@@ -375,6 +375,296 @@ gt daemon stop && gt daemon start
 
 ---
 
+## Context Window Filling
+
+**Symptom:** An agent becomes sluggish, loses track of its work, starts repeating itself, or produces incoherent output. Often preceded by the agent running for an extended period on a large task.
+
+**Diagnosis:**
+
+```bash
+# Check how long the agent has been running
+gt audit polecat:toast --rig myproject
+
+# Look for signs of context pressure in agent output
+gt peek polecat:toast --rig myproject --lines 50
+```
+
+**Solutions:**
+
+1. **For polecats: use `gt handoff`.** The polecat should cycle itself to a fresh session with context notes before the window fills completely.
+
+    ```bash
+    # From inside the polecat session:
+    gt handoff -s "Context filling, continuing work" -m "Issue: gt-a1b2c
+    Progress: implemented X, Y remains
+    Next step: finish Y and run tests"
+    ```
+
+2. **For persistent agents (Witness, Mayor, Deacon): trigger a context reset.**
+
+    ```bash
+    # Nudge the agent to prime
+    gt nudge witness --rig myproject "Run gt prime to reset context"
+
+    # Or restart with fresh context
+    gt witness restart --rig myproject --fresh
+    ```
+
+3. **Prevent the issue.** Large tasks should be broken into smaller beads. If a polecat consistently fills context on a task type, the task decomposition needs improvement.
+
+:::note
+
+Persistent agents (Mayor, Deacon, Witness) experience automatic compaction but may lose nuance. If an agent seems confused after compaction, `gt prime` reloads the full role context.
+
+:::
+
+---
+
+## Agent Boot Failures
+
+**Symptom:** An agent fails to start, or starts but immediately exits or becomes unresponsive. The `gt start` command completes but `gt doctor` shows the agent is not running.
+
+**Diagnosis:**
+
+```bash
+# Check if the session exists in tmux
+gt peek <agent> --rig myproject
+
+# Check daemon logs for startup errors
+gt daemon logs --level error --since 10m
+
+# Check if the tmux session was created
+tmux list-sessions
+```
+
+**Solutions:**
+
+1. **Missing dependencies.** The agent's Claude session may fail if required tools are not installed.
+
+    ```bash
+    gt doctor --check dependencies
+    ```
+
+2. **Stale tmux sessions.** A previous session may still hold the slot.
+
+    ```bash
+    # Kill stale tmux sessions
+    tmux kill-session -t <session-name>
+
+    # Restart the agent
+    gt witness start --rig myproject
+    ```
+
+3. **Configuration errors.** Check rig configuration for invalid settings.
+
+    ```bash
+    # Validate rig config
+    gt rig show myproject
+    ```
+
+4. **Disk space.** Claude sessions need space for logs and context.
+
+    ```bash
+    df -h ~/gt/
+    # Clean up if needed
+    gt cleanup
+    ```
+
+---
+
+## Git Worktree Issues
+
+**Symptom:** A polecat reports git errors, has a dirty working tree it did not expect, or cannot commit/push its changes.
+
+**Diagnosis:**
+
+```bash
+# Check worktree state from outside
+cd ~/gt/myproject/polecats/<name>/myproject
+git status
+git log --oneline -5
+```
+
+**Solutions:**
+
+1. **Dirty working tree from a previous crash.** If a polecat crashed mid-work, its worktree may have uncommitted changes.
+
+    ```bash
+    # If the changes are salvageable, commit them
+    cd ~/gt/myproject/polecats/<name>/myproject
+    git add -A
+    git commit -m "chore: recover work from crashed polecat session"
+    git push
+
+    # Then stop and respawn
+    gt polecat stop <name> --rig myproject
+    gt sling <bead-id> myproject
+    ```
+
+2. **Detached HEAD.** The worktree may have ended up in a detached HEAD state.
+
+    ```bash
+    # Check the current state
+    git branch --show-current  # Empty output means detached HEAD
+
+    # Recover by creating a branch from the current position
+    git checkout -b recovery/<bead-id>
+    git push origin recovery/<bead-id>
+    ```
+
+3. **Worktree pointing to deleted branch.** If the branch was cleaned up but the worktree remains:
+
+    ```bash
+    # Remove the broken worktree
+    git worktree remove ~/gt/myproject/polecats/<name>/myproject --force
+
+    # Let gt recreate it on next spawn
+    gt sling <bead-id> myproject
+    ```
+
+---
+
+## Beads Database Issues
+
+**Symptom:** `bd` commands fail with lock errors, return unexpected results, or report corruption. Agents may be unable to create, update, or close beads.
+
+**Diagnosis:**
+
+```bash
+# Run the beads doctor
+bd doctor
+
+# Check for lock files
+ls -la ~/gt/myproject/.beads/*.lock 2>/dev/null
+```
+
+**Solutions:**
+
+1. **Database locked.** Concurrent writes from multiple agents can cause locking. Usually resolves itself.
+
+    ```bash
+    # Wait a few seconds and retry
+    bd list --status=open
+
+    # If persistent, check for zombie bd processes
+    ps aux | grep "bd " | grep -v grep
+
+    # Kill zombies if found
+    kill <PID>
+    ```
+
+2. **Database corruption.** Rare but possible after unclean shutdowns.
+
+    ```bash
+    # Run repair
+    bd doctor --fix
+
+    # If repair fails, the JSONL export is the backup
+    # Check for the last good export
+    ls -la ~/gt/myproject/.beads/*.jsonl
+    ```
+
+3. **Sync issues between agents.** If agents have divergent views of bead state:
+
+    ```bash
+    # Force a flush to JSONL
+    bd sync --flush-only
+
+    # Each agent should re-read on next bd command
+    ```
+
+---
+
+## Polecat Self-Clean Failures
+
+**Symptom:** A polecat runs `gt done` but the command fails. The polecat may be left in a limbo state -- finished with work but not properly cleaned up.
+
+**Diagnosis:**
+
+```bash
+# Check if the polecat's work was pushed
+cd ~/gt/myproject/polecats/<name>/myproject
+git status
+git log --oneline origin/main..HEAD
+```
+
+**Solutions:**
+
+1. **Uncommitted changes.** `gt done` requires a clean git state.
+
+    ```bash
+    # Commit remaining changes
+    git add <files>
+    git commit -m "fix: remaining changes before gt done"
+    git push
+
+    # Retry
+    gt done
+    ```
+
+2. **Push failures.** Network issues or remote conflicts can prevent push.
+
+    ```bash
+    # Check remote connectivity
+    git remote -v
+    git fetch origin
+
+    # If behind remote, rebase
+    git rebase origin/main
+    git push
+
+    gt done
+    ```
+
+3. **If `gt done` keeps failing:** Escalate to the Witness with context about what failed.
+
+    ```bash
+    gt mail send myproject/witness -s "HELP: gt done failing" -m "Polecat: <name>
+    Issue: <bead-id>
+    Error: <error message>
+    Git state: <clean/dirty>
+    Branch pushed: <yes/no>"
+    ```
+
+---
+
+## Mail Delivery Problems
+
+**Symptom:** Messages sent via `gt mail send` are not appearing in the recipient's inbox, or agents are not responding to mail they should have received.
+
+**Diagnosis:**
+
+```bash
+# Check outbox
+gt mail sent
+
+# Check the recipient's inbox directly
+gt mail inbox --agent <recipient>
+
+# Verify the mail address format
+gt mail send <rig>/<agent> -s "test" -m "ping"
+```
+
+**Solutions:**
+
+1. **Wrong address format.** Mail addresses follow the pattern `<rig>/<agent>` or `mayor/` for town-level agents.
+
+2. **Agent not checking mail.** Persistent agents check mail during patrol cycles. If an agent is stuck, it may not be polling.
+
+    ```bash
+    # Nudge the agent to check mail
+    gt nudge <agent> --rig myproject "Check your inbox"
+    ```
+
+3. **Mail queue corruption.** Rare, but can happen after crashes.
+
+    ```bash
+    # Check mail queue health
+    gt doctor --check agents
+    ```
+
+---
+
 ## Common Error Messages
 
 | Error | Cause | Fix |
@@ -387,6 +677,10 @@ gt daemon stop && gt daemon start
 | `beads database locked` | Concurrent write conflict | Wait and retry; check for zombie `bd` processes |
 | `worktree already exists` | Stale worktree from previous run | Clean up: `gt cleanup` |
 | `convoy not found` | Invalid convoy ID or convoy was auto-cleaned | Check `gt convoy list --all` for closed convoys |
+| `context window exceeded` | Agent session ran too long | Use `gt handoff` to cycle to a fresh session |
+| `git push rejected` | Remote has diverged from local | Run `git fetch && git rebase origin/main`, then push |
+| `molecule step not found` | Bead ID typo or step was already closed | Check `bd show <molecule-id>` for step list |
+| `permission denied` | File or directory owned by another agent | Check `ls -la` ownership; may need `gt cleanup` |
 
 ---
 
@@ -406,6 +700,34 @@ gt daemon stop && gt daemon start
 | `gt daemon status` | Verify daemon is running |
 | `gt trail --since 1h` | Recent activity for diagnosis |
 | `gt peek <agent>` | View agent session output |
+| `bd doctor` | Check beads database health |
+| `bd doctor --fix` | Attempt beads database repair |
+
+---
+
+## Decision Tree: Which Section to Read
+
+Use this to quickly find the right troubleshooting section:
+
+```
+Is anything running at all?
+├── No → Daemon Issues / Agent Boot Failures
+└── Yes
+    ├── Is a specific agent unresponsive?
+    │   ├── Mayor → Mayor Not Responding
+    │   ├── Polecat → Stale Polecats
+    │   └── Witness/Refinery → Agent Loses Connection
+    ├── Is work not progressing?
+    │   ├── Convoy shows ACTIVE → Convoy Stuck
+    │   ├── Merge queue backed up → Merge Conflicts
+    │   └── Polecat can't finish → Polecat Self-Clean Failures
+    ├── Are bd commands failing?
+    │   └── Beads Database Issues
+    ├── Is an agent confused or repeating itself?
+    │   └── Context Window Filling
+    └── Are there leftover resources?
+        └── Orphaned Processes
+```
 
 ---
 

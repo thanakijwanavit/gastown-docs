@@ -432,6 +432,122 @@ Custom inputs defined in `plugin.json` are also passed as uppercase environment 
 
 ---
 
+## Debugging Plugins
+
+When a plugin fails, the first step is understanding where and why.
+
+### Viewing Execution Output
+
+Plugin stdout and stderr are captured in the execution history:
+
+```bash
+# See recent runs with output
+gt plugin history my-plugin --last 5
+
+# See detailed output of a specific run
+gt plugin history my-plugin --verbose
+```
+
+### Running with Debug Output
+
+Add verbose logging to your `run.sh` during development:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+# Debug: print all environment variables available to the plugin
+echo "=== Plugin Environment ==="
+echo "RIG_NAME: $RIG_NAME"
+echo "RIG_PATH: $RIG_PATH"
+echo "BRANCH_NAME: $BRANCH_NAME"
+echo "BEAD_ID: $BEAD_ID"
+echo "PLUGIN_DIR: $PLUGIN_DIR"
+echo "========================="
+
+# Your plugin logic here...
+```
+
+### Common Failure Causes
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Plugin not found | Wrong directory or missing `plugin.json` | Check `gt plugin list` and verify path |
+| Permission denied | `run.sh` not executable | `chmod +x run.sh` |
+| Exit code 127 | Command not found in plugin script | Check `$PATH` or use absolute paths |
+| Timeout | Plugin exceeds configured timeout | Increase `timeout` in `plugin.json` or optimize |
+| Works manually, fails in pipeline | Missing environment variables | Check Plugin Environment Variables table |
+
+### Testing Locally Before Deploying
+
+Always test plugins outside the pipeline first:
+
+```bash
+# Dry run: shows what would happen without executing
+gt plugin run my-plugin --rig myproject --dry-run
+
+# Manual run with custom inputs to simulate different scenarios
+gt plugin run my-plugin --rig myproject --input branch=main
+gt plugin run my-plugin --rig myproject --input branch=feature/untested
+```
+
+---
+
+## Plugin Types Beyond Gates
+
+While gates are the most common plugin type, Gas Town supports four plugin types:
+
+### Action Plugins
+
+Actions run in response to triggers but do not block workflow progress. Use these for notifications, logging, or side effects.
+
+```json
+{
+  "name": "deploy-notify",
+  "type": "action",
+  "trigger": "post-merge",
+  "config": {
+    "command": "./notify.sh",
+    "timeout": "30s"
+  }
+}
+```
+
+### Hook Plugins
+
+Hooks intercept lifecycle events and can modify behavior. They run synchronously at specific points in the agent lifecycle.
+
+```json
+{
+  "name": "pre-spawn-check",
+  "type": "hook",
+  "trigger": "on-spawn",
+  "config": {
+    "command": "./check-capacity.sh",
+    "timeout": "10s"
+  }
+}
+```
+
+### Schedule Plugins
+
+Scheduled plugins run on a cron schedule independently of workflow events.
+
+```json
+{
+  "name": "nightly-cleanup",
+  "type": "schedule",
+  "config": {
+    "schedule": "0 3 * * *",
+    "timezone": "America/Los_Angeles",
+    "command": "./cleanup.sh",
+    "timeout": "5m"
+  }
+}
+```
+
+---
+
 ## Plugin Best Practices
 
 1. **Keep plugins fast.** Plugins that run as gates block the merge pipeline. Aim for under 60 seconds; use the `timeout` config to prevent runaway executions.

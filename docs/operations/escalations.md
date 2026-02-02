@@ -337,6 +337,133 @@ stateDiagram-v2
 
 ---
 
+## Common Escalation Scenarios
+
+These are real-world scenarios you will encounter and how to handle them.
+
+### Scenario: Flaky Test Causing Repeated Merge Failures
+
+A test intermittently fails in the Refinery, causing merges to bounce. Polecats' work is correct but the gate keeps rejecting it.
+
+**What you will see:**
+
+- Multiple P2 escalations from the Refinery about merge failures
+- The same test name appearing in different escalation messages
+- Merge queue growing as items back up behind the flaky test
+
+**What to do:**
+
+```bash
+# Acknowledge the escalations
+gt escalate ack ESC-001 --note "Flaky test identified: test_auth_timeout"
+
+# Fix the flaky test (or skip it temporarily)
+# Work from a crew workspace to fix main directly
+cd ~/gt/myproject/crew/yourname
+# Fix the test, commit, push to main
+
+# Close the escalation
+gt escalate close ESC-001 --note "Fixed flaky test: added retry logic to test_auth_timeout"
+```
+
+### Scenario: Polecat Stuck in a Loop
+
+A polecat keeps trying the same approach to a problem, failing, and trying again. The Witness has nudged it but it cannot break out.
+
+**What you will see:**
+
+- P1 escalation from the Witness about a stale polecat
+- `gt peek` shows the polecat repeating similar actions
+
+**What to do:**
+
+```bash
+# Acknowledge
+gt escalate ack ESC-002 --note "Reviewing stuck polecat"
+
+# Stop the polecat and release its work
+gt polecat stop toast --rig myproject
+gt release gt-a1b2c
+
+# Add more detail to the bead before re-slinging
+bd update gt-a1b2c --notes "Previous attempt failed because <reason>. Try <alternative approach>."
+
+# Re-sling to a fresh polecat
+gt sling gt-a1b2c myproject
+
+gt escalate close ESC-002 --note "Respawned with updated guidance"
+```
+
+### Scenario: Cost Spike During Off-Hours
+
+You return to find an escalation about token costs exceeding the daily budget.
+
+**What you will see:**
+
+- P1 or P2 escalation with cost details
+- `gt costs` showing a spike
+
+**What to do:**
+
+```bash
+# Check what caused the spike
+gt costs --since 12h --by-agent
+gt trail --since 12h
+
+# If a runaway agent, stop it
+gt polecat stop <name> --rig myproject
+
+# Acknowledge and close
+gt escalate ack ESC-003 --note "Cost spike from runaway polecat"
+gt escalate close ESC-003 --note "Stopped runaway polecat, reviewing task scoping"
+```
+
+---
+
+## Tuning Escalation Thresholds
+
+The default thresholds work well for most setups, but you may want to adjust them based on your operational pattern.
+
+### When to Tighten Thresholds (Shorter Timers)
+
+- You are actively monitoring and want faster alerts
+- The project is in a critical phase (launch, migration)
+- You have multiple rigs and need early warning
+
+```json
+{
+  "routing": {
+    "high": {
+      "auto_escalate_after": "30m",
+      "max_re_escalations": 3
+    }
+  }
+}
+```
+
+### When to Loosen Thresholds (Longer Timers)
+
+- Running overnight unattended (combine with quiet hours)
+- Low-priority project where delays are acceptable
+- Reducing alert fatigue from a noisy rig
+
+```json
+{
+  "routing": {
+    "medium": {
+      "auto_escalate_after": "8h",
+      "max_re_escalations": 1
+    }
+  }
+}
+```
+
+### Per-Rig Overrides
+
+You can override escalation settings at the rig level by placing an `escalation.json` in `<rig>/settings/`. Rig-level settings merge with (and override) town-level defaults.
+
+---
+
 ## Escalation Best Practices
 
 1. **Acknowledge promptly.** Even if you cannot fix the issue immediately, acknowledging stops the re-escalation timer and signals to the system that a human is aware.

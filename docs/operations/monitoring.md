@@ -395,6 +395,83 @@ Gas Town at peak usage with 10+ polecats can burn approximately $100/hour in API
 
 ---
 
+## What to Watch For
+
+Knowing what the tools show you is only half the story. Knowing which signals matter is the other half.
+
+### Red Flags (Investigate Immediately)
+
+| Signal | Where to See It | What It Means |
+|--------|----------------|---------------|
+| `STALE` events in feed | `gt feed` | An agent has stopped making progress |
+| Multiple escalations from one rig | `gt escalate list` | Systemic issue in that project |
+| Refinery queue growing | `gt mq status` | Merges are failing or backing up |
+| `[FAIL]` in doctor output | `gt doctor` | A subsystem is down |
+| Cost spike in hourly rate | `gt costs --today` | Runaway agent or infinite loop |
+| No events for 10+ minutes | `gt feed` | System may have stalled silently |
+
+### Warning Signs (Check When Convenient)
+
+| Signal | Where to See It | What It Means |
+|--------|----------------|---------------|
+| Increasing polecat durations | `gt audit` | Tasks may be too large or poorly scoped |
+| Frequent context handoffs | `gt trail` | Tasks are filling context windows regularly |
+| Escalations acknowledged but not closed | `gt escalate list --all` | Issues being noticed but not resolved |
+| Orphaned worktrees accumulating | `gt orphans` | Cleanup not running often enough |
+
+### Healthy System Indicators
+
+A well-running Gas Town installation shows these patterns:
+
+- Polecats spawn, work, and complete in steady cycles
+- Merge queue stays near-empty (items move through quickly)
+- Escalation count stays low (under 2-3 open at a time)
+- Cost rate is stable and predictable
+- `gt doctor` shows all green
+
+---
+
+## Log Analysis Patterns
+
+When `gt feed` and `gt trail` are not enough, dig into the raw event log for patterns.
+
+### Finding Repeated Failures
+
+```bash
+# Count events by type in the last 24h
+gt activity --since 24h --json | jq -r '.type' | sort | uniq -c | sort -rn
+
+# Find all error events for a specific rig
+gt log --level error --component myproject --since 24h
+
+# Find agents that restarted more than twice
+gt trail --since 24h | grep RESTART
+```
+
+### Tracking a Specific Bead Through the System
+
+```bash
+# See the full lifecycle of a piece of work
+gt audit --bead gt-a1b2c
+
+# Check if it is stuck somewhere
+bd show gt-a1b2c
+gt mq show gt-a1b2c
+```
+
+### Correlating Events Across Agents
+
+```bash
+# See what happened around a specific time
+gt trail --since 2h --last 100
+
+# Cross-reference Witness actions with polecat events
+gt activity --actor witness --since 1h --json
+gt activity --type polecat --since 1h --json
+```
+
+---
+
 ## Monitoring Best Practices
 
 1. **Always keep `gt feed` running** in a dedicated terminal. It is the fastest way to notice problems.
@@ -408,3 +485,7 @@ Gas Town at peak usage with 10+ polecats can burn approximately $100/hour in API
 5. **Set up `gt dashboard`** on a second screen for visual fleet tracking during active development sessions.
 
 6. **Review patrol digests** when the Deacon or Witnesses flag anomalies -- they contain the context you need to decide on action.
+
+7. **Watch for silence.** A quiet feed is not always good news. If no events appear for an extended period, verify the daemon is running and agents are active.
+
+8. **Track trends, not just snapshots.** A single stale polecat is normal. Three stale polecats in the same rig within an hour suggests a systemic problem.

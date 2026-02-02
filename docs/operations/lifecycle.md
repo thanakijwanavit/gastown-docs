@@ -368,6 +368,152 @@ After undocking, run `gt rig boot myproject` to create worktrees and start agent
 
 ---
 
+## Startup Order and Dependencies
+
+When starting Gas Town, components must come up in a specific order. `gt start --all` handles this automatically, but understanding the dependency chain helps when troubleshooting partial starts or doing manual recovery.
+
+### Required Startup Order
+
+```mermaid
+graph TD
+    D[Daemon] --> DE[Deacon]
+    D --> M[Mayor]
+    DE --> W1[Witness: rig1]
+    DE --> W2[Witness: rig2]
+    W1 --> R1[Refinery: rig1]
+    W2 --> R2[Refinery: rig2]
+    R1 --> P1[Polecats: rig1]
+    R2 --> P2[Polecats: rig2]
+```
+
+| Order | Component | Depends On | Why |
+|-------|-----------|------------|-----|
+| 1 | Daemon | Nothing | Provides heartbeat and lifecycle management |
+| 2 | Deacon | Daemon | Monitors daemon heartbeats, manages town health |
+| 3 | Mayor | Daemon | Coordinates work distribution across rigs |
+| 4 | Witnesses | Deacon | Monitor per-rig health; report to Deacon |
+| 5 | Refineries | Witnesses | Process merge queue; Witness monitors their health |
+| 6 | Polecats | Refineries | Do the work; Refinery merges their output |
+
+:::note
+
+If you start a Witness before the Deacon, it will still function but the Deacon will not know about it until its next patrol cycle. Starting in the correct order ensures immediate monitoring coverage.
+
+:::
+
+### What Each Agent Needs at Startup
+
+Every agent runs `gt prime` on startup to load its role context. This requires:
+
+- Its home directory to exist (worktree for polecats, rig directory for others)
+- The beads database to be accessible
+- Hook state to be intact (for polecats, their assigned work)
+- Mail queue to be readable (for checking incoming messages)
+
+If any of these are missing, the agent will log errors. Use `gt doctor` to identify missing prerequisites.
+
+---
+
+## Emergency Recovery
+
+When the normal lifecycle commands are not working, use these procedures to recover the system.
+
+### Scenario: Full System Unresponsive
+
+Nothing is responding -- `gt` commands hang or error out.
+
+```bash
+# Step 1: Check if the daemon is alive
+gt daemon status
+
+# Step 2: If daemon is dead, start it
+gt daemon start
+
+# Step 3: If gt commands still hang, check for tmux
+tmux list-sessions
+
+# Step 4: Kill all tmux sessions and restart clean
+tmux kill-server
+gt start --all
+```
+
+### Scenario: Single Rig in Bad State
+
+One rig is misbehaving but others are fine.
+
+```bash
+# Surgical shutdown of the problem rig
+gt rig stop myproject
+
+# Clean up orphaned resources
+gt cleanup --rig myproject
+
+# Fresh start for the rig
+gt rig boot myproject
+```
+
+### Scenario: Polecats Spawning and Immediately Dying
+
+Polecats start but crash within seconds, repeatedly.
+
+```bash
+# Stop the spawn cycle
+gt shutdown --polecats-only --rig myproject
+
+# Check what is causing the crash
+gt trail --rig myproject --last 20
+
+# Common cause: broken main branch
+# Verify tests pass on main
+cd ~/gt/myproject/crew/yourname
+git fetch origin && git checkout origin/main
+# Run project tests
+
+# If main is broken, fix it before resuming polecat work
+```
+
+### Scenario: Lost Work from Crashed Polecat
+
+A polecat crashed before pushing its changes.
+
+```bash
+# Check if the worktree still exists
+ls ~/gt/myproject/polecats/*/myproject/
+
+# If it exists, recover the work
+cd ~/gt/myproject/polecats/<name>/myproject
+git status
+git log --oneline -5
+# Commit and push if there are changes worth saving
+
+# If the worktree is gone, check for orphaned commits
+gt orphans --commits --rig myproject
+gt orphans --recover <commit-hash>
+```
+
+---
+
+## Graceful Degradation
+
+Gas Town is designed to continue operating even when some components fail. Understanding what keeps working and what stops helps you prioritize recovery.
+
+| Failed Component | What Still Works | What Stops |
+|-----------------|-----------------|------------|
+| Daemon | All agents continue running | No new agents can be spawned; no heartbeats |
+| Deacon | Rigs operate independently | No town-wide health monitoring; no zombie cleanup |
+| Mayor | Existing work continues | No new work distribution; convoys not coordinated |
+| Witness (one rig) | Other rigs unaffected | Stale polecats in that rig are not detected |
+| Refinery (one rig) | Polecats can still work | Completed work accumulates but does not merge |
+| Single polecat | All other polecats fine | One bead's work is delayed |
+
+:::tip
+
+The system degrades gracefully because each agent operates independently with its own state. A failed Witness in one rig has zero impact on polecats in another rig. Prioritize recovering components based on what is actually blocked.
+
+:::
+
+---
+
 ## Lifecycle State Machine
 
 ```mermaid

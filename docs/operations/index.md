@@ -75,5 +75,62 @@ gt shutdown --all
 4. Check `gt costs` to monitor token spend
 5. Review `gt convoy list` for stalled or stranded convoys
 
-
 :::
+
+---
+
+## Incident Response Playbook
+
+When something goes wrong, follow this decision tree:
+
+```
+Is the system completely down?
+├── Yes → gt daemon start && gt start --all (see Lifecycle: Emergency Recovery)
+└── No
+    ├── Is one rig broken?
+    │   └── gt rig reboot <name> (see Lifecycle: Emergency Recovery)
+    ├── Are polecats stuck?
+    │   └── gt shutdown --polecats-only (see Troubleshooting: Stale Polecats)
+    ├── Is the merge queue backed up?
+    │   └── gt mq status (see Troubleshooting: Merge Conflicts)
+    ├── Are costs spiking?
+    │   └── gt costs --by-agent (see Escalations: Cost Spike scenario)
+    └── Are escalations piling up?
+        └── gt escalate list (see Escalations: Managing Escalations)
+```
+
+## Weekly Review Checklist
+
+Run these checks once a week to catch slow-building problems:
+
+```bash
+# 1. Overall system health
+gt doctor
+
+# 2. Cost trends for the week
+gt costs --since 7d --by-rig
+
+# 3. Find orphaned resources consuming disk
+gt orphans
+
+# 4. Review and close stale escalations
+gt escalate stale
+
+# 5. Check for stranded convoys
+gt convoy stranded
+
+# 6. Clean up finished polecat worktrees
+gt cleanup
+```
+
+## Operational Anti-Patterns
+
+Avoid these common mistakes when running Gas Town:
+
+| Anti-Pattern | Why It Hurts | What to Do Instead |
+|-------------|-------------|-------------------|
+| Manually fixing things on `main` | Bypasses the merge queue; can conflict with in-flight polecat work | Use a crew workspace or sling a fix bead |
+| Ignoring P3 escalations | They accumulate and mask real problems | Review and close (or promote) P3s weekly |
+| Restarting everything when one thing breaks | Disrupts working agents unnecessarily | Use surgical restarts: `gt rig reboot` or per-agent commands |
+| Never running `gt cleanup` | Disk fills with orphaned worktrees | Schedule regular cleanup or add it to your weekly checklist |
+| Over-slinging work to one rig | Creates merge queue bottlenecks | Distribute work across rigs when possible |
