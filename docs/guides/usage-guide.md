@@ -41,7 +41,7 @@ You technically only need the Mayor. Running with just the Mayor is a good tutor
 
 ## The Three Developer Loops
 
-Gas Town operations follow three nested feedback loops, a framework from the [Vibe Coding](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04) book by Steve Yegge and Gene Kim. Understanding these loops helps you work at the right cadence for each type of task.
+Gas Town operations follow three nested feedback loops. Understanding these loops helps you work at the right cadence for each type of task.
 
 ### Outer Loop (Days to Weeks)
 

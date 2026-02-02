@@ -79,7 +79,7 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **The 8 Stages** | A maturity model for AI-assisted development, from Stage 1 (zero AI) through Stage 8 (building your own orchestrator). Gas Town targets Stage 7+ users. |
 | **Survival Formula** | (Savings x Usage x H) / (Awareness + Friction) — the formula determining whether a software tool survives. |
 | **Plot Armor** | A competitive advantage so large it protects a product from being killed by competitors. Extreme velocity from AI orchestration can provide plot armor. |
-| **Human Coefficient (H)** | The variable in the survival formula representing how much human involvement is still required. Lower H means more automation. |
+| **Human Coefficient (H)** | A multiplier in the survival formula representing human preference for human-made output. Higher H means the domain values human involvement, giving software in that domain an extra survival advantage beyond pure efficiency. |
 
 ## Mad Max Naming
 
@@ -93,6 +93,15 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Witness** | "Witness me!" (validation cry) | The monitor who watches and validates |
 | **Convoy** | Group of vehicles traveling together | A batch of tasks moving through the system |
 | **Deacon** | A religious authority figure | The health monitor who keeps order |
+
+## Usage Patterns
+
+| Term | Definition |
+|------|------------|
+| **Three Developer Loops** | The nested feedback loops for Gas Town operations: Outer Loop (days-weeks, strategic planning), Middle Loop (hours-days, agent coordination), Inner Loop (minutes, task delegation and output review). |
+| **PR Sheriff** | An ad-hoc Crew role with a permanent hook to manage pull requests. On each session startup, the PR Sheriff checks open PRs, classifies them by complexity, and slings easy wins to other Crew or polecats. |
+| **Vibe Coding** | A development approach where you let the AI do the work while focusing on direction and review. Gas Town embraces vibe coding as a core philosophy -- tolerating some work loss in exchange for throughput. |
+| **Guzzoline** | Slang for the specifications, plans, and design work that Crew members produce. Polecats consume this guzzoline to execute well-specified tasks. From the Mad Max fuel terminology. |
 
 ## CLI Quick Reference
 
@@ -115,3 +124,9 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | `gt nudge <agent> <msg>` | Send sync message to agent |
 | `gt mol status` | Show current molecule progress |
 | `gt formula run <name>` | Pour a formula into a molecule |
+| `gt may at` | Attach to Mayor (short for `gt mayor attach`) |
+| `gt crew at <rig> <name>` | Attach to a Crew workspace |
+| `gt rig park <rig>` | Pause a rig (preserve state, stop agents) |
+| `gt rig unpark <rig>` | Resume a parked rig |
+| `gt escalate <msg>` | Create an escalation for problems agents cannot resolve |
+| `gt polecat list` | List active polecats across rigs |
