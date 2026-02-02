@@ -1,0 +1,118 @@
+import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+
+const sidebars: SidebarsConfig = {
+  docsSidebar: [
+    {
+      type: 'doc',
+      id: 'index',
+      label: 'Home',
+    },
+    {
+      type: 'category',
+      label: 'Getting Started',
+      link: {type: 'doc', id: 'getting-started/index'},
+      items: [
+        'getting-started/installation',
+        'getting-started/quickstart',
+        'getting-started/first-convoy',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Architecture',
+      link: {type: 'doc', id: 'architecture/index'},
+      items: [
+        'architecture/overview',
+        'architecture/agent-hierarchy',
+        'architecture/work-distribution',
+        'architecture/design-principles',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'CLI Reference',
+      link: {type: 'doc', id: 'cli-reference/index'},
+      items: [
+        'cli-reference/workspace',
+        'cli-reference/agents',
+        'cli-reference/work',
+        'cli-reference/convoys',
+        'cli-reference/communication',
+        'cli-reference/merge-queue',
+        'cli-reference/rigs',
+        'cli-reference/sessions',
+        'cli-reference/diagnostics',
+        'cli-reference/configuration',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Agents',
+      link: {type: 'doc', id: 'agents/index'},
+      items: [
+        'agents/mayor',
+        'agents/deacon',
+        'agents/witness',
+        'agents/refinery',
+        'agents/polecats',
+        'agents/dogs',
+        'agents/crew',
+        'agents/boot',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Core Concepts',
+      link: {type: 'doc', id: 'concepts/index'},
+      items: [
+        'concepts/beads',
+        'concepts/hooks',
+        'concepts/convoys',
+        'concepts/molecules',
+        'concepts/gates',
+        'concepts/rigs',
+        'concepts/meow-stack',
+        'concepts/gupp',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Workflows',
+      link: {type: 'doc', id: 'workflows/index'},
+      items: [
+        'workflows/mayor-workflow',
+        'workflows/minimal-mode',
+        'workflows/manual-convoy',
+        'workflows/formula-workflow',
+        'workflows/code-review',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Operations',
+      link: {type: 'doc', id: 'operations/index'},
+      items: [
+        'operations/lifecycle',
+        'operations/monitoring',
+        'operations/escalations',
+        'operations/troubleshooting',
+        'operations/plugins',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      link: {type: 'doc', id: 'guides/index'},
+      items: [
+        'guides/usage-guide',
+        'guides/eight-stages',
+        'guides/multi-runtime',
+        'guides/cost-management',
+        'guides/philosophy',
+        'guides/glossary',
+      ],
+    },
+  ],
+};
+
+export default sidebars;
