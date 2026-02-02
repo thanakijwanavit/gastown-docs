@@ -44,12 +44,12 @@ This creates the rig structure:
 ~/gt/myproject/
 ├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration
+├── plugins/         # Rig-level plugins
 ├── refinery/rig/    # Canonical clone (merge queue)
 ├── mayor/rig/       # Mayor's working copy
 ├── crew/            # Human developer workspaces
 ├── witness/         # Health monitor
-├── polecats/        # Worker directories
-└── plugins/         # Rig-level plugins
+└── polecats/        # Worker directories
 ```
 
 ## Create a Crew Workspace
@@ -57,7 +57,7 @@ This creates the rig structure:
 Crew workspaces are persistent clones for human developers.
 
 ```bash
-gt crew add myproject yourname
+gt crew add yourname --rig myproject
 ```
 
 Enter your workspace:

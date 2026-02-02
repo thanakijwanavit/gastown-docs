@@ -13,7 +13,7 @@ A **Convoy** is Gas Town's primary unit for tracking batches of related work. Th
 First, create some beads (issues) to track:
 
 ```bash
-bd create --title "Fix login bug" --type bug --priority high
+bd create --title "Fix login bug" --type bug --priority 1
 # Created: gt-a1b2c
 
 bd create --title "Add email validation" --type feature
@@ -71,8 +71,8 @@ As polecats complete work, they submit merge requests to the Refinery:
 # View merge queue
 gt mq list
 
-# Check merge status
-gt mq status
+# Check a specific merge request's status
+gt mq status <mr-id>
 ```
 
 The Refinery:

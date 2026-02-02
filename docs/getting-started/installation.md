@@ -37,6 +37,7 @@ sudo mv gt /usr/local/bin/
 
 </TabItem>
 </Tabs>
+
 ## Install Dependencies
 
 ### Beads (Issue Tracking)
@@ -73,9 +74,13 @@ sudo yum install tmux
 
 ### Claude Code CLI
 
-Gas Town builds on Claude Code as its primary runtime. Install it following the [official instructions](https://claude.ai/).
+Gas Town builds on Claude Code as its primary runtime. Install it following the [official instructions](https://docs.anthropic.com/en/docs/claude-code/overview).
 
 ```bash
+# Install Claude Code
+curl -fsSL https://claude.ai/install.sh | bash
+# Or: brew install --cask claude-code
+
 # Verify Claude Code is available
 claude --version
 ```
