@@ -372,7 +372,7 @@ Skeptics question whether the complexity of orchestration is justified by the th
 
 ### By the Numbers
 
-As of 2025:
+As of early 2026:
 
 - **7.3k stars** on GitHub
 - **600+ forks**
