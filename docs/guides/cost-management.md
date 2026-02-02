@@ -68,14 +68,11 @@ gt costs
 # Today's costs
 gt costs --today
 
-# Last 24 hours
-gt costs --since 24h
+# This week's costs
+gt costs --week
 
-# Specific date range
-gt costs --since 2025-06-01 --until 2025-06-15
-
-# Breakdown by agent type
-gt costs --by-agent
+# Breakdown by role
+gt costs --by-role
 
 # Breakdown by rig
 gt costs --by-rig
@@ -92,7 +89,7 @@ Gas Town Costs (today)
   Total tokens:  4,800,000 input / 1,620,000 output
   Est. cost:     $89.40
 
-  By agent type:
+  By role:
     Polecats:    $61.30  (68.6%)  [12 sessions]
     Witnesses:   $9.80   (11.0%)  [3 sessions]
     Refineries:  $6.20   (6.9%)   [3 sessions]
@@ -132,11 +129,11 @@ The most direct way to reduce costs. Each polecat you remove saves its proportio
 # Check how many polecats are running
 gt polecat list
 
-# Stop unnecessary polecats
-gt polecat stop alpha --rig myproject
+# Remove unnecessary polecats
+gt polecat remove alpha --rig myproject
 
-# Reduce the max polecat count for a rig
-gt config set --rig myproject max_polecats 3
+# Reduce the max polecat count via rig settings
+gt rig settings set --rig myproject max_polecats 3
 ```
 
 :::tip[Quality Over Quantity]
@@ -167,7 +164,7 @@ Run Gas Town with reduced monitoring overhead for cost-sensitive workloads.
 
 ```bash
 # Enable minimal mode
-gt config set minimal_mode true
+gt rig settings set minimal_mode true
 ```
 
 Minimal mode:
@@ -241,10 +238,10 @@ For teams with a $50/day budget:
 
 ```bash
 # Use 2 polecats max
-gt config set max_polecats 2
+gt rig settings set max_polecats 2
 
 # Enable minimal mode
-gt config set minimal_mode true
+gt rig settings set minimal_mode true
 
 # Work in 2-hour focused sprints
 gt start --all
@@ -261,10 +258,10 @@ For teams with a $200/day budget:
 
 ```bash
 # Use up to 5 polecats
-gt config set max_polecats 5
+gt rig settings set max_polecats 5
 
 # Normal monitoring
-gt config set minimal_mode false
+gt rig settings set minimal_mode false
 
 # Work in 4-hour sprints with breaks
 gt start --all
@@ -276,7 +273,7 @@ gt start --all
 gt down
 
 # Monitor costs every hour
-gt costs --today --by-agent
+gt costs --today --by-role
 ```
 
 ### The "Unlimited" Workflow
@@ -285,7 +282,7 @@ For teams where speed matters more than cost:
 
 ```bash
 # Max polecats
-gt config set max_polecats 15
+gt rig settings set max_polecats 15
 
 # Full monitoring
 gt start --all
@@ -348,7 +345,7 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 
 2. **Set a daily budget** and configure cost alerts to notify you when approaching it.
 
-3. **Review `gt costs --by-agent` weekly** to identify agents that are disproportionately expensive. A Witness consuming 20% of total cost may indicate a health monitoring loop.
+3. **Review `gt costs --by-role` weekly** to identify agents that are disproportionately expensive. A Witness consuming 20% of total cost may indicate a health monitoring loop.
 
 4. **Track cost per completed bead** over time. This metric tells you whether you are getting more efficient: `total_daily_cost / beads_closed_today`.
 

@@ -232,11 +232,11 @@ This:
 ### Agent Session Restart
 
 ```bash
-# Restart with context preservation
+# Restart the Mayor session
 gt mayor restart
 
-# Restart completely fresh (re-reads all context)
-gt mayor restart --fresh
+# Restart with a different agent
+gt mayor restart --agent claude
 ```
 
 ---
@@ -381,7 +381,7 @@ Any incomplete work or follow-up items must be tracked:
 
 ```bash
 # Create beads for remaining work
-bd create --title "TODO: finish API pagination" --type task --priority medium
+bd create --title "TODO: finish API pagination" --type task --priority 2
 bd create --title "TODO: add tests for edge case X" --type task
 ```
 
@@ -409,11 +409,11 @@ Close completed beads and update in-progress ones:
 
 ```bash
 # Close completed beads
-bd close gt-a1b2c --note "Implemented and merged"
+bd close gt-a1b2c --reason "Implemented and merged"
 bd close gt-d3e4f
 
 # Update in-progress beads
-bd update gt-g5h6i --status deferred --note "Waiting for API spec"
+bd defer gt-g5h6i    # Defer until later (waiting for API spec)
 ```
 
 #### Step 4: Push to Remote (MANDATORY)
@@ -424,8 +424,8 @@ This is the most critical step. **All changes must be pushed to the remote repos
 # Pull latest and rebase
 git pull --rebase
 
-# Sync beads
-bd sync
+# Sync beads (export to JSONL)
+bd sync --flush-only
 
 # Push everything
 git push
@@ -471,7 +471,7 @@ gt handoff
 Or if you are the human operator, leave a note in the Mayor's mail:
 
 ```bash
-gt mail send mayor "End of day: all auth work landed. Remaining: API pagination (gt-g5h6i) deferred until spec is ready. Tests all green."
+gt mail send mayor/ -s "End of day handoff" -m "All auth work landed. Remaining: API pagination (gt-g5h6i) deferred until spec is ready. Tests all green."
 ```
 
 ### Landing Checklist Summary
@@ -481,7 +481,7 @@ gt mail send mayor "End of day: all auth work landed. Remaining: API pagination 
 | 1 | `bd create` | File remaining work |
 | 2 | `npm test` / `go test` | Run quality gates |
 | 3 | `bd close` / `bd update` | Update issue status |
-| 4 | `git pull --rebase && bd sync && git push` | **Push to remote** |
+| 4 | `git pull --rebase && bd sync --flush-only && git push` | **Push to remote** |
 | 5 | `gt cleanup` | Clean up resources |
 | 6 | `git status` + `git log` | Verify everything pushed |
 | 7 | `gt handoff` | Hand off with context |
@@ -608,7 +608,7 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | Command | Description |
 |---------|-------------|
 | `gt mail inbox` | Check your inbox |
-| `gt mail send <to> <msg>` | Send a message |
+| `gt mail send <to> -s <subj> -m <msg>` | Send a message |
 | `gt nudge <agent> <msg>` | Send sync message |
 | `gt escalate <msg>` | Create escalation |
 | `gt broadcast <msg>` | Message all agents |
@@ -621,7 +621,7 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | `bd list` | List issues |
 | `bd show <id>` | Show issue details |
 | `bd close <id>` | Close an issue |
-| `bd sync` | Sync beads with git |
+| `bd sync --flush-only` | Export beads to JSONL for git |
 
 ### Session
 
@@ -631,4 +631,4 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | `gt handoff` | Write handoff notes |
 | `gt may at` | Attach to Mayor |
 | `gt crew at <rig> <name>` | Attach to a Crew workspace |
-| `gt polecat attach <name>` | Attach to a polecat |
+| `gt session at <name>` | Attach to a polecat session |

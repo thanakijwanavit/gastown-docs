@@ -35,13 +35,19 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Formula** | A TOML-defined template for creating molecules. Formulas are blueprints; molecules are live instances. Gas Town ships with 30+ built-in formulas. |
 | **Gate** | An async coordination primitive. A gate blocks a molecule step until a condition is met (e.g., "wait for code review approval" or "wait for dependent bead to complete"). |
 | **Rig** | A project container wrapping a git repository. Each rig has its own set of polecats, a witness, and a refinery. A Gas Town workspace typically runs 2-5 rigs. |
-| **Wisp** | A sub-bead — a lightweight tracking unit that represents a single step within a molecule. |
+| **Town** | The top-level workspace directory containing all rigs, the Mayor, the Deacon, and shared configuration. Typically located at `~/gt`. |
+| **Worktree** | A git worktree providing file-level isolation for each polecat. Each polecat gets its own worktree so agents never edit shared files simultaneously. |
+| **Wisp** | A sub-bead — a lightweight tracking unit that represents a single step within a molecule. Ephemeral by default (not exported to JSONL). |
+| **Mail** | The asynchronous messaging system between agents. Messages are stored as beads and routed by address (e.g., `mayor/`, `myrig/witness`). |
+| **Guzzoline** | Slang for the specifications, plans, and designs that Crew members create. Polecats consume guzzoline — they execute the plans Crew produces. |
+| **DND** | Do Not Disturb mode. When enabled, an agent suppresses non-critical notifications and nudges. Toggle with `gt dnd`. |
+| **Seance** | A command (`gt seance`) that lets you query predecessor sessions for context, useful when picking up work from a crashed or cycled agent. |
 
 ## The MEOW Stack
 
 | Term | Definition |
 |------|------------|
-| **MEOW Stack** | Gas Town's layered abstraction model: Molecules, Epics, Orchestration, Workflows. Each layer builds on the one below. |
+| **MEOW Stack** | **M**olecules, **E**pics, **O**rchestration, **W**orkflows — Gas Town's layered abstraction model. Each layer builds on the one below, from individual molecule steps up to full workflow orchestration. |
 | **Protomolecule** | A higher-order orchestration pattern that coordinates multiple molecules working in parallel at the convoy level. |
 | **Pour** | The act of creating a molecule instance from a formula template. "Pour the shiny formula" creates a new shiny molecule. |
 | **Squash** | Compressing a completed molecule into a single digest bead. Used by patrol agents to keep the beads database clean. |
@@ -78,8 +84,8 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Software Survival 3.0** | Steve Yegge's thesis that competitive selection pressure now favors teams that effectively use multi-agent AI. The third era of software selection pressure. |
 | **The 8 Stages** | A maturity model for AI-assisted development, from Stage 1 (zero AI) through Stage 8 (building your own orchestrator). Gas Town targets Stage 7+ users. |
 | **Survival Formula** | (Savings x Usage x H) / (Awareness + Friction) — the formula determining whether a software tool survives. |
-| **Plot Armor** | A competitive advantage so large it protects a product from being killed by competitors. Extreme velocity from AI orchestration can provide plot armor. |
-| **Human Coefficient (H)** | The variable in the survival formula representing how much human involvement is still required. Lower H means more automation. |
+| **Plot Armor** | A survival ratio so high (in the thousands) that a tool becomes effectively indestructible. No LLM will waste tokens re-synthesizing what the tool already does perfectly. `grep` is the canonical example. |
+| **Human Coefficient (H)** | A multiplier in the survival formula for domains where humans prefer human-made output. High H means the domain has strong human preference, giving software in that domain an extra survival advantage beyond pure efficiency. |
 
 ## Mad Max Naming
 
@@ -114,4 +120,7 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | `gt handoff` | Write handoff notes |
 | `gt nudge <agent> <msg>` | Send sync message to agent |
 | `gt mol status` | Show current molecule progress |
-| `gt formula run <name>` | Pour a formula into a molecule |
+| `gt formula run <name>` | Execute a formula (pour and dispatch) |
+| `gt escalate <msg>` | Create an escalation for blocked issues |
+| `gt mail inbox` | Check your inbox |
+| `gt done` | Signal work ready for merge queue |
