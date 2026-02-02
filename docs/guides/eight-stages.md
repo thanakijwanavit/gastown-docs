@@ -10,6 +10,10 @@ This guide maps out the progression of AI-assisted software development, from ba
 
 The framework is based on the work of [Steve Yegge](https://steve-yegge.medium.com/), Gas Town's creator, who has been tracking and predicting AI coding adoption since 2023.
 
+> "If you extrapolated from completions in 2023 to chat in 2024 to agents in early 2025, you arrived inescapably at orchestration arriving in early 2026."
+>
+> -- Steve Yegge, *Software Survival 3.0*
+
 ---
 
 ## The Stages
@@ -54,6 +58,10 @@ AI:  income, rate=0.25):
 
 **When this became mainstream:** Early 2023
 
+> "Vibe coding just means letting the AI do the work."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
+
 ---
 
 ### Stage 3: Chat in IDE
@@ -76,6 +84,10 @@ You: *copies and adapts the code*
 **Tools:** Copilot Chat, Cursor Chat, Cody, Continue
 
 **When this became mainstream:** Late 2023
+
+> "Each successive modality wave, beginning with chat, is conservatively about 5x as productive as the previous wave."
+>
+> -- Steve Yegge, *The Future of Coding Agents*
 
 ---
 
@@ -100,6 +112,10 @@ You: "Looks good, apply it"
 **Tools:** Cursor Agent, Windsurf, Cline, Aider
 
 **When this became mainstream:** Early 2024
+
+> "Once you have tried coding agents, and figured out how to be effective with them, you will never want to go back."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
 
 ---
 
@@ -127,6 +143,10 @@ claude "Add input validation to all API endpoints and write tests"
 :::note[The CLI Turning Point]
 
 Stage 5 is where most developers realize the bottleneck shifts from "writing code" to "managing agents." A single agent can do the work of 2-3 developers, but you can only run one at a time.
+
+> "It's not AI's job to prove it's better than you. It's your job to get better using AI."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
 
 :::
 
@@ -156,6 +176,10 @@ claude "Write integration tests for the API"
 - 3-5x throughput increase over Stage 5
 
 **When this became common:** Early-Mid 2025
+
+> "They are so incredibly effective that it's easy to get greedy and smother the goose."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
 
 :::warning[The Coordination Wall]
 
@@ -191,6 +215,14 @@ You scale to 10 or more agents running simultaneously. You develop ad-hoc script
 
 **The realization:** You are building an orchestrator whether you planned to or not.
 
+> "The new job of a software developer going forward will soon be managing dashboards of coding agents."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
+
+> "If you're not at least Stage 7, or maybe Stage 6 and very brave, then you will not be able to use Gas Town."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
 ---
 
 ### Stage 8: Building Your Own Orchestrator
@@ -216,6 +248,18 @@ gt mayor attach
 - Cost tracking and resource management
 
 **This is where Gas Town lives.**
+
+> "Gas Town is a new take on the IDE for 2026. Gas Town helps you with the tedium of running lots of Claude Code instances."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
+> "Working effectively in Gas Town involves committing to vibe coding. Work becomes fluid, an uncountable that you sling around freely."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
+> "Most work gets done; some work gets lost. Fish fall out of the barrel. Some escape back to sea, or get stepped on. The focus is throughput: creation and correction at the speed of thought."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
 
 ---
 
@@ -246,6 +290,14 @@ Gas Town is a **Stage 8** orchestration system. It provides the infrastructure t
 | Lost work on crash | Hooks persist across restarts |
 | Manual escalation (Slack msg) | `gt escalate` with severity routing |
 | Unknown costs | `gt costs` with per-agent breakdown |
+
+> "Gas Town helps with all that yak shaving, and lets you focus on what your Claude Codes are working on."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
+> "What I did was make their hallucinations real, over and over, by implementing whatever I saw the agents trying to do."
+>
+> -- Steve Yegge, *Software Survival 3.0*
 
 ---
 
@@ -282,6 +334,10 @@ Be solidly at **Stage 7** before adopting Gas Town. Spend time at Stage 6 (3-5 a
 
 Steve Yegge's core thesis: each stage is **inevitable**. Once developers discover that the next stage is possible, competitive pressure ensures widespread adoption within 6-12 months.
 
+> "If you believe the AI researchers -- who have been spot-on accurate for literally four decades"
+>
+> -- Steve Yegge, *Software Survival 3.0*
+
 ```
 Stage 5 developers: "Why would I need more than one agent?"
 Stage 6 developers: "OK, 3 agents is amazing, but 10 is chaos"
@@ -290,3 +346,15 @@ Stage 8 developers: "Yes. Yes it is."
 ```
 
 The pattern is consistent: what seems excessive today becomes standard practice within a year. Gas Town is built on the assumption that Stage 8 multi-agent orchestration will be as normal in 2026-2027 as AI completions are today.
+
+> "These systems are, in a meaningful sense, crystallized cognition, a financial asset, very much like (as Brendan Hopper has observed) money is crystallized human labor."
+>
+> -- Steve Yegge, *Software Survival 3.0*
+
+> "Supervisor agents can and will start doing most of that for us very soon."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
+
+> "Gas Town has illuminated and kicked off the next wave for everyone."
+>
+> -- Steve Yegge, *Software Survival 3.0*

@@ -9,6 +9,9 @@ build/
 site/
 
 # Gas Town runtime
+.runtime/
+.claude/
+.logs/
 .beads/
 
 # Misc
