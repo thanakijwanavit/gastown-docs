@@ -1,0 +1,105 @@
+/* Gas Town Documentation - Docusaurus Custom Styles */
+
+:root {
+  --ifm-color-primary: #ff6d00;
+  --ifm-color-primary-dark: #e66200;
+  --ifm-color-primary-darker: #d95d00;
+  --ifm-color-primary-darkest: #b34d00;
+  --ifm-color-primary-light: #ff7d1a;
+  --ifm-color-primary-lighter: #ff8426;
+  --ifm-color-primary-lightest: #ff9d4d;
+  --ifm-code-font-size: 95%;
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', monospace;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 109, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #ff8c33;
+  --ifm-color-primary-dark: #ff7d1a;
+  --ifm-color-primary-darker: #ff7610;
+  --ifm-color-primary-darkest: #e66200;
+  --ifm-color-primary-light: #ff9b4d;
+  --ifm-color-primary-lighter: #ffa257;
+  --ifm-color-primary-lightest: #ffb880;
+  --docusaurus-highlighted-code-line-bg: rgba(255, 109, 0, 0.15);
+}
+
+/* Wider content area */
+.container {
+  max-width: 1440px;
+}
+
+/* Code block styling */
+.prism-code {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Table improvements */
+table:not(.tabs) {
+  font-size: 0.88rem;
+}
+
+table:not(.tabs) th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Admonition sizing */
+.theme-admonition {
+  font-size: 0.9rem;
+}
+
+/* Navigation improvements */
+.menu__link {
+  font-size: 0.85rem;
+}
+
+/* Mermaid diagram sizing */
+.mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Print optimization */
+@media print {
+  .navbar,
+  .footer,
+  .theme-doc-sidebar-container,
+  .theme-doc-toc-desktop {
+    display: none;
+  }
+  .main-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* Landing page styles */
+.hero--primary {
+  background: linear-gradient(135deg, #ff6d00 0%, #ff8c33 50%, #ffab40 100%);
+}
+
+[data-theme='dark'] .hero--primary {
+  background: linear-gradient(135deg, #b34d00 0%, #e66200 50%, #ff6d00 100%);
+}
+
+.hero__title {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.hero__subtitle {
+  font-size: 1.3rem;
+  opacity: 0.9;
+}
+
+.feature-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.feature-card h3 {
+  margin-top: 0.5rem;
+}
