@@ -208,20 +208,15 @@ gt prime
 
 This reads all relevant context (hooks, beads, mail, agent identity) and presents it as a structured prompt that the agent can process.
 
-### `gt mail check --inject` -- Mail-Based Context
+### `gt mail inbox` -- Check Pending Mail
 
-For runtimes that support text input but not file-based hooks:
+For runtimes that support text input but not file-based hooks, check for pending messages after priming:
 
 ```bash
-gt mail check --inject
+gt mail inbox
 ```
 
-This:
-
-1. Reads the agent's mailbox
-2. Reads the current hook
-3. Formats everything as a single text block
-4. Injects it into the agent's input stream
+This shows all pending messages in the agent's mailbox. Read any relevant messages with `gt mail read <id>` to get assignment context.
 
 ### Recommended Startup Sequence for Limited Runtimes
 
@@ -230,13 +225,13 @@ This:
 gt sling gt-a1b2c myproject --agent auggie
 
 # 2. Attach to the session
-gt polecat attach <name> --rig myproject
+gt session at <name> --rig myproject
 
 # 3. Inject context
 gt prime
 
-# 4. Inject pending mail
-gt mail check --inject
+# 4. Check pending mail
+gt mail inbox
 
 # 5. The agent now has full context and can begin work
 ```
