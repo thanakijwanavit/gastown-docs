@@ -39,15 +39,15 @@ graph TB
         P2a["Polecat: Bravo"]
     end
 
-    Daemon -->|heartbeat| Deacon
-    Mayor --> Deacon
-    Deacon --> W1
-    Deacon --> W2
-    W1 --> P1a
-    W1 --> P1b
-    P1a -->|MR| R1
-    P1b -->|MR| R1
-    P2a -->|MR| R2
+    Daemon -->|heartbeat 3m| Deacon
+    Mayor -->|strategy| Deacon
+    Deacon -->|monitors| W1
+    Deacon -->|monitors| W2
+    W1 -->|watches| P1a
+    W1 -->|watches| P1b
+    P1a -->|gt done → MR| R1
+    P1b -->|gt done → MR| R1
+    P2a -->|gt done → MR| R2
     R1 -->|merge| Main1[main]
     R2 -->|merge| Main2[main]
 ```

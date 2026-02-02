@@ -18,8 +18,8 @@ graph TD
     Boot["Boot<br/>(Triage dog)"]
 
     Daemon -->|heartbeat 3m| Deacon
-    Mayor -->|strategic| Deacon
-    Deacon -->|manages| Boot
+    Mayor -->|strategic direction| Deacon
+    Deacon -->|spawns for triage| Boot
 
     subgraph "Per-Rig Supervision"
         Witness["Witness<br/>(Rig supervisor)"]
@@ -27,14 +27,16 @@ graph TD
         P1["Polecat 1"]
         P2["Polecat 2"]
         P3["Polecat 3"]
+        Crew["Crew<br/>(Human devs)"]
     end
 
     Deacon -->|monitors| Witness
     Witness -->|watches| P1
     Witness -->|watches| P2
     Witness -->|watches| P3
-    P1 -->|submits MR| Refinery
-    P2 -->|submits MR| Refinery
+    P1 -->|gt done → MR| Refinery
+    P2 -->|gt done → MR| Refinery
+    Refinery -->|merge| Main[main branch]
 ```
 
 ## Monitoring Chain
@@ -58,17 +60,27 @@ Persistent agents run patrol cycles — periodic health checks:
 | **Refinery** | 5 min | Process merge queue, rebase and validate |
 | **Daemon** | 3 min | Send heartbeat to Deacon |
 
+## Boot Dog: The Triage Agent
+
+The Boot dog is a special agent spawned by the Deacon to assess situations that need triage — new work arriving, health check failures, or ambiguous states. Boot performs a quick assessment and reports back to the Deacon, which then takes action (spawn polecats, escalate, etc.). Boot is short-lived and focused: assess, report, exit.
+
 ## Escalation Path
 
 When an agent encounters a problem it cannot resolve:
 
 ```
 Polecat (stuck)
-  → Witness detects stall
+  → Witness detects stall (patrol cycle)
     → Witness nudges polecat
       → If still stuck: Witness escalates to Deacon
         → Deacon escalates to Mayor
           → Mayor escalates to Human/Overseer
+```
+
+Agents can also self-escalate using `gt escalate`:
+
+```bash
+gt escalate "Brief description" -s HIGH -m "Details"
 ```
 
 Severity levels control routing:

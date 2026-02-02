@@ -27,10 +27,11 @@ Gas Town borrows heavily from Erlang/OTP patterns:
 
 All persistent state lives in git or git-adjacent storage:
 
-- Beads (issues) stored in SQLite, synced via git
+- Beads (issues) stored in SQLite with JSONL export for portability
 - Hooks implemented as git worktrees
 - Agent context in CLAUDE.md files (committed)
 - Configuration in tracked JSON/YAML files
+- Rig-level `.beads/` is gitignored (local runtime state), but issue data persists via export
 
 This means state survives anything — crashes, restarts, even machine failures.
 
@@ -79,7 +80,9 @@ Each agent role has clear, non-overlapping responsibilities:
 | Witness | Watch polecats | Process merges |
 | Refinery | Merge code | Write features |
 | Polecat | Implement features | Monitor others |
+| Crew | Human dev work | Agent coordination |
 | Dog | Infrastructure tasks | Feature work |
+| Boot | Triage assessments | Long-running work |
 
 ## 8. Communication Over Shared State
 

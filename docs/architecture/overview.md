@@ -25,15 +25,16 @@ Each rig wraps a git repository with the full agent infrastructure:
 
 ```
 myproject/
-├── .beads/           # Rig-level issue tracking
-├── config.json       # Rig configuration
-├── refinery/rig/     # Canonical main clone
-├── mayor/rig/        # Mayor's working copy
+├── .beads/           # Rig-level issue tracking (SQLite + JSONL export)
+├── metadata.json     # Rig configuration and identity
+├── AGENTS.md         # Agent role descriptions
+├── refinery/         # Refinery merge queue processing
+├── mayor/            # Mayor's coordination workspace
 ├── crew/             # Human developer workspaces
 │   ├── dave/
 │   └── emma/
-├── witness/          # Health monitor state
-├── polecats/         # Ephemeral worker directories
+├── witness/          # Rig-level health monitor
+├── polecats/         # Ephemeral worker directories (git worktrees)
 │   ├── toast/
 │   └── alpha/
 └── plugins/          # Rig-level plugins
@@ -41,16 +42,19 @@ myproject/
 
 ### 3. Agents (Workers)
 
-Six agent roles form the hierarchy:
+Seven agent roles form the hierarchy:
 
 | Agent | Scope | Lifecycle | Purpose |
 |-------|-------|-----------|---------|
-| **Mayor** | Town | Persistent | Global coordination |
-| **Deacon** | Town | Persistent | Health monitoring |
+| **Mayor** | Town | Persistent | Global coordination and strategy |
+| **Deacon** | Town | Persistent | Health monitoring and lifecycle |
 | **Witness** | Per-rig | Persistent | Polecat supervision |
 | **Refinery** | Per-rig | Persistent | Merge queue processing |
-| **Polecats** | Per-rig | Ephemeral | Feature work |
+| **Polecats** | Per-rig | Ephemeral | Feature work (self-cleaning) |
+| **Crew** | Per-rig | Managed | Human developer workspaces |
 | **Dogs** | Town | Reusable | Infrastructure tasks |
+
+Additionally, the **Boot** dog is a special triage agent spawned by the Deacon to assess new work or problems.
 
 ### 4. Daemon (Scheduler)
 
@@ -94,8 +98,9 @@ All state is persisted in git or the filesystem:
 | State | Storage | Survives |
 |-------|---------|----------|
 | Issues | `.beads/beads.db` (SQLite) | Everything |
+| Issue export | `.beads/issues.jsonl` | Everything |
 | Work hooks | Git worktrees | Crashes, restarts |
 | Mail | Filesystem JSONL | Session restarts |
-| Config | JSON/YAML files | Everything |
+| Config | `metadata.json`, `.beads/config.yaml` | Everything |
 | Agent context | CLAUDE.md files | Everything |
 | Activity log | `.events.jsonl` | Everything |

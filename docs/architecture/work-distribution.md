@@ -14,18 +14,16 @@ Every piece of work in Gas Town follows a defined lifecycle from creation to com
 
 ```mermaid
 stateDiagram-v2
-    [*] --> Pending: bd create
-    Pending --> Open: Agent claims
-    Open --> InProgress: Work begins
-    InProgress --> Hooked: gt hook / gt sling
-    Hooked --> InProgress: Agent picks up
-    InProgress --> Done: gt done / bd close
-    Done --> [*]
+    [*] --> Open: bd create
+    Open --> Hooked: gt sling (assigns to agent)
+    Hooked --> InProgress: Agent picks up from hook
+    InProgress --> Completed: gt done / bd close
+    Completed --> [*]
 
     InProgress --> Escalated: Blocker hit
     InProgress --> Deferred: Paused
     Escalated --> InProgress: Resolved
-    Deferred --> InProgress: Resumed
+    Deferred --> Open: gt release
 ```
 
 ### Exit States (Polecat Completion)
@@ -117,18 +115,48 @@ gt convoy stranded
 
 Convoys auto-close when all tracked issues complete.
 
+## Molecules: Structured Workflows
+
+Molecules define multi-step workflows for agents. A molecule is an epic bead with child step beads that guide execution:
+
+```bash
+# Agents check their current steps
+bd ready                    # Shows steps with no blockers
+
+# Work through steps sequentially
+bd update <step> --status=in_progress
+# ... do the work ...
+bd close <step>
+bd ready                    # Next step appears
+```
+
+The standard polecat workflow molecule (`mol-polecat-work`) includes steps like:
+
+1. Load context and verify assignment
+2. Set up working branch
+3. Verify tests pass on main
+4. Implement the solution
+5. Self-review changes
+6. Run tests and verify coverage
+7. Clean up workspace
+8. Prepare work for review
+9. Submit work and self-clean
+
+Molecules provide crash recovery — if an agent restarts, `bd ready` shows the next incomplete step, so work resumes from where it left off.
+
 ## Cross-Rig Work
 
 For work spanning multiple projects:
 
 - **Dogs** handle infrastructure tasks across rigs
 - **Convoys** track issues across multiple rigs
-- **Worktrees** provide cross-rig file access
+- **Mayor** coordinates cross-rig strategy
 
 ```bash
-# Create cross-rig worktree
-gt worktree myproject /path/to/other-repo
-
-# Dogs work from ~/gt/deacon/dogs/
+# Dogs handle infrastructure
 gt dog list
+
+# Prefix-based routing lets you reference any rig's beads
+bd show gt-abc12            # Routes to gastown rig
+bd show hq-abc              # Routes to town-level beads
 ```
