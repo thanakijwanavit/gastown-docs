@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+build/
+.docusaurus/
+
+# Old MkDocs
+site/
+
+# Gas Town runtime
+.runtime/
+.claude/
+.logs/
+.beads/
+
+# Misc
+.DS_Store
+.env
+.env.local
+*.log
+npm-debug.log*
+__pycache__/
+*.pyc
+.venv/
+venv/
+.cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
