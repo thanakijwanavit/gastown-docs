@@ -37,7 +37,7 @@ Gas Town has gone through four major architectural revisions, each driven by har
 
 ### v1: The Prototype
 
-The first version was a collection of bash scripts managing Claude Code sessions in tmux. It proved the concept -- multiple agents could work in parallel on the same project -- but coordination was fragile and everything broke constantly.
+As described in [Welcome to Gas Town](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04), Yegge began building his first orchestrator in August 2025. The first version was a collection of bash scripts managing Claude Code sessions in tmux. It proved the concept -- multiple agents could work in parallel on the same project -- but coordination was fragile and everything broke constantly.
 
 **Lessons learned:**
 
@@ -76,11 +76,17 @@ The current version is written in Go, providing:
 
 Go was chosen for operational characteristics, not language preference. The daemon needs to be fast, reliable, and simple. Go excels at all three.
 
+Gas Town is the fourth complete, functioning orchestrator Yegge built in 2025. Each failure taught hard lessons that informed the next iteration.
+
 ---
 
 ## Mad Max Naming and Theming
 
-Gas Town's naming comes from the Mad Max: Fury Road universe. The fictional Gas Town is an oil refinery citadel controlled by a warlord. The metaphor maps surprisingly well to a multi-agent orchestration system:
+Gas Town's naming comes from the Mad Max: Fury Road universe. As Yegge describes in [Welcome to Gas Town](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04):
+
+> "Gas Town is a new take on the IDE for 2026. Gas Town helps you with the tedium of running lots of Claude Code instances."
+
+The fictional Gas Town is an oil refinery citadel controlled by a warlord. The metaphor maps surprisingly well to a multi-agent orchestration system:
 
 | Mad Max | Gas Town Concept |
 |---------|------------------|
@@ -273,6 +279,16 @@ The Software Survival 3.0 framework leads to concrete strategic advice:
 - **Make it easy to use.** Reduce friction ruthlessly. Clean APIs, predictable behavior, fast response times. Every bit of friction you remove improves your survival ratio.
 - **Identify your niche breadth.** Understand whether your Usage multiplier compensates for your per-invocation Savings. Broad tools can survive with modest savings; niche tools need to save dramatically per use.
 - **Consider the Human Coefficient.** If you operate in a domain where human preference matters, lean into it. The H multiplier is a legitimate survival advantage.
+
+### The Vibe Coding Commitment
+
+Gas Town embraces what Yegge calls "vibe coding" -- the practice of letting AI do the work while you focus on direction and review. As he writes in [Welcome to Gas Town](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04):
+
+> "Working effectively in Gas Town involves committing to vibe coding. Work becomes fluid, an uncountable that you sling around freely."
+
+> "Most work gets done; some work gets lost. Fish fall out of the barrel. Some escape back to sea, or get stepped on. The focus is throughput: creation and correction at the speed of thought."
+
+This tolerance for imperfection in exchange for throughput is a conscious design choice, not a flaw.
 
 ### Broader Implications
 
