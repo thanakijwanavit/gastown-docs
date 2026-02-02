@@ -1,0 +1,606 @@
+# Gas Town Documentation
+# https://docs.gt.villamarket.ai
+# Multi-agent orchestration for AI coding agents
+
+## Table of Contents
+
+### Home
+- Gas Town Documentation: /docs/index
+
+### Getting Started
+- Getting Started: /docs/getting-started
+- Installation: /docs/getting-started/installation
+- Quick Start: /docs/getting-started/quickstart
+- Your First Convoy: /docs/getting-started/first-convoy
+
+### Architecture
+- Architecture: /docs/architecture
+- System Overview: /docs/architecture/overview
+- Agent Hierarchy: /docs/architecture/agent-hierarchy
+- Work Distribution: /docs/architecture/work-distribution
+- Design Principles: /docs/architecture/design-principles
+
+### Cli Reference
+- CLI Reference: /docs/cli-reference
+- Workspace Management: /docs/cli-reference/workspace
+- Agent Operations: /docs/cli-reference/agents
+- Work Management: /docs/cli-reference/work
+- Convoy & Tracking: /docs/cli-reference/convoys
+- Communication: /docs/cli-reference/communication
+- Merge Queue: /docs/cli-reference/merge-queue
+- Rig Management: /docs/cli-reference/rigs
+- Session & Handoff: /docs/cli-reference/sessions
+- Diagnostics: /docs/cli-reference/diagnostics
+- Configuration: /docs/cli-reference/configuration
+
+### Agents
+- Agents: /docs/agents
+- Mayor -- Global Coordinator: /docs/agents/mayor
+- Deacon -- Town-Level Watchdog: /docs/agents/deacon
+- Witness -- Per-Rig Health Monitor: /docs/agents/witness
+- Refinery -- Merge Queue Processor: /docs/agents/refinery
+- Polecats -- Ephemeral Workers: /docs/agents/polecats
+- Dogs -- Infrastructure Workers: /docs/agents/dogs
+- Crew -- Human Workspaces: /docs/agents/crew
+- Boot -- Daemon Watchdog Dog: /docs/agents/boot
+
+### Concepts
+- Core Concepts: /docs/concepts
+- Beads (Issue Tracking): /docs/concepts/beads
+- Hooks (Persistence): /docs/concepts/hooks
+- Convoys (Batch Tracking): /docs/concepts/convoys
+- Molecules & Formulas: /docs/concepts/molecules
+- Gates (Async Coordination): /docs/concepts/gates
+- Rigs (Project Containers): /docs/concepts/rigs
+- The MEOW Stack: /docs/concepts/meow-stack
+- GUPP & NDI: /docs/concepts/gupp
+
+### Workflows
+- Workflows: /docs/workflows
+- Mayor Workflow (MEOW): /docs/workflows/mayor-workflow
+- Minimal Mode (No Tmux): /docs/workflows/minimal-mode
+- Manual Convoy Workflow: /docs/workflows/manual-convoy
+- Formula Workflow: /docs/workflows/formula-workflow
+- Code Review Workflow: /docs/workflows/code-review
+
+### Operations
+- Operations: /docs/operations
+- Starting & Stopping: /docs/operations/lifecycle
+- Monitoring & Health: /docs/operations/monitoring
+- Escalation System: /docs/operations/escalations
+- Troubleshooting: /docs/operations/troubleshooting
+- Plugins: /docs/operations/plugins
+
+### Guides
+- Guides: /docs/guides
+- Usage Guide: /docs/guides/usage-guide
+- The 8 Stages of AI Coding: /docs/guides/eight-stages
+- Multi-Runtime Support: /docs/guides/multi-runtime
+- Cost Management: /docs/guides/cost-management
+- Background & Philosophy: /docs/guides/philosophy
+- Glossary: /docs/guides/glossary
+
+---
+
+## Gas Town Documentation
+> /docs/index
+
+Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of Claude Co...
+
+**Gas Town** is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of [Claude Code](https://claude.ai/), it scales from a single agent to 20-30 concurrent workers — all managed through the `gt` CLI.
+
+---
+
+## Getting Started
+> /docs/getting-started
+
+This section covers everything you need to go from zero to running Gas Town with your first project.
+
+This section covers everything you need to go from zero to running Gas Town with your first project.
+
+---
+
+## Installation
+> /docs/getting-started/installation
+
+Install Gas Town via Homebrew, npm, or build from source, plus required dependencies like Beads and tmux.
+
+<Tabs>
+<TabItem value="homebrew-recommended-" label="Homebrew (Recommended)">
+
+---
+
+## Quick Start
+> /docs/getting-started/quickstart
+
+The Town is your top-level workspace directory. All projects (rigs) live inside it.
+
+The **Town** is your top-level workspace directory. All projects (rigs) live inside it.
+
+---
+
+## Your First Convoy
+> /docs/getting-started/first-convoy
+
+A Convoy is Gas Town's primary unit for tracking batches of related work. This walkthrough takes you through creating and monitoring your first convoy.
+
+A **Convoy** is Gas Town's primary unit for tracking batches of related work. This walkthrough takes you through creating and monitoring your first convoy.
+
+---
+
+## Architecture
+> /docs/architecture
+
+Gas Town's architecture draws from Erlang's supervisor trees and mailbox patterns — battle-tested approaches to building reliable distributed systems.
+
+Gas Town's architecture draws from Erlang's supervisor trees and mailbox patterns — battle-tested approaches to building reliable distributed systems.
+
+---
+
+## System Overview
+> /docs/architecture/overview
+
+Gas Town consists of five layers:
+
+Gas Town consists of five layers:
+
+---
+
+## Agent Hierarchy
+> /docs/architecture/agent-hierarchy
+
+Gas Town uses a supervisor tree pattern inspired by Erlang/OTP. Each agent level monitors the level below it, providing fault tolerance and automatic recovery.
+
+Gas Town uses a supervisor tree pattern inspired by Erlang/OTP. Each agent level monitors the level below it, providing fault tolerance and automatic recovery.
+
+---
+
+## Work Distribution
+> /docs/architecture/work-distribution
+
+Every piece of work in Gas Town follows a defined lifecycle from creation to completion.
+
+Every piece of work in Gas Town follows a defined lifecycle from creation to completion.
+
+---
+
+## Design Principles
+> /docs/architecture/design-principles
+
+Gas Town is built on several core design principles that guide its architecture and behavior.
+
+Gas Town is built on several core design principles that guide its architecture and behavior.
+
+---
+
+## CLI Reference
+> /docs/cli-reference
+
+The gt CLI is the primary interface for interacting with Gas Town. It manages workspaces, agents, work distribution, communication, and diagnostics across yo...
+
+The `gt` CLI is the primary interface for interacting with Gas Town. It manages workspaces, agents, work distribution, communication, and diagnostics across your entire multi-agent development environment.
+
+---
+
+## Workspace Management
+> /docs/cli-reference/workspace
+
+Commands for installing, initializing, and managing your Gas Town workspace (the \
+
+Commands for installing, initializing, and managing your Gas Town workspace (the "Town"). These commands handle the foundational setup that all other operations depend on.
+
+---
+
+## Agent Operations
+> /docs/cli-reference/agents
+
+Commands for starting, stopping, monitoring, and managing the Gas Town agent hierarchy. Each agent role has dedicated lifecycle commands, plus there are cros...
+
+Commands for starting, stopping, monitoring, and managing the Gas Town agent hierarchy. Each agent role has dedicated lifecycle commands, plus there are cross-cutting commands for role management.
+
+---
+
+## Work Management
+> /docs/cli-reference/work
+
+Commands for creating, assigning, tracking, and completing work items. This includes both gt commands for work orchestration and bd (Beads) commands for issu...
+
+Commands for creating, assigning, tracking, and completing work items. This includes both `gt` commands for work orchestration and `bd` (Beads) commands for issue tracking.
+
+---
+
+## Convoy & Tracking
+> /docs/cli-reference/convoys
+
+Convoys are Gas Town's primary mechanism for bundling and tracking batches of related work. A convoy groups multiple beads together, monitors their collectiv...
+
+Convoys are Gas Town's primary mechanism for bundling and tracking batches of related work. A convoy groups multiple beads together, monitors their collective progress, and auto-closes when all tracked items complete.
+
+---
+
+## Communication
+> /docs/cli-reference/communication
+
+Commands for inter-agent messaging, notifications, escalations, and broadcasts. Gas Town's communication layer is built on Erlang-inspired mailbox patterns w...
+
+Commands for inter-agent messaging, notifications, escalations, and broadcasts. Gas Town's communication layer is built on Erlang-inspired mailbox patterns with asynchronous message passing as the default.
+
+---
+
+## Merge Queue
+> /docs/cli-reference/merge-queue
+
+Commands for managing the Refinery's merge queue. The Refinery processes merge requests (MRs) submitted by polecats, rebasing them onto the latest main branc...
+
+Commands for managing the Refinery's merge queue. The Refinery processes merge requests (MRs) submitted by polecats, rebasing them onto the latest main branch, running validation, and merging clean code.
+
+---
+
+## Rig Management
+> /docs/cli-reference/rigs
+
+Commands for adding, configuring, starting, stopping, and managing rigs. A rig is a project container that wraps a git repository with the full Gas Town agen...
+
+Commands for adding, configuring, starting, stopping, and managing rigs. A rig is a project container that wraps a git repository with the full Gas Town agent infrastructure.
+
+---
+
+## Session & Handoff
+> /docs/cli-reference/sessions
+
+Commands for managing agent sessions, handoffs between sessions, molecules (multi-step workflows), and formulas (reusable workflow templates).
+
+Commands for managing agent sessions, handoffs between sessions, molecules (multi-step workflows), and formulas (reusable workflow templates).
+
+---
+
+## Diagnostics
+> /docs/cli-reference/diagnostics
+
+Commands for monitoring, auditing, and troubleshooting Gas Town. These tools provide visibility into system health, agent activity, resource usage, and opera...
+
+Commands for monitoring, auditing, and troubleshooting Gas Town. These tools provide visibility into system health, agent activity, resource usage, and operational state.
+
+---
+
+## Configuration
+> /docs/cli-reference/configuration
+
+Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and...
+
+Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and rig levels.
+
+---
+
+## Agents
+> /docs/agents
+
+Gas Town's agent hierarchy is a supervisor tree inspired by Erlang/OTP. Each role has a well-defined scope, lifecycle, and set of responsibilities -- ensurin...
+
+Gas Town's agent hierarchy is a supervisor tree inspired by Erlang/OTP. Each role has a well-defined scope, lifecycle, and set of responsibilities -- ensuring reliable, self-healing operation from a single worker to 30 concurrent agents.
+
+---
+
+## Mayor -- Global Coordinator
+> /docs/agents/mayor
+
+> The Mayor is the brain of Gas Town. It receives instructions from the human overseer, decomposes them into actionable work, and orchestrates the entire age...
+
+> The Mayor is the brain of Gas Town. It receives instructions from the human overseer, decomposes them into actionable work, and orchestrates the entire agent hierarchy to deliver results.
+
+---
+
+## Deacon -- Town-Level Watchdog
+> /docs/agents/deacon
+
+> The Deacon is the immune system of Gas Town. It monitors the health of every agent, manages lifecycles, and ensures the system self-heals when things go wr...
+
+> The Deacon is the immune system of Gas Town. It monitors the health of every agent, manages lifecycles, and ensures the system self-heals when things go wrong.
+
+---
+
+## Witness -- Per-Rig Health Monitor
+> /docs/agents/witness
+
+> The Witness is the local guardian of a rig. It watches every polecat in its domain, detects problems before they spread, and keeps the workspace clean.
+
+> The Witness is the local guardian of a rig. It watches every polecat in its domain, detects problems before they spread, and keeps the workspace clean.
+
+---
+
+## Refinery -- Merge Queue Processor
+> /docs/agents/refinery
+
+> The Refinery is the gatekeeper of main. It serializes merges from concurrent polecats, ensuring every change is rebased, validated, and cleanly integrated.
+
+> The Refinery is the gatekeeper of `main`. It serializes merges from concurrent polecats, ensuring every change is rebased, validated, and cleanly integrated.
+
+---
+
+## Polecats -- Ephemeral Workers
+> /docs/agents/polecats
+
+> Polecats are the hands of Gas Town. They spawn, do their job, submit their work, and disappear. No idle time. No wasted resources.
+
+> Polecats are the hands of Gas Town. They spawn, do their job, submit their work, and disappear. No idle time. No wasted resources.
+
+---
+
+## Dogs -- Infrastructure Workers
+> /docs/agents/dogs
+
+> Dogs do the dirty work. They clean up messes, sync systems, and handle cross-rig infrastructure tasks that no single polecat or witness can manage alone.
+
+> Dogs do the dirty work. They clean up messes, sync systems, and handle cross-rig infrastructure tasks that no single polecat or witness can manage alone.
+
+---
+
+## Crew -- Human Workspaces
+> /docs/agents/crew
+
+> Crew workspaces give human developers a first-class seat at the Gas Town table -- persistent, fully integrated, and always ready for hands-on work.
+
+> Crew workspaces give human developers a first-class seat at the Gas Town table -- persistent, fully integrated, and always ready for hands-on work.
+
+---
+
+## Boot -- Daemon Watchdog Dog
+> /docs/agents/boot
+
+> Boot is the first responder. It runs fresh on every daemon tick, takes a snapshot of the world, and decides whether the Deacon needs waking or nudging.
+
+> Boot is the first responder. It runs fresh on every daemon tick, takes a snapshot of the world, and decides whether the Deacon needs waking or nudging.
+
+---
+
+## Core Concepts
+> /docs/concepts
+
+Gas Town is built on a small set of powerful primitives. Understanding these concepts is the key to effective use of the system, whether you are a human oper...
+
+Gas Town is built on a small set of powerful primitives. Understanding these concepts is the key to effective use of the system, whether you are a human operator or an AI agent.
+
+---
+
+## Beads (Issue Tracking)
+> /docs/concepts/beads
+
+Beads is Gas Town's AI-native, git-backed issue tracking system. Instead of a web-based project board, issues live directly in your repository as structured ...
+
+Beads is Gas Town's **AI-native, git-backed issue tracking system**. Instead of a web-based project board, issues live directly in your repository as structured data, managed entirely through the `bd` CLI. This design makes Beads seamlessly usable by AI coding agents that work through the terminal.
+
+---
+
+## Hooks (Persistence)
+> /docs/concepts/hooks
+
+Hooks are Gas Town's durability primitive. A hook is a persistent attachment point where work state is stored in a way that survives crashes, restarts, hando...
+
+Hooks are Gas Town's **durability primitive**. A hook is a persistent attachment point where work state is stored in a way that survives crashes, restarts, handoffs, context compaction, and even machine failures. Hooks are what make Gas Town agents self-propelling -- an agent always knows what to do by checking its hook.
+
+---
+
+## Convoys (Batch Tracking)
+> /docs/concepts/convoys
+
+A Convoy is Gas Town's unit for tracking batches of related work. Convoys bundle multiple beads together, provide a single point of progress monitoring, auto...
+
+A **Convoy** is Gas Town's unit for tracking batches of related work. Convoys bundle multiple beads together, provide a single point of progress monitoring, auto-close when all tracked items complete, and notify subscribers on landing. They are the primary coordination mechanism for multi-issue projects.
+
+---
+
+## Molecules & Formulas
+> /docs/concepts/molecules
+
+Molecules are Gas Town's multi-step workflow execution units. A molecule guides an agent through a sequence of steps, tracking progress so that work can resu...
+
+**Molecules** are Gas Town's multi-step workflow execution units. A molecule guides an agent through a sequence of steps, tracking progress so that work can resume after crashes, handoffs, or context compaction. **Formulas** are the TOML-defined templates from which molecules are created.
+
+---
+
+## Gates (Async Coordination)
+> /docs/concepts/gates
+
+Gates are synchronization points in Gas Town workflows. When a molecule step needs to wait for an external condition -- a CI pipeline finishing, a human appr...
+
+**Gates** are synchronization points in Gas Town workflows. When a molecule step needs to wait for an external condition -- a CI pipeline finishing, a human approving a change, or a timer elapsing -- it parks on a gate. The gate holds the workflow until the condition is met, then releases it to continue.
+
+---
+
+## Rigs (Project Containers)
+> /docs/concepts/rigs
+
+A Rig is Gas Town's project container. Each rig wraps a git repository with the full agent infrastructure needed to manage, develop, and merge code. Rigs are...
+
+A **Rig** is Gas Town's project container. Each rig wraps a git repository with the full agent infrastructure needed to manage, develop, and merge code. Rigs are the physical structure of a Gas Town workspace -- every project you manage with Gas Town becomes a rig.
+
+---
+
+## The MEOW Stack
+> /docs/concepts/meow-stack
+
+The MEOW Stack is Gas Town's layered abstraction model for organizing work, from atomic Beads to reusable Formulas.
+
+The **MEOW Stack** (Molecules, Epics, Orchestration, Workflows) is Gas Town's layered abstraction model for organizing and executing work. Each layer builds on the one below it, creating a composable system that scales from a single task to an entire project buildout.
+
+---
+
+## GUPP & NDI
+> /docs/concepts/gupp
+
+The Gas Town Universal Propulsion Principle (GUPP) and Nondeterministic Idempotence (NDI) are the core design principles that make Gas Town reliable at scale.
+
+Two foundational principles govern how Gas Town handles the inherent chaos of multi-agent AI coordination: the **Gas Town Universal Propulsion Principle (GUPP)** and **Nondeterministic Idempotence (NDI)**.
+
+---
+
+## Workflows
+> /docs/workflows
+
+Gas Town supports several workflow patterns for getting work done. Choose the one that best matches your needs and infrastructure.
+
+Gas Town supports several workflow patterns for getting work done. Choose the one that best matches your needs and infrastructure.
+
+---
+
+## Mayor Workflow (MEOW)
+> /docs/workflows/mayor-workflow
+
+The Mayor Workflow -- also known as MEOW (Mayor-Executed Orchestrated Work) -- is the recommended workflow for complex multi-issue coordination. You describe...
+
+The **Mayor Workflow** -- also known as **MEOW** (Mayor-Executed Orchestrated Work) -- is the recommended workflow for complex multi-issue coordination. You describe what you want in natural language, and the Mayor handles bead creation, convoy management, agent assignment, progress monitoring, and completion notification.
+
+---
+
+## Minimal Mode (No Tmux)
+> /docs/workflows/minimal-mode
+
+Minimal Mode lets you use Gas Town's persistence and tracking features without requiring Tmux or the full agent hierarchy. You manually spawn agents and mana...
+
+**Minimal Mode** lets you use Gas Town's persistence and tracking features without requiring Tmux or the full agent hierarchy. You manually spawn agents and manage work, while Gas Town provides hooks, beads, and convoy tracking. This is ideal for getting started, running on limited resources, or when you prefer hands-on control.
+
+---
+
+## Manual Convoy Workflow
+> /docs/workflows/manual-convoy
+
+The Manual Convoy Workflow gives you direct control over work distribution while still using Gas Town's convoy tracking, merge queue, and agent infrastructur...
+
+The **Manual Convoy Workflow** gives you direct control over work distribution while still using Gas Town's convoy tracking, merge queue, and agent infrastructure. Unlike the Mayor Workflow (where the Mayor decides assignments), you create the convoy, add issues, and sling them individually to specific rigs or agents.
+
+---
+
+## Formula Workflow
+> /docs/workflows/formula-workflow
+
+The Formula Workflow uses predefined TOML templates to orchestrate structured, repeatable processes. Instead of describing work in free-form text, you select...
+
+The **Formula Workflow** uses predefined TOML templates to orchestrate structured, repeatable processes. Instead of describing work in free-form text, you select a formula that defines the exact steps, run it with variables, and let Gas Town execute the workflow. This is ideal for standardized processes like releases, design explorations, and audits.
+
+---
+
+## Code Review Workflow
+> /docs/workflows/code-review
+
+Gas Town provides a powerful parallel code review system using the code-review convoy formula. Instead of a single reviewer reading through a PR, Gas Town sp...
+
+Gas Town provides a powerful **parallel code review** system using the `code-review` convoy formula. Instead of a single reviewer reading through a PR, Gas Town spawns multiple specialized reviewer polecats -- each examining the code from a different perspective -- then synthesizes their findings into a unified, prioritized review.
+
+---
+
+## Operations
+> /docs/operations
+
+Running Gas Town in production means managing a fleet of AI agents across multiple projects. This section covers the day-to-day operational tasks: starting a...
+
+Running Gas Town in production means managing a fleet of AI agents across multiple projects. This section covers the day-to-day operational tasks: starting and stopping the system, monitoring health, handling escalations, troubleshooting problems, and extending functionality with plugins.
+
+---
+
+## Starting & Stopping
+> /docs/operations/lifecycle
+
+Gas Town provides granular control over the system lifecycle -- from starting the entire fleet to managing individual agents and rigs. Understanding the dist...
+
+Gas Town provides granular control over the system lifecycle -- from starting the entire fleet to managing individual agents and rigs. Understanding the distinction between **pause** (`gt down`) and **shutdown** (`gt shutdown`) is critical: pausing preserves worktrees and state for fast restart, while shutdown cleans up resources.
+
+---
+
+## Monitoring & Health
+> /docs/operations/monitoring
+
+Gas Town provides a suite of monitoring tools to observe real-time activity, audit historical work, diagnose system health, and track costs. Effective monito...
+
+Gas Town provides a suite of monitoring tools to observe real-time activity, audit historical work, diagnose system health, and track costs. Effective monitoring is how you keep a fleet of 10-30 agents running smoothly without micromanaging each one.
+
+---
+
+## Escalation System
+> /docs/operations/escalations
+
+Gas Town's escalation system provides priority-routed alerts that flow upward through the supervision hierarchy. When an agent encounters a problem it cannot...
+
+Gas Town's escalation system provides priority-routed alerts that flow upward through the supervision hierarchy. When an agent encounters a problem it cannot resolve, it creates an escalation that routes to the appropriate handler based on severity. This ensures critical issues reach the human operator quickly while low-severity problems are tracked without interruption.
+
+---
+
+## Troubleshooting
+> /docs/operations/troubleshooting
+
+This guide covers common Gas Town problems, their diagnosis, and resolution. Start with gt doctor for automated diagnostics, then consult the specific sectio...
+
+This guide covers common Gas Town problems, their diagnosis, and resolution. Start with `gt doctor` for automated diagnostics, then consult the specific sections below for detailed troubleshooting steps.
+
+---
+
+## Plugins
+> /docs/operations/plugins
+
+Gas Town's plugin system extends the platform with custom automation, gates, and scheduled tasks. Plugins can operate at the town level (affecting all rigs) ...
+
+Gas Town's plugin system extends the platform with custom automation, gates, and scheduled tasks. Plugins can operate at the town level (affecting all rigs) or at the rig level (scoped to a single project).
+
+---
+
+## Guides
+> /docs/guides
+
+This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI develop...
+
+This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI development.
+
+---
+
+## Usage Guide
+> /docs/guides/usage-guide
+
+This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion...
+
+This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion workflow. It assumes you have a working installation (see [Getting Started](../getting-started/index.md)) and are familiar with the basic concepts.
+
+---
+
+## The 8 Stages of AI Coding
+> /docs/guides/eight-stages
+
+This guide maps out the progression of AI-assisted software development, from basic code completions to building your own multi-agent orchestrator. Gas Town ...
+
+This guide maps out the progression of AI-assisted software development, from basic code completions to building your own multi-agent orchestrator. Gas Town targets users at **Stage 7 and above** -- if you are not yet there, this guide will help you understand the path.
+
+---
+
+## Multi-Runtime Support
+> /docs/guides/multi-runtime
+
+Gas Town is not locked to a single AI coding agent. While Claude Code is the default and most thoroughly supported runtime, Gas Town supports multiple agent ...
+
+Gas Town is not locked to a single AI coding agent. While Claude Code is the default and most thoroughly supported runtime, Gas Town supports multiple agent runtimes -- allowing you to mix and match based on task requirements, cost, or preference.
+
+---
+
+## Cost Management
+> /docs/guides/cost-management
+
+Gas Town burns tokens. A lot of tokens. At peak usage with 10+ polecats running simultaneously, you can expect to spend approximately $100/hour -- roughly 10...
+
+Gas Town burns tokens. A lot of tokens. At peak usage with 10+ polecats running simultaneously, you can expect to spend approximately **$100/hour** -- roughly 10x what a single Claude Code session costs. This guide covers monitoring, understanding, and optimizing your token spend.
+
+---
+
+## Background & Philosophy
+> /docs/guides/philosophy
+
+Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectu...
+
+Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
+
+---
+
+## Glossary
+> /docs/guides/glossary
+
+Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions.
+
+A comprehensive reference for Gas Town terminology, drawn from the documentation and Steve Yegge's articles on multi-agent AI orchestration.
+
+---

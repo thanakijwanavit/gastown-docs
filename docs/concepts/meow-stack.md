@@ -1,0 +1,151 @@
+---
+title: "The MEOW Stack"
+sidebar_position: 7
+description: "The MEOW Stack is Gas Town's layered abstraction model for organizing work, from atomic Beads to reusable Formulas."
+---
+
+# The MEOW Stack
+
+The **MEOW Stack** (Molecules, Epics, Orchestration, Workflows) is Gas Town's layered abstraction model for organizing and executing work. Each layer builds on the one below it, creating a composable system that scales from a single task to an entire project buildout.
+
+---
+
+## The Layers
+
+```mermaid
+graph TD
+    F["Formulas<br/>(Reusable templates)"] --> P["Protomolecules<br/>(Convoy-level orchestration)"]
+    P --> M["Molecules<br/>(Multi-step workflows)"]
+    M --> E["Epics / Convoys<br/>(Batched work items)"]
+    E --> B["Beads<br/>(Atomic work units)"]
+```
+
+### Layer 1: Beads (Atomic Work Units)
+
+**Beads** are the foundation — individual, trackable units of work. Each bead represents a single issue, task, bug fix, or feature request. They are stored in git (via the `bd` CLI) and persist across crashes, restarts, and agent handoffs.
+
+```bash
+bd create --title "Add input validation to /api/users" --type task
+```
+
+Beads are the atoms of Gas Town. Everything else is built from them.
+
+| Property | Description |
+|----------|-------------|
+| **ID** | Unique identifier (e.g., `gt-a1b2c`) |
+| **Status** | `open`, `in_progress`, `done`, `deferred` |
+| **Hook** | Which agent is currently working on it |
+| **Convoy** | Which batch it belongs to |
+
+See [Beads](beads.md) for the full reference.
+
+### Layer 2: Epics / Convoys (Batched Work)
+
+**Convoys** group related beads into batches that travel together. When you tell the Mayor "build the auth system," it creates a convoy containing all the individual beads needed:
+
+```
+Convoy: auth-system-v2
+├── gt-a1b2c  Add login endpoint
+├── gt-d3e4f  Add JWT middleware
+├── gt-g5h6i  Add password reset flow
+├── gt-j7k8l  Write auth integration tests
+└── gt-m9n0o  Update API documentation
+```
+
+Convoys provide batch-level tracking: how many beads are done, how many are in progress, whether the overall effort is on track.
+
+See [Convoys](../concepts/convoys.md) for details.
+
+### Layer 3: Molecules (Multi-Step Workflows)
+
+**Molecules** are execution plans for individual beads. When a polecat picks up a bead, it follows a molecule — a sequence of ordered steps with dependencies, gates, and checkpoints.
+
+```
+Molecule: mol-polecat-work
+├── load-context      [done]
+├── branch-setup      [done]
+├── preflight-tests   [done]
+├── implement         [in_progress]  ← agent is here
+├── self-review       [pending]
+├── run-tests         [pending]
+└── submit-and-exit   [pending]
+```
+
+The molecule tracks exactly where an agent is in its workflow. If the agent crashes, a fresh agent reads the molecule and resumes from the last completed step.
+
+See [Molecules & Formulas](molecules.md) for the full reference.
+
+### Layer 4: Protomolecules (Convoy-Level Orchestration)
+
+**Protomolecules** are higher-order orchestration patterns that coordinate multiple molecules working in parallel. They represent convoy-level workflows where multiple agents work simultaneously on related tasks with coordination points.
+
+Examples:
+- **Parallel code review**: Multiple agents review different dimensions (correctness, security, performance), then a synthesis step combines findings
+- **Multi-rig deployment**: Changes are pushed to staging across multiple rigs, then promoted to production
+- **Design exploration**: Multiple agents explore different design approaches, then the Mayor evaluates results
+
+```mermaid
+graph TD
+    PM["Protomolecule: Code Review"] --> M1["Mol: Correctness Review"]
+    PM --> M2["Mol: Security Review"]
+    PM --> M3["Mol: Performance Review"]
+    M1 --> S["Synthesis: Combined Review"]
+    M2 --> S
+    M3 --> S
+```
+
+### Layer 5: Formulas (Reusable Templates)
+
+**Formulas** are the TOML-defined templates from which molecules and protomolecules are created. They are the blueprints — reusable, parameterized, and version-controlled.
+
+```toml
+formula = "shiny"
+type = "workflow"
+version = 1
+
+[[steps]]
+id = "design"
+title = "Design {{feature}}"
+
+[[steps]]
+id = "implement"
+needs = ["design"]
+title = "Implement {{feature}}"
+```
+
+A formula is **poured** into a molecule — creating a live instance with real bead IDs and runtime state. You can pour the same formula many times, creating independent workflow instances.
+
+Gas Town ships with 30+ built-in formulas. See [Molecules & Formulas](molecules.md) for the full catalog.
+
+---
+
+## Why "MEOW"?
+
+The name is a backronym: **M**olecules, **E**pics, **O**rchestration, **W**orkflows. But more importantly, it reflects Gas Town's philosophy that work organization should be:
+
+- **Composable**: Each layer builds naturally on the one below
+- **Observable**: You can inspect state at any layer
+- **Recoverable**: Crashes at any layer are handled gracefully
+- **Scalable**: Works for 1 agent or 30
+
+---
+
+## MEOW in Practice
+
+Here's how a typical Gas Town work session flows through the stack:
+
+1. **Human** tells Mayor: "Build user notifications"
+2. **Mayor** creates a **Convoy** (Layer 2) with 5 **Beads** (Layer 1)
+3. Mayor **slings** each bead to a polecat
+4. Each polecat **pours** the `mol-polecat-work` **Formula** (Layer 5) into a **Molecule** (Layer 3)
+5. Polecats execute their molecules in parallel, coordinated by the **Protomolecule** (Layer 4) convoy pattern
+6. The **Refinery** merges completed work to main
+7. The **Convoy** tracks overall progress until all beads are done
+
+```bash
+# See the full stack in action
+gt convoy list          # Layer 2: batch tracking
+gt mol status           # Layer 3: workflow progress
+gt formula list         # Layer 5: available templates
+bd list --convoy cv-01  # Layer 1: individual beads
+```
