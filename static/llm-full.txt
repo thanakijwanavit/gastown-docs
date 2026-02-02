@@ -11770,8 +11770,65 @@ gt shutdown --all
 4. Check `gt costs` to monitor token spend
 5. Review `gt convoy list` for stalled or stranded convoys
 
-
 :::
+
+---
+
+## Incident Response Playbook
+
+When something goes wrong, follow this decision tree:
+
+```
+Is the system completely down?
+├── Yes → gt daemon start && gt start --all (see Lifecycle: Emergency Recovery)
+└── No
+    ├── Is one rig broken?
+    │   └── gt rig reboot <name> (see Lifecycle: Emergency Recovery)
+    ├── Are polecats stuck?
+    │   └── gt shutdown --polecats-only (see Troubleshooting: Stale Polecats)
+    ├── Is the merge queue backed up?
+    │   └── gt mq status (see Troubleshooting: Merge Conflicts)
+    ├── Are costs spiking?
+    │   └── gt costs --by-agent (see Escalations: Cost Spike scenario)
+    └── Are escalations piling up?
+        └── gt escalate list (see Escalations: Managing Escalations)
+```
+
+## Weekly Review Checklist
+
+Run these checks once a week to catch slow-building problems:
+
+```bash
+# 1. Overall system health
+gt doctor
+
+# 2. Cost trends for the week
+gt costs --since 7d --by-rig
+
+# 3. Find orphaned resources consuming disk
+gt orphans
+
+# 4. Review and close stale escalations
+gt escalate stale
+
+# 5. Check for stranded convoys
+gt convoy stranded
+
+# 6. Clean up finished polecat worktrees
+gt cleanup
+```
+
+## Operational Anti-Patterns
+
+Avoid these common mistakes when running Gas Town:
+
+| Anti-Pattern | Why It Hurts | What to Do Instead |
+|-------------|-------------|-------------------|
+| Manually fixing things on `main` | Bypasses the merge queue; can conflict with in-flight polecat work | Use a crew workspace or sling a fix bead |
+| Ignoring P3 escalations | They accumulate and mask real problems | Review and close (or promote) P3s weekly |
+| Restarting everything when one thing breaks | Disrupts working agents unnecessarily | Use surgical restarts: `gt rig reboot` or per-agent commands |
+| Never running `gt cleanup` | Disk fills with orphaned worktrees | Schedule regular cleanup or add it to your weekly checklist |
+| Over-slinging work to one rig | Creates merge queue bottlenecks | Distribute work across rigs when possible |
 
 
 ========================================================================
@@ -12140,6 +12197,152 @@ gt rig undock myproject
 ```
 
 After undocking, run `gt rig boot myproject` to create worktrees and start agents.
+
+---
+
+## Startup Order and Dependencies
+
+When starting Gas Town, components must come up in a specific order. `gt start --all` handles this automatically, but understanding the dependency chain helps when troubleshooting partial starts or doing manual recovery.
+
+### Required Startup Order
+
+```mermaid
+graph TD
+    D[Daemon] --> DE[Deacon]
+    D --> M[Mayor]
+    DE --> W1[Witness: rig1]
+    DE --> W2[Witness: rig2]
+    W1 --> R1[Refinery: rig1]
+    W2 --> R2[Refinery: rig2]
+    R1 --> P1[Polecats: rig1]
+    R2 --> P2[Polecats: rig2]
+```
+
+| Order | Component | Depends On | Why |
+|-------|-----------|------------|-----|
+| 1 | Daemon | Nothing | Provides heartbeat and lifecycle management |
+| 2 | Deacon | Daemon | Monitors daemon heartbeats, manages town health |
+| 3 | Mayor | Daemon | Coordinates work distribution across rigs |
+| 4 | Witnesses | Deacon | Monitor per-rig health; report to Deacon |
+| 5 | Refineries | Witnesses | Process merge queue; Witness monitors their health |
+| 6 | Polecats | Refineries | Do the work; Refinery merges their output |
+
+:::note
+
+If you start a Witness before the Deacon, it will still function but the Deacon will not know about it until its next patrol cycle. Starting in the correct order ensures immediate monitoring coverage.
+
+:::
+
+### What Each Agent Needs at Startup
+
+Every agent runs `gt prime` on startup to load its role context. This requires:
+
+- Its home directory to exist (worktree for polecats, rig directory for others)
+- The beads database to be accessible
+- Hook state to be intact (for polecats, their assigned work)
+- Mail queue to be readable (for checking incoming messages)
+
+If any of these are missing, the agent will log errors. Use `gt doctor` to identify missing prerequisites.
+
+---
+
+## Emergency Recovery
+
+When the normal lifecycle commands are not working, use these procedures to recover the system.
+
+### Scenario: Full System Unresponsive
+
+Nothing is responding -- `gt` commands hang or error out.
+
+```bash
+# Step 1: Check if the daemon is alive
+gt daemon status
+
+# Step 2: If daemon is dead, start it
+gt daemon start
+
+# Step 3: If gt commands still hang, check for tmux
+tmux list-sessions
+
+# Step 4: Kill all tmux sessions and restart clean
+tmux kill-server
+gt start --all
+```
+
+### Scenario: Single Rig in Bad State
+
+One rig is misbehaving but others are fine.
+
+```bash
+# Surgical shutdown of the problem rig
+gt rig stop myproject
+
+# Clean up orphaned resources
+gt cleanup --rig myproject
+
+# Fresh start for the rig
+gt rig boot myproject
+```
+
+### Scenario: Polecats Spawning and Immediately Dying
+
+Polecats start but crash within seconds, repeatedly.
+
+```bash
+# Stop the spawn cycle
+gt shutdown --polecats-only --rig myproject
+
+# Check what is causing the crash
+gt trail --rig myproject --last 20
+
+# Common cause: broken main branch
+# Verify tests pass on main
+cd ~/gt/myproject/crew/yourname
+git fetch origin && git checkout origin/main
+# Run project tests
+
+# If main is broken, fix it before resuming polecat work
+```
+
+### Scenario: Lost Work from Crashed Polecat
+
+A polecat crashed before pushing its changes.
+
+```bash
+# Check if the worktree still exists
+ls ~/gt/myproject/polecats/*/myproject/
+
+# If it exists, recover the work
+cd ~/gt/myproject/polecats/<name>/myproject
+git status
+git log --oneline -5
+# Commit and push if there are changes worth saving
+
+# If the worktree is gone, check for orphaned commits
+gt orphans --commits --rig myproject
+gt orphans --recover <commit-hash>
+```
+
+---
+
+## Graceful Degradation
+
+Gas Town is designed to continue operating even when some components fail. Understanding what keeps working and what stops helps you prioritize recovery.
+
+| Failed Component | What Still Works | What Stops |
+|-----------------|-----------------|------------|
+| Daemon | All agents continue running | No new agents can be spawned; no heartbeats |
+| Deacon | Rigs operate independently | No town-wide health monitoring; no zombie cleanup |
+| Mayor | Existing work continues | No new work distribution; convoys not coordinated |
+| Witness (one rig) | Other rigs unaffected | Stale polecats in that rig are not detected |
+| Refinery (one rig) | Polecats can still work | Completed work accumulates but does not merge |
+| Single polecat | All other polecats fine | One bead's work is delayed |
+
+:::tip
+
+The system degrades gracefully because each agent operates independently with its own state. A failed Witness in one rig has zero impact on polecats in another rig. Prioritize recovering components based on what is actually blocked.
+
+:::
 
 ---
 
@@ -12575,6 +12778,83 @@ Gas Town at peak usage with 10+ polecats can burn approximately $100/hour in API
 
 ---
 
+## What to Watch For
+
+Knowing what the tools show you is only half the story. Knowing which signals matter is the other half.
+
+### Red Flags (Investigate Immediately)
+
+| Signal | Where to See It | What It Means |
+|--------|----------------|---------------|
+| `STALE` events in feed | `gt feed` | An agent has stopped making progress |
+| Multiple escalations from one rig | `gt escalate list` | Systemic issue in that project |
+| Refinery queue growing | `gt mq status` | Merges are failing or backing up |
+| `[FAIL]` in doctor output | `gt doctor` | A subsystem is down |
+| Cost spike in hourly rate | `gt costs --today` | Runaway agent or infinite loop |
+| No events for 10+ minutes | `gt feed` | System may have stalled silently |
+
+### Warning Signs (Check When Convenient)
+
+| Signal | Where to See It | What It Means |
+|--------|----------------|---------------|
+| Increasing polecat durations | `gt audit` | Tasks may be too large or poorly scoped |
+| Frequent context handoffs | `gt trail` | Tasks are filling context windows regularly |
+| Escalations acknowledged but not closed | `gt escalate list --all` | Issues being noticed but not resolved |
+| Orphaned worktrees accumulating | `gt orphans` | Cleanup not running often enough |
+
+### Healthy System Indicators
+
+A well-running Gas Town installation shows these patterns:
+
+- Polecats spawn, work, and complete in steady cycles
+- Merge queue stays near-empty (items move through quickly)
+- Escalation count stays low (under 2-3 open at a time)
+- Cost rate is stable and predictable
+- `gt doctor` shows all green
+
+---
+
+## Log Analysis Patterns
+
+When `gt feed` and `gt trail` are not enough, dig into the raw event log for patterns.
+
+### Finding Repeated Failures
+
+```bash
+# Count events by type in the last 24h
+gt activity --since 24h --json | jq -r '.type' | sort | uniq -c | sort -rn
+
+# Find all error events for a specific rig
+gt log --level error --component myproject --since 24h
+
+# Find agents that restarted more than twice
+gt trail --since 24h | grep RESTART
+```
+
+### Tracking a Specific Bead Through the System
+
+```bash
+# See the full lifecycle of a piece of work
+gt audit --bead gt-a1b2c
+
+# Check if it is stuck somewhere
+bd show gt-a1b2c
+gt mq show gt-a1b2c
+```
+
+### Correlating Events Across Agents
+
+```bash
+# See what happened around a specific time
+gt trail --since 2h --last 100
+
+# Cross-reference Witness actions with polecat events
+gt activity --actor witness --since 1h --json
+gt activity --type polecat --since 1h --json
+```
+
+---
+
 ## Monitoring Best Practices
 
 1. **Always keep `gt feed` running** in a dedicated terminal. It is the fastest way to notice problems.
@@ -12588,6 +12868,10 @@ Gas Town at peak usage with 10+ polecats can burn approximately $100/hour in API
 5. **Set up `gt dashboard`** on a second screen for visual fleet tracking during active development sessions.
 
 6. **Review patrol digests** when the Deacon or Witnesses flag anomalies -- they contain the context you need to decide on action.
+
+7. **Watch for silence.** A quiet feed is not always good news. If no events appear for an extended period, verify the daemon is running and agents are active.
+
+8. **Track trends, not just snapshots.** A single stale polecat is normal. Three stale polecats in the same rig within an hour suggests a systemic problem.
 
 
 ========================================================================
@@ -12925,6 +13209,133 @@ stateDiagram-v2
     Stale --> Closed: gt escalate close
     Closed --> [*]
 ```
+
+---
+
+## Common Escalation Scenarios
+
+These are real-world scenarios you will encounter and how to handle them.
+
+### Scenario: Flaky Test Causing Repeated Merge Failures
+
+A test intermittently fails in the Refinery, causing merges to bounce. Polecats' work is correct but the gate keeps rejecting it.
+
+**What you will see:**
+
+- Multiple P2 escalations from the Refinery about merge failures
+- The same test name appearing in different escalation messages
+- Merge queue growing as items back up behind the flaky test
+
+**What to do:**
+
+```bash
+# Acknowledge the escalations
+gt escalate ack ESC-001 --note "Flaky test identified: test_auth_timeout"
+
+# Fix the flaky test (or skip it temporarily)
+# Work from a crew workspace to fix main directly
+cd ~/gt/myproject/crew/yourname
+# Fix the test, commit, push to main
+
+# Close the escalation
+gt escalate close ESC-001 --note "Fixed flaky test: added retry logic to test_auth_timeout"
+```
+
+### Scenario: Polecat Stuck in a Loop
+
+A polecat keeps trying the same approach to a problem, failing, and trying again. The Witness has nudged it but it cannot break out.
+
+**What you will see:**
+
+- P1 escalation from the Witness about a stale polecat
+- `gt peek` shows the polecat repeating similar actions
+
+**What to do:**
+
+```bash
+# Acknowledge
+gt escalate ack ESC-002 --note "Reviewing stuck polecat"
+
+# Stop the polecat and release its work
+gt polecat stop toast --rig myproject
+gt release gt-a1b2c
+
+# Add more detail to the bead before re-slinging
+bd update gt-a1b2c --notes "Previous attempt failed because <reason>. Try <alternative approach>."
+
+# Re-sling to a fresh polecat
+gt sling gt-a1b2c myproject
+
+gt escalate close ESC-002 --note "Respawned with updated guidance"
+```
+
+### Scenario: Cost Spike During Off-Hours
+
+You return to find an escalation about token costs exceeding the daily budget.
+
+**What you will see:**
+
+- P1 or P2 escalation with cost details
+- `gt costs` showing a spike
+
+**What to do:**
+
+```bash
+# Check what caused the spike
+gt costs --since 12h --by-agent
+gt trail --since 12h
+
+# If a runaway agent, stop it
+gt polecat stop <name> --rig myproject
+
+# Acknowledge and close
+gt escalate ack ESC-003 --note "Cost spike from runaway polecat"
+gt escalate close ESC-003 --note "Stopped runaway polecat, reviewing task scoping"
+```
+
+---
+
+## Tuning Escalation Thresholds
+
+The default thresholds work well for most setups, but you may want to adjust them based on your operational pattern.
+
+### When to Tighten Thresholds (Shorter Timers)
+
+- You are actively monitoring and want faster alerts
+- The project is in a critical phase (launch, migration)
+- You have multiple rigs and need early warning
+
+```json
+{
+  "routing": {
+    "high": {
+      "auto_escalate_after": "30m",
+      "max_re_escalations": 3
+    }
+  }
+}
+```
+
+### When to Loosen Thresholds (Longer Timers)
+
+- Running overnight unattended (combine with quiet hours)
+- Low-priority project where delays are acceptable
+- Reducing alert fatigue from a noisy rig
+
+```json
+{
+  "routing": {
+    "medium": {
+      "auto_escalate_after": "8h",
+      "max_re_escalations": 1
+    }
+  }
+}
+```
+
+### Per-Rig Overrides
+
+You can override escalation settings at the rig level by placing an `escalation.json` in `<rig>/settings/`. Rig-level settings merge with (and override) town-level defaults.
 
 ---
 
@@ -13319,6 +13730,296 @@ gt daemon stop && gt daemon start
 
 ---
 
+## Context Window Filling
+
+**Symptom:** An agent becomes sluggish, loses track of its work, starts repeating itself, or produces incoherent output. Often preceded by the agent running for an extended period on a large task.
+
+**Diagnosis:**
+
+```bash
+# Check how long the agent has been running
+gt audit polecat:toast --rig myproject
+
+# Look for signs of context pressure in agent output
+gt peek polecat:toast --rig myproject --lines 50
+```
+
+**Solutions:**
+
+1. **For polecats: use `gt handoff`.** The polecat should cycle itself to a fresh session with context notes before the window fills completely.
+
+    ```bash
+    # From inside the polecat session:
+    gt handoff -s "Context filling, continuing work" -m "Issue: gt-a1b2c
+    Progress: implemented X, Y remains
+    Next step: finish Y and run tests"
+    ```
+
+2. **For persistent agents (Witness, Mayor, Deacon): trigger a context reset.**
+
+    ```bash
+    # Nudge the agent to prime
+    gt nudge witness --rig myproject "Run gt prime to reset context"
+
+    # Or restart with fresh context
+    gt witness restart --rig myproject --fresh
+    ```
+
+3. **Prevent the issue.** Large tasks should be broken into smaller beads. If a polecat consistently fills context on a task type, the task decomposition needs improvement.
+
+:::note
+
+Persistent agents (Mayor, Deacon, Witness) experience automatic compaction but may lose nuance. If an agent seems confused after compaction, `gt prime` reloads the full role context.
+
+:::
+
+---
+
+## Agent Boot Failures
+
+**Symptom:** An agent fails to start, or starts but immediately exits or becomes unresponsive. The `gt start` command completes but `gt doctor` shows the agent is not running.
+
+**Diagnosis:**
+
+```bash
+# Check if the session exists in tmux
+gt peek <agent> --rig myproject
+
+# Check daemon logs for startup errors
+gt daemon logs --level error --since 10m
+
+# Check if the tmux session was created
+tmux list-sessions
+```
+
+**Solutions:**
+
+1. **Missing dependencies.** The agent's Claude session may fail if required tools are not installed.
+
+    ```bash
+    gt doctor --check dependencies
+    ```
+
+2. **Stale tmux sessions.** A previous session may still hold the slot.
+
+    ```bash
+    # Kill stale tmux sessions
+    tmux kill-session -t <session-name>
+
+    # Restart the agent
+    gt witness start --rig myproject
+    ```
+
+3. **Configuration errors.** Check rig configuration for invalid settings.
+
+    ```bash
+    # Validate rig config
+    gt rig show myproject
+    ```
+
+4. **Disk space.** Claude sessions need space for logs and context.
+
+    ```bash
+    df -h ~/gt/
+    # Clean up if needed
+    gt cleanup
+    ```
+
+---
+
+## Git Worktree Issues
+
+**Symptom:** A polecat reports git errors, has a dirty working tree it did not expect, or cannot commit/push its changes.
+
+**Diagnosis:**
+
+```bash
+# Check worktree state from outside
+cd ~/gt/myproject/polecats/<name>/myproject
+git status
+git log --oneline -5
+```
+
+**Solutions:**
+
+1. **Dirty working tree from a previous crash.** If a polecat crashed mid-work, its worktree may have uncommitted changes.
+
+    ```bash
+    # If the changes are salvageable, commit them
+    cd ~/gt/myproject/polecats/<name>/myproject
+    git add -A
+    git commit -m "chore: recover work from crashed polecat session"
+    git push
+
+    # Then stop and respawn
+    gt polecat stop <name> --rig myproject
+    gt sling <bead-id> myproject
+    ```
+
+2. **Detached HEAD.** The worktree may have ended up in a detached HEAD state.
+
+    ```bash
+    # Check the current state
+    git branch --show-current  # Empty output means detached HEAD
+
+    # Recover by creating a branch from the current position
+    git checkout -b recovery/<bead-id>
+    git push origin recovery/<bead-id>
+    ```
+
+3. **Worktree pointing to deleted branch.** If the branch was cleaned up but the worktree remains:
+
+    ```bash
+    # Remove the broken worktree
+    git worktree remove ~/gt/myproject/polecats/<name>/myproject --force
+
+    # Let gt recreate it on next spawn
+    gt sling <bead-id> myproject
+    ```
+
+---
+
+## Beads Database Issues
+
+**Symptom:** `bd` commands fail with lock errors, return unexpected results, or report corruption. Agents may be unable to create, update, or close beads.
+
+**Diagnosis:**
+
+```bash
+# Run the beads doctor
+bd doctor
+
+# Check for lock files
+ls -la ~/gt/myproject/.beads/*.lock 2>/dev/null
+```
+
+**Solutions:**
+
+1. **Database locked.** Concurrent writes from multiple agents can cause locking. Usually resolves itself.
+
+    ```bash
+    # Wait a few seconds and retry
+    bd list --status=open
+
+    # If persistent, check for zombie bd processes
+    ps aux | grep "bd " | grep -v grep
+
+    # Kill zombies if found
+    kill <PID>
+    ```
+
+2. **Database corruption.** Rare but possible after unclean shutdowns.
+
+    ```bash
+    # Run repair
+    bd doctor --fix
+
+    # If repair fails, the JSONL export is the backup
+    # Check for the last good export
+    ls -la ~/gt/myproject/.beads/*.jsonl
+    ```
+
+3. **Sync issues between agents.** If agents have divergent views of bead state:
+
+    ```bash
+    # Force a flush to JSONL
+    bd sync --flush-only
+
+    # Each agent should re-read on next bd command
+    ```
+
+---
+
+## Polecat Self-Clean Failures
+
+**Symptom:** A polecat runs `gt done` but the command fails. The polecat may be left in a limbo state -- finished with work but not properly cleaned up.
+
+**Diagnosis:**
+
+```bash
+# Check if the polecat's work was pushed
+cd ~/gt/myproject/polecats/<name>/myproject
+git status
+git log --oneline origin/main..HEAD
+```
+
+**Solutions:**
+
+1. **Uncommitted changes.** `gt done` requires a clean git state.
+
+    ```bash
+    # Commit remaining changes
+    git add <files>
+    git commit -m "fix: remaining changes before gt done"
+    git push
+
+    # Retry
+    gt done
+    ```
+
+2. **Push failures.** Network issues or remote conflicts can prevent push.
+
+    ```bash
+    # Check remote connectivity
+    git remote -v
+    git fetch origin
+
+    # If behind remote, rebase
+    git rebase origin/main
+    git push
+
+    gt done
+    ```
+
+3. **If `gt done` keeps failing:** Escalate to the Witness with context about what failed.
+
+    ```bash
+    gt mail send myproject/witness -s "HELP: gt done failing" -m "Polecat: <name>
+    Issue: <bead-id>
+    Error: <error message>
+    Git state: <clean/dirty>
+    Branch pushed: <yes/no>"
+    ```
+
+---
+
+## Mail Delivery Problems
+
+**Symptom:** Messages sent via `gt mail send` are not appearing in the recipient's inbox, or agents are not responding to mail they should have received.
+
+**Diagnosis:**
+
+```bash
+# Check outbox
+gt mail sent
+
+# Check the recipient's inbox directly
+gt mail inbox --agent <recipient>
+
+# Verify the mail address format
+gt mail send <rig>/<agent> -s "test" -m "ping"
+```
+
+**Solutions:**
+
+1. **Wrong address format.** Mail addresses follow the pattern `<rig>/<agent>` or `mayor/` for town-level agents.
+
+2. **Agent not checking mail.** Persistent agents check mail during patrol cycles. If an agent is stuck, it may not be polling.
+
+    ```bash
+    # Nudge the agent to check mail
+    gt nudge <agent> --rig myproject "Check your inbox"
+    ```
+
+3. **Mail queue corruption.** Rare, but can happen after crashes.
+
+    ```bash
+    # Check mail queue health
+    gt doctor --check agents
+    ```
+
+---
+
 ## Common Error Messages
 
 | Error | Cause | Fix |
@@ -13331,6 +14032,10 @@ gt daemon stop && gt daemon start
 | `beads database locked` | Concurrent write conflict | Wait and retry; check for zombie `bd` processes |
 | `worktree already exists` | Stale worktree from previous run | Clean up: `gt cleanup` |
 | `convoy not found` | Invalid convoy ID or convoy was auto-cleaned | Check `gt convoy list --all` for closed convoys |
+| `context window exceeded` | Agent session ran too long | Use `gt handoff` to cycle to a fresh session |
+| `git push rejected` | Remote has diverged from local | Run `git fetch && git rebase origin/main`, then push |
+| `molecule step not found` | Bead ID typo or step was already closed | Check `bd show <molecule-id>` for step list |
+| `permission denied` | File or directory owned by another agent | Check `ls -la` ownership; may need `gt cleanup` |
 
 ---
 
@@ -13350,6 +14055,34 @@ gt daemon stop && gt daemon start
 | `gt daemon status` | Verify daemon is running |
 | `gt trail --since 1h` | Recent activity for diagnosis |
 | `gt peek <agent>` | View agent session output |
+| `bd doctor` | Check beads database health |
+| `bd doctor --fix` | Attempt beads database repair |
+
+---
+
+## Decision Tree: Which Section to Read
+
+Use this to quickly find the right troubleshooting section:
+
+```
+Is anything running at all?
+├── No → Daemon Issues / Agent Boot Failures
+└── Yes
+    ├── Is a specific agent unresponsive?
+    │   ├── Mayor → Mayor Not Responding
+    │   ├── Polecat → Stale Polecats
+    │   └── Witness/Refinery → Agent Loses Connection
+    ├── Is work not progressing?
+    │   ├── Convoy shows ACTIVE → Convoy Stuck
+    │   ├── Merge queue backed up → Merge Conflicts
+    │   └── Polecat can't finish → Polecat Self-Clean Failures
+    ├── Are bd commands failing?
+    │   └── Beads Database Issues
+    ├── Is an agent confused or repeating itself?
+    │   └── Context Window Filling
+    └── Are there leftover resources?
+        └── Orphaned Processes
+```
 
 ---
 
@@ -13803,6 +14536,122 @@ Plugins receive these variables automatically:
 | `$PLUGIN_DIR` | Path to the plugin's own directory |
 
 Custom inputs defined in `plugin.json` are also passed as uppercase environment variables (e.g., `min_coverage` becomes `$MIN_COVERAGE`).
+
+---
+
+## Debugging Plugins
+
+When a plugin fails, the first step is understanding where and why.
+
+### Viewing Execution Output
+
+Plugin stdout and stderr are captured in the execution history:
+
+```bash
+# See recent runs with output
+gt plugin history my-plugin --last 5
+
+# See detailed output of a specific run
+gt plugin history my-plugin --verbose
+```
+
+### Running with Debug Output
+
+Add verbose logging to your `run.sh` during development:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+# Debug: print all environment variables available to the plugin
+echo "=== Plugin Environment ==="
+echo "RIG_NAME: $RIG_NAME"
+echo "RIG_PATH: $RIG_PATH"
+echo "BRANCH_NAME: $BRANCH_NAME"
+echo "BEAD_ID: $BEAD_ID"
+echo "PLUGIN_DIR: $PLUGIN_DIR"
+echo "========================="
+
+# Your plugin logic here...
+```
+
+### Common Failure Causes
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Plugin not found | Wrong directory or missing `plugin.json` | Check `gt plugin list` and verify path |
+| Permission denied | `run.sh` not executable | `chmod +x run.sh` |
+| Exit code 127 | Command not found in plugin script | Check `$PATH` or use absolute paths |
+| Timeout | Plugin exceeds configured timeout | Increase `timeout` in `plugin.json` or optimize |
+| Works manually, fails in pipeline | Missing environment variables | Check Plugin Environment Variables table |
+
+### Testing Locally Before Deploying
+
+Always test plugins outside the pipeline first:
+
+```bash
+# Dry run: shows what would happen without executing
+gt plugin run my-plugin --rig myproject --dry-run
+
+# Manual run with custom inputs to simulate different scenarios
+gt plugin run my-plugin --rig myproject --input branch=main
+gt plugin run my-plugin --rig myproject --input branch=feature/untested
+```
+
+---
+
+## Plugin Types Beyond Gates
+
+While gates are the most common plugin type, Gas Town supports four plugin types:
+
+### Action Plugins
+
+Actions run in response to triggers but do not block workflow progress. Use these for notifications, logging, or side effects.
+
+```json
+{
+  "name": "deploy-notify",
+  "type": "action",
+  "trigger": "post-merge",
+  "config": {
+    "command": "./notify.sh",
+    "timeout": "30s"
+  }
+}
+```
+
+### Hook Plugins
+
+Hooks intercept lifecycle events and can modify behavior. They run synchronously at specific points in the agent lifecycle.
+
+```json
+{
+  "name": "pre-spawn-check",
+  "type": "hook",
+  "trigger": "on-spawn",
+  "config": {
+    "command": "./check-capacity.sh",
+    "timeout": "10s"
+  }
+}
+```
+
+### Schedule Plugins
+
+Scheduled plugins run on a cron schedule independently of workflow events.
+
+```json
+{
+  "name": "nightly-cleanup",
+  "type": "schedule",
+  "config": {
+    "schedule": "0 3 * * *",
+    "timezone": "America/Los_Angeles",
+    "command": "./cleanup.sh",
+    "timeout": "5m"
+  }
+}
+```
 
 ---
 
