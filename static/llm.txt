@@ -554,7 +554,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 ## Usage Guide
 > /docs/guides/usage-guide
 
-This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion...
+Practical day-to-day Gas Town usage patterns: entry points, the three developer loops, working with Mayor and Crew, the PR Sheriff pattern, 5 tips for effective use, and the mandatory landing checklist.
 
 This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion workflow. It assumes you have a working installation (see [Getting Started](../getting-started/index.md)) and are familiar with the basic concepts.
 
@@ -590,7 +590,7 @@ Gas Town burns tokens. A lot of tokens. At peak usage with 10+ polecats running 
 ## Background & Philosophy
 > /docs/guides/philosophy
 
-Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectu...
+Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
 
 Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
 

@@ -13893,6 +13893,85 @@ If you have completed the [Getting Started](../getting-started/index.md) guide a
 
 This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion workflow. It assumes you have a working installation (see [Getting Started](../getting-started/index.md)) and are familiar with the basic concepts.
 
+:::info[Source]
+
+Much of the operational advice in this guide comes from the [Gas Town Emergency User Manual](https://steve-yegge.medium.com/gas-town-emergency-user-manual-cf0e4556d74b) by Steve Yegge, written after the first two weeks of Gas Town's public release.
+
+:::
+
+---
+
+## Entry Points
+
+Your two main entry points into Gas Town are:
+
+```bash
+gt may at    # Attach to the Mayor
+gt crew at   # Attach to a Crew workspace
+```
+
+**`gt may at`** (short for `gt mayor attach`) drops you into the Mayor's tmux session. From there you can give instructions, check progress, and coordinate all your rigs. This is the primary interface for most Gas Town work.
+
+**`gt crew at`** (short for `gt crew at <rig> <name>`) attaches you to a named Crew workspace -- a persistent, long-lived development environment where you work hands-on with code alongside your AI agents.
+
+These two commands represent the two modes of Gas Town operation: **directing** (via the Mayor) and **doing** (via Crew). Most sessions involve both -- you direct work through the Mayor, then drop into Crew workspaces for design decisions, code review, or hands-on implementation.
+
+:::tip[Mayor-Only Mode]
+
+You technically only need the Mayor. Running with just the Mayor is a good tutorial and introduction to Gas Town. The Mayor can file and fix issues itself, or you can ask it to sling work to polecats. Even alone, it still gets all the benefits of GUPP, MEOW, and the full agent lifecycle.
+
+:::
+
+---
+
+## The Three Developer Loops
+
+Gas Town operations follow three nested feedback loops, a framework from the [Vibe Coding](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04) book by Steve Yegge and Gene Kim. Understanding these loops helps you work at the right cadence for each type of task.
+
+### Outer Loop (Days to Weeks)
+
+The outer loop covers strategic planning and infrastructure-level decisions:
+
+- **System upgrades** -- Gas Town ships updates frequently; upgrade daily if you are actively using it
+- **Capacity planning** -- How many rigs, how many polecats per rig, which projects are active
+- **Town-level maintenance** -- Cleanup, cost review, architectural decisions
+- **Workflow evolution** -- Your workflows will change as you gain experience; expect to adjust weekly
+
+The outer loop is where you decide *what* to build and *how* to organize your fleet.
+
+### Middle Loop (Hours to Days)
+
+The middle loop covers the active work session:
+
+- **Agent spawning decisions** -- When to spin up polecats, when to throttle back
+- **Mayor + Polecat coordination** -- Breaking work into beads, creating convoys, monitoring progress
+- **Capacity throttling** -- Adjusting agent count based on workload and cost targets
+- **Rig cycling** -- Moving between rigs as work progresses; with one rig fully spinning, move to the next and start the same loop
+
+The middle loop is where you turn plans into tracked work and keep the fleet productive.
+
+### Inner Loop (Minutes)
+
+The inner loop is the moment-to-moment operational cadence:
+
+- **Frequent handoffs** -- Use `gt handoff` after every task in every worker; only let sessions go long if they need to accumulate important context for a big design or decision
+- **Clear task specification** -- Be specific when delegating to agents
+- **Output review** -- Read what agents produce; some finish simple tasks and just need another assignment, others surface questions or complex summaries that require your time
+- **Real-time adjustments** -- Redirect agents, escalate blockers, reassign work
+
+The inner loop is where execution happens. Speed here comes from clear instructions and fast feedback cycles.
+
+```
+Outer Loop (Days-Weeks)
+│  Strategic planning, upgrades, capacity decisions
+│
+├── Middle Loop (Hours-Days)
+│   │  Spawning agents, creating convoys, rig cycling
+│   │
+│   └── Inner Loop (Minutes)
+│       Task delegation, output review, handoffs
+```
+
 ---
 
 ## Working with the Mayor
@@ -14102,6 +14181,73 @@ gt down
 
 ---
 
+## Working with Crew
+
+Crew workspaces are your most powerful tool for sustained, hands-on development within Gas Town. While polecats handle well-specified tasks autonomously, your Crew members are where design work, code review, and complex decision-making happen. See the [Crew agent docs](../agents/crew.md) for setup and commands.
+
+### The Crew Cycle
+
+When you have multiple Crew workspaces running across your rigs, the natural workflow is a **cycling pattern**: rotating through each Crew member in sequence, giving tasks, reviewing output, and moving on.
+
+Here is what a typical Crew cycle looks like:
+
+1. **Attach to a Crew workspace**: `gt crew at <rig> <name>`
+2. **Give a meaty task** -- design decisions, multi-file refactors, documentation, code review
+3. **Detach and move to the next Crew** -- while the first one works, attach to the next
+4. **Cycle back** -- by the time you have visited each Crew, the earlier ones are finishing
+
+As you cycle through, you will find Crew members in various states:
+
+- **Still working** -- Let them continue; move on
+- **Finished with simple output** -- Hand off immediately with `gt handoff` and give the next task
+- **Finished with questions or complex summaries** -- Reserve time to read carefully and respond
+
+The Crew for a rig are organized on a tmux cycle group, making it easy to rotate between them with tmux key bindings. Start with 3 Crew per rig and scale up to 7-8 as you become comfortable with the cycling rhythm.
+
+```bash
+# Add a new Crew member to a rig
+gt crew add myapp alice
+
+# Cycle through Crew members (in tmux, use Ctrl+B then N/P for next/prev)
+gt crew at myapp alice
+# ... give task, detach ...
+gt crew at myapp bob
+# ... give task, detach ...
+gt crew at myapp carol
+# ... cycle back to alice when ready ...
+```
+
+:::tip[Crew vs. Polecats]
+
+Use **Crew** for thoughtful work: design, review, complex refactors, and tasks where you need back-and-forth dialog. Use **Polecats** for well-specified, fast tasks where the acceptance criteria are clear up front. Your Crew creates the *guzzoline* (specifications and plans) that the polecat swarms consume.
+
+:::
+
+### The PR Sheriff Pattern
+
+A useful ad-hoc role for Crew members is the **PR Sheriff** -- a Crew workspace that has a permanent hook with standing orders to manage pull requests.
+
+On every session startup, the PR Sheriff:
+
+1. Checks all open PRs across the rig's repository
+2. Classifies them into **easy wins** (straightforward, tests pass, small diff) and **needs human review** (complex changes, failing CI, architectural implications)
+3. Slings the easy wins to other Crew or polecats for processing
+4. Flags the complex ones for your attention
+
+```bash
+# Create a PR Sheriff bead with standing orders
+bd create --title "PR Sheriff Standing Orders" --type task \
+  --description "On each session: check open PRs, classify by complexity, sling easy wins to crew"
+
+# Hook it permanently to a Crew member
+gt crew at myapp dave
+gt hook <bead-id>
+```
+
+The PR Sheriff pattern keeps your PR backlog from growing unbounded. Instead of PRs piling up while you focus on new work, they get triaged and handled continuously.
+
+---
+
 ## Landing the Plane (Session Completion)
 
 Landing the plane is the **mandatory** workflow for completing a Gas Town session. Skipping any step risks losing work, leaving stale state, or creating confusion for the next session.
@@ -14227,6 +14373,87 @@ gt mail send mayor "End of day: all auth work landed. Remaining: API pagination 
 
 ---
 
+## 5 Tips for Effective Gas Town Usage
+
+These tips come directly from operational experience with Gas Town in its first weeks of production use.
+
+### 1. Learn tmux
+
+tmux is the backbone of Gas Town's session management. Every agent, every Crew workspace, and the Mayor itself runs in a tmux session. Investing time in tmux proficiency pays off immediately:
+
+- **Learn a new keybinding or feature each day** -- pane splitting, window navigation, copy mode
+- **Customize it** -- ask your agent to help you set up a tmux configuration that works for you
+- **Learn how to copy text out of the terminal** -- this trips people up more than anything else
+- **Use tmux cycle groups** to rotate efficiently between Crew members and agents
+
+```bash
+# Essential tmux operations for Gas Town
+Ctrl+B D       # Detach from session (agent keeps running)
+Ctrl+B N/P     # Next/previous window (cycle through agents)
+Ctrl+B [       # Enter copy mode (scroll through output)
+Ctrl+B %       # Split pane vertically
+Ctrl+B "       # Split pane horizontally
+```
+
+:::tip[tmux Is Your Friend]
+
+The tmux tip is the single highest-leverage investment you can make. Gas Town without tmux proficiency is like driving with the parking brake on.
+
+:::
+
+### 2. Bring Your Own Workflow
+
+Gas Town does not force any particular workflow, any more than an IDE does. The basic pattern is always the same -- file beads, then ask agents to implement them -- but the details are entirely up to you.
+
+Expect your workflows to change frequently. In early Gas Town usage, workflows evolve just about every week as you discover what works for your projects and your working style. This is normal and encouraged.
+
+### 3. Start with the Mayor
+
+Do most of your talking to the Mayor until you are comfortable with it. The Mayor is your coordination layer -- it handles issue creation, work assignment, and progress tracking.
+
+You can run Gas Town in **Mayor-only mode** as a tutorial and introduction:
+
+```bash
+gt may at
+# Give the Mayor instructions directly
+# It can file issues, fix code, and sling work to polecats
+```
+
+Once you are comfortable with Mayor interactions, expand to using Crew and polecats for parallel execution.
+
+### 4. Handoff Liberally
+
+Use `gt handoff` after every task in every worker. Only let sessions go long if they need to accumulate important context for a big design or decision.
+
+Polecats take this to the extreme -- they self-destruct after submitting their work. For all other workers, there are several ways to hand off:
+
+```bash
+# From within an agent session
+gt handoff
+
+# Or say "let's hand off" in conversation
+
+# Or shell out
+!gt handoff
+```
+
+The worker will be spun up on a fresh shift, preserving the tmux session. Short sessions with frequent handoffs prevent context bloat, reduce token costs, and keep agents sharp.
+
+### 5. Work with Your Crew
+
+This is the biggest tip. Your Crew are your named, long-lived workers on each project rig. They are your design team, and they create the specifications and plans that polecat swarms execute.
+
+The difference between a productive Gas Town session and a frustrating one often comes down to how effectively you use your Crew:
+
+- **Give Crew members meaty tasks** -- design reviews, architecture decisions, documentation, complex refactors
+- **Cycle through them regularly** -- do not let Crew sit idle; rotate through giving tasks and reviewing output
+- **Scale up gradually** -- start with 3 Crew per rig, work up to 7-8 as you get comfortable
+- **Use Crew for human-judgment work** -- anything that requires back-and-forth dialog or nuanced decisions
+
+Your Crew are the bridge between your intent and the fleet's execution. Invest time in them.
+
+---
+
 ## Quick Reference Commands
 
 ### Lifecycle
@@ -14287,7 +14514,8 @@ gt mail send mayor "End of day: all auth work landed. Remaining: API pagination 
 |---------|-------------|
 | `gt prime` | Reload agent context |
 | `gt handoff` | Write handoff notes |
-| `gt mayor attach` | Attach to Mayor |
+| `gt may at` | Attach to Mayor |
+| `gt crew at <rig> <name>` | Attach to a Crew workspace |
 | `gt polecat attach <name>` | Attach to a polecat |
 
 
@@ -14301,6 +14529,10 @@ gt mail send mayor "End of day: all auth work landed. Remaining: API pagination 
 This guide maps out the progression of AI-assisted software development, from basic code completions to building your own multi-agent orchestrator. Gas Town targets users at **Stage 7 and above** -- if you are not yet there, this guide will help you understand the path.
 
 The framework is based on the work of [Steve Yegge](https://steve-yegge.medium.com/), Gas Town's creator, who has been tracking and predicting AI coding adoption since 2023.
+
+> "If you extrapolated from completions in 2023 to chat in 2024 to agents in early 2025, you arrived inescapably at orchestration arriving in early 2026."
+>
+> -- Steve Yegge, *Software Survival 3.0*
 
 ---
 
@@ -14346,6 +14578,10 @@ AI:  income, rate=0.25):
 
 **When this became mainstream:** Early 2023
 
+> "Vibe coding just means letting the AI do the work."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
+
 ---
 
 ### Stage 3: Chat in IDE
@@ -14368,6 +14604,10 @@ You: *copies and adapts the code*
 **Tools:** Copilot Chat, Cursor Chat, Cody, Continue
 
 **When this became mainstream:** Late 2023
+
+> "Each successive modality wave, beginning with chat, is conservatively about 5x as productive as the previous wave."
+>
+> -- Steve Yegge, *The Future of Coding Agents*
 
 ---
 
@@ -14392,6 +14632,10 @@ You: "Looks good, apply it"
 **Tools:** Cursor Agent, Windsurf, Cline, Aider
 
 **When this became mainstream:** Early 2024
+
+> "Once you have tried coding agents, and figured out how to be effective with them, you will never want to go back."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
 
 ---
 
@@ -14419,6 +14663,10 @@ claude "Add input validation to all API endpoints and write tests"
 :::note[The CLI Turning Point]
 
 Stage 5 is where most developers realize the bottleneck shifts from "writing code" to "managing agents." A single agent can do the work of 2-3 developers, but you can only run one at a time.
+
+> "It's not AI's job to prove it's better than you. It's your job to get better using AI."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
 
 :::
 
@@ -14448,6 +14696,10 @@ claude "Write integration tests for the API"
 - 3-5x throughput increase over Stage 5
 
 **When this became common:** Early-Mid 2025
+
+> "They are so incredibly effective that it's easy to get greedy and smother the goose."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
 
 :::warning[The Coordination Wall]
 
@@ -14483,6 +14735,14 @@ You scale to 10 or more agents running simultaneously. You develop ad-hoc script
 
 **The realization:** You are building an orchestrator whether you planned to or not.
 
+> "The new job of a software developer going forward will soon be managing dashboards of coding agents."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
+
+> "If you're not at least Stage 7, or maybe Stage 6 and very brave, then you will not be able to use Gas Town."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
 ---
 
 ### Stage 8: Building Your Own Orchestrator
@@ -14508,6 +14768,18 @@ gt mayor attach
 - Cost tracking and resource management
 
 **This is where Gas Town lives.**
+
+> "Gas Town is a new take on the IDE for 2026. Gas Town helps you with the tedium of running lots of Claude Code instances."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
+> "Working effectively in Gas Town involves committing to vibe coding. Work becomes fluid, an uncountable that you sling around freely."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
+> "Most work gets done; some work gets lost. Fish fall out of the barrel. Some escape back to sea, or get stepped on. The focus is throughput: creation and correction at the speed of thought."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
 
 ---
 
@@ -14538,6 +14810,14 @@ Gas Town is a **Stage 8** orchestration system. It provides the infrastructure t
 | Lost work on crash | Hooks persist across restarts |
 | Manual escalation (Slack msg) | `gt escalate` with severity routing |
 | Unknown costs | `gt costs` with per-agent breakdown |
+
+> "Gas Town helps with all that yak shaving, and lets you focus on what your Claude Codes are working on."
+>
+> -- Steve Yegge, *Welcome to Gas Town*
+
+> "What I did was make their hallucinations real, over and over, by implementing whatever I saw the agents trying to do."
+>
+> -- Steve Yegge, *Software Survival 3.0*
 
 ---
 
@@ -14574,6 +14854,10 @@ Be solidly at **Stage 7** before adopting Gas Town. Spend time at Stage 6 (3-5 a
 
 Steve Yegge's core thesis: each stage is **inevitable**. Once developers discover that the next stage is possible, competitive pressure ensures widespread adoption within 6-12 months.
 
+> "If you believe the AI researchers -- who have been spot-on accurate for literally four decades"
+>
+> -- Steve Yegge, *Software Survival 3.0*
+
 ```
 Stage 5 developers: "Why would I need more than one agent?"
 Stage 6 developers: "OK, 3 agents is amazing, but 10 is chaos"
@@ -14582,6 +14866,18 @@ Stage 8 developers: "Yes. Yes it is."
 ```
 
 The pattern is consistent: what seems excessive today becomes standard practice within a year. Gas Town is built on the assumption that Stage 8 multi-agent orchestration will be as normal in 2026-2027 as AI completions are today.
+
+> "These systems are, in a meaningful sense, crystallized cognition, a financial asset, very much like (as Brendan Hopper has observed) money is crystallized human labor."
+>
+> -- Steve Yegge, *Software Survival 3.0*
+
+> "Supervisor agents can and will start doing most of that for us very soon."
+>
+> -- Steve Yegge, *Revenge of the Junior Developer*
+
+> "Gas Town has illuminated and kicked off the next wave for everyone."
+>
+> -- Steve Yegge, *Software Survival 3.0*
 
 
 ========================================================================
@@ -15431,7 +15727,7 @@ Each agent runs in its own session with its own state. A crash in one agent cann
 
 ## Software Survival 3.0
 
-Yegge's "Software Survival 3.0" thesis extends beyond coding tools to a broader claim about software itself:
+Yegge's "Software Survival 3.0" thesis, published on [Medium](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) in January 2026, extends beyond coding tools to a broader claim about the evolutionary pressures shaping all software in the AI era.
 
 ### The Three Eras
 
@@ -15443,11 +15739,127 @@ Yegge's "Software Survival 3.0" thesis extends beyond coding tools to a broader 
 
 ### The Core Thesis
 
-Software Survival 3.0 argues that **selection pressure on software teams will increasingly favor those who effectively use multi-agent AI**. Teams that resist or lag in adoption will be outcompeted, not because their code is worse, but because their velocity is lower.
+Inference costs tokens, which cost energy, which cost money. For the purposes of computing software survival odds, tokens, energy, and money are all equivalent -- and all are perpetually constrained.
 
-This is not a moral argument ("you should use AI") but an evolutionary one ("teams that use AI ship faster, and shipping faster wins").
+This resource constraint creates a selection pressure that shapes the entire software ecosystem. The rule is simple: **software tends to survive if it saves cognition**.
 
-### Implications
+Teams that effectively use multi-agent AI ship faster. Shipping faster wins. This is not a moral argument ("you should use AI") but an evolutionary one. The selection pressure is already operating.
+
+### The Squirrel Selection Model
+
+Yegge calls his survival framework the **Squirrel Selection Model** -- a deliberately humble name acknowledging it as a "Good Enough" model, while arguing it is better than what most C-suites are working with today. The model is grounded in an evolutionary argument: in any environment with constrained resources, entities that use those resources efficiently tend to outcompete those that do not.
+
+### The Survival Formula
+
+The model expresses software fitness as a ratio of cognitive value to cognitive cost:
+
+```
+Survival(T) = (Savings x Usage x H) / (Awareness + Friction)
+```
+
+Where:
+
+| Variable | Meaning |
+|----------|---------|
+| **Savings** | How much cognition (tokens, compute, human thought) the tool saves per use |
+| **Usage** | How broadly and frequently the tool applies across different situations |
+| **H** | The Human Coefficient -- a multiplier for domains where humans prefer human-made output |
+| **Awareness** | The cost of knowing the tool exists (discovery, learning it is available) |
+| **Friction** | The cost of actually using the tool (setup, API complexity, error handling) |
+
+`Survival(T)` is a **fitness function** -- when the ratio exceeds 1, the tool tends to survive. When it falls below 1, the tool is selected against; LLMs will synthesize alternatives or route around it.
+
+The Usage term amortizes the awareness cost and lowers the threshold for token savings. A tool does not need to save much per invocation if it is invoked constantly.
+
+### Plot Armor
+
+Tools with extremely high survival ratios -- in the thousands -- acquire what Yegge calls **"plot armor."** They become effectively indestructible.
+
+`grep` is the canonical example. It compresses a nontrivial insight (regular expression matching over streams of text), runs on a radically cheaper substrate than GPU inference, and applies to a near-universal niche. Its survival ratio is so high that no LLM will ever waste tokens re-synthesizing what grep already does perfectly. grep has plot armor.
+
+The concept is borrowed from fiction writing: some characters are so central to the narrative that they cannot die regardless of the danger they face. In software terms, some tools are so efficient that no amount of AI advancement threatens them -- it would always be cheaper to invoke them than to replicate them.
+
+### The Six Levers
+
+The survival formula gives you **six levers** you can pull to improve your software's chances of survival in the AI era:
+
+#### Lever 1: Compressed Insights
+
+Your software survives by compressing hard-won insights into reusable form. The software industry has accumulated decades of knowledge that would be expensive to rediscover from scratch. Tools that encode this knowledge densely are worth preserving.
+
+**Git** is the prime example. Its model -- the DAG of commits, refs as pointers, the index, the reflog -- represents decades of accumulated wisdom about how to track changes. An LLM could theoretically re-derive version control concepts, but it would be wildly wasteful compared to just using git.
+
+#### Lever 2: Cheaper Substrate
+
+Software survives by running on a cheaper computation substrate than GPU inference. Pattern matching over text, image transformation, data parsing -- these are tasks where CPUs beat GPUs by orders of magnitude. It would be irrational to spin up inference to do what `grep`, ImageMagick, or a JSON parser already does.
+
+Tools that leverage this lever include parsers, complex transformers, and many Unix CLI tools. They do their work on traditional compute that costs a fraction of what LLM inference would cost for equivalent output.
+
+#### Lever 3: Broad Usage (Near-Universal Niche)
+
+Niche tools may require incredible savings per invocation to compensate for their narrow applicability. Conversely, tools that apply broadly -- to many situations, many domains, many workflows -- can survive with modest per-use savings because the Usage multiplier in the formula does the heavy lifting.
+
+**Code search engines** exemplify all three levers together: they solve a nontrivial problem with lots of hard-to-discover edge cases (compressed insights), they do it on a cheaper computation substrate than inference (cheaper substrate), and they have found a large, near-universal niche (broad usage). As LLMs produce 10x to 100x as much code, agents will need good search as much as humans ever did.
+
+#### Lever 4: Awareness (Pre-Sales)
+
+Agent attention is becoming a key battleground. For a tool to be used, agents must know it exists. In a niche domain without much competition -- say DNA sequencing -- any tool that saves a few tokens might be quickly noticed and see heavy use. But in crowded domains, awareness is not automatic. Big mediocre players may have all the recognition, and you may have to pay extra to be noticed by agents.
+
+Awareness is the pre-sales problem in the survival formula. Your tool might be excellent, but if neither humans nor agents know about it, the numerator might as well be zero.
+
+#### Lever 5: Reducing Friction (Post-Sales)
+
+If Awareness is a pre-sales problem, then Friction is the post-sales problem. An agent may be perfectly aware that it has a useful tool, but even a small amount of friction may change its calculation. Agents always act like they are in a hurry, and if something appears to be failing, they will rapidly switch to workarounds.
+
+Friction includes API complexity, poor documentation, unreliable behavior, and slow response times. Every bit of friction pushes the denominator higher and the survival ratio lower. Tools that are easy to invoke and predictable in their behavior have an inherent survival advantage.
+
+#### Lever 6: The Human Coefficient (H)
+
+The Human Coefficient is a fundamentally different selection pressure -- not efficiency, but **human preference**. There will be a large set of domains where people prefer a human's work even when an AI can do "better" by some measurable standard.
+
+Even if AIs become the best teachers, some people will insist on human teachers. Even if AI-generated art is technically flawless, some collectors will prefer human-made art. The Human Coefficient is a multiplier that captures this preference -- software operating in high-H domains has an extra survival advantage that pure efficiency calculations miss.
+
+You can still benefit from the other five levers, but in high-H domains, the human element is itself a form of savings that the formula accounts for.
+
+### Temporal: A Case Study
+
+Yegge uses [Temporal](https://temporal.io/) -- the workflow orchestration engine -- as a detailed case study for applying the survival formula.
+
+Temporal scores highly on the first three levers:
+
+- **Compressed Insights**: Temporal encodes deep knowledge about distributed workflow orchestration -- retry logic, state management, failure recovery, and durable execution. These are problems with subtle edge cases that took years of engineering to solve correctly.
+- **Cheaper Substrate**: Temporal handles complex distributed coordination in traditional compute, which is far cheaper than re-synthesizing equivalent orchestration logic through LLM inference every time.
+- **Broad Usage**: As agentic workflows take center focus in 2026, Temporal's applicability is near-universal. Yegge describes it as "as broadly useful as PostgreSQL" for the emerging world of agent-driven software.
+
+However, Temporal faces challenges on levers 4 and 5. Compared to PostgreSQL -- which has been around for decades and has massive training data representation -- Temporal has comparatively higher awareness and friction costs. It is less well-known, and LLMs have less training data about its APIs and patterns. This means Temporal's raw survival ratio is moderated by the denominator, even though its numerator is strong.
+
+The case study illustrates a key insight: **a tool can be genuinely excellent (high numerator) and still face survival pressure if its denominator is too high.** The six levers are not just about building good software -- they are about the full equation.
+
+### Competition and Survivability Thresholds
+
+The survival formula does not operate in a vacuum. Your software's survivability threshold **floats above 1** when competitors exist.
+
+A tool with a survival ratio of 1.2 is technically viable in isolation -- it saves more cognition than it costs. But if a competitor achieves a ratio of 2.5 in the same niche, the 1.2 tool is effectively dead. Agents and developers will choose the higher-ratio option every time.
+
+This means survival is not a fixed bar. It is a relative competition:
+
+- In an **uncontested niche**, a ratio slightly above 1 may suffice
+- In a **crowded market**, you need to significantly outperform alternatives
+- **Dominant incumbents** with high ratios raise the bar for everyone else
+
+The competitive dynamic also explains why some categories consolidate rapidly. Once a tool establishes a high survival ratio and gains awareness (low denominator from widespread adoption), it becomes very difficult to displace -- it has effectively acquired plot armor through competitive dominance.
+
+### Implications for Software Teams
+
+The Software Survival 3.0 framework leads to concrete strategic advice:
+
+- **Build something that would be crazy to re-synthesize.** Compress genuine insights. Encode hard-won knowledge. The denser your insight compression, the higher your Savings term.
+- **Make it easy to find.** Invest in awareness. Agent-discoverable documentation, MCP tool listings, and prominent placement in training data all lower the Awareness cost in the denominator.
+- **Make it easy to use.** Reduce friction ruthlessly. Clean APIs, predictable behavior, fast response times. Every bit of friction you remove improves your survival ratio.
+- **Identify your niche breadth.** Understand whether your Usage multiplier compensates for your per-invocation Savings. Broad tools can survive with modest savings; niche tools need to save dramatically per use.
+- **Consider the Human Coefficient.** If you operate in a domain where human preference matters, lean into it. The H multiplier is a legitimate survival advantage.
+
+### Broader Implications
 
 - Solo developers with orchestrated AI can match the output of small teams
 - Small teams with orchestrated AI can match the output of large teams
