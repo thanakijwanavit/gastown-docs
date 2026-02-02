@@ -1,12 +1,91 @@
 ---
 title: "Usage Guide"
 sidebar_position: 1
-description: "This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion..."
+description: "Practical day-to-day Gas Town usage patterns: entry points, the three developer loops, working with Mayor and Crew, the PR Sheriff pattern, 5 tips for effective use, and the mandatory landing checklist."
 ---
 
 # Usage Guide
 
 This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion workflow. It assumes you have a working installation (see [Getting Started](../getting-started/index.md)) and are familiar with the basic concepts.
+
+:::info[Source]
+
+Much of the operational advice in this guide comes from the [Gas Town Emergency User Manual](https://steve-yegge.medium.com/gas-town-emergency-user-manual-cf0e4556d74b) by Steve Yegge, written after the first two weeks of Gas Town's public release.
+
+:::
+
+---
+
+## Entry Points
+
+Your two main entry points into Gas Town are:
+
+```bash
+gt may at    # Attach to the Mayor
+gt crew at   # Attach to a Crew workspace
+```
+
+**`gt may at`** (short for `gt mayor attach`) drops you into the Mayor's tmux session. From there you can give instructions, check progress, and coordinate all your rigs. This is the primary interface for most Gas Town work.
+
+**`gt crew at`** (short for `gt crew at <rig> <name>`) attaches you to a named Crew workspace -- a persistent, long-lived development environment where you work hands-on with code alongside your AI agents.
+
+These two commands represent the two modes of Gas Town operation: **directing** (via the Mayor) and **doing** (via Crew). Most sessions involve both -- you direct work through the Mayor, then drop into Crew workspaces for design decisions, code review, or hands-on implementation.
+
+:::tip[Mayor-Only Mode]
+
+You technically only need the Mayor. Running with just the Mayor is a good tutorial and introduction to Gas Town. The Mayor can file and fix issues itself, or you can ask it to sling work to polecats. Even alone, it still gets all the benefits of GUPP, MEOW, and the full agent lifecycle.
+
+:::
+
+---
+
+## The Three Developer Loops
+
+Gas Town operations follow three nested feedback loops, a framework from the [Vibe Coding](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04) book by Steve Yegge and Gene Kim. Understanding these loops helps you work at the right cadence for each type of task.
+
+### Outer Loop (Days to Weeks)
+
+The outer loop covers strategic planning and infrastructure-level decisions:
+
+- **System upgrades** -- Gas Town ships updates frequently; upgrade daily if you are actively using it
+- **Capacity planning** -- How many rigs, how many polecats per rig, which projects are active
+- **Town-level maintenance** -- Cleanup, cost review, architectural decisions
+- **Workflow evolution** -- Your workflows will change as you gain experience; expect to adjust weekly
+
+The outer loop is where you decide *what* to build and *how* to organize your fleet.
+
+### Middle Loop (Hours to Days)
+
+The middle loop covers the active work session:
+
+- **Agent spawning decisions** -- When to spin up polecats, when to throttle back
+- **Mayor + Polecat coordination** -- Breaking work into beads, creating convoys, monitoring progress
+- **Capacity throttling** -- Adjusting agent count based on workload and cost targets
+- **Rig cycling** -- Moving between rigs as work progresses; with one rig fully spinning, move to the next and start the same loop
+
+The middle loop is where you turn plans into tracked work and keep the fleet productive.
+
+### Inner Loop (Minutes)
+
+The inner loop is the moment-to-moment operational cadence:
+
+- **Frequent handoffs** -- Use `gt handoff` after every task in every worker; only let sessions go long if they need to accumulate important context for a big design or decision
+- **Clear task specification** -- Be specific when delegating to agents
+- **Output review** -- Read what agents produce; some finish simple tasks and just need another assignment, others surface questions or complex summaries that require your time
+- **Real-time adjustments** -- Redirect agents, escalate blockers, reassign work
+
+The inner loop is where execution happens. Speed here comes from clear instructions and fast feedback cycles.
+
+```
+Outer Loop (Days-Weeks)
+│  Strategic planning, upgrades, capacity decisions
+│
+├── Middle Loop (Hours-Days)
+│   │  Spawning agents, creating convoys, rig cycling
+│   │
+│   └── Inner Loop (Minutes)
+│       Task delegation, output review, handoffs
+```
 
 ---
 
@@ -217,6 +296,73 @@ gt down
 
 ---
 
+## Working with Crew
+
+Crew workspaces are your most powerful tool for sustained, hands-on development within Gas Town. While polecats handle well-specified tasks autonomously, your Crew members are where design work, code review, and complex decision-making happen. See the [Crew agent docs](../agents/crew.md) for setup and commands.
+
+### The Crew Cycle
+
+When you have multiple Crew workspaces running across your rigs, the natural workflow is a **cycling pattern**: rotating through each Crew member in sequence, giving tasks, reviewing output, and moving on.
+
+Here is what a typical Crew cycle looks like:
+
+1. **Attach to a Crew workspace**: `gt crew at <rig> <name>`
+2. **Give a meaty task** -- design decisions, multi-file refactors, documentation, code review
+3. **Detach and move to the next Crew** -- while the first one works, attach to the next
+4. **Cycle back** -- by the time you have visited each Crew, the earlier ones are finishing
+
+As you cycle through, you will find Crew members in various states:
+
+- **Still working** -- Let them continue; move on
+- **Finished with simple output** -- Hand off immediately with `gt handoff` and give the next task
+- **Finished with questions or complex summaries** -- Reserve time to read carefully and respond
+
+The Crew for a rig are organized on a tmux cycle group, making it easy to rotate between them with tmux key bindings. Start with 3 Crew per rig and scale up to 7-8 as you become comfortable with the cycling rhythm.
+
+```bash
+# Add a new Crew member to a rig
+gt crew add myapp alice
+
+# Cycle through Crew members (in tmux, use Ctrl+B then N/P for next/prev)
+gt crew at myapp alice
+# ... give task, detach ...
+gt crew at myapp bob
+# ... give task, detach ...
+gt crew at myapp carol
+# ... cycle back to alice when ready ...
+```
+
+:::tip[Crew vs. Polecats]
+
+Use **Crew** for thoughtful work: design, review, complex refactors, and tasks where you need back-and-forth dialog. Use **Polecats** for well-specified, fast tasks where the acceptance criteria are clear up front. Your Crew creates the *guzzoline* (specifications and plans) that the polecat swarms consume.
+
+:::
+
+### The PR Sheriff Pattern
+
+A useful ad-hoc role for Crew members is the **PR Sheriff** -- a Crew workspace that has a permanent hook with standing orders to manage pull requests.
+
+On every session startup, the PR Sheriff:
+
+1. Checks all open PRs across the rig's repository
+2. Classifies them into **easy wins** (straightforward, tests pass, small diff) and **needs human review** (complex changes, failing CI, architectural implications)
+3. Slings the easy wins to other Crew or polecats for processing
+4. Flags the complex ones for your attention
+
+```bash
+# Create a PR Sheriff bead with standing orders
+bd create --title "PR Sheriff Standing Orders" --type task \
+  --description "On each session: check open PRs, classify by complexity, sling easy wins to crew"
+
+# Hook it permanently to a Crew member
+gt crew at myapp dave
+gt hook <bead-id>
+```
+
+The PR Sheriff pattern keeps your PR backlog from growing unbounded. Instead of PRs piling up while you focus on new work, they get triaged and handled continuously.
+
+---
+
 ## Landing the Plane (Session Completion)
 
 Landing the plane is the **mandatory** workflow for completing a Gas Town session. Skipping any step risks losing work, leaving stale state, or creating confusion for the next session.
@@ -342,6 +488,87 @@ gt mail send mayor "End of day: all auth work landed. Remaining: API pagination 
 
 ---
 
+## 5 Tips for Effective Gas Town Usage
+
+These tips come directly from operational experience with Gas Town in its first weeks of production use.
+
+### 1. Learn tmux
+
+tmux is the backbone of Gas Town's session management. Every agent, every Crew workspace, and the Mayor itself runs in a tmux session. Investing time in tmux proficiency pays off immediately:
+
+- **Learn a new keybinding or feature each day** -- pane splitting, window navigation, copy mode
+- **Customize it** -- ask your agent to help you set up a tmux configuration that works for you
+- **Learn how to copy text out of the terminal** -- this trips people up more than anything else
+- **Use tmux cycle groups** to rotate efficiently between Crew members and agents
+
+```bash
+# Essential tmux operations for Gas Town
+Ctrl+B D       # Detach from session (agent keeps running)
+Ctrl+B N/P     # Next/previous window (cycle through agents)
+Ctrl+B [       # Enter copy mode (scroll through output)
+Ctrl+B %       # Split pane vertically
+Ctrl+B "       # Split pane horizontally
+```
+
+:::tip[tmux Is Your Friend]
+
+The tmux tip is the single highest-leverage investment you can make. Gas Town without tmux proficiency is like driving with the parking brake on.
+
+:::
+
+### 2. Bring Your Own Workflow
+
+Gas Town does not force any particular workflow, any more than an IDE does. The basic pattern is always the same -- file beads, then ask agents to implement them -- but the details are entirely up to you.
+
+Expect your workflows to change frequently. In early Gas Town usage, workflows evolve just about every week as you discover what works for your projects and your working style. This is normal and encouraged.
+
+### 3. Start with the Mayor
+
+Do most of your talking to the Mayor until you are comfortable with it. The Mayor is your coordination layer -- it handles issue creation, work assignment, and progress tracking.
+
+You can run Gas Town in **Mayor-only mode** as a tutorial and introduction:
+
+```bash
+gt may at
+# Give the Mayor instructions directly
+# It can file issues, fix code, and sling work to polecats
+```
+
+Once you are comfortable with Mayor interactions, expand to using Crew and polecats for parallel execution.
+
+### 4. Handoff Liberally
+
+Use `gt handoff` after every task in every worker. Only let sessions go long if they need to accumulate important context for a big design or decision.
+
+Polecats take this to the extreme -- they self-destruct after submitting their work. For all other workers, there are several ways to hand off:
+
+```bash
+# From within an agent session
+gt handoff
+
+# Or say "let's hand off" in conversation
+
+# Or shell out
+!gt handoff
+```
+
+The worker will be spun up on a fresh shift, preserving the tmux session. Short sessions with frequent handoffs prevent context bloat, reduce token costs, and keep agents sharp.
+
+### 5. Work with Your Crew
+
+This is the biggest tip. Your Crew are your named, long-lived workers on each project rig. They are your design team, and they create the specifications and plans that polecat swarms execute.
+
+The difference between a productive Gas Town session and a frustrating one often comes down to how effectively you use your Crew:
+
+- **Give Crew members meaty tasks** -- design reviews, architecture decisions, documentation, complex refactors
+- **Cycle through them regularly** -- do not let Crew sit idle; rotate through giving tasks and reviewing output
+- **Scale up gradually** -- start with 3 Crew per rig, work up to 7-8 as you get comfortable
+- **Use Crew for human-judgment work** -- anything that requires back-and-forth dialog or nuanced decisions
+
+Your Crew are the bridge between your intent and the fleet's execution. Invest time in them.
+
+---
+
 ## Quick Reference Commands
 
 ### Lifecycle
@@ -402,5 +629,6 @@ gt mail send mayor "End of day: all auth work landed. Remaining: API pagination 
 |---------|-------------|
 | `gt prime` | Reload agent context |
 | `gt handoff` | Write handoff notes |
-| `gt mayor attach` | Attach to Mayor |
+| `gt may at` | Attach to Mayor |
+| `gt crew at <rig> <name>` | Attach to a Crew workspace |
 | `gt polecat attach <name>` | Attach to a polecat |
