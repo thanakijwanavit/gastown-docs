@@ -1,7 +1,7 @@
 ---
 title: "Background & Philosophy"
 sidebar_position: 5
-description: "Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectu..."
+description: "Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas."
 ---
 
 # Background & Philosophy
@@ -142,7 +142,7 @@ Each agent runs in its own session with its own state. A crash in one agent cann
 
 ## Software Survival 3.0
 
-Yegge's "Software Survival 3.0" thesis extends beyond coding tools to a broader claim about software itself:
+Yegge's "Software Survival 3.0" thesis, published on [Medium](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) in January 2026, extends beyond coding tools to a broader claim about the evolutionary pressures shaping all software in the AI era.
 
 ### The Three Eras
 
@@ -154,11 +154,127 @@ Yegge's "Software Survival 3.0" thesis extends beyond coding tools to a broader 
 
 ### The Core Thesis
 
-Software Survival 3.0 argues that **selection pressure on software teams will increasingly favor those who effectively use multi-agent AI**. Teams that resist or lag in adoption will be outcompeted, not because their code is worse, but because their velocity is lower.
+Inference costs tokens, which cost energy, which cost money. For the purposes of computing software survival odds, tokens, energy, and money are all equivalent -- and all are perpetually constrained.
 
-This is not a moral argument ("you should use AI") but an evolutionary one ("teams that use AI ship faster, and shipping faster wins").
+This resource constraint creates a selection pressure that shapes the entire software ecosystem. The rule is simple: **software tends to survive if it saves cognition**.
 
-### Implications
+Teams that effectively use multi-agent AI ship faster. Shipping faster wins. This is not a moral argument ("you should use AI") but an evolutionary one. The selection pressure is already operating.
+
+### The Squirrel Selection Model
+
+Yegge calls his survival framework the **Squirrel Selection Model** -- a deliberately humble name acknowledging it as a "Good Enough" model, while arguing it is better than what most C-suites are working with today. The model is grounded in an evolutionary argument: in any environment with constrained resources, entities that use those resources efficiently tend to outcompete those that do not.
+
+### The Survival Formula
+
+The model expresses software fitness as a ratio of cognitive value to cognitive cost:
+
+```
+Survival(T) = (Savings x Usage x H) / (Awareness + Friction)
+```
+
+Where:
+
+| Variable | Meaning |
+|----------|---------|
+| **Savings** | How much cognition (tokens, compute, human thought) the tool saves per use |
+| **Usage** | How broadly and frequently the tool applies across different situations |
+| **H** | The Human Coefficient -- a multiplier for domains where humans prefer human-made output |
+| **Awareness** | The cost of knowing the tool exists (discovery, learning it is available) |
+| **Friction** | The cost of actually using the tool (setup, API complexity, error handling) |
+
+`Survival(T)` is a **fitness function** -- when the ratio exceeds 1, the tool tends to survive. When it falls below 1, the tool is selected against; LLMs will synthesize alternatives or route around it.
+
+The Usage term amortizes the awareness cost and lowers the threshold for token savings. A tool does not need to save much per invocation if it is invoked constantly.
+
+### Plot Armor
+
+Tools with extremely high survival ratios -- in the thousands -- acquire what Yegge calls **"plot armor."** They become effectively indestructible.
+
+`grep` is the canonical example. It compresses a nontrivial insight (regular expression matching over streams of text), runs on a radically cheaper substrate than GPU inference, and applies to a near-universal niche. Its survival ratio is so high that no LLM will ever waste tokens re-synthesizing what grep already does perfectly. grep has plot armor.
+
+The concept is borrowed from fiction writing: some characters are so central to the narrative that they cannot die regardless of the danger they face. In software terms, some tools are so efficient that no amount of AI advancement threatens them -- it would always be cheaper to invoke them than to replicate them.
+
+### The Six Levers
+
+The survival formula gives you **six levers** you can pull to improve your software's chances of survival in the AI era:
+
+#### Lever 1: Compressed Insights
+
+Your software survives by compressing hard-won insights into reusable form. The software industry has accumulated decades of knowledge that would be expensive to rediscover from scratch. Tools that encode this knowledge densely are worth preserving.
+
+**Git** is the prime example. Its model -- the DAG of commits, refs as pointers, the index, the reflog -- represents decades of accumulated wisdom about how to track changes. An LLM could theoretically re-derive version control concepts, but it would be wildly wasteful compared to just using git.
+
+#### Lever 2: Cheaper Substrate
+
+Software survives by running on a cheaper computation substrate than GPU inference. Pattern matching over text, image transformation, data parsing -- these are tasks where CPUs beat GPUs by orders of magnitude. It would be irrational to spin up inference to do what `grep`, ImageMagick, or a JSON parser already does.
+
+Tools that leverage this lever include parsers, complex transformers, and many Unix CLI tools. They do their work on traditional compute that costs a fraction of what LLM inference would cost for equivalent output.
+
+#### Lever 3: Broad Usage (Near-Universal Niche)
+
+Niche tools may require incredible savings per invocation to compensate for their narrow applicability. Conversely, tools that apply broadly -- to many situations, many domains, many workflows -- can survive with modest per-use savings because the Usage multiplier in the formula does the heavy lifting.
+
+**Code search engines** exemplify all three levers together: they solve a nontrivial problem with lots of hard-to-discover edge cases (compressed insights), they do it on a cheaper computation substrate than inference (cheaper substrate), and they have found a large, near-universal niche (broad usage). As LLMs produce 10x to 100x as much code, agents will need good search as much as humans ever did.
+
+#### Lever 4: Awareness (Pre-Sales)
+
+Agent attention is becoming a key battleground. For a tool to be used, agents must know it exists. In a niche domain without much competition -- say DNA sequencing -- any tool that saves a few tokens might be quickly noticed and see heavy use. But in crowded domains, awareness is not automatic. Big mediocre players may have all the recognition, and you may have to pay extra to be noticed by agents.
+
+Awareness is the pre-sales problem in the survival formula. Your tool might be excellent, but if neither humans nor agents know about it, the numerator might as well be zero.
+
+#### Lever 5: Reducing Friction (Post-Sales)
+
+If Awareness is a pre-sales problem, then Friction is the post-sales problem. An agent may be perfectly aware that it has a useful tool, but even a small amount of friction may change its calculation. Agents always act like they are in a hurry, and if something appears to be failing, they will rapidly switch to workarounds.
+
+Friction includes API complexity, poor documentation, unreliable behavior, and slow response times. Every bit of friction pushes the denominator higher and the survival ratio lower. Tools that are easy to invoke and predictable in their behavior have an inherent survival advantage.
+
+#### Lever 6: The Human Coefficient (H)
+
+The Human Coefficient is a fundamentally different selection pressure -- not efficiency, but **human preference**. There will be a large set of domains where people prefer a human's work even when an AI can do "better" by some measurable standard.
+
+Even if AIs become the best teachers, some people will insist on human teachers. Even if AI-generated art is technically flawless, some collectors will prefer human-made art. The Human Coefficient is a multiplier that captures this preference -- software operating in high-H domains has an extra survival advantage that pure efficiency calculations miss.
+
+You can still benefit from the other five levers, but in high-H domains, the human element is itself a form of savings that the formula accounts for.
+
+### Temporal: A Case Study
+
+Yegge uses [Temporal](https://temporal.io/) -- the workflow orchestration engine -- as a detailed case study for applying the survival formula.
+
+Temporal scores highly on the first three levers:
+
+- **Compressed Insights**: Temporal encodes deep knowledge about distributed workflow orchestration -- retry logic, state management, failure recovery, and durable execution. These are problems with subtle edge cases that took years of engineering to solve correctly.
+- **Cheaper Substrate**: Temporal handles complex distributed coordination in traditional compute, which is far cheaper than re-synthesizing equivalent orchestration logic through LLM inference every time.
+- **Broad Usage**: As agentic workflows take center focus in 2026, Temporal's applicability is near-universal. Yegge describes it as "as broadly useful as PostgreSQL" for the emerging world of agent-driven software.
+
+However, Temporal faces challenges on levers 4 and 5. Compared to PostgreSQL -- which has been around for decades and has massive training data representation -- Temporal has comparatively higher awareness and friction costs. It is less well-known, and LLMs have less training data about its APIs and patterns. This means Temporal's raw survival ratio is moderated by the denominator, even though its numerator is strong.
+
+The case study illustrates a key insight: **a tool can be genuinely excellent (high numerator) and still face survival pressure if its denominator is too high.** The six levers are not just about building good software -- they are about the full equation.
+
+### Competition and Survivability Thresholds
+
+The survival formula does not operate in a vacuum. Your software's survivability threshold **floats above 1** when competitors exist.
+
+A tool with a survival ratio of 1.2 is technically viable in isolation -- it saves more cognition than it costs. But if a competitor achieves a ratio of 2.5 in the same niche, the 1.2 tool is effectively dead. Agents and developers will choose the higher-ratio option every time.
+
+This means survival is not a fixed bar. It is a relative competition:
+
+- In an **uncontested niche**, a ratio slightly above 1 may suffice
+- In a **crowded market**, you need to significantly outperform alternatives
+- **Dominant incumbents** with high ratios raise the bar for everyone else
+
+The competitive dynamic also explains why some categories consolidate rapidly. Once a tool establishes a high survival ratio and gains awareness (low denominator from widespread adoption), it becomes very difficult to displace -- it has effectively acquired plot armor through competitive dominance.
+
+### Implications for Software Teams
+
+The Software Survival 3.0 framework leads to concrete strategic advice:
+
+- **Build something that would be crazy to re-synthesize.** Compress genuine insights. Encode hard-won knowledge. The denser your insight compression, the higher your Savings term.
+- **Make it easy to find.** Invest in awareness. Agent-discoverable documentation, MCP tool listings, and prominent placement in training data all lower the Awareness cost in the denominator.
+- **Make it easy to use.** Reduce friction ruthlessly. Clean APIs, predictable behavior, fast response times. Every bit of friction you remove improves your survival ratio.
+- **Identify your niche breadth.** Understand whether your Usage multiplier compensates for your per-invocation Savings. Broad tools can survive with modest savings; niche tools need to save dramatically per use.
+- **Consider the Human Coefficient.** If you operate in a domain where human preference matters, lean into it. The H multiplier is a legitimate survival advantage.
+
+### Broader Implications
 
 - Solo developers with orchestrated AI can match the output of small teams
 - Small teams with orchestrated AI can match the output of large teams
