@@ -18,7 +18,7 @@ Create a new Gas Town workspace.
 gt install <directory> [options]
 ```
 
-**Description:** Initializes a new town directory with all required structure including `.beads/`, `mayor/`, `deacon/`, `settings/`, and configuration files. This is typically the first command you run.
+**Description:** Initializes a new HQ (headquarters) with all required structure including `.beads/`, `mayor/`, `deacon/`, `settings/`, and configuration files. This is typically the first command you run.
 
 **Options:**
 
@@ -26,8 +26,13 @@ gt install <directory> [options]
 |------|-------------|
 | `--git` | Initialize a git repository in the workspace |
 | `--force` | Overwrite an existing workspace |
-| `--agent <runtime>` | Set default agent runtime (default: `claude`) |
-| `--no-daemon` | Skip daemon setup |
+| `--name`, `-n` | Town name (defaults to directory name) |
+| `--no-beads` | Skip town beads initialization |
+| `--github <owner/repo>` | Create GitHub repo (private by default) |
+| `--public` | Make GitHub repo public (use with `--github`) |
+| `--shell` | Install shell integration (sets `GT_TOWN_ROOT`/`GT_RIG` env vars) |
+| `--owner <email>` | Owner email for entity identity |
+| `--wrappers` | Install `gt-codex`/`gt-opencode` wrapper scripts to `~/bin/` |
 
 **Example:**
 
@@ -35,8 +40,8 @@ gt install <directory> [options]
 # Standard installation with git
 gt install ~/gt --git
 
-# Install with Gemini as default agent
-gt install ~/gt --git --agent gemini
+# Install with a linked GitHub repo
+gt install ~/gt --github=user/repo
 ```
 
 **Created structure:**
@@ -97,30 +102,28 @@ Remove Gas Town from a workspace.
 gt uninstall [directory] [options]
 ```
 
-**Description:** Removes Gas Town configuration and infrastructure from a workspace. Does not remove your project source code or git repositories by default.
+**Description:** Removes shell integration, wrapper scripts, and state/config/cache directories. The workspace directory (e.g. `~/gt`) is NOT removed unless `--workspace` is specified.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--all` | Remove everything including rig source directories |
-| `--keep-beads` | Preserve the beads database |
-| `--force` | Skip confirmation prompts |
-| `--dry-run` | Show what would be removed without removing it |
+| `--force`, `-f` | Skip confirmation prompts |
+| `--workspace` | Also remove the workspace directory (DESTRUCTIVE) |
 
 **Example:**
 
 ```bash
-# Remove Gas Town but keep project files
-gt uninstall ~/gt
+# Remove Gas Town integration (preserves workspace)
+gt uninstall
 
-# Full removal
-gt uninstall ~/gt --all --force
+# Full removal including workspace directory
+gt uninstall --workspace --force
 ```
 
 :::danger
 
-Using `--all` permanently deletes all rig data, worktrees, and agent state. This cannot be undone.
+Using `--workspace` permanently deletes the workspace directory and all its contents. This cannot be undone.
 
 :::
 
@@ -157,86 +160,70 @@ gt git-init --repair
 
 ### `gt enable`
 
-Enable a Gas Town feature or plugin.
+Enable Gas Town for all agentic coding tools.
 
 ```bash
-gt enable <feature> [options]
+gt enable
 ```
 
-**Description:** Enables optional features, plugins, or integrations in the workspace.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Enable for a specific rig only |
-| `--global` | Enable globally for all rigs |
+**Description:** Enable Gas Town for all agentic coding tools. When enabled: shell hooks set `GT_TOWN_ROOT` and `GT_RIG` environment variables, Claude Code SessionStart hooks run `gt prime` for context.
 
 **Example:**
 
 ```bash
-# Enable Discord integration
-gt enable discord
-
-# Enable a plugin for a specific rig
-gt enable eslint-plugin --rig myproject
+gt enable
 ```
 
 ---
 
 ### `gt disable`
 
-Disable a Gas Town feature or plugin.
+Disable Gas Town for all agentic coding tools.
 
 ```bash
-gt disable <feature> [options]
+gt disable [options]
 ```
 
-**Description:** Disables a previously enabled feature, plugin, or integration.
+**Description:** Disable Gas Town for all agentic coding tools. The workspace is preserved.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Disable for a specific rig only |
-| `--global` | Disable globally for all rigs |
+| `--clean` | Remove shell integration from RC files |
 
 **Example:**
 
 ```bash
-gt disable discord
-gt disable eslint-plugin --rig myproject
+gt disable
+
+# Also remove shell integration from RC files
+gt disable --clean
 ```
 
 ---
 
 ### `gt stale`
 
-Find and report stale resources in the workspace.
+Check if the gt binary is stale.
 
 ```bash
 gt stale [options]
 ```
 
-**Description:** Identifies stale worktrees, abandoned hooks, zombie processes, orphaned polecats, and other resources that may need cleanup. Useful for periodic maintenance.
+**Description:** Checks if the `gt` binary is stale (i.e., built from an older commit than the current repo HEAD). Useful for determining if the binary needs to be rebuilt.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--cleanup` | Automatically clean up stale resources |
-| `--rig <name>` | Check a specific rig only |
-| `--age <duration>` | Stale threshold (default: `24h`) |
-| `--json` | Output in JSON format |
+| `--json` | Output as JSON |
+| `--quiet`, `-q` | Exit code only (0=stale, 1=fresh) |
 
 **Example:**
 
 ```bash
-# Report stale resources
 gt stale
-
-# Auto-cleanup resources older than 12 hours
-gt stale --cleanup --age 12h
 ```
 
 ---
@@ -354,29 +341,18 @@ After installing completions, restart your shell or source the completion file f
 
 ### `gt shell`
 
-Launch an interactive Gas Town shell.
+Manage shell integration.
 
 ```bash
 gt shell [options]
 ```
 
-**Description:** Opens an interactive shell session with Gas Town context pre-loaded. Provides enhanced tab completion, prompt integration showing current rig and agent status, and shorthand command aliases.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Start in the context of a specific rig |
-| `--role <agent>` | Set the shell role identity |
+**Description:** Manage shell integration for Gas Town. Handles setup and configuration of shell hooks and environment variables.
 
 **Example:**
 
 ```bash
-# Launch Gas Town shell
 gt shell
-
-# Launch in context of a specific rig
-gt shell --rig myproject
 ```
 
 :::note

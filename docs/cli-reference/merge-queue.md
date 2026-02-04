@@ -8,54 +8,64 @@ description: "Commands for managing the Refinery's merge queue. The Refinery pro
 
 Commands for managing the Refinery's merge queue. The Refinery processes merge requests (MRs) submitted by polecats, rebasing them onto the latest main branch, running validation, and merging clean code.
 
+:::info[Alias]
+
+`gt mr` is equivalent to `gt mq`. All subcommands work with either prefix.
+
+:::
+
 ---
 
 ### `gt mq list`
 
-List items in the merge queue.
+List items in the merge queue for a rig.
 
 ```bash
-gt mq list [options]
+gt mq list <rig> [flags]
 ```
 
-**Description:** Shows all merge requests currently in the queue, including their position, status, and associated bead.
+**Description:** Shows merge requests in the queue for the specified rig, including their position, status, and associated branch.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Filter to a specific rig |
-| `--status <status>` | Filter: `pending`, `processing`, `validated`, `merged`, `rejected`, `conflict` |
-| `--all` | Show across all rigs |
-| `--json` | Output in JSON format |
+| `--json` | Output as JSON |
+| `--ready` | Show only ready-to-merge (no blockers) |
+| `--status <status>` | Filter by status: `open`, `in_progress`, `closed` |
+| `--worker <name>` | Filter by worker name |
+| `--epic <id>` | Show MRs targeting `integration/<epic>` |
 
 **Example:**
 
 ```bash
-# List queue for current rig
-gt mq list
+# List queue for a rig
+gt mq list myproject
 
-# List across all rigs
-gt mq list --all
+# Show only ready-to-merge items
+gt mq list myproject --ready
 
-# Show only pending items
-gt mq list --status pending
+# Filter by status
+gt mq list myproject --status open
+
+# Show MRs targeting an epic's integration branch
+gt mq list myproject --epic 42
 ```
 
 **Sample output:**
 
 ```
 POS  ID       BEAD       BRANCH                  STATUS       RIG          AGE
-1    mr-001   gt-abc12   fix/login-bug           processing   myproject    5m
-2    mr-002   gt-def34   feat/email-validation   pending      myproject    2m
-3    mr-003   gt-ghi56   docs/update-readme      pending      docs         1m
+1    mr-001   gt-abc12   fix/login-bug           in_progress  myproject    5m
+2    mr-002   gt-def34   feat/email-validation   open         myproject    2m
+3    mr-003   gt-ghi56   docs/update-readme      open         myproject    1m
 ```
 
 ---
 
 ### `gt mq next`
 
-Show or process the next item in the merge queue.
+Show the next item in the merge queue.
 
 ```bash
 gt mq next [options]
@@ -68,7 +78,6 @@ gt mq next [options]
 | Flag | Description |
 |------|-------------|
 | `--rig <name>` | Target a specific rig |
-| `--process` | Immediately process the next item |
 | `--json` | Output in JSON format |
 
 **Example:**
@@ -77,8 +86,8 @@ gt mq next [options]
 # Show next item
 gt mq next
 
-# Process next item now
-gt mq next --process
+# Show next item for a specific rig
+gt mq next --rig myproject
 ```
 
 ---
@@ -88,38 +97,40 @@ gt mq next --process
 Submit a merge request to the queue.
 
 ```bash
-gt mq submit [options]
+gt mq submit [flags]
 ```
 
-**Description:** Adds the current branch to the merge queue for processing by the Refinery. This is typically called by `gt done` automatically, but can be used manually for crew workspaces or special cases.
+**Description:** Adds a branch to the merge queue for processing by the Refinery. Auto-detects the source branch, issue, worker, rig, target branch, and priority from the current context. This is typically called by `gt done` automatically, but can be used manually for crew workspaces or special cases.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--branch <name>` | Branch to submit (default: current branch) |
-| `--bead <id>` | Associated bead |
-| `--message <text>` | MR description |
-| `--priority` | Mark as priority merge (processed before others) |
-| `--rig <name>` | Target rig |
-| `--no-validate` | Skip pre-submission validation |
+| `--branch` | Source branch (default: current branch) |
+| `--issue` | Source issue ID (default: parsed from branch name) |
+| `--epic` | Target epic's integration branch instead of main |
+| `--priority`, `-p` | Override priority (0-4, default: inherit from issue) |
+| `--no-cleanup` | Don't auto-cleanup after submit (for polecats) |
 
 **Example:**
 
 ```bash
-# Submit current branch
-gt mq submit --bead gt-abc12 --message "Fixed OAuth callback URL handling"
+# Submit current branch (auto-detects everything)
+gt mq submit
 
-# Submit a specific branch with priority
-gt mq submit --branch fix/critical-bug --bead gt-xyz99 --priority
+# Submit a specific branch with priority override
+gt mq submit --branch fix/critical-bug --priority 4
 
-# Submit from a crew workspace
-gt mq submit --branch feat/new-feature --rig myproject --message "Add user profile page"
+# Submit targeting an epic's integration branch
+gt mq submit --epic 42
+
+# Submit without post-submit cleanup
+gt mq submit --no-cleanup
 ```
 
 :::tip
 
-The standard polecat workflow uses `gt done` which handles `gt mq submit` automatically. Use `gt mq submit` directly for crew (human developer) workflows or manual submissions.
+The standard polecat workflow uses `gt done` which handles `gt mq submit` automatically. When a polecat submits, its workspace is auto-cleaned up after submission unless `--no-cleanup` is specified. Use `gt mq submit` directly for crew (human developer) workflows or manual submissions.
 
 :::
 
@@ -218,46 +229,33 @@ gt mq retry mr-002 --rebase --priority
 
 ### `gt mq integration`
 
-Manage integration validation for the merge queue.
+Manage integration branches for batch work on epics.
 
 ```bash
-gt mq integration [options]
+gt mq integration <subcommand> [options]
 ```
 
-**Description:** Controls what validation the Refinery runs before merging. This includes test suites, build checks, linting, and custom validation scripts.
+**Description:** Manage integration branches for batch work on epics. Integration branches allow multiple MRs for an epic to target a shared branch instead of main. Once all work for the epic is complete, the integration branch is landed to main as a single merge.
 
-**Options:**
+**Subcommands:**
 
-| Flag | Description |
-|------|-------------|
-| `--show` | Show current integration configuration |
-| `--add <check>` | Add a validation check |
-| `--remove <check>` | Remove a validation check |
-| `--enable <check>` | Enable a disabled check |
-| `--disable <check>` | Disable a check without removing it |
-| `--rig <name>` | Configure for a specific rig |
+| Subcommand | Description |
+|------------|-------------|
+| `create` | Create an integration branch for an epic |
+| `land` | Merge an integration branch to main |
+| `status` | Show integration branch status |
 
 **Example:**
 
 ```bash
-# Show current checks
-gt mq integration --show
+# Create an integration branch for epic 42
+gt mq integration create --epic 42
 
-# Add a test check
-gt mq integration --add "npm test" --rig myproject
+# Check status of an integration branch
+gt mq integration status --epic 42
 
-# Disable linting temporarily
-gt mq integration --disable lint --rig myproject
-```
-
-**Sample configuration output:**
-
-```
-Integration Checks: myproject
-  [enabled]   build     npm run build
-  [enabled]   test      npm test
-  [disabled]  lint      npm run lint
-  [enabled]   typecheck npx tsc --noEmit
+# Land a completed integration branch to main
+gt mq integration land --epic 42
 ```
 
 :::note[Merge Process]

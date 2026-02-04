@@ -17,32 +17,43 @@ Commands for managing agent sessions, handoffs between sessions, molecules (mult
 Hand off work to a new session.
 
 ```bash
-gt handoff [options]
+gt handoff [flags]
 ```
 
-**Description:** Performs a graceful session transition. The current session saves its state (hook, context, progress) into a handoff file, then exits. The next session picks up from where the previous one left off. This is the standard way to deal with context limits.
+**Description:** Performs a graceful session transition, handling all roles. For polecats it calls `gt done --status DEFERRED`. When given a bead ID, hooks that work first then restarts. When given a role name, hands off that role's session. The current session saves its state into a handoff message, then exits. The next session picks up from where the previous one left off. This is the standard way to deal with context limits.
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
-| `--message <text>` | Handoff notes for the next session |
-| `--checkpoint` | Save a full checkpoint before handing off |
-| `--to <agent>` | Hand off to a specific agent role |
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--subject` | `-s` | Subject for handoff mail |
+| `--message` | `-m` | Message body for handoff mail |
+| `--collect` | `-c` | Auto-collect state (status, inbox, beads) into handoff message |
+| `--dry-run` | `-n` | Show what would be done without executing |
+| `--watch` | `-w` | Switch to new session (for remote handoff, default true) |
 
 **Example:**
 
 ```bash
-# Standard handoff
-gt handoff --message "Completed 3/5 test fixes, remaining: auth_test.go and api_test.go"
+# Standard handoff with message
+gt handoff -m "Completed 3/5 test fixes, remaining: auth_test.go and api_test.go"
 
-# Handoff with checkpoint
-gt handoff --checkpoint --message "At step 3 of molecule, next: run integration tests"
+# Handoff with auto-collected state
+gt handoff -c -m "At step 3 of molecule, next: run integration tests"
+
+# Handoff a specific bead (hooks it first, then restarts)
+gt handoff gt-abc12
+
+# Handoff a specific role's session
+gt handoff witness
+
+# Dry run to preview
+gt handoff -n -m "Preview handoff"
 ```
 
 :::tip[Handoff Best Practice]
 
-Always include a clear message describing what was accomplished and what remains. The next session relies on this context to continue work effectively.
+Always include a clear message describing what was accomplished and what remains. The next session relies on this context to continue work effectively. Use `--collect` to automatically include status, inbox, and bead information.
 
 :::
 
@@ -50,87 +61,110 @@ Always include a clear message describing what was accomplished and what remains
 
 ### `gt resume`
 
-Resume from a previous session or handoff.
+Resume work that was parked on a gate, or check for handoff messages.
 
 ```bash
-gt resume [options]
+gt resume [flags]
 ```
 
-**Description:** Loads the most recent handoff state and resumes work. Reads the handoff file, restores hook state, and continues from where the previous session ended.
+**Description:** Checks for parked work (from `gt park`) and whether its gate has cleared. Can also check for handoff messages from other sessions.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--session <id>` | Resume a specific session by ID |
-| `--latest` | Resume the most recent session (default) |
-| `--list` | List available sessions to resume |
+| `--handoff` | Check for handoff messages instead of parked work |
+| `--status` | Just show parked work status without resuming |
+| `--json` | Output as JSON |
 
 **Example:**
 
 ```bash
-# Resume latest
+# Resume parked work (checks if gate has cleared)
 gt resume
 
-# List available sessions
-gt resume --list
+# Just check status of parked work
+gt resume --status
 
-# Resume a specific session
-gt resume --session sess-abc123
+# Check for handoff messages
+gt resume --handoff
+
+# Output as JSON
+gt resume --json
 ```
 
 ---
 
 ### `gt park`
 
-Park the current session (pause without handoff).
+Park current work on a gate, allowing the agent to exit safely.
 
 ```bash
-gt park [options]
+gt park <gate-id> [flags]
 ```
 
-**Description:** Saves the current session state and exits without triggering a new session. The work stays on the hook and can be resumed later. Unlike handoff, parking does not expect an immediate successor.
+**Description:** When you need to wait for an external condition (timer, CI, human approval), park your work on a gate. The agent can then exit safely, and `gt resume` will check if the gate has cleared.
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
-| `--message <text>` | Parking notes |
-| `--duration <time>` | Expected park duration (informational) |
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--message` | `-m` | Context notes for resumption |
+| `--dry-run` | `-n` | Show what would be done without executing |
 
 **Example:**
 
 ```bash
-gt park --message "Waiting for API review feedback" --duration 4h
+# Create a timer gate and park on it
+gt gate create timer --duration 30m
+gt park gate-abc123 -m "Waiting for CI pipeline to complete"
+
+# Park on an existing gate with dry run
+gt park gate-def456 -n
+
+# Park with context notes
+gt park gate-ghi789 -m "Waiting for human approval on PR #42"
 ```
 
 ---
 
 ### `gt prime`
 
-Initialize agent context for a new or resumed session.
+Detect the agent role from the current directory and output context.
 
 ```bash
-gt prime [options]
+gt prime [flags]
 ```
 
-**Description:** Loads the full agent context including role, identity, configuration, hook state, and CLAUDE.md instructions. This is the first command an agent runs in a new session.
+**Description:** Detects the agent role from the current directory and outputs the full agent context including role, identity, configuration, hook state, and CLAUDE.md instructions. This is the first command an agent runs in a new session.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--role <role>` | Override the agent role |
-| `--verbose` | Show detailed priming information |
+| `--hook` | Hook mode: read session ID from stdin JSON (for LLM runtime hooks) |
+| `--dry-run` | Show what would be injected without side effects |
+| `--explain` | Show why each section was included |
+| `--state` | Show detected session state only |
+| `--json` | Output state as JSON (requires `--state`) |
 
 **Example:**
 
 ```bash
-# Standard prime (reads GT_ROLE from environment)
+# Standard prime (detects role from current directory)
 gt prime
 
-# Prime with explicit role
-gt prime --role witness
+# Show what would be injected without side effects
+gt prime --dry-run
+
+# Show why each context section was included
+gt prime --explain
+
+# Show detected session state
+gt prime --state
+
+# Output state as JSON
+gt prime --state --json
 ```
 
 :::note
@@ -143,67 +177,75 @@ gt prime --role witness
 
 ### `gt seance`
 
-Inspect a completed or crashed session.
+Talk to predecessor sessions.
 
 ```bash
-gt seance <session-id> [options]
+gt seance [flags]
 ```
 
-**Description:** Examines the state and artifacts from a previous session, including its hook state, messages sent, activity log, and exit condition. Named after "communicating with the dead" -- useful for debugging crashed or failed sessions.
+**Description:** Seance lets you literally talk to predecessor sessions. Instead of parsing logs, seance spawns a Claude subprocess that resumes a predecessor session with full context. Without flags, lists recent sessions.
 
 **Options:**
 
-| Flag | Description |
-|------|-------------|
-| `--json` | Output in JSON format |
-| `--verbose` | Show full session transcript excerpts |
-| `--artifacts` | List all session artifacts |
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--talk` | `-t` | Session ID to commune with |
+| `--prompt` | `-p` | One-shot prompt (with `--talk`) |
+| `--recent` | `-n` | Number of recent sessions to show (default 20) |
+| `--rig` | | Filter by rig name |
+| `--role` | | Filter by role |
+| `--json` | | Output as JSON |
 
 **Example:**
 
 ```bash
-gt seance sess-abc123
-gt seance sess-abc123 --verbose
-```
+# List recent sessions
+gt seance
 
-**Sample output:**
+# List sessions filtered by rig
+gt seance --rig myproject
 
-```
-Session: sess-abc123
-Agent: polecat/toast
-Rig: myproject
-Duration: 45m
-Exit: COMPLETED
-Hook: gt-abc12 (completed)
-Messages sent: 3
-Commits: 4
-Branch: fix/login-bug
+# Talk to a predecessor session
+gt seance -t sess-abc123
+
+# One-shot question to a predecessor session
+gt seance -t sess-abc123 -p "What was the root cause of the auth bug?"
+
+# List recent sessions as JSON
+gt seance --json --recent 10
 ```
 
 ---
 
 ### `gt checkpoint`
 
-Save a session checkpoint.
+Manage checkpoints for polecat session crash recovery.
 
 ```bash
-gt checkpoint [options]
+gt checkpoint <subcommand>
 ```
 
-**Description:** Saves the current session state without exiting. Creates a snapshot that can be resumed later if the session crashes or is interrupted.
+**Description:** Checkpoints capture current work state so that if a session crashes, the next session can resume. This is not a direct command -- it has subcommands for writing, reading, and clearing checkpoints.
 
-**Options:**
+**Subcommands:**
 
-| Flag | Description |
-|------|-------------|
-| `--message <text>` | Checkpoint description |
-| `--name <name>` | Named checkpoint for easy reference |
+| Subcommand | Description |
+|------------|-------------|
+| `gt checkpoint write` | Write a checkpoint of current session state |
+| `gt checkpoint read` | Read and display the current checkpoint |
+| `gt checkpoint clear` | Clear the checkpoint file |
 
 **Example:**
 
 ```bash
-gt checkpoint --message "Before attempting risky refactor"
-gt checkpoint --name pre-migration
+# Write a checkpoint of current state
+gt checkpoint write
+
+# Read the current checkpoint
+gt checkpoint read
+
+# Clear the checkpoint file
+gt checkpoint clear
 ```
 
 ---
@@ -211,6 +253,8 @@ gt checkpoint --name pre-migration
 ## Molecules
 
 Molecules are multi-step workflow execution units. They break complex work into a directed acyclic graph (DAG) of steps that can be executed sequentially, in parallel, or with dependencies.
+
+**Aliases:** `gt mol`, `gt molecule`
 
 ### `gt mol status`
 
@@ -301,6 +345,8 @@ gt mol progress
 
 Mark the current molecule step as completed.
 
+`gt mol step` is a subcommand of `gt mol` with its own sub-subcommand `done`.
+
 ```bash
 gt mol step done [options]
 ```
@@ -355,6 +401,42 @@ gt mol detach [options]
 
 ```bash
 gt mol detach
+```
+
+---
+
+### `gt mol attach-from-mail`
+
+Attach to a molecule from a mail message.
+
+```bash
+gt mol attach-from-mail [options]
+```
+
+**Description:** Attaches the current agent to a molecule based on information from a received mail message.
+
+**Example:**
+
+```bash
+gt mol attach-from-mail
+```
+
+---
+
+### `gt mol attachment`
+
+Manage molecule attachments.
+
+```bash
+gt mol attachment [options]
+```
+
+**Description:** Work with attachments associated with the current molecule.
+
+**Example:**
+
+```bash
+gt mol attachment
 ```
 
 ---

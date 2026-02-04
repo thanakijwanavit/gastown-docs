@@ -15,7 +15,7 @@ Convoys are Gas Town's primary mechanism for bundling and tracking batches of re
 Create a new convoy.
 
 ```bash
-gt convoy create <title> [bead-id...] [options]
+gt convoy create <name> [bead-id...] [options]
 ```
 
 **Description:** Creates a new convoy with an optional set of initial beads. Convoys are the standard unit for tracking a batch of related work such as a feature set, a bug-fix sprint, or a documentation effort.
@@ -24,10 +24,9 @@ gt convoy create <title> [bead-id...] [options]
 
 | Flag | Description |
 |------|-------------|
-| `--description <text>` | Detailed convoy description |
-| `--rig <name>` | Associate with a specific rig |
-| `--priority <level>` | Set convoy priority: `critical`, `high`, `medium`, `low` |
-| `--deadline <date>` | Set a target completion date |
+| `--molecule <id>` | Associated molecule ID |
+| `--notify [address]` | Additional address to notify on completion (default: `mayor/` if used without value) |
+| `--owner <address>` | Owner who requested convoy (gets completion notification) |
 
 **Example:**
 
@@ -37,10 +36,10 @@ gt convoy create "Auth System Fixes" gt-a1b2c gt-d3e4f gt-g5h6i
 # Created: hq-cv-001
 
 # Create empty convoy (add beads later)
-gt convoy create "Q1 Performance Sprint" --priority high
+gt convoy create "Q1 Performance Sprint"
 
-# Create with description
-gt convoy create "API Refactor" --description "Migrate all endpoints from v1 to v2 schema"
+# Create with owner and notification
+gt convoy create "API Refactor" --owner mayor/ops --notify
 ```
 
 ---
@@ -85,9 +84,6 @@ gt convoy list [options]
 
 | Flag | Description |
 |------|-------------|
-| `--status <status>` | Filter: `active`, `completed`, `stalled`, `cancelled` |
-| `--rig <name>` | Filter to a specific rig |
-| `--limit <n>` | Maximum number of results |
 | `--json` | Output in JSON format |
 
 **Example:**
@@ -96,8 +92,8 @@ gt convoy list [options]
 # List all convoys
 gt convoy list
 
-# List active convoys only
-gt convoy list --status active
+# List in JSON format
+gt convoy list --json
 ```
 
 **Sample output:**
@@ -139,43 +135,11 @@ gt convoy status hq-cv-001
 
 ---
 
-### `gt convoy show`
+:::note
 
-Show detailed information about a convoy.
+There is no `gt convoy show` subcommand. Use `gt convoy status <convoy-id>` to view detailed information about a specific convoy.
 
-```bash
-gt convoy show <convoy-id> [options]
-```
-
-**Description:** Displays comprehensive convoy details including all tracked beads, their individual statuses, assigned agents, and overall progress metrics.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output in JSON format |
-| `--verbose` | Include bead details and history |
-
-**Example:**
-
-```bash
-gt convoy show hq-cv-001
-```
-
-**Sample output:**
-
-```
-Convoy: hq-cv-001
-Title: Auth System Fixes
-Status: active
-Progress: 2/3 (67%)
-Created: 2h ago
-
-BEAD       STATUS         AGENT           TITLE
-gt-a1b2c   completed      polecat/toast   Fix login redirect
-gt-d3e4f   in_progress    polecat/alpha   Add email validation
-gt-g5h6i   pending        -               Update auth docs
-```
+:::
 
 ---
 
@@ -216,20 +180,18 @@ Convoys auto-close when all tracked beads reach a terminal state (completed, clo
 
 ### `gt convoy check`
 
-Check convoy health and consistency.
+Check and auto-close completed convoys.
 
 ```bash
 gt convoy check [convoy-id] [options]
 ```
 
-**Description:** Validates the convoy state, checking for inconsistencies between convoy tracking and bead statuses. Reports any beads that may be stuck, orphaned, or in an unexpected state.
+**Description:** Checks convoy state and automatically closes convoys where all tracked beads have reached a terminal state. Without an ID, checks all active convoys.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--all` | Check all convoys |
-| `--fix` | Attempt to fix inconsistencies |
 | `--json` | Output in JSON format |
 
 **Example:**
@@ -238,8 +200,8 @@ gt convoy check [convoy-id] [options]
 # Check a specific convoy
 gt convoy check hq-cv-001
 
-# Check all convoys and fix issues
-gt convoy check --all --fix
+# Check all convoys
+gt convoy check
 ```
 
 ---
@@ -282,53 +244,8 @@ Stranded convoys indicate work that has fallen through the cracks. The Mayor sho
 
 ---
 
-### `gt convoy synthesis`
+:::note
 
-Generate a synthesis report for a convoy.
+Synthesis is not a convoy subcommand. To generate a synthesis report, use the top-level command `gt synthesis`. See the [synthesis documentation](/cli-reference/synthesis) for details.
 
-```bash
-gt convoy synthesis <convoy-id> [options]
-```
-
-**Description:** Produces a summary report of the convoy's progress, including what was accomplished, what remains, any blockers encountered, and time metrics. Useful for status updates and retrospectives.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--format <fmt>` | Output format: `text`, `markdown`, `json` |
-| `--verbose` | Include per-bead details |
-
-**Example:**
-
-```bash
-# Generate text synthesis
-gt convoy synthesis hq-cv-001
-
-# Generate markdown report
-gt convoy synthesis hq-cv-001 --format markdown
-
-# Detailed synthesis
-gt convoy synthesis hq-cv-001 --verbose
-```
-
-**Sample output:**
-
-```
-Convoy Synthesis: Auth System Fixes (hq-cv-001)
-================================================
-
-Progress: 2/3 completed (67%)
-Duration: 2h 15m
-Agents used: 3 polecats
-
-Completed:
-  - gt-a1b2c: Fix login redirect loop (polecat/toast, 45m)
-  - gt-d3e4f: Add email validation (polecat/alpha, 1h 10m)
-
-Remaining:
-  - gt-g5h6i: Update auth docs (pending, unassigned)
-
-Blockers: none
-Merge status: 2 merged, 0 in queue
-```
+:::

@@ -60,10 +60,12 @@ gt rig add <name> <git-url> [options]
 
 | Flag | Description |
 |------|-------------|
-| `--branch <name>` | Check out a specific branch (default: `main`) |
-| `--agent <runtime>` | Default agent runtime for this rig |
-| `--no-start` | Add the rig but do not start its agents |
-| `--shallow` | Shallow clone for large repositories |
+| `--adopt` | Adopt an existing directory instead of creating new |
+| `--branch <name>` | Default branch name (default: auto-detected from remote) |
+| `--force` | With `--adopt`, register even if git remote cannot be detected |
+| `--local-repo <path>` | Local repo path to share git objects (optional) |
+| `--prefix <prefix>` | Beads issue prefix (default: derived from name) |
+| `--url <url>` | Git remote URL for `--adopt` (default: auto-detected) |
 
 **Example:**
 
@@ -74,67 +76,77 @@ gt rig add myproject https://github.com/you/repo.git
 # Add with SSH URL and specific branch
 gt rig add backend git@github.com:you/backend.git --branch develop
 
-# Add without starting agents
-gt rig add docs https://github.com/you/docs.git --no-start
+# Adopt an existing directory
+gt rig add myproject --adopt --url https://github.com/you/repo.git
 ```
 
 **Created structure:**
 
 ```
 ~/gt/myproject/
-├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration
+├── .beads/          # Rig-level issue tracking
+├── plugins/         # Rig-level plugins
 ├── refinery/rig/    # Canonical main clone
 ├── mayor/rig/       # Mayor's working copy
 ├── crew/            # Human developer workspaces
 ├── witness/         # Health monitor state
-├── polecats/        # Ephemeral worker directories
-└── plugins/         # Rig-level plugins
+└── polecats/        # Ephemeral worker directories
+```
+
+---
+
+### `gt rig remove`
+
+Remove a rig from the registry.
+
+```bash
+gt rig remove <name> [options]
+```
+
+**Description:** Remove a rig from the registry. Does not delete files on disk.
+
+**Example:**
+
+```bash
+gt rig remove myproject
 ```
 
 ---
 
 ### `gt rig start`
 
-Start all agents for a rig.
+Start witness and refinery on patrol for one or more rigs.
 
 ```bash
 gt rig start <name> [options]
 ```
 
-**Description:** Starts the Witness and Refinery agents for the specified rig. If polecats have hooked work, they will also be spawned.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--agents <list>` | Start only specific agents (comma-separated) |
+**Description:** Start witness and refinery on patrol for one or more rigs.
 
 **Example:**
 
 ```bash
 gt rig start myproject
-gt rig start myproject --agents witness,refinery
 ```
 
 ---
 
 ### `gt rig stop`
 
-Stop all agents for a rig.
+Stop one or more rigs (shutdown semantics).
 
 ```bash
 gt rig stop <name> [options]
 ```
 
-**Description:** Gracefully stops all agents running in the rig, including the Witness, Refinery, and any active polecats.
+**Description:** Stop one or more rigs (shutdown semantics).
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
 | `--force` | Force stop without graceful shutdown |
-| `--keep-polecats` | Do not stop running polecats |
 
 **Example:**
 
@@ -143,36 +155,28 @@ gt rig stop myproject
 gt rig stop myproject --force
 ```
 
-:::warning
-
-Stopping a rig with active polecats may result in lost uncommitted work. Use `--keep-polecats` or ensure polecats have committed their changes first.
-
-:::
-
 ---
 
 ### `gt rig shutdown`
 
-Fully shut down a rig including cleanup.
+Gracefully stop all rig agents.
 
 ```bash
 gt rig shutdown <name> [options]
 ```
 
-**Description:** Stops all agents, cleans up polecat worktrees, drains the merge queue, and puts the rig in a stopped state. More thorough than `gt rig stop`.
+**Description:** Gracefully stop all rig agents.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
 | `--force` | Skip confirmation and force shutdown |
-| `--drain` | Wait for merge queue to empty before shutting down |
 
 **Example:**
 
 ```bash
 gt rig shutdown myproject
-gt rig shutdown myproject --drain
 ```
 
 ---
@@ -226,58 +230,43 @@ Active Convoy: hq-cv-001 (2/3)
 
 ### `gt rig reset`
 
-Reset a rig to a clean state.
+Reset rig state (handoff content, mail, stale issues).
 
 ```bash
 gt rig reset <name> [options]
 ```
 
-**Description:** Resets the rig by stopping all agents, removing all polecat worktrees, clearing the merge queue, and optionally resetting the beads database.
+**Description:** Reset rig state (handoff content, mail, stale issues).
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--hard` | Also reset beads database and agent state |
 | `--force` | Skip confirmation |
-| `--keep-crew` | Preserve crew workspaces |
 
 **Example:**
 
 ```bash
 gt rig reset myproject
-gt rig reset myproject --hard --force
+gt rig reset myproject --force
 ```
-
-:::danger
-
-`gt rig reset --hard` destroys all work state including beads, hooks, and merge queue items. This cannot be undone.
-
-:::
 
 ---
 
 ### `gt rig boot`
 
-Boot a rig from cold state.
+Start witness and refinery for a rig.
 
 ```bash
 gt rig boot <name> [options]
 ```
 
-**Description:** Initializes a rig that has been shut down or is in a cold state. Sets up worktrees, starts agents, and processes any pending hooks.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--full` | Full boot including all optional agents |
+**Description:** Start witness and refinery for a rig.
 
 **Example:**
 
 ```bash
 gt rig boot myproject
-gt rig boot myproject --full
 ```
 
 ---
@@ -302,6 +291,24 @@ gt rig reboot <name> [options]
 
 ```bash
 gt rig reboot myproject
+```
+
+---
+
+### `gt rig restart`
+
+Restart one or more rigs.
+
+```bash
+gt rig restart <name> [options]
+```
+
+**Description:** Restart one or more rigs (stop then start).
+
+**Example:**
+
+```bash
+gt rig restart myproject
 ```
 
 ---
@@ -407,7 +414,7 @@ gt rig config <name> [key] [value] [options]
 | `--json` | Output in JSON format |
 | `--reset` | Reset configuration to defaults |
 
-**Common configuration keys:**
+**Common configuration keys (example defaults; actual defaults may vary):**
 
 | Key | Description | Default |
 |-----|-------------|---------|

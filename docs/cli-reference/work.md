@@ -20,16 +20,13 @@ List work items that are ready for assignment.
 gt ready [options]
 ```
 
-**Description:** Shows beads in `pending` or `open` status that are not currently assigned to any agent. These are available for slinging to workers.
+**Description:** Display all ready work items across the town and all rigs. Aggregates ready issues from town beads (hq-* items) and each rig's beads. Ready items have no blockers.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
 | `--rig <name>` | Filter to a specific rig |
-| `--priority <level>` | Filter by priority: `critical`, `high`, `medium`, `low` |
-| `--type <type>` | Filter by type: `bug`, `feature`, `task`, `chore` |
-| `--convoy <id>` | Show only items in a specific convoy |
 | `--json` | Output in JSON format |
 
 **Example:**
@@ -37,9 +34,6 @@ gt ready [options]
 ```bash
 # Show all ready work
 gt ready
-
-# Show high-priority bugs ready for work
-gt ready --priority high --type bug
 
 # Show ready work for a specific rig
 gt ready --rig myproject
@@ -64,16 +58,25 @@ Assign work to a rig or agent.
 gt sling <bead-id>... <target> [options]
 ```
 
-**Description:** The primary command for assigning work. Hooks the bead to the target, updates its status, and spawns a polecat to execute the work. This is the central work distribution command in Gas Town.
+**Description:** The primary command for assigning work. Applies a formula to a bead, spawns a polecat in the target rig, and propels the work forward. This is the central work distribution command in Gas Town. When slinging a single issue, a convoy is automatically created unless `--no-convoy` is specified.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--agent <runtime>` | Agent runtime for the spawned polecat |
-| `--name <name>` | Name for the spawned polecat |
-| `--priority` | Override bead priority for scheduling |
-| `--no-spawn` | Hook the work but do not spawn a polecat |
+| `--agent <runtime>` | Override agent/runtime for this sling |
+| `--account <handle>` | Claude Code account handle to use |
+| `--args`, `-a` | Natural language instructions for the executor |
+| `--create` | Create polecat if it doesn't exist |
+| `--dry-run`, `-n` | Show what would be done |
+| `--force` | Force spawn even if polecat has unread mail |
+| `--hook-raw-bead` | Hook raw bead without default formula (expert mode) |
+| `--message`, `-m` | Context message for the work |
+| `--subject`, `-s` | Context subject for the work |
+| `--no-convoy` | Skip auto-convoy creation for single-issue sling |
+| `--no-merge` | Skip merge queue on completion (keep work on feature branch) |
+| `--on <bead>` | Apply formula to existing bead |
+| `--var <key=value>` | Formula variable (can be repeated) |
 
 **Example:**
 
@@ -87,16 +90,19 @@ gt sling gt-abc12 gt-def34 myproject
 # Assign with a specific agent
 gt sling gt-abc12 myproject --agent cursor
 
-# Hook work without spawning (manual pickup later)
-gt sling gt-abc12 myproject --no-spawn
+# Dry run to preview what would happen
+gt sling gt-abc12 myproject --dry-run
+
+# Sling with context message
+gt sling gt-abc12 myproject -m "Focus on the auth module"
 ```
 
 **What happens:**
 
-1. Bead status changes to `hooked`
-2. Work attaches to the target's hook
-3. A polecat spawns in the rig (unless `--no-spawn`)
-4. The polecat's startup hook finds and begins the work
+1. A convoy is auto-created for the work (unless `--no-convoy`)
+2. A formula is applied to the bead and a polecat spawns in the rig
+3. The polecat propels the work forward following the propulsion principle
+4. On completion, the work enters the merge queue (unless `--no-merge`)
 
 :::tip
 
@@ -116,11 +122,25 @@ gt hook [bead-id] [options]
 
 **Description:** Without arguments, shows what is currently on the agent's hook. With a bead ID, attaches that work item to the hook. The hook is Gas Town's durability primitive -- work on a hook survives session restarts, compaction, and crashes.
 
+**Alias:** `work`
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `show` | Show current hook contents |
+| `status` | Show hook status |
+
 **Options:**
 
 | Flag | Description |
 |------|-------------|
 | `--json` | Output in JSON format |
+| `--clear` | Clear the current hook |
+| `--dry-run`, `-n` | Show what would be done |
+| `--force`, `-f` | Force hook even if hook is occupied |
+| `--message`, `-m` | Context message for the work |
+| `--subject`, `-s` | Context subject for the work |
 
 **Example:**
 
@@ -130,6 +150,12 @@ gt hook
 
 # Attach work to hook
 gt hook gt-abc12
+
+# Force attach (replacing current hook contents)
+gt hook gt-abc12 --force
+
+# Clear the hook
+gt hook --clear
 ```
 
 **Sample output:**
@@ -152,14 +178,16 @@ Remove work from a hook without completing it.
 gt unsling <bead-id> [options]
 ```
 
-**Description:** Detaches work from an agent's hook and sets the bead back to an assignable state. Use this when work needs to be reassigned or when a polecat should not continue with a task.
+**Description:** Detaches work from an agent's hook and changes the bead status from `hooked` back to `open`. Use this when work needs to be reassigned or when a polecat should not continue with a task.
+
+**Alias:** `unhook`
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--release` | Also release the bead back to `open` status |
 | `--force` | Force unsling even if the agent is actively working |
+| `--dry-run`, `-n` | Show what would be done |
 
 **Example:**
 
@@ -167,8 +195,8 @@ gt unsling <bead-id> [options]
 # Unsling from current agent
 gt unsling gt-abc12
 
-# Unsling and release back to ready pool
-gt unsling gt-abc12 --release
+# Force unsling even if agent is working
+gt unsling gt-abc12 --force
 ```
 
 ---
@@ -187,33 +215,40 @@ gt done [options]
 
 | Flag | Description |
 |------|-------------|
-| `--message <msg>` | MR description / completion summary |
-| `--no-mr` | Complete without creating a merge request |
-| `--escalate` | Exit with escalation instead of completion |
-| `--defer` | Exit with deferred status (work paused, not done) |
-| `--phase` | Exit with phase-complete status (gate point) |
+| `--status <state>` | Exit status: `COMPLETED`, `ESCALATED`, or `DEFERRED` (default `COMPLETED`) |
+| `--issue <id>` | Source issue ID (default: parse from branch name) |
+| `--phase-complete` | Signal phase complete -- await gate before continuing |
+| `--gate <id>` | Gate bead ID to wait on (with `--phase-complete`) |
+| `--priority`, `-p` | Override priority (0-4) |
+| `--cleanup-status` | Git cleanup status (agent-observed) |
 
 **Example:**
 
 ```bash
 # Standard completion
-gt done --message "Fixed login redirect by correcting OAuth callback URL"
+gt done
 
-# Complete without MR (e.g., documentation-only changes)
-gt done --no-mr --message "Updated local docs only"
+# Complete with escalation
+gt done --status ESCALATED
 
-# Escalate a blocker
-gt done --escalate --message "Blocked: need API credentials for staging"
+# Defer work for later
+gt done --status DEFERRED
+
+# Phase complete with gate
+gt done --phase-complete --gate gt-gate01
 ```
 
 **Exit states:**
 
+| `--status` value | Exit State | Meaning |
+|------------------|-----------|---------|
+| `COMPLETED` (default) | `COMPLETED` | Work done, MR submitted to Refinery |
+| `ESCALATED` | `ESCALATED` | Hit a blocker, needs human input |
+| `DEFERRED` | `DEFERRED` | Paused, another agent can pick up later |
+
 | Flag | Exit State | Meaning |
 |------|-----------|---------|
-| (default) | `COMPLETED` | Work done, MR submitted to Refinery |
-| `--escalate` | `ESCALATED` | Hit a blocker, needs human input |
-| `--defer` | `DEFERRED` | Paused, another agent can pick up later |
-| `--phase` | `PHASE_COMPLETE` | Phase done, waiting for gate |
+| `--phase-complete` | `PHASE_COMPLETE` | Phase done, waiting for gate |
 
 ---
 
@@ -225,22 +260,13 @@ Close a bead without going through the done workflow.
 gt close <bead-id> [options]
 ```
 
-**Description:** Manually closes a bead. Useful for closing duplicate issues, items resolved by other means, or administrative cleanup.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--reason <text>` | Reason for closing |
-| `--wontfix` | Close as won't fix |
-| `--duplicate <id>` | Close as duplicate of another bead |
+**Description:** Wrapper for `bd close`. Manually closes a bead. All flags supported by `bd close` are passed through.
 
 **Example:**
 
 ```bash
+gt close gt-abc12
 gt close gt-abc12 --reason "Resolved by upstream fix"
-gt close gt-def34 --duplicate gt-abc12
-gt close gt-ghi56 --wontfix
 ```
 
 ---
@@ -259,13 +285,13 @@ gt release <bead-id> [options]
 
 | Flag | Description |
 |------|-------------|
-| `--force` | Release even if an agent appears to still be working on it |
+| `--reason`, `-r` | Reason for releasing |
 
 **Example:**
 
 ```bash
 gt release gt-abc12
-gt release gt-abc12 --force
+gt release gt-abc12 --reason "Agent stalled, reassigning"
 ```
 
 :::tip
@@ -284,21 +310,13 @@ Show detailed information about a bead or work item.
 gt show <bead-id> [options]
 ```
 
-**Description:** Displays comprehensive information about a bead including its status, history, assigned agent, convoy membership, and related activity.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output in JSON format |
-| `--history` | Include full status change history |
-| `--comments` | Include all comments |
+**Description:** Displays comprehensive information about a bead. Delegates to `bd show` -- all `bd show` flags are supported.
 
 **Example:**
 
 ```bash
 gt show gt-abc12
-gt show gt-abc12 --history
+gt show gt-abc12 --json
 ```
 
 **Sample output:**
@@ -327,14 +345,13 @@ Output the raw content of a bead or work artifact.
 gt cat <bead-id> [options]
 ```
 
-**Description:** Prints the raw bead content, including description, comments, and metadata. Useful for piping into other tools or for programmatic access.
+**Description:** Display the content of a bead. Convenience wrapper around `bd show`.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--field <name>` | Output only a specific field |
-| `--format <fmt>` | Output format: `text`, `json`, `yaml` |
+| `--json` | Output in JSON format |
 
 **Example:**
 
@@ -342,11 +359,8 @@ gt cat <bead-id> [options]
 # Full bead content
 gt cat gt-abc12
 
-# Just the description
-gt cat gt-abc12 --field description
-
 # JSON output for scripting
-gt cat gt-abc12 --format json
+gt cat gt-abc12 --json
 ```
 
 ---
@@ -371,23 +385,29 @@ bd create [options]
 |------|-------------|
 | `--title <text>` | Bead title (required) |
 | `--type <type>` | Type: `bug`, `feature`, `task`, `chore`, `epic` |
-| `--priority <level>` | Priority: `critical`, `high`, `medium`, `low` |
+| `--priority <level>` | Priority: `0-4` or `P0-P4` (0=highest, default P2) |
 | `--description <text>` | Detailed description |
-| `--rig <name>` | Assign to a specific rig |
-| `--label <label>` | Add labels (can be repeated) |
+| `--rig <name>` | Create issue in a different rig |
+| `--prefix` | Create issue in rig by prefix |
+| `--labels`, `-l` | Labels (comma-separated) |
+| `--assignee`, `-a` | Assignee |
+| `--notes` | Additional notes |
+| `--design` | Design notes |
 | `--parent <id>` | Set parent bead for hierarchical tracking |
 | `--convoy <id>` | Add to an existing convoy |
+| `--silent` | Output only the issue ID |
+| `--ephemeral` | Create as ephemeral |
 
 **Example:**
 
 ```bash
-bd create --title "Fix login bug" --type bug --priority high
+bd create --title "Fix login bug" --type bug --priority P0
 # Created: gt-abc12
 
 bd create --title "Add email validation" --type feature --description "Validate email format on registration form" --rig myproject
 # Created: gt-def34
 
-bd create --title "Auth epic" --type epic
+bd create --title "Auth epic" --type epic --labels "auth,security"
 # Created: gt-epc01
 ```
 
@@ -514,13 +534,17 @@ Synchronize the beads database.
 bd sync [options]
 ```
 
-**Description:** Syncs the local beads SQLite database with the git-backed storage. Ensures all beads are consistent across agents and workspaces.
+**Description:** Exports the beads database to JSONL for git synchronization. Ensures all beads are consistent across agents and workspaces.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--force` | Force full resync |
+| `--full` | Force full sync (legacy full sync behavior) |
+| `--flush-only` | Only flush pending changes |
+| `--import` | Import beads from JSONL |
+| `--import-only` | Import only, do not export |
+| `--status` | Show sync status |
 | `--rig <name>` | Sync a specific rig's beads only |
 
 **Example:**
@@ -528,6 +552,8 @@ bd sync [options]
 ```bash
 bd sync
 bd sync --rig myproject
+bd sync --flush-only
+bd sync --import
 ```
 
 ---

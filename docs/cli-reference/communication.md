@@ -63,26 +63,34 @@ m-003  mayor       30m ago  .      New convoy assigned: hq-cv-002
 Send a message to another agent.
 
 ```bash
-gt mail send <recipient> [options]
+gt mail send <address> [flags]
 ```
 
 **Description:** Sends an asynchronous message to another agent's mailbox. The recipient will see it on their next inbox check.
+
+**Address formats:**
+
+| Format | Target |
+|--------|--------|
+| `mayor/` | Mayor inbox |
+| `<rig>/witness` | Rig's Witness |
+| `<rig>/refinery` | Rig's Refinery |
+| `<rig>/<polecat>` | Polecat |
+| `<rig>/crew/<name>` | Crew worker |
+| `--human` | Special: human overseer |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--subject <text>` | Message subject |
-| `--body <text>` | Message body |
-| `--priority <level>` | Message priority: `high`, `normal`, `low` |
-| `--channel <name>` | Send to a named channel instead of an agent |
-| `--attach <file>` | Attach a file to the message |
+| `-s`, `--subject <text>` | Message subject |
+| `-m`, `--body <text>` | Message body |
 
 **Example:**
 
 ```bash
-gt mail send mayor --subject "Need guidance" --body "Blocked on API design decision for auth module"
-gt mail send deacon --subject "Health alert" --body "Refinery queue backing up" --priority high
+gt mail send mayor/ -s "Need guidance" -m "Blocked on API design decision for auth module"
+gt mail send greenplace/witness -s "Health alert" -m "Refinery queue backing up"
 ```
 
 ---
@@ -105,26 +113,38 @@ gt mail read m-001
 
 ---
 
-### `gt mail mark`
+### `gt mail mark-read`
 
-Mark messages as read or unread.
+Mark messages as read.
 
 ```bash
-gt mail mark <message-id>... <status>
+gt mail mark-read <message-id>...
 ```
 
-**Description:** Changes the read status of one or more messages.
-
-**Valid statuses:** `read`, `unread`
+**Description:** Marks one or more messages as read.
 
 **Example:**
 
 ```bash
-# Mark as read
-gt mail mark m-001 m-002 read
+gt mail mark-read m-001 m-002
+```
 
-# Mark as unread
-gt mail mark m-003 unread
+---
+
+### `gt mail mark-unread`
+
+Mark messages as unread.
+
+```bash
+gt mail mark-unread <message-id>...
+```
+
+**Description:** Marks one or more messages as unread.
+
+**Example:**
+
+```bash
+gt mail mark-unread m-003
 ```
 
 ---
@@ -316,33 +336,192 @@ gt mail announces --since 24h
 
 ---
 
+### `gt mail archive`
+
+Archive messages.
+
+```bash
+gt mail archive <message-id>...
+```
+
+**Description:** Archives one or more messages, removing them from the active inbox without deleting them.
+
+**Example:**
+
+```bash
+gt mail archive m-001 m-002
+```
+
+---
+
+### `gt mail claim`
+
+Claim a message from a queue.
+
+```bash
+gt mail claim <queue>
+```
+
+**Description:** Claims the next available message from a shared queue for processing. The message is locked to the claiming agent until released.
+
+**Example:**
+
+```bash
+gt mail claim work-queue
+```
+
+---
+
+### `gt mail release`
+
+Release a claimed queue message.
+
+```bash
+gt mail release <message-id>
+```
+
+**Description:** Releases a previously claimed message back into the queue so another agent can pick it up.
+
+**Example:**
+
+```bash
+gt mail release m-005
+```
+
+---
+
+### `gt mail clear`
+
+Clear all messages from an inbox.
+
+```bash
+gt mail clear
+```
+
+**Description:** Removes all messages from the current agent's inbox.
+
+**Example:**
+
+```bash
+gt mail clear
+```
+
+---
+
+### `gt mail delete`
+
+Delete messages.
+
+```bash
+gt mail delete <message-id>...
+```
+
+**Description:** Permanently deletes one or more messages from the mailbox.
+
+**Example:**
+
+```bash
+gt mail delete m-001 m-002
+```
+
+---
+
+### `gt mail group`
+
+Manage mail groups.
+
+```bash
+gt mail group [name] [flags]
+```
+
+**Description:** Create and manage mail groups for sending messages to multiple agents at once.
+
+**Example:**
+
+```bash
+gt mail group
+gt mail group my-team
+```
+
+---
+
+### `gt mail hook`
+
+Attach mail to your hook.
+
+```bash
+gt mail hook [flags]
+```
+
+**Description:** Attaches incoming mail to the agent's hook for automated processing.
+
+**Example:**
+
+```bash
+gt mail hook
+```
+
+---
+
+### `gt mail check`
+
+Check for new mail.
+
+```bash
+gt mail check
+```
+
+**Description:** Checks for new incoming mail. Primarily used by hooks to poll for messages.
+
+**Example:**
+
+```bash
+gt mail check
+```
+
+---
+
 ## Notifications & Broadcasts
 
 ### `gt nudge`
 
-Send a synchronous notification to an agent.
+Send a synchronous message to a worker.
 
 ```bash
-gt nudge <target> [options]
+gt nudge <target> [message] [flags]
 ```
 
-**Description:** Unlike mail (async), a nudge is a synchronous message delivery that interrupts the target agent immediately. Used by supervisors to wake up or redirect agents.
+**Description:** Universal synchronous messaging API for Gas Town worker-to-worker communication. Delivers a message directly to any worker's Claude Code session.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <text>` | Nudge message |
-| `--action <action>` | Requested action: `check-hook`, `patrol`, `restart`, `status` |
+| `--message`, `-m` | Message to send |
+| `--force`, `-f` | Send even if target has DND enabled |
+
+**Target formats:**
+
+The target can be specified using full paths or role shortcuts:
+
+| Format | Target |
+|--------|--------|
+| `<rig>/<role>` | Agent by rig and role (e.g., `greenplace/witness`) |
+| `<rig>/<polecat>` | Polecat by rig and name (e.g., `greenplace/furiosa`) |
+| Role shortcuts | `mayor`, `witness`, `refinery`, etc. |
+| Channel syntax | Named channels for group nudges |
 
 **Example:**
 
 ```bash
-# Nudge a polecat to check its hook
-gt nudge polecat/toast --action check-hook
+# Nudge a polecat with a message
+gt nudge greenplace/furiosa "Check your mail"
 
-# Nudge with a message
-gt nudge witness --message "Check polecat alpha, appears stalled" --rig myproject
+# Nudge with the -m flag
+gt nudge greenplace/witness -m "Check polecat alpha, appears stalled"
+
+# Force nudge through DND
+gt nudge greenplace/refinery -m "Urgent: queue backing up" --force
 ```
 
 :::warning
@@ -355,30 +534,36 @@ Use nudges sparingly. They interrupt the target agent's current activity. For no
 
 ### `gt broadcast`
 
-Send a message to all agents.
+Send a message to all workers.
 
 ```bash
-gt broadcast [options]
+gt broadcast <message> [flags]
 ```
 
-**Description:** Sends a message to all agents in the town or all agents in a specific rig. Used for system-wide announcements.
+**Description:** Sends a message to all workers in the town or all workers in a specific rig. Used for system-wide announcements. The message is a positional argument.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <text>` | Broadcast message |
-| `--rig <name>` | Broadcast to a specific rig only |
-| `--priority <level>` | Priority level |
+| `--all` | Include all agents (mayor, witness, etc.), not just workers |
+| `--dry-run` | Show what would be sent without sending |
+| `--rig <name>` | Only broadcast to workers in this rig |
 
 **Example:**
 
 ```bash
-# Town-wide broadcast
-gt broadcast --message "Maintenance window in 30 minutes, save your work"
+# Town-wide broadcast to all workers
+gt broadcast "Maintenance window in 30 minutes, save your work"
 
 # Rig-specific broadcast
-gt broadcast --rig myproject --message "Main branch frozen for release"
+gt broadcast "Main branch frozen for release" --rig myproject
+
+# Include all agents, not just workers
+gt broadcast "System update in progress" --all
+
+# Preview without sending
+gt broadcast "Testing broadcast" --dry-run
 ```
 
 ---
@@ -388,63 +573,69 @@ gt broadcast --rig myproject --message "Main branch frozen for release"
 Toggle do-not-disturb mode.
 
 ```bash
-gt dnd [on|off] [options]
+gt dnd [subcommand]
 ```
 
-**Description:** When enabled, suppresses non-critical notifications and nudges. Critical escalations still come through. Useful during focused work or maintenance.
+**Description:** Controls do-not-disturb mode for the current agent. Without arguments, toggles DND on or off. When enabled, suppresses non-critical notifications and nudges. Critical escalations still come through.
 
-**Options:**
+**Subcommands:**
 
-| Flag | Description |
-|------|-------------|
-| `--duration <time>` | Auto-disable after duration |
-| `--allow <agent>` | Allow messages from specific agent even in DND |
+| Subcommand | Description |
+|------------|-------------|
+| `on` | Enable do-not-disturb |
+| `off` | Disable do-not-disturb |
+| `status` | Show current DND status |
 
 **Example:**
 
 ```bash
+# Toggle DND
+gt dnd
+
 # Enable DND
 gt dnd on
 
-# Enable for 2 hours
-gt dnd on --duration 2h
-
-# Disable
+# Disable DND
 gt dnd off
+
+# Check status
+gt dnd status
 ```
 
 ---
 
 ### `gt notify`
 
-Manage notification preferences.
+Control notification level for the current agent.
 
 ```bash
-gt notify [options]
+gt notify [level]
 ```
 
-**Description:** Configure how and when you receive notifications from Gas Town agents.
+**Description:** Control the notification level for the current agent. Without arguments, shows the current notification level. With an argument, sets the level.
 
-**Options:**
+**Levels:**
 
-| Flag | Description |
-|------|-------------|
-| `--email <address>` | Set email notification address |
-| `--discord <webhook>` | Set Discord webhook URL |
-| `--level <level>` | Minimum notification level: `all`, `high`, `critical` |
-| `--show` | Show current notification settings |
+| Level | Description |
+|-------|-------------|
+| `verbose` | All notifications are shown |
+| `normal` | Standard notification level |
+| `muted` | Suppress all notifications |
 
 **Example:**
 
 ```bash
-# Show current settings
-gt notify --show
+# Show current notification level
+gt notify
 
-# Set email notifications for critical alerts
-gt notify --email you@example.com --level critical
+# Set verbose notifications
+gt notify verbose
 
-# Set Discord webhook
-gt notify --discord https://discord.com/api/webhooks/...
+# Set normal notifications
+gt notify normal
+
+# Mute notifications
+gt notify muted
 ```
 
 ---
@@ -458,41 +649,33 @@ Escalations are priority-routed alerts for issues that need human intervention o
 Create a new escalation.
 
 ```bash
-gt escalate [options]
+gt escalate [description] [flags]
 ```
 
-**Description:** Creates a priority-routed escalation that travels up the supervisor chain until it reaches an agent authorized to handle it. Severity levels control routing depth.
+**Description:** Creates a priority-routed escalation that travels up the supervisor chain until it reaches an agent authorized to handle it. Severity levels control routing depth. The description is a positional argument.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--severity <level>` | Severity: `P0` (critical), `P1` (high), `P2` (medium), `P3` (low) |
-| `--message <text>` | Escalation description |
-| `--bead <id>` | Associated bead |
-| `--rig <name>` | Associated rig |
-| `--to <agent>` | Direct escalation to a specific agent |
-
-**Routing by severity:**
-
-| Severity | Route |
-|----------|-------|
-| P0 (Critical) | Bead -> Mail:Mayor -> Email:Human -> SMS:Human |
-| P1 (High) | Bead -> Mail:Mayor -> Email:Human |
-| P2 (Medium) | Bead -> Mail:Mayor |
-| P3 (Low) | Bead only |
+| `--severity`, `-s` | Severity level: `critical`, `high`, `medium`, `low` (default "medium") |
+| `--reason`, `-r` | Detailed reason for escalation |
+| `--related` | Related bead ID |
+| `--source` | Source identifier (e.g., `plugin:rebuild-gt`, `patrol:deacon`) |
+| `--dry-run`, `-n` | Show what would be done |
+| `--json` | Output as JSON |
 
 **Example:**
 
 ```bash
 # Critical escalation
-gt escalate --severity P0 --message "Production database migration failed" --rig myproject
+gt escalate "Production database migration failed" --severity critical
 
-# Standard escalation with associated bead
-gt escalate --severity P2 --message "Need design decision for API schema" --bead gt-abc12
+# Medium escalation with reason and related bead
+gt escalate "Need design decision for API schema" -s medium -r "Blocked on auth module" --related gt-abc12
 
-# Direct escalation to Mayor
-gt escalate --to mayor --message "Merge conflicts accumulating faster than resolution"
+# Dry run to preview
+gt escalate "Merge conflicts accumulating" -s high --dry-run
 ```
 
 ---
@@ -502,7 +685,7 @@ gt escalate --to mayor --message "Merge conflicts accumulating faster than resol
 List all active escalations.
 
 ```bash
-gt escalate list [options]
+gt escalate list [flags]
 ```
 
 **Options:**
@@ -511,23 +694,46 @@ gt escalate list [options]
 |------|-------------|
 | `--severity <level>` | Filter by severity |
 | `--status <status>` | Filter: `open`, `acked`, `closed` |
-| `--rig <name>` | Filter by rig |
 | `--json` | Output in JSON format |
 
 **Example:**
 
 ```bash
 gt escalate list
-gt escalate list --severity P0 --status open
+gt escalate list --severity critical --status open
 ```
 
 **Sample output:**
 
 ```
 ID       SEVERITY   STATUS   FROM      AGE    MESSAGE
-esc-001  P0         open     witness   5m     Production DB migration failed
-esc-002  P2         acked    polecat   1h     Need API schema decision
-esc-003  P3         open     refinery  30m    Flaky test in auth module
+esc-001  critical   open     witness   5m     Production DB migration failed
+esc-002  medium     acked    polecat   1h     Need API schema decision
+esc-003  low        open     refinery  30m    Flaky test in auth module
+```
+
+---
+
+### `gt escalate show`
+
+Show details of a specific escalation.
+
+```bash
+gt escalate show <escalation-id> [flags]
+```
+
+**Description:** Displays the full details of an escalation, including its history, status changes, and associated metadata.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output in JSON format |
+
+**Example:**
+
+```bash
+gt escalate show esc-001
 ```
 
 ---

@@ -20,10 +20,6 @@ Global flags available on all commands:
 |------|-------------|
 | `--help`, `-h` | Show help for any command |
 | `--version`, `-v` | Print the Gas Town version |
-| `--verbose` | Enable verbose output |
-| `--quiet`, `-q` | Suppress non-essential output |
-| `--json` | Output in JSON format (where supported) |
-| `--rig <name>` | Target a specific rig (overrides auto-detection) |
 
 ## Command Categories
 

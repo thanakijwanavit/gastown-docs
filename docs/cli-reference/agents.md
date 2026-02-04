@@ -14,48 +14,45 @@ Commands for starting, stopping, monitoring, and managing the Gas Town agent hie
 
 ### `gt agents`
 
-List all agents and their current status.
+Display a popup menu of core Gas Town agent sessions.
 
 ```bash
 gt agents [options]
 ```
 
-**Description:** Displays all agents across the town, organized by role. Shows running status, current activity, and resource usage.
+**Alias:** `gt ag`
+
+**Description:** Display a popup menu of core Gas Town agent sessions. Shows Mayor, Deacon, Witnesses, Refineries, and Crew workers. Polecats are hidden (use `gt polecat list` to see them).
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Filter to agents in a specific rig |
-| `--role <role>` | Filter to a specific role (mayor, deacon, witness, etc.) |
-| `--running` | Show only running agents |
-| `--json` | Output in JSON format |
+| `--all`, `-a` | Include polecats in the menu |
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt agents check` | Check for identity collisions |
+| `gt agents fix` | Fix identity collisions |
+| `gt agents list` | List agent sessions (no popup) |
+| `gt agents state` | Get or set operational state |
 
 **Example:**
 
 ```bash
-# List all agents
+# Open the agent session popup menu
 gt agents
 
-# Show only running agents
-gt agents --running
+# Include polecats in the menu
+gt agents --all
 
-# Show agents for a specific rig
-gt agents --rig myproject
-```
+# List agent sessions without the popup
+gt agents list
 
-**Sample output:**
-
-```
-ROLE        RIG          STATUS     PID    AGE
-mayor       (town)       running    1234   2h
-deacon      (town)       running    1235   2h
-witness     myproject    running    1240   1h
-witness     docs         running    1241   1h
-refinery    myproject    running    1250   1h
-polecat     myproject    running    1260   15m   [toast] gt-abc12
-polecat     myproject    running    1261   10m   [alpha] gt-def34
-dog         (town)       idle       -      -     [boot]
+# Check for identity collisions
+gt agents check
 ```
 
 ---
@@ -180,7 +177,9 @@ Active convoys: 2
 
 ## Deacon
 
-The Deacon is the health monitoring supervisor for the town. It runs patrol cycles, monitors all Witnesses, and handles lifecycle requests.
+The Deacon ("daemon beacon") is the only agent that receives mechanical heartbeats from the daemon. It monitors system health across all rigs, watches all Witnesses, manages Dogs, and handles lifecycle requests.
+
+**Alias:** `gt dea`
 
 ### `gt deacon start`
 
@@ -243,17 +242,121 @@ gt deacon status
 
 ---
 
+### `gt deacon attach`
+
+Attach to the Deacon session.
+
+```bash
+gt deacon attach
+```
+
+---
+
+### `gt deacon restart`
+
+Restart the Deacon session.
+
+```bash
+gt deacon restart [options]
+```
+
+---
+
+### `gt deacon heartbeat`
+
+Update the Deacon heartbeat.
+
+```bash
+gt deacon heartbeat
+```
+
+---
+
+### `gt deacon pause` / `gt deacon resume`
+
+Pause or resume patrol actions.
+
+```bash
+gt deacon pause
+gt deacon resume
+```
+
+---
+
+### `gt deacon cleanup-orphans`
+
+Clean up orphaned claude subagent processes.
+
+```bash
+gt deacon cleanup-orphans
+```
+
+---
+
+### `gt deacon force-kill`
+
+Force-kill an unresponsive agent session.
+
+```bash
+gt deacon force-kill <session>
+```
+
+---
+
+### `gt deacon health-check` / `gt deacon health-state`
+
+Health monitoring commands.
+
+```bash
+gt deacon health-check
+gt deacon health-state
+```
+
+---
+
+### `gt deacon stale-hooks`
+
+Find and unhook stale hooked beads.
+
+```bash
+gt deacon stale-hooks
+```
+
+---
+
+### `gt deacon zombie-scan`
+
+Find zombie Claude processes.
+
+```bash
+gt deacon zombie-scan
+```
+
+---
+
+### `gt deacon trigger-pending`
+
+Trigger pending polecat spawns.
+
+```bash
+gt deacon trigger-pending
+```
+
+---
+
 ## Witness
 
 Witnesses are per-rig supervisors that monitor polecats, detect stalls, and manage worker lifecycle within a single rig.
 
 ### `gt witness start`
 
-Start a Witness agent for a rig.
+Start a Witness agent for the current rig.
 
 ```bash
-gt witness start <rig> [options]
+gt witness start [options]
 ```
+
+**Description:** Starts the Witness for the current rig (auto-detected from working directory). Does not take a `<rig>` argument.
 
 **Options:**
 
@@ -265,7 +368,7 @@ gt witness start <rig> [options]
 **Example:**
 
 ```bash
-gt witness start myproject
+gt witness start
 ```
 
 ---
@@ -275,8 +378,10 @@ gt witness start myproject
 Stop a Witness agent.
 
 ```bash
-gt witness stop <rig> [options]
+gt witness stop [options]
 ```
+
+**Description:** Stops the Witness for the current rig (auto-detected from working directory). Does not take a `<rig>` argument.
 
 **Options:**
 
@@ -287,7 +392,27 @@ gt witness stop <rig> [options]
 **Example:**
 
 ```bash
-gt witness stop myproject
+gt witness stop
+```
+
+---
+
+### `gt witness attach`
+
+Attach to the Witness session.
+
+```bash
+gt witness attach
+```
+
+---
+
+### `gt witness restart`
+
+Restart the Witness session.
+
+```bash
+gt witness restart [options]
 ```
 
 ---
@@ -319,6 +444,8 @@ gt witness status --all
 ## Refinery
 
 The Refinery processes the merge queue for a rig, rebasing, validating, and merging pull requests onto the main branch.
+
+**Alias:** `gt ref`
 
 ### `gt refinery start`
 
@@ -359,6 +486,26 @@ gt refinery stop <rig> [options]
 
 ---
 
+### `gt refinery attach`
+
+Attach to the Refinery session.
+
+```bash
+gt refinery attach
+```
+
+---
+
+### `gt refinery restart`
+
+Restart the Refinery session.
+
+```bash
+gt refinery restart [options]
+```
+
+---
+
 ### `gt refinery status`
 
 Show Refinery status for a rig.
@@ -376,9 +523,71 @@ gt refinery status [rig] [options]
 
 ---
 
+### `gt refinery blocked`
+
+List MRs blocked by open tasks.
+
+```bash
+gt refinery blocked
+```
+
+---
+
+### `gt refinery claim`
+
+Claim an MR for processing.
+
+```bash
+gt refinery claim <mr>
+```
+
+---
+
+### `gt refinery queue`
+
+Show the merge queue.
+
+```bash
+gt refinery queue
+```
+
+---
+
+### `gt refinery ready`
+
+List MRs ready for processing.
+
+```bash
+gt refinery ready
+```
+
+---
+
+### `gt refinery release`
+
+Release a claimed MR.
+
+```bash
+gt refinery release <mr>
+```
+
+---
+
+### `gt refinery unclaimed`
+
+List unclaimed MRs.
+
+```bash
+gt refinery unclaimed
+```
+
+---
+
 ## Polecats
 
 Polecats are ephemeral worker agents. They spawn, execute a single task, submit their work, and exit. Managed by the Witness.
+
+**Aliases:** `gt polecat`, `gt polecats`
 
 ### `gt polecat list`
 
@@ -524,9 +733,67 @@ gt polecat stale --age 15m
 
 ---
 
+### `gt polecat check-recovery`
+
+Check if a polecat needs recovery vs is safe to nuke.
+
+```bash
+gt polecat check-recovery <name>
+```
+
+---
+
+### `gt polecat git-state`
+
+Show git state for pre-kill verification.
+
+```bash
+gt polecat git-state <name>
+```
+
+---
+
+### `gt polecat identity`
+
+Manage polecat identities.
+
+```bash
+gt polecat identity [options]
+```
+
+---
+
+### `gt polecat remove`
+
+Remove polecats from a rig.
+
+```bash
+gt polecat remove <name> [options]
+```
+
+---
+
+### `gt polecat sync`
+
+Sync beads for a polecat.
+
+```bash
+gt polecat sync <name>
+```
+
+:::note
+
+This subcommand is deprecated with the Dolt backend.
+
+:::
+
+---
+
 ## Dogs
 
-Dogs are reusable agents that handle infrastructure and cross-rig tasks. They persist between tasks, unlike ephemeral polecats.
+Dogs are reusable workers for infrastructure and cleanup. Cats build features (one rig, ephemeral). Dogs clean up messes (cross-rig, reusable).
+
+**Alias:** `gt dogs`
 
 ### `gt dog list`
 
@@ -596,36 +863,69 @@ gt dog add <name> [options]
 | Flag | Description |
 |------|-------------|
 | `--agent <runtime>` | Agent runtime for this dog |
-| `--role <purpose>` | Dog's specialization (e.g., `triage`, `infrastructure`) |
 
 **Example:**
 
 ```bash
-gt dog add fetch --role infrastructure
+gt dog add fetch
 gt dog add lint --agent claude
+```
+
+---
+
+### `gt dog call`
+
+Wake idle dog(s) for work.
+
+```bash
+gt dog call [name]
+```
+
+---
+
+### `gt dog dispatch`
+
+Dispatch plugin execution to a dog.
+
+```bash
+gt dog dispatch <name> <plugin>
+```
+
+---
+
+### `gt dog done`
+
+Mark dog as done and return to idle.
+
+```bash
+gt dog done <name>
+```
+
+---
+
+### `gt dog remove`
+
+Remove dogs from the kennel.
+
+```bash
+gt dog remove <name> [options]
 ```
 
 ---
 
 ## Boot
 
-The Boot agent is a special triage dog that spawns to assess and route incoming work.
+Boot is a special dog that runs fresh on each daemon tick. It observes the system state and decides whether to start/wake/nudge/interrupt the Deacon.
 
 ### `gt boot spawn`
 
-Spawn the Boot triage agent.
+Spawn the Boot agent.
 
 ```bash
-gt boot spawn [options]
+gt boot spawn
 ```
 
-**Description:** Starts the Boot dog to perform triage on pending work items, assess complexity, and recommend assignment strategies.
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--attach` | Attach to the Boot session |
+**Description:** Starts the Boot dog to observe system state and decide whether to start, wake, nudge, or interrupt the Deacon.
 
 **Example:**
 
@@ -651,6 +951,16 @@ gt boot status [options]
 
 ---
 
+### `gt boot triage`
+
+Run Boot triage.
+
+```bash
+gt boot triage
+```
+
+---
+
 ## Crew
 
 Crew members are persistent workspaces for human developers. They get their own git clone within a rig and can run agent sessions.
@@ -660,8 +970,10 @@ Crew members are persistent workspaces for human developers. They get their own 
 Start an agent session in a crew workspace.
 
 ```bash
-gt crew start <rig> <member> [options]
+gt crew start <name> [options]
 ```
+
+**Description:** Starts a crew agent session. The rig is auto-detected from the current working directory.
 
 **Options:**
 
@@ -673,7 +985,7 @@ gt crew start <rig> <member> [options]
 **Example:**
 
 ```bash
-gt crew start myproject dave --attach
+gt crew start dave --attach
 ```
 
 ---
@@ -683,7 +995,7 @@ gt crew start myproject dave --attach
 Stop a crew agent session.
 
 ```bash
-gt crew stop <rig> <member> [options]
+gt crew stop <name> [options]
 ```
 
 **Options:**
@@ -699,23 +1011,22 @@ gt crew stop <rig> <member> [options]
 Add a new crew member workspace to a rig.
 
 ```bash
-gt crew add <rig> <name> [options]
+gt crew add <name> [options]
 ```
 
-**Description:** Creates a new persistent git clone for a human developer within the specified rig.
+**Description:** Creates a new persistent git clone for a human developer within the current rig.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--branch <name>` | Check out a specific branch |
 | `--agent <runtime>` | Default agent runtime for this crew member |
 
 **Example:**
 
 ```bash
-gt crew add myproject dave
-gt crew add myproject emma --branch develop
+gt crew add dave
+gt crew add emma
 ```
 
 ---
@@ -749,13 +1060,13 @@ gt crew list --all
 Show what a crew member is currently working on.
 
 ```bash
-gt crew at <rig> <member>
+gt crew at <name>
 ```
 
 **Example:**
 
 ```bash
-gt crew at myproject dave
+gt crew at dave
 ```
 
 ---
@@ -765,7 +1076,7 @@ gt crew at myproject dave
 Remove a crew member workspace.
 
 ```bash
-gt crew remove <rig> <name> [options]
+gt crew remove <name> [options]
 ```
 
 **Options:**
@@ -778,7 +1089,7 @@ gt crew remove <rig> <name> [options]
 **Example:**
 
 ```bash
-gt crew remove myproject dave
+gt crew remove dave
 ```
 
 ---
@@ -788,7 +1099,7 @@ gt crew remove myproject dave
 Refresh a crew workspace by pulling latest changes.
 
 ```bash
-gt crew refresh <rig> <member> [options]
+gt crew refresh <name> [options]
 ```
 
 **Options:**
@@ -801,7 +1112,7 @@ gt crew refresh <rig> <member> [options]
 **Example:**
 
 ```bash
-gt crew refresh myproject dave --rebase
+gt crew refresh dave --rebase
 ```
 
 ---
@@ -811,7 +1122,7 @@ gt crew refresh myproject dave --rebase
 Restart a crew agent session.
 
 ```bash
-gt crew restart <rig> <member> [options]
+gt crew restart <name> [options]
 ```
 
 **Description:** Stops and restarts the agent session for a crew member, preserving hook state and context.
@@ -825,5 +1136,35 @@ gt crew restart <rig> <member> [options]
 **Example:**
 
 ```bash
-gt crew restart myproject dave
+gt crew restart dave
+```
+
+---
+
+### `gt crew pristine`
+
+Sync crew workspaces with remote.
+
+```bash
+gt crew pristine [name]
+```
+
+---
+
+### `gt crew rename`
+
+Rename a crew workspace.
+
+```bash
+gt crew rename <old-name> <new-name>
+```
+
+---
+
+### `gt crew status`
+
+Show detailed workspace status.
+
+```bash
+gt crew status [name]
 ```

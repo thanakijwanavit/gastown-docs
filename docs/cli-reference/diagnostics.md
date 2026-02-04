@@ -14,158 +14,158 @@ Commands for monitoring, auditing, and troubleshooting Gas Town. These tools pro
 
 ### `gt activity`
 
-Show recent system activity.
+Emit and view activity events.
 
 ```bash
-gt activity [options]
+gt activity [command]
+gt activity emit [options]
 ```
 
-**Description:** Displays a chronological log of significant events across the town, including agent starts/stops, work assignments, completions, escalations, and merges.
+**Description:** Emit and view activity events for the Gas Town activity feed. Events are written to `~/gt/.events.jsonl` and can be viewed with `gt feed`.
 
-**Options:**
+**Subcommands:**
 
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Filter to a specific rig |
-| `--agent <name>` | Filter to a specific agent |
-| `--type <type>` | Filter by event type: `work`, `agent`, `merge`, `escalation`, `mail` |
-| `--since <duration>` | Show events since (e.g., `1h`, `30m`, `1d`) |
-| `--limit <n>` | Maximum events to show |
-| `--json` | Output in JSON format |
+| Command | Description |
+|---------|-------------|
+| `emit` | Emit an activity event |
 
 **Example:**
 
 ```bash
-# Recent activity
+# Emit an activity event
+gt activity emit
+
+# View activity events
 gt activity
-
-# Last hour of work events
-gt activity --type work --since 1h
-
-# Activity for a specific rig
-gt activity --rig myproject --limit 50
-```
-
-**Sample output:**
-
-```
-TIME       TYPE        AGENT           EVENT
-14:30      work        polecat/toast   Completed gt-abc12 (fix/login-bug)
-14:28      merge       refinery        Merged mr-001 to main
-14:25      agent       witness         Started patrol cycle
-14:20      work        polecat/alpha   Started gt-def34 (feat/email-validation)
-14:15      escalation  polecat/bravo   Escalated gt-ghi56 (P2: need design input)
 ```
 
 ---
 
 ### `gt audit`
 
-Generate an audit report.
+Query provenance data.
 
 ```bash
 gt audit [options]
 ```
 
-**Description:** Produces a comprehensive audit of system state, including agent uptime, work throughput, error rates, and resource usage. Useful for periodic reviews and compliance.
+**Description:** Queries provenance data across git commits, beads, and events. Provides an audit trail of who did what, when, and why across the workspace.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--since <duration>` | Audit period (default: `24h`) |
-| `--rig <name>` | Audit a specific rig |
-| `--format <fmt>` | Output format: `text`, `json`, `csv` |
-| `--output <file>` | Write report to a file |
+| `--actor <name>` | Filter by actor (agent address or partial match) |
+| `--since <duration>` | Show events since duration (e.g., `1h`, `24h`, `7d`) |
+| `--limit`, `-n <count>` | Maximum number of entries to show (default: `50`) |
+| `--json` | Output as JSON |
 
 **Example:**
 
 ```bash
-# Daily audit
+# Recent audit trail
 gt audit
 
-# Weekly audit for a specific rig
-gt audit --since 7d --rig myproject --format json
+# Audit trail for a specific actor
+gt audit --actor polecat/toast
 
-# Export to file
-gt audit --output audit-report.json --format json
+# Last 7 days, limited results
+gt audit --since 7d --limit 20
+
+# JSON output for scripting
+gt audit --json
 ```
 
 ---
 
 ### `gt feed`
 
-Watch the live activity feed.
+Real-time activity dashboard.
 
 ```bash
 gt feed [options]
 ```
 
-**Description:** Displays a real-time stream of system events. Similar to `gt activity` but shows events as they happen. Press `Ctrl+C` to exit.
+**Description:** Opens a real-time TUI dashboard showing the activity feed. The dashboard includes an agent tree, convoy panel, and event stream. Press `Ctrl+C` to exit.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Filter to a specific rig |
+| `--follow`, `-f` | Stream events in real-time (default) |
+| `--no-follow` | Show events once and exit |
+| `--plain` | Use plain text output instead of TUI |
+| `--window`, `-w` | Open in dedicated tmux window |
+| `--since <duration>` | Show events since duration (e.g., `1h`, `30m`) |
+| `--rig <name>` | Run from specific rig's beads directory |
+| `--limit`, `-n <count>` | Maximum number of events (default: `100`) |
+| `--mol <id>` | Filter by molecule/issue ID prefix |
 | `--type <type>` | Filter by event type |
-| `--quiet` | Show only significant events |
 
 **Example:**
 
 ```bash
-# Watch all events
+# Open the TUI dashboard
 gt feed
 
-# Watch a specific rig
-gt feed --rig myproject
+# Plain text output, no follow
+gt feed --plain --no-follow
 
-# Watch only work and merge events
-gt feed --type work,merge
+# Open in a dedicated tmux window
+gt feed --window
+
+# Filter by molecule
+gt feed --mol gt-abc12
+
+# Show events from the last hour for a specific rig
+gt feed --since 1h --rig myproject
 ```
 
 ---
 
 ### `gt trail`
 
-Show the execution trail for a specific bead or agent.
+Show recent activity in the workspace.
 
 ```bash
-gt trail <target> [options]
+gt trail [command] [options]
 ```
 
-**Description:** Traces the full lifecycle of a bead or agent, showing every state change, assignment, message, and action in chronological order.
+**Aliases:** `recent`, `recap`
+
+**Description:** Show recent activity in the workspace. Without a subcommand, shows recent commits from agents.
+
+**Subcommands:**
+
+| Command | Description |
+|---------|-------------|
+| `commits` | Show recent commits |
+| `beads` | Show recent bead activity |
+| `hooks` | Show recent hook activity |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--json` | Output in JSON format |
-| `--verbose` | Include full message content |
+| `--since <duration>` | Show activity since duration (e.g., `1h`, `24h`) |
+| `--limit <n>` | Maximum number of entries to show |
+| `--json` | Output as JSON |
+| `--all` | Show all entries |
 
 **Example:**
 
 ```bash
-# Trail a bead
-gt trail gt-abc12
+# Recent commits from agents
+gt trail
 
-# Trail an agent
-gt trail polecat/toast
-```
+# Recent bead activity
+gt trail beads
 
-**Sample output (bead trail):**
+# Recent hooks, last 24 hours
+gt trail hooks --since 24h
 
-```
-gt-abc12: Fix login redirect loop
-  14:00  created     by mayor          priority=high type=bug
-  14:05  assigned    to myproject      via gt sling
-  14:05  hooked      on polecat/toast  branch=fix/login-bug
-  14:10  started     by polecat/toast
-  14:25  committed   4 files changed
-  14:28  done        by polecat/toast  exit=COMPLETED
-  14:28  submitted   mr-001            to merge queue
-  14:30  merged      to main           by refinery
-  14:30  closed      auto
+# Show all recent commits as JSON
+gt trail commits --all --json
 ```
 
 ---
@@ -219,9 +219,11 @@ gt doctor [options]
 
 | Flag | Description |
 |------|-------------|
-| `--fix` | Attempt to fix detected issues |
-| `--verbose` | Show detailed check results |
-| `--json` | Output in JSON format |
+| `--fix` | Attempt to automatically fix issues |
+| `--verbose`, `-v` | Show detailed output |
+| `--rig <name>` | Check specific rig only |
+| `--restart-sessions` | Restart patrol sessions when fixing |
+| `--slow [threshold]` | Highlight slow checks (optional threshold) |
 
 **Example:**
 
@@ -231,6 +233,12 @@ gt doctor
 
 # Run and attempt fixes
 gt doctor --fix
+
+# Verbose check for a specific rig
+gt doctor --verbose --rig myproject
+
+# Fix and restart sessions
+gt doctor --fix --restart-sessions
 ```
 
 **Sample output:**
@@ -239,20 +247,15 @@ gt doctor --fix
 Gas Town Doctor
 ===============
 
-[OK]  Go version: 1.23.4
-[OK]  Git version: 2.43.0
-[OK]  Beads (bd) version: 0.44.2
-[OK]  SQLite3 available
-[OK]  Tmux version: 3.4
+[OK]  Git version
+[OK]  Tmux version
 [OK]  Claude Code available
 [OK]  Workspace structure valid
 [OK]  Beads database integrity
+[OK]  Sessions healthy
 [WARN] Stale polecat worktree: myproject/polecats/toast (2d old)
-[OK]  Daemon running (PID 1200)
-[OK]  Mayor session active
-[OK]  Deacon session active
 
-11 checks passed, 1 warning, 0 errors
+6 checks passed, 1 warning, 0 errors
 ```
 
 :::tip
@@ -265,82 +268,76 @@ Run `gt doctor` after installation, after upgrading Gas Town, or whenever someth
 
 ### `gt dashboard`
 
-Display an interactive system dashboard.
+Start the convoy tracking web dashboard.
 
 ```bash
 gt dashboard [options]
 ```
 
-**Description:** Opens a terminal-based dashboard showing real-time status of all rigs, agents, convoys, merge queues, and recent activity. Provides a bird's-eye view of the entire town.
+**Description:** Start a web server that displays the convoy tracking dashboard. The dashboard shows real-time convoy status with progress tracking and auto-refresh via htmx.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Focus dashboard on a specific rig |
-| `--refresh <seconds>` | Refresh interval (default: `5`) |
+| `--port <port>` | HTTP port to listen on (default: `8080`) |
+| `--open` | Open browser automatically |
 
 **Example:**
 
 ```bash
+# Start the dashboard on default port
 gt dashboard
-gt dashboard --rig myproject --refresh 10
+
+# Start on a custom port and open browser
+gt dashboard --port 3000 --open
 ```
 
 ---
 
 ### `gt costs`
 
-Show resource usage and cost metrics.
+Display Claude Code session costs.
 
 ```bash
-gt costs [options]
+gt costs [command] [options]
 ```
 
-**Description:** Displays token usage, API costs, agent session time, and other resource metrics. Helps track spending across agents and rigs.
+**Description:** Display costs for Claude Code sessions in Gas Town. Costs are calculated from Claude Code transcript files.
+
+**Subcommands:**
+
+| Command | Description |
+|---------|-------------|
+| `record` | Record cost data from transcripts |
+| `digest` | Generate a cost digest |
+| `migrate` | Migrate cost data format |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--since <duration>` | Time period (default: `24h`) |
-| `--rig <name>` | Filter by rig |
-| `--agent <name>` | Filter by agent |
-| `--format <fmt>` | Output format: `text`, `json`, `csv` |
-| `--group-by <field>` | Group by: `rig`, `agent`, `role`, `hour` |
+| `--today` | Show today's total from session events |
+| `--week` | Show this week's total |
+| `--by-rig` | Show breakdown by rig |
+| `--by-role` | Show breakdown by role |
+| `--json` | Output as JSON |
+| `--verbose`, `-v` | Show debug output |
 
 **Example:**
 
 ```bash
-# Daily costs
-gt costs
+# Today's costs
+gt costs --today
 
-# Weekly costs by rig
-gt costs --since 7d --group-by rig
+# This week's costs broken down by rig
+gt costs --week --by-rig
 
-# Costs for a specific agent
-gt costs --agent polecat/toast
-```
+# Costs broken down by role
+gt costs --by-role
 
-**Sample output:**
-
-```
-Gas Town Costs (last 24h)
-=========================
-
-Total tokens: 2,450,000 (input: 1,800,000 / output: 650,000)
-Estimated cost: $12.35
-
-By rig:
-  myproject    $8.20    (66%)
-  docs         $2.15    (17%)
-  backend      $2.00    (16%)
-
-By role:
-  polecats     $9.50    (77%)
-  refinery     $1.85    (15%)
-  mayor        $0.60    (5%)
-  other        $0.40    (3%)
+# JSON output for scripting
+gt costs --today --json
 ```
 
 ---
@@ -511,38 +508,31 @@ Verify orphans are truly orphaned before killing. Use `gt orphans procs` first t
 
 ### `gt peek`
 
-Peek at an agent's current state without interrupting it.
+Capture recent terminal output from an agent session.
 
 ```bash
-gt peek <agent> [options]
+gt peek <rig/polecat> [count] [options]
 ```
 
-**Description:** Non-invasively inspects what an agent is currently doing, including its hook state, recent activity, and resource usage. Does not send any messages to the agent.
+**Description:** Capture and display recent terminal output from an agent session. Ergonomic alias for `gt session capture`.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--json` | Output in JSON format |
+| `--lines`, `-n <count>` | Number of lines to capture (default: `100`) |
 
 **Example:**
 
 ```bash
-gt peek polecat/toast
-gt peek witness --rig myproject
-gt peek mayor
-```
+# Capture last 100 lines from an agent
+gt peek greenplace/furiosa
 
-**Sample output:**
+# Capture last 50 lines
+gt peek greenplace/furiosa 50
 
-```
-Peek: polecat/toast (myproject)
-  Status: running
-  Hook: gt-abc12 "Fix login redirect loop"
-  Last activity: 2m ago (editing src/auth/callback.ts)
-  Session: sess-xyz789
-  Commits: 3 (uncommitted changes: 2 files)
-  Branch: fix/login-bug
+# Capture with explicit line count flag
+gt peek greenplace/furiosa --lines 200
 ```
 
 ---
