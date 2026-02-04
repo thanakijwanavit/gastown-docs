@@ -38,6 +38,18 @@ Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name
 | [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt status` |
 | [Configuration](configuration.md) | Configure agents, accounts, themes, hooks, and plugins | `gt config`, `gt account`, `gt theme`, `gt hooks`, `gt plugin` |
 
+## Command Deep Dives
+
+Comprehensive reference for frequently used commands with all flags, subcommands, and examples:
+
+| Command | Description |
+|---------|-------------|
+| [`gt sling`](sling.md) | Assign work to agents and rigs, with formula support and batch dispatch |
+| [`gt refinery`](refinery-commands.md) | Manage the per-rig merge queue processor |
+| [`gt polecat`](polecat-commands.md) | Manage polecat lifecycle: list, nuke, stale detection, identities |
+| [`gt nudge`](nudge.md) | Send synchronous messages to running agent sessions |
+| [`gt session`](session-commands.md) | Manage tmux sessions: start, stop, attach, capture output |
+
 ## Related Tools
 
 Gas Town integrates with the **Beads** issue tracker (`bd` CLI). Beads commands are documented in the [Work Management](work.md) section alongside `gt` work commands.
