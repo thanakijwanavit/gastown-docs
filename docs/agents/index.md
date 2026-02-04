@@ -85,10 +85,10 @@ graph TD
 
 | Property | Mayor | Deacon | Witness | Refinery | Polecats | Dogs | Crew | Boot |
 |----------|-------|--------|---------|----------|----------|------|------|------|
-| **Receives mail** | Yes | Yes | Yes | Yes | Yes | No | No | No |
-| **Receives nudges** | Yes | Yes | Yes | Yes | Yes | No | No | No |
+| **Receives mail** | Yes | Yes | Yes | Yes | Yes | No | Yes | No |
+| **Receives nudges** | Yes | Yes | Yes | Yes | Yes | No | Yes | No |
 | **Sends escalations** | To human | To Mayor | To Deacon | To Witness | To Witness | To Deacon | N/A | To Deacon |
-| **Has mailbox** | Yes | Yes | Yes | Yes | Yes | No | No | No |
+| **Has mailbox** | Yes | Yes | Yes | Yes | Yes | No | Yes | No |
 
 ## Supervision Chain
 

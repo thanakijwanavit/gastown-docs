@@ -149,14 +149,14 @@ Each Dog gets its own subdirectory for task context and working files.
 | Command | Description |
 |---------|-------------|
 | `gt dog list` | List all active dogs |
-| `gt dog spawn` | Manually spawn a new dog |
+| `gt dog add <name>` | Create a new dog in the kennel |
 | `gt dog status <id>` | Check a specific dog's status |
 
 ## Tips and Best Practices
 
 :::tip[Let the Deacon Manage Dogs]
 
-Dogs are designed to be managed by the Deacon automatically. Manual dog management (`gt dog spawn`) should be rare and reserved for specific infrastructure emergencies.
+Dogs are designed to be managed by the Deacon automatically. Manual dog management (`gt dog add`) should be rare and reserved for specific infrastructure emergencies.
 
 :::
 
@@ -231,7 +231,7 @@ If infrastructure work is queued but no dogs are available:
 
 ```bash
 gt dog list                  # See active dogs
-gt dog spawn                 # Manually add a dog to the pool
+gt dog add <name>            # Manually add a dog to the pool
 ```
 
 The Deacon should auto-spawn dogs, but manual intervention may be needed if the Deacon is down.
