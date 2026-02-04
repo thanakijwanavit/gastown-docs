@@ -223,10 +223,10 @@ gt mayor start
 gt deacon start
 
 # Start a Witness for a specific rig
-gt witness start --rig myproject
+gt witness start myproject
 
 # Start a Refinery for a specific rig
-gt refinery start --rig myproject
+gt refinery start myproject
 ```
 
 ### Stopping a Specific Agent
@@ -239,10 +239,10 @@ gt mayor stop
 gt deacon stop
 
 # Stop a Witness
-gt witness stop --rig myproject
+gt witness stop myproject
 
 # Stop a Refinery
-gt refinery stop --rig myproject
+gt refinery stop myproject
 ```
 
 ### Restarting an Agent
@@ -268,10 +268,10 @@ When an agent restarts, it runs `gt prime` to reload context. All hook-attached 
 gt mayor attach
 
 # Attach to a Witness
-gt witness attach --rig myproject
+gt witness attach myproject
 
 # Attach to a specific polecat
-gt polecat attach toast --rig myproject
+gt session at myproject/toast
 ```
 
 ---

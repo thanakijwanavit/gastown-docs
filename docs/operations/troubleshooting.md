@@ -69,9 +69,9 @@ gt convoy list
 3. **Restart the agent.** If hooks and state look correct, a session restart often resolves transient issues.
 
     ```bash
-    gt witness restart --rig myproject
+    gt witness restart myproject
     # Or for a fresh start:
-    gt witness restart --rig myproject --fresh
+    gt witness restart myproject --fresh
     ```
 
 :::tip
@@ -201,7 +201,7 @@ gt polecat stale
 
 # Check individual polecat status
 gt polecat list --rig myproject
-gt peek polecat:toast --rig myproject
+gt peek polecat/toast --rig myproject
 ```
 
 **Solutions:**
@@ -216,14 +216,14 @@ gt peek polecat:toast --rig myproject
 2. **Manually nudge the polecat.**
 
     ```bash
-    gt nudge polecat:toast --rig myproject "Check your progress - you appear to be stalled"
+    gt nudge polecat/toast --rig myproject "Check your progress - you appear to be stalled"
     ```
 
 3. **Terminate and respawn.** If the polecat is truly stuck:
 
     ```bash
-    # Stop the polecat
-    gt polecat stop toast --rig myproject
+    # Nuke the polecat (kills session, removes worktree)
+    gt polecat nuke myproject/toast
 
     # Release its work
     gt release gt-a1b2c
@@ -315,7 +315,7 @@ gt mq show <mr-id>
 
     ```bash
     # Attach to the Refinery
-    gt refinery attach --rig myproject
+    gt refinery attach myproject
 
     # Or work from a crew workspace
     cd ~/gt/myproject/crew/yourname
@@ -383,10 +383,10 @@ gt daemon stop && gt daemon start
 
 ```bash
 # Check how long the agent has been running
-gt audit polecat:toast --rig myproject
+gt audit polecat/toast --rig myproject
 
 # Look for signs of context pressure in agent output
-gt peek polecat:toast --rig myproject --lines 50
+gt peek polecat/toast --rig myproject --lines 50
 ```
 
 **Solutions:**
@@ -407,7 +407,7 @@ gt peek polecat:toast --rig myproject --lines 50
     gt nudge witness --rig myproject "Run gt prime to reset context"
 
     # Or restart with fresh context
-    gt witness restart --rig myproject --fresh
+    gt witness restart myproject --fresh
     ```
 
 3. **Prevent the issue.** Large tasks should be broken into smaller beads. If a polecat consistently fills context on a task type, the task decomposition needs improvement.
@@ -452,7 +452,7 @@ tmux list-sessions
     tmux kill-session -t <session-name>
 
     # Restart the agent
-    gt witness start --rig myproject
+    gt witness start myproject
     ```
 
 3. **Configuration errors.** Check rig configuration for invalid settings.
@@ -497,7 +497,7 @@ git log --oneline -5
     git push
 
     # Then stop and respawn
-    gt polecat stop <name> --rig myproject
+    gt polecat nuke myproject/<name>
     gt sling <bead-id> myproject
     ```
 

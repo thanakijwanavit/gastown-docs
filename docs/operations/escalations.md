@@ -381,8 +381,8 @@ A polecat keeps trying the same approach to a problem, failing, and trying again
 # Acknowledge
 gt escalate ack ESC-002 --note "Reviewing stuck polecat"
 
-# Stop the polecat and release its work
-gt polecat stop toast --rig myproject
+# Nuke the polecat and release its work
+gt polecat nuke myproject/toast
 gt release gt-a1b2c
 
 # Add more detail to the bead before re-slinging
@@ -407,11 +407,11 @@ You return to find an escalation about token costs exceeding the daily budget.
 
 ```bash
 # Check what caused the spike
-gt costs --since 12h --by-agent
+gt costs --since 12h --group-by agent
 gt trail --since 12h
 
-# If a runaway agent, stop it
-gt polecat stop <name> --rig myproject
+# If a runaway agent, nuke it
+gt polecat nuke myproject/<name>
 
 # Acknowledge and close
 gt escalate ack ESC-003 --note "Cost spike from runaway polecat"

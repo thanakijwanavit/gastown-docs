@@ -37,11 +37,8 @@ gt feed --rig myproject
 gt feed --type merge
 gt feed --type escalation
 
-# Show only errors and warnings
-gt feed --level warn
-
-# JSON output for piping to other tools
-gt feed --json
+# Show only significant events (suppress noise)
+gt feed --quiet
 ```
 
 Sample output:
@@ -104,7 +101,7 @@ Peek at the most recent output from an agent session without attaching to it.
 gt peek mayor
 
 # Peek at a specific polecat
-gt peek polecat:toast --rig myproject
+gt peek polecat/toast
 
 # Peek at the Witness
 gt peek witness --rig myproject
@@ -146,34 +143,36 @@ Events are stored in `.events.jsonl` at the town level and queryable with standa
 Query the full work history of a specific actor (agent or human).
 
 ```bash
-# Audit a specific agent
-gt audit witness --rig myproject
+# Audit a specific rig
+gt audit --rig myproject
 
-# Audit a polecat by name
-gt audit polecat:toast
+# Audit a specific time range
+gt audit --since 7d
 
-# Audit all work in a time range
-gt audit --since 2025-01-01 --until 2025-01-31
+# Audit with JSON output
+gt audit --format json
 
-# Audit by bead
-gt audit --bead gt-a1b2c
-
-# JSON output
-gt audit --json
+# Export to a file
+gt audit --output audit-report.json --format json
 ```
 
 Sample output:
 
 ```
-Audit: polecat:toast (myproject)
+Gas Town Audit (last 24h) — myproject
 
-  2025-06-15 14:23  SPAWNED   hook: gt-a1b2c "Fix login bug"
-  2025-06-15 14:41  COMMIT    3 files changed, +45 -12
-  2025-06-15 14:52  MR_SUBMIT gt-a1b2c -> refinery
-  2025-06-15 14:52  EXIT      COMPLETED (29m elapsed)
+  Polecats spawned:   4
+  Tasks completed:    3
+  Tasks escalated:    0
+  Merges landed:      3
+  Avg task duration:  29m
+  Estimated cost:     $12.35
 
-  Total: 1 task, 1 completed, 0 escalated
-  Avg duration: 29m
+  Events:
+  14:23  polecat/toast   SPAWNED    hook: gt-a1b2c "Fix login bug"
+  14:41  polecat/toast   COMMIT     3 files changed, +45 -12
+  14:52  polecat/toast   MR_SUBMIT  gt-a1b2c -> refinery
+  14:52  polecat/toast   EXIT       COMPLETED (29m elapsed)
 ```
 
 ### `gt log` -- Town Activity Log
@@ -223,16 +222,11 @@ The doctor checks:
 | Network | Git remotes reachable |
 
 ```bash
-# Check a specific rig
-gt doctor --rig myproject
-
-# Check only a specific subsystem
-gt doctor --check daemon
-gt doctor --check agents
-gt doctor --check beads
-
 # JSON output for automation
 gt doctor --json
+
+# Verbose output with detailed check results
+gt doctor --verbose
 
 # Auto-fix what it can
 gt doctor --fix
@@ -299,7 +293,7 @@ Launch a web-based dashboard for visual convoy and system tracking.
 gt dashboard
 ```
 
-This opens a local web server (default: `http://localhost:8420`) with:
+This starts a local web server (default: `http://localhost:8080`) with:
 
 - **Convoy overview** -- All active convoys with progress bars
 - **Agent map** -- Visual hierarchy of running agents per rig
@@ -311,8 +305,8 @@ This opens a local web server (default: `http://localhost:8420`) with:
 # Specify a custom port
 gt dashboard --port 9000
 
-# Run headless (no browser auto-open)
-gt dashboard --no-open
+# Open browser automatically
+gt dashboard --open
 
 # Stop the dashboard
 gt dashboard stop
@@ -333,21 +327,20 @@ gt costs
 ```
 
 ```bash
-# Show costs for the current day
-gt costs --today
+# Show costs for the last 24 hours (default)
+gt costs --since 24h
 
 # Show costs for a specific period
-gt costs --since 24h
-gt costs --since 2025-06-01 --until 2025-06-15
+gt costs --since 7d
 
-# Break down by agent type
-gt costs --by-agent
+# Break down by agent role
+gt costs --group-by agent
 
 # Break down by rig
-gt costs --by-rig
+gt costs --group-by rig
 
-# JSON output
-gt costs --json
+# CSV output for spreadsheets
+gt costs --format csv
 ```
 
 Sample output:
@@ -355,19 +348,18 @@ Sample output:
 ```
 Gas Town Costs (last 24h)
 
-  Total tokens:  2,450,000 input / 890,000 output
-  Est. cost:     $47.20
-
-  By agent:
-    Mayor:       $4.10  (8.7%)
-    Deacon:      $2.80  (5.9%)
-    Witnesses:   $5.40  (11.4%)
-    Refineries:  $3.20  (6.8%)
-    Polecats:    $31.70 (67.2%)
+  Total tokens: 2,450,000 (input: 1,800,000 / output: 650,000)
+  Estimated cost: $47.20
 
   By rig:
-    myproject:   $32.40 (68.6%)
-    docs:        $14.80 (31.4%)
+    myproject    $32.40   (68.6%)
+    docs         $14.80   (31.4%)
+
+  By role:
+    polecats     $31.70   (67.2%)
+    refinery     $5.40    (11.4%)
+    mayor        $4.10    (8.7%)
+    other        $5.90    (12.5%)
 ```
 
 :::warning[Cost Awareness]
