@@ -15,6 +15,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 | Guide | Description |
 |-------|-------------|
 | [Usage Guide](usage-guide.md) | Comprehensive walkthrough for day-to-day Gas Town usage |
+| [Beads Tutorial](beads-tutorial.md) | Hands-on guide to the Beads issue tracking system |
 | [The 8 Stages of AI Coding](eight-stages.md) | Understanding where Gas Town fits in the AI coding maturity model |
 | [Multi-Runtime Support](multi-runtime.md) | Using Gas Town with Claude, Gemini, Codex, Cursor, and more |
 | [Cost Management](cost-management.md) | Monitoring and optimizing token spend |
