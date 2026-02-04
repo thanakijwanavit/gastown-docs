@@ -184,26 +184,68 @@ Branch: fix/login-bug
 
 ### `gt checkpoint`
 
-Save a session checkpoint.
+Manage session checkpoints for crash recovery.
 
 ```bash
-gt checkpoint [options]
+gt checkpoint <subcommand>
 ```
 
-**Description:** Saves the current session state without exiting. Creates a snapshot that can be resumed later if the session crashes or is interrupted.
+**Description:** Checkpoints capture current work state so that if a session crashes, the next session can resume. Checkpoint data includes current molecule and step, hooked bead, modified files, git branch, last commit, and timestamp. Stored in `.polecat-checkpoint.json` in the polecat directory.
 
-**Options:**
+**Subcommands:**
 
-| Flag | Description |
-|------|-------------|
-| `--message <text>` | Checkpoint description |
-| `--name <name>` | Named checkpoint for easy reference |
+| Subcommand | Description |
+|------------|-------------|
+| `gt checkpoint write` | Write a checkpoint of current session state |
+| `gt checkpoint read` | Read and display the current checkpoint |
+| `gt checkpoint clear` | Clear the checkpoint file |
 
 **Example:**
 
 ```bash
-gt checkpoint --message "Before attempting risky refactor"
-gt checkpoint --name pre-migration
+# Save current state
+gt checkpoint write
+
+# View saved checkpoint
+gt checkpoint read
+
+# Clear checkpoint
+gt checkpoint clear
+```
+
+---
+
+### `gt cycle`
+
+Cycle between related tmux sessions.
+
+```bash
+gt cycle <subcommand>
+```
+
+**Description:** Switches between related tmux sessions based on the current session type. Session groups are detected automatically.
+
+**Session groups:**
+
+| Group | Sessions |
+|-------|----------|
+| Town | Mayor ↔ Deacon |
+| Crew | All crew members in the same rig |
+| Rig infra | Witness ↔ Refinery (per rig) |
+| Polecats | All polecats in the same rig |
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt cycle next` | Switch to next session in group |
+| `gt cycle prev` | Switch to previous session in group |
+
+**Example:**
+
+```bash
+gt cycle next
+gt cycle prev
 ```
 
 ---

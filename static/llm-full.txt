@@ -1066,25 +1066,23 @@ Global flags available on all commands:
 |------|-------------|
 | `--help`, `-h` | Show help for any command |
 | `--version`, `-v` | Print the Gas Town version |
-| `--verbose` | Enable verbose output |
-| `--quiet`, `-q` | Suppress non-essential output |
-| `--json` | Output in JSON format (where supported) |
-| `--rig <name>` | Target a specific rig (overrides auto-detection) |
+
+Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name>` flags. See individual command documentation for details.
 
 ## Command Categories
 
 | Category | Description | Key Commands |
 |----------|-------------|--------------|
-| [Workspace Management](workspace.md) | Install, initialize, and configure your Gas Town workspace | `gt install`, `gt init`, `gt enable`, `gt disable`, `gt info` |
+| [Workspace Management](workspace.md) | Install, initialize, manage services, and configure your Gas Town workspace | `gt install`, `gt start`, `gt up`, `gt down`, `gt shutdown`, `gt status` |
 | [Agent Operations](agents.md) | Start, stop, and manage the agent hierarchy | `gt mayor`, `gt deacon`, `gt witness`, `gt polecat`, `gt crew` |
-| [Work Management](work.md) | Create, assign, track, and complete work items | `gt sling`, `gt hook`, `gt done`, `bd create`, `gt bead` |
-| [Convoy & Tracking](convoys.md) | Bundle and track batches of related work | `gt convoy create`, `gt convoy status`, `gt convoy stranded` |
+| [Work Management](work.md) | Create, assign, track, and complete work items | `gt sling`, `gt hook`, `gt done`, `gt commit`, `bd create` |
+| [Convoy & Tracking](convoys.md) | Bundle and track batches of related work | `gt convoy create`, `gt convoy status`, `gt synthesis` |
 | [Communication](communication.md) | Send and receive messages between agents and humans | `gt mail`, `gt nudge`, `gt broadcast`, `gt escalate` |
 | [Merge Queue](merge-queue.md) | Manage the refinery merge pipeline | `gt mq list`, `gt mq submit`, `gt mq status` |
 | [Rig Management](rigs.md) | Add, configure, and manage project containers | `gt rig add`, `gt rig start`, `gt rig config` |
-| [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol` |
-| [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt patrol` |
-| [Configuration](configuration.md) | Configure agents, accounts, themes, and hooks | `gt config`, `gt account`, `gt theme`, `gt hooks` |
+| [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol`, `gt cycle` |
+| [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt status` |
+| [Configuration](configuration.md) | Configure agents, accounts, themes, hooks, and plugins | `gt config`, `gt account`, `gt theme`, `gt hooks`, `gt plugin` |
 
 ## Related Tools
 
@@ -1098,11 +1096,11 @@ gt install ~/gt --git
 
 # Add a project and start working
 gt rig add myapp https://github.com/you/app.git
-gt mayor attach
+gt start
 
 # Check system status
+gt status
 gt rig list
-gt convoy list
 gt feed
 
 # Diagnose issues
@@ -1282,133 +1280,120 @@ gt git-init --repair
 
 ### `gt enable`
 
-Enable a Gas Town feature or plugin.
+Enable Gas Town for all agentic coding tools.
 
 ```bash
-gt enable <feature> [options]
+gt enable
 ```
 
-**Description:** Enables optional features, plugins, or integrations in the workspace.
+**Description:** Activates Gas Town system-wide. When enabled, shell hooks set `GT_TOWN_ROOT` and `GT_RIG` environment variables, Claude Code `SessionStart` hooks run `gt prime` for context, and git repos are auto-registered as rigs.
 
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Enable for a specific rig only |
-| `--global` | Enable globally for all rigs |
+Use environment variables for per-session overrides: `GASTOWN_DISABLED=1` to disable, `GASTOWN_ENABLED=1` to enable.
 
 **Example:**
 
 ```bash
-# Enable Discord integration
-gt enable discord
-
-# Enable a plugin for a specific rig
-gt enable eslint-plugin --rig myproject
+gt enable
 ```
 
 ---
 
 ### `gt disable`
 
-Disable a Gas Town feature or plugin.
+Disable Gas Town for all agentic coding tools.
 
 ```bash
-gt disable <feature> [options]
+gt disable [options]
 ```
 
-**Description:** Disables a previously enabled feature, plugin, or integration.
+**Description:** Disables Gas Town system-wide. When disabled, shell hooks become no-ops, Claude Code `SessionStart` hooks skip `gt prime`, and tools work vanilla without Gas Town behavior. The workspace (`~/gt`) is preserved.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Disable for a specific rig only |
-| `--global` | Disable globally for all rigs |
+| `--clean` | Also remove shell integration from `~/.zshrc`/`~/.bashrc` |
 
 **Example:**
 
 ```bash
-gt disable discord
-gt disable eslint-plugin --rig myproject
+# Disable Gas Town
+gt disable
+
+# Disable and remove shell integration
+gt disable --clean
 ```
 
 ---
 
 ### `gt stale`
 
-Find and report stale resources in the workspace.
+Check if the `gt` binary needs rebuilding.
 
 ```bash
 gt stale [options]
 ```
 
-**Description:** Identifies stale worktrees, abandoned hooks, zombie processes, orphaned polecats, and other resources that may need cleanup. Useful for periodic maintenance.
+**Description:** Compares the commit hash embedded in the binary at build time with the current HEAD of the gastown repository. Reports whether the binary is out of date.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--cleanup` | Automatically clean up stale resources |
-| `--rig <name>` | Check a specific rig only |
-| `--age <duration>` | Stale threshold (default: `24h`) |
-| `--json` | Output in JSON format |
+| `--json` | Output as JSON |
+| `--quiet`, `-q` | Exit code only (0=stale, 1=fresh) |
+
+**Exit codes:**
+
+| Code | Meaning |
+|------|---------|
+| `0` | Binary is stale (needs rebuild) |
+| `1` | Binary is fresh (up to date) |
+| `2` | Error (could not determine staleness) |
 
 **Example:**
 
 ```bash
-# Report stale resources
+# Check if binary is stale
 gt stale
 
-# Auto-cleanup resources older than 12 hours
-gt stale --cleanup --age 12h
+# Machine-readable output
+gt stale --json
+
+# Script-friendly check
+gt stale --quiet && echo "Rebuild needed"
 ```
 
 ---
 
 ### `gt info`
 
-Display information about the current workspace or rig.
+Display Gas Town version and release notes.
 
 ```bash
-gt info [target] [options]
+gt info [options]
 ```
 
-**Description:** Shows detailed information about the town, a specific rig, an agent, or the overall system. When run without arguments, shows town-level summary.
+**Description:** Shows the current Gas Town version and optionally displays agent-relevant changes from recent versions.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
 | `--json` | Output in JSON format |
-| `--verbose` | Show extended details |
+| `--whats-new` | Show agent-relevant changes from recent versions |
 
 **Example:**
 
 ```bash
-# Show town info
+# Show version info
 gt info
 
-# Show rig info
-gt info myproject
-
-# Show agent info
-gt info mayor
+# Show what's new
+gt info --whats-new
 
 # Machine-readable output
-gt info --json
-```
-
-**Sample output:**
-
-```
-Gas Town v1.2.0
-Workspace: /home/user/gt
-Rigs: 3 (2 active, 1 parked)
-Agents: Mayor (running), Deacon (running)
-Active polecats: 4
-Open convoys: 2
-Pending beads: 7
+gt info --whats-new --json
 ```
 
 ---
@@ -1510,6 +1495,377 @@ The Gas Town shell sets the `GT_ROLE` environment variable and configures the pr
 
 
 :::
+
+---
+
+### `gt version`
+
+Print Gas Town version information.
+
+```bash
+gt version
+```
+
+**Example:**
+
+```bash
+gt version
+```
+
+---
+
+### `gt status`
+
+Display overall town status.
+
+```bash
+gt status [options]
+```
+
+**Description:** Shows town name, registered rigs, active polecats, and agent status at a glance.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--fast` | Skip mail lookups for faster execution |
+| `--json` | Output as JSON |
+| `--verbose`, `-v` | Show detailed multi-line output per agent |
+| `--watch`, `-w` | Watch mode: refresh status continuously |
+| `--interval`, `-n` | Refresh interval in seconds (default: `2`) |
+
+**Example:**
+
+```bash
+# Quick status
+gt status
+
+# Watch mode
+gt status --watch
+
+# Fast mode (skip mail)
+gt status --fast
+```
+
+---
+
+### `gt whoami`
+
+Show the identity used for mail commands.
+
+```bash
+gt whoami
+```
+
+**Description:** Displays the current identity determined by the `GT_ROLE` environment variable. If `GT_ROLE` is set, you are an agent. If not, you are the overseer (human).
+
+**Example:**
+
+```bash
+gt whoami
+```
+
+---
+
+## Services
+
+Commands for managing Gas Town background services and infrastructure.
+
+### `gt start`
+
+Start Gas Town by launching the Deacon and Mayor.
+
+```bash
+gt start [path] [options]
+```
+
+**Description:** Launches the Deacon (health-check orchestrator) and Mayor (global coordinator). Other agents (Witnesses, Refineries) are started lazily as needed. If a path like `rig/crew/name` is provided, starts that crew workspace instead.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <runtime>` | Agent alias to run Mayor/Deacon with |
+| `--all`, `-a` | Also start Witnesses and Refineries for all rigs |
+
+**Example:**
+
+```bash
+# Start Gas Town
+gt start
+
+# Start with all rig agents
+gt start --all
+
+# Start a crew workspace
+gt start myproject/crew/dave
+```
+
+---
+
+### `gt up`
+
+Bring up all Gas Town long-lived services.
+
+```bash
+gt up [options]
+```
+
+**Description:** Idempotent boot command that ensures all infrastructure agents are running: Daemon, Deacon, Mayor, Witnesses, and Refineries. Polecats are NOT started (they are transient workers spawned on demand). Running `gt up` multiple times is safe.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--quiet`, `-q` | Only show errors |
+| `--restore` | Also restore crew (from settings) and polecats (from hooks) |
+
+**Example:**
+
+```bash
+gt up
+gt up --restore
+```
+
+---
+
+### `gt down`
+
+Stop Gas Town services (reversible pause).
+
+```bash
+gt down [options]
+```
+
+**Description:** Stops infrastructure agents (Refineries, Witnesses, Mayor, Boot, Deacon, Daemon). This is a "pause" operation -- use `gt start` to bring everything back up. For permanent cleanup, use `gt shutdown` instead.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--polecats`, `-p` | Also stop all polecat sessions |
+| `--all`, `-a` | Also stop bd daemons/activity and verify shutdown |
+| `--nuke` | Kill entire tmux server (DESTRUCTIVE -- kills non-GT sessions) |
+| `--force`, `-f` | Force kill without graceful shutdown |
+| `--quiet`, `-q` | Only show errors |
+| `--dry-run` | Preview what would be stopped |
+
+**Example:**
+
+```bash
+# Pause infrastructure
+gt down
+
+# Stop everything including polecats
+gt down --polecats
+
+# Preview what would stop
+gt down --dry-run
+```
+
+:::warning
+
+`gt down --nuke` kills the entire tmux server, including non-Gas Town sessions. Use with care.
+
+:::
+
+---
+
+### `gt shutdown`
+
+Shut down Gas Town with full cleanup.
+
+```bash
+gt shutdown [options]
+```
+
+**Description:** The "done for the day" command. Stops all agents, cleans up polecat worktrees and branches, and puts the town in a fully stopped state. Polecats with uncommitted work are protected (skipped) unless `--nuclear` is used.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--all`, `-a` | Also stop crew sessions |
+| `--polecats-only` | Only stop polecats (minimal shutdown) |
+| `--force`, `-f` | Skip confirmation prompt |
+| `--yes`, `-y` | Skip confirmation prompt |
+| `--graceful`, `-g` | Allow agents time to save state before killing |
+| `--wait`, `-w` | Seconds to wait for graceful shutdown (default: `30`) |
+| `--nuclear` | Force cleanup even if polecats have uncommitted work (DANGER) |
+| `--cleanup-orphans` | Clean up orphaned Claude processes |
+| `--cleanup-orphans-grace-secs` | Grace period between SIGTERM and SIGKILL (default: `60`) |
+
+**Comparison with `gt down`:**
+
+| | `gt down` | `gt shutdown` |
+|---|-----------|--------------|
+| Stops agents | Yes | Yes |
+| Removes worktrees | No | Yes |
+| Reversible | Yes (`gt start`) | Permanent cleanup |
+
+**Example:**
+
+```bash
+# Standard shutdown
+gt shutdown
+
+# Graceful shutdown with drain
+gt shutdown --graceful
+
+# Shutdown including crew
+gt shutdown --all --force
+```
+
+:::danger
+
+`gt shutdown --nuclear` forces cleanup even when polecats have uncommitted work. This may result in lost work.
+
+:::
+
+---
+
+### `gt daemon`
+
+Manage the Gas Town background daemon.
+
+```bash
+gt daemon <subcommand>
+```
+
+**Description:** The daemon is a Go background process that pokes agents periodically (heartbeat), processes lifecycle requests, and restarts sessions when agents request cycling. It is a "dumb scheduler" -- all intelligence is in the agents.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt daemon start` | Start the daemon |
+| `gt daemon stop` | Stop the daemon |
+| `gt daemon status` | Show daemon status |
+| `gt daemon logs` | View daemon logs |
+
+**Example:**
+
+```bash
+gt daemon status
+gt daemon logs
+```
+
+---
+
+### `gt dolt`
+
+Manage the Dolt SQL server for beads.
+
+```bash
+gt dolt <subcommand>
+```
+
+**Description:** The Dolt server provides multi-client access to all rig databases, avoiding the single-writer limitation of embedded Dolt mode. Runs on port 3307 (to avoid conflicts with MySQL on 3306).
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt dolt start` | Start the Dolt server |
+| `gt dolt stop` | Stop the Dolt server |
+| `gt dolt status` | Show Dolt server status |
+| `gt dolt logs` | View Dolt server logs |
+| `gt dolt sql` | Open Dolt SQL shell |
+| `gt dolt list` | List available rig databases |
+| `gt dolt init-rig` | Initialize a new rig database |
+| `gt dolt migrate` | Migrate existing databases to centralized data directory |
+
+**Example:**
+
+```bash
+gt dolt status
+gt dolt sql
+gt dolt list
+```
+
+---
+
+### `gt namepool`
+
+Manage themed name pools for polecats.
+
+```bash
+gt namepool [subcommand] [options]
+```
+
+**Description:** Polecats get themed names from a pool (default: Mad Max universe, e.g., furiosa, nux, slit). You can change the theme or add custom names.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt namepool themes` | List available themes and their names |
+| `gt namepool set <theme>` | Set the namepool theme for this rig |
+| `gt namepool add <name>` | Add a custom name to the pool |
+| `gt namepool reset` | Reset the pool state (release all names) |
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--list`, `-l` | List available themes |
+
+**Example:**
+
+```bash
+# Show current pool status
+gt namepool
+
+# List available themes
+gt namepool themes
+
+# Set theme to minerals
+gt namepool set minerals
+
+# Add a custom name
+gt namepool add ember
+
+# Reset pool state
+gt namepool reset
+```
+
+---
+
+### `gt worktree`
+
+Create a git worktree in another rig for cross-rig work.
+
+```bash
+gt worktree <rig> [options]
+```
+
+**Description:** For crew workers who need to work on another rig's codebase while maintaining their identity. Creates a worktree in the target rig's `crew/` directory named after your source rig and identity.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt worktree list` | List all cross-rig worktrees owned by current crew member |
+| `gt worktree remove` | Remove a cross-rig worktree |
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--no-cd` | Just print the path (do not print cd command) |
+
+**Example:**
+
+```bash
+# Create worktree in beads rig
+gt worktree beads
+
+# List your cross-rig worktrees
+gt worktree list
+
+# Remove a worktree
+gt worktree remove beads
+```
 
 
 ========================================================================
@@ -2164,6 +2520,38 @@ gt boot status [options]
 
 ---
 
+## Callbacks
+
+### `gt callbacks`
+
+Handle callbacks from agents during Deacon patrol.
+
+```bash
+gt callbacks <subcommand>
+```
+
+**Description:** Processes messages sent to the Mayor from Witnesses, Refineries, polecats, and external triggers. Routes messages to other agents or updates state as needed.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt callbacks process` | Process pending callbacks |
+
+**Example:**
+
+```bash
+gt callbacks process
+```
+
+:::note
+
+Callbacks are typically processed automatically during Deacon patrol cycles. Manual invocation is for debugging or manual intervention.
+
+:::
+
+---
+
 ## Crew
 
 Crew members are persistent workspaces for human developers. They get their own git clone within a rig and can run agent sessions.
@@ -2690,6 +3078,68 @@ gt cat gt-abc12 --field description
 
 # JSON output for scripting
 gt cat gt-abc12 --format json
+```
+
+---
+
+### `gt commit`
+
+Git commit with automatic agent identity.
+
+```bash
+gt commit [flags] [-- git-commit-args...]
+```
+
+**Description:** A git commit wrapper that automatically sets the git author identity for agents. When run by an agent (with `GT_ROLE` set), it detects the agent identity from environment variables and converts it to a git-friendly name and email. When run by a human (no `GT_ROLE`), it passes through to plain `git commit`.
+
+**Example:**
+
+```bash
+# Commit as current agent
+gt commit -m "Fix bug"
+
+# Stage all and commit
+gt commit -am "Quick fix"
+
+# Amend last commit
+gt commit -- --amend
+```
+
+**Identity mapping:**
+
+```
+Agent: gastown/crew/jack  →  Name: gastown/crew/jack
+                              Email: gastown.crew.jack@gastown.local
+```
+
+:::tip
+
+The email domain is configurable in town settings (`agent_email_domain`). Default: `gastown.local`.
+
+:::
+
+---
+
+### `gt gate`
+
+Gate coordination for async workflows.
+
+```bash
+gt gate <subcommand>
+```
+
+**Description:** Gates provide async coordination points in workflows. Most gate operations are in the `bd` CLI (`bd gate create`, `bd gate show`, `bd gate list`, `bd gate close`, `bd gate approve`, `bd gate eval`). The `gt gate` command adds Gas Town integration.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt gate wake` | Send wake mail to gate waiters after a gate closes |
+
+**Example:**
+
+```bash
+gt gate wake <gate-id>
 ```
 
 ---
@@ -3234,6 +3684,41 @@ Stranded convoys indicate work that has fallen through the cracks. The Mayor sho
 
 ---
 
+### `gt synthesis`
+
+Manage convoy synthesis steps.
+
+```bash
+gt synthesis <subcommand> <convoy-id>
+```
+
+**Description:** Synthesis is the final step in a convoy workflow that combines outputs from all parallel legs into a unified deliverable. This is a top-level command separate from `gt convoy synthesis` (which generates reports).
+
+**Aliases:** `synth`
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt synthesis status <convoy-id>` | Check if convoy is ready for synthesis |
+| `gt synthesis start <convoy-id>` | Start synthesis for a convoy (checks all legs complete) |
+| `gt synthesis close <convoy-id>` | Close convoy after synthesis complete |
+
+**Example:**
+
+```bash
+# Check readiness
+gt synthesis status hq-cv-abc
+
+# Start synthesis step
+gt synthesis start hq-cv-abc
+
+# Close after synthesis
+gt synthesis close hq-cv-abc
+```
+
+---
+
 ### `gt convoy synthesis`
 
 Generate a synthesis report for a convoy.
@@ -3392,26 +3877,34 @@ gt mail read m-001
 
 ---
 
-### `gt mail mark`
+### `gt mail mark-read`
 
-Mark messages as read or unread.
+Mark messages as read without archiving.
 
 ```bash
-gt mail mark <message-id>... <status>
+gt mail mark-read <message-id>...
 ```
-
-**Description:** Changes the read status of one or more messages.
-
-**Valid statuses:** `read`, `unread`
 
 **Example:**
 
 ```bash
-# Mark as read
-gt mail mark m-001 m-002 read
+gt mail mark-read m-001 m-002
+```
 
-# Mark as unread
-gt mail mark m-003 unread
+---
+
+### `gt mail mark-unread`
+
+Mark messages as unread.
+
+```bash
+gt mail mark-unread <message-id>...
+```
+
+**Example:**
+
+```bash
+gt mail mark-unread m-003
 ```
 
 ---
@@ -3599,6 +4092,150 @@ gt mail announces [options]
 ```bash
 gt mail announces
 gt mail announces --since 24h
+```
+
+---
+
+### `gt mail archive`
+
+Archive messages.
+
+```bash
+gt mail archive <message-id>...
+```
+
+**Description:** Moves messages to the archive. Archived messages are no longer shown in the inbox but are preserved for future reference.
+
+**Example:**
+
+```bash
+gt mail archive m-001 m-002
+```
+
+---
+
+### `gt mail delete`
+
+Delete messages.
+
+```bash
+gt mail delete <message-id>...
+```
+
+**Description:** Permanently delete messages from the mailbox.
+
+**Example:**
+
+```bash
+gt mail delete m-001
+```
+
+---
+
+### `gt mail clear`
+
+Clear all messages from an inbox.
+
+```bash
+gt mail clear
+```
+
+**Description:** Removes all messages from the current agent's inbox.
+
+**Example:**
+
+```bash
+gt mail clear
+```
+
+---
+
+### `gt mail hook`
+
+Attach a mail message to your hook.
+
+```bash
+gt mail hook <message-id>
+```
+
+**Description:** Attaches a mail message to your hook as an ad-hoc work assignment. Alias for `gt hook attach`.
+
+**Example:**
+
+```bash
+gt mail hook m-001
+```
+
+---
+
+### `gt mail check`
+
+Check for new mail (for hooks).
+
+```bash
+gt mail check
+```
+
+**Description:** Non-interactive check for new mail, intended for use in hooks and automation.
+
+**Example:**
+
+```bash
+gt mail check
+```
+
+---
+
+### `gt mail claim`
+
+Claim a message from a queue.
+
+```bash
+gt mail claim <queue-name>
+```
+
+**Description:** Claims the next available message from a named queue, removing it from the queue for processing.
+
+**Example:**
+
+```bash
+gt mail claim work-queue
+```
+
+---
+
+### `gt mail release`
+
+Release a claimed queue message.
+
+```bash
+gt mail release <message-id>
+```
+
+**Description:** Releases a previously claimed queue message back to the queue for another agent to claim.
+
+**Example:**
+
+```bash
+gt mail release m-001
+```
+
+---
+
+### `gt mail group`
+
+Manage mail groups.
+
+```bash
+gt mail group [subcommand]
+```
+
+**Description:** Create and manage mail groups (distribution lists) for sending messages to multiple agents at once.
+
+**Example:**
+
+```bash
+gt mail group
 ```
 
 ---
@@ -4828,26 +5465,68 @@ Branch: fix/login-bug
 
 ### `gt checkpoint`
 
-Save a session checkpoint.
+Manage session checkpoints for crash recovery.
 
 ```bash
-gt checkpoint [options]
+gt checkpoint <subcommand>
 ```
 
-**Description:** Saves the current session state without exiting. Creates a snapshot that can be resumed later if the session crashes or is interrupted.
+**Description:** Checkpoints capture current work state so that if a session crashes, the next session can resume. Checkpoint data includes current molecule and step, hooked bead, modified files, git branch, last commit, and timestamp. Stored in `.polecat-checkpoint.json` in the polecat directory.
 
-**Options:**
+**Subcommands:**
 
-| Flag | Description |
-|------|-------------|
-| `--message <text>` | Checkpoint description |
-| `--name <name>` | Named checkpoint for easy reference |
+| Subcommand | Description |
+|------------|-------------|
+| `gt checkpoint write` | Write a checkpoint of current session state |
+| `gt checkpoint read` | Read and display the current checkpoint |
+| `gt checkpoint clear` | Clear the checkpoint file |
 
 **Example:**
 
 ```bash
-gt checkpoint --message "Before attempting risky refactor"
-gt checkpoint --name pre-migration
+# Save current state
+gt checkpoint write
+
+# View saved checkpoint
+gt checkpoint read
+
+# Clear checkpoint
+gt checkpoint clear
+```
+
+---
+
+### `gt cycle`
+
+Cycle between related tmux sessions.
+
+```bash
+gt cycle <subcommand>
+```
+
+**Description:** Switches between related tmux sessions based on the current session type. Session groups are detected automatically.
+
+**Session groups:**
+
+| Group | Sessions |
+|-------|----------|
+| Town | Mayor ↔ Deacon |
+| Crew | All crew members in the same rig |
+| Rig infra | Witness ↔ Refinery (per rig) |
+| Polecats | All polecats in the same rig |
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt cycle next` | Switch to next session in group |
+| `gt cycle prev` | Switch to previous session in group |
+
+**Example:**
+
+```bash
+gt cycle next
+gt cycle prev
 ```
 
 ---
@@ -5226,6 +5905,63 @@ Commands for monitoring, auditing, and troubleshooting Gas Town. These tools pro
 
 ---
 
+## Town Status
+
+### `gt status`
+
+Display overall town status.
+
+```bash
+gt status [options]
+```
+
+**Description:** Shows the current state of the Gas Town workspace including registered rigs, active polecats, and agent status.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--fast` | Skip mail lookups for faster execution |
+| `--json` | Output as JSON |
+| `--verbose`, `-v` | Show detailed multi-line output per agent |
+| `--watch`, `-w` | Watch mode: refresh status continuously |
+| `--interval`, `-n` | Refresh interval in seconds (default: `2`) |
+
+**Aliases:** `stat`
+
+**Example:**
+
+```bash
+# Quick status
+gt status
+
+# Watch mode with custom interval
+gt status --watch --interval 5
+
+# Fast mode (skip mail lookups)
+gt status --fast
+```
+
+---
+
+### `gt whoami`
+
+Show the identity used for mail commands.
+
+```bash
+gt whoami
+```
+
+**Description:** Displays the identity determined by the `GT_ROLE` environment variable. If set, you are an agent session. If not, you are the overseer (human). Use the `--identity` flag with mail commands to override.
+
+**Example:**
+
+```bash
+gt whoami
+```
+
+---
+
 ## Activity & Monitoring
 
 ### `gt activity`
@@ -5481,26 +6217,32 @@ Run `gt doctor` after installation, after upgrading Gas Town, or whenever someth
 
 ### `gt dashboard`
 
-Display an interactive system dashboard.
+Start the convoy tracking web dashboard.
 
 ```bash
 gt dashboard [options]
 ```
 
-**Description:** Opens a terminal-based dashboard showing real-time status of all rigs, agents, convoys, merge queues, and recent activity. Provides a bird's-eye view of the entire town.
+**Description:** Starts a web server that displays a convoy tracking dashboard with real-time status indicators, progress tracking, and last activity indicators. Auto-refreshes every 30 seconds via htmx.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Focus dashboard on a specific rig |
-| `--refresh <seconds>` | Refresh interval (default: `5`) |
+| `--port <number>` | HTTP port to listen on (default: `8080`) |
+| `--open` | Open browser automatically |
 
 **Example:**
 
 ```bash
+# Start on default port
 gt dashboard
-gt dashboard --rig myproject --refresh 10
+
+# Start on custom port
+gt dashboard --port 3000
+
+# Start and open browser
+gt dashboard --open
 ```
 
 ---
@@ -5725,6 +6467,12 @@ Verify orphans are truly orphaned before killing. Use `gt orphans procs` first t
 
 ## Peek & Sessions
 
+:::tip
+
+For session handoffs, molecules, and formulas, see the [Session & Handoff](sessions.md) page.
+
+:::
+
 ### `gt peek`
 
 Peek at an agent's current state without interrupting it.
@@ -5763,115 +6511,51 @@ Peek: polecat/toast (myproject)
 
 ---
 
-### `gt session list`
+### `gt session`
 
-List all agent sessions.
+Manage tmux sessions for polecats.
 
 ```bash
-gt session list [options]
+gt session <subcommand> [options]
 ```
 
-**Options:**
+**Aliases:** `sess`
 
-| Flag | Description |
-|------|-------------|
-| `--status <status>` | Filter: `running`, `stopped`, `crashed` |
-| `--rig <name>` | Filter by rig |
-| `--json` | Output in JSON format |
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt session list` | List all sessions |
+| `gt session status <name>` | Show session status details |
+| `gt session start <name>` | Start a polecat session |
+| `gt session stop <name>` | Stop a polecat session |
+| `gt session restart <name>` | Restart a polecat session |
+| `gt session at <name>` | Attach to a running session |
+| `gt session capture <name>` | Capture recent session output |
+| `gt session check <name>` | Check session health |
+| `gt session inject <name>` | Send message to session (prefer `gt nudge`) |
 
 **Example:**
 
 ```bash
+# List all sessions
 gt session list
-gt session list --status running
+
+# Check session health
+gt session check toast
+
+# Capture recent output
+gt session capture toast
+
+# Restart a session
+gt session restart toast
 ```
 
----
+:::tip
 
-### `gt session status`
+To send messages to a running session, use `gt nudge` instead of `gt session inject`. The nudge command uses reliable delivery that works correctly with Claude Code.
 
-Show status of a specific session.
-
-```bash
-gt session status <session-id> [options]
-```
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output in JSON format |
-
-**Example:**
-
-```bash
-gt session status sess-abc123
-```
-
----
-
-### `gt session start`
-
-Start a new agent session.
-
-```bash
-gt session start <agent> [options]
-```
-
-**Description:** Starts a new session for the specified agent. Lower-level than the agent-specific start commands (e.g., `gt mayor start`).
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--attach` | Attach to the session after starting |
-| `--agent <runtime>` | Agent runtime |
-
-**Example:**
-
-```bash
-gt session start witness --rig myproject
-```
-
----
-
-### `gt session stop`
-
-Stop an agent session.
-
-```bash
-gt session stop <session-id> [options]
-```
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--force` | Force stop |
-
-**Example:**
-
-```bash
-gt session stop sess-abc123
-```
-
----
-
-### `gt session at`
-
-Show what an agent session is currently working on.
-
-```bash
-gt session at <session-id>
-```
-
-**Description:** Quick view of the session's current task and hook state.
-
-**Example:**
-
-```bash
-gt session at sess-abc123
-```
+:::
 
 
 ========================================================================
@@ -6013,53 +6697,41 @@ The default agent can be overridden at the rig level with `gt rig config <rig> a
 
 ### `gt account`
 
-Manage Gas Town account settings.
+Manage multiple Claude Code accounts for Gas Town.
 
 ```bash
-gt account [subcommand] [options]
+gt account <subcommand>
 ```
 
-**Description:** View and manage account-level settings including API keys, user identity, and linked services.
+**Description:** Enables switching between Claude Code accounts (e.g., personal vs work) with easy account selection per spawn or globally.
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt account show` | Show current account settings |
-| `gt account set <key> <value>` | Set an account setting |
-| `gt account link <service>` | Link an external service (GitHub, Discord, etc.) |
-| `gt account unlink <service>` | Unlink an external service |
+| `gt account list` | List registered accounts |
+| `gt account add <handle>` | Add a new account |
+| `gt account default <handle>` | Set the default account |
+| `gt account status` | Show current account info |
+| `gt account switch <handle>` | Switch to a different account |
 
 **Example:**
 
 ```bash
-# Show account info
-gt account show
+# List accounts
+gt account list
 
-# Set user name
-gt account set name "Dave"
+# Add a new account
+gt account add work
 
-# Set email
-gt account set email "dave@example.com"
+# Set default
+gt account default work
 
-# Link GitHub
-gt account link github
+# Show current status
+gt account status
 
-# Link Discord
-gt account link discord
-```
-
-**Sample output (show):**
-
-```
-Gas Town Account
-================
-Name: Dave
-Email: dave@example.com
-Linked services:
-  GitHub: connected (dave-dev)
-  Discord: connected (dave#1234)
-  Slack: not linked
+# Switch accounts
+gt account switch personal
 ```
 
 ---
@@ -6068,30 +6740,26 @@ Linked services:
 
 ### `gt theme`
 
-Manage terminal theme and display settings.
+Manage tmux status bar themes for Gas Town sessions.
 
 ```bash
 gt theme [name] [options]
 ```
 
-**Description:** Without arguments, shows the current theme. With a name, sets the active theme. Themes control colors, icons, and formatting in the CLI output.
+**Description:** Without arguments, shows the current theme assignment for the rig. With a name, sets the active tmux status bar theme.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--list` | List available themes |
-| `--preview` | Preview a theme without applying |
+| `--list`, `-l` | List available themes |
 
-**Built-in themes:**
+**Subcommands:**
 
-| Theme | Description |
-|-------|-------------|
-| `default` | Standard terminal colors |
-| `dark` | Optimized for dark backgrounds |
-| `light` | Optimized for light backgrounds |
-| `minimal` | Reduced visual noise |
-| `mad-max` | Thematic, full color |
+| Subcommand | Description |
+|------------|-------------|
+| `gt theme apply` | Apply theme to all running sessions in this rig |
+| `gt theme cli` | View or set CLI color scheme (`dark`/`light`/`auto`) |
 
 **Example:**
 
@@ -6103,160 +6771,153 @@ gt theme
 gt theme --list
 
 # Set theme
-gt theme dark
+gt theme forest
 
-# Preview before applying
-gt theme mad-max --preview
+# Apply to running sessions
+gt theme apply
+
+# Set CLI color scheme
+gt theme cli dark
 ```
 
 ---
 
-## Event Hooks
+## Claude Code Hooks
 
 ### `gt hooks`
 
-Manage lifecycle hooks and event handlers.
+List all Claude Code hooks configured in the workspace.
 
 ```bash
-gt hooks [subcommand] [options]
+gt hooks [options]
 ```
 
-**Description:** Configure scripts and actions that run in response to Gas Town lifecycle events. Hooks execute at specific points in the work lifecycle.
+**Description:** Scans for `.claude/settings.json` files across the workspace and displays all configured Claude Code hooks, organized by type.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--verbose`, `-v` | Show hook commands |
+| `--json` | Output as JSON |
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt hooks list` | List configured hooks |
-| `gt hooks add <event> <command>` | Add a hook for an event |
-| `gt hooks remove <event> [command]` | Remove a hook |
-| `gt hooks enable <event>` | Enable a disabled hook |
-| `gt hooks disable <event>` | Disable a hook without removing |
-| `gt hooks test <event>` | Test-fire a hook |
+| `gt hooks install` | Install a hook from the registry |
+| `gt hooks list` | List available hooks from the registry |
 
-**Available events:**
+**Hook types:**
 
-| Event | Fires When |
-|-------|-----------|
-| `pre-sling` | Before work is assigned |
-| `post-sling` | After work is assigned |
-| `pre-done` | Before work completion |
-| `post-done` | After work completion |
-| `pre-merge` | Before a merge is attempted |
-| `post-merge` | After a successful merge |
-| `agent-start` | When any agent starts |
-| `agent-stop` | When any agent stops |
-| `escalation` | When an escalation is created |
-| `convoy-complete` | When a convoy finishes |
-| `polecat-spawn` | When a polecat spawns |
-| `polecat-nuke` | When a polecat is nuked |
+| Type | Description |
+|------|-------------|
+| `SessionStart` | Runs when Claude session starts |
+| `PreCompact` | Runs before context compaction |
+| `UserPromptSubmit` | Runs before user prompt is submitted |
+| `PreToolUse` | Runs before tool execution |
+| `PostToolUse` | Runs after tool execution |
+| `Stop` | Runs when Claude session stops |
 
 **Example:**
 
 ```bash
 # List all hooks
-gt hooks list
+gt hooks
 
-# Add a hook to notify on merge
-gt hooks add post-merge "curl -X POST https://slack.com/webhook -d '{\"text\": \"Merged!\"}'"
+# Show with commands
+gt hooks --verbose
 
-# Add a pre-merge test hook
-gt hooks add pre-merge "npm test"
+# JSON output
+gt hooks --json
 
-# Disable a hook
-gt hooks disable pre-merge
-
-# Test a hook
-gt hooks test post-merge
-
-# Remove a hook
-gt hooks remove pre-merge
+# Install from registry
+gt hooks install
 ```
-
-**Options for `gt hooks add`:**
-
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Apply hook to a specific rig |
-| `--global` | Apply hook globally |
-| `--async` | Run hook asynchronously (do not block) |
-| `--timeout <seconds>` | Hook execution timeout |
-
-:::note
-
-Pre-hooks (pre-sling, pre-done, pre-merge) can abort the operation by returning a non-zero exit code. Post-hooks are informational and do not affect the operation outcome.
-
-:::
 
 ---
 
-## Issue Integration
+## Status Line
 
 ### `gt issue`
 
-Manage external issue tracker integration.
+Manage current issue displayed in the tmux status line.
 
 ```bash
-gt issue [subcommand] [options]
+gt issue <subcommand>
 ```
 
-**Description:** Configure integration between Gas Town beads and external issue trackers (GitHub Issues, Jira, Linear, etc.).
+**Description:** Controls which issue/bead ID is shown in the tmux status bar for the current session. Useful for quick visual identification of what you are working on.
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt issue link <bead-id> <url>` | Link a bead to an external issue |
-| `gt issue unlink <bead-id>` | Remove external issue link |
-| `gt issue sync` | Sync bead status with external tracker |
-| `gt issue config` | Configure issue tracker integration |
+| `gt issue set <bead-id>` | Set the current issue (shown in tmux status line) |
+| `gt issue show` | Show the current issue |
+| `gt issue clear` | Clear the current issue from status line |
 
 **Example:**
 
 ```bash
-# Link a bead to a GitHub issue
-gt issue link gt-abc12 https://github.com/you/repo/issues/42
+# Set the current issue
+gt issue set gt-abc12
 
-# Configure GitHub integration
-gt issue config --provider github --repo you/repo --token $GITHUB_TOKEN
+# Show current issue
+gt issue show
 
-# Sync all linked issues
-gt issue sync
+# Clear the status line
+gt issue clear
 ```
 
-**Configuration options (gt issue config):**
+---
 
-| Flag | Description |
+## Plugin Management
+
+### `gt plugin`
+
+Manage plugins that run during Deacon patrol cycles.
+
+```bash
+gt plugin <subcommand> [options]
+```
+
+**Description:** Plugins are periodic automation tasks defined by `plugin.md` files with TOML frontmatter. They can be installed at town level (`~/gt/plugins/`) or rig level (`<rig>/plugins/`).
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt plugin list` | List all discovered plugins |
+| `gt plugin show <name>` | Show plugin details |
+| `gt plugin run <name>` | Manually trigger plugin execution |
+| `gt plugin history <name>` | Show plugin execution history |
+
+**Gate types:**
+
+| Type | Description |
 |------|-------------|
-| `--provider <name>` | Issue provider: `github`, `jira`, `linear` |
-| `--repo <repo>` | Repository identifier |
-| `--project <project>` | Project identifier (Jira/Linear) |
-| `--token <token>` | API token |
-| `--auto-sync` | Enable automatic bidirectional sync |
-| `--sync-interval <duration>` | Sync frequency (default: `15m`) |
-| `--rig <name>` | Configure for a specific rig |
+| `cooldown` | Run if enough time has passed (e.g., `1h`) |
+| `cron` | Run on a schedule (e.g., `"0 9 * * *"`) |
+| `condition` | Run if a check command returns exit 0 |
+| `event` | Run on events (e.g., `startup`) |
+| `manual` | Never auto-run, trigger explicitly |
 
 **Example:**
 
 ```bash
-# Configure Jira integration
-gt issue config --provider jira --project MYPROJ --token $JIRA_TOKEN --auto-sync
+# List all plugins
+gt plugin list
 
-# Configure GitHub with auto-sync every 5 minutes
-gt issue config --provider github --repo you/repo --token $GITHUB_TOKEN --auto-sync --sync-interval 5m
+# Show plugin details
+gt plugin show my-plugin
+
+# Manually run a plugin
+gt plugin run my-plugin
+
+# List as JSON
+gt plugin list --json
 ```
-
-:::tip[Bidirectional Sync]
-
-When `--auto-sync` is enabled, Gas Town will:
-
-- Update external issue status when a bead status changes
-- Update bead status when an external issue changes
-- Sync comments between beads and external issues
-- Map priority levels between systems
-
-
-:::
 
 
 ========================================================================

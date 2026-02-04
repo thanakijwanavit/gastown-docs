@@ -138,53 +138,41 @@ The default agent can be overridden at the rig level with `gt rig config <rig> a
 
 ### `gt account`
 
-Manage Gas Town account settings.
+Manage multiple Claude Code accounts for Gas Town.
 
 ```bash
-gt account [subcommand] [options]
+gt account <subcommand>
 ```
 
-**Description:** View and manage account-level settings including API keys, user identity, and linked services.
+**Description:** Enables switching between Claude Code accounts (e.g., personal vs work) with easy account selection per spawn or globally.
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt account show` | Show current account settings |
-| `gt account set <key> <value>` | Set an account setting |
-| `gt account link <service>` | Link an external service (GitHub, Discord, etc.) |
-| `gt account unlink <service>` | Unlink an external service |
+| `gt account list` | List registered accounts |
+| `gt account add <handle>` | Add a new account |
+| `gt account default <handle>` | Set the default account |
+| `gt account status` | Show current account info |
+| `gt account switch <handle>` | Switch to a different account |
 
 **Example:**
 
 ```bash
-# Show account info
-gt account show
+# List accounts
+gt account list
 
-# Set user name
-gt account set name "Dave"
+# Add a new account
+gt account add work
 
-# Set email
-gt account set email "dave@example.com"
+# Set default
+gt account default work
 
-# Link GitHub
-gt account link github
+# Show current status
+gt account status
 
-# Link Discord
-gt account link discord
-```
-
-**Sample output (show):**
-
-```
-Gas Town Account
-================
-Name: Dave
-Email: dave@example.com
-Linked services:
-  GitHub: connected (dave-dev)
-  Discord: connected (dave#1234)
-  Slack: not linked
+# Switch accounts
+gt account switch personal
 ```
 
 ---
@@ -193,30 +181,26 @@ Linked services:
 
 ### `gt theme`
 
-Manage terminal theme and display settings.
+Manage tmux status bar themes for Gas Town sessions.
 
 ```bash
 gt theme [name] [options]
 ```
 
-**Description:** Without arguments, shows the current theme. With a name, sets the active theme. Themes control colors, icons, and formatting in the CLI output.
+**Description:** Without arguments, shows the current theme assignment for the rig. With a name, sets the active tmux status bar theme.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--list` | List available themes |
-| `--preview` | Preview a theme without applying |
+| `--list`, `-l` | List available themes |
 
-**Built-in themes:**
+**Subcommands:**
 
-| Theme | Description |
-|-------|-------------|
-| `default` | Standard terminal colors |
-| `dark` | Optimized for dark backgrounds |
-| `light` | Optimized for light backgrounds |
-| `minimal` | Reduced visual noise |
-| `mad-max` | Thematic, full color |
+| Subcommand | Description |
+|------------|-------------|
+| `gt theme apply` | Apply theme to all running sessions in this rig |
+| `gt theme cli` | View or set CLI color scheme (`dark`/`light`/`auto`) |
 
 **Example:**
 
@@ -228,157 +212,150 @@ gt theme
 gt theme --list
 
 # Set theme
-gt theme dark
+gt theme forest
 
-# Preview before applying
-gt theme mad-max --preview
+# Apply to running sessions
+gt theme apply
+
+# Set CLI color scheme
+gt theme cli dark
 ```
 
 ---
 
-## Event Hooks
+## Claude Code Hooks
 
 ### `gt hooks`
 
-Manage lifecycle hooks and event handlers.
+List all Claude Code hooks configured in the workspace.
 
 ```bash
-gt hooks [subcommand] [options]
+gt hooks [options]
 ```
 
-**Description:** Configure scripts and actions that run in response to Gas Town lifecycle events. Hooks execute at specific points in the work lifecycle.
+**Description:** Scans for `.claude/settings.json` files across the workspace and displays all configured Claude Code hooks, organized by type.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--verbose`, `-v` | Show hook commands |
+| `--json` | Output as JSON |
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt hooks list` | List configured hooks |
-| `gt hooks add <event> <command>` | Add a hook for an event |
-| `gt hooks remove <event> [command]` | Remove a hook |
-| `gt hooks enable <event>` | Enable a disabled hook |
-| `gt hooks disable <event>` | Disable a hook without removing |
-| `gt hooks test <event>` | Test-fire a hook |
+| `gt hooks install` | Install a hook from the registry |
+| `gt hooks list` | List available hooks from the registry |
 
-**Available events:**
+**Hook types:**
 
-| Event | Fires When |
-|-------|-----------|
-| `pre-sling` | Before work is assigned |
-| `post-sling` | After work is assigned |
-| `pre-done` | Before work completion |
-| `post-done` | After work completion |
-| `pre-merge` | Before a merge is attempted |
-| `post-merge` | After a successful merge |
-| `agent-start` | When any agent starts |
-| `agent-stop` | When any agent stops |
-| `escalation` | When an escalation is created |
-| `convoy-complete` | When a convoy finishes |
-| `polecat-spawn` | When a polecat spawns |
-| `polecat-nuke` | When a polecat is nuked |
+| Type | Description |
+|------|-------------|
+| `SessionStart` | Runs when Claude session starts |
+| `PreCompact` | Runs before context compaction |
+| `UserPromptSubmit` | Runs before user prompt is submitted |
+| `PreToolUse` | Runs before tool execution |
+| `PostToolUse` | Runs after tool execution |
+| `Stop` | Runs when Claude session stops |
 
 **Example:**
 
 ```bash
 # List all hooks
-gt hooks list
+gt hooks
 
-# Add a hook to notify on merge
-gt hooks add post-merge "curl -X POST https://slack.com/webhook -d '{\"text\": \"Merged!\"}'"
+# Show with commands
+gt hooks --verbose
 
-# Add a pre-merge test hook
-gt hooks add pre-merge "npm test"
+# JSON output
+gt hooks --json
 
-# Disable a hook
-gt hooks disable pre-merge
-
-# Test a hook
-gt hooks test post-merge
-
-# Remove a hook
-gt hooks remove pre-merge
+# Install from registry
+gt hooks install
 ```
-
-**Options for `gt hooks add`:**
-
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Apply hook to a specific rig |
-| `--global` | Apply hook globally |
-| `--async` | Run hook asynchronously (do not block) |
-| `--timeout <seconds>` | Hook execution timeout |
-
-:::note
-
-Pre-hooks (pre-sling, pre-done, pre-merge) can abort the operation by returning a non-zero exit code. Post-hooks are informational and do not affect the operation outcome.
-
-:::
 
 ---
 
-## Issue Integration
+## Status Line
 
 ### `gt issue`
 
-Manage external issue tracker integration.
+Manage current issue displayed in the tmux status line.
 
 ```bash
-gt issue [subcommand] [options]
+gt issue <subcommand>
 ```
 
-**Description:** Configure integration between Gas Town beads and external issue trackers (GitHub Issues, Jira, Linear, etc.).
+**Description:** Controls which issue/bead ID is shown in the tmux status bar for the current session. Useful for quick visual identification of what you are working on.
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt issue link <bead-id> <url>` | Link a bead to an external issue |
-| `gt issue unlink <bead-id>` | Remove external issue link |
-| `gt issue sync` | Sync bead status with external tracker |
-| `gt issue config` | Configure issue tracker integration |
+| `gt issue set <bead-id>` | Set the current issue (shown in tmux status line) |
+| `gt issue show` | Show the current issue |
+| `gt issue clear` | Clear the current issue from status line |
 
 **Example:**
 
 ```bash
-# Link a bead to a GitHub issue
-gt issue link gt-abc12 https://github.com/you/repo/issues/42
+# Set the current issue
+gt issue set gt-abc12
 
-# Configure GitHub integration
-gt issue config --provider github --repo you/repo --token $GITHUB_TOKEN
+# Show current issue
+gt issue show
 
-# Sync all linked issues
-gt issue sync
+# Clear the status line
+gt issue clear
 ```
 
-**Configuration options (gt issue config):**
+---
 
-| Flag | Description |
+## Plugin Management
+
+### `gt plugin`
+
+Manage plugins that run during Deacon patrol cycles.
+
+```bash
+gt plugin <subcommand> [options]
+```
+
+**Description:** Plugins are periodic automation tasks defined by `plugin.md` files with TOML frontmatter. They can be installed at town level (`~/gt/plugins/`) or rig level (`<rig>/plugins/`).
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt plugin list` | List all discovered plugins |
+| `gt plugin show <name>` | Show plugin details |
+| `gt plugin run <name>` | Manually trigger plugin execution |
+| `gt plugin history <name>` | Show plugin execution history |
+
+**Gate types:**
+
+| Type | Description |
 |------|-------------|
-| `--provider <name>` | Issue provider: `github`, `jira`, `linear` |
-| `--repo <repo>` | Repository identifier |
-| `--project <project>` | Project identifier (Jira/Linear) |
-| `--token <token>` | API token |
-| `--auto-sync` | Enable automatic bidirectional sync |
-| `--sync-interval <duration>` | Sync frequency (default: `15m`) |
-| `--rig <name>` | Configure for a specific rig |
+| `cooldown` | Run if enough time has passed (e.g., `1h`) |
+| `cron` | Run on a schedule (e.g., `"0 9 * * *"`) |
+| `condition` | Run if a check command returns exit 0 |
+| `event` | Run on events (e.g., `startup`) |
+| `manual` | Never auto-run, trigger explicitly |
 
 **Example:**
 
 ```bash
-# Configure Jira integration
-gt issue config --provider jira --project MYPROJ --token $JIRA_TOKEN --auto-sync
+# List all plugins
+gt plugin list
 
-# Configure GitHub with auto-sync every 5 minutes
-gt issue config --provider github --repo you/repo --token $GITHUB_TOKEN --auto-sync --sync-interval 5m
+# Show plugin details
+gt plugin show my-plugin
+
+# Manually run a plugin
+gt plugin run my-plugin
+
+# List as JSON
+gt plugin list --json
 ```
-
-:::tip[Bidirectional Sync]
-
-When `--auto-sync` is enabled, Gas Town will:
-
-- Update external issue status when a bead status changes
-- Update bead status when an external issue changes
-- Sync comments between beads and external issues
-- Map priority levels between systems
-
-
-:::

@@ -282,6 +282,41 @@ Stranded convoys indicate work that has fallen through the cracks. The Mayor sho
 
 ---
 
+### `gt synthesis`
+
+Manage convoy synthesis steps.
+
+```bash
+gt synthesis <subcommand> <convoy-id>
+```
+
+**Description:** Synthesis is the final step in a convoy workflow that combines outputs from all parallel legs into a unified deliverable. This is a top-level command separate from `gt convoy synthesis` (which generates reports).
+
+**Aliases:** `synth`
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt synthesis status <convoy-id>` | Check if convoy is ready for synthesis |
+| `gt synthesis start <convoy-id>` | Start synthesis for a convoy (checks all legs complete) |
+| `gt synthesis close <convoy-id>` | Close convoy after synthesis complete |
+
+**Example:**
+
+```bash
+# Check readiness
+gt synthesis status hq-cv-abc
+
+# Start synthesis step
+gt synthesis start hq-cv-abc
+
+# Close after synthesis
+gt synthesis close hq-cv-abc
+```
+
+---
+
 ### `gt convoy synthesis`
 
 Generate a synthesis report for a convoy.

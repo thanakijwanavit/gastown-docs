@@ -351,6 +351,68 @@ gt cat gt-abc12 --format json
 
 ---
 
+### `gt commit`
+
+Git commit with automatic agent identity.
+
+```bash
+gt commit [flags] [-- git-commit-args...]
+```
+
+**Description:** A git commit wrapper that automatically sets the git author identity for agents. When run by an agent (with `GT_ROLE` set), it detects the agent identity from environment variables and converts it to a git-friendly name and email. When run by a human (no `GT_ROLE`), it passes through to plain `git commit`.
+
+**Example:**
+
+```bash
+# Commit as current agent
+gt commit -m "Fix bug"
+
+# Stage all and commit
+gt commit -am "Quick fix"
+
+# Amend last commit
+gt commit -- --amend
+```
+
+**Identity mapping:**
+
+```
+Agent: gastown/crew/jack  →  Name: gastown/crew/jack
+                              Email: gastown.crew.jack@gastown.local
+```
+
+:::tip
+
+The email domain is configurable in town settings (`agent_email_domain`). Default: `gastown.local`.
+
+:::
+
+---
+
+### `gt gate`
+
+Gate coordination for async workflows.
+
+```bash
+gt gate <subcommand>
+```
+
+**Description:** Gates provide async coordination points in workflows. Most gate operations are in the `bd` CLI (`bd gate create`, `bd gate show`, `bd gate list`, `bd gate close`, `bd gate approve`, `bd gate eval`). The `gt gate` command adds Gas Town integration.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt gate wake` | Send wake mail to gate waiters after a gate closes |
+
+**Example:**
+
+```bash
+gt gate wake <gate-id>
+```
+
+---
+
 ## Beads (Issue Tracking)
 
 Beads is the git-backed issue tracking system integrated into Gas Town. The `bd` CLI manages beads directly.

@@ -105,26 +105,34 @@ gt mail read m-001
 
 ---
 
-### `gt mail mark`
+### `gt mail mark-read`
 
-Mark messages as read or unread.
+Mark messages as read without archiving.
 
 ```bash
-gt mail mark <message-id>... <status>
+gt mail mark-read <message-id>...
 ```
-
-**Description:** Changes the read status of one or more messages.
-
-**Valid statuses:** `read`, `unread`
 
 **Example:**
 
 ```bash
-# Mark as read
-gt mail mark m-001 m-002 read
+gt mail mark-read m-001 m-002
+```
 
-# Mark as unread
-gt mail mark m-003 unread
+---
+
+### `gt mail mark-unread`
+
+Mark messages as unread.
+
+```bash
+gt mail mark-unread <message-id>...
+```
+
+**Example:**
+
+```bash
+gt mail mark-unread m-003
 ```
 
 ---
@@ -312,6 +320,150 @@ gt mail announces [options]
 ```bash
 gt mail announces
 gt mail announces --since 24h
+```
+
+---
+
+### `gt mail archive`
+
+Archive messages.
+
+```bash
+gt mail archive <message-id>...
+```
+
+**Description:** Moves messages to the archive. Archived messages are no longer shown in the inbox but are preserved for future reference.
+
+**Example:**
+
+```bash
+gt mail archive m-001 m-002
+```
+
+---
+
+### `gt mail delete`
+
+Delete messages.
+
+```bash
+gt mail delete <message-id>...
+```
+
+**Description:** Permanently delete messages from the mailbox.
+
+**Example:**
+
+```bash
+gt mail delete m-001
+```
+
+---
+
+### `gt mail clear`
+
+Clear all messages from an inbox.
+
+```bash
+gt mail clear
+```
+
+**Description:** Removes all messages from the current agent's inbox.
+
+**Example:**
+
+```bash
+gt mail clear
+```
+
+---
+
+### `gt mail hook`
+
+Attach a mail message to your hook.
+
+```bash
+gt mail hook <message-id>
+```
+
+**Description:** Attaches a mail message to your hook as an ad-hoc work assignment. Alias for `gt hook attach`.
+
+**Example:**
+
+```bash
+gt mail hook m-001
+```
+
+---
+
+### `gt mail check`
+
+Check for new mail (for hooks).
+
+```bash
+gt mail check
+```
+
+**Description:** Non-interactive check for new mail, intended for use in hooks and automation.
+
+**Example:**
+
+```bash
+gt mail check
+```
+
+---
+
+### `gt mail claim`
+
+Claim a message from a queue.
+
+```bash
+gt mail claim <queue-name>
+```
+
+**Description:** Claims the next available message from a named queue, removing it from the queue for processing.
+
+**Example:**
+
+```bash
+gt mail claim work-queue
+```
+
+---
+
+### `gt mail release`
+
+Release a claimed queue message.
+
+```bash
+gt mail release <message-id>
+```
+
+**Description:** Releases a previously claimed queue message back to the queue for another agent to claim.
+
+**Example:**
+
+```bash
+gt mail release m-001
+```
+
+---
+
+### `gt mail group`
+
+Manage mail groups.
+
+```bash
+gt mail group [subcommand]
+```
+
+**Description:** Create and manage mail groups (distribution lists) for sending messages to multiple agents at once.
+
+**Example:**
+
+```bash
+gt mail group
 ```
 
 ---
