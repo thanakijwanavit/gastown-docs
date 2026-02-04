@@ -7006,10 +7006,10 @@ graph TD
 
 | Property | Mayor | Deacon | Witness | Refinery | Polecats | Dogs | Crew | Boot |
 |----------|-------|--------|---------|----------|----------|------|------|------|
-| **Receives mail** | Yes | Yes | Yes | Yes | Yes | No | No | No |
-| **Receives nudges** | Yes | Yes | Yes | Yes | Yes | No | No | No |
+| **Receives mail** | Yes | Yes | Yes | Yes | Yes | No | Yes | No |
+| **Receives nudges** | Yes | Yes | Yes | Yes | Yes | No | Yes | No |
 | **Sends escalations** | To human | To Mayor | To Deacon | To Witness | To Witness | To Deacon | N/A | To Deacon |
-| **Has mailbox** | Yes | Yes | Yes | Yes | Yes | No | No | No |
+| **Has mailbox** | Yes | Yes | Yes | Yes | Yes | No | Yes | No |
 
 ## Supervision Chain
 
@@ -7473,7 +7473,7 @@ Dogs are reusable infrastructure workers managed by the Deacon for cross-rig tas
 
 ```bash
 gt dog list          # List active dogs
-gt dog spawn         # Create a new dog
+gt dog add <name>    # Create a new dog
 ```
 
 ### 4. Patrol Cycle
@@ -7832,7 +7832,19 @@ flowchart TD
 
 ## Commands
 
-There are no direct `gt witness` subcommands exposed to the user. The Witness is managed by the Deacon. However, the following commands interact with Witness-monitored resources:
+### Witness Management
+
+| Command | Description |
+|---------|-------------|
+| `gt witness start` | Start the Witness for the current rig |
+| `gt witness stop` | Stop the Witness |
+| `gt witness status` | Check Witness session status |
+| `gt witness attach` | Attach to the Witness session |
+| `gt witness restart` | Restart the Witness session |
+
+### Polecat Commands (Witness-Monitored)
+
+The following commands interact with Witness-monitored resources:
 
 | Command | Description |
 |---------|-------------|
@@ -8829,14 +8841,14 @@ Each Dog gets its own subdirectory for task context and working files.
 | Command | Description |
 |---------|-------------|
 | `gt dog list` | List all active dogs |
-| `gt dog spawn` | Manually spawn a new dog |
+| `gt dog add <name>` | Create a new dog in the kennel |
 | `gt dog status <id>` | Check a specific dog's status |
 
 ## Tips and Best Practices
 
 :::tip[Let the Deacon Manage Dogs]
 
-Dogs are designed to be managed by the Deacon automatically. Manual dog management (`gt dog spawn`) should be rare and reserved for specific infrastructure emergencies.
+Dogs are designed to be managed by the Deacon automatically. Manual dog management (`gt dog add`) should be rare and reserved for specific infrastructure emergencies.
 
 :::
 
@@ -8911,7 +8923,7 @@ If infrastructure work is queued but no dogs are available:
 
 ```bash
 gt dog list                  # See active dogs
-gt dog spawn                 # Manually add a dog to the pool
+gt dog add <name>            # Manually add a dog to the pool
 ```
 
 The Deacon should auto-spawn dogs, but manual intervention may be needed if the Deacon is down.
