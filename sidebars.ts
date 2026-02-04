@@ -109,6 +109,7 @@ const sidebars: SidebarsConfig = {
         'guides/multi-runtime',
         'guides/cost-management',
         'guides/philosophy',
+        'guides/architecture',
         'guides/glossary',
       ],
     },
