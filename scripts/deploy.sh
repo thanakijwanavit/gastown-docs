@@ -15,6 +15,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 S3_BUCKET="docs.gt.villamarket.ai"
+CF_FUNCTION_NAME="gastown-docs-url-rewrite"
 
 if [ -z "${CF_DIST_ID:-}" ]; then
   echo "Error: CF_DIST_ID environment variable not set"
@@ -52,6 +53,43 @@ aws s3 sync build/ "s3://${S3_BUCKET}" \
   --include "llm.txt" \
   --include "llm-full.txt" \
   --include "api/*"
+
+# Ensure CloudFront Function exists for URL rewriting
+# This handles: /docs -> 301 /docs/ and /docs/ -> /docs/index.html
+echo ""
+echo "--- Ensuring CloudFront Function ---"
+CF_FUNC_FILE="$PROJECT_DIR/cloudfront/url-rewrite.js"
+
+if aws cloudfront describe-function --name "$CF_FUNCTION_NAME" --output text >/dev/null 2>&1; then
+  echo "Updating existing CloudFront Function: $CF_FUNCTION_NAME"
+  ETAG=$(aws cloudfront describe-function --name "$CF_FUNCTION_NAME" --query 'ETag' --output text)
+  aws cloudfront update-function \
+    --name "$CF_FUNCTION_NAME" \
+    --function-config '{"Comment":"URL rewrite for Docusaurus trailing slash","Runtime":"cloudfront-js-2.0"}' \
+    --function-code "fileb://${CF_FUNC_FILE}" \
+    --if-match "$ETAG" \
+    --output text
+  ETAG=$(aws cloudfront describe-function --name "$CF_FUNCTION_NAME" --query 'ETag' --output text)
+  aws cloudfront publish-function --name "$CF_FUNCTION_NAME" --if-match "$ETAG" --output text
+  echo "CloudFront Function updated and published"
+else
+  echo "Creating CloudFront Function: $CF_FUNCTION_NAME"
+  aws cloudfront create-function \
+    --name "$CF_FUNCTION_NAME" \
+    --function-config '{"Comment":"URL rewrite for Docusaurus trailing slash","Runtime":"cloudfront-js-2.0"}' \
+    --function-code "fileb://${CF_FUNC_FILE}" \
+    --output text
+  ETAG=$(aws cloudfront describe-function --name "$CF_FUNCTION_NAME" --query 'ETag' --output text)
+  aws cloudfront publish-function --name "$CF_FUNCTION_NAME" --if-match "$ETAG" --output text
+  echo "CloudFront Function created and published"
+  echo ""
+  echo "NOTE: You must manually associate this function with the distribution."
+  echo "  Distribution: ${CF_DIST_ID}"
+  echo "  Function:     ${CF_FUNCTION_NAME}"
+  echo "  Event type:   viewer-request"
+  echo "  Run: aws cloudfront get-distribution-config --id ${CF_DIST_ID}"
+  echo "  Then update the default cache behavior to include the function association."
+fi
 
 # Invalidate CloudFront cache
 echo ""

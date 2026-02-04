@@ -55,6 +55,32 @@ jobs:
             --include "llm-full.txt" \
             --include "api/*"
 
+      - name: Deploy CloudFront Function (URL rewrite)
+        run: |
+          CF_FUNC_NAME="gastown-docs-url-rewrite"
+          CF_FUNC_FILE="cloudfront/url-rewrite.js"
+
+          if aws cloudfront describe-function --name "$CF_FUNC_NAME" >/dev/null 2>&1; then
+            echo "Updating CloudFront Function: $CF_FUNC_NAME"
+            ETAG=$(aws cloudfront describe-function --name "$CF_FUNC_NAME" --query 'ETag' --output text)
+            aws cloudfront update-function \
+              --name "$CF_FUNC_NAME" \
+              --function-config '{"Comment":"URL rewrite for Docusaurus trailing slash","Runtime":"cloudfront-js-2.0"}' \
+              --function-code "fileb://${CF_FUNC_FILE}" \
+              --if-match "$ETAG"
+            ETAG=$(aws cloudfront describe-function --name "$CF_FUNC_NAME" --query 'ETag' --output text)
+            aws cloudfront publish-function --name "$CF_FUNC_NAME" --if-match "$ETAG"
+          else
+            echo "Creating CloudFront Function: $CF_FUNC_NAME"
+            aws cloudfront create-function \
+              --name "$CF_FUNC_NAME" \
+              --function-config '{"Comment":"URL rewrite for Docusaurus trailing slash","Runtime":"cloudfront-js-2.0"}' \
+              --function-code "fileb://${CF_FUNC_FILE}"
+            ETAG=$(aws cloudfront describe-function --name "$CF_FUNC_NAME" --query 'ETag' --output text)
+            aws cloudfront publish-function --name "$CF_FUNC_NAME" --if-match "$ETAG"
+            echo "NOTE: Function created but must be manually associated with distribution ${{ secrets.CF_DIST_ID }}"
+          fi
+
       - name: Invalidate CloudFront cache
         run: |
           aws cloudfront create-invalidation \
