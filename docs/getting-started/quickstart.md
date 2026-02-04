@@ -1,7 +1,7 @@
 ---
 title: "Quick Start"
 sidebar_position: 2
-description: "The Town is your top-level workspace directory. All projects (rigs) live inside it."
+description: "Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions."
 ---
 
 # Quick Start

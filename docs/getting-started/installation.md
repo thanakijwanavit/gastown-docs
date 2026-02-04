@@ -37,7 +37,19 @@ sudo mv gt /usr/local/bin/
 
 </TabItem>
 </Tabs>
+
 ## Install Dependencies
+
+### Git (Required)
+
+Gas Town relies on git worktrees for file-level isolation between agents. Git 2.25+ is required.
+
+```bash
+git --version
+# Should show 2.25.0 or higher
+```
+
+If your version is older, update via your package manager (`brew upgrade git`, `sudo apt install git`, etc.).
 
 ### Beads (Issue Tracking)
 
@@ -73,7 +85,7 @@ sudo yum install tmux
 
 ### Claude Code CLI
 
-Gas Town builds on Claude Code as its primary runtime. Install it following the [official instructions](https://claude.ai/).
+Gas Town builds on Claude Code as its primary runtime. Install it following the [official instructions](https://docs.anthropic.com/en/docs/claude-code/getting-started).
 
 ```bash
 # Verify Claude Code is available
