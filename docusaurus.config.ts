@@ -10,8 +10,9 @@ const config: Config = {
   url: 'https://docs.gt.villamarket.ai',
   baseUrl: '/',
 
-  organizationName: 'steveyegge',
-  projectName: 'gastown',
+  organizationName: 'thanakijwanavit',
+  projectName: 'gastown-docs',
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',

@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-02T05:14:05.670Z",
+  "generated": "2026-02-04T06:47:36.650Z",
   "sections": [
     {
       "id": "getting-started",
@@ -21,7 +21,7 @@
         {
           "title": "Quick Start",
           "path": "/docs/getting-started/quickstart",
-          "description": "The Town is your top-level workspace directory. All projects (rigs) live inside it."
+          "description": "Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions."
         },
         {
           "title": "Your First Convoy",
@@ -565,7 +565,7 @@
       "title": "Quick Start",
       "path": "/docs/getting-started/quickstart",
       "section": "getting-started",
-      "description": "The Town is your top-level workspace directory. All projects (rigs) live inside it."
+      "description": "Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions."
     },
     {
       "title": "Cost Management",

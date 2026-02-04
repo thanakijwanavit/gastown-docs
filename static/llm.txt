@@ -113,7 +113,7 @@ Install Gas Town via Homebrew, npm, or build from source, plus required dependen
 ## Quick Start
 > /docs/getting-started/quickstart
 
-The Town is your top-level workspace directory. All projects (rigs) live inside it.
+Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions.
 
 The **Town** is your top-level workspace directory. All projects (rigs) live inside it.
 
