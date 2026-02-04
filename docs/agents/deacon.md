@@ -63,7 +63,7 @@ Dogs are reusable infrastructure workers managed by the Deacon for cross-rig tas
 
 ```bash
 gt dog list          # List active dogs
-gt dog spawn         # Create a new dog
+gt dog add <name>    # Create a new dog
 ```
 
 ### 4. Patrol Cycle

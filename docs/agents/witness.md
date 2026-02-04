@@ -124,7 +124,19 @@ flowchart TD
 
 ## Commands
 
-There are no direct `gt witness` subcommands exposed to the user. The Witness is managed by the Deacon. However, the following commands interact with Witness-monitored resources:
+### Witness Management
+
+| Command | Description |
+|---------|-------------|
+| `gt witness start` | Start the Witness for the current rig |
+| `gt witness stop` | Stop the Witness |
+| `gt witness status` | Check Witness session status |
+| `gt witness attach` | Attach to the Witness session |
+| `gt witness restart` | Restart the Witness session |
+
+### Polecat Commands (Witness-Monitored)
+
+The following commands interact with Witness-monitored resources:
 
 | Command | Description |
 |---------|-------------|
