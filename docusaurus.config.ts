@@ -12,7 +12,7 @@ const config: Config = {
 
   organizationName: 'thanakijwanavit',
   projectName: 'gastown-docs',
-  trailingSlash: false,
+  trailingSlash: true,
 
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
@@ -39,7 +39,12 @@ const config: Config = {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/steveyegge/gastown/tree/master/gastowndocs/mayor/rig/',
         },
-        blog: false,
+        blog: {
+          showReadingTime: true,
+          blogSidebarTitle: 'Recent posts',
+          blogSidebarCount: 5,
+          onInlineAuthors: 'ignore',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
