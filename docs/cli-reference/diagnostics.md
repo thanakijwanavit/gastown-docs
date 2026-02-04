@@ -549,110 +549,110 @@ Peek: polecat/toast (myproject)
 
 ### `gt session list`
 
-List all agent sessions.
+List all tmux sessions.
 
 ```bash
 gt session list [options]
 ```
 
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--status <status>` | Filter: `running`, `stopped`, `crashed` |
-| `--rig <name>` | Filter by rig |
-| `--json` | Output in JSON format |
+**Aliases:** `sess list`
 
 **Example:**
 
 ```bash
 gt session list
-gt session list --status running
 ```
 
 ---
 
 ### `gt session status`
 
-Show status of a specific session.
+Show session status details.
 
 ```bash
-gt session status <session-id> [options]
+gt session status <name> [options]
 ```
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output in JSON format |
 
 **Example:**
 
 ```bash
-gt session status sess-abc123
+gt session status gt-myproject-toast
 ```
 
 ---
 
 ### `gt session start`
 
-Start a new agent session.
+Start a polecat session.
 
 ```bash
-gt session start <agent> [options]
+gt session start <name> [options]
 ```
-
-**Description:** Starts a new session for the specified agent. Lower-level than the agent-specific start commands (e.g., `gt mayor start`).
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--attach` | Attach to the session after starting |
-| `--agent <runtime>` | Agent runtime |
 
 **Example:**
 
 ```bash
-gt session start witness --rig myproject
+gt session start toast
 ```
 
 ---
 
 ### `gt session stop`
 
-Stop an agent session.
+Stop a polecat session.
 
 ```bash
-gt session stop <session-id> [options]
+gt session stop <name> [options]
 ```
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--force` | Force stop |
 
 **Example:**
 
 ```bash
-gt session stop sess-abc123
+gt session stop toast
 ```
 
 ---
 
 ### `gt session at`
 
-Show what an agent session is currently working on.
+Attach to a running session.
 
 ```bash
-gt session at <session-id>
+gt session at <name>
 ```
-
-**Description:** Quick view of the session's current task and hook state.
 
 **Example:**
 
 ```bash
-gt session at sess-abc123
+gt session at toast
+```
+
+---
+
+### `gt session capture`
+
+Capture recent session output.
+
+```bash
+gt session capture <name>
+```
+
+---
+
+### `gt session check`
+
+Check session health for polecats.
+
+```bash
+gt session check [options]
+```
+
+---
+
+### `gt session restart`
+
+Restart a polecat session.
+
+```bash
+gt session restart <name>
 ```

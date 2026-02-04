@@ -134,57 +134,77 @@ The default agent can be overridden at the rig level with `gt rig config <rig> a
 
 ---
 
+### `gt config agent remove`
+
+Remove a custom agent configuration.
+
+```bash
+gt config agent remove <name>
+```
+
+**Example:**
+
+```bash
+gt config agent remove my-custom-agent
+```
+
+---
+
+### `gt config agent-email-domain`
+
+Get or set the agent email domain.
+
+```bash
+gt config agent-email-domain [domain]
+```
+
+**Description:** Controls the email domain used for agent git commit identities. Default: `gastown.local`.
+
+**Example:**
+
+```bash
+gt config agent-email-domain
+gt config agent-email-domain mycompany.local
+```
+
+---
+
 ## Account Management
 
 ### `gt account`
 
-Manage Gas Town account settings.
+Manage multiple Claude Code accounts for Gas Town.
 
 ```bash
-gt account [subcommand] [options]
+gt account [subcommand]
 ```
 
-**Description:** View and manage account-level settings including API keys, user identity, and linked services.
+**Description:** Enables switching between accounts (e.g., personal vs work) with easy account selection per spawn or globally.
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt account show` | Show current account settings |
-| `gt account set <key> <value>` | Set an account setting |
-| `gt account link <service>` | Link an external service (GitHub, Discord, etc.) |
-| `gt account unlink <service>` | Unlink an external service |
+| `list` | List registered accounts |
+| `add <handle>` | Add a new account |
+| `default <handle>` | Set the default account |
+| `status` | Show current account info |
+| `switch` | Switch to a different account |
 
 **Example:**
 
 ```bash
-# Show account info
-gt account show
+# List registered accounts
+gt account list
 
-# Set user name
-gt account set name "Dave"
+# Add a new account
+gt account add work
 
-# Set email
-gt account set email "dave@example.com"
+# Set default
+gt account default work
 
-# Link GitHub
-gt account link github
-
-# Link Discord
-gt account link discord
-```
-
-**Sample output (show):**
-
-```
-Gas Town Account
-================
-Name: Dave
-Email: dave@example.com
-Linked services:
-  GitHub: connected (dave-dev)
-  Discord: connected (dave#1234)
-  Slack: not linked
+# Show current account info
+gt account status
 ```
 
 ---
@@ -193,30 +213,26 @@ Linked services:
 
 ### `gt theme`
 
-Manage terminal theme and display settings.
+Manage tmux status bar themes for Gas Town sessions.
 
 ```bash
 gt theme [name] [options]
 ```
 
-**Description:** Without arguments, shows the current theme. With a name, sets the active theme. Themes control colors, icons, and formatting in the CLI output.
+**Description:** Without arguments, shows the current theme assignment. With a name, sets the theme for the current rig.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `apply` | Apply theme to all running sessions in this rig |
+| `cli` | View or set CLI color scheme (`dark`/`light`/`auto`) |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--list` | List available themes |
-| `--preview` | Preview a theme without applying |
-
-**Built-in themes:**
-
-| Theme | Description |
-|-------|-------------|
-| `default` | Standard terminal colors |
-| `dark` | Optimized for dark backgrounds |
-| `light` | Optimized for light backgrounds |
-| `minimal` | Reduced visual noise |
-| `mad-max` | Thematic, full color |
+| `--list`, `-l` | List available themes |
 
 **Example:**
 
@@ -228,10 +244,10 @@ gt theme
 gt theme --list
 
 # Set theme
-gt theme dark
+gt theme forest
 
-# Preview before applying
-gt theme mad-max --preview
+# Apply to running sessions
+gt theme apply
 ```
 
 ---
@@ -240,78 +256,51 @@ gt theme mad-max --preview
 
 ### `gt hooks`
 
-Manage lifecycle hooks and event handlers.
+List all Claude Code hooks configured in the workspace.
 
 ```bash
-gt hooks [subcommand] [options]
+gt hooks [options]
 ```
 
-**Description:** Configure scripts and actions that run in response to Gas Town lifecycle events. Hooks execute at specific points in the work lifecycle.
+**Description:** Scans for `.claude/settings.json` files and displays hooks by type. This lists Claude Code hooks (not Gas Town lifecycle hooks).
+
+**Hook types:**
+
+| Type | Description |
+|------|-------------|
+| `SessionStart` | Runs when Claude session starts |
+| `PreCompact` | Runs before context compaction |
+| `UserPromptSubmit` | Runs before user prompt is submitted |
+| `PreToolUse` | Runs before tool execution |
+| `PostToolUse` | Runs after tool execution |
+| `Stop` | Runs when Claude session stops |
 
 **Subcommands:**
 
 | Subcommand | Description |
 |------------|-------------|
-| `gt hooks list` | List configured hooks |
-| `gt hooks add <event> <command>` | Add a hook for an event |
-| `gt hooks remove <event> [command]` | Remove a hook |
-| `gt hooks enable <event>` | Enable a disabled hook |
-| `gt hooks disable <event>` | Disable a hook without removing |
-| `gt hooks test <event>` | Test-fire a hook |
+| `install` | Install a hook from the registry |
+| `list` | List available hooks from the registry |
 
-**Available events:**
+**Options:**
 
-| Event | Fires When |
-|-------|-----------|
-| `pre-sling` | Before work is assigned |
-| `post-sling` | After work is assigned |
-| `pre-done` | Before work completion |
-| `post-done` | After work completion |
-| `pre-merge` | Before a merge is attempted |
-| `post-merge` | After a successful merge |
-| `agent-start` | When any agent starts |
-| `agent-stop` | When any agent stops |
-| `escalation` | When an escalation is created |
-| `convoy-complete` | When a convoy finishes |
-| `polecat-spawn` | When a polecat spawns |
-| `polecat-nuke` | When a polecat is nuked |
+| Flag | Description |
+|------|-------------|
+| `--verbose`, `-v` | Show hook commands |
+| `--json` | Output as JSON |
 
 **Example:**
 
 ```bash
-# List all hooks
-gt hooks list
+# List all hooks in workspace
+gt hooks
 
-# Add a hook to notify on merge
-gt hooks add post-merge "curl -X POST https://slack.com/webhook -d '{\"text\": \"Merged!\"}'"
+# Show hook commands
+gt hooks --verbose
 
-# Add a pre-merge test hook
-gt hooks add pre-merge "npm test"
-
-# Disable a hook
-gt hooks disable pre-merge
-
-# Test a hook
-gt hooks test post-merge
-
-# Remove a hook
-gt hooks remove pre-merge
+# Install from registry
+gt hooks install
 ```
-
-**Options for `gt hooks add`:**
-
-| Flag | Description |
-|------|-------------|
-| `--rig <name>` | Apply hook to a specific rig |
-| `--global` | Apply hook globally |
-| `--async` | Run hook asynchronously (do not block) |
-| `--timeout <seconds>` | Hook execution timeout |
-
-:::note
-
-Pre-hooks (pre-sling, pre-done, pre-merge) can abort the operation by returning a non-zero exit code. Post-hooks are informational and do not affect the operation outcome.
-
-:::
 
 ---
 
@@ -372,13 +361,10 @@ gt issue config --provider github --repo you/repo --token $GITHUB_TOKEN --auto-s
 ```
 
 :::tip[Bidirectional Sync]
-
 When `--auto-sync` is enabled, Gas Town will:
 
 - Update external issue status when a bead status changes
 - Update bead status when an external issue changes
 - Sync comments between beads and external issues
 - Map priority levels between systems
-
-
 :::

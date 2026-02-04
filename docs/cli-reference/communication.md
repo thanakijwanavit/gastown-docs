@@ -105,27 +105,107 @@ gt mail read m-001
 
 ---
 
-### `gt mail mark`
+### `gt mail mark-read`
 
-Mark messages as read or unread.
+Mark messages as read without archiving.
 
 ```bash
-gt mail mark <message-id>... <status>
+gt mail mark-read <message-id>...
 ```
-
-**Description:** Changes the read status of one or more messages.
-
-**Valid statuses:** `read`, `unread`
 
 **Example:**
 
 ```bash
-# Mark as read
-gt mail mark m-001 m-002 read
-
-# Mark as unread
-gt mail mark m-003 unread
+gt mail mark-read m-001 m-002
 ```
+
+---
+
+### `gt mail mark-unread`
+
+Mark messages as unread.
+
+```bash
+gt mail mark-unread <message-id>...
+```
+
+**Example:**
+
+```bash
+gt mail mark-unread m-003
+```
+
+---
+
+### `gt mail archive`
+
+Archive messages.
+
+```bash
+gt mail archive <message-id>...
+```
+
+**Example:**
+
+```bash
+gt mail archive m-001
+```
+
+---
+
+### `gt mail delete`
+
+Delete messages.
+
+```bash
+gt mail delete <message-id>...
+```
+
+**Example:**
+
+```bash
+gt mail delete m-001
+```
+
+---
+
+### `gt mail clear`
+
+Clear all messages from an inbox.
+
+```bash
+gt mail clear
+```
+
+---
+
+### `gt mail hook`
+
+Attach mail to your hook.
+
+```bash
+gt mail hook <mail-id>
+```
+
+**Description:** Hooks a mail bead as your work assignment. Alias for `gt hook attach`.
+
+**Example:**
+
+```bash
+gt mail hook hq-mail-abc
+```
+
+---
+
+### `gt mail check`
+
+Check for new mail (for hooks).
+
+```bash
+gt mail check
+```
+
+**Description:** Used by hooks to detect new mail arrivals.
 
 ---
 
@@ -320,65 +400,75 @@ gt mail announces --since 24h
 
 ### `gt nudge`
 
-Send a synchronous notification to an agent.
+Send a synchronous message to any Gas Town worker.
 
 ```bash
-gt nudge <target> [options]
+gt nudge <target> [message] [options]
 ```
 
-**Description:** Unlike mail (async), a nudge is a synchronous message delivery that interrupts the target agent immediately. Used by supervisors to wake up or redirect agents.
+**Description:** Delivers a message directly to a worker's Claude Code session. This is the only way to send real-time messages to Claude sessions. Supports role shortcuts (`mayor`, `deacon`, `witness`, `refinery`) and channel syntax (`channel:<name>`) for group nudges.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <text>` | Nudge message |
-| `--action <action>` | Requested action: `check-hook`, `patrol`, `restart`, `status` |
+| `--message`, `-m` | Message to send |
+| `--force`, `-f` | Send even if target has DND enabled |
 
 **Example:**
 
 ```bash
-# Nudge a polecat to check its hook
-gt nudge polecat/toast --action check-hook
+# Nudge a specific polecat
+gt nudge myproject/toast "Check your mail and start working"
 
-# Nudge with a message
-gt nudge witness --message "Check polecat alpha, appears stalled" --rig myproject
+# Nudge with --message flag
+gt nudge mayor -m "Status update requested"
+
+# Nudge a role shortcut
+gt nudge witness "Check polecat health"
+
+# Nudge a channel (all members)
+gt nudge channel:workers "New priority work available"
 ```
 
 :::warning
-
 Use nudges sparingly. They interrupt the target agent's current activity. For non-urgent messages, use `gt mail send` instead.
-
 :::
 
 ---
 
 ### `gt broadcast`
 
-Send a message to all agents.
+Send a message to all active workers.
 
 ```bash
-gt broadcast [options]
+gt broadcast <message> [options]
 ```
 
-**Description:** Sends a message to all agents in the town or all agents in a specific rig. Used for system-wide announcements.
+**Description:** Broadcasts a nudge to all active workers (polecats and crew). Use `--all` to include infrastructure agents (mayor, deacon, witness, refinery).
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <text>` | Broadcast message |
-| `--rig <name>` | Broadcast to a specific rig only |
-| `--priority <level>` | Priority level |
+| `--rig <name>` | Only broadcast to workers in this rig |
+| `--all` | Include all agents (not just workers) |
+| `--dry-run` | Show what would be sent without sending |
 
 **Example:**
 
 ```bash
-# Town-wide broadcast
-gt broadcast --message "Maintenance window in 30 minutes, save your work"
+# Broadcast to all workers
+gt broadcast "Check your mail"
 
 # Rig-specific broadcast
-gt broadcast --rig myproject --message "Main branch frozen for release"
+gt broadcast --rig myproject "New priority work available"
+
+# Include infrastructure agents
+gt broadcast --all "System maintenance in 5 minutes"
+
+# Preview
+gt broadcast --dry-run "Test message"
 ```
 
 ---
@@ -458,20 +548,23 @@ Escalations are priority-routed alerts for issues that need human intervention o
 Create a new escalation.
 
 ```bash
-gt escalate [options]
+gt escalate [description] [options]
 ```
 
-**Description:** Creates a priority-routed escalation that travels up the supervisor chain until it reaches an agent authorized to handle it. Severity levels control routing depth.
+**Description:** Creates a severity-routed escalation tracked as a bead with the `gt:escalation` label. Routing is configured in `~/gt/settings/escalation.json`.
+
+**Subcommands:** `list`, `ack`, `close`, `show`, `stale`
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--severity <level>` | Severity: `P0` (critical), `P1` (high), `P2` (medium), `P3` (low) |
-| `--message <text>` | Escalation description |
-| `--bead <id>` | Associated bead |
-| `--rig <name>` | Associated rig |
-| `--to <agent>` | Direct escalation to a specific agent |
+| `--severity`, `-s` | Severity: `critical` (P0), `high` (P1), `medium` (P2, default), `low` (P3) |
+| `--reason`, `-r` | Detailed reason for escalation |
+| `--related <id>` | Related bead ID (task, bug, etc.) |
+| `--source <id>` | Source identifier (e.g., `plugin:rebuild-gt`, `patrol:deacon`) |
+| `--json` | Output as JSON |
+| `--dry-run`, `-n` | Show what would be done without executing |
 
 **Routing by severity:**
 
@@ -486,13 +579,13 @@ gt escalate [options]
 
 ```bash
 # Critical escalation
-gt escalate --severity P0 --message "Production database migration failed" --rig myproject
+gt escalate "Build failing" --severity critical --reason "CI blocked"
 
-# Standard escalation with associated bead
-gt escalate --severity P2 --message "Need design decision for API schema" --bead gt-abc12
+# Standard escalation with related bead
+gt escalate "Need API credentials" --severity high --source "plugin:rebuild-gt"
 
-# Direct escalation to Mayor
-gt escalate --to mayor --message "Merge conflicts accumulating faster than resolution"
+# Default severity (medium)
+gt escalate "Code review requested" --reason "PR #123 ready"
 ```
 
 ---
@@ -556,6 +649,22 @@ gt escalate ack esc-001 --message "Investigating, will have fix in 15 minutes"
 
 ---
 
+### `gt escalate show`
+
+Show details of an escalation.
+
+```bash
+gt escalate show <escalation-id>
+```
+
+**Example:**
+
+```bash
+gt escalate show hq-esc-001
+```
+
+---
+
 ### `gt escalate close`
 
 Close a resolved escalation.
@@ -568,12 +677,12 @@ gt escalate close <escalation-id> [options]
 
 | Flag | Description |
 |------|-------------|
-| `--resolution <text>` | How the escalation was resolved |
+| `--reason <text>` | How the escalation was resolved |
 
 **Example:**
 
 ```bash
-gt escalate close esc-001 --resolution "Rolled back migration, applied fix, re-ran successfully"
+gt escalate close hq-esc-001 --reason "Fixed in commit abc"
 ```
 
 ---
@@ -603,8 +712,5 @@ gt escalate stale --age 30m
 ```
 
 :::warning
-
 Stale P0/P1 escalations indicate that critical issues are going unaddressed. These should be triaged immediately.
-
-
 :::

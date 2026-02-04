@@ -14,95 +14,116 @@ Commands for managing agent sessions, handoffs between sessions, molecules (mult
 
 ### `gt handoff`
 
-Hand off work to a new session.
+End session and hand off to a fresh agent session.
 
 ```bash
-gt handoff [options]
+gt handoff [bead-or-role] [options]
 ```
 
-**Description:** Performs a graceful session transition. The current session saves its state (hook, context, progress) into a handoff file, then exits. The next session picks up from where the previous one left off. This is the standard way to deal with context limits.
+**Description:** The canonical way to end any agent session. It handles all roles: Mayor, Crew, Witness, Refinery, and Deacon respawn with a fresh Claude instance. Polecats call `gt done --status DEFERRED` instead (Witness handles lifecycle). When given a bead ID, hooks that work first, then restarts. Any molecule on the hook is auto-continued by the new session.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <text>` | Handoff notes for the next session |
-| `--checkpoint` | Save a full checkpoint before handing off |
-| `--to <agent>` | Hand off to a specific agent role |
+| `--subject`, `-s` | Subject for handoff mail |
+| `--message`, `-m` | Message body for handoff mail |
+| `--collect`, `-c` | Auto-collect state (status, inbox, beads) into handoff message |
+| `--watch`, `-w` | Switch to new session (default: `true`) |
+| `--dry-run`, `-n` | Show what would be done without executing |
 
 **Example:**
 
 ```bash
 # Standard handoff
-gt handoff --message "Completed 3/5 test fixes, remaining: auth_test.go and api_test.go"
+gt handoff -s "Context filling" -m "Completed 3/5 test fixes"
 
-# Handoff with checkpoint
-gt handoff --checkpoint --message "At step 3 of molecule, next: run integration tests"
+# Hook a bead and restart
+gt handoff gt-abc12 -s "Fix the login bug"
+
+# Auto-collect state into handoff mail
+gt handoff -c
+
+# Hand off a specific role's session
+gt handoff crew
+gt handoff mayor
 ```
 
 :::tip[Handoff Best Practice]
-
 Always include a clear message describing what was accomplished and what remains. The next session relies on this context to continue work effectively.
-
 :::
 
 ---
 
 ### `gt resume`
 
-Resume from a previous session or handoff.
+Resume from parked work or check for handoff messages.
 
 ```bash
 gt resume [options]
 ```
 
-**Description:** Loads the most recent handoff state and resumes work. Reads the handoff file, restores hook state, and continues from where the previous session ended.
+**Description:** Checks for parked work (from `gt park`) and whether its gate has cleared. If the gate is closed, restores the hook with previous work and displays context notes. With `--handoff`, checks inbox for handoff messages instead.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--session <id>` | Resume a specific session by ID |
-| `--latest` | Resume the most recent session (default) |
-| `--list` | List available sessions to resume |
+| `--status` | Just show parked work status without resuming |
+| `--handoff` | Check inbox for handoff messages instead of parked work |
+| `--json` | Output in JSON format |
 
 **Example:**
 
 ```bash
-# Resume latest
+# Check for and resume parked work
 gt resume
 
-# List available sessions
-gt resume --list
+# Just show status
+gt resume --status
 
-# Resume a specific session
-gt resume --session sess-abc123
+# Check for handoff messages
+gt resume --handoff
 ```
 
 ---
 
 ### `gt park`
 
-Park the current session (pause without handoff).
+Park current work on a gate for async resumption.
 
 ```bash
-gt park [options]
+gt park <gate-id> [options]
 ```
 
-**Description:** Saves the current session state and exits without triggering a new session. The work stays on the hook and can be resumed later. Unlike handoff, parking does not expect an immediate successor.
+**Description:** When waiting for an external condition (timer, CI, human approval), park your work on a gate. Saves your current hook state, adds you as a waiter on the gate, and stores context notes. After parking, exit the session safely. Use `gt resume` to check for cleared gates and continue.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <text>` | Parking notes |
-| `--duration <time>` | Expected park duration (informational) |
+| `--message`, `-m` | Context notes for resumption |
+| `--dry-run`, `-n` | Show what would be done without executing |
 
 **Example:**
 
 ```bash
-gt park --message "Waiting for API review feedback" --duration 4h
+# Create a gate and park on it
+bd gate create --await timer:30m --title "Coffee break"
+gt park <gate-id> -m "Taking a break, will resume auth work"
+
+# Park on a human approval gate
+bd gate create --await human:deploy-approval
+gt park <gate-id> -m "Deploy staged, awaiting approval"
+
+# Park on a GitHub Actions gate
+bd gate create --await gh:run:123456789
+gt park <gate-id> -m "Waiting for CI to complete"
 ```
+
+:::note
+`gt park` parks work on a gate (async wait). `gt rig park` parks a rig (stops its agents). These are different commands.
+:::
 
 ---
 
@@ -325,18 +346,36 @@ gt mol step done --message "All endpoints migrated, 47 files changed"
 
 ### `gt mol attach`
 
-Attach to a running molecule.
+Attach a molecule to a pinned bead.
 
 ```bash
 gt mol attach <molecule-id> [options]
 ```
 
-**Description:** Attaches the current agent to an active molecule, joining the workflow execution.
+**Description:** Attaches a molecule to the current agent's hook, joining the workflow execution.
 
 **Example:**
 
 ```bash
 gt mol attach mol-auth-001
+```
+
+---
+
+### `gt mol attach-from-mail`
+
+Attach a molecule from a mail message.
+
+```bash
+gt mol attach-from-mail <mail-id>
+```
+
+**Description:** Extracts and attaches a molecule from a mail bead. Used when work arrives via the mail system rather than direct slinging.
+
+**Example:**
+
+```bash
+gt mol attach-from-mail hq-mail-abc
 ```
 
 ---

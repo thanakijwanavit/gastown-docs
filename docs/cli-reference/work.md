@@ -20,60 +20,66 @@ List work items that are ready for assignment.
 gt ready [options]
 ```
 
-**Description:** Shows beads in `pending` or `open` status that are not currently assigned to any agent. These are available for slinging to workers.
+**Description:** Aggregates ready issues from town beads (hq-* items) and each rig's beads. Ready items have no blockers and can be worked immediately. Results are sorted by priority (highest first).
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
 | `--rig <name>` | Filter to a specific rig |
-| `--priority <level>` | Filter by priority: `critical`, `high`, `medium`, `low` |
-| `--type <type>` | Filter by type: `bug`, `feature`, `task`, `chore` |
-| `--convoy <id>` | Show only items in a specific convoy |
 | `--json` | Output in JSON format |
 
 **Example:**
 
 ```bash
-# Show all ready work
+# Show all ready work across town
 gt ready
-
-# Show high-priority bugs ready for work
-gt ready --priority high --type bug
 
 # Show ready work for a specific rig
 gt ready --rig myproject
-```
-
-**Sample output:**
-
-```
-ID         PRIORITY   TYPE      TITLE                           RIG
-gt-abc12   high       bug       Fix login redirect loop         myproject
-gt-def34   medium     feature   Add email validation            myproject
-gt-ghi56   low        task      Update API documentation        docs
 ```
 
 ---
 
 ### `gt sling`
 
-Assign work to a rig or agent.
+Assign work to an agent. THE unified work dispatch command.
 
 ```bash
-gt sling <bead-id>... <target> [options]
+gt sling <bead-or-formula> [target] [options]
 ```
 
-**Description:** The primary command for assigning work. Hooks the bead to the target, updates its status, and spawns a polecat to execute the work. This is the central work distribution command in Gas Town.
+**Description:** The primary command for assigning work. Handles existing agents, auto-spawning polecats, dispatching to dogs, formula instantiation, and auto-convoy creation. When multiple beads are provided with a rig target, each bead gets its own polecat.
+
+**Target resolution:**
+
+| Target | Result |
+|--------|--------|
+| *(none)* | Self (current agent) |
+| `crew` | Crew worker in current rig |
+| `myrig` | Auto-spawn polecat in rig |
+| `myrig/toast` | Specific polecat |
+| `mayor` | Mayor |
+| `deacon/dogs` | Auto-dispatch to idle dog |
+| `deacon/dogs/alpha` | Specific dog |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--agent <runtime>` | Agent runtime for the spawned polecat |
-| `--name <name>` | Name for the spawned polecat |
-| `--priority` | Override bead priority for scheduling |
-| `--no-spawn` | Hook the work but do not spawn a polecat |
+| `--agent <runtime>` | Override agent runtime (e.g., `claude`, `gemini`, `codex`) |
+| `--account <handle>` | Claude Code account handle to use |
+| `--args`, `-a` | Natural language instructions for the executor |
+| `--create` | Create polecat if it doesn't exist |
+| `--force` | Force spawn even if polecat has unread mail |
+| `--message`, `-m` | Context message for the work |
+| `--subject`, `-s` | Context subject for the work |
+| `--no-convoy` | Skip auto-convoy creation |
+| `--no-merge` | Skip merge queue on completion (keep branch for review) |
+| `--hook-raw-bead` | Hook raw bead without default formula (expert mode) |
+| `--on <bead-id>` | Apply formula to existing bead |
+| `--var <key=value>` | Formula variable (can be repeated) |
+| `--dry-run`, `-n` | Show what would be done |
 
 **Example:**
 
@@ -81,27 +87,24 @@ gt sling <bead-id>... <target> [options]
 # Assign a single bead to a rig (auto-spawns polecat)
 gt sling gt-abc12 myproject
 
-# Assign multiple beads
-gt sling gt-abc12 gt-def34 myproject
+# Batch sling (each bead gets its own polecat)
+gt sling gt-abc12 gt-def34 gt-ghi56 myproject
+
+# Assign with natural language instructions
+gt sling gt-abc12 myproject --args "patch release"
+
+# Sling a formula
+gt sling mol-release mayor/
+
+# Apply formula to existing work
+gt sling mol-review --on gt-abc12
 
 # Assign with a specific agent
 gt sling gt-abc12 myproject --agent cursor
-
-# Hook work without spawning (manual pickup later)
-gt sling gt-abc12 myproject --no-spawn
 ```
 
-**What happens:**
-
-1. Bead status changes to `hooked`
-2. Work attaches to the target's hook
-3. A polecat spawns in the rig (unless `--no-spawn`)
-4. The polecat's startup hook finds and begins the work
-
 :::tip
-
 The Mayor typically handles slinging automatically. Use `gt sling` for manual assignment or when fine-grained control is needed.
-
 :::
 
 ---
@@ -114,13 +117,27 @@ View or attach work to the current agent's hook.
 gt hook [bead-id] [options]
 ```
 
-**Description:** Without arguments, shows what is currently on the agent's hook. With a bead ID, attaches that work item to the hook. The hook is Gas Town's durability primitive -- work on a hook survives session restarts, compaction, and crashes.
+**Aliases:** `work`
+
+**Description:** Without arguments, shows what is currently on the agent's hook (alias for `gt mol status`). With a bead ID, attaches that work item to the hook. The hook is Gas Town's durability primitive — work on a hook survives session restarts, compaction, and crashes.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `status` | Show what's on your hook |
+| `show` | Show what's on an agent's hook (compact) |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--json` | Output in JSON format |
+| `--json` | Output in JSON format (for status) |
+| `--subject`, `-s` | Subject for handoff mail |
+| `--message`, `-m` | Message for handoff mail |
+| `--force`, `-f` | Replace existing incomplete hooked bead |
+| `--clear` | Clear your hook (alias for `gt unhook`) |
+| `--dry-run`, `-n` | Show what would be done |
 
 **Example:**
 
@@ -130,17 +147,18 @@ gt hook
 
 # Attach work to hook
 gt hook gt-abc12
+
+# Attach with context
+gt hook gt-abc12 -s "Fix the login bug"
 ```
 
-**Sample output:**
+**Related commands:**
 
-```
-Hook: gt-abc12 "Fix login redirect loop" [in_progress]
-  Rig: myproject
-  Branch: fix/login-bug
-  Convoy: hq-cv-001
-  Hooked: 15m ago
-```
+| Command | Behavior |
+|---------|----------|
+| `gt hook <bead>` | Just attach (no action) |
+| `gt sling <bead>` | Attach + start now (keep context) |
+| `gt handoff <bead>` | Attach + restart (fresh context) |
 
 ---
 
@@ -175,45 +193,49 @@ gt unsling gt-abc12 --release
 
 ### `gt done`
 
-Mark work as complete and submit a merge request.
+Signal work complete and submit to the merge queue.
 
 ```bash
 gt done [options]
 ```
 
-**Description:** The standard polecat exit command. Commits any remaining changes, pushes the branch, creates a merge request for the Refinery, updates the bead status, and exits the polecat session. This is the happy-path completion for any piece of work.
+**Description:** The standard polecat exit command. Submits the current branch to the merge queue, auto-detects issue ID from branch name, notifies the Witness with the exit outcome, and exits the Claude session.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <msg>` | MR description / completion summary |
-| `--no-mr` | Complete without creating a merge request |
-| `--escalate` | Exit with escalation instead of completion |
-| `--defer` | Exit with deferred status (work paused, not done) |
-| `--phase` | Exit with phase-complete status (gate point) |
+| `--status <status>` | Exit status: `COMPLETED`, `ESCALATED`, or `DEFERRED` (default: `COMPLETED`) |
+| `--issue <id>` | Source issue ID (default: parsed from branch name) |
+| `--priority`, `-p` | Override priority 0-4 (default: inherit from issue) |
+| `--phase-complete` | Signal phase complete — await gate before continuing |
+| `--gate <id>` | Gate bead ID to wait on (with `--phase-complete`) |
+| `--cleanup-status <status>` | Git cleanup status: `clean`, `uncommitted`, `unpushed`, `stash`, `unknown` |
 
 **Example:**
 
 ```bash
 # Standard completion
-gt done --message "Fixed login redirect by correcting OAuth callback URL"
+gt done
 
-# Complete without MR (e.g., documentation-only changes)
-gt done --no-mr --message "Updated local docs only"
+# Explicit issue ID
+gt done --issue gt-abc12
 
 # Escalate a blocker
-gt done --escalate --message "Blocked: need API credentials for staging"
+gt done --status ESCALATED
+
+# Phase complete, waiting on gate
+gt done --phase-complete --gate g-abc
 ```
 
 **Exit states:**
 
-| Flag | Exit State | Meaning |
-|------|-----------|---------|
-| (default) | `COMPLETED` | Work done, MR submitted to Refinery |
-| `--escalate` | `ESCALATED` | Hit a blocker, needs human input |
-| `--defer` | `DEFERRED` | Paused, another agent can pick up later |
-| `--phase` | `PHASE_COMPLETE` | Phase done, waiting for gate |
+| Status | Meaning |
+|--------|---------|
+| `COMPLETED` | Work done, MR submitted to Refinery (default) |
+| `ESCALATED` | Hit a blocker, needs human intervention |
+| `DEFERRED` | Work paused, issue still open |
+| `PHASE_COMPLETE` | Phase done, awaiting gate (use `--phase-complete`) |
 
 ---
 
@@ -247,31 +269,29 @@ gt close gt-ghi56 --wontfix
 
 ### `gt release`
 
-Release a stuck in-progress bead back to the ready pool.
+Release stuck in-progress issues back to open status.
 
 ```bash
-gt release <bead-id> [options]
+gt release <issue-id>... [options]
 ```
 
-**Description:** Frees a bead that is stuck in `in_progress` or `hooked` status, making it available for reassignment. Essential for recovering from polecat crashes or stalled work.
+**Description:** Moves issues from `in_progress` back to `open` status and clears the assignee, allowing another worker to claim and complete them. Implements nondeterministic idempotence — work can be safely retried by releasing and reclaiming stuck steps.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--force` | Release even if an agent appears to still be working on it |
+| `--reason`, `-r` | Reason for releasing (added as note) |
 
 **Example:**
 
 ```bash
 gt release gt-abc12
-gt release gt-abc12 --force
+gt release gt-abc12 gt-def34 -r "worker died"
 ```
 
 :::tip
-
 The Witness automatically detects stalled polecats and can release their work. Use `gt release` for manual intervention.
-
 :::
 
 ---
@@ -321,32 +341,26 @@ Updated: 15m ago
 
 ### `gt cat`
 
-Output the raw content of a bead or work artifact.
+Display the content of a bead.
 
 ```bash
 gt cat <bead-id> [options]
 ```
 
-**Description:** Prints the raw bead content, including description, comments, and metadata. Useful for piping into other tools or for programmatic access.
+**Description:** Convenience wrapper around `bd show` that integrates with `gt`. Accepts any bead ID (`bd-*`, `hq-*`, `mol-*`).
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--field <name>` | Output only a specific field |
-| `--format <fmt>` | Output format: `text`, `json`, `yaml` |
+| `--json` | Output in JSON format |
 
 **Example:**
 
 ```bash
-# Full bead content
 gt cat gt-abc12
-
-# Just the description
-gt cat gt-abc12 --field description
-
-# JSON output for scripting
-gt cat gt-abc12 --format json
+gt cat hq-xyz789
+gt cat gt-abc12 --json
 ```
 
 ---
@@ -506,15 +520,219 @@ bd close gt-abc12 --reason "Fixed in PR #42"
 
 ---
 
+### `bd ready`
+
+Show issues ready to work (no blockers, open or in_progress).
+
+```bash
+bd ready [options]
+```
+
+**Description:** Lists issues that have no blocking dependencies and can be worked immediately.
+
+**Example:**
+
+```bash
+bd ready
+```
+
+---
+
+### `bd blocked`
+
+Show blocked issues.
+
+```bash
+bd blocked [options]
+```
+
+**Description:** Lists issues that are blocked by unresolved dependencies.
+
+**Example:**
+
+```bash
+bd blocked
+```
+
+---
+
+### `bd search`
+
+Search issues by text query.
+
+```bash
+bd search <query> [options]
+```
+
+**Description:** Full-text search across issue titles, descriptions, and comments.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--from <agent>` | Filter by author |
+| `--since <time>` | Filter by date |
+| `--limit <n>` | Maximum results |
+| `--json` | Output in JSON format |
+
+**Example:**
+
+```bash
+bd search "login bug"
+bd search "authentication" --limit 5
+```
+
+---
+
+### `bd dep`
+
+Manage dependencies between issues.
+
+```bash
+bd dep <subcommand> <issue-id> <depends-on-id>
+```
+
+**Description:** Add or remove dependency relationships. When issue A depends on issue B, A is blocked until B is closed.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `add <issue> <depends-on>` | Add dependency (issue depends on depends-on) |
+| `rm <issue> <depends-on>` | Remove dependency |
+
+**Example:**
+
+```bash
+# "Write tests" depends on "Implement feature"
+bd dep add gt-tests gt-feature
+
+# Show what's blocked
+bd blocked
+```
+
+:::warning
+Think "X needs Y", not "X comes before Y". Temporal language inverts dependencies.
+:::
+
+---
+
+### `bd delete`
+
+Delete one or more issues and clean up references.
+
+```bash
+bd delete <bead-id>... [options]
+```
+
+**Description:** Permanently removes issues from the database and cleans up dependency references.
+
+**Example:**
+
+```bash
+bd delete gt-abc12
+bd delete gt-abc12 gt-def34
+```
+
+---
+
+### `bd reopen`
+
+Reopen one or more closed issues.
+
+```bash
+bd reopen <bead-id>... [options]
+```
+
+**Example:**
+
+```bash
+bd reopen gt-abc12
+```
+
+---
+
+### `bd comments`
+
+View or manage comments on an issue.
+
+```bash
+bd comments <bead-id> [options]
+```
+
+**Example:**
+
+```bash
+bd comments gt-abc12
+```
+
+---
+
+### `bd label`
+
+Manage issue labels.
+
+```bash
+bd label <subcommand> [options]
+```
+
+**Description:** Add, remove, or list labels on issues.
+
+**Example:**
+
+```bash
+bd label add gt-abc12 bug
+bd label rm gt-abc12 wontfix
+```
+
+---
+
+### `bd graph`
+
+Display issue dependency graph.
+
+```bash
+bd graph [options]
+```
+
+**Description:** Visualizes issue dependency relationships as a graph.
+
+**Example:**
+
+```bash
+bd graph
+```
+
+---
+
+### `bd epic`
+
+Epic management commands.
+
+```bash
+bd epic <subcommand> [options]
+```
+
+**Description:** Manage epics — parent issues that group related work.
+
+**Example:**
+
+```bash
+bd epic list
+bd epic show gt-epc01
+```
+
+---
+
 ### `bd sync`
 
-Synchronize the beads database.
+Export database to JSONL (sync with git).
 
 ```bash
 bd sync [options]
 ```
 
-**Description:** Syncs the local beads SQLite database with the git-backed storage. Ensures all beads are consistent across agents and workspaces.
+**Description:** Exports the beads SQLite database to JSONL format for git-based persistence. Use `--flush-only` to export without importing.
 
 **Options:**
 
@@ -522,11 +740,13 @@ bd sync [options]
 |------|-------------|
 | `--force` | Force full resync |
 | `--rig <name>` | Sync a specific rig's beads only |
+| `--flush-only` | Export to JSONL only (no import) |
 
 **Example:**
 
 ```bash
 bd sync
+bd sync --flush-only
 bd sync --rig myproject
 ```
 
@@ -601,8 +821,5 @@ gt bead move gt-def34 myproject --force
 ```
 
 :::note
-
 Moving a hooked bead without `--force` will fail. Unsling it first, or use `--force` to automatically unsling before moving.
-
-
 :::

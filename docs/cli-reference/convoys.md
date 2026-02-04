@@ -282,53 +282,35 @@ Stranded convoys indicate work that has fallen through the cracks. The Mayor sho
 
 ---
 
-### `gt convoy synthesis`
+### `gt synthesis`
 
-Generate a synthesis report for a convoy.
+Manage synthesis steps for convoy formulas.
 
 ```bash
-gt convoy synthesis <convoy-id> [options]
+gt synthesis <subcommand> <convoy-id>
 ```
 
-**Description:** Produces a summary report of the convoy's progress, including what was accomplished, what remains, any blockers encountered, and time metrics. Useful for status updates and retrospectives.
+**Aliases:** `synth`
 
-**Options:**
+**Description:** Synthesis is the final step in a convoy workflow that combines outputs from all parallel legs into a unified deliverable.
 
-| Flag | Description |
-|------|-------------|
-| `--format <fmt>` | Output format: `text`, `markdown`, `json` |
-| `--verbose` | Include per-bead details |
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `status <convoy-id>` | Check if ready for synthesis |
+| `start <convoy-id>` | Start synthesis (checks all legs complete) |
+| `close <convoy-id>` | Close convoy after synthesis complete |
 
 **Example:**
 
 ```bash
-# Generate text synthesis
-gt convoy synthesis hq-cv-001
+# Check synthesis readiness
+gt synthesis status hq-cv-001
 
-# Generate markdown report
-gt convoy synthesis hq-cv-001 --format markdown
+# Start synthesis step
+gt synthesis start hq-cv-001
 
-# Detailed synthesis
-gt convoy synthesis hq-cv-001 --verbose
-```
-
-**Sample output:**
-
-```
-Convoy Synthesis: Auth System Fixes (hq-cv-001)
-================================================
-
-Progress: 2/3 completed (67%)
-Duration: 2h 15m
-Agents used: 3 polecats
-
-Completed:
-  - gt-a1b2c: Fix login redirect loop (polecat/toast, 45m)
-  - gt-d3e4f: Add email validation (polecat/alpha, 1h 10m)
-
-Remaining:
-  - gt-g5h6i: Update auth docs (pending, unassigned)
-
-Blockers: none
-Merge status: 2 merged, 0 in queue
+# Close after synthesis
+gt synthesis close hq-cv-001
 ```

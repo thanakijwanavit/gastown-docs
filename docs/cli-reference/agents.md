@@ -14,48 +14,42 @@ Commands for starting, stopping, monitoring, and managing the Gas Town agent hie
 
 ### `gt agents`
 
-List all agents and their current status.
+Display a popup menu of core Gas Town agent sessions.
 
 ```bash
 gt agents [options]
 ```
 
-**Description:** Displays all agents across the town, organized by role. Shows running status, current activity, and resource usage.
+**Aliases:** `ag`
+
+**Description:** Shows Mayor, Deacon, Witnesses, Refineries, and Crew workers in a tmux popup for quick session switching. Polecats are hidden by default (use `gt polecat list` to see them).
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `list` | List agent sessions (no popup) |
+| `check` | Check for identity collisions and stale locks |
+| `fix` | Fix identity collisions and clean up stale locks |
+| `state` | Get or set operational state on agent beads |
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Filter to agents in a specific rig |
-| `--role <role>` | Filter to a specific role (mayor, deacon, witness, etc.) |
-| `--running` | Show only running agents |
-| `--json` | Output in JSON format |
+| `--all`, `-a` | Include polecats in the menu |
 
 **Example:**
 
 ```bash
-# List all agents
+# Open session switcher popup
 gt agents
 
-# Show only running agents
-gt agents --running
+# Include polecats
+gt agents --all
 
-# Show agents for a specific rig
-gt agents --rig myproject
-```
-
-**Sample output:**
-
-```
-ROLE        RIG          STATUS     PID    AGE
-mayor       (town)       running    1234   2h
-deacon      (town)       running    1235   2h
-witness     myproject    running    1240   1h
-witness     docs         running    1241   1h
-refinery    myproject    running    1250   1h
-polecat     myproject    running    1260   15m   [toast] gt-abc12
-polecat     myproject    running    1261   10m   [alpha] gt-def34
-dog         (town)       idle       -      -     [boot]
+# List without popup
+gt agents list
 ```
 
 ---
@@ -316,9 +310,29 @@ gt witness status --all
 
 ---
 
+### `gt witness attach`
+
+Attach to the Witness tmux session.
+
+```bash
+gt witness attach <rig>
+```
+
+---
+
+### `gt witness restart`
+
+Restart the Witness.
+
+```bash
+gt witness restart <rig>
+```
+
+---
+
 ## Refinery
 
-The Refinery processes the merge queue for a rig, rebasing, validating, and merging pull requests onto the main branch.
+The Refinery processes the merge queue for a rig, rebasing, validating, and merging work branches onto main. If conflicts arise, it spawns a fresh polecat to re-implement.
 
 ### `gt refinery start`
 
@@ -373,6 +387,56 @@ gt refinery status [rig] [options]
 |------|-------------|
 | `--all` | Show all Refineries across all rigs |
 | `--json` | Output in JSON format |
+
+---
+
+### `gt refinery attach`
+
+Attach to the Refinery tmux session.
+
+```bash
+gt refinery attach <rig>
+```
+
+---
+
+### `gt refinery restart`
+
+Restart the Refinery.
+
+```bash
+gt refinery restart <rig>
+```
+
+---
+
+### `gt refinery queue`
+
+Show the merge queue.
+
+```bash
+gt refinery queue [rig]
+```
+
+---
+
+### `gt refinery ready`
+
+List MRs ready for processing (unclaimed and unblocked).
+
+```bash
+gt refinery ready [rig]
+```
+
+---
+
+### `gt refinery blocked`
+
+List MRs blocked by open tasks.
+
+```bash
+gt refinery blocked [rig]
+```
 
 ---
 
@@ -501,7 +565,7 @@ gt polecat gc --rig myproject --dry-run
 
 ### `gt polecat stale`
 
-List polecats that appear to be stalled or unresponsive.
+Detect stale polecats that may need cleanup.
 
 ```bash
 gt polecat stale [options]
@@ -520,6 +584,52 @@ gt polecat stale [options]
 ```bash
 gt polecat stale
 gt polecat stale --age 15m
+```
+
+---
+
+### `gt polecat remove`
+
+Remove polecats from a rig.
+
+```bash
+gt polecat remove <name>... [options]
+```
+
+**Example:**
+
+```bash
+gt polecat remove toast
+```
+
+---
+
+### `gt polecat identity`
+
+Manage polecat identities.
+
+```bash
+gt polecat identity [options]
+```
+
+---
+
+### `gt polecat check-recovery`
+
+Check if a polecat needs recovery vs is safe to nuke.
+
+```bash
+gt polecat check-recovery <name>
+```
+
+---
+
+### `gt polecat git-state`
+
+Show git state for pre-kill verification.
+
+```bash
+gt polecat git-state <name>
 ```
 
 ---
@@ -653,14 +763,14 @@ gt boot status [options]
 
 ## Crew
 
-Crew members are persistent workspaces for human developers. They get their own git clone within a rig and can run agent sessions.
+Crew workers are persistent workspaces for human developers. Unlike ephemeral polecats (Witness-managed, auto-nuked), crew workspaces are user-managed and persist until explicitly removed. They are full git clones with Gas Town integration (mail, nudge, handoff).
 
 ### `gt crew start`
 
-Start an agent session in a crew workspace.
+Start crew worker(s) in a rig.
 
 ```bash
-gt crew start <rig> <member> [options]
+gt crew start <name> [options]
 ```
 
 **Options:**
@@ -785,7 +895,7 @@ gt crew remove myproject dave
 
 ### `gt crew refresh`
 
-Refresh a crew workspace by pulling latest changes.
+Context cycle with mail-to-self handoff.
 
 ```bash
 gt crew refresh <rig> <member> [options]
@@ -808,13 +918,13 @@ gt crew refresh myproject dave --rebase
 
 ### `gt crew restart`
 
-Restart a crew agent session.
+Kill and restart a crew workspace session.
 
 ```bash
 gt crew restart <rig> <member> [options]
 ```
 
-**Description:** Stops and restarts the agent session for a crew member, preserving hook state and context.
+**Description:** Stops and restarts the agent session for a crew member fresh.
 
 **Options:**
 
@@ -826,4 +936,52 @@ gt crew restart <rig> <member> [options]
 
 ```bash
 gt crew restart myproject dave
+```
+
+---
+
+### `gt crew status`
+
+Show detailed workspace status.
+
+```bash
+gt crew status <name>
+```
+
+**Example:**
+
+```bash
+gt crew status dave
+```
+
+---
+
+### `gt crew rename`
+
+Rename a crew workspace.
+
+```bash
+gt crew rename <old-name> <new-name>
+```
+
+**Example:**
+
+```bash
+gt crew rename dave david
+```
+
+---
+
+### `gt crew pristine`
+
+Sync crew workspaces with remote.
+
+```bash
+gt crew pristine <name>
+```
+
+**Example:**
+
+```bash
+gt crew pristine dave
 ```

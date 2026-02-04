@@ -29,15 +29,15 @@ Global flags available on all commands:
 
 | Category | Description | Key Commands |
 |----------|-------------|--------------|
-| [Workspace Management](workspace.md) | Install, initialize, and configure your Gas Town workspace | `gt install`, `gt init`, `gt enable`, `gt disable`, `gt info` |
+| [Workspace Management](workspace.md) | Install, initialize, and manage your Gas Town workspace and services | `gt install`, `gt up`, `gt down`, `gt status`, `gt plugin` |
 | [Agent Operations](agents.md) | Start, stop, and manage the agent hierarchy | `gt mayor`, `gt deacon`, `gt witness`, `gt polecat`, `gt crew` |
-| [Work Management](work.md) | Create, assign, track, and complete work items | `gt sling`, `gt hook`, `gt done`, `bd create`, `gt bead` |
+| [Work Management](work.md) | Create, assign, track, and complete work items | `gt sling`, `gt hook`, `gt done`, `bd create`, `gt show` |
 | [Convoy & Tracking](convoys.md) | Bundle and track batches of related work | `gt convoy create`, `gt convoy status`, `gt convoy stranded` |
 | [Communication](communication.md) | Send and receive messages between agents and humans | `gt mail`, `gt nudge`, `gt broadcast`, `gt escalate` |
 | [Merge Queue](merge-queue.md) | Manage the refinery merge pipeline | `gt mq list`, `gt mq submit`, `gt mq status` |
 | [Rig Management](rigs.md) | Add, configure, and manage project containers | `gt rig add`, `gt rig start`, `gt rig config` |
-| [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol` |
-| [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt patrol` |
+| [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt park`, `gt mol` |
+| [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt doctor`, `gt dashboard`, `gt feed`, `gt patrol` |
 | [Configuration](configuration.md) | Configure agents, accounts, themes, and hooks | `gt config`, `gt account`, `gt theme`, `gt hooks` |
 
 ## Related Tools
@@ -52,10 +52,13 @@ gt install ~/gt --git
 
 # Add a project and start working
 gt rig add myapp https://github.com/you/app.git
-gt mayor attach
+gt mayor start --attach
+
+# Bring up all services
+gt up
 
 # Check system status
-gt rig list
+gt status
 gt convoy list
 gt feed
 
@@ -71,8 +74,5 @@ Install tab completions for a better CLI experience. See [Workspace Management](
 :::
 
 :::note[Context-Aware Commands]
-
 Many `gt` commands auto-detect the current rig based on your working directory. Use `--rig <name>` to override this when needed.
-
-
 :::

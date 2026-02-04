@@ -436,6 +436,56 @@ gt rig config myproject --reset
 
 ---
 
+### `gt rig remove`
+
+Remove a rig from the registry.
+
+```bash
+gt rig remove <name> [options]
+```
+
+**Description:** Removes a rig from the registry. Does not delete files by default.
+
+**Example:**
+
+```bash
+gt rig remove backend
+```
+
+---
+
+### `gt rig restart`
+
+Restart one or more rigs (stop then start).
+
+```bash
+gt rig restart <name>... [options]
+```
+
+**Example:**
+
+```bash
+gt rig restart myproject
+```
+
+---
+
+### `gt rig stop`
+
+Stop one or more rigs (shutdown semantics).
+
+```bash
+gt rig stop <name>... [options]
+```
+
+**Example:**
+
+```bash
+gt rig stop myproject
+```
+
+---
+
 ### `gt rig settings`
 
 Manage advanced rig settings.
