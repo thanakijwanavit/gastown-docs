@@ -53,6 +53,9 @@ const config: Config = {
   ],
 
   themeConfig: {
+    metadata: [
+      {name: 'description', content: 'Gas Town documentation — multi-agent orchestration for AI coding agents. Guides, CLI reference, architecture, and workflow docs.'},
+    ],
     image: 'img/logo.svg',
     navbar: {
       title: 'Gas Town',
