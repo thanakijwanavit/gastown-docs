@@ -1,7 +1,7 @@
 ---
 title: "Guides"
 sidebar_position: 0
-description: "This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI develop..."
+description: "In-depth guides for using Gas Town effectively: usage patterns, architecture, cost management, multi-runtime support, and design philosophy."
 ---
 
 # Guides
