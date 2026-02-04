@@ -19,6 +19,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 | [Multi-Runtime Support](multi-runtime.md) | Using Gas Town with Claude, Gemini, Codex, Cursor, and more |
 | [Cost Management](cost-management.md) | Monitoring and optimizing token spend |
 | [Background & Philosophy](philosophy.md) | Why Gas Town exists, its history, and design philosophy |
+| [Architecture Guide](architecture.md) | Comprehensive tour of Gas Town's multi-agent architecture |
 | [Glossary](glossary.md) | Complete terminology reference for all Gas Town concepts |
 
 ## Who Are These Guides For?
@@ -38,9 +39,10 @@ For new Gas Town users, we recommend this reading order:
 
 1. **[The 8 Stages of AI Coding](eight-stages.md)** -- Understand where Gas Town fits and whether you are ready for it
 2. **[Background & Philosophy](philosophy.md)** -- Understand why Gas Town exists and the mental model behind it
-3. **[Usage Guide](usage-guide.md)** -- Learn the day-to-day workflows and commands
-4. **[Multi-Runtime Support](multi-runtime.md)** -- If you use agents other than Claude Code
-5. **[Cost Management](cost-management.md)** -- Essential for anyone running at scale
+3. **[Architecture Guide](architecture.md)** -- Understand how the agents, rigs, and pipelines fit together
+4. **[Usage Guide](usage-guide.md)** -- Learn the day-to-day workflows and commands
+5. **[Multi-Runtime Support](multi-runtime.md)** -- If you use agents other than Claude Code
+6. **[Cost Management](cost-management.md)** -- Essential for anyone running at scale
 
 :::tip[Already Running Gas Town?]
 

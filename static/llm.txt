@@ -6,6 +6,7 @@
 
 ### Home
 - Gas Town Documentation: /docs/index
+- intro: /docs/intro
 
 ### Getting Started
 - Getting Started: /docs/getting-started
@@ -78,6 +79,7 @@
 - Multi-Runtime Support: /docs/guides/multi-runtime
 - Cost Management: /docs/guides/cost-management
 - Background & Philosophy: /docs/guides/philosophy
+- Architecture Guide: /docs/guides/architecture
 - Glossary: /docs/guides/glossary
 
 ---
@@ -88,6 +90,13 @@
 Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of Claude Co...
 
 **Gas Town** is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of [Claude Code](https://claude.ai/), it scales from a single agent to 20-30 concurrent workers — all managed through the `gt` CLI.
+
+---
+
+## intro
+> /docs/intro
+
+Gas Town is a multi-agent orchestration system for AI coding agents. It coordinates fleets of workers — from a single agent to 20-30 concurrent polecats — all through the `gt` CLI.
 
 ---
 
@@ -593,6 +602,15 @@ Gas Town burns tokens. A lot of tokens. At peak usage with 10+ polecats running 
 Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
 
 Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
+
+---
+
+## Architecture Guide
+> /docs/guides/architecture
+
+A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Refinery, and Polecats work together as a self-healing multi-agent system built on Erlang-inspired supervision, git worktrees, and persistent hooks.
+
+Gas Town is a multi-agent AI orchestration system where dozens of autonomous agents coordinate to build software. This guide walks through the entire architecture in one place -- from the high-level metaphor down to the merge pipeline that lands code on `main`.
 
 ---
 

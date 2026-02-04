@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-04T07:15:44.552Z",
+  "generated": "2026-02-04T07:37:24.967Z",
   "sections": [
     {
       "id": "getting-started",
@@ -331,6 +331,11 @@
           "description": "Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas."
         },
         {
+          "title": "Architecture Guide",
+          "path": "/docs/guides/architecture",
+          "description": "A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Refinery, and Polecats work together as a self-healing multi-agent system built on Erlang-inspired supervision, git worktrees, and persistent hooks."
+        },
+        {
           "title": "Glossary",
           "path": "/docs/guides/glossary",
           "description": "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
@@ -568,6 +573,12 @@
       "description": "Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions."
     },
     {
+      "title": "Architecture Guide",
+      "path": "/docs/guides/architecture",
+      "section": "guides",
+      "description": "A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Refinery, and Polecats work together as a self-healing multi-agent system built on Erlang-inspired supervision, git worktrees, and persistent hooks."
+    },
+    {
       "title": "Cost Management",
       "path": "/docs/guides/cost-management",
       "section": "guides",
@@ -614,6 +625,12 @@
       "path": "/docs/index",
       "section": "root",
       "description": "Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of Claude Co..."
+    },
+    {
+      "title": "intro",
+      "path": "/docs/intro",
+      "section": "root",
+      "description": ""
     },
     {
       "title": "Escalation System",
