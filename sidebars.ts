@@ -108,6 +108,7 @@ const sidebars: SidebarsConfig = {
         'guides/eight-stages',
         'guides/multi-runtime',
         'guides/cost-management',
+        'guides/beads-tutorial',
         'guides/philosophy',
         'guides/architecture',
         'guides/glossary',
