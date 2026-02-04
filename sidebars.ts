@@ -110,6 +110,7 @@ const sidebars: SidebarsConfig = {
         'guides/cost-management',
         'guides/philosophy',
         'guides/glossary',
+        'guides/troubleshooting',
       ],
     },
   ],

@@ -20,6 +20,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 | [Cost Management](cost-management.md) | Monitoring and optimizing token spend |
 | [Background & Philosophy](philosophy.md) | Why Gas Town exists, its history, and design philosophy |
 | [Glossary](glossary.md) | Complete terminology reference for all Gas Town concepts |
+| [Troubleshooting](troubleshooting.md) | Solutions for common Gas Town issues with diagnostic commands |
 
 ## Who Are These Guides For?
 
