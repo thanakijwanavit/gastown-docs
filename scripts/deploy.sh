@@ -46,11 +46,12 @@ aws s3 sync build/ "s3://${S3_BUCKET}" \
 # HTML and dynamic files with shorter cache
 aws s3 sync build/ "s3://${S3_BUCKET}" \
   --cache-control "public, max-age=300" \
+  --exclude "*" \
   --include "*.html" \
   --include "sitemap.xml" \
   --include "llm.txt" \
   --include "llm-full.txt" \
-  --exclude "*" \
+  --include "api/*"
 
 # Invalidate CloudFront cache
 echo ""
