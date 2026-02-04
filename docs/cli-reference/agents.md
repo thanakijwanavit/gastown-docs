@@ -651,6 +651,38 @@ gt boot status [options]
 
 ---
 
+## Callbacks
+
+### `gt callbacks`
+
+Handle callbacks from agents during Deacon patrol.
+
+```bash
+gt callbacks <subcommand>
+```
+
+**Description:** Processes messages sent to the Mayor from Witnesses, Refineries, polecats, and external triggers. Routes messages to other agents or updates state as needed.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt callbacks process` | Process pending callbacks |
+
+**Example:**
+
+```bash
+gt callbacks process
+```
+
+:::note
+
+Callbacks are typically processed automatically during Deacon patrol cycles. Manual invocation is for debugging or manual intervention.
+
+:::
+
+---
+
 ## Crew
 
 Crew members are persistent workspaces for human developers. They get their own git clone within a rig and can run agent sessions.

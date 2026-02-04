@@ -20,25 +20,23 @@ Global flags available on all commands:
 |------|-------------|
 | `--help`, `-h` | Show help for any command |
 | `--version`, `-v` | Print the Gas Town version |
-| `--verbose` | Enable verbose output |
-| `--quiet`, `-q` | Suppress non-essential output |
-| `--json` | Output in JSON format (where supported) |
-| `--rig <name>` | Target a specific rig (overrides auto-detection) |
+
+Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name>` flags. See individual command documentation for details.
 
 ## Command Categories
 
 | Category | Description | Key Commands |
 |----------|-------------|--------------|
-| [Workspace Management](workspace.md) | Install, initialize, and configure your Gas Town workspace | `gt install`, `gt init`, `gt enable`, `gt disable`, `gt info` |
+| [Workspace Management](workspace.md) | Install, initialize, manage services, and configure your Gas Town workspace | `gt install`, `gt start`, `gt up`, `gt down`, `gt shutdown`, `gt status` |
 | [Agent Operations](agents.md) | Start, stop, and manage the agent hierarchy | `gt mayor`, `gt deacon`, `gt witness`, `gt polecat`, `gt crew` |
-| [Work Management](work.md) | Create, assign, track, and complete work items | `gt sling`, `gt hook`, `gt done`, `bd create`, `gt bead` |
-| [Convoy & Tracking](convoys.md) | Bundle and track batches of related work | `gt convoy create`, `gt convoy status`, `gt convoy stranded` |
+| [Work Management](work.md) | Create, assign, track, and complete work items | `gt sling`, `gt hook`, `gt done`, `gt commit`, `bd create` |
+| [Convoy & Tracking](convoys.md) | Bundle and track batches of related work | `gt convoy create`, `gt convoy status`, `gt synthesis` |
 | [Communication](communication.md) | Send and receive messages between agents and humans | `gt mail`, `gt nudge`, `gt broadcast`, `gt escalate` |
 | [Merge Queue](merge-queue.md) | Manage the refinery merge pipeline | `gt mq list`, `gt mq submit`, `gt mq status` |
 | [Rig Management](rigs.md) | Add, configure, and manage project containers | `gt rig add`, `gt rig start`, `gt rig config` |
-| [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol` |
-| [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt patrol` |
-| [Configuration](configuration.md) | Configure agents, accounts, themes, and hooks | `gt config`, `gt account`, `gt theme`, `gt hooks` |
+| [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol`, `gt cycle` |
+| [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt status` |
+| [Configuration](configuration.md) | Configure agents, accounts, themes, hooks, and plugins | `gt config`, `gt account`, `gt theme`, `gt hooks`, `gt plugin` |
 
 ## Related Tools
 
@@ -52,11 +50,11 @@ gt install ~/gt --git
 
 # Add a project and start working
 gt rig add myapp https://github.com/you/app.git
-gt mayor attach
+gt start
 
 # Check system status
+gt status
 gt rig list
-gt convoy list
 gt feed
 
 # Diagnose issues

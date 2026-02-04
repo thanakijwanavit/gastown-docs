@@ -10,6 +10,63 @@ Commands for monitoring, auditing, and troubleshooting Gas Town. These tools pro
 
 ---
 
+## Town Status
+
+### `gt status`
+
+Display overall town status.
+
+```bash
+gt status [options]
+```
+
+**Description:** Shows the current state of the Gas Town workspace including registered rigs, active polecats, and agent status.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--fast` | Skip mail lookups for faster execution |
+| `--json` | Output as JSON |
+| `--verbose`, `-v` | Show detailed multi-line output per agent |
+| `--watch`, `-w` | Watch mode: refresh status continuously |
+| `--interval`, `-n` | Refresh interval in seconds (default: `2`) |
+
+**Aliases:** `stat`
+
+**Example:**
+
+```bash
+# Quick status
+gt status
+
+# Watch mode with custom interval
+gt status --watch --interval 5
+
+# Fast mode (skip mail lookups)
+gt status --fast
+```
+
+---
+
+### `gt whoami`
+
+Show the identity used for mail commands.
+
+```bash
+gt whoami
+```
+
+**Description:** Displays the identity determined by the `GT_ROLE` environment variable. If set, you are an agent session. If not, you are the overseer (human). Use the `--identity` flag with mail commands to override.
+
+**Example:**
+
+```bash
+gt whoami
+```
+
+---
+
 ## Activity & Monitoring
 
 ### `gt activity`
@@ -265,26 +322,32 @@ Run `gt doctor` after installation, after upgrading Gas Town, or whenever someth
 
 ### `gt dashboard`
 
-Display an interactive system dashboard.
+Start the convoy tracking web dashboard.
 
 ```bash
 gt dashboard [options]
 ```
 
-**Description:** Opens a terminal-based dashboard showing real-time status of all rigs, agents, convoys, merge queues, and recent activity. Provides a bird's-eye view of the entire town.
+**Description:** Starts a web server that displays a convoy tracking dashboard with real-time status indicators, progress tracking, and last activity indicators. Auto-refreshes every 30 seconds via htmx.
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--rig <name>` | Focus dashboard on a specific rig |
-| `--refresh <seconds>` | Refresh interval (default: `5`) |
+| `--port <number>` | HTTP port to listen on (default: `8080`) |
+| `--open` | Open browser automatically |
 
 **Example:**
 
 ```bash
+# Start on default port
 gt dashboard
-gt dashboard --rig myproject --refresh 10
+
+# Start on custom port
+gt dashboard --port 3000
+
+# Start and open browser
+gt dashboard --open
 ```
 
 ---
@@ -509,6 +572,12 @@ Verify orphans are truly orphaned before killing. Use `gt orphans procs` first t
 
 ## Peek & Sessions
 
+:::tip
+
+For session handoffs, molecules, and formulas, see the [Session & Handoff](sessions.md) page.
+
+:::
+
 ### `gt peek`
 
 Peek at an agent's current state without interrupting it.
@@ -547,112 +616,48 @@ Peek: polecat/toast (myproject)
 
 ---
 
-### `gt session list`
+### `gt session`
 
-List all agent sessions.
+Manage tmux sessions for polecats.
 
 ```bash
-gt session list [options]
+gt session <subcommand> [options]
 ```
 
-**Options:**
+**Aliases:** `sess`
 
-| Flag | Description |
-|------|-------------|
-| `--status <status>` | Filter: `running`, `stopped`, `crashed` |
-| `--rig <name>` | Filter by rig |
-| `--json` | Output in JSON format |
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt session list` | List all sessions |
+| `gt session status <name>` | Show session status details |
+| `gt session start <name>` | Start a polecat session |
+| `gt session stop <name>` | Stop a polecat session |
+| `gt session restart <name>` | Restart a polecat session |
+| `gt session at <name>` | Attach to a running session |
+| `gt session capture <name>` | Capture recent session output |
+| `gt session check <name>` | Check session health |
+| `gt session inject <name>` | Send message to session (prefer `gt nudge`) |
 
 **Example:**
 
 ```bash
+# List all sessions
 gt session list
-gt session list --status running
+
+# Check session health
+gt session check toast
+
+# Capture recent output
+gt session capture toast
+
+# Restart a session
+gt session restart toast
 ```
 
----
+:::tip
 
-### `gt session status`
+To send messages to a running session, use `gt nudge` instead of `gt session inject`. The nudge command uses reliable delivery that works correctly with Claude Code.
 
-Show status of a specific session.
-
-```bash
-gt session status <session-id> [options]
-```
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output in JSON format |
-
-**Example:**
-
-```bash
-gt session status sess-abc123
-```
-
----
-
-### `gt session start`
-
-Start a new agent session.
-
-```bash
-gt session start <agent> [options]
-```
-
-**Description:** Starts a new session for the specified agent. Lower-level than the agent-specific start commands (e.g., `gt mayor start`).
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--attach` | Attach to the session after starting |
-| `--agent <runtime>` | Agent runtime |
-
-**Example:**
-
-```bash
-gt session start witness --rig myproject
-```
-
----
-
-### `gt session stop`
-
-Stop an agent session.
-
-```bash
-gt session stop <session-id> [options]
-```
-
-**Options:**
-
-| Flag | Description |
-|------|-------------|
-| `--force` | Force stop |
-
-**Example:**
-
-```bash
-gt session stop sess-abc123
-```
-
----
-
-### `gt session at`
-
-Show what an agent session is currently working on.
-
-```bash
-gt session at <session-id>
-```
-
-**Description:** Quick view of the session's current task and hook state.
-
-**Example:**
-
-```bash
-gt session at sess-abc123
-```
+:::
