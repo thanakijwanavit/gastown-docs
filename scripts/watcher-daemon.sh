@@ -22,6 +22,11 @@ STALE_THRESHOLD=7200     # 2 hours = stale (healer dispatch)
 CRITICAL_THRESHOLD=14400 # 4 hours = critical (force restart)
 COOLDOWN_PERIOD=1800     # 30 minutes between healer dispatches
 
+# Messaging configuration
+# Set INTERRUPT_MODE=1 to use nudges (immediate but interrupting)
+# Default is mail-only (queued, non-interrupting)
+INTERRUPT_MODE="${INTERRUPT_MODE:-0}"
+
 # Healer configuration (Kimi parity)
 HEALER_AGENT="${HEALER_AGENT:-kimigas}"
 HEALER_DIR="$RIG_DIR/crew/healer"
@@ -186,31 +191,34 @@ EOF
     # Log dispatch
     log INFO "Healer marker created: $marker_file"
     
-    # Send nudge to the idle session (Kimi parity - use gt nudge)
-    local nudge_msg="Watcher: $agent_name session ${session_age}s old. Run gt prime && bd prime. Check gt hook. Use bd for work tracking. See GASTOWN_AGENT_PRIMER.md"
-    
-    if command -v gt >/dev/null 2>&1; then
-        # Convert session name to nudge target
-        local nudge_target
-        nudge_target=$(session_to_nudge_target "$session")
-        if [ -n "$nudge_target" ]; then
-            gt nudge "$nudge_target" "$nudge_msg" 2>/dev/null || log WARN "Nudge failed for $nudge_target"
-            log INFO "Nudge sent to $nudge_target"
-        fi
-    fi
-    
-    # Also send mail to session owner
+    # Queue mail notification (non-interrupting)
     if command -v gt >/dev/null 2>&1; then
         gt mail send "$agent_name" -s "Watcher: Idle Session Detected" -m "Your session $session has been idle for ${session_age}s.
 
 Reason: $reason
+Severity: $reason
 
 Action Required:
 1. Run: gt prime && bd prime
 2. Check: gt hook
 3. Resume work or run: gt handoff
 
-This is an automated message from the gastowndocs watcher daemon." 2>/dev/null || true
+This is an automated message from the gastowndocs watcher daemon.
+Queued messages do not interrupt your session." 2>/dev/null || true
+        log INFO "Mail queued for $agent_name"
+    fi
+    
+    # Only nudge (interrupt) if CRITICAL and INTERRUPT_MODE is enabled
+    if [ "$INTERRUPT_MODE" = "1" ] && [ "$reason" = "critical_idle" ]; then
+        local nudge_msg="CRITICAL: $agent_name session ${session_age}s old. Run gt prime && bd prime. Check gt hook. See GASTOWN_AGENT_PRIMER.md"
+        if command -v gt >/dev/null 2>&1; then
+            local nudge_target
+            nudge_target=$(session_to_nudge_target "$session")
+            if [ -n "$nudge_target" ]; then
+                gt nudge "$nudge_target" "$nudge_msg" 2>/dev/null || log WARN "Nudge failed for $nudge_target"
+                log INFO "Nudge sent to $nudge_target (CRITICAL + INTERRUPT_MODE)"
+            fi
+        fi
     fi
     
     return 0
@@ -285,12 +293,27 @@ run_cycle() {
             dispatch_healer "$session" "stale_session" "$age"
             healer_dispatched=$((healer_dispatched + 1))
         elif [ "$age" -gt "$IDLE_THRESHOLD" ]; then
-            log INFO "IDLE: $session idle for ${age}s - nudging"
-            # Just nudge, no healer for basic idle
-            local nudge_target
-            nudge_target=$(session_to_nudge_target "$session")
-            if [ -n "$nudge_target" ] && command -v gt >/dev/null 2>&1; then
-                gt nudge "$nudge_target" "Watcher: $agent session ${age}s old. Run gt prime && bd prime. Check gt hook." 2>/dev/null || true
+            log INFO "IDLE: $session idle for ${age}s - sending notification"
+            # Queue mail notification (non-interrupting)
+            if command -v gt >/dev/null 2>&1; then
+                gt mail send "$agent" -s "Watcher: Idle Session Reminder" -m "Your session $session has been idle for ${age}s.
+
+This is a friendly reminder to check your session.
+
+Actions:
+1. Run: gt prime && bd prime
+2. Check: gt hook
+3. Resume work or run: gt handoff
+
+Queued messages do not interrupt your session." 2>/dev/null || true
+            fi
+            # Only nudge if INTERRUPT_MODE is enabled
+            if [ "$INTERRUPT_MODE" = "1" ]; then
+                local nudge_target
+                nudge_target=$(session_to_nudge_target "$session")
+                if [ -n "$nudge_target" ] && command -v gt >/dev/null 2>&1; then
+                    gt nudge "$nudge_target" "Watcher: $agent session ${age}s old. Run gt prime && bd prime. Check gt hook." 2>/dev/null || true
+                fi
             fi
         fi
     done
@@ -364,6 +387,7 @@ stop_daemon() {
 show_status() {
     echo "=== gastowndocs Watcher Status ==="
     echo ""
+    echo "Mode: $( [ "$INTERRUPT_MODE" = "1" ] && echo "INTERRUPT (nudges enabled)" || echo "QUEUED (mail only)" )"
     
     # Daemon status
     if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
@@ -473,6 +497,10 @@ case "${1:-run}" in
         echo "  STALE_THRESHOLD=${STALE_THRESHOLD}s (2 hours)"
         echo "  CRITICAL_THRESHOLD=${CRITICAL_THRESHOLD}s (4 hours)"
         echo "  COOLDOWN_PERIOD=${COOLDOWN_PERIOD}s (30 minutes)"
+        echo "  INTERRUPT_MODE=${INTERRUPT_MODE} (0=mail only, 1=enable nudges)"
+        echo ""
+        echo "Note: By default, notifications are queued via mail (non-interrupting)."
+        echo "      Set INTERRUPT_MODE=1 to enable nudges (immediate but interrupting)."
         exit 1
         ;;
 esac
