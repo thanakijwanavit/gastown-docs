@@ -920,6 +920,56 @@ else
     fail_test "Found $DESC_FORMAT_ISSUES description(s) with unquoted colons" "Wrap descriptions containing colons in double quotes"
 fi
 
+# Test 29: All non-index doc pages have at least one code block or Mermaid diagram
+echo ""
+echo "Test 29: Checking doc pages have code examples or diagrams..."
+NO_CODE_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
+    basename=$(basename "$file")
+    # Skip index pages — they are navigation hubs, not content pages
+    [ "$basename" = "index.md" ] && continue
+
+    # Count code blocks (``` markers come in pairs, so divide by 2)
+    code_blocks=$(grep -c '^```' "$file" 2>/dev/null || echo 0)
+
+    if [ "$code_blocks" -lt 2 ]; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  No code blocks or diagrams in $rel_file"
+        NO_CODE_ISSUES=$((NO_CODE_ISSUES + 1))
+    fi
+done
+
+if [ "$NO_CODE_ISSUES" -eq 0 ]; then
+    pass_test "All non-index doc pages have code examples or diagrams"
+else
+    fail_test "Found $NO_CODE_ISSUES page(s) without code examples or diagrams" "Add at least one code block or Mermaid diagram to each content page"
+fi
+
+# Test 30: Blog post tags are non-empty and lowercase
+echo ""
+echo "Test 30: Checking blog post tag formatting..."
+TAG_ISSUES=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    # Extract tags line from frontmatter
+    tags_line=$(awk '/^---$/{if(++n==2)exit}n==1 && /^tags:/{print; exit}' "$file" 2>/dev/null)
+    [ -z "$tags_line" ] && continue
+
+    # Check for uppercase letters in tags
+    if echo "$tags_line" | grep -qE '\[.*[A-Z].*\]' 2>/dev/null; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Uppercase tag in $rel_file: $tags_line"
+        TAG_ISSUES=$((TAG_ISSUES + 1))
+    fi
+done
+
+if [ "$TAG_ISSUES" -eq 0 ]; then
+    pass_test "All blog post tags are properly formatted"
+else
+    fail_test "Found $TAG_ISSUES blog post(s) with formatting issues in tags" "Use lowercase, hyphenated tags"
+fi
+
 # Summary
 echo ""
 echo "========================================"
