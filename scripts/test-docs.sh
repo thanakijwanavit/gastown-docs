@@ -336,6 +336,24 @@ else
     fail_test "Found $MISSING_RELATED page(s) without Related sections" "Add ## Related with 3-4 cross-references"
 fi
 
+# Test 13: Check for admonition coverage on non-index pages
+echo ""
+echo "Test 13: Checking for admonition coverage..."
+MISSING_ADMONITIONS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md"); do
+    if ! grep -q "^:::" "$file" 2>/dev/null; then
+        echo "  No admonitions in: $file"
+        MISSING_ADMONITIONS=$((MISSING_ADMONITIONS + 1))
+    fi
+done
+
+if [ "$MISSING_ADMONITIONS" -eq 0 ]; then
+    pass_test "All non-index pages have admonitions"
+else
+    fail_test "Found $MISSING_ADMONITIONS page(s) without admonitions" "Add :::tip, :::note, or :::warning callouts"
+fi
+
 # Summary
 echo ""
 echo "========================================"

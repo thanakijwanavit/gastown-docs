@@ -12,6 +12,10 @@ The Gas Town documentation includes a powerful local search feature that helps y
 
 ## Accessing Search
 
+:::tip
+Press **`Ctrl+K`** (Windows/Linux) or **`⌘+K`** (Mac) from any page to instantly open search. This is the fastest way to find anything in the docs.
+:::
+
 ### Keyboard Shortcut
 
 Press **`Ctrl+K`** (Windows/Linux) or **`⌘+K`** (Mac) from any page to open the search modal.

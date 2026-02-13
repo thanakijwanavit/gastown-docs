@@ -42,7 +42,11 @@ sudo mv gt /usr/local/bin/
 
 ### Git (Required)
 
-Gas Town relies on git worktrees for file-level isolation between agents. Git 2.25+ is required.
+:::warning
+Gas Town requires Git 2.25+ for worktree support. Older versions will fail silently when creating polecat sandboxes.
+:::
+
+Gas Town relies on git worktrees for file-level isolation between agents.
 
 ```bash
 git --version
