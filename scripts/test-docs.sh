@@ -218,6 +218,49 @@ else
     fail_test "No sidebar config found" "Cannot verify sidebar coverage"
 fi
 
+# Test 9: Verify top-level CLI commands referenced in docs actually exist
+echo ""
+echo "Test 9: Checking CLI commands referenced in docs..."
+INVALID_CMDS=0
+
+# Extract unique "gt <cmd>" top-level commands from fenced code blocks only
+# This avoids false positives from prose like "gt commands for..."
+TMPFILE=$(mktemp)
+find "$ROOT_DIR/docs" -name "*.md" -exec awk '
+    /^```/{in_code=!in_code; next}
+    in_code && /gt [a-z]/ && !/^[[:space:]]*#/{
+        for(i=1;i<=NF;i++){
+            if($i=="gt" && i<NF){
+                cmd=$(i+1)
+                if(cmd ~ /^[a-z][a-z-]*$/){
+                    print cmd
+                }
+            }
+        }
+    }
+' {} + | sort -u > "$TMPFILE"
+
+# Check each unique top-level command
+while read -r cmd; do
+    # Skip empty, flags, uppercase (likely prose)
+    [[ -z "$cmd" ]] && continue
+    [[ "$cmd" =~ ^- ]] && continue
+    [[ "$cmd" =~ ^[A-Z] ]] && continue
+
+    # Check if command exists via --help
+    if ! gt "$cmd" --help >/dev/null 2>&1; then
+        echo "  Non-existent command: gt $cmd"
+        INVALID_CMDS=$((INVALID_CMDS + 1))
+    fi
+done < "$TMPFILE"
+rm -f "$TMPFILE"
+
+if [ "$INVALID_CMDS" -eq 0 ]; then
+    pass_test "All top-level CLI commands in docs are valid"
+else
+    fail_test "Found $INVALID_CMDS invalid CLI command(s) in docs" "Fix commands to match actual gt CLI"
+fi
+
 # Summary
 echo ""
 echo "========================================"
