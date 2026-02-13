@@ -31,11 +31,13 @@ The primary deployment method is via GitHub Actions:
 1. Checkout code
 2. Setup Node.js 20
 3. Install dependencies (`npm ci`)
-4. Build website (`npm run build`)
-5. Configure AWS credentials
-6. Deploy to S3 with cache headers
-7. Deploy/update CloudFront Function
-8. Invalidate CloudFront cache
+4. Validate documentation (`npm test` — frontmatter, links, sidebar positions)
+5. Build website (`npm run build`)
+6. Validate search index (`npm run test:search` — document count, key terms, URLs)
+7. Configure AWS credentials
+8. Deploy to S3 with cache headers
+9. Deploy/update CloudFront Function
+10. Invalidate CloudFront cache
 
 **Required Secrets**:
 - `AWS_ACCESS_KEY_ID` - AWS access key

@@ -2,3 +2,7 @@ User-agent: *
 Allow: /
 
 Sitemap: https://docs.gt.villamarket.ai/sitemap.xml
+
+# LLM-accessible content (llmstxt.org convention)
+# llm.txt: Summary of all documentation pages
+# llm-full.txt: Full documentation content
