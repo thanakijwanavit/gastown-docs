@@ -1,7 +1,7 @@
 ---
 title: "Gates (Async Coordination)"
 sidebar_position: 5
-description: "Gates are synchronization points in Gas Town workflows. When a molecule step needs to wait for an external condition -- a CI pipeline finishing, a human appr..."
+description: "Gates pause workflows until external conditions are met, such as CI completion, human approval, or timer expiration."
 ---
 
 # Gates (Async Coordination)

@@ -1,7 +1,7 @@
 ---
 title: "Rigs (Project Containers)"
 sidebar_position: 6
-description: "A Rig is Gas Town's project container. Each rig wraps a git repository with the full agent infrastructure needed to manage, develop, and merge code. Rigs are..."
+description: "Rigs are self-contained project containers that wrap a git repository with agents, a merge queue, and worker sandboxes."
 ---
 
 # Rigs (Project Containers)

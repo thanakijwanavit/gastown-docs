@@ -1,7 +1,7 @@
 ---
 title: "Convoys (Batch Tracking)"
 sidebar_position: 3
-description: "A Convoy is Gas Town's unit for tracking batches of related work. Convoys bundle multiple beads together, provide a single point of progress monitoring, auto..."
+description: "Convoys bundle related beads into tracked batches that auto-close when all issues complete and notify subscribers."
 ---
 
 # Convoys (Batch Tracking)

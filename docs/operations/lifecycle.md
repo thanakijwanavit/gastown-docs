@@ -1,7 +1,7 @@
 ---
 title: "Starting & Stopping"
 sidebar_position: 1
-description: "Gas Town provides granular control over the system lifecycle -- from starting the entire fleet to managing individual agents and rigs. Understanding the dist..."
+description: "Start, pause, and shut down Gas Town agents and rigs with granular lifecycle commands and emergency recovery procedures."
 ---
 
 # Starting & Stopping

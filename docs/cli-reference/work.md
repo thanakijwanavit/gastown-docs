@@ -1,7 +1,7 @@
 ---
 title: "Work Management"
 sidebar_position: 3
-description: "Commands for creating, assigning, tracking, and completing work items. This includes both gt commands for work orchestration and bd (Beads) commands for issu..."
+description: "Reference for gt sling, gt hook, gt done, and bd commands that create, assign, track, and complete work items."
 ---
 
 # Work Management

@@ -1,7 +1,7 @@
 ---
 title: "Workspace Management"
 sidebar_position: 1
-description: "Commands for installing, initializing, and managing your Gas Town workspace (the \"Town\"). These commands handle the foundational setup that all other operati..."
+description: "Install, initialize, and manage your Gas Town workspace with commands for services, daemon control, and shell integration."
 ---
 
 # Workspace Management

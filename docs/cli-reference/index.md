@@ -1,7 +1,7 @@
 ---
 title: "CLI Reference"
 sidebar_position: 0
-description: "The gt CLI is the primary interface for interacting with Gas Town. It manages workspaces, agents, work distribution, communication, and diagnostics across yo..."
+description: "Complete reference for the gt CLI covering workspaces, agents, work management, communication, merge queues, and diagnostics."
 ---
 
 # CLI Reference

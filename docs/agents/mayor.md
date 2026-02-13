@@ -1,7 +1,7 @@
 ---
 title: "Mayor -- Global Coordinator"
 sidebar_position: 1
-description: "> The Mayor is the brain of Gas Town. It receives instructions from the human overseer, decomposes them into actionable work, and orchestrates the entire age..."
+description: "The Mayor receives human instructions, creates beads and convoys, assigns work to rigs, and tracks progress to completion."
 ---
 
 # Mayor -- Global Coordinator

@@ -1,7 +1,7 @@
 ---
 title: "Merge Queue"
 sidebar_position: 6
-description: "Commands for managing the Refinery's merge queue. The Refinery processes merge requests (MRs) submitted by polecats, rebasing them onto the latest main branc..."
+description: "Manage the Refinery merge queue with commands to list, submit, reject, retry, and configure merge request processing."
 ---
 
 # Merge Queue

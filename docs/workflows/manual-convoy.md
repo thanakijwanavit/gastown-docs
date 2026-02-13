@@ -1,7 +1,7 @@
 ---
 title: "Manual Convoy Workflow"
 sidebar_position: 3
-description: "The Manual Convoy Workflow gives you direct control over work distribution while still using Gas Town's convoy tracking, merge queue, and agent infrastructur..."
+description: "Create convoys and sling work to specific rigs yourself while using Gas Town's tracking and merge infrastructure."
 ---
 
 # Manual Convoy Workflow

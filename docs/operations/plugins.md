@@ -1,7 +1,7 @@
 ---
 title: "Plugins"
 sidebar_position: 5
-description: "Gas Town's plugin system extends the platform with custom automation, gates, and scheduled tasks. Plugins can operate at the town level (affecting all rigs) ..."
+description: "Extend Gas Town with custom gate plugins, action hooks, and scheduled tasks at the town or rig level."
 ---
 
 # Plugins

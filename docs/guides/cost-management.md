@@ -1,7 +1,7 @@
 ---
 title: "Cost Management"
 sidebar_position: 4
-description: "Gas Town burns tokens. A lot of tokens. At peak usage with 10+ polecats running simultaneously, you can expect to spend approximately $100/hour -- roughly 10..."
+description: "Monitor and optimize Gas Town token costs with budget workflows, cost alerts, and strategies for reducing spend."
 ---
 
 # Cost Management

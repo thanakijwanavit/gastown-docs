@@ -1,7 +1,7 @@
 ---
 title: "Hooks (Persistence)"
 sidebar_position: 2
-description: "Hooks are Gas Town's durability primitive. A hook is a persistent attachment point where work state is stored in a way that survives crashes, restarts, hando..."
+description: "Hooks persist work state across crashes, restarts, and handoffs so agents always know what to do when a new session starts."
 ---
 
 # Hooks (Persistence)

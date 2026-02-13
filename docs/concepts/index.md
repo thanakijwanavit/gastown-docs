@@ -1,7 +1,7 @@
 ---
 title: "Core Concepts"
 sidebar_position: 0
-description: "Gas Town is built on a small set of powerful primitives. Understanding these concepts is the key to effective use of the system, whether you are a human oper..."
+description: "Learn the core primitives of Gas Town: beads, hooks, convoys, molecules, gates, and rigs that power the orchestration system."
 ---
 
 # Core Concepts

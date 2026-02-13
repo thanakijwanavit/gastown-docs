@@ -1,7 +1,7 @@
 ---
 title: "Agent Operations"
 sidebar_position: 2
-description: "Commands for starting, stopping, monitoring, and managing the Gas Town agent hierarchy. Each agent role has dedicated lifecycle commands, plus there are cros..."
+description: "CLI reference for managing Mayor, Deacon, Witness, Refinery, Polecat, Dog, Boot, and Crew agent lifecycles."
 ---
 
 # Agent Operations
