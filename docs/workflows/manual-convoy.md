@@ -266,3 +266,8 @@ gt convoy stranded
 - [Convoys](../concepts/convoys.md) -- How convoy tracking, dependencies, and auto-close work
 - [Beads](../concepts/beads.md) -- Creating and managing the work items that convoys track
 - [Sling Commands](../cli-reference/sling.md) -- Full CLI reference for `gt sling` and work assignment
+
+### Blog Posts
+
+- [Your First Convoy](/blog/first-convoy) -- Step-by-step guide to creating and running your first convoy
+- [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Cross-rig coordination and dependency management techniques

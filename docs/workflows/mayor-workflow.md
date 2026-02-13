@@ -251,3 +251,9 @@ The Mayor maintains context across the session. You can refer back to earlier wo
 - [MEOW Stack](../concepts/meow-stack.md) -- The Molecules, Epics, Orchestration, Workflows abstraction model
 - [Manual Convoy Workflow](manual-convoy.md) -- Alternative workflow with fine-grained control over work assignment
 - [Convoys](../concepts/convoys.md) -- How convoy tracking and auto-close work under the hood
+
+### Blog Posts
+
+- [The Mayor Workflow](/blog/mayor-workflow) -- In-depth walkthrough of the MEOW workflow in practice
+- [Your First Convoy](/blog/first-convoy) -- Getting started with convoy-based work coordination
+- [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Cross-rig dependencies and phased execution strategies

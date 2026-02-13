@@ -368,3 +368,9 @@ Next: <what remains>"
 - [Witness](witness.md) -- Monitors polecats for health
 - [Refinery](refinery.md) -- Processes MRs submitted by polecats via `gt done`
 - [Beads](../concepts/beads.md) -- Issue tracking system polecats use for task management
+
+### Blog Posts
+
+- [Understanding GUPP](/blog/understanding-gupp) -- Deep dive into the propulsion principle behind polecat execution
+- [Common Pitfalls](/blog/common-pitfalls) -- Mistakes to avoid when working with ephemeral workers
+- [The Witness Explained](/blog/witness-explained) -- How the Witness monitors and recovers polecats

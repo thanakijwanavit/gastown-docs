@@ -272,3 +272,8 @@ gt crew restart myproject dave
 - [Refinery](refinery.md) -- Merge queue that crew work flows through
 - [Beads](../concepts/beads.md) -- Issue tracking available to crew members
 - [Rigs](../concepts/rigs.md) -- Project containers where crew workspaces live
+
+### Blog Posts
+
+- [Session Cycling](/blog/session-cycling) -- How crew members handle context limits with session handoffs
+- [Common Pitfalls](/blog/common-pitfalls) -- Mistakes to avoid when working alongside AI agents

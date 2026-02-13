@@ -135,3 +135,8 @@ Convoys auto-close when all tracked beads complete. You do not need to manually 
 - [Beads](../concepts/beads.md) -- The atomic work units that convoys track through the system
 - [Manual Convoy Workflow](../workflows/manual-convoy.md) -- Advanced convoy patterns with cross-rig coordination
 - [Mayor Workflow](../workflows/mayor-workflow.md) -- Let the Mayor handle convoy creation and assignment automatically
+
+### Blog Posts
+
+- [Your First Convoy](/blog/first-convoy) -- Blog walkthrough with tips and real-world examples
+- [The Mayor Workflow](/blog/mayor-workflow) -- How to let the Mayor automate convoy creation and assignment
