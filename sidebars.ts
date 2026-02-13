@@ -8,6 +8,11 @@ const sidebars: SidebarsConfig = {
       label: 'Home',
     },
     {
+      type: 'doc',
+      id: 'intro',
+      label: 'Introduction',
+    },
+    {
       type: 'category',
       label: 'Getting Started',
       link: {type: 'doc', id: 'getting-started/index'},
@@ -15,6 +20,7 @@ const sidebars: SidebarsConfig = {
         'getting-started/installation',
         'getting-started/quickstart',
         'getting-started/first-convoy',
+        'getting-started/using-search',
       ],
     },
     {
@@ -38,7 +44,12 @@ const sidebars: SidebarsConfig = {
         'cli-reference/work',
         'cli-reference/convoys',
         'cli-reference/communication',
+        'cli-reference/sling',
+        'cli-reference/nudge',
         'cli-reference/merge-queue',
+        'cli-reference/refinery-commands',
+        'cli-reference/polecat-commands',
+        'cli-reference/session-commands',
         'cli-reference/rigs',
         'cli-reference/sessions',
         'cli-reference/diagnostics',
@@ -110,8 +121,15 @@ const sidebars: SidebarsConfig = {
         'guides/cost-management',
         'guides/philosophy',
         'guides/architecture',
+        'guides/git-workflow',
+        'guides/troubleshooting',
         'guides/glossary',
       ],
+    },
+    {
+      type: 'doc',
+      id: 'troubleshooting',
+      label: 'Troubleshooting',
     },
   ],
 };
