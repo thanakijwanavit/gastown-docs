@@ -780,5 +780,6 @@ Stale P0/P1 escalations indicate that critical issues are going unaddressed. The
 
 ### Blog Posts
 
+- [The Escalation System: How Gas Town Surfaces Problems Before They Snowball](/blog/escalation-system) -- Practical guide to priority-routed escalations, severity levels, and incident handling
 - [Gas Town's Mail System](/blog/mail-system) -- Async communication patterns between agents
 - [Session Cycling](/blog/session-cycling) -- How handoff mail preserves context across sessions

@@ -487,5 +487,6 @@ You can override escalation settings at the rig level by placing an `escalation.
 
 ### Blog Posts
 
+- [The Escalation System: How Gas Town Surfaces Problems Before They Snowball](/blog/escalation-system) -- Practical guide to severity levels, routing configuration, and handling real-world incidents
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking progress, and catching problems early
