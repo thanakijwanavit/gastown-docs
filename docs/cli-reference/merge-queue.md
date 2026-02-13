@@ -271,5 +271,10 @@ The Refinery processes each MR through these steps:
 
 If a merge conflict occurs during rebase, the Refinery can spawn a fresh polecat to resolve the conflict before retrying.
 
-
 :::
+
+## See Also
+
+- [Refinery](/docs/agents/refinery) — The merge queue agent
+- [gt refinery](/docs/cli-reference/refinery-commands) — Refinery management commands
+- [Work Management](/docs/cli-reference/work) — Submitting work to the merge queue via `gt done`

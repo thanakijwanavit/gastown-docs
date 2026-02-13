@@ -467,3 +467,9 @@ gt rig settings myproject --set "validation.timeout=300"
 # Remove a setting
 gt rig settings myproject --unset "validation.timeout"
 ```
+
+## See Also
+
+- [Rigs](/docs/concepts/rigs) — Conceptual overview of project containers
+- [Workspace Management](/docs/cli-reference/workspace) — Town-level workspace commands
+- [Configuration](/docs/cli-reference/configuration) — Town-level configuration

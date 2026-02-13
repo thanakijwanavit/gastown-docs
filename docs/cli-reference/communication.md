@@ -758,5 +758,10 @@ gt escalate stale --age 30m
 
 Stale P0/P1 escalations indicate that critical issues are going unaddressed. These should be triaged immediately.
 
-
 :::
+
+## See Also
+
+- [gt nudge](/docs/cli-reference/nudge) — Synchronous agent-to-agent messaging
+- [Escalations](/docs/operations/escalations) — The escalation routing system
+- [Agent Hierarchy](/docs/architecture/agent-hierarchy) — How agents are organized for communication

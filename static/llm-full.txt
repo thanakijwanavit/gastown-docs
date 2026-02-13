@@ -1903,6 +1903,13 @@ gt worktree list
 gt worktree remove beads
 ```
 
+## See Also
+
+- [Architecture Overview](/docs/architecture/overview) — How the workspace fits into Gas Town's architecture
+- [Rig Management](/docs/cli-reference/rigs) — Managing individual project containers within the workspace
+- [Configuration](/docs/cli-reference/configuration) — Town-level settings and agent configuration
+- [gt dolt](/docs/cli-reference/dolt) — Dolt SQL server that backs the beads database
+
 
 ========================================================================
 # Agent Operations
@@ -2765,6 +2772,13 @@ gt crew restart <rig> <member> [options]
 gt crew restart myproject dave
 ```
 
+## See Also
+
+- [Agent Hierarchy](/docs/architecture/agent-hierarchy) — How agents are organized
+- [Lifecycle](/docs/operations/lifecycle) — Agent lifecycle management
+- [gt polecat](/docs/cli-reference/polecat-commands) — Polecat-specific commands
+- [gt session](/docs/cli-reference/session-commands) — Session management for agents
+
 
 ========================================================================
 # Work Management
@@ -3433,8 +3447,15 @@ gt bead move gt-def34 myproject --force
 
 Moving a hooked bead without `--force` will fail. Unsling it first, or use `--force` to automatically unsling before moving.
 
-
 :::
+
+## See Also
+
+- [Beads](/docs/concepts/beads) — The work tracking primitive
+- [Hooks](/docs/concepts/hooks) — How agents claim and track work
+- [GUPP](/docs/concepts/gupp) — The propulsion principle behind work assignment
+- [gt sling](/docs/cli-reference/sling) — Detailed sling command reference
+- [Convoy & Tracking](/docs/cli-reference/convoys) — Batch work management
 
 
 ========================================================================
@@ -3805,6 +3826,12 @@ Remaining:
 Blockers: none
 Merge status: 2 merged, 0 in queue
 ```
+
+## See Also
+
+- [Convoys](/docs/concepts/convoys) — Conceptual overview of convoy-based work batching
+- [Work Management](/docs/cli-reference/work) — Individual bead lifecycle commands
+- [gt sling](/docs/cli-reference/sling) — Dispatching convoy beads to rigs
 
 
 ========================================================================
@@ -4566,8 +4593,13 @@ gt escalate stale --age 30m
 
 Stale P0/P1 escalations indicate that critical issues are going unaddressed. These should be triaged immediately.
 
-
 :::
+
+## See Also
+
+- [gt nudge](/docs/cli-reference/nudge) — Synchronous agent-to-agent messaging
+- [Escalations](/docs/operations/escalations) — The escalation routing system
+- [Agent Hierarchy](/docs/architecture/agent-hierarchy) — How agents are organized for communication
 
 
 ========================================================================
@@ -4678,6 +4710,12 @@ For non-urgent communication, use `gt mail send` instead. Nudges interrupt the t
 `gt nudge` is the preferred way to send messages to running sessions. The lower-level `gt session inject` exists but lacks the reliable delivery guarantees that `gt nudge` provides.
 
 :::
+
+## See Also
+
+- [Communication](/docs/cli-reference/communication) — Full communication command reference including mail and escalations
+- [gt sling](/docs/cli-reference/sling) — Assign work (often paired with nudge to wake agents)
+- [gt session](/docs/cli-reference/session-commands) — Low-level session management
 
 
 ========================================================================
@@ -4823,6 +4861,13 @@ gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
 The `--args` string is stored in the bead and shown via `gt prime`. Since the executor is an LLM, it interprets these instructions naturally -- write them as you would explain the task to a person.
 
 :::
+
+## See Also
+
+- [GUPP](/docs/concepts/gupp) — The propulsion principle that drives work assignment
+- [Hooks](/docs/concepts/hooks) — How agents claim work via hooks
+- [Work Management](/docs/cli-reference/work) — Full work lifecycle commands
+- [gt nudge](/docs/cli-reference/nudge) — Wake agents after slinging work
 
 
 ========================================================================
@@ -5097,8 +5142,13 @@ The Refinery processes each MR through these steps:
 
 If a merge conflict occurs during rebase, the Refinery can spawn a fresh polecat to resolve the conflict before retrying.
 
-
 :::
+
+## See Also
+
+- [Refinery](/docs/agents/refinery) — The merge queue agent
+- [gt refinery](/docs/cli-reference/refinery-commands) — Refinery management commands
+- [Work Management](/docs/cli-reference/work) — Submitting work to the merge queue via `gt done`
 
 
 ========================================================================
@@ -5569,6 +5619,12 @@ gt rig settings myproject --set "validation.timeout=300"
 # Remove a setting
 gt rig settings myproject --unset "validation.timeout"
 ```
+
+## See Also
+
+- [Rigs](/docs/concepts/rigs) — Conceptual overview of project containers
+- [Workspace Management](/docs/cli-reference/workspace) — Town-level workspace commands
+- [Configuration](/docs/cli-reference/configuration) — Town-level configuration
 
 
 ========================================================================
@@ -6069,8 +6125,14 @@ gt mol dag --format mermaid
 
 ## Formulas
 
-Formulas are reusable workflow templates that define molecule structures. They encode repeatable multi-step processes.
+Formulas are reusable workflow templates that define molecule structures. They encode repeatable multi-step processes. See [gt formula](/docs/cli-reference/formula) for the full formula command reference.
 
+## See Also
+
+- [Session Cycling](/docs/concepts/session-cycling) — How context refresh works
+- [Molecules](/docs/concepts/molecules) — Running workflow instances
+- [gt formula](/docs/cli-reference/formula) — Formula template management
+- [gt session](/docs/cli-reference/session-commands) — Low-level session management
 ### `gt formula list`
 
 List available formulas.
@@ -6447,6 +6509,12 @@ gt nudge myproject/furiosa "Check your mail"
 gt session inject myproject/toast -f prompt.txt
 ```
 
+## See Also
+
+- [Session & Handoff](/docs/cli-reference/sessions) — Higher-level session lifecycle commands
+- [Session Cycling](/docs/concepts/session-cycling) — How context refresh works
+- [gt nudge](/docs/cli-reference/nudge) — Preferred way to message running sessions
+
 
 ========================================================================
 # gt polecat
@@ -6796,6 +6864,13 @@ gt polecat identity show myproject/toast
 gt polecat identity rename myproject/toast myproject/alpha
 ```
 
+## See Also
+
+- [Polecats](/docs/agents/polecats) — Ephemeral worker agent documentation
+- [Lifecycle](/docs/operations/lifecycle) — Agent lifecycle management
+- [gt warrant](/docs/cli-reference/warrant) — Death warrants for stuck polecats
+- [Agent Operations](/docs/cli-reference/agents) — General agent management commands
+
 
 ========================================================================
 # gt refinery
@@ -7109,6 +7184,12 @@ gt refinery release gt-abc123
 All subcommands that accept `[rig]` infer the rig from the current directory when not specified.
 
 :::
+
+## See Also
+
+- [Refinery](/docs/agents/refinery) — The merge queue agent
+- [Merge Queue](/docs/cli-reference/merge-queue) — MQ list, submit, and status commands
+- [Work Management](/docs/cli-reference/work) — Submitting work via `gt done`
 
 
 ========================================================================
@@ -7774,6 +7855,13 @@ To send messages to a running session, use `gt nudge` instead of `gt session inj
 
 :::
 
+## See Also
+
+- [Monitoring](/docs/operations/monitoring) — Operational monitoring patterns
+- [Troubleshooting](/docs/operations/troubleshooting) — Common issues and solutions
+- [gt krc](/docs/cli-reference/krc) — Ephemeral data lifecycle management
+- [gt patrol](/docs/cli-reference/patrol) — Patrol digest aggregation
+
 
 ========================================================================
 # Configuration
@@ -8135,6 +8223,12 @@ gt plugin run my-plugin
 # List as JSON
 gt plugin list --json
 ```
+
+## See Also
+
+- [Plugins](/docs/operations/plugins) — Plugin system documentation
+- [Workspace Management](/docs/cli-reference/workspace) — Town-level setup commands
+- [Rig Management](/docs/cli-reference/rigs) — Per-rig settings and configuration
 
 
 ========================================================================

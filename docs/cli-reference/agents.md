@@ -859,3 +859,10 @@ gt crew restart <rig> <member> [options]
 ```bash
 gt crew restart myproject dave
 ```
+
+## See Also
+
+- [Agent Hierarchy](/docs/architecture/agent-hierarchy) — How agents are organized
+- [Lifecycle](/docs/operations/lifecycle) — Agent lifecycle management
+- [gt polecat](/docs/cli-reference/polecat-commands) — Polecat-specific commands
+- [gt session](/docs/cli-reference/session-commands) — Session management for agents

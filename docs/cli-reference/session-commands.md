@@ -260,3 +260,9 @@ gt nudge myproject/furiosa "Check your mail"
 # Low-level: file injection
 gt session inject myproject/toast -f prompt.txt
 ```
+
+## See Also
+
+- [Session & Handoff](/docs/cli-reference/sessions) — Higher-level session lifecycle commands
+- [Session Cycling](/docs/concepts/session-cycling) — How context refresh works
+- [gt nudge](/docs/cli-reference/nudge) — Preferred way to message running sessions

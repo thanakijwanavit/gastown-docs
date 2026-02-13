@@ -497,8 +497,14 @@ gt mol dag --format mermaid
 
 ## Formulas
 
-Formulas are reusable workflow templates that define molecule structures. They encode repeatable multi-step processes.
+Formulas are reusable workflow templates that define molecule structures. They encode repeatable multi-step processes. See [gt formula](/docs/cli-reference/formula) for the full formula command reference.
 
+## See Also
+
+- [Session Cycling](/docs/concepts/session-cycling) — How context refresh works
+- [Molecules](/docs/concepts/molecules) — Running workflow instances
+- [gt formula](/docs/cli-reference/formula) — Formula template management
+- [gt session](/docs/cli-reference/session-commands) — Low-level session management
 ### `gt formula list`
 
 List available formulas.
