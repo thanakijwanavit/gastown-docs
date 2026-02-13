@@ -658,6 +658,52 @@ else
     fail_test "Found $BAD_URLS malformed external link(s)" "Fix URL formatting issues"
 fi
 
+# Test 21: Check for inconsistent terminology
+echo ""
+echo "Test 21: Checking terminology consistency..."
+TERM_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    in_code=false
+    line_num=0
+    while IFS= read -r line; do
+        line_num=$((line_num + 1))
+        if [[ "$line" =~ ^'```' ]]; then
+            in_code=$([ "$in_code" = false ] && echo true || echo false)
+            continue
+        fi
+        [ "$in_code" = true ] && continue
+        # Skip frontmatter lines
+        [[ "$line" =~ ^--- ]] && continue
+
+        rel_file="${file#$ROOT_DIR/}"
+
+        # Check: "pole cat" or "pole-cat" (should be "polecat")
+        if echo "$line" | grep -qi '\bpole[- ]cat\b' 2>/dev/null; then
+            echo "  Inconsistent term 'pole cat/pole-cat' in $rel_file:$line_num (use 'polecat')"
+            TERM_ISSUES=$((TERM_ISSUES + 1))
+        fi
+
+        # Check: "gasetown" (common misspelling)
+        if echo "$line" | grep -qi '\bgasetown\b' 2>/dev/null; then
+            echo "  Misspelling 'gasetown' in $rel_file:$line_num (use 'Gas Town' or 'Gastown')"
+            TERM_ISSUES=$((TERM_ISSUES + 1))
+        fi
+
+        # Check: "work tree" (should be "worktree")
+        if echo "$line" | grep -qi '\bwork tree\b' 2>/dev/null; then
+            echo "  Inconsistent term 'work tree' in $rel_file:$line_num (use 'worktree')"
+            TERM_ISSUES=$((TERM_ISSUES + 1))
+        fi
+    done < "$file"
+done
+
+if [ "$TERM_ISSUES" -eq 0 ]; then
+    pass_test "Terminology is consistent across documentation"
+else
+    fail_test "Found $TERM_ISSUES terminology inconsistenc(ies)" "Use canonical terms: Gas Town/Gastown, polecat, worktree"
+fi
+
 # Summary
 echo ""
 echo "========================================"
