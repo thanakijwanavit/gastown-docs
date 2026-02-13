@@ -300,6 +300,42 @@ else
     fail_test "Found $BARE_BLOCKS bare code block(s)" "Add language tags (bash, text, json, etc.) to opening fences"
 fi
 
+# Test 11: Check for truncated meta descriptions
+echo ""
+echo "Test 11: Checking for truncated meta descriptions..."
+TRUNCATED_DESCS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    if grep -q 'description: ".*\.\.\."' "$file" 2>/dev/null; then
+        echo "  Truncated description in: $file"
+        TRUNCATED_DESCS=$((TRUNCATED_DESCS + 1))
+    fi
+done
+
+if [ "$TRUNCATED_DESCS" -eq 0 ]; then
+    pass_test "All meta descriptions are complete"
+else
+    fail_test "Found $TRUNCATED_DESCS truncated description(s)" "Replace descriptions ending with '...' with complete sentences"
+fi
+
+# Test 12: Check for Related cross-reference sections
+echo ""
+echo "Test 12: Checking for Related cross-reference sections..."
+MISSING_RELATED=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md"); do
+    if ! grep -q "^## Related" "$file" 2>/dev/null; then
+        echo "  Missing Related section: $file"
+        MISSING_RELATED=$((MISSING_RELATED + 1))
+    fi
+done
+
+if [ "$MISSING_RELATED" -eq 0 ]; then
+    pass_test "All non-index pages have Related sections"
+else
+    fail_test "Found $MISSING_RELATED page(s) without Related sections" "Add ## Related with 3-4 cross-references"
+fi
+
 # Summary
 echo ""
 echo "========================================"
