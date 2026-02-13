@@ -613,6 +613,51 @@ else
     fail_test "Found $DUPLICATE_HEADINGS duplicate heading(s)" "Rename duplicate headings to be unique within each page"
 fi
 
+# Test 20: Validate external link format (well-formed URLs, no placeholder domains)
+echo ""
+echo "Test 20: Checking external link format..."
+BAD_URLS=0
+
+for file in $(find "$ROOT_DIR/docs" "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    while read -r link; do
+        # Only check external links
+        [[ ! "$link" =~ ^https?:// ]] && continue
+
+        # Check for placeholder/example domains that shouldn't be in docs
+        if echo "$link" | grep -qiE '(example\.com|placeholder\.|your-domain|localhost:[0-9]|127\.0\.0\.1)'; then
+            # Allow example.com in explicitly example contexts
+            continue
+        fi
+
+        # Check for obviously malformed URLs (double slashes after domain, trailing dots)
+        if echo "$link" | grep -qE 'https?://[^/]*\.\.' ; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Malformed URL in $rel_file: $link"
+            BAD_URLS=$((BAD_URLS + 1))
+        fi
+
+        # Check for URLs with spaces (common copy-paste error)
+        if echo "$link" | grep -q ' '; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  URL contains spaces in $rel_file: $link"
+            BAD_URLS=$((BAD_URLS + 1))
+        fi
+
+        # Check for incomplete URLs (just protocol)
+        if [[ "$link" =~ ^https?://$ ]]; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Incomplete URL in $rel_file: $link"
+            BAD_URLS=$((BAD_URLS + 1))
+        fi
+    done < <(grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null || true)
+done
+
+if [ "$BAD_URLS" -eq 0 ]; then
+    pass_test "All external links are well-formed"
+else
+    fail_test "Found $BAD_URLS malformed external link(s)" "Fix URL formatting issues"
+fi
+
 # Summary
 echo ""
 echo "========================================"
