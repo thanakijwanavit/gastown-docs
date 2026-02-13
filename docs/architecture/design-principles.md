@@ -115,3 +115,17 @@ The Overseer (human) sits at the top of the escalation chain:
 - Can manually sling, release, or reassign work
 
 Gas Town automates everything it can, but keeps humans in control.
+
+## 11. The Scotty Principle
+
+> "Never walk past a warp core leak."
+
+Named after the Star Trek engineer: Gas Town agents never proceed past failures. The [Refinery](../agents/refinery.md) does not merge code that fails validation. Polecats run [preflight tests](../agents/polecats.md) before starting implementation to ensure `main` is clean. If something is broken, you fix it or file it -- you don't skip past it.
+
+This principle prevents failure cascading through the system. One broken test, left unaddressed, can waste dozens of polecat hours.
+
+## 12. Discovery Over Tracking
+
+Gas Town favors agents discovering what needs to happen over centralized tracking that tells them. The [Witness](../agents/witness.md) discovers stale polecats by inspecting them, not by reading a checklist. The [Deacon](../agents/deacon.md) discovers zombies by scanning processes, not by maintaining a process table.
+
+This makes the system resilient to state corruption: even if tracking data is lost, agents can recover by rediscovering the current state.
