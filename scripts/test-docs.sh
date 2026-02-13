@@ -354,6 +354,46 @@ else
     fail_test "Found $MISSING_ADMONITIONS page(s) without admonitions" "Add :::tip, :::note, or :::warning callouts"
 fi
 
+# Test 14: Validate Mermaid diagram syntax
+echo ""
+echo "Test 14: Checking Mermaid diagram syntax..."
+MERMAID_ERRORS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract mermaid blocks and check first line has a valid diagram type
+    in_mermaid=false
+    first_content_line=true
+    line_num=0
+    while IFS= read -r line; do
+        line_num=$((line_num + 1))
+        if [[ "$line" =~ ^'```mermaid' ]]; then
+            in_mermaid=true
+            first_content_line=true
+            continue
+        fi
+        if [ "$in_mermaid" = true ] && [[ "$line" =~ ^'```' ]]; then
+            in_mermaid=false
+            continue
+        fi
+        if [ "$in_mermaid" = true ] && [ "$first_content_line" = true ]; then
+            # Skip blank lines
+            [[ -z "${line// }" ]] && continue
+            first_content_line=false
+            # Check for valid mermaid diagram type declaration
+            if ! echo "$line" | grep -qiE "^[[:space:]]*(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|erDiagram|gantt|pie|gitgraph|journey|mindmap|timeline|quadrantChart|sankey|xychart|block|packet|architecture|kanban)\b"; then
+                echo "  Invalid mermaid diagram type in $file:$line_num: $line"
+                MERMAID_ERRORS=$((MERMAID_ERRORS + 1))
+            fi
+        fi
+    done < "$file"
+done
+
+if [ "$MERMAID_ERRORS" -eq 0 ]; then
+    pass_test "All Mermaid diagrams have valid type declarations"
+else
+    fail_test "Found $MERMAID_ERRORS invalid Mermaid diagram(s)" "Ensure first line of mermaid block is a valid diagram type (graph, flowchart, sequenceDiagram, etc.)"
+fi
+
 # Summary
 echo ""
 echo "========================================"
