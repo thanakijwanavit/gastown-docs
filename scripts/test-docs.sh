@@ -588,6 +588,31 @@ else
     fail_test "Found $MERMAID_ACCESS_ISSUES Mermaid diagram(s) without nearby descriptions" "Add explanatory text above Mermaid diagrams"
 fi
 
+# Test 19: Check for duplicate headings within a single page
+echo ""
+echo "Test 19: Checking for duplicate headings..."
+DUPLICATE_HEADINGS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract all headings (## and below), normalize
+    headings=$(grep '^##' "$file" 2>/dev/null | sed 's/^##* //' | sort)
+    dupes=$(echo "$headings" | uniq -d)
+    if [ -n "$dupes" ]; then
+        rel_file="${file#$ROOT_DIR/}"
+        while IFS= read -r dupe; do
+            [ -z "$dupe" ] && continue
+            echo "  Duplicate heading in $rel_file: \"$dupe\""
+            DUPLICATE_HEADINGS=$((DUPLICATE_HEADINGS + 1))
+        done <<< "$dupes"
+    fi
+done
+
+if [ "$DUPLICATE_HEADINGS" -eq 0 ]; then
+    pass_test "No duplicate headings found within pages"
+else
+    fail_test "Found $DUPLICATE_HEADINGS duplicate heading(s)" "Rename duplicate headings to be unique within each page"
+fi
+
 # Summary
 echo ""
 echo "========================================"
