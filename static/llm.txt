@@ -14,6 +14,7 @@
 - Installation: /docs/getting-started/installation
 - Quick Start: /docs/getting-started/quickstart
 - Your First Convoy: /docs/getting-started/first-convoy
+- Using Search: /docs/getting-started/using-search
 
 ### Architecture
 - Architecture: /docs/architecture
@@ -149,6 +150,15 @@ The **Town** is your top-level workspace directory. All projects (rigs) live ins
 A Convoy is Gas Town's primary unit for tracking batches of related work. This walkthrough takes you through creating and monitoring your first convoy.
 
 A **Convoy** is Gas Town's primary unit for tracking batches of related work. This walkthrough takes you through creating and monitoring your first convoy.
+
+---
+
+## Using Search
+> /docs/getting-started/using-search
+
+How to effectively search the Gas Town documentation to find what you need quickly.
+
+The Gas Town documentation includes a powerful local search feature that helps you find information quickly across all pages.
 
 ---
 

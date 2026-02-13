@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T12:34:37.032Z",
+  "generated": "2026-02-13T12:58:34.149Z",
   "sections": [
     {
       "id": "getting-started",
@@ -27,6 +27,11 @@
           "title": "Your First Convoy",
           "path": "/docs/getting-started/first-convoy",
           "description": "A Convoy is Gas Town's primary unit for tracking batches of related work. This walkthrough takes you through creating and monitoring your first convoy."
+        },
+        {
+          "title": "Using Search",
+          "path": "/docs/getting-started/using-search",
+          "description": "How to effectively search the Gas Town documentation to find what you need quickly."
         }
       ]
     },
@@ -636,6 +641,12 @@
       "path": "/docs/getting-started/quickstart",
       "section": "getting-started",
       "description": "Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions."
+    },
+    {
+      "title": "Using Search",
+      "path": "/docs/getting-started/using-search",
+      "section": "getting-started",
+      "description": "How to effectively search the Gas Town documentation to find what you need quickly."
     },
     {
       "title": "Architecture Guide",
