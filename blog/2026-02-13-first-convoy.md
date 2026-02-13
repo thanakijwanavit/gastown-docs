@@ -55,6 +55,19 @@ gt sling ga-g5h6i myproject
 
 Each `sling` creates a polecat, assigns the bead to its hook, and starts execution. Within seconds, you'll have three polecats working in parallel.
 
+```mermaid
+sequenceDiagram
+    participant Y as You
+    participant MY as Mayor
+    participant P as Polecats
+    participant RF as Refinery
+    Y->>MY: gt sling beads to rig
+    MY->>P: Spawn 3 polecats
+    P->>P: Implement + Test
+    P->>RF: gt done (submit MRs)
+    RF->>RF: Rebase + Merge to main
+```
+
 ## Step 4: Watch It Happen
 
 Monitor the convoy's progress:

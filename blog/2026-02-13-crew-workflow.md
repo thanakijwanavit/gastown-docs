@@ -157,6 +157,14 @@ Gas Town embraces "vibe coding" -- letting AI do the heavy lifting while you foc
 
 The most effective Gas Town operators spend 80% of their time on specification and review, and 20% on direct coding in their crew workspace.
 
+```mermaid
+flowchart LR
+    subgraph Crew["Crew Operator Time Split"]
+        S[Specify: 40%] --> R[Review: 40%]
+        R --> C[Code: 20%]
+    end
+```
+
 ## Best Practices
 
 1. **Push frequently.** In a multi-agent environment, unpushed work diverges fast. Push after every logical chunk.

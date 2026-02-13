@@ -123,6 +123,21 @@ gt rig config myproject refinery.require_ci true
 | Monitor agent health | Gas Town Witness |
 | Merge safely at scale | Gas Town Refinery + your CI |
 
+```mermaid
+sequenceDiagram
+    participant MY as Mayor
+    participant PC as Polecats
+    participant RF as Refinery
+    participant CI as Your CI/CD
+    participant PR as Production
+    MY->>PC: Decompose + Sling
+    PC->>RF: gt done (submit MR)
+    RF->>CI: Push rebased branch
+    CI->>RF: Pass/Fail
+    RF->>RF: Merge to main
+    CI->>PR: Deploy (your CD)
+```
+
 ## The Bottom Line
 
 Gas Town is not CI/CD 2.0. It's the layer that generates the code your CI/CD validates. Think of it as "AI-driven development management" that happens to interface with your existing automation.

@@ -232,6 +232,19 @@ bd stats                     # Beads statistics
 bd doctor                    # Check for beads issues
 ```
 
+```mermaid
+flowchart TD
+    subgraph Prevention["Daily Health Checks"]
+        S[gt status] --> CV[gt convoy list]
+        CV --> ST[gt convoy stranded]
+        ST --> BL[bd blocked]
+    end
+    subgraph Weekly["Weekly Maintenance"]
+        DR[gt doctor] --> OR[gt orphans]
+        OR --> CL[gt cleanup]
+    end
+```
+
 ## The Golden Rule
 
 When in doubt, remember: **beads are the source of truth**. Agents come and go, sessions crash and restart, git branches get created and deleted. But the bead tracking state persists. As long as the bead is open, someone (or some new agent) will eventually pick it up.

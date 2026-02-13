@@ -103,6 +103,20 @@ New session reads hook:
 
 The molecule tracks which steps are done, in progress, or pending. A fresh agent reads this state and skips completed steps entirely.
 
+```mermaid
+sequenceDiagram
+    participant GT as gt sling
+    participant FS as Filesystem
+    participant PC as Polecat
+    GT->>FS: Create worktree + write .gt-hook
+    GT->>PC: Start session
+    PC->>FS: Read hook (bead + molecule)
+    loop Each Step
+        PC->>FS: Update hook (step done)
+    end
+    PC->>PC: gt done (submit MR)
+```
+
 ## Hooks vs. Handoff Mail
 
 Gas Town has two persistence mechanisms for session boundaries. They serve different purposes:

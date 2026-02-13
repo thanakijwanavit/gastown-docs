@@ -233,6 +233,18 @@ This lets you verify that:
 3. Instructions are clear enough for an agent
 4. Variables resolve correctly
 
+```mermaid
+flowchart TD
+    subgraph CodeReview["Code Review Formula"]
+        LC[load-context] --> SR[security-review]
+        LC --> PR[performance-review]
+        LC --> STR[style-review]
+        SR --> WR[write-review]
+        PR --> WR
+        STR --> WR
+    end
+```
+
 ## Best Practices
 
 **Keep steps focused.** Each step should be one clear action. If a step description is more than a paragraph, consider splitting it into multiple steps.

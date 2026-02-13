@@ -116,6 +116,16 @@ Deacon → "Rig myproject has 5 stale polecats, Witness claims all healthy"
 
 Boot dogs are deliberately short-lived. They assess and report, then exit. The Deacon takes action based on Boot's assessment. This separation keeps triage lightweight and prevents the Deacon from getting stuck doing detailed investigation.
 
+```mermaid
+flowchart TD
+    DM[Daemon] -->|heartbeat| DC[Deacon]
+    DC -->|watches| W1[Witness Rig 1]
+    DC -->|watches| W2[Witness Rig 2]
+    W1 -->|watches| P1[Polecats]
+    W2 -->|watches| P2[Polecats]
+    DC -->|spawns| BT[Boot Dog: Triage]
+```
+
 ## Convoy Completion
 
 The Deacon checks convoy status during each patrol. When all beads in a convoy reach a terminal state (`done`, `wontfix`), the convoy auto-closes:

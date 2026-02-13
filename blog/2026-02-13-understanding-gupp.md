@@ -87,6 +87,18 @@ The fresh agent doesn't redo steps 1-2. It reads the molecule state and picks up
 
 This prevents a class of bugs where agents fight over state: Agent A closes a bead, Agent B reopens it, Agent A closes it again, and so on.
 
+```mermaid
+sequenceDiagram
+    participant P1 as Polecat (crashes)
+    participant H as Hook + Molecule
+    participant P2 as Fresh Polecat
+    P1->>H: Steps 1-2 done, step 3 in_progress
+    Note over P1: CRASH
+    P2->>H: Reads hook state
+    Note over P2: Skips steps 1-2, resumes step 3
+    P2->>H: Steps 3-4 done
+```
+
 ## NDI: The Practical Companion
 
 GUPP has a companion principle: **Nondeterministic Idempotence (NDI)**. It acknowledges that AI agents are nondeterministic — ask Claude to implement the same feature twice and you'll get different code.

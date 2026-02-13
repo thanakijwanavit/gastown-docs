@@ -159,6 +159,21 @@ gt mq skip <mr-id>
 gt mq process
 ```
 
+```mermaid
+sequenceDiagram
+    participant P as Polecat
+    participant MQ as Merge Queue
+    participant R as Refinery
+    participant CI as Your CI
+    participant M as Main Branch
+    P->>MQ: gt done (submit MR)
+    MQ->>R: Next MR in FIFO order
+    R->>R: Rebase onto main
+    R->>CI: Push rebased branch
+    CI->>R: Status: pass/fail
+    R->>M: Fast-forward merge
+```
+
 ## Queue Ordering
 
 The default ordering is FIFO — first submitted, first processed. But the Refinery respects priority when configured:

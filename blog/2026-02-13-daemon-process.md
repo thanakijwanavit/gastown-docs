@@ -137,6 +137,19 @@ gt daemon status --json | jq '.last_heartbeat'
 
 If `gt daemon status` shows the daemon is down but agents are still running, you can restart it without affecting active work.
 
+```mermaid
+flowchart TD
+    subgraph Impact["Daemon Crash Impact"]
+        PC[Running Polecats: NONE]
+        WI[Running Witnesses: REDUCED]
+        RF[Running Refinery: NONE]
+        HB[Heartbeats: BROKEN]
+        SP[New Spawns: BLOCKED]
+    end
+    FIX[gt daemon start] --> PC
+    FIX --> HB
+```
+
 ## Design Lessons
 
 The daemon embodies several Gas Town principles:

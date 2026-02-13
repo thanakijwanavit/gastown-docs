@@ -63,6 +63,19 @@ Gas Town uses git worktrees rather than Docker containers for isolation because:
 
 This is a deliberate trade-off: Gas Town provides **code isolation**, not **process isolation**. If you need stronger sandboxing (untrusted code execution, network isolation), layer containers on top.
 
+```mermaid
+flowchart TD
+    subgraph Isolation["Workspace Isolation"]
+        R[Rig Clone .git]
+        R --> WT1["polecats/toast/ (sandboxed)"]
+        R --> WT2["polecats/alpha/ (sandboxed)"]
+        R --> CW["crew/dave/ (full access)"]
+        R --> RF["refinery/rig/ (merge only)"]
+    end
+    WT1 -.->|cannot access| WT2
+    WT1 -.->|cannot access| CW
+```
+
 ## The Refinery Gate
 
 The Refinery is the single point where code enters `main`. No agent pushes directly to the main branch (except crew workers, who are human-managed). This creates a natural security checkpoint:

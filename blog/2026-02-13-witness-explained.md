@@ -134,6 +134,13 @@ Understanding the Witness's scope helps avoid confusion:
 
 The Witness is purely a health monitor. It observes and reports. It can nudge agents back on track, but it never takes direct action on code or work items.
 
+```mermaid
+flowchart LR
+    W[Witness] -->|raw observations| DC[Deacon]
+    DC -->|rig-level context| MY[Mayor]
+    MY -->|strategic assessment| HU[Human]
+```
+
 ## The Escalation Flow
 
 When the Witness escalates, the information flows upward:

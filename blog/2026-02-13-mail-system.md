@@ -159,6 +159,17 @@ Mail uses the two-level beads architecture:
 
 All mail goes through the town-level beads database, regardless of which rig the agents belong to. The `gt mail` command handles routing transparently.
 
+```mermaid
+sequenceDiagram
+    participant A as Agent A
+    participant MB as Mailbox (Beads)
+    participant B as Agent B
+    A->>MB: gt mail send (payload)
+    A->>B: gt nudge (wake up)
+    B->>MB: gt mail inbox (read)
+    Note over B: Processes mail content
+```
+
 ## Mail vs. Nudge: When to Use Which
 
 | Scenario | Use Mail | Use Nudge |

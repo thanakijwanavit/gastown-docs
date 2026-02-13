@@ -213,6 +213,16 @@ Gas Town's [escalation system](/docs/operations/escalations/) routes problems au
 
 Most day-to-day monitoring is about catching patterns before they become P0 escalations. The tools above give you early warning.
 
+```mermaid
+flowchart TD
+    DM[Daemon: Heartbeat 3min] --> BT[Boot: Triage]
+    BT --> DC[Deacon: Town Patrol 5min]
+    DC --> W[Witnesses: Rig Patrol 5min]
+    W --> PC[Polecats: Monitored]
+    DC -->|escalates| MY[Mayor]
+    MY -->|escalates| HU[Human]
+```
+
 ## The Automated Safety Net
 
 Even when you're not watching, Gas Town monitors itself:

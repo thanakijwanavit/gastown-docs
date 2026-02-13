@@ -150,6 +150,21 @@ Tests: All passing
 "
 ```
 
+```mermaid
+flowchart TD
+    subgraph Preserved["Survives Cycling"]
+        HK[Hook: Work Assignment]
+        MOL[Molecule: Step Progress]
+        GIT[Git: Code Changes]
+        ML[Mail: Context Notes]
+    end
+    subgraph Lost["Lost on Cycling"]
+        MEM[In-Memory Reasoning]
+        UC[Uncommitted Changes]
+        FC[File Read Context]
+    end
+```
+
 ## The Role of Molecules
 
 Molecules are what make session cycling work for multi-step tasks. Each molecule tracks:

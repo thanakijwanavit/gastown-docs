@@ -136,6 +136,17 @@ The seance ensures that regardless of runtime, the agent starts with:
 
 This is what makes runtime-swapping possible without losing coordination state.
 
+```mermaid
+sequenceDiagram
+    participant GT as Gas Town
+    participant RT as Any Runtime
+    GT->>RT: Hook (assigned work)
+    RT->>RT: Read hook + implement
+    RT->>GT: Git commits on branch
+    RT->>GT: gt done (signal completion)
+    Note over GT,RT: Contract: hook → commits → done
+```
+
 ## Practical Tips
 
 **Start with one runtime.** Most teams begin with Claude Code for everything, then specialize as they learn which tasks benefit from different runtimes.

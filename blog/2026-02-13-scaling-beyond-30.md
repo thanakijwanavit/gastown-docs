@@ -149,6 +149,16 @@ Set up alerting when:
 - Conflict rate exceeds 40%
 - Any agent has been unresponsive for more than 15 minutes
 
+```mermaid
+flowchart LR
+    subgraph Stagger["Staggered Dispatches"]
+        W1["Wave 1: 5 beads"] --> M1[Merges Land]
+        M1 --> W2["Wave 2: 5 beads"]
+        W2 --> M2[Merges Land]
+        M2 --> W3["Wave 3: 5 beads"]
+    end
+```
+
 ## Common Pitfalls at Scale
 
 1. **Not splitting rigs early enough.** By the time merge conflicts are constant, you should have split the rig already.

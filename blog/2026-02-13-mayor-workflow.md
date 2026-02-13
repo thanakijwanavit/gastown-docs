@@ -203,6 +203,15 @@ gt polecat nuke <name>
 gt sling <bead-id> <rig>
 ```
 
+```mermaid
+flowchart TD
+    subgraph Recovery["Automatic Recovery"]
+        ST[Polecat Stuck] -->|Witness detects| ND[Nudge]
+        ND -->|no response| DC[Deacon Spawns Replacement]
+        MC[Merge Conflict] -->|Refinery rejects| RS[Re-sling to New Polecat]
+    end
+```
+
 ## MEOW vs Other Workflows
 
 | Feature | MEOW | Manual Convoy | Formula | Minimal |

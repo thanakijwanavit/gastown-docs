@@ -145,6 +145,19 @@ retry = 1
 | `timeout` | Maximum execution time |
 | `retry` | Number of retries on failure |
 
+```mermaid
+flowchart TD
+    MR[Merge Request] --> P1["01-lint.sh"]
+    P1 -->|pass| P2["02-type-check.sh"]
+    P2 -->|pass| P3["03-test-coverage.sh"]
+    P3 -->|pass| P4["04-security-scan.sh"]
+    P4 -->|pass| MG[Merge to Main]
+    P1 -->|fail| RJ[Reject MR]
+    P2 -->|fail| RJ
+    P3 -->|fail| RJ
+    P4 -->|fail| RJ
+```
+
 ## Plugin Ordering
 
 When multiple plugins target the same hook point, they execute in alphabetical order by filename. Use numeric prefixes to control ordering:
