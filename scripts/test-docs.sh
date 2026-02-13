@@ -18,13 +18,13 @@ TESTS_FAILED=0
 # Helper function to report test results
 pass_test() {
     echo "✓ $1"
-    ((TESTS_PASSED++))
+    TESTS_PASSED=$((TESTS_PASSED + 1))
 }
 
 fail_test() {
     echo "✗ $1"
     echo "  Error: $2"
-    ((TESTS_FAILED++))
+    TESTS_FAILED=$((TESTS_FAILED + 1))
 }
 
 # Test 1: Build succeeds
@@ -44,7 +44,7 @@ BROKEN_LINKS=0
 # Find all markdown files and check internal links
 for file in $(find . -name "*.md"); do
     # Extract markdown links: [text](link)
-    grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null | while read -r link; do
+    while read -r link; do
         # Skip external links (http/https)
         if [[ "$link" =~ ^https?:// ]]; then
             continue
@@ -55,13 +55,24 @@ for file in $(find . -name "*.md"); do
             continue
         fi
 
+        # Skip absolute doc paths (handled by Docusaurus routing, not filesystem)
+        if [[ "$link" =~ ^/docs/ ]]; then
+            continue
+        fi
+
+        # Strip anchor from link for filesystem check
+        link_no_anchor="${link%%#*}"
+        if [[ -z "$link_no_anchor" ]]; then
+            continue
+        fi
+
         # Check if relative path exists
-        link_path=$(dirname "$file")/"$link"
+        link_path=$(dirname "$file")/"$link_no_anchor"
         if [[ ! -f "$link_path" ]] && [[ ! -d "$link_path" ]]; then
             echo "  Broken link in $file: $link"
-            ((BROKEN_LINKS++))
+            BROKEN_LINKS=$((BROKEN_LINKS + 1))
         fi
-    done
+    done < <(grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null || true)
 done
 
 if [ "$BROKEN_LINKS" -eq 0 ]; then
@@ -80,13 +91,13 @@ for file in $(find . -name "*.md"); do
     BACKTICK_COUNT=$(grep -o '```' "$file" | wc -l)
     if [ $((BACKTICK_COUNT % 2)) -ne 0 ]; then
         echo "  Unclosed code block in: $file"
-        ((FORMATTING_ISSUES++))
+        FORMATTING_ISSUES=$((FORMATTING_ISSUES + 1))
     fi
 
     # Check for frontmatter
     if ! head -1 "$file" | grep -q "^---$"; then
         echo "  Missing frontmatter in: $file"
-        ((FORMATTING_ISSUES++))
+        FORMATTING_ISSUES=$((FORMATTING_ISSUES + 1))
     fi
 done
 
@@ -129,7 +140,7 @@ MISSING_DOCS=0
 for doc in "${REQUIRED_DOCS[@]}"; do
     if [ ! -f "$ROOT_DIR/$doc" ]; then
         echo "  Missing required doc: $doc"
-        ((MISSING_DOCS++))
+        MISSING_DOCS=$((MISSING_DOCS + 1))
     fi
 done
 
@@ -150,7 +161,7 @@ while IFS= read -r -d '' file; do
     size_kb=$((size / 1024))
     if [ "$size_kb" -gt "$MAX_SIZE_KB" ]; then
         echo "  Large file ($size_kb KB): $file"
-        ((LARGE_FILES++))
+        LARGE_FILES=$((LARGE_FILES + 1))
     fi
 done < <(find "$ROOT_DIR/docs" -name "*.md" -print0)
 

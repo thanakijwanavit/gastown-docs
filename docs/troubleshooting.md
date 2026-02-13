@@ -1,3 +1,8 @@
+---
+sidebar_position: 99
+title: Troubleshooting Guide
+---
+
 # Troubleshooting Guide
 
 This guide covers common errors and their solutions when working with Gas Town.
