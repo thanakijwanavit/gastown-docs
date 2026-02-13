@@ -42,6 +42,8 @@ Before installing Gas Town, ensure you have:
 2. [Quick Start](quickstart.md) — Set up your workspace and add your first project
 3. [Your First Convoy](first-convoy.md) — Assign work and watch agents deliver
 4. [Using Search](using-search.md) — Find what you need in the documentation
+5. [Cheat Sheet](cheat-sheet.md) — One-page command quick reference
+6. [FAQ](faq.md) — Answers to the most common questions
 
 ## The 30-Second Version
 
@@ -58,6 +60,8 @@ gt mayor attach               # Start the Mayor
 
 Once you're up and running, explore these areas:
 
+- [Cheat Sheet](cheat-sheet.md) — Quick reference for the commands you'll use most
+- [FAQ](faq.md) — Answers to common questions about setup, agents, and costs
 - [Architecture Overview](../architecture/overview.md) — Understand how all the pieces fit together
 - [Usage Guide](../guides/usage-guide.md) — Day-to-day patterns for working with Gas Town
 - [CLI Reference](../cli-reference/index.md) — Complete command reference
