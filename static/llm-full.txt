@@ -13127,12 +13127,14 @@ flowchart TD
     Start -->|Fine control over assignments| Manual[Manual Convoy]
     Start -->|Repeatable process| Formula[Formula Workflow]
     Start -->|Code review| Review[Code Review]
+    Start -->|Work alongside polecats| Crew[Crew Collaboration]
 
     MEOW --> Done[Work gets done]
     Minimal --> Done
     Manual --> Done
     Formula --> Done
     Review --> Done
+    Crew --> Done
 ```
 
 ## Workflow Comparison
