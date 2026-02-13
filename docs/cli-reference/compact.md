@@ -87,6 +87,31 @@ gt compact report --dry-run    # Preview the report without sending
 gt compact report --weekly     # Send weekly rollup to mayor/
 ```
 
+## Troubleshooting
+
+### Wisps Not Being Compacted
+
+If `gt compact --dry-run` shows no wisps to process, check that:
+
+1. The rig has wisps: `bd list --type wisp`
+2. The wisps have exceeded their TTL (see table above)
+3. You're targeting the correct rig: `gt compact --rig <name>`
+
+### Unexpected Promotions
+
+Wisps are promoted (instead of deleted) when they're still open past their TTL — this usually means something is stuck. Check the promoted bead for context:
+
+```bash
+# After compaction reports a promotion
+bd show <promoted-bead-id>
+
+# Common causes: stalled heartbeats, unresolved patrol findings
+```
+
+:::warning
+Compaction is irreversible for deletions. Use `--dry-run` first to verify what will be removed. Dolt's `AS OF` feature preserves historical data, but direct recovery is not straightforward.
+:::
+
 ## Related
 
 - [Wisps](../concepts/wisps.md) -- The ephemeral beads that compaction manages

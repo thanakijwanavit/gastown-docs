@@ -68,9 +68,49 @@ gt seance --talk sess-abc123
 ```
 
 :::tip
-
 Sessions are discovered from events emitted by SessionStart hooks. The `[GAS TOWN]` beacon in each session makes them searchable via `/resume`.
+:::
 
+## Common Use Cases
+
+### Recovering Lost Context After Compaction
+
+When your context window compacts and you lose details about earlier work:
+
+```bash
+# Find your recent sessions
+gt seance --role crew --recent 5
+
+# Ask your predecessor what they were doing
+gt seance --talk sess-abc123 -p "What files did you modify and why?"
+```
+
+### Debugging a Polecat's Decisions
+
+When reviewing polecat output and you don't understand the approach:
+
+```bash
+# Find polecat sessions in the rig
+gt seance --rig myproject --role polecat
+
+# Ask why it made a particular choice
+gt seance --talk sess-def456 -p "Why did you use a map instead of a slice for the cache?"
+```
+
+### Investigating Escalations
+
+When an escalation arrives and you need to understand the original problem:
+
+```bash
+# Find the session that escalated
+gt seance --recent 20
+
+# Get the full story
+gt seance --talk sess-ghi789 -p "What went wrong and what did you try?"
+```
+
+:::note
+Seance spawns a read-only fork of the predecessor session. It cannot modify the original session's state or history.
 :::
 
 ## Related

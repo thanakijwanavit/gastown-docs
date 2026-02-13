@@ -49,6 +49,18 @@ gt town prev
 
 Cycles backward through town-level tmux sessions.
 
+## When to Use
+
+Town-level navigation is useful when:
+
+- **Debugging coordination issues** -- The Mayor and Deacon handle different aspects of town operations. Cycling between them lets you compare what each is seeing.
+- **Monitoring town health** -- Check the Deacon's patrol state, then switch to the Mayor to see strategic context.
+- **During incident response** -- Quickly switch between sessions to understand both the health monitoring (Deacon) and coordination (Mayor) perspectives.
+
+:::tip
+If you need to interact with rig-level agents (Witness, Refinery, Polecats), use `gt rig next/prev` instead. `gt town` only cycles between Mayor and Deacon sessions.
+:::
+
 ## Examples
 
 ```bash
@@ -57,6 +69,12 @@ gt town next
 
 # Cycle back to the previous town-level session
 gt town prev
+
+# Common workflow: check Deacon health, then Mayor strategy
+gt town next          # Switch to Deacon
+# ... inspect patrol state ...
+gt town next          # Switch to Mayor
+# ... check coordination status ...
 ```
 
 ## Related
