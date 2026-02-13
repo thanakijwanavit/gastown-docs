@@ -319,5 +319,6 @@ See the [Quick Start](../getting-started/quickstart.md) guide for a step-by-step
 
 ### Blog Posts
 
+- [Understanding Rigs: Gas Town's Project Containers](/blog/understanding-rigs) -- When to create, park, or dock rigs and how they encapsulate projects with agents and merge queues
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- How to partition and scale rigs for large deployments
 - [Gas Town's Security Model](/blog/security-model) -- How rig isolation provides security boundaries
