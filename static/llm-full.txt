@@ -218,7 +218,7 @@ sudo yum install tmux
 
 ### Claude Code CLI
 
-Gas Town builds on Claude Code as its primary runtime. Install it following the [official instructions](https://docs.anthropic.com/en/docs/claude-code/getting-started).
+Gas Town builds on Claude Code as its primary runtime. Install it following the [official instructions](https://code.claude.com/docs/en/getting-started).
 
 ```bash
 # Verify Claude Code is available
