@@ -1,7 +1,7 @@
 ---
 title: "Formula Workflow"
 sidebar_position: 4
-description: "The Formula Workflow uses predefined TOML templates to orchestrate structured, repeatable processes. Instead of describing work in free-form text, you select..."
+description: "The Formula Workflow uses predefined TOML templates to orchestrate structured, repeatable processes like releases, design explorations, and audits."
 ---
 
 # Formula Workflow

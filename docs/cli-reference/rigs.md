@@ -1,7 +1,7 @@
 ---
 title: "Rig Management"
 sidebar_position: 9
-description: "Commands for adding, configuring, starting, stopping, and managing rigs. A rig is a project container that wraps a git repository with the full Gas Town agen..."
+description: "CLI commands for adding, configuring, starting, stopping, and managing rigs -- Gas Town's project containers that wrap git repositories."
 ---
 
 # Rig Management

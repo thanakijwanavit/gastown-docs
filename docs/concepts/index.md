@@ -1,7 +1,7 @@
 ---
 title: "Core Concepts"
 sidebar_position: 0
-description: "Gas Town is built on a small set of powerful primitives. Understanding these concepts is the key to effective use of the system, whether you are a human oper..."
+description: "Core concepts behind Gas Town: beads, hooks, convoys, molecules, gates, rigs, the MEOW stack, GUPP principles, wisps, and session cycling."
 ---
 
 # Core Concepts

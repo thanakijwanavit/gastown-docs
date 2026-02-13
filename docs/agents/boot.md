@@ -1,7 +1,7 @@
 ---
 title: "Boot -- Daemon Watchdog Dog"
 sidebar_position: 8
-description: "> Boot is the first responder. It runs fresh on every daemon tick, takes a snapshot of the world, and decides whether the Deacon needs waking or nudging."
+description: "Boot is the daemon watchdog dog. It runs fresh on every daemon tick, takes a snapshot of the world, and decides whether the Deacon needs waking or nudging."
 ---
 
 # Boot -- Daemon Watchdog Dog

@@ -62,6 +62,8 @@ const config: Config = {
     metadata: [
       {name: 'twitter:card', content: 'summary'},
       {name: 'og:type', content: 'website'},
+      {name: 'og:site_name', content: 'Gas Town Documentation'},
+      {name: 'og:description', content: 'Multi-agent orchestration for AI coding agents'},
     ],
     navbar: {
       title: 'Gas Town',
@@ -75,6 +77,11 @@ const config: Config = {
           sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Documentation',
+        },
+        {
+          to: '/blog',
+          label: 'Blog',
+          position: 'left',
         },
         {
           href: 'https://github.com/steveyegge/gastown',

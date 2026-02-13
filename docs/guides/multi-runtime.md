@@ -1,7 +1,7 @@
 ---
 title: "Multi-Runtime Support"
 sidebar_position: 3
-description: "Gas Town is not locked to a single AI coding agent. While Claude Code is the default and most thoroughly supported runtime, Gas Town supports multiple agent ..."
+description: "Gas Town supports multiple AI agent runtimes including Claude Code, Gemini CLI, Codex, Cursor, Auggie, and Amp. Learn how to configure and mix runtimes."
 ---
 
 # Multi-Runtime Support

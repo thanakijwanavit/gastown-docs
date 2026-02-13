@@ -1,7 +1,7 @@
 ---
 title: "Agents"
 sidebar_position: 0
-description: "Gas Town's agent hierarchy is a supervisor tree inspired by Erlang/OTP. Each role has a well-defined scope, lifecycle, and set of responsibilities -- ensurin..."
+description: "Overview of Gas Town's agent hierarchy: Mayor, Deacon, Witness, Refinery, Polecats, Dogs, Crew, and Boot. Each role's scope, lifecycle, and responsibilities."
 ---
 
 # Agents

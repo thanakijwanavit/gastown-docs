@@ -1,7 +1,7 @@
 ---
 title: "Code Review Workflow"
 sidebar_position: 5
-description: "Gas Town provides a powerful parallel code review system using the code-review convoy formula. Instead of a single reviewer reading through a PR, Gas Town sp..."
+description: "Gas Town's parallel code review workflow spawns multiple specialized reviewer polecats to examine code from different perspectives and synthesize findings."
 ---
 
 # Code Review Workflow

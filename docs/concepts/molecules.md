@@ -1,7 +1,7 @@
 ---
 title: "Molecules & Formulas"
 sidebar_position: 4
-description: "Molecules are Gas Town's multi-step workflow execution units. A molecule guides an agent through a sequence of steps, tracking progress so that work can resu..."
+description: "Molecules are multi-step workflow instances created from TOML-defined formulas. They track step progress through crashes, handoffs, and context compaction."
 ---
 
 # Molecules & Formulas

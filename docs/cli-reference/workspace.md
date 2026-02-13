@@ -1,7 +1,7 @@
 ---
 title: "Workspace Management"
 sidebar_position: 1
-description: "Commands for installing, initializing, and managing your Gas Town workspace (the \"Town\"). These commands handle the foundational setup that all other operati..."
+description: "CLI commands for installing, initializing, and managing your Gas Town workspace, including gt install, gt start, gt up, gt down, and gt shutdown."
 ---
 
 # Workspace Management

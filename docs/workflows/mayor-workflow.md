@@ -1,7 +1,7 @@
 ---
 title: "Mayor Workflow (MEOW)"
 sidebar_position: 1
-description: "The Mayor Workflow -- also known as MEOW (Mayor-Executed Orchestrated Work) -- is the recommended workflow for complex multi-issue coordination. You describe..."
+description: "The MEOW workflow lets the Mayor handle bead creation, convoy management, agent assignment, and progress monitoring from natural language instructions."
 ---
 
 # Mayor Workflow (MEOW)

@@ -1,7 +1,7 @@
 ---
 title: "Polecats -- Ephemeral Workers"
 sidebar_position: 5
-description: "> Polecats are the hands of Gas Town. They spawn, do their job, submit their work, and disappear. No idle time. No wasted resources."
+description: "Polecats are Gas Town's ephemeral workers. They spawn, do their job, submit their work, and disappear. No idle time. No wasted resources."
 ---
 
 # Polecats -- Ephemeral Workers

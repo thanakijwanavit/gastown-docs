@@ -1,7 +1,7 @@
 ---
 title: "Work Management"
 sidebar_position: 3
-description: "Commands for creating, assigning, tracking, and completing work items. This includes both gt commands for work orchestration and bd (Beads) commands for issu..."
+description: "CLI commands for creating, assigning, tracking, and completing work items using gt for orchestration and bd (Beads) for issue tracking."
 ---
 
 # Work Management

@@ -1,7 +1,7 @@
 ---
 title: "Crew -- Human Workspaces"
 sidebar_position: 7
-description: "> Crew workspaces give human developers a first-class seat at the Gas Town table -- persistent, fully integrated, and always ready for hands-on work."
+description: "Crew workspaces give human developers a persistent, fully integrated seat at the Gas Town table, always ready for hands-on work alongside AI agents."
 ---
 
 # Crew -- Human Workspaces

@@ -23,9 +23,9 @@ function HomepageHeader() {
           </Link>
           <Link
             className="button button--secondary button--outline button--lg"
-            to="/docs"
+            href="https://github.com/steveyegge/gastown"
             style={{marginLeft: '1rem'}}>
-            Read the Docs
+            View on GitHub
           </Link>
         </div>
       </div>

@@ -1,7 +1,7 @@
 ---
 title: "Dogs -- Infrastructure Workers"
 sidebar_position: 6
-description: "> Dogs do the dirty work. They clean up messes, sync systems, and handle cross-rig infrastructure tasks that no single polecat or witness can manage alone."
+description: "Dogs are Gas Town's infrastructure workers. They clean up messes, sync systems, and handle cross-rig tasks that no single polecat or witness can manage alone."
 ---
 
 # Dogs -- Infrastructure Workers

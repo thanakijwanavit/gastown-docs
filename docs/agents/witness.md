@@ -1,7 +1,7 @@
 ---
 title: "Witness -- Per-Rig Health Monitor"
 sidebar_position: 3
-description: "> The Witness is the local guardian of a rig. It watches every polecat in its domain, detects problems before they spread, and keeps the workspace clean."
+description: "The Witness is a per-rig health monitor that watches polecats, detects problems before they spread, and keeps the workspace clean."
 ---
 
 # Witness -- Per-Rig Health Monitor

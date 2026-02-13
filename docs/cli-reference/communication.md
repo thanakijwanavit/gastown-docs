@@ -1,7 +1,7 @@
 ---
 title: "Communication"
 sidebar_position: 5
-description: "Commands for inter-agent messaging, notifications, escalations, and broadcasts. Gas Town's communication layer is built on Erlang-inspired mailbox patterns w..."
+description: "CLI commands for inter-agent messaging, notifications, escalations, and broadcasts using Gas Town's Erlang-inspired asynchronous mailbox system."
 ---
 
 # Communication

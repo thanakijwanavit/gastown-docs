@@ -1,7 +1,7 @@
 ---
 title: "Monitoring & Health"
 sidebar_position: 2
-description: "Gas Town provides a suite of monitoring tools to observe real-time activity, audit historical work, diagnose system health, and track costs. Effective monito..."
+description: "Gas Town monitoring tools for real-time activity feeds, historical audits, system health diagnostics, and cost tracking across your agent fleet."
 ---
 
 # Monitoring & Health

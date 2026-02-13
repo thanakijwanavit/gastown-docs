@@ -1,7 +1,7 @@
 ---
 title: "Gas Town Documentation"
 sidebar_position: 0
-description: "Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of Claude Co..."
+description: "Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents, scaling from one to 30 concurrent workers via the gt CLI."
 ---
 
 # Gas Town Documentation

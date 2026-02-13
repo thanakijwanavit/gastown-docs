@@ -1,7 +1,7 @@
 ---
 title: "Convoy & Tracking"
 sidebar_position: 4
-description: "Convoys are Gas Town's primary mechanism for bundling and tracking batches of related work. A convoy groups multiple beads together, monitors their collectiv..."
+description: "CLI commands for creating, managing, and tracking convoys -- Gas Town's mechanism for bundling related beads and monitoring batch progress."
 ---
 
 # Convoy & Tracking

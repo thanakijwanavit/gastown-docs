@@ -1,7 +1,7 @@
 ---
 title: "Refinery -- Merge Queue Processor"
 sidebar_position: 4
-description: "> The Refinery is the gatekeeper of main. It serializes merges from concurrent polecats, ensuring every change is rebased, validated, and cleanly integrated."
+description: "The Refinery is the merge queue processor that serializes merges from concurrent polecats, ensuring every change is rebased, validated, and cleanly integrated."
 ---
 
 # Refinery -- Merge Queue Processor

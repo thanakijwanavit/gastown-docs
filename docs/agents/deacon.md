@@ -1,7 +1,7 @@
 ---
 title: "Deacon -- Town-Level Watchdog"
 sidebar_position: 2
-description: "> The Deacon is the immune system of Gas Town. It monitors the health of every agent, manages lifecycles, and ensures the system self-heals when things go wr..."
+description: "The Deacon is Gas Town's town-level watchdog agent. It monitors agent health, manages lifecycles, performs boot triage, and ensures self-healing operation."
 ---
 
 # Deacon -- Town-Level Watchdog

@@ -1,7 +1,7 @@
 ---
 title: "Beads (Issue Tracking)"
 sidebar_position: 1
-description: "Beads is Gas Town's AI-native, git-backed issue tracking system. Instead of a web-based project board, issues live directly in your repository as structured ..."
+description: "Beads is Gas Town's AI-native, git-backed issue tracking system. Issues live in your repository as structured data, managed entirely through the bd CLI."
 ---
 
 # Beads (Issue Tracking)

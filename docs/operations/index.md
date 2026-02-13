@@ -1,7 +1,7 @@
 ---
 title: "Operations"
 sidebar_position: 0
-description: "Running Gas Town in production means managing a fleet of AI agents across multiple projects. This section covers the day-to-day operational tasks: starting a..."
+description: "Day-to-day Gas Town operations: starting and stopping the system, monitoring health, handling escalations, troubleshooting, and extending with plugins."
 ---
 
 # Operations

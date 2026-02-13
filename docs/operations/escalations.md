@@ -1,7 +1,7 @@
 ---
 title: "Escalation System"
 sidebar_position: 3
-description: "Gas Town's escalation system provides priority-routed alerts that flow upward through the supervision hierarchy. When an agent encounters a problem it cannot..."
+description: "Gas Town's escalation system routes priority alerts upward through the agent supervision hierarchy, ensuring critical issues reach the human operator quickly."
 ---
 
 # Escalation System

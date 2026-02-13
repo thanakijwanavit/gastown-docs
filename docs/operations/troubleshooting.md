@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting"
 sidebar_position: 4
-description: "This guide covers common Gas Town problems, their diagnosis, and resolution. Start with gt doctor for automated diagnostics, then consult the specific sectio..."
+description: "Diagnose and resolve common Gas Town problems. Covers gt doctor diagnostics, agent issues, merge queue failures, and recovery procedures."
 ---
 
 # Troubleshooting

@@ -1,7 +1,7 @@
 ---
 title: "Minimal Mode (No Tmux)"
 sidebar_position: 2
-description: "Minimal Mode lets you use Gas Town's persistence and tracking features without requiring Tmux or the full agent hierarchy. You manually spawn agents and mana..."
+description: "Minimal Mode lets you use Gas Town's hooks, beads, and convoy tracking without Tmux or the full agent hierarchy. Ideal for getting started."
 ---
 
 # Minimal Mode (No Tmux)

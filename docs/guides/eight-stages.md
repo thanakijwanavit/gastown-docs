@@ -1,7 +1,7 @@
 ---
 title: "The 8 Stages of AI Coding"
 sidebar_position: 2
-description: "This guide maps out the progression of AI-assisted software development, from basic code completions to building your own multi-agent orchestrator. Gas Town ..."
+description: "The 8-stage maturity framework for AI-assisted development, from zero AI to multi-agent orchestration. Gas Town targets Stage 7 and above."
 ---
 
 # The 8 Stages of AI Coding
