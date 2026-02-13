@@ -434,6 +434,56 @@ else
     fail_test "Found $MISSING_FRONTMATTER frontmatter issue(s)" "Ensure all pages have title, description, and sidebar_position"
 fi
 
+# Test 16: Blog post quality checks
+echo ""
+echo "Test 16: Checking blog post quality..."
+BLOG_ISSUES=0
+
+if [ -d "$ROOT_DIR/blog" ]; then
+    for file in $(find "$ROOT_DIR/blog" -name "*.md"); do
+        basename=$(basename "$file")
+
+        # Check for frontmatter with title and description
+        frontmatter=$(awk '/^---$/{if(++n==2)exit}n==1' "$file" 2>/dev/null)
+        if [ -z "$frontmatter" ]; then
+            echo "  No frontmatter in blog: $basename"
+            BLOG_ISSUES=$((BLOG_ISSUES + 1))
+        else
+            if ! echo "$frontmatter" | grep -q '^title:'; then
+                echo "  Missing title in blog: $basename"
+                BLOG_ISSUES=$((BLOG_ISSUES + 1))
+            fi
+            if ! echo "$frontmatter" | grep -q '^description:'; then
+                echo "  Missing description in blog: $basename"
+                BLOG_ISSUES=$((BLOG_ISSUES + 1))
+            fi
+            if ! echo "$frontmatter" | grep -q '^tags:'; then
+                echo "  Missing tags in blog: $basename"
+                BLOG_ISSUES=$((BLOG_ISSUES + 1))
+            fi
+        fi
+
+        # Check for truncate marker (required for blog list excerpts)
+        if ! grep -q '<!-- truncate -->' "$file" 2>/dev/null; then
+            echo "  Missing <!-- truncate --> marker in blog: $basename"
+            BLOG_ISSUES=$((BLOG_ISSUES + 1))
+        fi
+
+        # Check minimum content length (at least 10 lines after frontmatter)
+        content_lines=$(awk '/^---$/{if(++n==2){found=1;next}}found{print}' "$file" | wc -l)
+        if [ "$content_lines" -lt 10 ]; then
+            echo "  Blog post too short ($content_lines lines): $basename"
+            BLOG_ISSUES=$((BLOG_ISSUES + 1))
+        fi
+    done
+fi
+
+if [ "$BLOG_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts have proper frontmatter, truncate markers, and sufficient content"
+else
+    fail_test "Found $BLOG_ISSUES blog quality issue(s)" "Ensure blog posts have title, description, tags, truncate marker, and 10+ lines"
+fi
+
 # Summary
 echo ""
 echo "========================================"
