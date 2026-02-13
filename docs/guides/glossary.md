@@ -193,3 +193,9 @@ bd <command> [options]
 
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How the Gas Town Universal Propulsion Principle makes multi-agent development crash-safe
+- [Why Beads? AI-Native Issue Tracking](/blog/why-beads) -- Why Gas Town has its own issue tracker
+- [The Witness Explained](/blog/witness-explained) -- How the Witness watchdog monitors agent health
+- [The Deacon: Background Coordinator](/blog/deacon-patrol) -- Deacon patrol cycles and gate evaluation
+- [Understanding Rigs](/blog/understanding-rigs) -- How rigs organize projects and agent infrastructure
+- [Molecules and Formulas](/blog/molecules-and-formulas) -- The molecule engine that powers Gas Town workflows
+- [What Stage Are You?](/blog/eight-stages-self-assessment) -- Self-assessment for AI coding maturity
