@@ -347,6 +347,7 @@ Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for d
 
 - **[Hooks](hooks.md)** -- Molecules are stored on an agent's hook, enabling crash-safe workflow resume across sessions
 - **[Beads](beads.md)** -- Each molecule step is tracked as a wisp bead; the molecule itself is also a bead
+- **[Wisps](wisps.md)** -- Ephemeral sub-beads that track individual molecule steps
 - **[Gates](gates.md)** -- Steps can be gated on external conditions (CI, human approval, timers), pausing the molecule until the gate closes
 - **[Convoys](convoys.md)** -- Convoy formulas orchestrate multiple molecules in parallel with a synthesis step
 - **[Rigs](rigs.md)** -- Formulas are stored in the rig's `.beads/formulas/` directory; molecules execute within a rig's context

@@ -8,11 +8,6 @@ const sidebars: SidebarsConfig = {
       label: 'Home',
     },
     {
-      type: 'doc',
-      id: 'intro',
-      label: 'Introduction',
-    },
-    {
       type: 'category',
       label: 'Getting Started',
       link: {type: 'doc', id: 'getting-started/index'},
@@ -90,6 +85,8 @@ const sidebars: SidebarsConfig = {
         'concepts/rigs',
         'concepts/meow-stack',
         'concepts/gupp',
+        'concepts/wisps',
+        'concepts/session-cycling',
       ],
     },
     {
@@ -102,6 +99,7 @@ const sidebars: SidebarsConfig = {
         'workflows/manual-convoy',
         'workflows/formula-workflow',
         'workflows/code-review',
+        'workflows/crew-collaboration',
       ],
     },
     {
@@ -131,11 +129,6 @@ const sidebars: SidebarsConfig = {
         'guides/troubleshooting',
         'guides/glossary',
       ],
-    },
-    {
-      type: 'doc',
-      id: 'troubleshooting',
-      label: 'Troubleshooting',
     },
   ],
 };

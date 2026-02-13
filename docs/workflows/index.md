@@ -19,6 +19,7 @@ Gas Town supports several workflow patterns for getting work done. Choose the on
 | [Manual Convoy](manual-convoy.md) | Fine-grained control | Optional | Medium |
 | [Formula Workflow](formula-workflow.md) | Repeatable processes | Optional | Medium |
 | [Code Review](code-review.md) | Thorough parallel reviews | Yes | Full |
+| [Crew Collaboration](crew-collaboration.md) | Humans working alongside polecats | Optional | Medium |
 
 ## Decision Tree
 
@@ -31,12 +32,14 @@ flowchart TD
     Start -->|Fine control over assignments| Manual[Manual Convoy]
     Start -->|Repeatable process| Formula[Formula Workflow]
     Start -->|Code review| Review[Code Review]
+    Start -->|Work alongside polecats| Crew[Crew Collaboration]
 
     MEOW --> Done[Work gets done]
     Minimal --> Done
     Manual --> Done
     Formula --> Done
     Review --> Done
+    Crew --> Done
 ```
 
 ## Workflow Comparison
