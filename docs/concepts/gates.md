@@ -38,7 +38,7 @@ sequenceDiagram
     Agent->>Gate: Check gate status
     Gate-->>Agent: CLOSED (ready)
     Agent->>Agent: Resume workflow
-```
+```text
 
 ## Gate Types
 
@@ -59,14 +59,14 @@ Timer gates are the simplest type. They close automatically after a specified du
 ```bash
 # Create a gate that opens after 30 minutes
 bd gate create --type timer --timeout 30m --title "Cooldown before retry"
-```
+```text
 
 The Deacon's patrol cycle checks all timer gates and closes any that have elapsed:
 
 ```bash
 # Deacon runs this automatically:
 bd gate check --type=timer --escalate
-```
+```text
 
 :::note[Escalation on Expiry]
 
@@ -81,7 +81,7 @@ These gates wait for a GitHub Actions workflow run to complete:
 ```bash
 # Wait for CI to pass on a specific commit
 bd gate create --type gh:run --run-id 12345 --title "Wait for CI"
-```
+```text
 
 The Deacon polls GitHub during patrol cycles to check run status.
 
@@ -92,14 +92,14 @@ Human gates require explicit human action to proceed. They are used for critical
 ```bash
 # Create a gate requiring human approval
 bd gate create --type human --title "Approve production deploy"
-```
+```text
 
 The gate stays open until a human explicitly approves it:
 
 ```bash
 # Human approves the gate
 bd gate approve gt-gate-123
-```
+```text
 
 ### Mail Gates
 
@@ -108,7 +108,7 @@ Mail gates close when a specific message arrives in an agent's mailbox:
 ```bash
 # Wait for a MERGED notification
 bd gate create --type mail --subject "MERGED polecat/toast" --title "Wait for merge"
-```
+```text
 
 ## Gate Lifecycle
 
@@ -122,7 +122,7 @@ stateDiagram-v2
     Open --> Expired: Timer exceeds limit
     Expired --> Escalated: Auto-escalate
     Escalated --> Closed: Human resolves
-```
+```text
 
 | State | Meaning |
 |-------|---------|
@@ -152,12 +152,12 @@ bd gate create --type gh:run --run-id <run-id> --title "Wait for CI"
 
 # Park on the gate
 gt mol step park --gate <gate-id>
-```
+```text
 
 The Deacon will close this gate when CI completes. Your next patrol
 cycle (or a fresh session) will pick up from here.
 """
-```
+```text
 
 ### Example: Human Gate Before Production Deploy
 
@@ -174,11 +174,11 @@ bd gate create --type human --title "Approve deploy v2.3.1 to production"
 # Notify the overseer
 gt mail send mayor/ -s "APPROVAL NEEDED: Deploy v2.3.1" \
   -m "Please review and approve: bd gate approve <gate-id>"
-```
+```text
 
 This step cannot proceed until a human runs `bd gate approve`.
 """
-```
+```text
 
 ## Gate Evaluation by the Deacon
 
@@ -198,7 +198,7 @@ bd mol ready --gated --json
 
 # Dispatch each to the appropriate rig
 gt sling <mol-id> <rig>/polecats
-```
+```text
 
 ## Commands
 
@@ -216,7 +216,7 @@ bd gate create --type gh:run --run-id 12345 --title "Wait for CI"
 
 # Mail gate
 bd gate create --type mail --subject "MERGED" --title "Wait for merge"
-```
+```text
 
 ### Viewing Gates
 
@@ -229,7 +229,7 @@ bd gate list
 
 # List gates as JSON
 bd gate list --json
-```
+```text
 
 ### Closing Gates
 
@@ -242,7 +242,7 @@ bd gate approve <gate-id>
 
 # Wake agents waiting on a gate
 gt gate wake <gate-id>
-```
+```text
 
 ## Command Reference
 
@@ -268,7 +268,7 @@ graph LR
     E -->|No| D
     E -->|Yes| F[Close gate]
     F --> G[Resume workflow]
-```
+```text
 
 ### Human Approval Workflow
 
@@ -280,7 +280,7 @@ graph LR
     D --> E[Human runs bd gate approve]
     E --> F[Gate closes]
     F --> G[Deploy proceeds]
-```
+```text
 
 ### Timer-Based Retry
 
@@ -291,7 +291,7 @@ graph LR
     C --> D[15 minutes pass]
     D --> E[Deacon closes gate]
     E --> F[Retry operation]
-```
+```text
 
 :::tip[When to Use Gates]
 

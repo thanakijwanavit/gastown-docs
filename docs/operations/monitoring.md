@@ -18,7 +18,7 @@ The primary real-time monitoring command. Shows a live stream of events across a
 
 ```bash
 gt feed
-```
+```text
 
 The feed displays:
 
@@ -42,17 +42,17 @@ gt feed --level warn
 
 # JSON output for piping to other tools
 gt feed --json
-```
+```text
 
 Sample output:
 
-```
+```text
 14:23:01 [myproject] polecat:toast  STARTED  gt-a1b2c "Fix login bug"
 14:23:45 [docs]      polecat:bravo  DONE     gt-d3e4f "Update API docs"
 14:24:02 [myproject] refinery       MERGE    gt-d3e4f merged to main
 14:25:11 [myproject] witness        STALE    polecat:alpha idle 12m
 14:25:12 [myproject] witness        NUDGE    polecat:alpha "check progress"
-```
+```text
 
 :::tip[Keep a Feed Running]
 
@@ -66,7 +66,7 @@ Shows a summary of recent agent activity -- more concise than `gt feed`, focused
 
 ```bash
 gt trail
-```
+```text
 
 ```bash
 # Show last N events
@@ -80,11 +80,11 @@ gt trail --rig myproject
 
 # Show activity in the last hour
 gt trail --since 1h
-```
+```text
 
 Sample output:
 
-```
+```text
 Last 1h activity (23 events):
 
   myproject  4 polecats spawned, 3 completed, 1 active
@@ -93,7 +93,7 @@ Last 1h activity (23 events):
 
   Escalations: 0 new, 0 open
   Convoys: 2 active, 1 completed
-```
+```text
 
 ### `gt peek` -- View Recent Session Output
 
@@ -111,7 +111,7 @@ gt peek witness --rig myproject
 
 # Show more lines
 gt peek mayor --lines 100
-```
+```text
 
 :::note
 
@@ -137,7 +137,7 @@ gt activity emit "deployment started" --type deploy --rig myproject
 # Query events with filters
 gt activity --type convoy --since 24h
 gt activity --actor witness --rig myproject
-```
+```text
 
 Events are stored in `.events.jsonl` at the town level and queryable with standard JSON tools.
 
@@ -160,11 +160,11 @@ gt audit --bead gt-a1b2c
 
 # JSON output
 gt audit --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Audit: polecat:toast (myproject)
 
   2025-06-15 14:23  SPAWNED   hook: gt-a1b2c "Fix login bug"
@@ -174,7 +174,7 @@ Audit: polecat:toast (myproject)
 
   Total: 1 task, 1 completed, 0 escalated
   Avg duration: 29m
-```
+```text
 
 ### `gt log` -- Town Activity Log
 
@@ -194,7 +194,7 @@ gt log --level warn
 # Filter by component
 gt log --component refinery
 gt log --component daemon
-```
+```text
 
 ---
 
@@ -206,7 +206,7 @@ Run a comprehensive diagnostic check on your Gas Town installation.
 
 ```bash
 gt doctor
-```
+```text
 
 The doctor checks:
 
@@ -236,11 +236,11 @@ gt doctor --json
 
 # Auto-fix what it can
 gt doctor --fix
-```
+```text
 
 Sample output:
 
-```
+```text
 Gas Town Doctor v1.2.0
 
   [PASS] Dependencies: all present
@@ -256,7 +256,7 @@ Gas Town Doctor v1.2.0
 
 Summary: 8 passed, 2 warnings, 1 failure
 Run 'gt doctor --fix' to attempt automatic repairs.
-```
+```text
 
 :::warning
 
@@ -277,7 +277,7 @@ gt patrol digest --agent witness --rig myproject
 
 # Request a fresh patrol cycle
 gt patrol start
-```
+```text
 
 The patrol digest summarizes:
 
@@ -297,7 +297,7 @@ Launch a web-based dashboard for visual convoy and system tracking.
 
 ```bash
 gt dashboard
-```
+```text
 
 This opens a local web server (default: `http://localhost:8420`) with:
 
@@ -316,7 +316,7 @@ gt dashboard --no-open
 
 # Stop the dashboard
 gt dashboard stop
-```
+```text
 
 :::tip
 
@@ -330,7 +330,7 @@ Track token consumption and estimated costs across all agent sessions.
 
 ```bash
 gt costs
-```
+```text
 
 ```bash
 # Show costs for the current day
@@ -348,11 +348,11 @@ gt costs --by-rig
 
 # JSON output
 gt costs --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Gas Town Costs (last 24h)
 
   Total tokens:  2,450,000 input / 890,000 output
@@ -368,7 +368,7 @@ Gas Town Costs (last 24h)
   By rig:
     myproject:   $32.40 (68.6%)
     docs:        $14.80 (31.4%)
-```
+```text
 
 :::warning[Cost Awareness]
 
@@ -446,7 +446,7 @@ gt log --level error --component myproject --since 24h
 
 # Find agents that restarted more than twice
 gt trail --since 24h | grep RESTART
-```
+```text
 
 ### Tracking a Specific Bead Through the System
 
@@ -457,7 +457,7 @@ gt audit --bead gt-a1b2c
 # Check if it is stuck somewhere
 bd show gt-a1b2c
 gt mq show gt-a1b2c
-```
+```text
 
 ### Correlating Events Across Agents
 
@@ -468,7 +468,7 @@ gt trail --since 2h --last 100
 # Cross-reference Witness actions with polecat events
 gt activity --actor witness --since 1h --json
 gt activity --type polecat --since 1h --json
-```
+```text
 
 ---
 

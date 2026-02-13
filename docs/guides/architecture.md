@@ -25,7 +25,7 @@ flowchart LR
     Rigs -->|polecats execute| Code["Feature<br/>Branches"]
     Code -->|gt done| Refinery
     Refinery -->|merge| Main["main branch"]
-```
+```text
 
 The rest of this guide explains each component in that pipeline.
 
@@ -35,7 +35,7 @@ The rest of this guide explains each component in that pipeline.
 
 A **town** is the root directory (typically `~/gt/`) that contains all projects, agents, and coordination state. Think of it as the factory floor where everything happens.
 
-```
+```text
 ~/gt/
 ├── mayor/              # Global coordinator
 ├── deacon/             # Town-level health monitor
@@ -47,7 +47,7 @@ A **town** is the root directory (typically `~/gt/`) that contains all projects,
 ├── myproject/          # ← A rig
 ├── docs/               # ← Another rig
 └── ...
-```
+```text
 
 Town-level state includes the global beads database (prefixed `hq-*`), Mayor and Deacon contexts, daemon process state, and configuration. Everything below this root is either a rig or a town-level agent.
 
@@ -57,7 +57,7 @@ Town-level state includes the global beads database (prefixed `hq-*`), Mayor and
 
 A **rig** is a self-contained project unit. Each rig wraps a git repository and provides the full agent infrastructure needed to work on that project autonomously. See the [Rigs concept page](../concepts/rigs.md) for reference details.
 
-```
+```text
 myproject/                # One rig
 ├── .beads/               # Rig-level issue tracking
 ├── metadata.json         # Rig identity and configuration
@@ -70,7 +70,7 @@ myproject/                # One rig
 │   ├── toast/            # ← git worktree
 │   └── alpha/            # ← git worktree
 └── plugins/              # Rig-level plugins
-```
+```text
 
 Each rig has its own beads prefix (e.g., `ga-` for gastowndocs, `gt-` for gastown). The `bd` CLI routes commands to the correct rig automatically based on issue ID prefix.
 
@@ -122,7 +122,7 @@ graph TD
     P3 -->|"gt done → MR"| R2
     R1 -->|merge| Main1["main"]
     R2 -->|merge| Main2["main"]
-```
+```text
 
 | Agent | Scope | Lifecycle | Count | Purpose |
 |-------|-------|-----------|-------|---------|
@@ -242,7 +242,7 @@ stateDiagram-v2
     Stalled --> Zombie: Unresponsive
     Zombie --> Recover: Witness cleans up
     Recover --> [*]: Work re-slung to new polecat
-```
+```text
 
 ### Step by Step
 
@@ -286,7 +286,7 @@ stateDiagram-v2
     Escalated --> InProgress: Resolved
     InProgress --> Deferred: Paused
     Deferred --> Open: gt release
-```
+```text
 
 Key bead types:
 
@@ -328,7 +328,7 @@ flowchart TD
     Close --> ConvoyCheck
     ConvoyCheck -->|Yes| ConvoyClose
     ConvoyCheck -->|No| Sling
-```
+```text
 
 The bead is the unit of work that travels through the entire pipeline. It starts as a human instruction, becomes a tracked issue, gets assigned to an agent, drives implementation, accompanies the merge request, and closes when code lands on `main`.
 
@@ -344,7 +344,7 @@ gt convoy create "Dark mode support" ga-a1 ga-b2 ga-c3 ga-d4 ga-e5
 
 # Check progress
 gt convoy status hq-cv-001
-```
+```text
 
 Convoys auto-close when all tracked beads reach a terminal state. The Deacon checks this during its patrol cycle.
 
@@ -384,7 +384,7 @@ flowchart TD
     Validate --> Pass
     Pass -->|No| Reject
     Pass -->|Yes| Merge --> CloseBead --> Nuke
-```
+```text
 
 ### Why This Design?
 
@@ -412,7 +412,7 @@ gt mail send gastowndocs/witness -s "Subject" -m "Message body"
 
 # Check inbox
 gt mail inbox
-```
+```text
 
 Mail is used for escalations, status reports, handoff context, and coordination messages. It is async -- the sender does not wait for a response.
 
@@ -422,7 +422,7 @@ A synchronous message injected directly into a running agent's session. Used by 
 
 ```bash
 gt nudge <agent> "Are you still working?"
-```
+```text
 
 Nudges are more intrusive than mail -- they interrupt the agent's current context. Used sparingly and only by supervisors.
 
@@ -439,7 +439,7 @@ Priority-routed alerts that travel up the supervision chain:
 
 ```bash
 gt escalate "Description" -s HIGH -m "Details"
-```
+```text
 
 ### Hooks (Persistent State)
 
@@ -474,7 +474,7 @@ bd close <step-id>
 
 # See what's next
 bd ready
-```
+```text
 
 Persistent agents (Witness, Refinery, Deacon) use **patrol molecules** that follow a squash-and-respawn pattern: complete the patrol, squash all step beads, spawn a fresh molecule for the next cycle. This prevents step bead accumulation over time.
 
@@ -484,7 +484,7 @@ Persistent agents (Witness, Refinery, Deacon) use **patrol molecules** that foll
 
 Gas Town uses git worktrees to enable concurrent work on the same repository. Each polecat gets its own worktree -- an independent working directory linked to the same git repository.
 
-```
+```text
 myproject/
 ├── refinery/rig/      # Canonical clone (.repo.git)
 ├── mayor/rig/         # Mayor's reference worktree
@@ -493,7 +493,7 @@ myproject/
 │   └── alpha/         # Polecat worktree (different branch)
 └── crew/
     └── dave/          # Crew worktree
-```
+```text
 
 **The Refinery holds the canonical clone.** All other worktrees -- mayor, polecats, crew -- link back to it. This is efficient (one repository, many working directories) and safe (each agent has isolated state on its own branch).
 
@@ -532,7 +532,7 @@ flowchart TD
 
     DPatrol -->|"can't resolve"| EscalateMayor
     EscalateMayor -->|"can't resolve"| EscalateHuman
-```
+```text
 
 The key principle is **Let It Crash** (borrowed from Erlang): agents can crash, and that is acceptable. What matters is that the supervisor detects the crash and recovers. A polecat that crashes mid-implementation is not a failure -- its work is on the hook, the Witness cleans up the zombie, and a fresh polecat picks up the work.
 
@@ -576,7 +576,7 @@ sequenceDiagram
 
     Beads->>Beads: All beads done → convoy auto-closes
     Mayor->>Human: "Dark mode convoy complete"
-```
+```text
 
 ### The Five Invariants
 

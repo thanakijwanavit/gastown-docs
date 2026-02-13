@@ -38,13 +38,13 @@ graph TD
     Deacon -->|monitors| R1
     Deacon -->|monitors| R2
     Deacon -->|monitors| R3
-```
+```text
 
 ## Rig Directory Structure
 
 When you add a rig with `gt rig add`, the following directory structure is created:
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/              # Rig-level issue tracking (SQLite)
 │   ├── beads.db         # Issue database
@@ -62,7 +62,7 @@ When you add a rig with `gt rig add`, the following directory structure is creat
 │   ├── toast/           # Polecat "toast" worktree
 │   └── alpha/           # Polecat "alpha" worktree
 └── plugins/             # Rig-level plugins
-```
+```text
 
 ### Key Directories
 
@@ -115,7 +115,7 @@ graph LR
         P2 -->|submits MR| R
         R -->|merges to| Main[main branch]
     end
-```
+```text
 
 ## Rig Configuration
 
@@ -133,7 +133,7 @@ Each rig has a `config.json` file that defines its settings:
     "prefix": "gt"
   }
 }
-```
+```text
 
 | Field | Description |
 |-------|-------------|
@@ -160,7 +160,7 @@ stateDiagram-v2
     Active --> Docked: gt rig dock
     Docked --> Active: gt rig undock
     Parked --> Docked: gt rig dock
-```
+```text
 
 :::warning[Docked Rigs]
 
@@ -178,23 +178,23 @@ gt rig add myproject https://github.com/you/repo.git
 
 # Add with SSH URL
 gt rig add myproject git@github.com:you/repo.git
-```
+```text
 
 ### Listing Rigs
 
 ```bash
 # List all rigs with status
 gt rig list
-```
+```text
 
 Example output:
 
-```
+```text
 Name          Status    Branch    Polecats    MQ
 myproject     Active    main      2/3         1 pending
 docs          Active    master    0/0         0 pending
 api-server    Docked    main      -           -
-```
+```text
 
 ### Starting and Stopping
 
@@ -207,14 +207,14 @@ gt rig stop myproject
 
 # Shutdown (immediate stop)
 gt rig shutdown myproject
-```
+```text
 
 ### Checking Status
 
 ```bash
 # Detailed rig status
 gt rig status myproject
-```
+```text
 
 ### Lifecycle Management
 
@@ -227,7 +227,7 @@ gt rig boot myproject
 
 # Reset a rig (clear state and restart)
 gt rig reset myproject
-```
+```text
 
 ### Parking and Docking
 
@@ -243,7 +243,7 @@ gt rig dock myproject
 
 # Undock (bring back online)
 gt rig undock myproject
-```
+```text
 
 ## Command Reference
 

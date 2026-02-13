@@ -115,7 +115,7 @@ Gas Town's architecture borrows directly from Erlang/OTP, the telecommunications
 
 ### Supervisor Trees
 
-```
+```text
                       Daemon
                         |
                       Deacon
@@ -123,7 +123,7 @@ Gas Town's architecture borrows directly from Erlang/OTP, the telecommunications
               Witness:A    Witness:B
               /    \          |
         Polecat  Polecat   Polecat
-```
+```text
 
 Each level monitors the level below it. When a child crashes, its supervisor decides what to do (restart, escalate, or ignore). This creates a self-healing system where individual agent failures do not cascade.
 
@@ -174,9 +174,9 @@ Yegge calls his survival framework the **Squirrel Selection Model** -- a deliber
 
 The model expresses software fitness as a ratio of cognitive value to cognitive cost:
 
-```
+```text
 Survival(T) = (Savings x Usage x H) / (Awareness + Friction)
-```
+```text
 
 Where:
 
@@ -315,7 +315,7 @@ Yegge has publicly tracked his predictions about AI coding adoption:
 
 ### Exponential Curve Intuition
 
-```
+```text
      Capability
          ^
          |                                    *
@@ -330,7 +330,7 @@ Yegge has publicly tracked his predictions about AI coding adoption:
          | *
          +---------------------------------> Time
          2023  2024  2025  2026  2027
-```
+```text
 
 The key insight: **exponential curves look flat at the beginning and vertical at the end**. Each stage seemed like a modest step when it arrived, but looking back, the cumulative progress is staggering.
 

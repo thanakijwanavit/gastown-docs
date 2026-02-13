@@ -50,7 +50,7 @@ graph TD
     S3 --> P3["Polecat: bravo"]
 
     You -->|4. Monitor| Monitor["gt convoy show"]
-```
+```text
 
 ## Step-by-Step
 
@@ -80,7 +80,7 @@ bd create --title "Update API security docs" \
   --priority 3 \
   --labels "docs"
 # Created: gt-g5h6i
-```
+```text
 
 :::tip[Detailed Descriptions]
 
@@ -95,7 +95,7 @@ Bundle the beads into a convoy for batch tracking:
 ```bash
 gt convoy create "API Security Hardening" gt-a1b2c gt-d3e4f gt-g5h6i
 # Created: hq-cv-007
-```
+```text
 
 ### Step 3: Sling Work to Rigs
 
@@ -110,7 +110,7 @@ gt sling gt-d3e4f backend
 
 # Send docs to the docs rig
 gt sling gt-g5h6i docs
-```
+```text
 
 Each `gt sling` command:
 
@@ -135,11 +135,11 @@ gt polecat list
 
 # Merge queue status
 gt mq list
-```
+```text
 
 Example convoy output:
 
-```
+```text
 Convoy: hq-cv-007 "API Security Hardening"
 Status: OPEN
 Progress: 1/3 issues completed
@@ -153,7 +153,7 @@ Polecats:
   backend/toast  -> gt-a1b2c (completed, awaiting merge)
   backend/alpha  -> gt-d3e4f (implementing)
   docs/bravo     -> gt-g5h6i (loading context)
-```
+```text
 
 ### Step 5: Handle Issues
 
@@ -168,7 +168,7 @@ gt sling gt-d3e4f backend --agent gemini
 
 # Or manually nudge the polecat
 gt nudge backend/polecats/alpha "Status update? Need help?"
-```
+```text
 
 ### Step 6: Add More Work
 
@@ -184,7 +184,7 @@ gt convoy add hq-cv-007 gt-n1e2w
 
 # Sling it
 gt sling gt-n1e2w backend
-```
+```text
 
 ### Step 7: Convoy Completes
 
@@ -193,7 +193,7 @@ When all tracked issues are done, the convoy auto-closes. You can verify:
 ```bash
 gt convoy list
 # hq-cv-007  API Security Hardening  [COMPLETED]  4/4 done
-```
+```text
 
 ## Handling Dependencies
 
@@ -217,7 +217,7 @@ bd show gt-c1l2i
 # When gt-d3e4f completes, the dependency resolves automatically
 # Now you can sling it:
 gt sling gt-c1l2i frontend
-```
+```text
 
 ## Cross-Rig Coordination
 
@@ -235,7 +235,7 @@ gt sling gt-g5h6i shared-lib
 
 # All tracked in one convoy
 gt convoy show hq-cv-007
-```
+```text
 
 ## Comparison with Other Workflows
 
@@ -255,7 +255,7 @@ If you forget to sling some issues, use `gt convoy stranded` to find convoys wit
 ```bash
 gt convoy stranded
 # hq-cv-007 has 1 unassigned issue: gt-n1e2w
-```
+```text
 
 :::
 

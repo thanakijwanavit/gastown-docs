@@ -44,7 +44,7 @@ graph TD
     A -->|writes progress to| H
     B[Agent Session 2] -->|reads from| H
     B -->|resumes work| W[Continues Work]
-```
+```text
 
 The hook stores:
 
@@ -79,7 +79,7 @@ flowchart TD
     Execute -->|Done| Submit[gt done]
     Execute -->|Context full| Handoff[gt handoff]
     Handoff --> Start
-```
+```text
 
 ## Commands
 
@@ -88,23 +88,23 @@ flowchart TD
 ```bash
 # Show what is currently on your hook
 gt hook
-```
+```text
 
 Output shows the hooked bead ID and any attached molecule:
 
-```
+```text
 Hook: gt-a1b2c  "Fix login bug"
   Molecule: mol-polecat-work (step: implement)
   Branch: polecat/toast
   Status: in_progress
-```
+```text
 
 ### Manually Hooking Work
 
 ```bash
 # Attach a bead to your hook
 gt hook gt-a1b2c
-```
+```text
 
 This is rarely done manually. Most hooking happens through `gt sling`.
 
@@ -121,7 +121,7 @@ gt sling gt-a1b2c myproject --agent cursor
 
 # Assign multiple items
 gt sling gt-a1b2c gt-d3e4f myproject
-```
+```text
 
 What `gt sling` does internally:
 
@@ -136,7 +136,7 @@ What `gt sling` does internally:
 ```bash
 # Remove a bead from the hook without completing it
 gt unsling gt-a1b2c
-```
+```text
 
 This releases the work back to the available pool without marking it done. Another agent can pick it up later.
 
@@ -185,7 +185,7 @@ The Mayor's hook typically holds a coordination molecule or convoy management ta
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:
 
-```
+```text
 Hook
 ├── hook_bead: gt-a1b2c        # The assigned issue
 └── molecule: mol-polecat-work  # The workflow template
@@ -194,7 +194,7 @@ Hook
     ├── step: implement         [in_progress]  <-- resume here
     ├── step: self-review       [pending]
     └── step: submit-and-exit   [pending]
-```
+```text
 
 When a session restarts, the agent:
 

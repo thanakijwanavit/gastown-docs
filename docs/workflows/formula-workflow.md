@@ -35,7 +35,7 @@ graph LR
     M --> S3["Step 3: Review ○"]
     M --> S4["Step 4: Test ○"]
     M --> S5["Step 5: Submit ○"]
-```
+```text
 
 ## Step-by-Step
 
@@ -45,11 +45,11 @@ List all available formulas in your workspace:
 
 ```bash
 gt formula list
-```
+```text
 
 Example output:
 
-```
+```text
 Name                        Type      Steps  Description
 shiny                       workflow  5      Design-implement-review-test-submit
 shiny-secure                workflow  6      Shiny with security audit
@@ -59,7 +59,7 @@ security-audit              convoy    4      Security-focused analysis
 mol-polecat-work            workflow  9      Full polecat work lifecycle
 rule-of-five                convoy    5      Five-perspective analysis
 ...
-```
+```text
 
 ### Step 2: Examine a Formula
 
@@ -67,7 +67,7 @@ View the details of a formula before running it:
 
 ```bash
 gt formula show shiny
-```
+```text
 
 This shows:
 
@@ -86,7 +86,7 @@ gt formula run shiny --var feature="Add notification system"
 
 # Run with multiple variables
 gt formula run shiny --var feature="Add notifications" --var assignee="polecat/toast"
-```
+```text
 
 For convoy formulas with parallel execution:
 
@@ -99,7 +99,7 @@ gt formula run design --problem="Redesign the merge queue"
 
 # Run with a specific preset
 gt formula run code-review --pr=42 --preset=gate
-```
+```text
 
 ### Step 4: Track Progress
 
@@ -114,11 +114,11 @@ gt mol progress <mol-id>
 
 # Show the dependency graph
 gt mol dag <mol-id>
-```
+```text
 
 Example progress output:
 
-```
+```text
 Molecule: mol-shiny-x1y2z "Add notification system"
 Formula: shiny v1
 Progress: 2/5 steps complete
@@ -129,7 +129,7 @@ Steps:
   [●] review          Review implementation
   [ ] test            Test Add notification system
   [ ] submit          Submit for merge
-```
+```text
 
 ### Step 5: Advance Steps
 
@@ -141,7 +141,7 @@ gt mol step done
 
 # The next step becomes active automatically
 gt mol status
-```
+```text
 
 ### Step 6: Completion
 
@@ -159,7 +159,7 @@ graph LR
     B --> C[review]
     C --> D[test]
     D --> E[submit]
-```
+```text
 
 **Built-in workflow formulas:**
 
@@ -201,7 +201,7 @@ id = "submit"
 needs = ["test"]
 title = "Submit for merge"
 description = "Final check and submit..."
-```
+```text
 
 ### Convoy Formulas
 
@@ -220,7 +220,7 @@ graph TD
     L4 --> Synth
 
     Synth --> Result[Unified Output]
-```
+```text
 
 **Built-in convoy formulas:**
 
@@ -246,7 +246,7 @@ gt formula run code-review --pr=42 --preset=gate
 
 # Run specific legs only
 gt formula run code-review --pr=42 --legs=security,correctness,wiring
-```
+```text
 
 ## Creating Custom Formulas
 
@@ -294,13 +294,13 @@ description = "Create git tag and publish release"
 [vars.version]
 description = "Release version (e.g., 2.3.1)"
 required = true
-```
+```text
 
 Run it:
 
 ```bash
 gt formula run my-release --var version="2.3.1"
-```
+```text
 
 ### Custom Convoy Formula
 
@@ -345,7 +345,7 @@ description = "Propose preventive measures..."
 title = "Incident Report"
 description = "Synthesize all analyses into a unified incident report..."
 depends_on = ["timeline", "root-cause", "impact", "prevention"]
-```
+```text
 
 ### Formula CLI Reference
 
@@ -364,7 +364,7 @@ gt formula run <name> --var key=value
 
 # Run with preset (convoy formulas)
 gt formula run <name> --preset=<preset-name>
-```
+```text
 
 ## Variables and Templating
 
@@ -374,13 +374,13 @@ Formulas use Go `text/template` syntax for variable interpolation:
 [[steps]]
 title = "Implement {{.feature}}"
 description = "Build the {{.feature}} feature for {{.assignee}}"
-```
+```text
 
 Variables are provided at runtime via `--var`:
 
 ```bash
 gt formula run shiny --var feature="notifications" --var assignee="toast"
-```
+```text
 
 ### Variable Definitions
 
@@ -394,7 +394,7 @@ required = true
 description = "Who is assigned"
 required = false
 default = "auto"
-```
+```text
 
 | Field | Purpose |
 |-------|---------|

@@ -22,10 +22,10 @@ The framework is based on the work of [Steve Yegge](https://steve-yegge.medium.c
 
 You write all code by hand. No AI assistance of any kind.
 
-```
+```text
 You: *types every character*
 AI:  *does not exist in your workflow*
-```
+```text
 
 **Characteristics:**
 
@@ -41,11 +41,11 @@ AI:  *does not exist in your workflow*
 
 You use AI-powered code completion -- a smarter version of autocomplete that predicts multiple lines at once.
 
-```
+```text
 You: def calculate_tax(
 AI:  income, rate=0.25):
          return income * rate
-```
+```text
 
 **Characteristics:**
 
@@ -68,11 +68,11 @@ AI:  income, rate=0.25):
 
 You use an AI chat panel alongside your editor. You ask questions, get explanations, request code snippets, and paste them into your project.
 
-```
+```text
 You: "How do I add JWT authentication to this Express app?"
 AI:  *provides explanation and code snippet*
 You: *copies and adapts the code*
-```
+```text
 
 **Characteristics:**
 
@@ -95,11 +95,11 @@ You: *copies and adapts the code*
 
 You let the AI agent edit files directly in your IDE. In "YOLO mode," you approve changes in batches rather than line by line. The agent can read your codebase, run commands, and make multi-file changes.
 
-```
+```text
 You: "Refactor the auth module to use middleware pattern"
 AI:  *edits 6 files, runs tests, shows diff*
 You: "Looks good, apply it"
-```
+```text
 
 **Characteristics:**
 
@@ -126,7 +126,7 @@ You move from the IDE to a dedicated CLI agent running in your terminal. The age
 ```bash
 claude "Add input validation to all API endpoints and write tests"
 # Agent works for 10-30 minutes autonomously
-```
+```text
 
 **Characteristics:**
 
@@ -165,7 +165,7 @@ claude "Add email validation"
 
 # Terminal 3
 claude "Write integration tests for the API"
-```
+```text
 
 **Characteristics:**
 
@@ -201,7 +201,7 @@ You scale to 10 or more agents running simultaneously. You develop ad-hoc script
 # ... 7 more
 ./check-status.sh
 ./merge-next.sh
-```
+```text
 
 **Characteristics:**
 
@@ -235,7 +235,7 @@ gt start --all
 gt mayor attach
 # "Build the auth system, run all tests, deploy to staging"
 # 15 agents coordinate automatically
-```
+```text
 
 **Characteristics:**
 
@@ -344,12 +344,12 @@ Steve Yegge's core thesis: each stage is **inevitable**. Once developers discove
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
 
-```
+```text
 Stage 5 developers: "Why would I need more than one agent?"
 Stage 6 developers: "OK, 3 agents is amazing, but 10 is chaos"
 Stage 7 developers: "I've built a pile of scripts... wait, is this an orchestrator?"
 Stage 8 developers: "Yes. Yes it is."
-```
+```text
 
 The pattern is consistent: what seems excessive today becomes standard practice within a year. Gas Town is built on the assumption that Stage 8 multi-agent orchestration will be as normal in 2026-2027 as AI completions are today.
 

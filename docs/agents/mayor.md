@@ -33,9 +33,9 @@ The Mayor is the primary human-facing agent in Gas Town. When you run `gt mayor 
 
 The Mayor is your interface to Gas Town. You describe what you want built, fixed, or changed in natural language:
 
-```
+```text
 > Fix the 5 failing tests in auth and add input validation to registration.
-```
+```text
 
 The Mayor parses this into discrete work items.
 
@@ -48,7 +48,7 @@ For each piece of work, the Mayor creates a bead (issue) in the tracking system,
 bd create --title "Fix auth test: login_expired" --type bug --priority 1
 bd create --title "Add email validation to registration" --type feature --priority 2
 gt convoy create "Auth Improvements" gt-a1b2c gt-d3e4f
-```
+```text
 
 ### 3. Assign Work to Rigs
 
@@ -57,7 +57,7 @@ The Mayor uses `gt sling` to assign beads to rigs, which triggers polecat spawni
 ```bash
 gt sling gt-a1b2c myproject    # Assigns issue to rig, spawns polecat
 gt sling gt-d3e4f myproject    # Another issue, another polecat
-```
+```text
 
 ### 4. Route Escalations
 
@@ -70,7 +70,7 @@ The Mayor monitors convoy completion, ensuring all assigned work reaches the fin
 ```bash
 gt convoy list
 gt convoy show hq-cv-001
-```
+```text
 
 ### 6. Strategic Direction to Deacon
 
@@ -104,7 +104,7 @@ flowchart TD
     Escalation -->|No| Complete
     Complete -->|No| Monitor
     Complete -->|Yes| Report
-```
+```text
 
 **MEOW Steps:**
 
@@ -174,7 +174,7 @@ sequenceDiagram
     P-->>M: Escalation (if blocked)
     M-->>H: Escalation (if unresolvable)
     M->>H: Convoy complete report
-```
+```text
 
 ## Tips and Best Practices
 
@@ -222,7 +222,7 @@ gt sling gt-def myproject
 
 # Monitor batch progress
 gt convoy list
-```
+```text
 
 ### Handling an Escalation
 
@@ -233,7 +233,7 @@ gt mail inbox                            # Check for escalations
 gt mail read <id>                        # Read the details
 # Decide: reassign, provide guidance, or escalate to human
 gt mail send <rig>/witness -s "RE: ..." -m "Guidance: ..."
-```
+```text
 
 ### Dispatching Cross-Rig Work
 
@@ -243,7 +243,7 @@ When work spans multiple rigs, the Mayor coordinates:
 gt sling gt-frontend frontend-rig
 gt sling gt-backend backend-rig
 gt convoy create gt-frontend gt-backend  # Track together
-```
+```text
 
 ## Troubleshooting
 
@@ -253,7 +253,7 @@ gt convoy create gt-frontend gt-backend  # Track together
 gt mayor status              # Check if session is alive
 gt nudge mayor "status?"     # Send a nudge
 gt mayor stop && gt mayor start  # Restart if needed
-```
+```text
 
 ### Convoy Shows Incomplete But Work Is Done
 
@@ -262,7 +262,7 @@ Check if all beads in the convoy are closed. A convoy auto-closes only when ever
 ```bash
 gt convoy show <convoy-id>   # See which beads are still open
 bd show <open-bead-id>       # Check why it is still open
-```
+```text
 
 ### Polecats Not Being Spawned After Sling
 
@@ -271,7 +271,7 @@ Verify the rig is started and the Witness is running:
 ```bash
 gt rig status <rig>          # Check rig health
 gt rig start <rig>           # Start rig agents if needed
-```
+```text
 
 ## See Also
 

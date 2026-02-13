@@ -39,7 +39,7 @@ graph TD
     Agent -->|reads hook| Hook
     Agent -->|works on| Code[Code Changes]
     Agent -->|completes| Done[gt done]
-```
+```text
 
 ## Step-by-Step
 
@@ -53,7 +53,7 @@ bd create --title "Fix login bug" --type bug --priority 1
 
 bd create --title "Add email validation" --type feature
 # Created: gt-d3e4f
-```
+```text
 
 ### Step 2: Create a Convoy
 
@@ -62,7 +62,7 @@ Bundle the issues for tracking:
 ```bash
 gt convoy create "Auth Fixes" gt-a1b2c gt-d3e4f
 # Created: hq-cv-001
-```
+```text
 
 ### Step 3: Sling Work to a Hook
 
@@ -70,7 +70,7 @@ Attach the first issue to an agent's hook:
 
 ```bash
 gt sling gt-a1b2c myproject
-```
+```text
 
 This does two things:
 
@@ -90,13 +90,13 @@ Open a terminal in the rig's working directory and start Claude Code:
 ```bash
 cd ~/gt/myproject/polecats/toast  # Or crew/yourname for persistent workspace
 claude
-```
+```text
 
 When Claude starts, it should run `gt prime` (via the SessionStart hook) and discover the work on its hook. If it does not auto-prime, tell it:
 
-```
+```text
 Run gt prime and check your hook for assigned work.
-```
+```text
 
 The agent will:
 
@@ -118,7 +118,7 @@ bd show gt-a1b2c
 
 # Check what's in the merge queue
 gt mq list
-```
+```text
 
 ### Step 6: Handle Completion
 
@@ -135,7 +135,7 @@ cd ~/gt/myproject/refinery/rig
 git fetch origin
 git merge --ff-only origin/polecat/toast
 git push origin main
-```
+```text
 
 ### Step 7: Move to Next Issue
 
@@ -144,14 +144,14 @@ Repeat steps 3-6 for the next issue:
 ```bash
 gt sling gt-d3e4f myproject
 # Start a new agent session manually
-```
+```text
 
 ### Step 8: Check Convoy Completion
 
 ```bash
 gt convoy show hq-cv-001
 # If all issues done, convoy shows COMPLETED
-```
+```text
 
 ## Example Session
 
@@ -191,7 +191,7 @@ $ claude
 # 8. Convoy completes
 $ gt convoy show hq-cv-005
 # COMPLETED: 2/2 done
-```
+```text
 
 ## Scaling Up from Minimal Mode
 
@@ -205,7 +205,7 @@ Install Tmux and let Gas Town manage sessions:
 # Now gt sling will auto-spawn polecats
 gt sling gt-a1b2c myproject
 # Polecat spawns in a tmux pane automatically
-```
+```text
 
 ### Start the Witness
 
@@ -213,7 +213,7 @@ Let the Witness monitor your polecats:
 
 ```bash
 gt witness start myproject
-```
+```text
 
 ### Start the Refinery
 
@@ -221,7 +221,7 @@ Let the Refinery handle merges:
 
 ```bash
 gt refinery start myproject
-```
+```text
 
 ### Start the Full Stack
 
@@ -230,7 +230,7 @@ When ready, start everything:
 ```bash
 gt start --all
 gt mayor attach
-```
+```text
 
 You are now running the full [Mayor Workflow](mayor-workflow.md).
 
@@ -248,7 +248,7 @@ Since you do not have the automated Refinery, always push your changes and sync 
 ```bash
 git push origin HEAD
 bd sync
-```
+```text
 
 :::
 

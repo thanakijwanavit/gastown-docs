@@ -23,7 +23,7 @@ Your two main entry points into Gas Town are:
 ```bash
 gt may at    # Attach to the Mayor
 gt crew at <name> --rig <rig>   # Attach to a Crew workspace
-```
+```text
 
 **`gt may at`** (short for `gt mayor attach`) drops you into the Mayor's tmux session. From there you can give instructions, check progress, and coordinate all your rigs. This is the primary interface for most Gas Town work.
 
@@ -76,7 +76,7 @@ The inner loop is the moment-to-moment operational cadence:
 
 The inner loop is where execution happens. Speed here comes from clear instructions and fast feedback cycles.
 
-```
+```text
 Outer Loop (Days-Weeks)
 │  Strategic planning, upgrades, capacity decisions
 │
@@ -85,7 +85,7 @@ Outer Loop (Days-Weeks)
 │   │
 │   └── Inner Loop (Minutes)
 │       Task delegation, output review, handoffs
-```
+```text
 
 ---
 
@@ -97,7 +97,7 @@ The Mayor is your primary interface for multi-agent coordination. You talk to th
 
 ```bash
 gt mayor attach
-```
+```text
 
 This attaches your terminal to the Mayor's tmux session. You can now interact with it directly.
 
@@ -105,12 +105,12 @@ This attaches your terminal to the Mayor's tmux session. You can now interact wi
 
 Be specific and action-oriented:
 
-```
+```text
 Good:  "Fix the 5 failing tests in the auth module and add input
         validation to the user registration endpoint."
 
 Bad:   "Make the code better."
-```
+```text
 
 The Mayor will:
 
@@ -124,11 +124,11 @@ The Mayor will:
 
 You can ask the Mayor directly:
 
-```
+```text
 "What's the status of the auth fixes?"
 "How many polecats are running right now?"
 "Are there any blocked items?"
-```
+```text
 
 Or use CLI commands from any terminal:
 
@@ -136,7 +136,7 @@ Or use CLI commands from any terminal:
 gt convoy list
 gt feed
 gt trail --since 30m
-```
+```text
 
 ### Detaching from the Mayor
 
@@ -152,16 +152,16 @@ A common Gas Town setup involves 2-5 rigs (projects) running simultaneously.
 
 ```bash
 gt rig list
-```
+```text
 
 Sample output:
 
-```
+```text
 Rigs (3):
   myapp        active   3 polecats   witness: up   refinery: up
   api-server   active   1 polecat    witness: up   refinery: up
   docs         parked   -            witness: -    refinery: -
-```
+```text
 
 ### Working Across Rigs
 
@@ -175,7 +175,7 @@ gt rig status myapp
 
 # View a rig's merge queue
 gt mq list --rig api-server
-```
+```text
 
 ### Rig-Specific Operations
 
@@ -189,7 +189,7 @@ gt rig park docs
 # Bring it back later
 gt rig unpark docs
 gt rig start docs
-```
+```text
 
 :::tip[Focus Mode]
 
@@ -209,7 +209,7 @@ When an agent loses context (after compaction, crash, or long idle):
 
 ```bash
 gt prime
-```
+```text
 
 This reloads the agent's full context from its CLAUDE.md file, hooks, and beads state. All persistent agents run `gt prime` automatically on startup.
 
@@ -220,7 +220,7 @@ When transitioning from one work session to another (e.g., end of day):
 ```bash
 # From within an agent session
 gt handoff
-```
+```text
 
 This:
 
@@ -237,7 +237,7 @@ gt mayor restart
 
 # Restart with a different agent
 gt mayor restart --agent claude
-```
+```text
 
 ---
 
@@ -260,7 +260,7 @@ gt convoy list
 
 # 5. Attach to Mayor and give today's instructions
 gt mayor attach
-```
+```text
 
 ### During Active Development
 
@@ -276,7 +276,7 @@ gt doctor
 
 # Quick status check
 gt rig list
-```
+```text
 
 ### End of Day
 
@@ -292,7 +292,7 @@ gt convoy list
 
 # 4. Option B: Pause until morning
 gt down
-```
+```text
 
 ---
 
@@ -330,7 +330,7 @@ gt crew at bob
 # ... give task, detach ...
 gt crew at carol
 # ... cycle back to alice when ready ...
-```
+```text
 
 :::tip[Crew vs. Polecats]
 
@@ -357,7 +357,7 @@ bd create --title "PR Sheriff Standing Orders" --type task \
 # Hook it permanently to a Crew member
 gt crew at dave
 gt hook <bead-id>
-```
+```text
 
 The PR Sheriff pattern keeps your PR backlog from growing unbounded. Instead of PRs piling up while you focus on new work, they get triaged and handled continuously.
 
@@ -383,7 +383,7 @@ Any incomplete work or follow-up items must be tracked:
 # Create beads for remaining work
 bd create --title "TODO: finish API pagination" --type task --priority 2
 bd create --title "TODO: add tests for edge case X" --type task
-```
+```text
 
 Do not leave work undocumented. If it is not in a bead, it will be forgotten.
 
@@ -401,7 +401,7 @@ npm run lint      # or your project's lint command
 
 # Check for build errors
 npm run build
-```
+```text
 
 #### Step 3: Update Issue Status
 
@@ -414,7 +414,7 @@ bd close gt-d3e4f
 
 # Update in-progress beads
 bd defer gt-g5h6i    # Defer until later (waiting for API spec)
-```
+```text
 
 #### Step 4: Push to Remote (MANDATORY)
 
@@ -429,7 +429,7 @@ bd sync --flush-only
 
 # Push everything
 git push
-```
+```text
 
 :::danger[Always Push]
 
@@ -445,7 +445,7 @@ gt cleanup
 
 # Stop polecats that have finished
 gt shutdown --polecats-only
-```
+```text
 
 #### Step 6: Verify All Changes Committed and Pushed
 
@@ -458,7 +458,7 @@ git status
 # Verify remote is up to date
 git log --oneline origin/main..HEAD
 # Should show nothing (all commits pushed)
-```
+```text
 
 #### Step 7: Hand Off with Context
 
@@ -466,13 +466,13 @@ Write handoff notes for the next session:
 
 ```bash
 gt handoff
-```
+```text
 
 Or if you are the human operator, leave a note in the Mayor's mail:
 
 ```bash
 gt mail send mayor/ -s "End of day handoff" -m "All auth work landed. Remaining: API pagination (gt-g5h6i) deferred until spec is ready. Tests all green."
-```
+```text
 
 ### Landing Checklist Summary
 
@@ -508,7 +508,7 @@ Ctrl+B N/P     # Next/previous window (cycle through agents)
 Ctrl+B [       # Enter copy mode (scroll through output)
 Ctrl+B %       # Split pane vertically
 Ctrl+B "       # Split pane horizontally
-```
+```text
 
 :::tip[tmux Is Your Friend]
 
@@ -532,7 +532,7 @@ You can run Gas Town in **Mayor-only mode** as a tutorial and introduction:
 gt may at
 # Give the Mayor instructions directly
 # It can file issues, fix code, and sling work to polecats
-```
+```text
 
 Once you are comfortable with Mayor interactions, expand to using Crew and polecats for parallel execution.
 
@@ -550,7 +550,7 @@ gt handoff
 
 # Or shell out
 !gt handoff
-```
+```text
 
 The worker will be spun up on a fresh shift, preserving the tmux session. Short sessions with frequent handoffs prevent context bloat, reduce token costs, and keep agents sharp.
 

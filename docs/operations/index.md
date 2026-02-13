@@ -30,14 +30,14 @@ The daemon process is a simple Go scheduler that sends heartbeats and processes 
 
 ### 2. Escalations Flow Upward
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat
       --> If still stuck: Witness escalates to Deacon
         --> Deacon escalates to Mayor
           --> Mayor escalates to Human/Overseer
-```
+```text
 
 You only need to intervene when escalations reach you. The system handles lower-level recovery automatically.
 
@@ -65,7 +65,7 @@ gt down
 
 # Stop and clean up
 gt shutdown --all
-```
+```text
 
 :::tip[Daily Operations Checklist]
 
@@ -83,7 +83,7 @@ gt shutdown --all
 
 When something goes wrong, follow this decision tree:
 
-```
+```text
 Is the system completely down?
 ├── Yes → gt daemon start && gt start --all (see Lifecycle: Emergency Recovery)
 └── No
@@ -97,7 +97,7 @@ Is the system completely down?
     │   └── gt costs --by-agent (see Escalations: Cost Spike scenario)
     └── Are escalations piling up?
         └── gt escalate list (see Escalations: Managing Escalations)
-```
+```text
 
 ## Weekly Review Checklist
 
@@ -121,7 +121,7 @@ gt convoy stranded
 
 # 6. Clean up finished polecat worktrees
 gt cleanup
-```
+```text
 
 ## Operational Anti-Patterns
 

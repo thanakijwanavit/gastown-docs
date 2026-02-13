@@ -61,7 +61,7 @@ flowchart TD
     Zombie -->|No| Next
     Next --> Each
     Each -->|All checked| Done
-```
+```text
 
 ### Deacon (Town-Wide)
 
@@ -88,7 +88,7 @@ flowchart TD
     Response -->|Yes| Hooks
     Stale -->|No| Hooks
     Hooks --> Orphans --> Zombies --> Done
-```
+```text
 
 ### Refinery (Per-Rig)
 
@@ -96,9 +96,9 @@ The [Refinery](../agents/refinery.md) processes the merge queue for its rig.
 
 **Patrol focus:** Merge requests, rebase validation, merge to main.
 
-```
+```text
 Patrol Tick → Check Queue → Process Next MR → Rebase → Run Tests → Merge → Repeat
-```
+```text
 
 ---
 
@@ -144,21 +144,21 @@ This means:
 ### Example: Discovery vs Tracking
 
 **Tracking approach (fragile):**
-```
+```text
 Polecat spawned → Tracker records "polecat-3: active"
 Polecat crashes → Crash handler fails to fire
 Tracker still shows "polecat-3: active"
 Work sits stuck indefinitely
-```
+```text
 
 **Discovery approach (resilient):**
-```
+```text
 Patrol tick → Witness lists all polecats
 Witness checks polecat-3's session → not responding
 Witness nudges polecat-3 → no response
 Witness escalates to Deacon → Deacon cleans up
 Work recovers within one patrol cycle
-```
+```text
 
 ---
 
@@ -179,7 +179,7 @@ gt mol squash <mol-id> --summary "Patrol cycle: 3 polecats healthy, 1 nudged, 0 
 # Aggregate daily patrol digests
 gt patrol digest
 gt patrol digest --yesterday
-```
+```text
 
 ### Standard Patrol Formulas
 
@@ -201,7 +201,7 @@ Use `gt patrol digest` to see aggregated patrol findings:
 gt patrol digest                          # Today's digest
 gt patrol digest --agent witness --rig myapp  # Specific agent/rig
 gt patrol digest --yesterday              # Yesterday's digest
-```
+```text
 
 ### Logs
 
@@ -210,7 +210,7 @@ Use `gt log` to see real-time patrol activity:
 ```bash
 gt log --agent witness    # Watch witness patrol in real time
 gt log --agent deacon     # Watch deacon patrol
-```
+```text
 
 ### Status
 
@@ -220,7 +220,7 @@ Use `gt status` for a snapshot of current patrol state:
 gt status           # Overview of all agents and rigs
 gt witness status   # Witness health and last patrol time
 gt deacon status    # Deacon health and last patrol time
-```
+```text
 
 ---
 

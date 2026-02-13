@@ -48,7 +48,7 @@ sequenceDiagram
     Witness->>Witness: Nuke polecat sandboxes
     Deacon->>Mayor: Convoy complete
     Mayor->>Human: Work landed
-```
+```text
 
 ## Step-by-Step
 
@@ -56,7 +56,7 @@ sequenceDiagram
 
 ```bash
 gt mayor attach
-```
+```text
 
 This opens an interactive session with the Mayor agent. The Mayor already has context about your town, rigs, and current state.
 
@@ -81,7 +81,7 @@ The Mayor automatically:
 
 Example Mayor response:
 
-```
+```text
 I've created the following plan:
 
 Convoy: hq-cv-012 "Auth Module Improvements"
@@ -92,7 +92,7 @@ Issues:
   gt-g5h6i  [task]    Update README with auth flow (P3)
 
 Shall I proceed with assigning these to polecats?
-```
+```text
 
 ### Step 4: Mayor Assigns Work
 
@@ -103,7 +103,7 @@ Once confirmed, the Mayor slings each bead to the appropriate rig:
 gt sling gt-a1b2c myproject
 gt sling gt-d3e4f myproject
 gt sling gt-g5h6i myproject
-```
+```text
 
 Each `gt sling` spawns a polecat worker that immediately begins work.
 
@@ -121,7 +121,7 @@ gt feed
 
 # Check individual polecat status
 gt polecat list
-```
+```text
 
 Or simply ask the Mayor:
 
@@ -143,7 +143,7 @@ When all convoy items are done, the convoy auto-closes and the Mayor notifies yo
 
 Here is a complete example session from start to finish:
 
-```
+```text
 $ gt mayor attach
 
 Mayor> Welcome! I see 2 active rigs: myproject, docs. How can I help?
@@ -185,7 +185,7 @@ Mayor> Progress update on hq-cv-015:
 
 Mayor> Convoy hq-cv-015 "Login Quote Bug Fix" is complete!
   All 3 issues merged to main. Duration: 12 minutes.
-```
+```text
 
 ## Advanced Usage
 
@@ -226,7 +226,7 @@ gt release gt-a1b2c
 
 # Add more work to an existing convoy
 gt convoy add hq-cv-015 gt-newbead
-```
+```text
 
 ## Troubleshooting
 

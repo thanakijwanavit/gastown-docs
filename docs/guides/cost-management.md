@@ -79,11 +79,11 @@ gt costs --by-rig
 
 # JSON output for external tools
 gt costs --json
-```
+```text
 
 ### Sample Output
 
-```
+```text
 Gas Town Costs (today)
 
   Total tokens:  4,800,000 input / 1,620,000 output
@@ -103,7 +103,7 @@ Gas Town Costs (today)
     docs:        $12.50  (14.0%)
 
   Hourly rate (last 3h avg): $32.40/hr
-```
+```text
 
 ### Real-Time Cost Monitoring
 
@@ -115,7 +115,7 @@ gt feed
 
 # In terminal 2: cost updates every 5 minutes
 watch -n 300 gt costs --today
-```
+```text
 
 ---
 
@@ -134,7 +134,7 @@ gt polecat remove alpha --rig myproject
 
 # Reduce the max polecat count via rig settings
 gt rig settings set --rig myproject max_polecats 3
-```
+```text
 
 :::tip[Quality Over Quantity]
 
@@ -154,7 +154,7 @@ gt convoy create "Fix C" gt-c3
 
 # Create one focused convoy:
 gt convoy create "Auth Module Fixes" gt-a1 gt-b2 gt-c3
-```
+```text
 
 When related beads are in the same convoy, the Mayor can assign them to fewer polecats that share context, reducing redundant file reading.
 
@@ -165,7 +165,7 @@ Run Gas Town with reduced monitoring overhead for cost-sensitive workloads.
 ```bash
 # Enable minimal mode
 gt rig settings set minimal_mode true
-```
+```text
 
 Minimal mode:
 
@@ -191,7 +191,7 @@ gt rig park staging-env
 
 # Unpark when needed
 gt rig unpark docs
-```
+```text
 
 ### Strategy 5: Time-Box Sessions
 
@@ -207,7 +207,7 @@ gt down
 gt start --all
 # ... intensive work ...
 gt down
-```
+```text
 
 A 2-hour sprint at "Normal" usage costs $60-100, compared to $240-400 for an 8-hour continuous run.
 
@@ -250,7 +250,7 @@ gt down
 
 # Monitor costs
 gt costs --today
-```
+```text
 
 ### The "$200/day" Workflow
 
@@ -274,7 +274,7 @@ gt down
 
 # Monitor costs every hour
 gt costs --today --by-role
-```
+```text
 
 ### The "Unlimited" Workflow
 
@@ -289,7 +289,7 @@ gt start --all
 
 # Run all day, monitor hourly
 watch -n 3600 gt costs --today
-```
+```text
 
 ---
 
@@ -309,7 +309,7 @@ Set up automated cost alerts using the plugin system:
     "alert_threshold_daily": 300
   }
 }
-```
+```text
 
 Example `check-costs.sh`:
 
@@ -320,7 +320,7 @@ DAILY_COST=$(gt costs --today --json | jq '.total_cost')
 if (( $(echo "$DAILY_COST > 300" | bc -l) )); then
     gt escalate --severity high "Daily cost threshold exceeded: \$$DAILY_COST"
 fi
-```
+```text
 
 ---
 

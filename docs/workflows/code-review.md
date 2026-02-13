@@ -54,7 +54,7 @@ graph TD
     L10 --> Synth
 
     Synth --> Output["review-summary.md"]
-```
+```text
 
 Each polecat works in parallel, examining the code from its specialized perspective. When all legs complete, a synthesis step combines findings into a single prioritized document.
 
@@ -88,19 +88,19 @@ The `code-review` formula examines code from 10 different perspectives:
 
 ```bash
 gt formula run code-review --pr=42
-```
+```text
 
 ### Review a Branch
 
 ```bash
 gt formula run code-review --branch=feature/auth-redesign
-```
+```text
 
 ### Review Specific Files
 
 ```bash
 gt formula run code-review --files="src/auth/*.go"
-```
+```text
 
 ## Presets
 
@@ -112,7 +112,7 @@ Fast, focused on blockers. Good for automatic merge-gate reviews:
 
 ```bash
 gt formula run code-review --pr=42 --preset=gate
-```
+```text
 
 | Legs | Purpose |
 |------|---------|
@@ -127,7 +127,7 @@ All 10 legs. Use for major features, security-sensitive changes, or important re
 
 ```bash
 gt formula run code-review --pr=42 --preset=full
-```
+```text
 
 ### Security-Focused Preset
 
@@ -135,7 +135,7 @@ Heavy on security analysis:
 
 ```bash
 gt formula run code-review --pr=42 --preset=security-focused
-```
+```text
 
 | Legs | Purpose |
 |------|---------|
@@ -150,7 +150,7 @@ Focus on code quality during refactoring:
 
 ```bash
 gt formula run code-review --pr=42 --preset=refactor
-```
+```text
 
 | Legs | Purpose |
 |------|---------|
@@ -165,7 +165,7 @@ Run specific legs only:
 
 ```bash
 gt formula run code-review --pr=42 --legs=security,correctness,wiring,test-quality
-```
+```text
 
 ## Review Output
 
@@ -173,7 +173,7 @@ gt formula run code-review --pr=42 --legs=security,correctness,wiring,test-quali
 
 Each leg writes its findings to `.reviews/<review-id>/<leg-id>-findings.md`:
 
-```
+```text
 .reviews/review-abc123/
 ├── correctness-findings.md
 ├── security-findings.md
@@ -186,7 +186,7 @@ Each leg writes its findings to `.reviews/<review-id>/<leg-id>-findings.md`:
 ├── commit-discipline-findings.md
 ├── test-quality-findings.md
 └── review-summary.md          # Synthesized review
-```
+```text
 
 ### Findings Format
 
@@ -213,7 +213,7 @@ Brief overview of findings from this perspective.
 
 ## Observations
 - ...
-```
+```text
 
 ### Synthesized Review
 
@@ -248,7 +248,7 @@ What is done well.
 
 ## Recommendations
 Actionable next steps.
-```
+```text
 
 ## Integration with Merge Queue
 
@@ -263,7 +263,7 @@ graph LR
     Decision -->|Clean| Merge[Refinery Merges]
     Block --> Fix[Author Fixes]
     Fix --> Review
-```
+```text
 
 ### Automatic Gate Review
 
@@ -276,7 +276,7 @@ gt formula run code-review --pr=$PR_NUMBER --preset=gate
 # Check for critical issues
 # If P0 issues found, block the merge
 # If clean, proceed to merge
-```
+```text
 
 ### Manual Full Review
 
@@ -284,7 +284,7 @@ For important changes, run the full review before the author finishes:
 
 ```bash
 gt formula run code-review --branch=feature/big-refactor --preset=full
-```
+```text
 
 Share the `review-summary.md` with the team for discussion.
 
@@ -322,7 +322,7 @@ $ cat .reviews/review-abc123/review-summary.md
 # Overall solid implementation with 1 critical security issue
 # and 2 major performance concerns. Recommend fixing P0 before merge.
 # ...
-```
+```text
 
 ## Tips
 

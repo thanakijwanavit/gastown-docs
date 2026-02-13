@@ -14,9 +14,9 @@ This guide covers the most frequently encountered Gas Town problems and their so
 
 **Symptom:** A polecat finishes its work, runs `gt done`, and gets:
 
-```
+```text
 Error: not inside a rig directory
-```
+```text
 
 This happens regardless of which directory you run the command from -- worktree, polecat root, rig root, or town root.
 
@@ -76,7 +76,7 @@ bd show <bead-id>
 # Check if main is green
 cd <rig>/refinery/rig
 git checkout main && npm test   # or your project's test command
-```
+```text
 
 **Solutions:**
 
@@ -115,9 +115,9 @@ If you see the same bead ID appearing repeatedly in `gt trail`, that is a churn 
 
 **Symptom:** Git commands fail with errors like:
 
-```
+```text
 fatal: couldn't find remote ref main
-```
+```text
 
 or polecats push to the wrong branch.
 
@@ -131,7 +131,7 @@ git remote show origin | grep "HEAD branch"
 
 # Check what branches exist
 git branch -r
-```
+```text
 
 **Solutions:**
 
@@ -187,7 +187,7 @@ cat ~/gt/.beads/routes.jsonl
 
 # Debug routing for a specific bead
 BD_DEBUG_ROUTING=1 bd show <bead-id>
-```
+```text
 
 **Solutions:**
 
@@ -221,13 +221,13 @@ BD_DEBUG_ROUTING=1 bd show <bead-id>
 
 **Common errors:**
 
-```
+```text
 hook already attached
-```
+```text
 
-```
+```text
 no work on hook
-```
+```text
 
 **Cause:** Hooks are persistent pointers from an agent to its current bead. Hook conflicts happen when:
 
@@ -243,7 +243,7 @@ gt hook
 
 # Check hooks across a rig
 gt hook --agent <polecat> --rig <rig>
-```
+```text
 
 **Solutions:**
 
@@ -305,7 +305,7 @@ gt refinery blocked <rig>
 
 # Check Refinery session health
 gt peek refinery --rig <rig>
-```
+```text
 
 **Common causes and solutions:**
 
@@ -316,7 +316,7 @@ The Refinery agent may have crashed or lost context.
 ```bash
 # Restart it
 gt refinery restart <rig>
-```
+```text
 
 ### 2. Merge Conflict in the First MR
 
@@ -331,7 +331,7 @@ gt refinery release <mr-id>
 
 # Re-sling the problematic bead for a fresh attempt
 gt sling <bead-id> <rig>
-```
+```text
 
 ### 3. Validation Failures
 
@@ -345,7 +345,7 @@ gt refinery attach <rig>
 cd <rig>/refinery/rig
 git pull origin main
 npm test   # or your project's test command
-```
+```text
 
 If `main` is broken, fix it first -- no MR can pass validation against a broken `main`.
 
@@ -359,7 +359,7 @@ gt refinery unclaimed <rig>
 
 # Release the stale claim
 gt refinery release <mr-id>
-```
+```text
 
 :::note
 

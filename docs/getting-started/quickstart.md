@@ -13,11 +13,11 @@ The **Town** is your top-level workspace directory. All projects (rigs) live ins
 ```bash
 gt install ~/gt --git
 cd ~/gt
-```
+```text
 
 This creates:
 
-```
+```text
 ~/gt/
 ├── .beads/          # Town-level issue tracking
 ├── .claude/         # Claude Code integration
@@ -28,7 +28,7 @@ This creates:
 ├── scripts/         # Utility scripts
 ├── plugins/         # Town-level plugins
 └── CLAUDE.md        # Project context
-```
+```text
 
 ## Add a Project (Rig)
 
@@ -36,11 +36,11 @@ Each project you manage with Gas Town is called a **Rig**.
 
 ```bash
 gt rig add myproject https://github.com/you/repo.git
-```
+```text
 
 This creates the rig structure:
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration
@@ -50,7 +50,7 @@ This creates the rig structure:
 ├── witness/         # Health monitor
 ├── polecats/        # Worker directories
 └── plugins/         # Rig-level plugins
-```
+```text
 
 ## Create a Crew Workspace
 
@@ -58,13 +58,13 @@ Crew workspaces are persistent clones for human developers.
 
 ```bash
 gt crew add myproject yourname
-```
+```text
 
 Enter your workspace:
 
 ```bash
 cd ~/gt/myproject/crew/yourname
-```
+```text
 
 ## Start Gas Town
 
@@ -76,7 +76,7 @@ gt start
 
 # Or start everything including Witnesses and Refineries
 gt start --all
-```
+```text
 
 ## Attach to the Mayor
 
@@ -84,7 +84,7 @@ The Mayor is your primary interface for coordinating work.
 
 ```bash
 gt mayor attach
-```
+```text
 
 Now you can give natural language instructions. For example:
 
@@ -112,7 +112,7 @@ gt feed
 
 # Check what's ready for work
 gt ready
-```
+```text
 
 ## See Also
 

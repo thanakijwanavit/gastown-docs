@@ -44,7 +44,7 @@ sequenceDiagram
         Dc->>Dc: Process patrol cycle
         Dc->>W: Check all Witnesses
     end
-```
+```text
 
 ### 2. Monitor All Witnesses
 
@@ -64,7 +64,7 @@ Dogs are reusable infrastructure workers managed by the Deacon for cross-rig tas
 ```bash
 gt dog list          # List active dogs
 gt dog add <name>    # Create a new dog
-```
+```text
 
 ### 4. Patrol Cycle
 
@@ -94,7 +94,7 @@ flowchart TD
     Hooks --> Orphans
     Orphans --> Zombies
     Zombies --> Done
-```
+```text
 
 ### 5. Boot Triage Process
 
@@ -107,7 +107,7 @@ flowchart LR
     Act["Act<br/>Execute Recovery"]
 
     Observe --> Decide --> Act
-```
+```text
 
 **Boot triage steps:**
 
@@ -182,7 +182,7 @@ graph TD
     W2 -->|escalates| Deacon
     W3 -->|escalates| Deacon
     Deacon -->|escalates| Mayor
-```
+```text
 
 ## Tips and Best Practices
 
@@ -216,10 +216,10 @@ The Deacon handles **operational health** (is everything running?). The Mayor ha
 
 When no active work exists across rigs, the Deacon enters idle monitoring mode. It skips health nudges for docked rigs and uses exponential backoff to reduce resource usage:
 
-```
+```text
 Active rigs with polecats → Full patrol cycle
 No active work anywhere → Idle monitoring (reduced frequency)
-```
+```text
 
 This prevents unnecessary Witness nudges and resource consumption when the system is quiet.
 
@@ -235,17 +235,17 @@ The Deacon checks timer gates for expiration, closes elapsed gates, and dispatch
 bd gate list                 # See open gates
 # Deacon auto-closes expired timer gates
 # Deacon auto-dispatches unblocked molecules
-```
+```text
 
 ### Second-Order Monitoring
 
 The "who watches the watchers" problem is solved by Witness pings. Each Witness sends a `WITNESS_PING` to the Deacon during its patrol. If the Deacon stops receiving pings, it knows a Witness has died:
 
-```
+```text
 Witness patrol → sends WITNESS_PING → Deacon archives it
 No ping for 3+ cycles → Deacon restarts the Witness
 No ping for 5+ cycles → Deacon escalates to Mayor
-```
+```text
 
 ## Troubleshooting
 
@@ -258,7 +258,7 @@ gt daemon status             # Is the Daemon running?
 # Check Boot's triage log:
 # ~/gt/deacon/dogs/boot/triage-log.jsonl
 gt deacon status             # Check Deacon state
-```
+```text
 
 ### Witnesses Are Not Being Monitored
 
@@ -267,7 +267,7 @@ Verify the Deacon is receiving `WITNESS_PING` messages. If Witnesses are running
 ```bash
 gt deacon status             # Check last patrol time
 gt rig status <rig>          # Check Witness state per rig
-```
+```text
 
 ### Dogs Are Not Being Dispatched
 
@@ -276,7 +276,7 @@ The Deacon maintains a minimum pool of idle dogs. If dogs are not spawning:
 ```bash
 gt dog list                  # Check current dog pool
 gt deacon status             # Verify Deacon patrol is running
-```
+```text
 
 ### Zombie Polecats Accumulating
 
@@ -285,7 +285,7 @@ The Deacon detects zombies during its patrol but only files "death warrants" -- 
 ```bash
 gt daemon status             # Boot runs on daemon ticks
 gt polecat list              # See zombie states
-```
+```text
 
 ## See Also
 

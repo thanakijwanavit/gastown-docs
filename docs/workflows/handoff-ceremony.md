@@ -45,7 +45,7 @@ Found the issue is in token refresh logic.
 Check line 145 in auth.go first.
 The failing test is TestRefreshExpired.
 "
-```
+```text
 
 The mail is addressed to yourself. Your next session reads it for orientation.
 
@@ -65,7 +65,7 @@ Complete the logical unit of work you are on. Do not hand off mid-implementation
 git add <files>
 git commit -m "Implement input validation for signup form"
 git push
-```
+```text
 
 :::danger[Non-Negotiable]
 
@@ -80,7 +80,7 @@ Close finished work, update status on in-progress items:
 ```bash
 bd close ga-abc --reason "Implemented and tests passing"
 bd update ga-def --status=in_progress --comment "50% done, form validation complete"
-```
+```text
 
 ### 4. Submit or Handoff
 
@@ -88,7 +88,7 @@ If the work is **done**, submit to the merge queue:
 
 ```bash
 gt done    # Submits MR, Witness nukes sandbox
-```
+```text
 
 If the work is **not done** but context is full, hand off:
 
@@ -104,7 +104,7 @@ Remaining:
 
 Next step: Look at auth/refresh.go line 145.
 "
-```
+```text
 
 ---
 
@@ -120,7 +120,7 @@ git add <files>
 git commit -m "Add sidebar navigation fixes"
 git push                    # MANDATORY
 git status                  # Verify "up to date with origin/main"
-```
+```text
 
 ### 2. File Follow-Up Work
 
@@ -129,13 +129,13 @@ Create beads for anything that needs attention later:
 ```bash
 bd create "Follow-up: add error handling for edge case in auth" -t task
 bd create "Follow-up: flaky test in TestRefreshExpired" -t bug
-```
+```text
 
 ### 3. Close Finished Beads
 
 ```bash
 bd close ga-abc --reason "Completed — sidebar navigation fixed"
-```
+```text
 
 ### 4. Handoff
 
@@ -151,7 +151,7 @@ Filed:
 
 Build is clean. All pushed to main.
 "
-```
+```text
 
 ---
 
@@ -168,7 +168,7 @@ gt handoff -s "Context full after 200 patrol cycles" -m "
 All polecats healthy. No pending escalations.
 Merge queue empty. Last patrol at 14:30.
 "
-```
+```text
 
 After restart, the agent runs `gt prime` to reload role context and resumes its patrol molecule from the hook.
 
@@ -191,7 +191,7 @@ gt mail read <handoff-mail-id>
 
 # 4. Resume work immediately (GUPP)
 # Do not wait for confirmation — the hook IS the assignment
-```
+```text
 
 ```mermaid
 sequenceDiagram
@@ -213,7 +213,7 @@ sequenceDiagram
     S2->>Hook: gt hook (find assigned work)
     S2->>Mail: gt mail inbox (read handoff notes)
     S2->>S2: Resume work immediately (GUPP)
-```
+```text
 
 ---
 
@@ -238,7 +238,7 @@ Handoff notes are for your next session — a version of you with no memory of t
 
 ### Example: Good Handoff
 
-```
+```text
 gt handoff -s "Token refresh bug — root cause found" -m "
 Root cause: RefreshToken() in auth/refresh.go:145 doesn't check expiry.
 Fix approach: Add time.Now().After(token.ExpiresAt) guard.
@@ -251,15 +251,15 @@ Remaining:
 Build: clean on main. Tests passing except TestRefreshExpired (the bug).
 Filed: ga-xyz for related rate-limiting issue found during investigation.
 "
-```
+```text
 
 ### Example: Bad Handoff
 
-```
+```text
 gt handoff -m "Worked on the auth bug for a while. Made some progress but
 couldn't figure it all out. The tests are kind of weird. Check the auth
 folder I guess."
-```
+```text
 
 ---
 
@@ -288,7 +288,7 @@ gt handoff -m "Almost done with the feature"
 # RIGHT: Always push first
 git add <files> && git commit -m "WIP: auth validation" && git push
 gt handoff -m "Auth validation WIP pushed. Resume from auth/validate.go."
-```
+```text
 
 ### Empty Handoff Notes
 
@@ -298,7 +298,7 @@ gt handoff
 
 # RIGHT: Always include notes
 gt handoff -s "Feature X progress" -m "Completed A and B. Next: do C. See auth/refresh.go:145."
-```
+```text
 
 ### Handing Off Mid-Thought
 
@@ -312,7 +312,7 @@ Evidence: bd show ga-abc shows closed, but convoy ga-def still open.
 Next: Add logging to convoy_close() in convoys.go:220 and reproduce.
 Reproduction: Run gt convoy create with 3 beads, gt done on all 3 within 5s.
 "
-```
+```text
 
 ---
 

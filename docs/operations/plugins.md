@@ -16,7 +16,7 @@ Gas Town's plugin system extends the platform with custom automation, gates, and
 
 Town-level plugins live in `~/gt/plugins/` and are available across all rigs.
 
-```
+```text
 ~/gt/plugins/
 ├── eslint-gate/
 │   ├── plugin.json
@@ -27,13 +27,13 @@ Town-level plugins live in `~/gt/plugins/` and are available across all rigs.
 └── cost-alert/
     ├── plugin.json
     └── run.sh
-```
+```text
 
 ### Rig-Level Plugins
 
 Rig-level plugins live in `<rig>/plugins/` and only affect that specific project.
 
-```
+```text
 ~/gt/myproject/plugins/
 ├── integration-tests/
 │   ├── plugin.json
@@ -41,7 +41,7 @@ Rig-level plugins live in `<rig>/plugins/` and only affect that specific project
 └── coverage-check/
     ├── plugin.json
     └── run.sh
-```
+```text
 
 :::note
 
@@ -68,7 +68,7 @@ Enforces a minimum time delay between actions.
     "scope": "rig"
   }
 }
-```
+```text
 
 Use cases:
 
@@ -89,7 +89,7 @@ Opens at scheduled times based on a cron expression.
     "timezone": "America/Los_Angeles"
   }
 }
-```
+```text
 
 Use cases:
 
@@ -112,7 +112,7 @@ Opens when a boolean condition evaluates to true.
     "max_retries": 3
   }
 }
-```
+```text
 
 Use cases:
 
@@ -135,7 +135,7 @@ Opens in response to a specific event in the activity stream.
     }
   }
 }
-```
+```text
 
 Use cases:
 
@@ -157,7 +157,7 @@ Requires explicit human approval to open.
     "notify_channels": ["email:human"]
   }
 }
-```
+```text
 
 Use cases:
 
@@ -198,7 +198,7 @@ Every plugin requires a `plugin.json` manifest and an executable entry point.
     "report": "test-results.json"
   }
 }
-```
+```text
 
 ### Manifest Fields
 
@@ -241,7 +241,7 @@ else
 fi
 
 exit $EXIT_CODE
-```
+```text
 
 ---
 
@@ -263,11 +263,11 @@ gt plugin list --rig myproject
 
 # JSON output
 gt plugin list --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Town plugins:
   eslint-gate       gate/condition   pre-merge   v1.0.0
   deploy-notify     action           post-merge  v1.2.0
@@ -276,7 +276,7 @@ Town plugins:
 Rig: myproject
   integration-tests gate/condition   pre-merge   v1.0.0
   coverage-check    gate/condition   pre-merge   v1.1.0
-```
+```text
 
 ### `gt plugin show`
 
@@ -285,7 +285,7 @@ View details of a specific plugin.
 ```bash
 gt plugin show integration-tests
 gt plugin show integration-tests --rig myproject
-```
+```text
 
 ### `gt plugin run`
 
@@ -300,7 +300,7 @@ gt plugin run integration-tests --rig myproject --input branch=feature/auth
 
 # Dry run (show what would happen)
 gt plugin run integration-tests --dry-run
-```
+```text
 
 ### `gt plugin history`
 
@@ -318,11 +318,11 @@ gt plugin history integration-tests --since 7d
 
 # JSON output
 gt plugin history --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Plugin: integration-tests (last 5 runs)
 
   2025-06-15 14:23  PASSED  branch: fix/login    12.4s
@@ -330,7 +330,7 @@ Plugin: integration-tests (last 5 runs)
   2025-06-15 12:45  PASSED  branch: fix/typo      6.1s
   2025-06-14 22:00  PASSED  branch: feat/api     15.3s
   2025-06-14 18:30  PASSED  branch: fix/css        4.8s
-```
+```text
 
 ---
 
@@ -344,7 +344,7 @@ mkdir -p ~/gt/plugins/my-plugin
 
 # Or rig-level plugin
 mkdir -p ~/gt/myproject/plugins/my-plugin
-```
+```text
 
 ### Step 2: Write the Manifest
 
@@ -369,7 +369,7 @@ Create `plugin.json`:
     "min_coverage": "80"
   }
 }
-```
+```text
 
 ### Step 3: Write the Entry Point
 
@@ -396,7 +396,7 @@ else
     echo "FAIL: Coverage ${COVERAGE}% is below minimum ${MIN_COVERAGE}%"
     exit 1
 fi
-```
+```text
 
 ### Step 4: Make Executable and Test
 
@@ -408,7 +408,7 @@ gt plugin run my-plugin --rig myproject
 
 # Check it appears in the list
 gt plugin list
-```
+```text
 
 ---
 
@@ -446,7 +446,7 @@ gt plugin history my-plugin --last 5
 
 # See detailed output of a specific run
 gt plugin history my-plugin --verbose
-```
+```text
 
 ### Running with Debug Output
 
@@ -466,7 +466,7 @@ echo "PLUGIN_DIR: $PLUGIN_DIR"
 echo "========================="
 
 # Your plugin logic here...
-```
+```text
 
 ### Common Failure Causes
 
@@ -489,7 +489,7 @@ gt plugin run my-plugin --rig myproject --dry-run
 # Manual run with custom inputs to simulate different scenarios
 gt plugin run my-plugin --rig myproject --input branch=main
 gt plugin run my-plugin --rig myproject --input branch=feature/untested
-```
+```text
 
 ---
 
@@ -511,7 +511,7 @@ Actions run in response to triggers but do not block workflow progress. Use thes
     "timeout": "30s"
   }
 }
-```
+```text
 
 ### Hook Plugins
 
@@ -527,7 +527,7 @@ Hooks intercept lifecycle events and can modify behavior. They run synchronously
     "timeout": "10s"
   }
 }
-```
+```text
 
 ### Schedule Plugins
 
@@ -544,7 +544,7 @@ Scheduled plugins run on a cron schedule independently of workflow events.
     "timeout": "5m"
   }
 }
-```
+```text
 
 ---
 

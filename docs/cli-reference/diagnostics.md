@@ -18,7 +18,7 @@ Display overall town status.
 
 ```bash
 gt status [options]
-```
+```text
 
 **Description:** Shows the current state of the Gas Town workspace including registered rigs, active polecats, and agent status.
 
@@ -45,7 +45,7 @@ gt status --watch --interval 5
 
 # Fast mode (skip mail lookups)
 gt status --fast
-```
+```text
 
 ---
 
@@ -55,7 +55,7 @@ Show the identity used for mail commands.
 
 ```bash
 gt whoami
-```
+```text
 
 **Description:** Displays the identity determined by the `GT_ROLE` environment variable. If set, you are an agent session. If not, you are the overseer (human). Use the `--identity` flag with mail commands to override.
 
@@ -63,7 +63,7 @@ gt whoami
 
 ```bash
 gt whoami
-```
+```text
 
 ---
 
@@ -75,7 +75,7 @@ Show recent system activity.
 
 ```bash
 gt activity [options]
-```
+```text
 
 **Description:** Displays a chronological log of significant events across the town, including agent starts/stops, work assignments, completions, escalations, and merges.
 
@@ -101,18 +101,18 @@ gt activity --type work --since 1h
 
 # Activity for a specific rig
 gt activity --rig myproject --limit 50
-```
+```text
 
 **Sample output:**
 
-```
+```text
 TIME       TYPE        AGENT           EVENT
 14:30      work        polecat/toast   Completed gt-abc12 (fix/login-bug)
 14:28      merge       refinery        Merged mr-001 to main
 14:25      agent       witness         Started patrol cycle
 14:20      work        polecat/alpha   Started gt-def34 (feat/email-validation)
 14:15      escalation  polecat/bravo   Escalated gt-ghi56 (P2: need design input)
-```
+```text
 
 ---
 
@@ -122,7 +122,7 @@ Generate an audit report.
 
 ```bash
 gt audit [options]
-```
+```text
 
 **Description:** Produces a comprehensive audit of system state, including agent uptime, work throughput, error rates, and resource usage. Useful for periodic reviews and compliance.
 
@@ -146,7 +146,7 @@ gt audit --since 7d --rig myproject --format json
 
 # Export to file
 gt audit --output audit-report.json --format json
-```
+```text
 
 ---
 
@@ -156,7 +156,7 @@ Watch the live activity feed.
 
 ```bash
 gt feed [options]
-```
+```text
 
 **Description:** Displays a real-time stream of system events. Similar to `gt activity` but shows events as they happen. Press `Ctrl+C` to exit.
 
@@ -179,7 +179,7 @@ gt feed --rig myproject
 
 # Watch only work and merge events
 gt feed --type work,merge
-```
+```text
 
 ---
 
@@ -189,7 +189,7 @@ Show the execution trail for a specific bead or agent.
 
 ```bash
 gt trail <target> [options]
-```
+```text
 
 **Description:** Traces the full lifecycle of a bead or agent, showing every state change, assignment, message, and action in chronological order.
 
@@ -208,11 +208,11 @@ gt trail gt-abc12
 
 # Trail an agent
 gt trail polecat/toast
-```
+```text
 
 **Sample output (bead trail):**
 
-```
+```text
 gt-abc12: Fix login redirect loop
   14:00  created     by mayor          priority=high type=bug
   14:05  assigned    to myproject      via gt sling
@@ -223,7 +223,7 @@ gt-abc12: Fix login redirect loop
   14:28  submitted   mr-001            to merge queue
   14:30  merged      to main           by refinery
   14:30  closed      auto
-```
+```text
 
 ---
 
@@ -233,7 +233,7 @@ View system logs.
 
 ```bash
 gt log [options]
-```
+```text
 
 **Description:** Accesses the raw event log (`.events.jsonl`) with filtering and formatting options. More detailed than `gt activity` -- includes internal system events.
 
@@ -258,7 +258,7 @@ gt log -f
 
 # Debug output for the last 30 minutes
 gt log --level debug --since 30m
-```
+```text
 
 ---
 
@@ -268,7 +268,7 @@ Diagnose system health issues.
 
 ```bash
 gt doctor [options]
-```
+```text
 
 **Description:** Runs a comprehensive health check of the Gas Town installation, verifying dependencies, configuration, agent state, database integrity, and common issues.
 
@@ -288,11 +288,11 @@ gt doctor
 
 # Run and attempt fixes
 gt doctor --fix
-```
+```text
 
 **Sample output:**
 
-```
+```text
 Gas Town Doctor
 ===============
 
@@ -310,7 +310,7 @@ Gas Town Doctor
 [OK]  Deacon session active
 
 11 checks passed, 1 warning, 0 errors
-```
+```text
 
 :::tip
 
@@ -326,7 +326,7 @@ Start the convoy tracking web dashboard.
 
 ```bash
 gt dashboard [options]
-```
+```text
 
 **Description:** Starts a web server that displays a convoy tracking dashboard with real-time status indicators, progress tracking, and last activity indicators. Auto-refreshes every 30 seconds via htmx.
 
@@ -348,7 +348,7 @@ gt dashboard --port 3000
 
 # Start and open browser
 gt dashboard --open
-```
+```text
 
 ---
 
@@ -358,7 +358,7 @@ Show resource usage and cost metrics.
 
 ```bash
 gt costs [options]
-```
+```text
 
 **Description:** Displays token usage, API costs, agent session time, and other resource metrics. Helps track spending across agents and rigs.
 
@@ -383,11 +383,11 @@ gt costs --since 7d --group-by rig
 
 # Costs for a specific agent
 gt costs --agent polecat/toast
-```
+```text
 
 **Sample output:**
 
-```
+```text
 Gas Town Costs (last 24h)
 =========================
 
@@ -404,7 +404,7 @@ By role:
   refinery     $1.85    (15%)
   mayor        $0.60    (5%)
   other        $0.40    (3%)
-```
+```text
 
 ---
 
@@ -414,7 +414,7 @@ Clean up temporary files and stale resources.
 
 ```bash
 gt cleanup [options]
-```
+```text
 
 **Description:** Removes temporary files, stale worktrees, dead session artifacts, and other accumulated debris. A more action-oriented companion to `gt stale`.
 
@@ -439,7 +439,7 @@ gt cleanup --all --force
 
 # Clean up a specific rig
 gt cleanup --rig myproject --age 12h
-```
+```text
 
 ---
 
@@ -449,7 +449,7 @@ Generate a patrol cycle digest.
 
 ```bash
 gt patrol digest [options]
-```
+```text
 
 **Description:** Summarizes the results of recent patrol cycles run by persistent agents (Deacon, Witnesses, Refinery). Shows what was detected and what actions were taken.
 
@@ -466,7 +466,7 @@ gt patrol digest [options]
 ```bash
 gt patrol digest
 gt patrol digest --since 6h --agent witness
-```
+```text
 
 ---
 
@@ -478,7 +478,7 @@ Find orphaned resources.
 
 ```bash
 gt orphans [options]
-```
+```text
 
 **Description:** Identifies orphaned resources across the town -- processes without parent agents, worktrees without polecats, branches without beads, and other disconnected artifacts.
 
@@ -493,11 +493,11 @@ gt orphans [options]
 
 ```bash
 gt orphans
-```
+```text
 
 **Sample output:**
 
-```
+```text
 Orphaned Resources
 ==================
 
@@ -512,7 +512,7 @@ Branches (3):
   fix/old-bug         (no associated bead)
   feat/abandoned       (no associated bead)
   tmp/experiment       (no associated bead)
-```
+```text
 
 ---
 
@@ -522,7 +522,7 @@ List orphaned processes specifically.
 
 ```bash
 gt orphans procs [options]
-```
+```text
 
 **Options:**
 
@@ -534,7 +534,7 @@ gt orphans procs [options]
 
 ```bash
 gt orphans procs
-```
+```text
 
 ---
 
@@ -544,7 +544,7 @@ Terminate orphaned processes.
 
 ```bash
 gt orphans kill [options]
-```
+```text
 
 **Description:** Kills orphaned processes that have no parent agent managing them. These are typically leftover sessions from crashed agents.
 
@@ -560,7 +560,7 @@ gt orphans kill [options]
 ```bash
 gt orphans kill --dry-run
 gt orphans kill --force
-```
+```text
 
 :::warning
 
@@ -584,7 +584,7 @@ Peek at an agent's current state without interrupting it.
 
 ```bash
 gt peek <agent> [options]
-```
+```text
 
 **Description:** Non-invasively inspects what an agent is currently doing, including its hook state, recent activity, and resource usage. Does not send any messages to the agent.
 
@@ -600,11 +600,11 @@ gt peek <agent> [options]
 gt peek polecat/toast
 gt peek witness --rig myproject
 gt peek mayor
-```
+```text
 
 **Sample output:**
 
-```
+```text
 Peek: polecat/toast (myproject)
   Status: running
   Hook: gt-abc12 "Fix login redirect loop"
@@ -612,7 +612,7 @@ Peek: polecat/toast (myproject)
   Session: sess-xyz789
   Commits: 3 (uncommitted changes: 2 files)
   Branch: fix/login-bug
-```
+```text
 
 ---
 
@@ -622,7 +622,7 @@ Manage tmux sessions for polecats.
 
 ```bash
 gt session <subcommand> [options]
-```
+```text
 
 **Aliases:** `sess`
 
@@ -654,7 +654,7 @@ gt session capture toast
 
 # Restart a session
 gt session restart toast
-```
+```text
 
 :::tip
 

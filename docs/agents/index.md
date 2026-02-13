@@ -59,7 +59,7 @@ graph TD
     W2 -->|supervises| P2
     P1 -->|submit MRs| R1
     P2 -->|submit MRs| R2
-```
+```text
 
 ## Comparison Table
 
@@ -94,24 +94,24 @@ graph TD
 
 The monitoring chain ensures no agent runs unsupervised:
 
-```
+```text
 Daemon --[heartbeat]--> Deacon
 Deacon --[monitors]---> Witnesses (all rigs)
 Witness --[watches]---> Polecats (in its rig)
 Witness --[watches]---> Refinery (in its rig)
 Mayor  --[strategy]---> Deacon
-```
+```text
 
 When something goes wrong, escalations flow upward:
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat
       --> If still stuck: Witness escalates to Deacon
         --> Deacon escalates to Mayor
           --> Mayor escalates to Human/Overseer
-```
+```text
 
 ## Role Separation
 
@@ -157,7 +157,7 @@ gt doctor                    # Full system health check
 gt rig status <rig>          # Per-rig agent status
 gt polecat list              # All polecats in current rig
 gt deacon status             # Deacon health
-```
+```text
 
 ### Tracing the Escalation Chain
 
@@ -182,7 +182,7 @@ gt deacon status
 
 # Are Witnesses patrolling? (monitor polecats)
 gt rig status <rig>
-```
+```text
 
 ## Troubleshooting
 
@@ -191,14 +191,14 @@ gt rig status <rig>
 ```bash
 gt up                        # Bring up all services
 gt doctor --fix              # Auto-fix common issues
-```
+```text
 
 ### Agent Is Stuck or Unresponsive
 
 ```bash
 gt nudge <agent> "status?"   # Send a nudge
 gt polecat nuke <name>       # Last resort: destroy polecat
-```
+```text
 
 ### Escalation Chain Is Broken
 

@@ -20,7 +20,7 @@ View incoming messages.
 
 ```bash
 gt mail inbox [options]
-```
+```text
 
 **Description:** Lists messages in the current agent's inbox. Messages are stored as JSONL files and persist across restarts.
 
@@ -45,16 +45,16 @@ gt mail inbox --unread
 
 # Messages from the Mayor in the last hour
 gt mail inbox --from mayor --since 1h
-```
+```text
 
 **Sample output:**
 
-```
+```text
 ID     FROM        TIME     READ   SUBJECT
 m-001  deacon      5m ago   *      Witness myproject unresponsive
 m-002  polecat     15m ago  .      gt-abc12 completed
 m-003  mayor       30m ago  .      New convoy assigned: hq-cv-002
-```
+```text
 
 ---
 
@@ -64,7 +64,7 @@ Send a message to another agent.
 
 ```bash
 gt mail send <recipient> [options]
-```
+```text
 
 **Description:** Sends an asynchronous message to another agent's mailbox. The recipient will see it on their next inbox check.
 
@@ -83,7 +83,7 @@ gt mail send <recipient> [options]
 ```bash
 gt mail send mayor --subject "Need guidance" --body "Blocked on API design decision for auth module"
 gt mail send deacon --subject "Health alert" --body "Refinery queue backing up" --priority high
-```
+```text
 
 ---
 
@@ -93,7 +93,7 @@ Read a specific message.
 
 ```bash
 gt mail read <message-id>
-```
+```text
 
 **Description:** Displays the full content of a message and marks it as read.
 
@@ -101,7 +101,7 @@ gt mail read <message-id>
 
 ```bash
 gt mail read m-001
-```
+```text
 
 ---
 
@@ -111,13 +111,13 @@ Mark messages as read without archiving.
 
 ```bash
 gt mail mark-read <message-id>...
-```
+```text
 
 **Example:**
 
 ```bash
 gt mail mark-read m-001 m-002
-```
+```text
 
 ---
 
@@ -127,13 +127,13 @@ Mark messages as unread.
 
 ```bash
 gt mail mark-unread <message-id>...
-```
+```text
 
 **Example:**
 
 ```bash
 gt mail mark-unread m-003
-```
+```text
 
 ---
 
@@ -143,7 +143,7 @@ Preview messages without marking them as read.
 
 ```bash
 gt mail peek [message-id] [options]
-```
+```text
 
 **Description:** Shows message content without changing its read status. Without an ID, peeks at the most recent unread message.
 
@@ -159,7 +159,7 @@ gt mail peek [message-id] [options]
 gt mail peek
 gt mail peek m-001
 gt mail peek --count 5
-```
+```text
 
 ---
 
@@ -169,7 +169,7 @@ Reply to a message.
 
 ```bash
 gt mail reply <message-id> [options]
-```
+```text
 
 **Description:** Sends a reply to the sender of a message, preserving the conversation thread.
 
@@ -184,7 +184,7 @@ gt mail reply <message-id> [options]
 
 ```bash
 gt mail reply m-001 --body "Acknowledged, restarting the witness now"
-```
+```text
 
 ---
 
@@ -194,7 +194,7 @@ Search messages.
 
 ```bash
 gt mail search <query> [options]
-```
+```text
 
 **Description:** Full-text search across all messages in the mailbox.
 
@@ -212,7 +212,7 @@ gt mail search <query> [options]
 ```bash
 gt mail search "merge conflict"
 gt mail search "blocked" --from polecat --since 24h
-```
+```text
 
 ---
 
@@ -222,7 +222,7 @@ View a conversation thread.
 
 ```bash
 gt mail thread <message-id> [options]
-```
+```text
 
 **Description:** Shows all messages in a conversation thread, from the original message through all replies.
 
@@ -236,7 +236,7 @@ gt mail thread <message-id> [options]
 
 ```bash
 gt mail thread m-001
-```
+```text
 
 ---
 
@@ -246,7 +246,7 @@ Manage or view named channels.
 
 ```bash
 gt mail channel [name] [options]
-```
+```text
 
 **Description:** Without arguments, lists available channels. With a channel name, shows messages in that channel. Channels are named mailboxes for topic-based communication.
 
@@ -270,7 +270,7 @@ gt mail channel alerts
 
 # Create a channel
 gt mail channel --create deployments
-```
+```text
 
 ---
 
@@ -280,7 +280,7 @@ View the outgoing message queue.
 
 ```bash
 gt mail queue [options]
-```
+```text
 
 **Description:** Shows messages that are queued for delivery but have not yet been picked up by their recipients.
 
@@ -294,7 +294,7 @@ gt mail queue [options]
 
 ```bash
 gt mail queue
-```
+```text
 
 ---
 
@@ -304,7 +304,7 @@ View or manage announcement messages.
 
 ```bash
 gt mail announces [options]
-```
+```text
 
 **Description:** Shows broadcast announcements that have been sent to all agents. Announcements are high-visibility messages from the Mayor or Overseer.
 
@@ -320,7 +320,7 @@ gt mail announces [options]
 ```bash
 gt mail announces
 gt mail announces --since 24h
-```
+```text
 
 ---
 
@@ -330,7 +330,7 @@ Archive messages.
 
 ```bash
 gt mail archive <message-id>...
-```
+```text
 
 **Description:** Moves messages to the archive. Archived messages are no longer shown in the inbox but are preserved for future reference.
 
@@ -338,7 +338,7 @@ gt mail archive <message-id>...
 
 ```bash
 gt mail archive m-001 m-002
-```
+```text
 
 ---
 
@@ -348,7 +348,7 @@ Delete messages.
 
 ```bash
 gt mail delete <message-id>...
-```
+```text
 
 **Description:** Permanently delete messages from the mailbox.
 
@@ -356,7 +356,7 @@ gt mail delete <message-id>...
 
 ```bash
 gt mail delete m-001
-```
+```text
 
 ---
 
@@ -366,7 +366,7 @@ Clear all messages from an inbox.
 
 ```bash
 gt mail clear
-```
+```text
 
 **Description:** Removes all messages from the current agent's inbox.
 
@@ -374,7 +374,7 @@ gt mail clear
 
 ```bash
 gt mail clear
-```
+```text
 
 ---
 
@@ -384,7 +384,7 @@ Attach a mail message to your hook.
 
 ```bash
 gt mail hook <message-id>
-```
+```text
 
 **Description:** Attaches a mail message to your hook as an ad-hoc work assignment. Alias for `gt hook attach`.
 
@@ -392,7 +392,7 @@ gt mail hook <message-id>
 
 ```bash
 gt mail hook m-001
-```
+```text
 
 ---
 
@@ -402,7 +402,7 @@ Check for new mail (for hooks).
 
 ```bash
 gt mail check
-```
+```text
 
 **Description:** Non-interactive check for new mail, intended for use in hooks and automation.
 
@@ -410,7 +410,7 @@ gt mail check
 
 ```bash
 gt mail check
-```
+```text
 
 ---
 
@@ -420,7 +420,7 @@ Claim a message from a queue.
 
 ```bash
 gt mail claim <queue-name>
-```
+```text
 
 **Description:** Claims the next available message from a named queue, removing it from the queue for processing.
 
@@ -428,7 +428,7 @@ gt mail claim <queue-name>
 
 ```bash
 gt mail claim work-queue
-```
+```text
 
 ---
 
@@ -438,7 +438,7 @@ Release a claimed queue message.
 
 ```bash
 gt mail release <message-id>
-```
+```text
 
 **Description:** Releases a previously claimed queue message back to the queue for another agent to claim.
 
@@ -446,7 +446,7 @@ gt mail release <message-id>
 
 ```bash
 gt mail release m-001
-```
+```text
 
 ---
 
@@ -456,7 +456,7 @@ Manage mail groups.
 
 ```bash
 gt mail group [subcommand]
-```
+```text
 
 **Description:** Create and manage mail groups (distribution lists) for sending messages to multiple agents at once.
 
@@ -464,7 +464,7 @@ gt mail group [subcommand]
 
 ```bash
 gt mail group
-```
+```text
 
 ---
 
@@ -476,7 +476,7 @@ Send a synchronous notification to an agent.
 
 ```bash
 gt nudge <target> [options]
-```
+```text
 
 **Description:** Unlike mail (async), a nudge is a synchronous message delivery that interrupts the target agent immediately. Used by supervisors to wake up or redirect agents.
 
@@ -495,7 +495,7 @@ gt nudge polecat/toast --action check-hook
 
 # Nudge with a message
 gt nudge witness --message "Check polecat alpha, appears stalled" --rig myproject
-```
+```text
 
 :::warning
 
@@ -511,7 +511,7 @@ Send a message to all agents.
 
 ```bash
 gt broadcast [options]
-```
+```text
 
 **Description:** Sends a message to all agents in the town or all agents in a specific rig. Used for system-wide announcements.
 
@@ -531,7 +531,7 @@ gt broadcast --message "Maintenance window in 30 minutes, save your work"
 
 # Rig-specific broadcast
 gt broadcast --rig myproject --message "Main branch frozen for release"
-```
+```text
 
 ---
 
@@ -541,7 +541,7 @@ Toggle do-not-disturb mode.
 
 ```bash
 gt dnd [on|off] [options]
-```
+```text
 
 **Description:** When enabled, suppresses non-critical notifications and nudges. Critical escalations still come through. Useful during focused work or maintenance.
 
@@ -563,7 +563,7 @@ gt dnd on --duration 2h
 
 # Disable
 gt dnd off
-```
+```text
 
 ---
 
@@ -573,7 +573,7 @@ Manage notification preferences.
 
 ```bash
 gt notify [options]
-```
+```text
 
 **Description:** Configure how and when you receive notifications from Gas Town agents.
 
@@ -597,7 +597,7 @@ gt notify --email you@example.com --level critical
 
 # Set Discord webhook
 gt notify --discord https://discord.com/api/webhooks/...
-```
+```text
 
 ---
 
@@ -611,7 +611,7 @@ Create a new escalation.
 
 ```bash
 gt escalate [options]
-```
+```text
 
 **Description:** Creates a priority-routed escalation that travels up the supervisor chain until it reaches an agent authorized to handle it. Severity levels control routing depth.
 
@@ -645,7 +645,7 @@ gt escalate --severity P2 --message "Need design decision for API schema" --bead
 
 # Direct escalation to Mayor
 gt escalate --to mayor --message "Merge conflicts accumulating faster than resolution"
-```
+```text
 
 ---
 
@@ -655,7 +655,7 @@ List all active escalations.
 
 ```bash
 gt escalate list [options]
-```
+```text
 
 **Options:**
 
@@ -671,16 +671,16 @@ gt escalate list [options]
 ```bash
 gt escalate list
 gt escalate list --severity P0 --status open
-```
+```text
 
 **Sample output:**
 
-```
+```text
 ID       SEVERITY   STATUS   FROM      AGE    MESSAGE
 esc-001  P0         open     witness   5m     Production DB migration failed
 esc-002  P2         acked    polecat   1h     Need API schema decision
 esc-003  P3         open     refinery  30m    Flaky test in auth module
-```
+```text
 
 ---
 
@@ -690,7 +690,7 @@ Acknowledge an escalation.
 
 ```bash
 gt escalate ack <escalation-id> [options]
-```
+```text
 
 **Description:** Marks an escalation as acknowledged, indicating someone is looking at it. This stops further routing up the chain.
 
@@ -704,7 +704,7 @@ gt escalate ack <escalation-id> [options]
 
 ```bash
 gt escalate ack esc-001 --message "Investigating, will have fix in 15 minutes"
-```
+```text
 
 ---
 
@@ -714,7 +714,7 @@ Close a resolved escalation.
 
 ```bash
 gt escalate close <escalation-id> [options]
-```
+```text
 
 **Options:**
 
@@ -726,7 +726,7 @@ gt escalate close <escalation-id> [options]
 
 ```bash
 gt escalate close esc-001 --resolution "Rolled back migration, applied fix, re-ran successfully"
-```
+```text
 
 ---
 
@@ -736,7 +736,7 @@ Find escalations that have not been acknowledged.
 
 ```bash
 gt escalate stale [options]
-```
+```text
 
 **Description:** Lists escalations that have been open without acknowledgment for longer than expected, based on their severity level.
 
@@ -752,7 +752,7 @@ gt escalate stale [options]
 ```bash
 gt escalate stale
 gt escalate stale --age 30m
-```
+```text
 
 :::warning
 

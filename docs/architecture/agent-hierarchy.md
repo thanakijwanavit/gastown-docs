@@ -37,7 +37,7 @@ graph TD
     P1 -->|gt done → MR| Refinery
     P2 -->|gt done → MR| Refinery
     Refinery -->|merge| Main[main branch]
-```
+```text
 
 ## Monitoring Chain
 
@@ -68,20 +68,20 @@ The Boot dog is a special agent spawned by the Deacon to assess situations that 
 
 When an agent encounters a problem it cannot resolve:
 
-```
+```text
 Polecat (stuck)
   → Witness detects stall (patrol cycle)
     → Witness nudges polecat
       → If still stuck: Witness escalates to Deacon
         → Deacon escalates to Mayor
           → Mayor escalates to Human/Overseer
-```
+```text
 
 Agents can also self-escalate using `gt escalate`:
 
 ```bash
 gt escalate "Brief description" -s HIGH -m "Details"
-```
+```text
 
 Severity levels control routing:
 

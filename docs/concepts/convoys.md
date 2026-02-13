@@ -30,7 +30,7 @@ graph TD
     style B1 fill:#2d5a2d
     style B2 fill:#5a5a2d
     style B3 fill:#5a2d2d
-```
+```text
 
 ## Convoy Lifecycle
 
@@ -43,7 +43,7 @@ stateDiagram-v2
 
     Open --> Stalled: Issues stuck
     Stalled --> Open: Unstuck / reassigned
-```
+```text
 
 | State | Meaning |
 |-------|---------|
@@ -55,10 +55,10 @@ stateDiagram-v2
 
 Convoys use the `hq-cv-` prefix by default (since they are town-level coordination beads):
 
-```
+```text
 hq-cv-001   # First convoy
 hq-cv-abc   # Auto-generated short ID
-```
+```text
 
 The `hq-` prefix indicates the bead belongs to the town-level `.beads/` database, not a rig-level one.
 
@@ -75,7 +75,7 @@ This is the key feature of convoys. The system automatically checks whether all 
 # The Deacon runs this check automatically:
 bd list --type=convoy --status=open
 # For each: check tracked issues, close if all done
-```
+```text
 
 :::info[No Manual Closing Needed]
 
@@ -89,7 +89,7 @@ Convoys can track issues **across multiple rigs**. A single convoy can reference
 
 ```bash
 gt convoy create "Cross-rig refactor" gt-a1b2c bd-d3e4f myrig-x5y6z
-```
+```text
 
 This works because convoys support **cross-prefix tracking** -- the convoy bead stores full IDs including their prefix, allowing it to query status from any [rig's](rigs.md) `.beads/` database.
 
@@ -104,7 +104,7 @@ ID          Title                  Status      Progress
 hq-cv-001   Auth System Fixes     OPEN        2/3 done
 hq-cv-002   API Redesign          OPEN        0/5 done
 hq-cv-003   Bug Bash Sprint       COMPLETED   8/8 done
-```
+```text
 
 The Mayor uses this dashboard to report progress to the Overseer (human operator) and make strategic decisions about resource allocation.
 
@@ -120,7 +120,7 @@ gt convoy create "Auth System Fixes" gt-a1b2c gt-d3e4f gt-g5h6i
 # Create with just a name (add issues later)
 gt convoy create "Sprint 42"
 # Created: hq-cv-002
-```
+```text
 
 ### Adding Issues to a Convoy
 
@@ -130,7 +130,7 @@ gt convoy add hq-cv-001 gt-h7i8j
 
 # Add multiple issues
 gt convoy add hq-cv-001 gt-h7i8j gt-k9l0m
-```
+```text
 
 ### Listing Convoys
 
@@ -140,7 +140,7 @@ gt convoy list
 
 # List only open convoys
 gt convoy list --status open
-```
+```text
 
 ### Checking Convoy Status
 
@@ -150,11 +150,11 @@ gt convoy show hq-cv-001
 
 # Get status summary
 gt convoy status hq-cv-001
-```
+```text
 
 Example output:
 
-```
+```text
 Convoy: hq-cv-001 "Auth System Fixes"
 Status: OPEN
 Progress: 2/3 issues completed
@@ -165,7 +165,7 @@ Tracked Issues:
   [PENDING]     gt-g5h6i  Update README
 
 Created: 2026-01-15T10:30:00Z
-```
+```text
 
 ### Closing a Convoy
 
@@ -175,14 +175,14 @@ gt convoy close hq-cv-001
 
 # Close with reason
 gt convoy close hq-cv-001 --reason "Remaining work deprioritized"
-```
+```text
 
 ### Checking Completion
 
 ```bash
 # Manually trigger completion check
 gt convoy check hq-cv-001
-```
+```text
 
 ### Finding Stranded Convoys
 
@@ -191,7 +191,7 @@ A stranded convoy has ready work that is not assigned to any agent:
 ```bash
 # Find convoys with unassigned work
 gt convoy stranded
-```
+```text
 
 This is useful for the Mayor to identify work that needs to be [slung](hooks.md) to polecats.
 

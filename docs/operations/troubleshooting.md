@@ -26,7 +26,7 @@ gt trail --since 1h
 
 # Check for open escalations
 gt escalate list
-```
+```text
 
 ---
 
@@ -45,7 +45,7 @@ gt hook --agent <agent>
 
 # Check convoy status for the agent's work
 gt convoy list
-```
+```text
 
 **Solutions:**
 
@@ -97,7 +97,7 @@ bd list --convoy <convoy-id>
 
 # Check for stranded convoys
 gt convoy stranded
-```
+```text
 
 **Solutions:**
 
@@ -150,7 +150,7 @@ gt mail inbox --agent mayor
 
 # Check for recent Mayor activity
 gt audit mayor --since 1h
-```
+```text
 
 **Solutions:**
 
@@ -202,7 +202,7 @@ gt polecat stale
 # Check individual polecat status
 gt polecat list --rig myproject
 gt peek polecat:toast --rig myproject
-```
+```text
 
 **Solutions:**
 
@@ -246,7 +246,7 @@ gt orphans
 
 # Clean them up
 gt cleanup
-```
+```text
 
 `gt orphans` finds:
 
@@ -262,7 +262,7 @@ gt deacon zombie-scan
 
 # Or manually check
 ps aux | grep claude | grep -v grep
-```
+```text
 
 If zombie processes are found:
 
@@ -272,7 +272,7 @@ gt deacon zombie-scan --cleanup
 
 # Or manually kill specific processes
 kill <PID>
-```
+```text
 
 ### Orphaned Commits
 
@@ -282,7 +282,7 @@ gt orphans --commits
 
 # Recover work from an orphaned commit
 gt orphans --recover <commit-hash>
-```
+```text
 
 :::tip[Lost Work Recovery]
 
@@ -305,7 +305,7 @@ gt mq status --rig myproject
 
 # Check for conflict details
 gt mq show <mr-id>
-```
+```text
 
 **Solutions:**
 
@@ -356,7 +356,7 @@ gt daemon start --verbose
 
 # Check daemon logs
 gt daemon logs --level error
-```
+```text
 
 ### Heartbeat Failures
 
@@ -371,7 +371,7 @@ gt daemon logs --follow
 
 # Restart the daemon
 gt daemon stop && gt daemon start
-```
+```text
 
 ---
 
@@ -387,7 +387,7 @@ gt audit polecat:toast --rig myproject
 
 # Look for signs of context pressure in agent output
 gt peek polecat:toast --rig myproject --lines 50
-```
+```text
 
 **Solutions:**
 
@@ -435,7 +435,7 @@ gt daemon logs --level error --since 10m
 
 # Check if the tmux session was created
 tmux list-sessions
-```
+```text
 
 **Solutions:**
 
@@ -483,7 +483,7 @@ tmux list-sessions
 cd ~/gt/myproject/polecats/<name>/myproject
 git status
 git log --oneline -5
-```
+```text
 
 **Solutions:**
 
@@ -536,7 +536,7 @@ bd doctor
 
 # Check for lock files
 ls -la ~/gt/myproject/.beads/*.lock 2>/dev/null
-```
+```text
 
 **Solutions:**
 
@@ -586,7 +586,7 @@ ls -la ~/gt/myproject/.beads/*.lock 2>/dev/null
 cd ~/gt/myproject/polecats/<name>/myproject
 git status
 git log --oneline origin/main..HEAD
-```
+```text
 
 **Solutions:**
 
@@ -643,7 +643,7 @@ gt mail inbox --agent <recipient>
 
 # Verify the mail address format
 gt mail send <rig>/<agent> -s "test" -m "ping"
-```
+```text
 
 **Solutions:**
 
@@ -709,7 +709,7 @@ gt mail send <rig>/<agent> -s "test" -m "ping"
 
 Use this to quickly find the right troubleshooting section:
 
-```
+```text
 Is anything running at all?
 ├── No → Daemon Issues / Agent Boot Failures
 └── Yes
@@ -727,7 +727,7 @@ Is anything running at all?
     │   └── Context Window Filling
     └── Are there leftover resources?
         └── Orphaned Processes
-```
+```text
 
 ---
 
@@ -739,7 +739,7 @@ If multiple systems are failing simultaneously and individual fixes are not reso
 # Nuclear option: stop everything and start fresh
 gt shutdown --all
 gt start --all
-```
+```text
 
 This preserves all persistent state (beads, config, hooks) but gives every agent a clean session. Agents will automatically pick up their hooked work on restart.
 

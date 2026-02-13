@@ -30,7 +30,7 @@ gt escalate --bead gt-a1b2c "Blocked: needs API key configuration"
 
 # Attach to a rig
 gt escalate --rig myproject "All polecats failing to spawn"
-```
+```text
 
 :::note
 
@@ -127,7 +127,7 @@ Escalation routing is configured in `settings/escalation.json` at the town level
     "override_for": ["critical"]
   }
 }
-```
+```text
 
 ### Routing Paths by Severity
 
@@ -151,7 +151,7 @@ graph LR
     subgraph P3 ["P3 - Low"]
         L0[Bead]
     end
-```
+```text
 
 Each channel in the routing path is attempted in order. If the escalation is not acknowledged within the `auto_escalate_after` window, it re-escalates through the same channels.
 
@@ -185,11 +185,11 @@ gt escalate list --all
 
 # JSON output
 gt escalate list --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Open Escalations (3):
 
   ESC-001  P0  CRITICAL  "Database migration broke all tests"
@@ -203,7 +203,7 @@ Open Escalations (3):
   ESC-003  P2  MEDIUM    "Flaky test in auth module"
            Rig: docs  Age: 2h  ACK: no
            Route: bead -> mail:mayor (pending)
-```
+```text
 
 ### `gt escalate ack`
 
@@ -218,7 +218,7 @@ gt escalate ack ESC-001 --note "Looking into the migration issue"
 
 # Acknowledge all open escalations
 gt escalate ack --all
-```
+```text
 
 :::warning
 
@@ -239,7 +239,7 @@ gt escalate close ESC-001 --note "Fixed: migration script had wrong column type"
 
 # Close with a linked commit
 gt escalate close ESC-001 --commit abc1234
-```
+```text
 
 ### `gt escalate stale`
 
@@ -247,18 +247,18 @@ Find escalations that have gone unacknowledged past their threshold.
 
 ```bash
 gt escalate stale
-```
+```text
 
 Sample output:
 
-```
+```text
 Stale Escalations (1):
 
   ESC-003  P2  MEDIUM  "Flaky test in auth module"
            Age: 4h 12m (threshold: 4h)
            Re-escalations: 1 of 2
            Next re-escalation in: 3h 48m
-```
+```text
 
 ---
 
@@ -316,7 +316,7 @@ sequenceDiagram
         S->>H: Re-escalation #2 email
         Note over S: Marked as stale
     end
-```
+```text
 
 ---
 
@@ -333,7 +333,7 @@ stateDiagram-v2
     Stale --> Acknowledged: gt escalate ack
     Stale --> Closed: gt escalate close
     Closed --> [*]
-```
+```text
 
 ---
 
@@ -364,7 +364,7 @@ cd ~/gt/myproject/crew/yourname
 
 # Close the escalation
 gt escalate close ESC-001 --note "Fixed flaky test: added retry logic to test_auth_timeout"
-```
+```text
 
 ### Scenario: Polecat Stuck in a Loop
 
@@ -392,7 +392,7 @@ bd update gt-a1b2c --notes "Previous attempt failed because <reason>. Try <alter
 gt sling gt-a1b2c myproject
 
 gt escalate close ESC-002 --note "Respawned with updated guidance"
-```
+```text
 
 ### Scenario: Cost Spike During Off-Hours
 
@@ -416,7 +416,7 @@ gt polecat stop <name> --rig myproject
 # Acknowledge and close
 gt escalate ack ESC-003 --note "Cost spike from runaway polecat"
 gt escalate close ESC-003 --note "Stopped runaway polecat, reviewing task scoping"
-```
+```text
 
 ---
 
@@ -439,7 +439,7 @@ The default thresholds work well for most setups, but you may want to adjust the
     }
   }
 }
-```
+```text
 
 ### When to Loosen Thresholds (Longer Timers)
 
@@ -456,7 +456,7 @@ The default thresholds work well for most setups, but you may want to adjust the
     }
   }
 }
-```
+```text
 
 ### Per-Rig Overrides
 

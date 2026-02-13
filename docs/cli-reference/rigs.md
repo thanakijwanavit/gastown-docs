@@ -16,7 +16,7 @@ List all rigs in the town.
 
 ```bash
 gt rig list [options]
-```
+```text
 
 **Description:** Shows all rigs with their current status, agent counts, and activity summary.
 
@@ -33,16 +33,16 @@ gt rig list [options]
 ```bash
 gt rig list
 gt rig list --status active
-```
+```text
 
 **Sample output:**
 
-```
+```text
 RIG          STATUS    POLECATS   QUEUE   OPEN BEADS   BRANCH
 myproject    active    3          2       7            main
 docs         active    1          0       2            main
 backend      parked    0          0       4            main
-```
+```text
 
 ---
 
@@ -52,7 +52,7 @@ Add a new rig to the town.
 
 ```bash
 gt rig add <name> <git-url> [options]
-```
+```text
 
 **Description:** Clones the repository, creates the rig directory structure, initializes beads, and sets up agent workspaces (witness, refinery, mayor, polecats).
 
@@ -76,11 +76,11 @@ gt rig add backend git@github.com:you/backend.git --branch develop
 
 # Add without starting agents
 gt rig add docs https://github.com/you/docs.git --no-start
-```
+```text
 
 **Created structure:**
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration
@@ -90,7 +90,7 @@ gt rig add docs https://github.com/you/docs.git --no-start
 ├── witness/         # Health monitor state
 ├── polecats/        # Ephemeral worker directories
 └── plugins/         # Rig-level plugins
-```
+```text
 
 ---
 
@@ -100,7 +100,7 @@ Start all agents for a rig.
 
 ```bash
 gt rig start <name> [options]
-```
+```text
 
 **Description:** Starts the Witness and Refinery agents for the specified rig. If polecats have hooked work, they will also be spawned.
 
@@ -115,7 +115,7 @@ gt rig start <name> [options]
 ```bash
 gt rig start myproject
 gt rig start myproject --agents witness,refinery
-```
+```text
 
 ---
 
@@ -125,7 +125,7 @@ Stop all agents for a rig.
 
 ```bash
 gt rig stop <name> [options]
-```
+```text
 
 **Description:** Gracefully stops all agents running in the rig, including the Witness, Refinery, and any active polecats.
 
@@ -141,7 +141,7 @@ gt rig stop <name> [options]
 ```bash
 gt rig stop myproject
 gt rig stop myproject --force
-```
+```text
 
 :::warning
 
@@ -157,7 +157,7 @@ Fully shut down a rig including cleanup.
 
 ```bash
 gt rig shutdown <name> [options]
-```
+```text
 
 **Description:** Stops all agents, cleans up polecat worktrees, drains the merge queue, and puts the rig in a stopped state. More thorough than `gt rig stop`.
 
@@ -173,7 +173,7 @@ gt rig shutdown <name> [options]
 ```bash
 gt rig shutdown myproject
 gt rig shutdown myproject --drain
-```
+```text
 
 ---
 
@@ -183,7 +183,7 @@ Show detailed status for a rig.
 
 ```bash
 gt rig status <name> [options]
-```
+```text
 
 **Description:** Displays comprehensive rig information including agent status, polecat activity, merge queue depth, open beads, and resource usage.
 
@@ -198,11 +198,11 @@ gt rig status <name> [options]
 
 ```bash
 gt rig status myproject
-```
+```text
 
 **Sample output:**
 
-```
+```text
 Rig: myproject
 Repository: https://github.com/you/repo.git
 Branch: main
@@ -220,7 +220,7 @@ Polecats: 3 running
 Merge Queue: 2 pending, 1 processing
 Open Beads: 7
 Active Convoy: hq-cv-001 (2/3)
-```
+```text
 
 ---
 
@@ -230,7 +230,7 @@ Reset a rig to a clean state.
 
 ```bash
 gt rig reset <name> [options]
-```
+```text
 
 **Description:** Resets the rig by stopping all agents, removing all polecat worktrees, clearing the merge queue, and optionally resetting the beads database.
 
@@ -247,7 +247,7 @@ gt rig reset <name> [options]
 ```bash
 gt rig reset myproject
 gt rig reset myproject --hard --force
-```
+```text
 
 :::danger
 
@@ -263,7 +263,7 @@ Boot a rig from cold state.
 
 ```bash
 gt rig boot <name> [options]
-```
+```text
 
 **Description:** Initializes a rig that has been shut down or is in a cold state. Sets up worktrees, starts agents, and processes any pending hooks.
 
@@ -278,7 +278,7 @@ gt rig boot <name> [options]
 ```bash
 gt rig boot myproject
 gt rig boot myproject --full
-```
+```text
 
 ---
 
@@ -288,7 +288,7 @@ Reboot a running rig.
 
 ```bash
 gt rig reboot <name> [options]
-```
+```text
 
 **Description:** Performs a stop-then-start cycle for the rig. Agents are stopped gracefully, state is preserved, and agents are restarted.
 
@@ -302,7 +302,7 @@ gt rig reboot <name> [options]
 
 ```bash
 gt rig reboot myproject
-```
+```text
 
 ---
 
@@ -312,7 +312,7 @@ Park a rig (suspend without removing).
 
 ```bash
 gt rig park <name> [options]
-```
+```text
 
 **Description:** Stops all agents and marks the rig as parked. Parked rigs consume no resources but retain all configuration and state. Work can be resumed later with `gt rig unpark`.
 
@@ -326,7 +326,7 @@ gt rig park <name> [options]
 
 ```bash
 gt rig park backend --reason "Waiting for API spec finalization"
-```
+```text
 
 ---
 
@@ -336,7 +336,7 @@ Resume a parked rig.
 
 ```bash
 gt rig unpark <name> [options]
-```
+```text
 
 **Description:** Restarts agents and resumes work in a previously parked rig.
 
@@ -344,7 +344,7 @@ gt rig unpark <name> [options]
 
 ```bash
 gt rig unpark backend
-```
+```text
 
 ---
 
@@ -354,7 +354,7 @@ Dock a rig (deep storage mode).
 
 ```bash
 gt rig dock <name> [options]
-```
+```text
 
 **Description:** Places a rig in deep storage. Docking is more aggressive than parking: it cleans up worktrees, removes polecat directories, and minimizes disk usage while preserving configuration and beads history.
 
@@ -368,7 +368,7 @@ gt rig dock <name> [options]
 
 ```bash
 gt rig dock backend
-```
+```text
 
 ---
 
@@ -378,7 +378,7 @@ Restore a docked rig.
 
 ```bash
 gt rig undock <name> [options]
-```
+```text
 
 **Description:** Restores a docked rig by recreating worktrees, agent directories, and starting agents.
 
@@ -386,7 +386,7 @@ gt rig undock <name> [options]
 
 ```bash
 gt rig undock backend
-```
+```text
 
 ---
 
@@ -396,7 +396,7 @@ View or modify rig configuration.
 
 ```bash
 gt rig config <name> [key] [value] [options]
-```
+```text
 
 **Description:** Without a key, shows all configuration for the rig. With a key, shows that specific setting. With a key and value, sets the configuration.
 
@@ -432,7 +432,7 @@ gt rig config myproject max_polecats 8
 
 # Reset to defaults
 gt rig config myproject --reset
-```
+```text
 
 ---
 
@@ -442,7 +442,7 @@ Manage advanced rig settings.
 
 ```bash
 gt rig settings <name> [options]
-```
+```text
 
 **Description:** Access and modify advanced rig settings that are not part of the standard configuration. Includes validation rules, plugin settings, and integration configuration.
 
@@ -466,7 +466,7 @@ gt rig settings myproject --set "validation.timeout=300"
 
 # Remove a setting
 gt rig settings myproject --unset "validation.timeout"
-```
+```text
 
 ## See Also
 

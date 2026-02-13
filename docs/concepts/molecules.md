@@ -30,7 +30,7 @@ graph LR
     M1 --> S1a["Step: load-context ✓"]
     M1 --> S1b["Step: implement ●"]
     M1 --> S1c["Step: test ○"]
-```
+```text
 
 ## Molecules
 
@@ -70,7 +70,7 @@ graph TD
     F --> G["cleanup-workspace"]
     G --> H["prepare-for-review"]
     H --> I["submit-and-exit"]
-```
+```text
 
 ### Molecule Types
 
@@ -117,7 +117,7 @@ gt mol squash <mol-id> --summary "Patrol cycle: 3 merges, 0 failures"
 
 # Show the dependency graph
 gt mol dag <mol-id>
-```
+```text
 
 ### The Squash Pattern
 
@@ -162,7 +162,7 @@ required = true
 
 [vars.assignee]
 description = "Who is assigned"
-```
+```text
 
 ### Formula Types
 
@@ -182,7 +182,7 @@ title = "Design {{feature}}"
 id = "implement"
 needs = ["design"]
 title = "Implement {{feature}}"
-```
+```text
 
 **Convoy formulas** (`type = "convoy"`) -- Parallel execution with multiple agents (legs), followed by a synthesis step:
 
@@ -201,7 +201,7 @@ title = "Security Review"
 [synthesis]
 title = "Review Synthesis"
 depends_on = ["correctness", "security"]
-```
+```text
 
 ### Built-in Formulas
 
@@ -272,7 +272,7 @@ gt formula run code-review --pr=123
 
 # Create a custom formula
 gt formula create my-workflow
-```
+```text
 
 ### Creating Custom Formulas
 
@@ -312,19 +312,19 @@ description = "Push to production with canary rollout"
 [vars.version]
 description = "Version being deployed"
 required = true
-```
+```text
 
 Then run it:
 
 ```bash
 gt formula run my-deploy --var version="2.3.1"
-```
+```text
 
 ## Molecule + Hook Integration
 
 Molecules are stored on an agent's [Hook](hooks.md), creating the crash-safe execution model:
 
-```
+```text
 Hook
 ├── hook_bead: gt-a1b2c            # The assigned issue
 └── molecule: mol-polecat-work     # Active workflow
@@ -333,7 +333,7 @@ Hook
     ├── implement         [in_progress]  <-- resume here
     ├── self-review       [pending]
     └── submit-and-exit   [pending]
-```
+```text
 
 On session restart, the agent reads the hook, finds the molecule, and resumes from the last completed step. No work is repeated.
 

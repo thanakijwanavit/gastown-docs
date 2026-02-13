@@ -20,7 +20,7 @@ Starts the **Deacon** and **Mayor**, the two town-level persistent agents.
 
 ```bash
 gt start
-```
+```text
 
 What happens:
 
@@ -41,7 +41,7 @@ Starts everything: Deacon, Mayor, plus all Witnesses and Refineries across all a
 
 ```bash
 gt start --all
-```
+```text
 
 What happens:
 
@@ -55,7 +55,7 @@ What happens:
 ```bash
 # Start with verbose output to watch the boot sequence
 gt start --all --verbose
-```
+```text
 
 :::tip
 
@@ -73,7 +73,7 @@ Stops all running agent processes but **keeps worktrees intact**. Use this when 
 
 ```bash
 gt down
-```
+```text
 
 | What it stops | What it keeps |
 |---------------|---------------|
@@ -87,7 +87,7 @@ Resume with:
 
 ```bash
 gt start --all
-```
+```text
 
 :::info[When to use `gt down`]
 
@@ -101,7 +101,7 @@ Stops all processes **and** removes worktrees, cleaning up disk resources.
 
 ```bash
 gt shutdown
-```
+```text
 
 This removes polecat worktrees and temporary state. Persistent state (beads, config, hooks) is preserved.
 
@@ -111,7 +111,7 @@ Stops everything including crew sessions and removes all ephemeral resources.
 
 ```bash
 gt shutdown --all
-```
+```text
 
 | Flag | Behavior |
 |------|----------|
@@ -131,7 +131,7 @@ Targets only ephemeral workers. Useful when polecats are stuck but you want to k
 
 ```bash
 gt shutdown --polecats-only
-```
+```text
 
 This is a surgical operation:
 
@@ -152,7 +152,7 @@ Start the background daemon process.
 
 ```bash
 gt daemon start
-```
+```text
 
 The daemon:
 
@@ -167,7 +167,7 @@ Stop the daemon process.
 
 ```bash
 gt daemon stop
-```
+```text
 
 :::warning
 
@@ -181,16 +181,16 @@ Check whether the daemon is running and view its state.
 
 ```bash
 gt daemon status
-```
+```text
 
 Sample output:
 
-```
+```text
 Daemon: running (PID 12345)
 Uptime: 4h 23m
 Last heartbeat: 12s ago
 Pending requests: 0
-```
+```text
 
 ### `gt daemon logs`
 
@@ -205,7 +205,7 @@ gt daemon logs --follow
 
 # Filter by level
 gt daemon logs --level error
-```
+```text
 
 ---
 
@@ -227,7 +227,7 @@ gt witness start --rig myproject
 
 # Start a Refinery for a specific rig
 gt refinery start --rig myproject
-```
+```text
 
 ### Stopping a Specific Agent
 
@@ -243,7 +243,7 @@ gt witness stop --rig myproject
 
 # Stop a Refinery
 gt refinery stop --rig myproject
-```
+```text
 
 ### Restarting an Agent
 
@@ -253,7 +253,7 @@ gt mayor restart
 
 # Restart with fresh context
 gt mayor restart --fresh
-```
+```text
 
 :::note
 
@@ -272,7 +272,7 @@ gt witness attach --rig myproject
 
 # Attach to a specific polecat
 gt polecat attach toast --rig myproject
-```
+```text
 
 ---
 
@@ -296,7 +296,7 @@ sequenceDiagram
     B->>B: Recovers uncommitted work if possible
     B->>P: Terminates process
     B->>D: Reports cleanup complete
-```
+```text
 
 1. **Detection**: The [Deacon](../agents/deacon.md) detects zombies during its patrol cycle -- sessions that are alive but not responding, or processes consuming resources without producing output.
 2. **Filing**: The Deacon files a death warrant as a bead, not an immediate kill. This creates an audit trail.
@@ -310,7 +310,7 @@ sequenceDiagram
 ```bash
 gt dog list                  # Check dog states
 # Dogs past timeout show "death warrant pending"
-```
+```text
 
 ### Why Not Kill Immediately?
 
@@ -334,7 +334,7 @@ Start all agents for a rig (Witness + Refinery).
 
 ```bash
 gt rig start myproject
-```
+```text
 
 ### `gt rig stop`
 
@@ -342,7 +342,7 @@ Stop all agents in a rig.
 
 ```bash
 gt rig stop myproject
-```
+```text
 
 ### `gt rig boot`
 
@@ -350,7 +350,7 @@ Cold-start a rig from scratch. Creates fresh worktrees and initializes all agent
 
 ```bash
 gt rig boot myproject
-```
+```text
 
 This is used when first adding a rig or after a `gt rig dock`.
 
@@ -360,7 +360,7 @@ Stop all rig agents, clean up, and restart fresh.
 
 ```bash
 gt rig reboot myproject
-```
+```text
 
 Equivalent to `gt rig stop` + cleanup + `gt rig boot`.
 
@@ -376,7 +376,7 @@ Take a rig offline without removing it. Parked rigs are ignored by `gt start --a
 
 ```bash
 gt rig park myproject
-```
+```text
 
 Use cases:
 
@@ -390,7 +390,7 @@ Bring a parked rig back online.
 
 ```bash
 gt rig unpark myproject
-```
+```text
 
 After unparking, run `gt rig start myproject` to launch agents.
 
@@ -400,7 +400,7 @@ Archive a rig. Stops agents, removes worktrees, and marks the rig as docked.
 
 ```bash
 gt rig dock myproject
-```
+```text
 
 Docked rigs retain their configuration and bead history but consume no runtime resources.
 
@@ -410,7 +410,7 @@ Restore a docked rig to active status.
 
 ```bash
 gt rig undock myproject
-```
+```text
 
 After undocking, run `gt rig boot myproject` to create worktrees and start agents.
 
@@ -432,7 +432,7 @@ graph TD
     W2 --> R2[Refinery: rig2]
     R1 --> P1[Polecats: rig1]
     R2 --> P2[Polecats: rig2]
-```
+```text
 
 | Order | Component | Depends On | Why |
 |-------|-----------|------------|-----|
@@ -483,7 +483,7 @@ tmux list-sessions
 # Step 4: Kill all tmux sessions and restart clean
 tmux kill-server
 gt start --all
-```
+```text
 
 ### Scenario: Single Rig in Bad State
 
@@ -498,7 +498,7 @@ gt cleanup --rig myproject
 
 # Fresh start for the rig
 gt rig boot myproject
-```
+```text
 
 ### Scenario: Polecats Spawning and Immediately Dying
 
@@ -518,7 +518,7 @@ git fetch origin && git checkout origin/main
 # Run project tests
 
 # If main is broken, fix it before resuming polecat work
-```
+```text
 
 ### Scenario: Lost Work from Crashed Polecat
 
@@ -537,7 +537,7 @@ git log --oneline -5
 # If the worktree is gone, check for orphaned commits
 gt orphans --commits --rig myproject
 gt orphans --recover <commit-hash>
-```
+```text
 
 ---
 
@@ -576,7 +576,7 @@ stateDiagram-v2
     Docked --> Added: gt rig undock
     Active --> Rebooting: gt rig reboot
     Rebooting --> Active: auto
-```
+```text
 
 ---
 

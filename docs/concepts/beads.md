@@ -34,13 +34,13 @@ Beads is an open-source project. Learn more at [github.com/steveyegge/beads](htt
 
 Beads stores issues in a **SQLite database** located in the `.beads/` directory at the root of each repository (or town):
 
-```
+```text
 .beads/
 ├── beads.db           # SQLite database (primary store)
 ├── formulas/          # TOML workflow templates
 ├── README.md          # Onboarding documentation
 └── daemon.log         # Daemon activity log
-```
+```text
 
 The SQLite backend enables fast queries, filtering, and complex joins while remaining portable and easy to back up through git.
 
@@ -82,7 +82,7 @@ stateDiagram-v2
     hooked --> in_progress: Agent picks up
     in_progress --> done: bd close
     done --> [*]
-```
+```text
 
 | Status | Meaning | Typical Transition |
 |--------|---------|-------------------|
@@ -101,7 +101,7 @@ Labels are free-form tags that categorize beads:
 ```bash
 bd create --title "Fix auth bug" --labels "auth,security,p1"
 bd list --labels "security"
-```
+```text
 
 ### Priorities
 
@@ -117,7 +117,7 @@ Priority levels control escalation routing and work ordering:
 ```bash
 bd create --title "Security vulnerability" --priority 0
 bd create --title "Minor UI glitch" --priority 3
-```
+```text
 
 ### Dependencies
 
@@ -129,17 +129,17 @@ bd create --title "Deploy to prod" --depends-on gt-a1b2c
 
 # Check blocked issues
 bd blocked
-```
+```text
 
 ## Cross-Project Tracking
 
 Beads supports **cross-prefix tracking**, allowing issues in different rigs to reference each other. Each rig has its own bead prefix (configured in `config.json`):
 
-```
+```text
 Town (.beads/)  prefix: hq-
 Rig A (.beads/) prefix: gt-
 Rig B (.beads/) prefix: bd-
-```
+```text
 
 A [convoy](convoys.md) with ID `hq-cv-001` can track issues `gt-a1b2c` and `bd-d3e4f` across both [rigs](rigs.md). Dependencies also work cross-prefix.
 
@@ -157,7 +157,7 @@ bd create --title "Fix login bug" \
   --priority 1 \
   --labels "auth,critical" \
   --description "Login fails when password contains special characters"
-```
+```text
 
 ### Listing and Filtering
 
@@ -176,7 +176,7 @@ bd list --json
 
 # Find ready work
 bd ready
-```
+```text
 
 ### Viewing Bead Details
 
@@ -186,7 +186,7 @@ bd show gt-a1b2c
 
 # Show bead as JSON
 bd show gt-a1b2c --json
-```
+```text
 
 ### Updating Beads
 
@@ -199,7 +199,7 @@ bd update gt-a1b2c --notes "Fixed the parser, testing now"
 
 # Add labels
 bd update gt-a1b2c --labels "reviewed"
-```
+```text
 
 ### Closing Beads
 
@@ -209,7 +209,7 @@ bd close gt-a1b2c
 
 # Close with a reason
 bd close gt-a1b2c --reason "Merged to main at abc1234"
-```
+```text
 
 ### Syncing with Git
 
@@ -219,7 +219,7 @@ bd sync
 
 # Onboard to a repo (first time setup)
 bd onboard
-```
+```text
 
 ## Command Reference
 
@@ -250,7 +250,7 @@ bd update <id> --status in_progress  # Claim it
 # ... do the work ...
 bd close <id>         # Mark complete
 bd sync               # Push state to remote
-```
+```text
 
 :::
 
