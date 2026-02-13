@@ -12,6 +12,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DOCS_DIR = path.resolve(__dirname, '..', 'docs');
+const BLOG_DIR = path.resolve(__dirname, '..', 'blog');
 const STATIC_DIR = path.resolve(__dirname, '..', 'static');
 
 // Section ordering for structured output
@@ -25,6 +26,7 @@ const SECTION_ORDER = [
   'workflows',
   'operations',
   'guides',
+  'blog',
 ];
 
 function stripFrontMatter(content) {
@@ -46,9 +48,13 @@ function extractFrontMatter(content) {
       const titleMatch = fm.match(/title:\s*"([^"]+)"/);
       const descMatch = fm.match(/description:\s*"([^"]+)"/);
       const posMatch = fm.match(/sidebar_position:\s*(\d+)/);
+      const slugMatch = fm.match(/slug:\s*(.+)/);
+      const tagsMatch = fm.match(/tags:\s*\[([^\]]+)\]/);
       if (titleMatch) meta.title = titleMatch[1];
       if (descMatch) meta.description = descMatch[1];
       if (posMatch) meta.sidebar_position = parseInt(posMatch[1]);
+      if (slugMatch) meta.slug = slugMatch[1].trim();
+      if (tagsMatch) meta.tags = tagsMatch[1].split(',').map(t => t.trim());
     }
   }
   return meta;
@@ -57,6 +63,38 @@ function extractFrontMatter(content) {
 function stripImports(content) {
   // Remove Docusaurus component imports
   return content.replace(/^import\s+.*from\s+['"].*['"];?\s*$/gm, '').trim();
+}
+
+function stripTruncateMarker(content) {
+  return content.replace(/<!--\s*truncate\s*-->/g, '').trim();
+}
+
+function collectBlogPosts(blogDir, posts) {
+  if (!fs.existsSync(blogDir)) return;
+  const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.md')).sort();
+  for (const file of files) {
+    const fullPath = path.join(blogDir, file);
+    const content = fs.readFileSync(fullPath, 'utf8');
+    const meta = extractFrontMatter(content);
+    const body = stripTruncateMarker(stripImports(stripFrontMatter(content)));
+    const slug = meta.slug || file.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace('.md', '');
+
+    // Extract date from filename
+    const dateMatch = file.match(/^(\d{4}-\d{2}-\d{2})/);
+    const date = dateMatch ? dateMatch[1] : '';
+
+    posts.push({
+      path: file,
+      section: 'blog',
+      title: meta.title || slug,
+      description: meta.description || '',
+      sidebar_position: 99,
+      tags: meta.tags || [],
+      date,
+      body,
+      url: `/blog/${slug}`,
+    });
+  }
 }
 
 function collectDocs(dir, baseDir, docs) {
@@ -243,21 +281,28 @@ const docs = [];
 collectDocs(DOCS_DIR, DOCS_DIR, docs);
 console.log(`  Found ${docs.length} documentation files`);
 
+const blogPosts = [];
+collectBlogPosts(BLOG_DIR, blogPosts);
+console.log(`  Found ${blogPosts.length} blog posts`);
+
+// Merge docs and blog posts for unified output
+const allContent = [...docs, ...blogPosts];
+
 // Ensure output directories exist
 fs.mkdirSync(path.join(STATIC_DIR, 'api'), { recursive: true });
 
 // Build llm.txt
-const llmTxt = buildLlmTxt(docs);
+const llmTxt = buildLlmTxt(allContent);
 fs.writeFileSync(path.join(STATIC_DIR, 'llm.txt'), llmTxt, 'utf8');
 console.log(`  Generated static/llm.txt (${(llmTxt.length / 1024).toFixed(1)} KB)`);
 
 // Build llm-full.txt
-const llmFull = buildLlmFullTxt(docs);
+const llmFull = buildLlmFullTxt(allContent);
 fs.writeFileSync(path.join(STATIC_DIR, 'llm-full.txt'), llmFull, 'utf8');
 console.log(`  Generated static/llm-full.txt (${(llmFull.length / 1024).toFixed(1)} KB)`);
 
 // Build docs.json
-const docsJson = buildDocsJson(docs);
+const docsJson = buildDocsJson(allContent);
 fs.writeFileSync(path.join(STATIC_DIR, 'api', 'docs.json'), docsJson, 'utf8');
 console.log(`  Generated static/api/docs.json (${(docsJson.length / 1024).toFixed(1)} KB)`);
 
