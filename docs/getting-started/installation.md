@@ -164,3 +164,4 @@ gt config agent set gemini "gemini"
 ### Blog Posts
 
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid frequent mistakes during installation and initial setup

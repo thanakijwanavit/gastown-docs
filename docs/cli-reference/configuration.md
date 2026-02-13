@@ -379,3 +379,4 @@ gt plugin list --json
 ### Blog Posts
 
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make, from vague beads to ignoring the Refinery queue
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Configuration patterns for running Gas Town at scale with dozens of concurrent agents

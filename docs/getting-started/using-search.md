@@ -381,3 +381,4 @@ Happy searching! If you can't find what you need, consider filing a [documentati
 ### Blog Posts
 
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog with multi-agent orchestration tips and workflow patterns
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Troubleshooting tips and search strategies for finding answers in the documentation

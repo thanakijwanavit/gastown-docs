@@ -179,3 +179,4 @@ The next session has zero memory of the current one. Write handoff notes as if b
 ### Blog Posts
 
 - [Session Cycling Explained](/blog/session-cycling) -- Practical guide to context refresh and handoff patterns
+- [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How hooks and session cycling work together to make Gas Town crash-safe

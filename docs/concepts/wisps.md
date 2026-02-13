@@ -179,3 +179,4 @@ When a Witness detects a polecat with a wisp stuck in `in_progress` for too long
 ### Blog Posts
 
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating TOML formulas that define custom agent workflows for specialized tasks
+- [Formula Design Patterns for Gas Town](/blog/formula-design-patterns) -- Advanced patterns for multi-step formulas where wisps track each step's progress

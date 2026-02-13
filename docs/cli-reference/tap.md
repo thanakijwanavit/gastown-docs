@@ -176,3 +176,4 @@ See the [Operations Guide](../operations/troubleshooting.md) and [Lifecycle Mana
 ### Blog Posts
 
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking work progress, and catching problems early
+- [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Using tap and feed data to monitor costs and optimize agent spending

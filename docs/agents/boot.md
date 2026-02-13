@@ -269,3 +269,4 @@ Boot is designed for rapid triage (seconds, not minutes). If Boot is slow:
 ### Blog Posts
 
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, manages agent lifecycles, and coordinates recovery
+- [Understanding the Gas Town Daemon Process](/blog/daemon-process) -- How the background daemon manages agent lifecycles including Boot's watchdog cycle
