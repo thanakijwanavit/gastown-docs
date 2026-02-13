@@ -92,6 +92,10 @@ gt convoy list
 # hq-cv-xyz  Auth System Fixes  [COMPLETED]  3/3 done
 ```
 
+:::info
+Convoys auto-close when all tracked beads reach a terminal state. You do not need to manually close a convoy -- just focus on completing the individual issues.
+:::
+
 ## Using the Mayor Instead
 
 For a more automated experience, attach to the Mayor and describe the work:
@@ -105,6 +109,10 @@ Then tell the Mayor:
 > "Fix the login bug, add email validation to registration, and update the README with the new auth flow."
 
 The Mayor handles convoy creation, issue tracking, and agent assignment automatically.
+
+:::tip
+For most workflows, use `gt mayor attach` instead of manually creating convoys. The Mayor handles issue creation, convoy bundling, and agent assignment automatically from natural language instructions.
+:::
 
 ## Tips
 

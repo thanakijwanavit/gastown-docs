@@ -39,6 +39,10 @@ graph TD
     Refinery -->|merge| Main[main branch]
 ```text
 
+:::note
+The supervision tree is inspired by Erlang/OTP's "let it crash" philosophy. Agents are expected to fail occasionally -- what matters is that their supervisor detects the failure and recovers automatically.
+:::
+
 ## Monitoring Chain
 
 | Monitor | Watches | Detects | Action |
@@ -82,6 +86,10 @@ Agents can also self-escalate using `gt escalate`:
 ```bash
 gt escalate "Brief description" -s HIGH -m "Details"
 ```text
+
+:::tip
+Use `gt escalate` with an appropriate severity level. Over-escalating (P0 for non-critical issues) creates noise, while under-escalating can delay resolution of real problems.
+:::
 
 Severity levels control routing:
 

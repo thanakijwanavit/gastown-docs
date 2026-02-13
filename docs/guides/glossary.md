@@ -24,6 +24,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **[Boot](../agents/boot.md)** | Triage agent that assesses incoming work, classifies complexity, and recommends assignment strategies. |
 | **Daemon** | The background Go process that manages agent lifecycles, runs health checks, and provides the `gt` CLI interface. |
 
+:::tip
+Use this glossary as a quick reference when reading other Gas Town documentation. Terms in **bold** link to their full documentation pages where available.
+:::
+
 ## Core Concepts
 
 | Term | Definition |
@@ -89,6 +93,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Survival Formula** | (Savings x Usage x H) / (Awareness + Friction) — the formula determining whether a software tool survives. |
 | **Plot Armor** | A survival ratio so high (in the thousands) that a tool becomes effectively indestructible. No LLM will waste tokens re-synthesizing what the tool already does perfectly. `grep` is the canonical example. Extreme velocity from AI orchestration can provide plot armor. |
 | **Human Coefficient (H)** | A multiplier in the survival formula representing human preference for human-made output. Higher H means the domain values human involvement, giving software in that domain an extra survival advantage beyond pure efficiency. |
+
+:::note
+Gas Town's naming convention is drawn from the Mad Max film franchise. Understanding the metaphor helps the terminology stick: the workspace is a citadel, projects are war rigs, and polecats are the warriors who do the fighting.
+:::
 
 ## Mad Max Naming
 

@@ -386,6 +386,10 @@ flowchart TD
     Pass -->|Yes| Merge --> CloseBead --> Nuke
 ```text
 
+:::warning
+The Refinery follows the Scotty Principle: it never merges code that fails validation. If your tests are failing on `main`, the entire merge pipeline stops. Fix `main` first before expecting new work to land.
+:::
+
 ### Why This Design?
 
 Multiple polecats work concurrently on the same repository. Without serialized merges, you get race conditions: two polecats both rebase onto the same `main`, both pass tests, both try to merge -- one wins, the other's merge is invalid.
@@ -577,6 +581,10 @@ sequenceDiagram
     Beads->>Beads: All beads done → convoy auto-closes
     Mayor->>Human: "Dark mode convoy complete"
 ```text
+
+:::info
+Gas Town's "Let It Crash" philosophy means you should not fear agent crashes. The hook persists, the Witness detects the zombie, and a fresh polecat picks up the work. No manual intervention is needed for routine crashes.
+:::
 
 ### The Five Invariants
 

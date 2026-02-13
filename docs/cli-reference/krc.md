@@ -64,6 +64,10 @@ Each event type follows one of four decay curves:
 
 Events with low forensic scores are candidates for aggressive pruning.
 
+:::tip
+Run `gt krc decay` before tuning TTLs to understand which event types are decaying fastest. This helps you set appropriate TTLs based on actual forensic value rather than guessing.
+:::
+
 **Options:**
 
 | Flag | Description |
@@ -110,6 +114,10 @@ KRC manages **Level 0** (ephemeral) data as defined in the Dolt storage design:
 | 2 (Archival) | Completed beads, audit trails | Permanent | High |
 
 KRC only manages Level 0. Higher levels are managed by Dolt directly.
+
+:::caution
+Never set TTLs too aggressively for patrol events. If a TTL is shorter than the patrol digest interval, events may be pruned before they can be aggregated by `gt patrol digest`. A safe minimum for patrol events is 24 hours.
+:::
 
 ## How Auto-Pruning Works
 

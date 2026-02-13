@@ -20,6 +20,10 @@ Formulas are loaded from these locations (in priority order):
 
 When multiple formulas share the same name, the highest-priority path wins. This allows project-level overrides of shared formulas.
 
+:::tip
+Use `--dry-run` with `gt formula run` to preview what a formula will do before executing it. This is especially useful when testing custom formulas or unfamiliar workflows.
+:::
+
 ## Commands
 
 ### `gt formula list`
@@ -114,6 +118,10 @@ gt formula create nightly-check --type=patrol # Repeating patrol cycle
 | `task` | Single-step, one-shot work | A quick bugfix or one-off task |
 | `workflow` | Multi-step sequence with dependencies | `shiny` — design, implement, review, test, submit |
 | `patrol` | Repeating cycle (used for wisps) | `mol-witness-patrol` — continuous health monitoring |
+
+:::note
+If no formula name is provided to `gt formula run`, it uses the default formula from the rig's `settings/config.json` under `workflow.default_formula`. Configure this to avoid typing the formula name every time.
+:::
 
 ## How Formulas Relate to Molecules
 

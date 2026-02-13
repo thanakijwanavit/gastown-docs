@@ -56,6 +56,10 @@ Seven agent roles form the hierarchy:
 
 Additionally, the **Boot** dog is a special triage agent spawned by the Deacon to assess new work or problems.
 
+:::info
+The Boot dog is not a persistent agent. It is spawned on demand by the Deacon to perform quick triage assessments, then exits. This keeps triage fast and focused.
+:::
+
 ### 4. Daemon (Scheduler)
 
 A simple Go process that:
@@ -104,6 +108,10 @@ All state is persisted in git or the filesystem:
 | Config | `metadata.json`, `.beads/config.yaml` | Everything |
 | Agent context | CLAUDE.md files | Everything |
 | Activity log | `.events.jsonl` | Everything |
+
+:::tip
+Use `gt feed` to watch the real-time activity stream across all agents and rigs. It is the fastest way to see what is happening in your town at any given moment.
+:::
 
 ## See Also
 

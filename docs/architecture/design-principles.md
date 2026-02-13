@@ -23,6 +23,10 @@ Gas Town borrows heavily from Erlang/OTP patterns:
 - **Let it crash** — Agents can crash; supervisors handle recovery
 - **Process isolation** — Each agent runs in its own session
 
+:::warning
+Violating role separation (Principle 7) is the most common source of bugs in custom Gas Town configurations. If you find an agent doing work outside its role, refactor immediately.
+:::
+
 ## 3. Git as Ground Truth
 
 All persistent state lives in git or git-adjacent storage:
@@ -123,6 +127,10 @@ Gas Town automates everything it can, but keeps humans in control.
 Named after the Star Trek engineer: Gas Town agents never proceed past failures. The [Refinery](../agents/refinery.md) does not merge code that fails validation. Polecats run [preflight tests](../agents/polecats.md) before starting implementation to ensure `main` is clean. If something is broken, you fix it or file it -- you don't skip past it.
 
 This principle prevents failure cascading through the system. One broken test, left unaddressed, can waste dozens of polecat hours.
+
+:::caution
+The Scotty Principle means polecats will refuse to start implementation if preflight tests fail on `main`. If your test suite is flaky, fix the flakes first -- otherwise polecats will stall repeatedly trying to begin work.
+:::
 
 ## 12. Discovery Over Tracking
 

@@ -53,6 +53,10 @@ gt dolt fix-metadata   # Update metadata.json in all rig .beads directories
 gt dolt sync           # Push Dolt databases to DoltHub remotes
 ```text
 
+:::warning
+The Dolt server uses port 3307 by default to avoid conflicts with MySQL on port 3306. If you have another service on 3307, you will need to change the Dolt port before starting.
+:::
+
 ## Common Workflows
 
 ### Initial Setup
@@ -73,6 +77,10 @@ gt dolt status         # Verify recovery
 ```text
 
 This typically happens when the Dolt server shuts down uncleanly or when multiple writers conflict. The `recover` command detects the issue and restarts the server with a clean lock state.
+
+:::caution
+If you see repeated "database is read-only" errors, do not attempt to manually edit lock files in `.dolt-data/`. Always use `gt dolt recover` which handles lock cleanup atomically.
+:::
 
 ### Adding a New Rig
 

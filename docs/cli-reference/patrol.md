@@ -58,6 +58,10 @@ gt patrol start --rig myapp   # Trigger patrol for a specific rig
 
 This nudges patrol agents to run their check cycle immediately rather than waiting for the next scheduled tick.
 
+:::tip
+Use `gt patrol digest --dry-run` during morning reviews to see what happened overnight without writing any changes. This gives you a quick health overview before committing to aggregation.
+:::
+
 ## What Are Patrol Cycles?
 
 Patrol is the core monitoring pattern in Gas Town. Three agent types run continuous [patrol molecules](../concepts/patrol-cycles.md):
@@ -84,6 +88,10 @@ After gt patrol digest:
 ```text
 
 The per-cycle ephemeral data is removed after aggregation, keeping the beads database clean while preserving the audit trail.
+
+:::warning
+Running `gt patrol digest` deletes the per-cycle ephemeral data after aggregation. If you need to preserve raw per-cycle data for debugging, use `--dry-run` first to inspect it before aggregating.
+:::
 
 ## When to Run Digests
 

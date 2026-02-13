@@ -30,6 +30,10 @@ This creates:
 └── CLAUDE.md        # Project context
 ```text
 
+:::note
+The `--git` flag in `gt install` initializes the workspace as a git repository. This is recommended because Gas Town uses git as ground truth for all persistent state.
+:::
+
 ## Add a Project (Rig)
 
 Each project you manage with Gas Town is called a **Rig**.
@@ -97,6 +101,10 @@ The Mayor will:
 3. Spawn polecats to work on each task
 4. Monitor progress
 5. Route completed work through the refinery for merging
+
+:::tip
+You can use `gt start --all` to launch the full agent fleet (Mayor, Deacon, all Witnesses, and all Refineries) in one command. Use plain `gt start` if you only need the Mayor and Deacon for lighter workloads.
+:::
 
 ## Check Status
 

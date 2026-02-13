@@ -62,6 +62,10 @@ What happens:
 4. Polecat's startup hook finds the work
 5. Polecat begins execution
 
+:::warning
+Once you `gt sling` a bead, the polecat begins execution immediately. There is no confirmation step. Make sure the bead description and acceptance criteria are clear before slinging.
+:::
+
 ### Hook Persistence
 
 The **hook** is Gas Town's durability primitive. Work on a hook survives:
@@ -143,6 +147,10 @@ The standard polecat workflow molecule (`mol-polecat-work`) includes steps like:
 9. Submit work and self-clean
 
 Molecules provide crash recovery — if an agent restarts, `bd ready` shows the next incomplete step, so work resumes from where it left off.
+
+:::tip
+Run `bd ready` at the start of any agent session to see the next actionable step. This works even after crashes -- molecules track progress persistently, so you never lose your place.
+:::
 
 ## Cross-Rig Work
 

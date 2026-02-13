@@ -40,6 +40,10 @@ sudo mv gt /usr/local/bin/
 
 ## Install Dependencies
 
+:::warning
+Gas Town requires Git 2.25+ because it relies heavily on git worktrees for agent isolation. Older versions have worktree bugs that can cause data corruption. Check your version before proceeding.
+:::
+
 ### Git (Required)
 
 Gas Town relies on git worktrees for file-level isolation between agents. Git 2.25+ is required.
@@ -115,6 +119,10 @@ gt help
 ```
 
 You should see the Gas Town help output listing all available commands.
+
+:::tip
+Install shell completions right away -- they make the `gt` and `bd` CLIs significantly easier to use, especially when working with bead IDs and rig names.
+:::
 
 ## Supported Runtimes
 
