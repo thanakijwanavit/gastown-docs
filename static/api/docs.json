@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T14:50:50.391Z",
+  "generated": "2026-02-13T14:54:05.767Z",
   "sections": [
     {
       "id": "getting-started",
@@ -376,14 +376,14 @@
           "description": "A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Refinery, and Polecats work together as a self-healing multi-agent system built on Erlang-inspired supervision, git worktrees, and persistent hooks."
         },
         {
-          "title": "Glossary",
-          "path": "/docs/guides/glossary",
-          "description": "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
-        },
-        {
           "title": "Troubleshooting",
           "path": "/docs/guides/troubleshooting",
           "description": "Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries."
+        },
+        {
+          "title": "Glossary",
+          "path": "/docs/guides/glossary",
+          "description": "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
         }
       ]
     }

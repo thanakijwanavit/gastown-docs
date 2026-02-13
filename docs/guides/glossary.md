@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-sidebar_position: 7
+sidebar_position: 8
 description: "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
 ---
 

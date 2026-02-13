@@ -1,6 +1,6 @@
 ---
 title: "Troubleshooting"
-sidebar_position: 8
+sidebar_position: 7
 description: "Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries."
 ---
 

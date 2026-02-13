@@ -87,8 +87,8 @@
 - Cost Management: /docs/guides/cost-management
 - Background & Philosophy: /docs/guides/philosophy
 - Architecture Guide: /docs/guides/architecture
-- Glossary: /docs/guides/glossary
 - Troubleshooting: /docs/guides/troubleshooting
+- Glossary: /docs/guides/glossary
 
 ---
 
@@ -687,20 +687,20 @@ Gas Town is a multi-agent AI orchestration system where dozens of autonomous age
 
 ---
 
-## Glossary
-> /docs/guides/glossary
-
-Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions.
-
-A comprehensive reference for Gas Town terminology, drawn from the documentation and Steve Yegge's articles on multi-agent AI orchestration.
-
----
-
 ## Troubleshooting
 > /docs/guides/troubleshooting
 
 Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries.
 
 This guide covers the most frequently encountered Gas Town problems and their solutions. For a comprehensive reference of all troubleshooting topics, see [Operations: Troubleshooting](../operations/troubleshooting.md).
+
+---
+
+## Glossary
+> /docs/guides/glossary
+
+Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions.
+
+A comprehensive reference for Gas Town terminology, drawn from the documentation and Steve Yegge's articles on multi-agent AI orchestration.
 
 ---
