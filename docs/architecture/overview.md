@@ -128,6 +128,6 @@ All state is persisted in git or the filesystem:
 
 ### Blog Posts
 
+- [The Daemon: Gas Town's Go Heartbeat Engine](/blog/daemon-process) -- Inside the deliberately simple Go scheduler that powers the heartbeat loop
 - [Gas Town's Security Model](/blog/security-model) -- Trust boundaries and workspace isolation in the architecture
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for large-scale deployments
-- [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor coordinates work across the architecture
