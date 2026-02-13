@@ -180,4 +180,5 @@ If an agent is terminated but respawns immediately:
 
 ### Blog Posts
 
+- [Death Warrants: How Gas Town Terminates Stuck Agents](/blog/death-warrants) -- How the warrant system provides structured termination with work recovery
 - [Gas Town's Security Model: Trust Boundaries for AI Agents](/blog/security-model) -- How Gas Town implements security through workspace isolation, permission scoping, and trust boundaries

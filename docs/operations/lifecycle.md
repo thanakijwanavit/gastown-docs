@@ -606,5 +606,6 @@ stateDiagram-v2
 
 ### Blog Posts
 
+- [Death Warrants: How Gas Town Terminates Stuck Agents](/blog/death-warrants) -- How the warrant system provides structured agent termination with work recovery
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale
