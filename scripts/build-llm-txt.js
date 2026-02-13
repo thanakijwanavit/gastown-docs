@@ -109,7 +109,7 @@ function buildLlmTxt(docs) {
     grouped[key].sort((a, b) => a.sidebar_position - b.sidebar_position);
   }
 
-  // TOC
+  // TOC — hierarchical with section headings
   for (const section of SECTION_ORDER) {
     const key = section || '_root';
     const sectionDocs = grouped[key];
@@ -117,9 +117,9 @@ function buildLlmTxt(docs) {
     const sectionTitle = section
       ? section.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
       : 'Home';
-    lines.push(`### ${sectionTitle}`);
+    lines.push(`## ${sectionTitle}`);
     for (const doc of sectionDocs) {
-      lines.push(`- ${doc.title}: ${doc.url}`);
+      lines.push(`  - [${doc.title}](${doc.url})`);
     }
     lines.push('');
   }
@@ -143,10 +143,16 @@ function buildLlmTxt(docs) {
       }
       // First meaningful paragraph
       const paragraphs = doc.body.split('\n\n').filter(p =>
-        p.trim() && !p.startsWith('#') && !p.startsWith('|') && !p.startsWith('```')
+        p.trim() && !p.startsWith('#') && !p.startsWith('|')
       );
       if (paragraphs.length > 0) {
         lines.push(paragraphs[0].trim());
+        lines.push('');
+      }
+      // Include first code block if present (valuable for LLM consumption)
+      const codeBlockMatch = doc.body.match(/```(?!mermaid)[a-z]*\n[\s\S]*?```/);
+      if (codeBlockMatch) {
+        lines.push(codeBlockMatch[0]);
         lines.push('');
       }
       lines.push('---');
