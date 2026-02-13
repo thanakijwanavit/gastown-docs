@@ -49,6 +49,16 @@ Each `gt sling` command:
 2. Spawns a polecat worker in the rig
 3. The polecat picks up the work immediately
 
+:::tip
+
+You can sling all three at once — each gets its own polecat working in parallel:
+
+```bash
+gt sling gt-a1b2c gt-d3e4f gt-g5h6i myproject
+```
+
+:::
+
 ## Step 4: Monitor Progress
 
 ```bash
@@ -112,3 +122,9 @@ The Mayor handles convoy creation, issue tracking, and agent assignment automati
 - If a polecat stalls, the Witness will detect and handle it
 - Use `gt escalate` for issues that need human attention
 - Convoys can span multiple rigs for cross-project work
+
+:::note
+
+Convoys auto-close when all tracked beads complete. You do not need to manually close them unless you want to cancel remaining work.
+
+:::

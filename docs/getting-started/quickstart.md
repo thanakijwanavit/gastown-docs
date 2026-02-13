@@ -15,6 +15,12 @@ gt install ~/gt --git
 cd ~/gt
 ```
 
+:::tip
+
+If you already have a `~/gt` directory, use `--force` to reinitialize: `gt install ~/gt --git --force`
+
+:::
+
 This creates:
 
 ```text
@@ -90,6 +96,12 @@ Now you can give natural language instructions. For example:
 
 > "Fix the 5 failing tests in the auth module and add input validation to the user registration endpoint."
 
+:::note
+
+You are now in an interactive Claude session inside tmux. Detach with `Ctrl-B D` to return to your terminal without stopping the Mayor.
+
+:::
+
 The Mayor will:
 
 1. Create beads (issues) for each task
@@ -113,6 +125,12 @@ gt feed
 # Check what's ready for work
 gt ready
 ```
+
+:::warning
+
+Gas Town agents consume API tokens. Monitor usage with `gt cost` to avoid surprise bills. See [Cost Management](../guides/cost-management.md) for details.
+
+:::
 
 ## Next Steps
 
