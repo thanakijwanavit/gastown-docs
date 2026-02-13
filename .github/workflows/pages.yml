@@ -1,3 +1,5 @@
+# Fallback deployment: GitHub Pages (only triggers on main branch).
+# Primary deployment is AWS via deploy.yml → docs.gt.villamarket.ai
 name: Deploy to GitHub Pages
 
 on:
