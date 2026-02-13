@@ -275,8 +275,8 @@ gt rig start <rig>           # Start rig agents if needed
 
 ## Related
 
-- [MEOW Stack](/docs/concepts/meow-stack.md) -- The Mayor's orchestration workflow
-- [Convoys](/docs/concepts/convoys.md) -- Batch tracking for related work
-- [Beads](/docs/concepts/beads.md) -- Issue tracking system the Mayor uses
+- [MEOW Stack](../concepts/meow-stack.md) -- The Mayor's orchestration workflow
+- [Convoys](../concepts/convoys.md) -- Batch tracking for related work
+- [Beads](../concepts/beads.md) -- Issue tracking system the Mayor uses
 - [Deacon](deacon.md) -- Receives strategic direction from the Mayor
 - [Polecats](polecats.md) -- Workers the Mayor assigns tasks to

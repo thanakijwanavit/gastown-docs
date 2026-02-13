@@ -265,7 +265,7 @@ Use `bd ready` to see your current step and `bd close <step-id>` to advance.
 
 ### The GUPP Startup
 
-When a polecat is spawned with work on its hook, it executes immediately per the [GUPP](/docs/concepts/gupp.md) principle:
+When a polecat is spawned with work on its hook, it executes immediately per the [GUPP](../concepts/gupp.md) principle:
 
 ```bash
 gt hook                      # Check assigned work
@@ -362,9 +362,9 @@ Next: <what remains>"
 
 ## Related
 
-- [GUPP](/docs/concepts/gupp.md) -- The propulsion principle that drives polecat execution
-- [Hooks](/docs/concepts/hooks.md) -- How work is attached to polecats
-- [Molecules](/docs/concepts/molecules.md) -- The `mol-polecat-work` formula defines polecat workflow steps
+- [GUPP](../concepts/gupp.md) -- The propulsion principle that drives polecat execution
+- [Hooks](../concepts/hooks.md) -- How work is attached to polecats
+- [Molecules](../concepts/molecules.md) -- The `mol-polecat-work` formula defines polecat workflow steps
 - [Witness](witness.md) -- Monitors polecats for health
 - [Refinery](refinery.md) -- Processes MRs submitted by polecats via `gt done`
-- [Beads](/docs/concepts/beads.md) -- Issue tracking system polecats use for task management
+- [Beads](../concepts/beads.md) -- Issue tracking system polecats use for task management
