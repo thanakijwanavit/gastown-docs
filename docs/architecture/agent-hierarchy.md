@@ -110,3 +110,9 @@ Severity levels control routing:
 - [Escalation System](../operations/escalations.md) -- Full escalation routing, severity levels, and auto re-escalation
 - [Design Principles](design-principles.md) -- Erlang-inspired supervision and the let-it-crash philosophy
 - [Monitoring & Health](../operations/monitoring.md) -- Patrol digests, health checks, and real-time activity feeds
+
+### Blog Posts
+
+- [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness agent monitors polecat health, detects stalls, and triggers recovery
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale

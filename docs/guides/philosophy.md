@@ -413,3 +413,9 @@ The following articles by Steve Yegge provide the foundational thinking behind G
 - [Design Principles](../architecture/design-principles.md) -- The twelve principles that implement the philosophy
 - [Architecture Guide](architecture.md) -- How the philosophy translates into system architecture
 - [Cost Management](cost-management.md) -- Practical cost implications of multi-agent orchestration
+
+### Blog Posts
+
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog and multi-agent orchestration tips
+- [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How the Gas Town Universal Propulsion Principle makes multi-agent development crash-safe by design
+- [Gas Town vs Traditional CI/CD: What's Different?](/blog/gas-town-vs-cicd) -- How Gas Town's agent-driven model complements and extends traditional CI/CD pipelines

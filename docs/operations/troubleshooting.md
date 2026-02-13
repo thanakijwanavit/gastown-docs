@@ -840,3 +840,8 @@ Before running `gt shutdown --all`, check if any polecats have uncommitted work:
 - [Starting & Stopping](lifecycle.md) -- Lifecycle commands for restarting agents and recovering rigs
 - [Monitoring & Health](monitoring.md) -- Diagnostic commands including `gt doctor`, `gt feed`, and `gt trail`
 - [Escalation System](escalations.md) -- How to create and manage escalations when problems are detected
+
+### Blog Posts
+
+- [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make

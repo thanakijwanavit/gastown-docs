@@ -194,3 +194,8 @@ gt town shutdown
 - [Deacon](../agents/deacon.md) -- The Deacon agent that manages infrastructure
 - [gt rig](rigs.md) -- Rig-level agent management (Witness, Refinery, Polecats)
 - [Monitoring & Observability](../operations/monitoring.md) -- Detailed monitoring beyond `gt town status`
+
+### Blog Posts
+
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale

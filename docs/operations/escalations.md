@@ -484,3 +484,8 @@ You can override escalation settings at the rig level by placing an `escalation.
 - [Monitoring & Health](monitoring.md) -- Detecting the problems that trigger escalations
 - [Troubleshooting](troubleshooting.md) -- Resolving the issues that escalations surface
 - [Deacon](../agents/deacon.md) -- The town-level health monitor that routes escalations
+
+### Blog Posts
+
+- [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking progress, and catching problems early

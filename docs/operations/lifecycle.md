@@ -603,3 +603,8 @@ stateDiagram-v2
 - [Troubleshooting](troubleshooting.md) -- Diagnosing agent boot failures, zombie processes, and stuck rigs
 - [Monitoring & Health](monitoring.md) -- Health checks, patrol digests, and real-time agent status
 - [Usage Guide](../guides/usage-guide.md) -- Day-to-day patterns for starting, monitoring, and stopping the fleet
+
+### Blog Posts
+
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale

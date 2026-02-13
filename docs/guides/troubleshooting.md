@@ -418,3 +418,8 @@ For the full troubleshooting reference, see [Operations: Troubleshooting](../ope
 - [Monitoring & Health](../operations/monitoring.md) -- Real-time feeds, health checks, and diagnostic commands
 - [Escalation System](../operations/escalations.md) -- How to create and manage priority-routed escalations
 - [Starting & Stopping](../operations/lifecycle.md) -- Lifecycle commands for recovering stuck agents and rigs
+
+### Blog Posts
+
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
+- [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures

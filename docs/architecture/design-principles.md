@@ -150,3 +150,8 @@ This makes the system resilient to state corruption: even if tracking data is lo
 - [GUPP](../concepts/gupp.md) -- The Gas Town Universal Propulsion Principle in detail
 - [Background & Philosophy](../guides/philosophy.md) -- Why Gas Town exists and the intellectual foundations behind its design
 - [System Overview](overview.md) -- The five-layer architecture these principles shaped
+
+### Blog Posts
+
+- [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How the Gas Town Universal Propulsion Principle makes multi-agent development crash-safe by design
+- [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- A deep dive into the hook system and the persistence primitive behind self-propelling agent workflows
