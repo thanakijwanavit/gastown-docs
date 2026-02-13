@@ -278,3 +278,8 @@ Without Witness and Deacon monitoring, stuck or crashed sessions will not be aut
 - [Manual Convoy Workflow](manual-convoy.md) -- An intermediate approach with convoy tracking and manual assignment
 - [Quick Start](../getting-started/quickstart.md) -- Initial setup steps before using minimal mode
 - [Hooks](../concepts/hooks.md) -- How hook persistence works even without the full agent hierarchy
+
+### Blog Posts
+
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog and getting started resources
+- [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical strategies for monitoring costs in reduced-overhead workflows

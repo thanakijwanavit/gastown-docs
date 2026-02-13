@@ -345,3 +345,8 @@ The Refinery does not know or care which runtime produced the code. It validates
 - [Hooks](../concepts/hooks.md) -- How hooks attach work to agents and vary by runtime capability
 - [Polecats](../agents/polecats.md) -- Ephemeral workers that can run on any supported runtime
 - [Configuration](../cli-reference/configuration.md) -- CLI commands for setting default agents and rig-level overrides
+
+### Blog Posts
+
+- [Multi-Runtime Workflows with Gas Town](/blog/multi-runtime-workflows) -- How Gas Town orchestrates work across Claude Code, Gemini CLI, Codex, and other runtimes
+- [Gas Town vs Traditional CI/CD: What's Different?](/blog/gas-town-vs-cicd) -- How Gas Town's agent-driven model complements traditional CI/CD pipelines

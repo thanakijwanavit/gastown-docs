@@ -500,3 +500,9 @@ This requires more discipline but enables true parallel development.
 - [Operations: Troubleshooting](../operations/troubleshooting.md) -- Resolving merge conflicts, git worktree issues, and push failures
 - [Polecats](../agents/polecats.md) -- How ephemeral workers use feature branches and git worktrees
 - [Refinery](../agents/refinery.md) -- The merge queue agent that serializes all merges to main
+
+### Blog Posts
+
+- [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into how the Refinery serializes parallel agent work into clean history
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid frequent mistakes including git workflow anti-patterns
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for managing git at scale with dozens of concurrent agents

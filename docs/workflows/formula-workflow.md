@@ -435,3 +435,8 @@ Increment the `version` field when making breaking changes to a formula. Existin
 - [Gates](../concepts/gates.md) -- Async coordination primitives used within formula steps
 - [Code Review Workflow](code-review.md) -- The convoy formula for parallel multi-perspective code review
 - [MEOW Stack](../concepts/meow-stack.md) -- The layered abstraction model from molecules to full orchestration
+
+### Blog Posts
+
+- [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating TOML formulas for custom agent workflows
+- [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- Cross-rig tracking, dependency chains, and parallel fan-out for convoy formulas

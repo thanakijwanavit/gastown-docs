@@ -359,3 +359,8 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 - [Starting & Stopping](../operations/lifecycle.md) -- `gt down` and `gt shutdown` for controlling agent runtime
 - [Minimal Mode](../workflows/minimal-mode.md) -- Reduced-overhead workflow for cost-sensitive workloads
 - [Plugins](../operations/plugins.md) -- Set up cost alert plugins with cron-scheduled budget checks
+
+### Blog Posts
+
+- [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical strategies for monitoring API costs and right-sizing agent work
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Cost implications and optimization strategies when running at scale

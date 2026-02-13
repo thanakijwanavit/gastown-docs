@@ -357,3 +357,8 @@ You can create your own code review formula with custom legs tailored to your co
 - [Molecules](../concepts/molecules.md) -- The underlying step-tracking system that powers convoy formulas
 - [Refinery](../agents/refinery.md) -- The merge queue agent that integrates with review gate presets
 - [Polecats](../agents/polecats.md) -- The ephemeral workers that execute each review leg in parallel
+
+### Blog Posts
+
+- [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into the merge queue that integrates with review gate presets
+- [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating custom TOML formulas for specialized workflows

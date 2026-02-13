@@ -213,3 +213,8 @@ The highest-leverage crew activity is creating clear, detailed beads. A 10-minut
 - **[Mayor Workflow](mayor-workflow.md)** -- The fully automated alternative where the Mayor coordinates everything
 - **[Manual Convoy](manual-convoy.md)** -- Fine-grained control over work assignment
 - **[Session Cycling](../concepts/session-cycling.md)** -- How to handle context limits in crew sessions
+
+### Blog Posts
+
+- [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents automatically hand off work when their context window fills up

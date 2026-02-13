@@ -371,3 +371,8 @@ The pattern is consistent: what seems excessive today becomes standard practice 
 - [Quick Start](../getting-started/quickstart.md) -- Get started with Gas Town if you are at Stage 7 or above
 - [Architecture Guide](architecture.md) -- How Gas Town implements Stage 8 orchestration
 - [Usage Guide](usage-guide.md) -- Practical day-to-day patterns for working at Stage 8
+
+### Blog Posts
+
+- [What Stage Are You? A Self-Assessment for AI Coding Maturity](/blog/eight-stages-self-assessment) -- Find out where you fall on the 8 Stages model and get advice for leveling up
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing Gas Town and the documentation blog for new users
