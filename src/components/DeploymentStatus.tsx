@@ -4,7 +4,7 @@ interface DeploymentStatusProps {
   inline?: boolean;
 }
 
-export default function DeploymentStatus({inline = false}: DeploymentStatusProps): JSX.Element {
+export default function DeploymentStatus({inline = false}: DeploymentStatusProps): React.JSX.Element {
   // Get build information from environment or package.json
   const version = '1.0.0';
   const buildDate = new Date().toISOString().split('T')[0];
@@ -65,7 +65,7 @@ export default function DeploymentStatus({inline = false}: DeploymentStatusProps
       <span>Updated {buildDate}</span>
       <span>•</span>
       <a
-        href="https://github.com/steveyegge/gastown/commits/master"
+        href="https://github.com/thanakijwanavit/gastown-docs/commits/master"
         target="_blank"
         rel="noopener noreferrer"
         style={{color: 'inherit', textDecoration: 'none'}}
