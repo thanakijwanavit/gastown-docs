@@ -17,6 +17,7 @@ const sidebars: SidebarsConfig = {
         'getting-started/first-convoy',
         'getting-started/using-search',
         'getting-started/cheat-sheet',
+        'getting-started/faq',
       ],
     },
     {
