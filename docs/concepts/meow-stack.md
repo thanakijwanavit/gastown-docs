@@ -175,3 +175,9 @@ Two concepts cut across all MEOW layers rather than living in a single layer:
 - **[Gates](gates.md)** -- Cross-cutting: async coordination within molecules
 - **[GUPP & NDI](gupp.md)** -- Cross-cutting: design principles ensuring recoverability at every layer
 - **[Rigs](rigs.md)** -- The physical infrastructure in which the entire MEOW stack operates
+
+### Blog Posts
+
+- [Understanding GUPP](/blog/understanding-gupp) -- How GUPP applies at every MEOW layer
+- [Custom Formulas](/blog/custom-formulas) -- Creating Layer 5 templates for your workflows
+- [Hook-Driven Architecture](/blog/hook-driven-architecture) -- The cross-cutting persistence mechanism

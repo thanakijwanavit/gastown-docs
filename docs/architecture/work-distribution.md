@@ -179,3 +179,9 @@ bd show hq-abc              # Routes to town-level beads
 - [Hooks](../concepts/hooks.md) -- Persistent work attachment that makes Gas Town crash-safe
 - [Convoys](../concepts/convoys.md) -- Batch tracking for related beads across rigs
 - [Molecules](../concepts/molecules.md) -- Multi-step structured workflows that guide agent execution
+
+### Blog Posts
+
+- [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor distributes work across rigs
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Distribution strategies for large deployments
+- [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How hooks drive the distribution cycle
