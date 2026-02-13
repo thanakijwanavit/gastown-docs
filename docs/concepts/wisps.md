@@ -83,6 +83,26 @@ graph LR
 
 ---
 
+## Compaction: Wisp Garbage Collection
+
+Wisps accumulate over time as molecules complete. The [compaction system](../cli-reference/compact.md) applies TTL-based cleanup:
+
+| Wisp Type | TTL | Action After TTL |
+|-----------|-----|------------------|
+| `heartbeat`, `ping` | 6 hours | Delete if closed, promote if open |
+| `patrol`, `gc_report` | 24 hours | Delete if closed, promote if open |
+| `recovery`, `error`, `escalation` | 7 days | Delete if closed, promote if open |
+
+**Promotion** means converting an expired open wisp into a permanent bead — if a wisp is still open past its TTL, something is likely stuck and needs attention. Promoted wisps appear in `bd list` for follow-up.
+
+```bash
+# Preview what compaction would do
+gt compact --dry-run --verbose
+
+# Run compaction
+gt compact
+```
+
 ## Cleanup Wisps
 
 :::info
@@ -135,6 +155,19 @@ Wisps are created automatically -- you almost never create them manually. Unders
 Never create wisps directly with `bd create --type wisp`. Wisps are internal tracking units managed by the molecule system. If you need persistent sub-task tracking, use regular beads with dependencies instead.
 
 :::
+
+## Wisps in the Supervision Chain
+
+Wisps provide granular observability for the supervision hierarchy:
+
+```text
+Human → checks convoy status (beads level)
+Mayor → checks molecule progress (wisp level)
+Witness → checks wisp state to detect stuck polecats
+Deacon → checks wisp promotions to detect systemic issues
+```
+
+When a Witness detects a polecat with a wisp stuck in `in_progress` for too long, it triggers the escalation chain. The wisp's state is the primary signal for detecting stuck work at the individual step level.
 
 ## Related Concepts
 

@@ -116,6 +116,44 @@ Then tell the Mayor:
 
 The Mayor handles convoy creation, issue tracking, and agent assignment automatically.
 
+## What Happens Behind the Scenes
+
+Understanding the full flow helps when debugging issues:
+
+```mermaid
+sequenceDiagram
+    participant You as You (Human)
+    participant GT as gt CLI
+    participant Rig as Rig (myproject)
+    participant PC as Polecat (spawned)
+    participant Ref as Refinery
+
+    You->>GT: gt sling gt-a1b2c myproject
+    GT->>Rig: Hook bead to new polecat
+    Rig->>PC: Spawn polecat in worktree
+    PC->>PC: gt prime → gt hook → EXECUTE
+    PC->>PC: Work on issue (code, test, commit)
+    PC->>Ref: gt done → Submit MR
+    Ref->>Ref: Rebase, validate, merge
+    Ref->>Rig: Merged to main
+    Note over Rig: Polecat worktree nuked
+```
+
+Each polecat:
+1. Gets its own isolated git worktree (no conflicts with other polecats)
+2. Reads the bead from its hook to understand the task
+3. Executes a molecule (workflow template) that guides its work
+4. Submits to the Refinery when done, which merges to main serially
+
+## Common First-Convoy Issues
+
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| Polecat not starting | No free slots in rig | Check `gt polecat list` — rig may be at max capacity |
+| Work not progressing | Polecat confused by bead description | Add more detail: `bd update gt-a1b2c --description "..."` |
+| Merge conflict | Two polecats touched same files | Refinery handles this — it spawns a resolution polecat |
+| Convoy stuck at 2/3 | One polecat stalled | Check `gt polecat list` and `gt feed` for errors |
+
 ## Tips
 
 - Use `gt convoy show` frequently to track progress
