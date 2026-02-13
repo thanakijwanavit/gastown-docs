@@ -1117,6 +1117,29 @@ else
     fail_test "Found $AUTHOR_ISSUES undefined blog author(s)" "Add missing authors to blog/authors.yml"
 fi
 
+# Test 36: All doc pages have Mermaid diagrams
+echo ""
+echo "Test 36: Checking all doc pages have Mermaid diagrams..."
+MERMAID_MISSING=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
+    basename=$(basename "$file")
+    # Skip index pages (they are navigation hubs, not content pages)
+    [ "$basename" = "index.md" ] && continue
+
+    if ! grep -q '```mermaid' "$file" 2>/dev/null; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Missing Mermaid diagram in $rel_file"
+        MERMAID_MISSING=$((MERMAID_MISSING + 1))
+    fi
+done
+
+if [ "$MERMAID_MISSING" -eq 0 ]; then
+    pass_test "All doc pages have at least one Mermaid diagram"
+else
+    fail_test "Found $MERMAID_MISSING doc page(s) without Mermaid diagrams" "Add a relevant Mermaid diagram to each doc page for visual clarity"
+fi
+
 # Summary
 echo ""
 echo "========================================"

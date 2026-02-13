@@ -15,6 +15,22 @@ gt compact [command]
 
 ## Description
 
+```mermaid
+flowchart TD
+    A[gt compact] --> B[Scan wisps in rig]
+    B --> C{For each wisp}
+    C --> D{Has keep label<br/>or comments?}
+    D -->|Yes| E[Promote to permanent bead]
+    D -->|No| F{Past TTL?}
+    F -->|No| G[Skip - within TTL]
+    F -->|Yes| H{Status?}
+    H -->|Closed| I[Delete wisp]
+    H -->|Open| E
+    E --> J[Report: promoted]
+    I --> K[Report: deleted]
+    G --> L[Report: skipped]
+```
+
 [Wisps](../concepts/wisps.md) are lightweight, ephemeral beads (heartbeats, pings, patrol reports). Over time they accumulate and need cleanup. Compaction applies TTL (time-to-live) policies:
 
 - **Non-closed wisps past TTL** are promoted to permanent beads (something is stuck)

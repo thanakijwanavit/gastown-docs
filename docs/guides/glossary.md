@@ -8,6 +8,28 @@ description: "Complete terminology reference for Gas Town, covering all agents, 
 
 A comprehensive reference for Gas Town terminology, drawn from the documentation and Steve Yegge's articles on multi-agent AI orchestration.
 
+```mermaid
+flowchart TD
+    subgraph Agents
+        Mayor --> Deacon
+        Mayor --> Witness
+        Mayor --> Refinery
+        Witness --> Polecats
+    end
+    subgraph Work
+        Bead --> Convoy
+        Bead --> Hook
+        Formula --> Molecule
+        Molecule --> Wisp
+    end
+    subgraph Operations
+        Sling --> Hook
+        Patrol --> Witness
+        Escalation --> Mayor
+        Handoff --> Session[Session Cycling]
+    end
+```
+
 ---
 
 ## Agents

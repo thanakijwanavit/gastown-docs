@@ -14,6 +14,22 @@ gt nudge <target> [message] [flags]
 
 ## Description
 
+```mermaid
+flowchart LR
+    A[gt nudge target msg] --> B{DND enabled?}
+    B -->|No| C[Resolve target]
+    B -->|Yes + --force| C
+    B -->|Yes| D[Skip delivery]
+    C --> E{Target type?}
+    E -->|Role shortcut| F[Expand to session name]
+    E -->|Direct path| G[Use as-is]
+    E -->|Channel| H[Expand to all members]
+    F --> I[Send via tmux -l]
+    G --> I
+    H --> I
+    I --> J[Wait 500ms + Enter]
+```
+
 `gt nudge` delivers a message directly to a running Claude Code session: polecats, crew, witness, refinery, mayor, or deacon. Unlike `gt mail` (async mailbox), nudges interrupt the target immediately for real-time coordination.
 
 Uses a reliable delivery pattern:

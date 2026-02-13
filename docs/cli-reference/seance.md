@@ -14,6 +14,19 @@ gt seance [flags]
 
 ## Description
 
+```mermaid
+flowchart TD
+    A[gt seance] --> B{Mode?}
+    B -->|Discovery| C[Read ~/.gt/.events.jsonl]
+    C --> D[Filter by --role / --rig / --recent]
+    D --> E[List sessions]
+    B -->|Talk| F[gt seance --talk session-id]
+    F --> G[claude --fork-session --resume id]
+    G --> H{Prompt mode?}
+    H -->|One-shot -p| I[Ask question → get answer → exit]
+    H -->|Interactive| J[Open conversation with predecessor]
+```
+
 Seance lets you talk to predecessor sessions directly. Instead of parsing logs, it spawns a Claude subprocess that resumes a previous session with full context. You can ask questions like:
 
 - "Why did you make this decision?"
