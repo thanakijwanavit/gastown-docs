@@ -6,6 +6,7 @@
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
     "test": "node scripts/validate-docs.js",
+    "test:search": "node scripts/validate-search.js",
     "test:links": "node scripts/check-external-links.js",
     "build": "node scripts/build-llm-txt.js && docusaurus build",
     "swizzle": "docusaurus swizzle",
