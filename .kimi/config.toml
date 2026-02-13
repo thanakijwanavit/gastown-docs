@@ -1,0 +1,35 @@
+# Kimi Gas Configuration for gastowndocs
+# Implements parity with gastown_manager crew configuration
+
+default_model = "kimi-for-coding"
+default_thinking = true
+
+[hooks]
+# Session Start: Run gt prime to get context, set agent type
+session_start = "export PATH=\"$HOME/go/bin:$HOME/bin:$PATH\"; export GT_AGENT=kimigas; timeout 10 gt prime 2>/dev/null || true"
+
+# Pre-compact: Save state before context window compaction
+pre_compact = "export PATH=\"$HOME/go/bin:$HOME/bin:$PATH\"; gt prime --hook 2>/dev/null || true"
+
+# Stop: Record costs on session end
+stop = "export PATH=\"$HOME/go/bin:$HOME/bin:$PATH\"; gt costs record 2>/dev/null || true"
+
+[gas_town]
+role = "crew-gastowndocs"
+agent_type = "kimi_gas"
+rig = "gastowndocs"
+
+[watcher]
+# Watcher daemon integration
+enabled = true
+daemon_script = "/home/gastown/gt/gastowndocs/scripts/watcher-daemon.sh"
+log_dir = "/home/gastown/gt/gastowndocs/logs"
+state_dir = "/home/gastown/gt/gastowndocs/state"
+
+[healer]
+# Healer configuration for idle session recovery
+agent = "kimigas"
+cooldown_seconds = 1800
+idle_threshold_seconds = 3600
+stale_threshold_seconds = 7200
+critical_threshold_seconds = 14400

@@ -23,6 +23,10 @@ Use crew collaboration when:
 
 ## The Guzzoline Pattern
 
+:::info
+The name comes from Mad Max: guzzoline (fuel) is the scarce resource that keeps the fleet moving. In Gas Town, well-written specs are the fuel that powers polecat productivity.
+:::
+
 Crew members produce specifications; polecats consume them.
 
 ```mermaid
@@ -93,7 +97,7 @@ bd create --title "Fix: rate limiter missing IPv6 normalization" \
 
 The most productive crew collaboration involves working in parallel with polecats:
 
-```
+```text
 You (Crew)                    Polecats
 ─────────────                 ─────────
 Design feature A              Implement feature B (from earlier spec)
@@ -107,7 +111,9 @@ File follow-ups for B         Implement feature A
 Design feature C              ...
 ```
 
+:::tip
 The key insight: while polecats implement your previous specs, you design the next batch. This creates a pipeline where neither you nor the polecats are ever idle.
+:::
 
 ---
 
@@ -146,6 +152,10 @@ The PR Sheriff hooks this work to their session, creating a permanent review cad
 
 ## Quality Gates
 
+:::warning
+Polecats optimize for task completion, not system-wide coherence. Without crew review, architectural drift can compound quickly across many parallel workers.
+:::
+
 Crew members are the quality backstop. While polecats run tests before submitting, crew reviews catch:
 
 - **Architectural drift** -- Polecat implementations that don't match the system's design
@@ -180,6 +190,10 @@ gt worktree remove beads
 ---
 
 ## Tips
+
+:::tip
+The highest-leverage crew activity is creating clear, detailed beads. A 10-minute spec saves a polecat 30 minutes of exploring the wrong approach.
+:::
 
 1. **Write specs, not code.** Your highest-leverage activity is creating well-specified beads. A 10-minute spec saves a polecat from spending 30 minutes exploring the wrong approach.
 

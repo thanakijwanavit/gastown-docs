@@ -9,6 +9,7 @@
     "test:search": "node scripts/validate-search.js",
     "test:links": "node scripts/check-external-links.js",
     "build": "node scripts/build-llm-txt.js && docusaurus build",
+    "test": "bash scripts/test-docs.sh",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

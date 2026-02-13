@@ -1,0 +1,566 @@
+#!/bin/bash
+# Test script for Gas Town documentation
+# Validates documentation quality and catches common issues
+
+set -e  # Exit on error
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+
+echo "🧪 Running Gas Town Documentation Tests"
+echo "========================================"
+echo ""
+
+# Track test results
+TESTS_PASSED=0
+TESTS_FAILED=0
+
+# Helper function to report test results
+pass_test() {
+    echo "✓ $1"
+    TESTS_PASSED=$((TESTS_PASSED + 1))
+}
+
+fail_test() {
+    echo "✗ $1"
+    echo "  Error: $2"
+    TESTS_FAILED=$((TESTS_FAILED + 1))
+}
+
+# Test 1: Build succeeds
+echo "Test 1: Documentation builds without errors..."
+if npm run build > /dev/null 2>&1; then
+    pass_test "Documentation builds successfully"
+else
+    fail_test "Documentation build failed" "Run 'npm run build' to see errors"
+fi
+
+# Test 2: Check for broken internal links
+echo ""
+echo "Test 2: Checking for broken internal links..."
+cd "$ROOT_DIR/docs"
+BROKEN_LINKS=0
+
+# Find all markdown files and check internal links
+for file in $(find . -name "*.md"); do
+    # Extract markdown links: [text](link)
+    while read -r link; do
+        # Skip external links (http/https)
+        if [[ "$link" =~ ^https?:// ]]; then
+            continue
+        fi
+
+        # Skip anchor-only links
+        if [[ "$link" =~ ^# ]]; then
+            continue
+        fi
+
+        # Flag absolute doc paths as broken (should use relative paths)
+        if [[ "$link" =~ ^/docs/ ]]; then
+            echo "  Absolute link in $file: $link (use relative path instead)"
+            BROKEN_LINKS=$((BROKEN_LINKS + 1))
+            continue
+        fi
+
+        # Strip anchor from link for filesystem check
+        link_no_anchor="${link%%#*}"
+        if [[ -z "$link_no_anchor" ]]; then
+            continue
+        fi
+
+        # Check if relative path exists
+        link_path=$(dirname "$file")/"$link_no_anchor"
+        if [[ ! -f "$link_path" ]] && [[ ! -d "$link_path" ]]; then
+            echo "  Broken link in $file: $link"
+            BROKEN_LINKS=$((BROKEN_LINKS + 1))
+        fi
+    done < <(grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null || true)
+done
+
+if [ "$BROKEN_LINKS" -eq 0 ]; then
+    pass_test "No broken internal links found"
+else
+    fail_test "Found $BROKEN_LINKS broken internal link(s)" "Check file paths and fix broken references"
+fi
+
+# Test 3: Check for markdown formatting issues
+echo ""
+echo "Test 3: Checking markdown formatting..."
+FORMATTING_ISSUES=0
+
+for file in $(find . -name "*.md"); do
+    # Check for unclosed code blocks
+    BACKTICK_COUNT=$(grep -o '```' "$file" | wc -l)
+    if [ $((BACKTICK_COUNT % 2)) -ne 0 ]; then
+        echo "  Unclosed code block in: $file"
+        FORMATTING_ISSUES=$((FORMATTING_ISSUES + 1))
+    fi
+
+    # Check for frontmatter
+    if ! head -1 "$file" | grep -q "^---$"; then
+        echo "  Missing frontmatter in: $file"
+        FORMATTING_ISSUES=$((FORMATTING_ISSUES + 1))
+    fi
+done
+
+if [ "$FORMATTING_ISSUES" -eq 0 ]; then
+    pass_test "No markdown formatting issues"
+else
+    fail_test "Found $FORMATTING_ISSUES formatting issue(s)" "Review markdown syntax in flagged files"
+fi
+
+# Test 4: Check for TODO/FIXME markers
+echo ""
+echo "Test 4: Checking for unresolved TODO/FIXME markers..."
+TODO_COUNT=$(grep -r "TODO\|FIXME\|XXX" "$ROOT_DIR/docs/" --include="*.md" 2>/dev/null | wc -l)
+
+if [ "$TODO_COUNT" -eq 0 ]; then
+    pass_test "No unresolved TODO markers"
+else
+    echo "  Found $TODO_COUNT TODO/FIXME marker(s) in documentation"
+    grep -r "TODO\|FIXME\|XXX" "$ROOT_DIR/docs/" --include="*.md" 2>/dev/null | head -5
+    if [ "$TODO_COUNT" -gt 5 ]; then
+        echo "  ... and $((TODO_COUNT - 5)) more"
+    fi
+    # This is a warning, not a failure
+    pass_test "TODO markers documented (review for completion)"
+fi
+
+# Test 5: Verify required documentation exists
+echo ""
+echo "Test 5: Verifying required documentation pages exist..."
+REQUIRED_DOCS=(
+    "docs/index.md"
+    "docs/getting-started/installation.md"
+    "docs/getting-started/quickstart.md"
+    "docs/architecture/overview.md"
+    "docs/cli-reference/index.md"
+    "docs/operations/troubleshooting.md"
+)
+
+MISSING_DOCS=0
+for doc in "${REQUIRED_DOCS[@]}"; do
+    if [ ! -f "$ROOT_DIR/$doc" ]; then
+        echo "  Missing required doc: $doc"
+        MISSING_DOCS=$((MISSING_DOCS + 1))
+    fi
+done
+
+if [ "$MISSING_DOCS" -eq 0 ]; then
+    pass_test "All required documentation pages exist"
+else
+    fail_test "Missing $MISSING_DOCS required documentation page(s)" "Create missing pages"
+fi
+
+# Test 6: Check for large files
+echo ""
+echo "Test 6: Checking for oversized files..."
+LARGE_FILES=0
+MAX_SIZE_KB=500
+
+while IFS= read -r -d '' file; do
+    size=$(stat -f%z "$file" 2>/dev/null || stat -c%s "$file" 2>/dev/null)
+    size_kb=$((size / 1024))
+    if [ "$size_kb" -gt "$MAX_SIZE_KB" ]; then
+        echo "  Large file ($size_kb KB): $file"
+        LARGE_FILES=$((LARGE_FILES + 1))
+    fi
+done < <(find "$ROOT_DIR/docs" -name "*.md" -print0)
+
+if [ "$LARGE_FILES" -eq 0 ]; then
+    pass_test "No oversized documentation files"
+else
+    echo "  Warning: Found $LARGE_FILES file(s) over ${MAX_SIZE_KB}KB"
+    echo "  Consider splitting large files into smaller pages"
+    pass_test "Large files documented (consider splitting)"
+fi
+
+# Test 7: Verify sidebar configuration
+echo ""
+echo "Test 7: Checking sidebar configuration..."
+if [ -f "$ROOT_DIR/sidebars.ts" ] || [ -f "$ROOT_DIR/sidebars.js" ]; then
+    pass_test "Sidebar configuration exists"
+else
+    fail_test "Sidebar configuration missing" "Create sidebars.ts or sidebars.js"
+fi
+
+# Test 8: Verify all doc files are referenced in sidebar
+echo ""
+echo "Test 8: Checking sidebar covers all doc files..."
+SIDEBAR_FILE=""
+if [ -f "$ROOT_DIR/sidebars.ts" ]; then
+    SIDEBAR_FILE="$ROOT_DIR/sidebars.ts"
+elif [ -f "$ROOT_DIR/sidebars.js" ]; then
+    SIDEBAR_FILE="$ROOT_DIR/sidebars.js"
+fi
+
+if [ -n "$SIDEBAR_FILE" ]; then
+    ORPHANED_DOCS=0
+    while IFS= read -r -d '' file; do
+        # Get doc ID (relative path without .md extension)
+        rel_path="${file#$ROOT_DIR/docs/}"
+        doc_id="${rel_path%.md}"
+
+        # Check if this doc ID appears in the sidebar config
+        if ! grep -q "'${doc_id}'" "$SIDEBAR_FILE" && \
+           ! grep -q "\"${doc_id}\"" "$SIDEBAR_FILE"; then
+            echo "  Not in sidebar: docs/$rel_path"
+            ORPHANED_DOCS=$((ORPHANED_DOCS + 1))
+        fi
+    done < <(find "$ROOT_DIR/docs" -name "*.md" -print0)
+
+    if [ "$ORPHANED_DOCS" -eq 0 ]; then
+        pass_test "All doc files are referenced in sidebar"
+    else
+        fail_test "Found $ORPHANED_DOCS doc file(s) not in sidebar" "Add missing pages to sidebars.ts"
+    fi
+else
+    fail_test "No sidebar config found" "Cannot verify sidebar coverage"
+fi
+
+# Test 9: Verify top-level CLI commands referenced in docs actually exist
+echo ""
+echo "Test 9: Checking CLI commands referenced in docs..."
+INVALID_CMDS=0
+
+# Skip if gt CLI is not available (e.g., CI environment)
+if ! command -v gt >/dev/null 2>&1; then
+    echo "  Skipping: gt CLI not available (CI environment)"
+    pass_test "CLI command check skipped (gt not available)"
+else
+
+# Extract unique "gt <cmd>" top-level commands from fenced code blocks only
+# This avoids false positives from prose like "gt commands for..."
+TMPFILE=$(mktemp)
+find "$ROOT_DIR/docs" -name "*.md" -exec awk '
+    /^```/{in_code=!in_code; next}
+    in_code && /gt [a-z]/ && !/^[[:space:]]*#/{
+        for(i=1;i<=NF;i++){
+            if($i=="gt" && i<NF){
+                cmd=$(i+1)
+                if(cmd ~ /^[a-z][a-z-]*$/){
+                    print cmd
+                }
+            }
+        }
+    }
+' {} + | sort -u > "$TMPFILE"
+
+# Check each unique top-level command
+while read -r cmd; do
+    # Skip empty, flags, uppercase (likely prose)
+    [[ -z "$cmd" ]] && continue
+    [[ "$cmd" =~ ^- ]] && continue
+    [[ "$cmd" =~ ^[A-Z] ]] && continue
+
+    # Check if command exists via --help
+    if ! gt "$cmd" --help >/dev/null 2>&1; then
+        echo "  Non-existent command: gt $cmd"
+        INVALID_CMDS=$((INVALID_CMDS + 1))
+    fi
+done < "$TMPFILE"
+rm -f "$TMPFILE"
+
+if [ "$INVALID_CMDS" -eq 0 ]; then
+    pass_test "All top-level CLI commands in docs are valid"
+else
+    fail_test "Found $INVALID_CMDS invalid CLI command(s) in docs" "Fix commands to match actual gt CLI"
+fi
+fi
+
+# Test 10: Check for bare code blocks (missing language specifiers)
+echo ""
+echo "Test 10: Checking for bare code blocks..."
+BARE_BLOCKS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Track whether we're inside a code block
+    in_block=false
+    line_num=0
+    while IFS= read -r line; do
+        line_num=$((line_num + 1))
+        if [[ "$line" =~ ^'```' ]]; then
+            if [ "$in_block" = false ]; then
+                # Opening fence — check if it has a language tag
+                if [[ "$line" =~ ^'```'$ ]]; then
+                    echo "  Bare code block in $file:$line_num"
+                    BARE_BLOCKS=$((BARE_BLOCKS + 1))
+                fi
+                in_block=true
+            else
+                in_block=false
+            fi
+        fi
+    done < "$file"
+done
+
+if [ "$BARE_BLOCKS" -eq 0 ]; then
+    pass_test "All code blocks have language specifiers"
+else
+    fail_test "Found $BARE_BLOCKS bare code block(s)" "Add language tags (bash, text, json, etc.) to opening fences"
+fi
+
+# Test 11: Check for truncated meta descriptions
+echo ""
+echo "Test 11: Checking for truncated meta descriptions..."
+TRUNCATED_DESCS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    if grep -q 'description: ".*\.\.\."' "$file" 2>/dev/null; then
+        echo "  Truncated description in: $file"
+        TRUNCATED_DESCS=$((TRUNCATED_DESCS + 1))
+    fi
+done
+
+if [ "$TRUNCATED_DESCS" -eq 0 ]; then
+    pass_test "All meta descriptions are complete"
+else
+    fail_test "Found $TRUNCATED_DESCS truncated description(s)" "Replace descriptions ending with '...' with complete sentences"
+fi
+
+# Test 12: Check for Related cross-reference sections
+echo ""
+echo "Test 12: Checking for Related cross-reference sections..."
+MISSING_RELATED=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md"); do
+    if ! grep -q "^## Related" "$file" 2>/dev/null; then
+        echo "  Missing Related section: $file"
+        MISSING_RELATED=$((MISSING_RELATED + 1))
+    fi
+done
+
+if [ "$MISSING_RELATED" -eq 0 ]; then
+    pass_test "All non-index pages have Related sections"
+else
+    fail_test "Found $MISSING_RELATED page(s) without Related sections" "Add ## Related with 3-4 cross-references"
+fi
+
+# Test 13: Check for admonition coverage on non-index pages
+echo ""
+echo "Test 13: Checking for admonition coverage..."
+MISSING_ADMONITIONS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md"); do
+    if ! grep -q "^:::" "$file" 2>/dev/null; then
+        echo "  No admonitions in: $file"
+        MISSING_ADMONITIONS=$((MISSING_ADMONITIONS + 1))
+    fi
+done
+
+if [ "$MISSING_ADMONITIONS" -eq 0 ]; then
+    pass_test "All non-index pages have admonitions"
+else
+    fail_test "Found $MISSING_ADMONITIONS page(s) without admonitions" "Add :::tip, :::note, or :::warning callouts"
+fi
+
+# Test 14: Validate Mermaid diagram syntax
+echo ""
+echo "Test 14: Checking Mermaid diagram syntax..."
+MERMAID_ERRORS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract mermaid blocks and check first line has a valid diagram type
+    in_mermaid=false
+    first_content_line=true
+    line_num=0
+    while IFS= read -r line; do
+        line_num=$((line_num + 1))
+        if [[ "$line" =~ ^'```mermaid' ]]; then
+            in_mermaid=true
+            first_content_line=true
+            continue
+        fi
+        if [ "$in_mermaid" = true ] && [[ "$line" =~ ^'```' ]]; then
+            in_mermaid=false
+            continue
+        fi
+        if [ "$in_mermaid" = true ] && [ "$first_content_line" = true ]; then
+            # Skip blank lines
+            [[ -z "${line// }" ]] && continue
+            first_content_line=false
+            # Check for valid mermaid diagram type declaration
+            if ! echo "$line" | grep -qiE "^[[:space:]]*(graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|erDiagram|gantt|pie|gitgraph|journey|mindmap|timeline|quadrantChart|sankey|xychart|block|packet|architecture|kanban)\b"; then
+                echo "  Invalid mermaid diagram type in $file:$line_num: $line"
+                MERMAID_ERRORS=$((MERMAID_ERRORS + 1))
+            fi
+        fi
+    done < "$file"
+done
+
+if [ "$MERMAID_ERRORS" -eq 0 ]; then
+    pass_test "All Mermaid diagrams have valid type declarations"
+else
+    fail_test "Found $MERMAID_ERRORS invalid Mermaid diagram(s)" "Ensure first line of mermaid block is a valid diagram type (graph, flowchart, sequenceDiagram, etc.)"
+fi
+
+# Test 15: Verify frontmatter completeness
+echo ""
+echo "Test 15: Checking frontmatter completeness..."
+MISSING_FRONTMATTER=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract frontmatter (between first --- and second ---)
+    frontmatter=$(awk '/^---$/{if(++n==2)exit}n==1' "$file" 2>/dev/null)
+
+    if [ -z "$frontmatter" ]; then
+        echo "  No frontmatter in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+        continue
+    fi
+
+    # Check for title
+    if ! echo "$frontmatter" | grep -q '^title:'; then
+        echo "  Missing title in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+    fi
+
+    # Check for description
+    if ! echo "$frontmatter" | grep -q '^description:'; then
+        echo "  Missing description in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+    fi
+
+    # Check for sidebar_position
+    if ! echo "$frontmatter" | grep -q '^sidebar_position:'; then
+        echo "  Missing sidebar_position in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+    fi
+done
+
+if [ "$MISSING_FRONTMATTER" -eq 0 ]; then
+    pass_test "All pages have complete frontmatter (title, description, sidebar_position)"
+else
+    fail_test "Found $MISSING_FRONTMATTER frontmatter issue(s)" "Ensure all pages have title, description, and sidebar_position"
+fi
+
+# Test 16: Blog post quality checks
+echo ""
+echo "Test 16: Checking blog post quality..."
+BLOG_ISSUES=0
+
+if [ -d "$ROOT_DIR/blog" ]; then
+    for file in $(find "$ROOT_DIR/blog" -name "*.md"); do
+        basename=$(basename "$file")
+
+        # Check for frontmatter with title and description
+        frontmatter=$(awk '/^---$/{if(++n==2)exit}n==1' "$file" 2>/dev/null)
+        if [ -z "$frontmatter" ]; then
+            echo "  No frontmatter in blog: $basename"
+            BLOG_ISSUES=$((BLOG_ISSUES + 1))
+        else
+            if ! echo "$frontmatter" | grep -q '^title:'; then
+                echo "  Missing title in blog: $basename"
+                BLOG_ISSUES=$((BLOG_ISSUES + 1))
+            fi
+            if ! echo "$frontmatter" | grep -q '^description:'; then
+                echo "  Missing description in blog: $basename"
+                BLOG_ISSUES=$((BLOG_ISSUES + 1))
+            fi
+            if ! echo "$frontmatter" | grep -q '^tags:'; then
+                echo "  Missing tags in blog: $basename"
+                BLOG_ISSUES=$((BLOG_ISSUES + 1))
+            fi
+        fi
+
+        # Check for truncate marker (required for blog list excerpts)
+        if ! grep -q '<!-- truncate -->' "$file" 2>/dev/null; then
+            echo "  Missing <!-- truncate --> marker in blog: $basename"
+            BLOG_ISSUES=$((BLOG_ISSUES + 1))
+        fi
+
+        # Check minimum content length (at least 10 lines after frontmatter)
+        content_lines=$(awk '/^---$/{if(++n==2){found=1;next}}found{print}' "$file" | wc -l)
+        if [ "$content_lines" -lt 10 ]; then
+            echo "  Blog post too short ($content_lines lines): $basename"
+            BLOG_ISSUES=$((BLOG_ISSUES + 1))
+        fi
+    done
+fi
+
+if [ "$BLOG_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts have proper frontmatter, truncate markers, and sufficient content"
+else
+    fail_test "Found $BLOG_ISSUES blog quality issue(s)" "Ensure blog posts have title, description, tags, truncate marker, and 10+ lines"
+fi
+
+# Test 17: Validate anchor links point to existing headings
+echo ""
+echo "Test 17: Checking anchor links resolve to headings..."
+BROKEN_ANCHORS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract links with anchors: [text](path#anchor) or [text](#anchor)
+    while read -r link; do
+        # Skip external links
+        [[ "$link" =~ ^https?:// ]] && continue
+
+        # Must contain a # to be an anchor link
+        [[ "$link" != *"#"* ]] && continue
+
+        # Split into path and anchor
+        link_path="${link%%#*}"
+        anchor="${link#*#}"
+        [[ -z "$anchor" ]] && continue
+
+        # Determine target file
+        if [[ -z "$link_path" ]]; then
+            # Same-file anchor: #heading
+            target_file="$file"
+        else
+            # Cross-file anchor: path#heading
+            target_file="$(dirname "$file")/$link_path"
+            # Try with .md extension if not found
+            if [[ ! -f "$target_file" ]] && [[ ! "$target_file" =~ \.md$ ]]; then
+                target_file="${target_file}.md"
+            fi
+            # Also try as directory index
+            if [[ ! -f "$target_file" ]] && [[ -d "${target_file%.md}" ]]; then
+                target_file="${target_file%.md}/index.md"
+            fi
+        fi
+
+        [[ ! -f "$target_file" ]] && continue
+
+        # Convert anchor to expected heading text for comparison
+        # Markdown heading anchors are lowercase, spaces become hyphens, special chars removed
+        # Check if any heading in the target generates this anchor
+        found=false
+        while IFS= read -r heading; do
+            # Generate anchor from heading: lowercase, replace spaces with hyphens, strip non-alphanumeric (except hyphens)
+            generated=$(echo "$heading" | sed 's/^#\+ //' | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/-$//')
+            if [[ "$generated" == "$anchor" ]]; then
+                found=true
+                break
+            fi
+        done < <(grep '^#' "$target_file" 2>/dev/null)
+
+        if [ "$found" = false ]; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Broken anchor in $rel_file: $link"
+            BROKEN_ANCHORS=$((BROKEN_ANCHORS + 1))
+        fi
+    done < <(grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null || true)
+done
+
+if [ "$BROKEN_ANCHORS" -eq 0 ]; then
+    pass_test "All anchor links resolve to valid headings"
+else
+    fail_test "Found $BROKEN_ANCHORS broken anchor link(s)" "Fix heading references to match actual heading text"
+fi
+
+# Summary
+echo ""
+echo "========================================"
+echo "Test Summary:"
+echo "  Passed: $TESTS_PASSED"
+echo "  Failed: $TESTS_FAILED"
+echo ""
+
+if [ "$TESTS_FAILED" -eq 0 ]; then
+    echo "✓ All tests passed!"
+    exit 0
+else
+    echo "✗ Some tests failed. Please fix the issues above."
+    exit 1
+fi

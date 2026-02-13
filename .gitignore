@@ -5,6 +5,11 @@ node_modules/
 build/
 .docusaurus/
 
+# Generated files (created during build)
+static/llm.txt
+static/llm-full.txt
+static/api/docs.json
+
 # Old MkDocs
 site/
 
@@ -13,6 +18,8 @@ site/
 .claude/
 .logs/
 .beads/
+.agent-type
+state.json
 
 # Misc
 .DS_Store

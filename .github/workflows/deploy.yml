@@ -1,3 +1,5 @@
+# Primary deployment: AWS S3 + CloudFront → docs.gt.villamarket.ai
+# Triggers on push to master or main. See also: pages.yml (GitHub Pages fallback).
 name: Deploy to AWS (S3 + CloudFront)
 
 on:
@@ -21,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies

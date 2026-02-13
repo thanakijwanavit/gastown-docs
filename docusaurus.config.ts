@@ -56,7 +56,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/thanakijwanavit/gastown-docs/tree/main/',
+          editUrl: 'https://github.com/thanakijwanavit/gastown-docs/tree/master/',
         },
         blog: {
           showReadingTime: true,

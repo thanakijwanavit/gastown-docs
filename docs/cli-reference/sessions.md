@@ -168,7 +168,7 @@ gt seance sess-abc123 --verbose
 
 **Sample output:**
 
-```
+```text
 Session: sess-abc123
 Agent: polecat/toast
 Rig: myproject
@@ -278,7 +278,7 @@ gt mol status
 
 **Sample output:**
 
-```
+```text
 Molecule: auth-refactor
 Status: in_progress
 Progress: 3/7 steps
@@ -483,7 +483,7 @@ gt mol dag --format mermaid
 
 **Sample output (text):**
 
-```
+```text
 1: Create migration script [completed]
 ├── 2: Update data models [completed]
 │   ├── 3: Migrate endpoints [completed]
@@ -527,7 +527,7 @@ gt formula list
 
 **Sample output:**
 
-```
+```text
 NAME                 STEPS   DESCRIPTION
 feature-standard     5       Standard feature development workflow
 bug-fix              3       Bug fix with test and validation
@@ -617,3 +617,9 @@ gt formula create my-workflow --from workflow.yaml
 # Create from an existing molecule
 gt formula create api-migration --from-molecule mol-auth-001 --description "API version migration workflow"
 ```
+
+## Related
+
+- [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes
+- [gt seance](./seance.md) -- Talk to predecessor sessions to recover context
+- [Molecules](../concepts/molecules.md) -- Multi-step workflow definitions

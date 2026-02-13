@@ -52,4 +52,12 @@ graph TB
     R2 -->|merge| Main2[main]
 ```
 
-Gas Town is a hierarchical supervisor system where each level monitors the level below it, ensuring work progresses reliably even when individual agents crash or stall.
+## How It Fits Together
+
+Gas Town is a hierarchical supervisor system with three layers:
+
+- **Town level** — The Mayor sets strategy, the Deacon runs health checks, and the Daemon provides heartbeats. These are singleton agents shared across all projects.
+- **Rig level** — Each project (rig) has its own Witness watching polecat health and a Refinery serializing merges to main. These agents are rig-scoped.
+- **Worker level** — Polecats are ephemeral workers spawned for one task and nuked when done. Crew members are persistent human-managed workspaces. Both do the actual coding work.
+
+Each level monitors the level below it, ensuring work progresses reliably even when individual agents crash or stall. When a polecat gets stuck, the Witness detects it and escalates to the Deacon, who can file a warrant for termination or trigger recovery.

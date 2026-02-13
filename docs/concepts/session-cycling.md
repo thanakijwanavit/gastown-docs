@@ -27,6 +27,10 @@ Gas Town solves this with session cycling:
 
 ## The Two Persistence Mechanisms
 
+:::note
+These two mechanisms are deliberately independent. If either one fails, the other still preserves enough state to continue. The hook carries the assignment; the mail carries the context.
+:::
+
 Session cycling relies on two independent mechanisms:
 
 ### 1. The Hook (What You're Working On)
@@ -149,6 +153,10 @@ gt mail inbox
 ---
 
 ## Best Practices
+
+:::tip
+The next session has zero memory of the current one. Write handoff notes as if briefing a stranger — because from a context perspective, that's exactly what's happening.
+:::
 
 1. **Always include handoff notes.** The next session (even if it's "you") has no memory of the previous one. Good notes save significant ramp-up time.
 

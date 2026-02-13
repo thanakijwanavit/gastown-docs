@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import Heading from '@theme/Heading';
+import DeploymentStatus from '@site/src/components/DeploymentStatus';
 
 import styles from './index.module.css';
 
@@ -77,7 +78,7 @@ function Feature({title, description}: {title: string; description: string}) {
   );
 }
 
-export default function Home(): JSX.Element {
+export default function Home(): React.JSX.Element {
   const {siteConfig} = useDocusaurusContext();
   return (
     <Layout title={siteConfig.title} description={siteConfig.tagline}>
@@ -90,6 +91,7 @@ export default function Home(): JSX.Element {
                 <Feature key={idx} {...props} />
               ))}
             </div>
+            <DeploymentStatus />
           </div>
         </section>
       </main>

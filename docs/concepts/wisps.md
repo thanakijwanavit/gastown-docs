@@ -85,6 +85,10 @@ graph LR
 
 ## Cleanup Wisps
 
+:::info
+Cleanup wisps are the exception, not the rule. A well-behaved polecat that runs `gt done` cleanly needs no cleanup wisp at all.
+:::
+
 A special use of wisps occurs in the [Witness](../agents/witness.md) workflow. When a polecat exits with a dirty state (uncommitted changes, unpushed commits), the Witness creates a **cleanup wisp** to track recovery:
 
 - **Clean exit** (branch pushed, MR submitted, git clean): No wisp needed -- auto-nuke immediately
@@ -107,6 +111,10 @@ gt mol current
 ---
 
 ## Ephemeral by Design
+
+:::note
+Wisps are deliberately invisible in normal bead listings. If you need to see them, use `gt mol status` which shows molecule progress including all wisp states.
+:::
 
 Wisps are deliberately ephemeral. They are **not exported** to JSONL during `bd sync` and do not appear in `bd list` output. This keeps the beads database focused on meaningful work items while allowing molecules to track arbitrarily fine-grained progress internally.
 

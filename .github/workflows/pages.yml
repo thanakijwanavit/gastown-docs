@@ -1,3 +1,5 @@
+# Fallback deployment: GitHub Pages (only triggers on main branch).
+# Primary deployment is AWS via deploy.yml → docs.gt.villamarket.ai
 name: Deploy to GitHub Pages
 
 on:
@@ -23,7 +25,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version-file: '.nvmrc'
           cache: npm
 
       - name: Install dependencies
