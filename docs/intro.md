@@ -24,3 +24,7 @@ When you scale beyond a single AI coding agent, you hit coordination problems: a
 - **Built-in monitoring** — Witnesses track health; the Deacon coordinates recovery
 
 For the full documentation, see the [docs home](/docs/).
+
+---
+
+*Last deployment validated: 2026-02-13*
