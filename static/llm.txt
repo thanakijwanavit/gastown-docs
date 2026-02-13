@@ -60,6 +60,7 @@
 - The MEOW Stack: /docs/concepts/meow-stack
 - GUPP & NDI: /docs/concepts/gupp
 - Wisps (Ephemeral Sub-Beads): /docs/concepts/wisps
+- Session Cycling: /docs/concepts/session-cycling
 
 ### Workflows
 - Workflows: /docs/workflows
@@ -493,6 +494,15 @@ Two foundational principles govern how Gas Town handles the inherent chaos of mu
 Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database.
 
 **Wisps** are lightweight tracking units that represent individual steps within a [molecule](molecules.md). Each step in a molecule's workflow is tracked as a wisp -- an ephemeral sub-bead that records progress, state transitions, and completion without persisting to the main issue database.
+
+---
+
+## Session Cycling
+> /docs/concepts/session-cycling
+
+Session cycling is Gas Town's mechanism for refreshing an agent's context window without losing work. When an agent's context fills up, it hands off to a fresh session that resumes from where it left off.
+
+**Session cycling** is Gas Town's mechanism for refreshing an agent's context window without losing work. When a session fills its context or finishes a logical chunk, it creates a handoff and a fresh session picks up where it left off.
 
 ---
 

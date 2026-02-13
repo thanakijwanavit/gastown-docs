@@ -79,6 +79,7 @@ const sidebars: SidebarsConfig = {
         'concepts/meow-stack',
         'concepts/gupp',
         'concepts/wisps',
+        'concepts/session-cycling',
       ],
     },
     {

@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T14:18:29.763Z",
+  "generated": "2026-02-13T14:20:06.560Z",
   "sections": [
     {
       "id": "getting-started",
@@ -251,6 +251,11 @@
           "title": "Wisps (Ephemeral Sub-Beads)",
           "path": "/docs/concepts/wisps",
           "description": "Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database."
+        },
+        {
+          "title": "Session Cycling",
+          "path": "/docs/concepts/session-cycling",
+          "description": "Session cycling is Gas Town's mechanism for refreshing an agent's context window without losing work. When an agent's context fills up, it hands off to a fresh session that resumes from where it left off."
         }
       ]
     },
@@ -612,6 +617,12 @@
       "path": "/docs/concepts/rigs",
       "section": "concepts",
       "description": "A Rig is Gas Town's project container. Each rig wraps a git repository with the full agent infrastructure needed to manage, develop, and merge code. Rigs are..."
+    },
+    {
+      "title": "Session Cycling",
+      "path": "/docs/concepts/session-cycling",
+      "section": "concepts",
+      "description": "Session cycling is Gas Town's mechanism for refreshing an agent's context window without losing work. When an agent's context fills up, it hands off to a fresh session that resumes from where it left off."
     },
     {
       "title": "Wisps (Ephemeral Sub-Beads)",
