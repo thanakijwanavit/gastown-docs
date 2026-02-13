@@ -271,6 +271,17 @@ Each stage transition represents roughly a 5x productivity gain, compounding as 
 >
 > -- Steve Yegge, *[Revenge of the Junior Developer](https://sourcegraph.com/blog/revenge-of-the-junior-developer)*
 
+```mermaid
+graph LR
+    S1["Stage 1-2<br/>No AI / Completions"] --> S3["Stage 3-4<br/>Chat / YOLO IDE"]
+    S3 --> S5["Stage 5<br/>CLI Single Agent"]
+    S5 --> S6["Stage 6<br/>3-5 Agents"]
+    S6 --> S7["Stage 7<br/>10+ Hand-Managed"]
+    S7 --> S8["Stage 8<br/>Orchestration"]
+    style S7 fill:#ff9,stroke:#333
+    style S8 fill:#9f9,stroke:#333
+```
+
 | Stage | Era | Agent Count | Coordination |
 |-------|-----|-------------|--------------|
 | 1-2 | Pre-2023 / 2023 | 0 | N/A |

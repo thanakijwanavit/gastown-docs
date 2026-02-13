@@ -10,6 +10,22 @@ Gas Town provides a suite of monitoring tools to observe real-time activity, aud
 
 ---
 
+## Monitoring Stack
+
+```mermaid
+graph TD
+    Feed["gt feed<br/>Real-time events"] --> You["You (Human)"]
+    Dashboard["gt dashboard<br/>Overview"] --> You
+    Costs["gt costs<br/>Token tracking"] --> You
+    Doctor["gt doctor<br/>Health check"] --> You
+    Trail["gt trail<br/>Agent output"] --> You
+
+    Witness -->|patrol reports| Feed
+    Deacon -->|health events| Feed
+    Refinery -->|merge events| Feed
+    Polecats -->|work events| Feed
+```
+
 ## Real-Time Activity
 
 ### `gt feed` -- Activity Dashboard
