@@ -78,6 +78,7 @@ const sidebars: SidebarsConfig = {
         'concepts/rigs',
         'concepts/meow-stack',
         'concepts/gupp',
+        'concepts/wisps',
       ],
     },
     {

@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T14:13:50.910Z",
+  "generated": "2026-02-13T14:18:29.763Z",
   "sections": [
     {
       "id": "getting-started",
@@ -246,6 +246,11 @@
           "title": "GUPP & NDI",
           "path": "/docs/concepts/gupp",
           "description": "The Gas Town Universal Propulsion Principle (GUPP) and Nondeterministic Idempotence (NDI) are the core design principles that make Gas Town reliable at scale."
+        },
+        {
+          "title": "Wisps (Ephemeral Sub-Beads)",
+          "path": "/docs/concepts/wisps",
+          "description": "Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database."
         }
       ]
     },
@@ -607,6 +612,12 @@
       "path": "/docs/concepts/rigs",
       "section": "concepts",
       "description": "A Rig is Gas Town's project container. Each rig wraps a git repository with the full agent infrastructure needed to manage, develop, and merge code. Rigs are..."
+    },
+    {
+      "title": "Wisps (Ephemeral Sub-Beads)",
+      "path": "/docs/concepts/wisps",
+      "section": "concepts",
+      "description": "Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database."
     },
     {
       "title": "Your First Convoy",

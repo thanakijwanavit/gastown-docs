@@ -59,6 +59,7 @@
 - Rigs (Project Containers): /docs/concepts/rigs
 - The MEOW Stack: /docs/concepts/meow-stack
 - GUPP & NDI: /docs/concepts/gupp
+- Wisps (Ephemeral Sub-Beads): /docs/concepts/wisps
 
 ### Workflows
 - Workflows: /docs/workflows
@@ -483,6 +484,15 @@ The **MEOW Stack** (Molecules, Epics, Orchestration, Workflows) is Gas Town's la
 The Gas Town Universal Propulsion Principle (GUPP) and Nondeterministic Idempotence (NDI) are the core design principles that make Gas Town reliable at scale.
 
 Two foundational principles govern how Gas Town handles the inherent chaos of multi-agent AI coordination: the **Gas Town Universal Propulsion Principle (GUPP)** and **Nondeterministic Idempotence (NDI)**.
+
+---
+
+## Wisps (Ephemeral Sub-Beads)
+> /docs/concepts/wisps
+
+Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database.
+
+**Wisps** are lightweight tracking units that represent individual steps within a [molecule](molecules.md). Each step in a molecule's workflow is tracked as a wisp -- an ephemeral sub-bead that records progress, state transitions, and completion without persisting to the main issue database.
 
 ---
 
