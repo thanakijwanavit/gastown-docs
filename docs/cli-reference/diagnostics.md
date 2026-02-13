@@ -661,3 +661,80 @@ gt session restart toast
 To send messages to a running session, use `gt nudge` instead of `gt session inject`. The nudge command uses reliable delivery that works correctly with Claude Code.
 
 :::
+
+---
+
+## Data Lifecycle
+
+### `gt krc`
+
+Key Record Chronicle — manages TTL-based lifecycle for Level 0 ephemeral data.
+
+```bash
+gt krc [command]
+```
+
+**Description:** Manages patrol heartbeats, status checks, and other operational data that decays in forensic value over days. Provides configurable TTLs, auto-pruning, and statistics.
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `gt krc stats` | Show event statistics |
+| `gt krc prune` | Remove expired events |
+| `gt krc config` | View or modify TTL configuration |
+| `gt krc decay` | Show forensic value decay report |
+| `gt krc auto-prune-status` | Show auto-prune scheduling state |
+
+**Examples:**
+
+```bash
+gt krc stats                          # Show event statistics
+gt krc prune                          # Remove expired events
+gt krc prune --dry-run                # Preview what would be pruned
+gt krc config                         # Show TTL configuration
+gt krc config set patrol_* 12h        # Set TTL for patrol events
+```
+
+---
+
+### `gt prune-branches`
+
+Remove local branches that were created when tracking remote polecat branches.
+
+```bash
+gt prune-branches [flags]
+```
+
+**Description:** When polecats push branches to origin, other clones create local tracking branches. After the remote branch is deleted (post-merge), `git fetch --prune` removes the remote tracking ref but the local branch persists. This command finds and removes those stale local branches.
+
+**Safety:** Uses `git branch -d` (not `-D`) so only fully-merged branches are deleted. Never deletes the current branch or the default branch.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Show what would be deleted without deleting |
+| `--pattern <glob>` | Branch name pattern to match (default: `polecat/*`) |
+
+**Examples:**
+
+```bash
+gt prune-branches                     # Clean up stale polecat branches
+gt prune-branches --dry-run           # Show what would be deleted
+gt prune-branches --pattern "feature/*"  # Custom pattern
+```
+
+---
+
+## Miscellaneous
+
+### `gt thanks`
+
+Display acknowledgments to contributors.
+
+```bash
+gt thanks
+```
+
+**Description:** Shows the humans who have contributed to the Gas Town project.
