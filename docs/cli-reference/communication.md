@@ -762,6 +762,6 @@ Stale P0/P1 escalations indicate that critical issues are going unaddressed. The
 
 ## See Also
 
-- [gt nudge](/docs/cli-reference/nudge) — Synchronous agent-to-agent messaging
-- [Escalations](/docs/operations/escalations) — The escalation routing system
-- [Agent Hierarchy](/docs/architecture/agent-hierarchy) — How agents are organized for communication
+- [gt nudge](nudge.md) — Synchronous agent-to-agent messaging
+- [Escalations](../operations/escalations.md) — The escalation routing system
+- [Agent Hierarchy](../architecture/agent-hierarchy.md) — How agents are organized for communication

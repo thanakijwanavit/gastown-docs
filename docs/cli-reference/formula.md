@@ -8,7 +8,7 @@ description: "Manage workflow formulas — reusable TOML/JSON templates that def
 
 Manage workflow formulas — reusable templates that define multi-step molecules.
 
-Formulas are TOML/JSON files that define workflows with steps, variables, and composition rules. They can be "poured" to create [molecules](/docs/concepts/molecules) or "wisped" for ephemeral patrol cycles.
+Formulas are TOML/JSON files that define workflows with steps, variables, and composition rules. They can be "poured" to create [molecules](../concepts/molecules.md) or "wisped" for ephemeral patrol cycles.
 
 ## Search Paths
 
@@ -57,14 +57,14 @@ gt formula create my-workflow
 ## How Formulas Relate to Molecules
 
 - A **formula** is a blueprint (static template)
-- A **[molecule](/docs/concepts/molecules)** is a live instance created from a formula
+- A **[molecule](../concepts/molecules.md)** is a live instance created from a formula
 - "Pouring" a formula creates a molecule with concrete variable bindings
 - Multiple molecules can be poured from the same formula simultaneously
 
-See [Formula Workflow](/docs/workflows/formula-workflow) for a step-by-step guide to creating and using formulas.
+See [Formula Workflow](../workflows/formula-workflow.md) for a step-by-step guide to creating and using formulas.
 
 ## See Also
 
-- [Molecules](/docs/concepts/molecules) — Running workflow instances
-- [MEOW Stack](/docs/concepts/meow-stack) — The layered workflow abstraction model
-- [Formula Workflow](/docs/workflows/formula-workflow) — End-to-end formula usage guide
+- [Molecules](../concepts/molecules.md) — Running workflow instances
+- [MEOW Stack](../concepts/meow-stack.md) — The layered workflow abstraction model
+- [Formula Workflow](../workflows/formula-workflow.md) — End-to-end formula usage guide

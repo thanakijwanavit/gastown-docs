@@ -362,6 +362,6 @@ gt plugin list --json
 
 ## See Also
 
-- [Plugins](/docs/operations/plugins) — Plugin system documentation
-- [Workspace Management](/docs/cli-reference/workspace) — Town-level setup commands
-- [Rig Management](/docs/cli-reference/rigs) — Per-rig settings and configuration
+- [Plugins](../operations/plugins.md) — Plugin system documentation
+- [Workspace Management](workspace.md) — Town-level setup commands
+- [Rig Management](rigs.md) — Per-rig settings and configuration

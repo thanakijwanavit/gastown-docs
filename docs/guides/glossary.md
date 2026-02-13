@@ -14,32 +14,32 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 
 | Term | Definition |
 |------|------------|
-| **[Mayor](/docs/agents/mayor)** | The top-level orchestrator agent. Receives instructions from the human, breaks work into beads, creates convoys, and coordinates all other agents. You interact with Gas Town primarily through the Mayor. |
-| **[Deacon](/docs/agents/deacon)** | The background health coordinator. Monitors agent health, handles escalations, and coordinates recovery when agents crash. Named after a religious figure who keeps order. |
-| **[Witness](/docs/agents/witness)** | Per-rig monitoring agent. Watches polecats, validates their work, detects crashes, and reports status. Inspired by Mad Max's "Witness me!" |
-| **[Refinery](/docs/agents/refinery)** | The merge queue agent. Processes completed work from polecats, rebasing and merging to main one at a time. Prevents merge chaos from parallel agents. |
-| **[Polecats](/docs/agents/polecats)** | Ephemeral worker agents. Spawn, claim a bead, execute a molecule, submit work, then exit. Named after the pole-swinging warriors in Mad Max. |
-| **[Dogs](/docs/agents/dogs)** | Cross-rig utility agents that handle tasks spanning multiple rigs (e.g., dependency updates, cross-project refactoring). |
-| **[Crew](/docs/agents/crew)** | Human-paired agents for interactive, collaborative work sessions. Unlike polecats, crew agents are long-lived and maintain context with a human operator. |
-| **[Boot](/docs/agents/boot)** | Triage agent that assesses incoming work, classifies complexity, and recommends assignment strategies. |
+| **[Mayor](../agents/mayor.md)** | The top-level orchestrator agent. Receives instructions from the human, breaks work into beads, creates convoys, and coordinates all other agents. You interact with Gas Town primarily through the Mayor. |
+| **[Deacon](../agents/deacon.md)** | The background health coordinator. Monitors agent health, handles escalations, and coordinates recovery when agents crash. Named after a religious figure who keeps order. |
+| **[Witness](../agents/witness.md)** | Per-rig monitoring agent. Watches polecats, validates their work, detects crashes, and reports status. Inspired by Mad Max's "Witness me!" |
+| **[Refinery](../agents/refinery.md)** | The merge queue agent. Processes completed work from polecats, rebasing and merging to main one at a time. Prevents merge chaos from parallel agents. |
+| **[Polecats](../agents/polecats.md)** | Ephemeral worker agents. Spawn, claim a bead, execute a molecule, submit work, then exit. Named after the pole-swinging warriors in Mad Max. |
+| **[Dogs](../agents/dogs.md)** | Cross-rig utility agents that handle tasks spanning multiple rigs (e.g., dependency updates, cross-project refactoring). |
+| **[Crew](../agents/crew.md)** | Human-paired agents for interactive, collaborative work sessions. Unlike polecats, crew agents are long-lived and maintain context with a human operator. |
+| **[Boot](../agents/boot.md)** | Triage agent that assesses incoming work, classifies complexity, and recommends assignment strategies. |
 | **Daemon** | The background Go process that manages agent lifecycles, runs health checks, and provides the `gt` CLI interface. |
 
 ## Core Concepts
 
 | Term | Definition |
 |------|------------|
-| **[Bead](/docs/concepts/beads)** | An atomic unit of tracked work — an issue, task, bug, or feature. Stored in git via the `bd` CLI. Beads are the fundamental work primitive in Gas Town. |
-| **[Convoy](/docs/concepts/convoys)** | A batch of related beads that travel together. Created when the Mayor breaks a large request into individual tasks. Tracks overall progress of a batch. |
-| **[Hook](/docs/concepts/hooks)** | A persistent pointer from an agent to its current bead. The hook is what makes Gas Town crash-safe — agents read their hook on startup to know what they were working on. |
-| **[Molecule](/docs/concepts/molecules)** | A running instance of a multi-step workflow. Tracks which steps are done, in progress, or pending. Persists in beads so agents can resume after crashes. |
-| **Formula** | A TOML-defined template for creating molecules. Formulas are blueprints; molecules are live instances. Gas Town ships with 30+ built-in formulas. See [Formula Workflow](/docs/workflows/formula-workflow). |
-| **[Gate](/docs/concepts/gates)** | An async coordination primitive. A gate blocks a molecule step until a condition is met (e.g., "wait for code review approval" or "wait for dependent bead to complete"). |
-| **[Rig](/docs/concepts/rigs)** | A project container wrapping a git repository. Each rig has its own set of polecats, a witness, and a refinery. A Gas Town workspace typically runs 2-5 rigs. |
-| **Town** | The top-level workspace directory containing all rigs, the Mayor, the Deacon, and shared configuration. Typically located at `~/gt`. See [Workspace Management](/docs/cli-reference/workspace). |
+| **[Bead](../concepts/beads.md)** | An atomic unit of tracked work — an issue, task, bug, or feature. Stored in git via the `bd` CLI. Beads are the fundamental work primitive in Gas Town. |
+| **[Convoy](../concepts/convoys.md)** | A batch of related beads that travel together. Created when the Mayor breaks a large request into individual tasks. Tracks overall progress of a batch. |
+| **[Hook](../concepts/hooks.md)** | A persistent pointer from an agent to its current bead. The hook is what makes Gas Town crash-safe — agents read their hook on startup to know what they were working on. |
+| **[Molecule](../concepts/molecules.md)** | A running instance of a multi-step workflow. Tracks which steps are done, in progress, or pending. Persists in beads so agents can resume after crashes. |
+| **Formula** | A TOML-defined template for creating molecules. Formulas are blueprints; molecules are live instances. Gas Town ships with 30+ built-in formulas. See [Formula Workflow](../workflows/formula-workflow.md). |
+| **[Gate](../concepts/gates.md)** | An async coordination primitive. A gate blocks a molecule step until a condition is met (e.g., "wait for code review approval" or "wait for dependent bead to complete"). |
+| **[Rig](../concepts/rigs.md)** | A project container wrapping a git repository. Each rig has its own set of polecats, a witness, and a refinery. A Gas Town workspace typically runs 2-5 rigs. |
+| **Town** | The top-level workspace directory containing all rigs, the Mayor, the Deacon, and shared configuration. Typically located at `~/gt`. See [Workspace Management](../cli-reference/workspace.md). |
 | **Worktree** | A git worktree providing file-level isolation for each polecat. Each polecat gets its own worktree so agents never edit shared files simultaneously. |
-| **[Wisp](/docs/concepts/wisps)** | A sub-bead — a lightweight tracking unit that represents a single step within a molecule. Ephemeral by default (not exported to JSONL). |
-| **Mail** | The asynchronous messaging system between agents. Messages are stored as beads and routed by address (e.g., `mayor/`, `myrig/witness`). See [Communication](/docs/cli-reference/communication). |
-| **Guzzoline** | Slang for the specifications, plans, and designs that Crew members create. Polecats consume guzzoline — they execute the plans Crew produces. See [Crew Collaboration](/docs/workflows/crew-collaboration). |
+| **[Wisp](../concepts/wisps.md)** | A sub-bead — a lightweight tracking unit that represents a single step within a molecule. Ephemeral by default (not exported to JSONL). |
+| **Mail** | The asynchronous messaging system between agents. Messages are stored as beads and routed by address (e.g., `mayor/`, `myrig/witness`). See [Communication](../cli-reference/communication.md). |
+| **Guzzoline** | Slang for the specifications, plans, and designs that Crew members create. Polecats consume guzzoline — they execute the plans Crew produces. See [Crew Collaboration](../workflows/crew-collaboration.md). |
 | **DND** | Do Not Disturb mode. When enabled, an agent suppresses non-critical notifications and nudges. Toggle with `gt dnd`. |
 | **Seance** | A command (`gt seance`) that lets you query predecessor sessions for context, useful when picking up work from a crashed or cycled agent. |
 
@@ -47,9 +47,9 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 
 | Term | Definition |
 |------|------------|
-| **[MEOW Stack](/docs/concepts/meow-stack)** | **M**olecules, **E**pics, **O**rchestration, **W**orkflows — Gas Town's layered abstraction model. Each layer builds on the one below, from individual molecule steps up to full workflow orchestration. |
+| **[MEOW Stack](../concepts/meow-stack.md)** | **M**olecules, **E**pics, **O**rchestration, **W**orkflows — Gas Town's layered abstraction model. Each layer builds on the one below, from individual molecule steps up to full workflow orchestration. |
 | **Protomolecule** | A higher-order orchestration pattern that coordinates multiple molecules working in parallel at the convoy level. |
-| **Pour** | The act of creating a molecule instance from a formula template. "Pour the shiny formula" creates a new shiny molecule. See [Formula Workflow](/docs/workflows/formula-workflow). |
+| **Pour** | The act of creating a molecule instance from a formula template. "Pour the shiny formula" creates a new shiny molecule. See [Formula Workflow](../workflows/formula-workflow.md). |
 | **Squash** | Compressing a completed molecule into a single digest bead. Used by patrol agents to keep the beads database clean. |
 | **Burn** | Archiving a completed molecule. The molecule is marked done and no longer appears in active status. |
 
@@ -57,35 +57,35 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 
 | Term | Definition |
 |------|------------|
-| **[GUPP](/docs/concepts/gupp)** | Gas Town Universal Propulsion Principle — every operation must move the system forward or leave it unchanged. No operation should move backward. |
-| **NDI** | Nondeterministic Idempotence — operations may produce different outputs each time (because AI is nondeterministic), but the system state after execution is equivalent. See [Design Principles](/docs/architecture/design-principles). |
-| **[Nudge](/docs/cli-reference/nudge)** | A synchronous message that interrupts an agent with new context or instructions. The escape hatch for stuck agents. |
-| **Let It Crash** | Erlang-inspired philosophy: rather than preventing every failure, design for recovery. Polecats are expected to crash; the system handles it gracefully. See [Design Principles](/docs/architecture/design-principles). |
-| **Discovery over Tracking** | Agents observe reality each patrol cycle rather than maintaining fragile in-memory state. See [Patrol Cycles](/docs/concepts/patrol-cycles) and [Design Principles](/docs/architecture/design-principles). |
-| **Scotty Principle** | Named after the Star Trek engineer: never proceed past a failure. The Refinery does not merge code that fails validation. Polecats run preflight tests before starting. See [Design Principles](/docs/architecture/design-principles). |
+| **[GUPP](../concepts/gupp.md)** | Gas Town Universal Propulsion Principle — every operation must move the system forward or leave it unchanged. No operation should move backward. |
+| **NDI** | Nondeterministic Idempotence — operations may produce different outputs each time (because AI is nondeterministic), but the system state after execution is equivalent. See [Design Principles](../architecture/design-principles.md). |
+| **[Nudge](../cli-reference/nudge.md)** | A synchronous message that interrupts an agent with new context or instructions. The escape hatch for stuck agents. |
+| **Let It Crash** | Erlang-inspired philosophy: rather than preventing every failure, design for recovery. Polecats are expected to crash; the system handles it gracefully. See [Design Principles](../architecture/design-principles.md). |
+| **Discovery over Tracking** | Agents observe reality each patrol cycle rather than maintaining fragile in-memory state. See [Patrol Cycles](../concepts/patrol-cycles.md) and [Design Principles](../architecture/design-principles.md). |
+| **Scotty Principle** | Named after the Star Trek engineer: never proceed past a failure. The Refinery does not merge code that fails validation. Polecats run preflight tests before starting. See [Design Principles](../architecture/design-principles.md). |
 
 ## Operations
 
 | Term | Definition |
 |------|------------|
 | **Landing the Plane** | The mandatory session completion workflow. Includes filing remaining work, running quality gates, updating issues, pushing to remote, and writing handoff notes. |
-| **[Patrol Cycle](/docs/concepts/patrol-cycles)** | A recurring monitoring cycle. Witnesses, Refinery, and Deacon all run patrol molecules — looping through check-act cycles. See [Patrol Cycles](/docs/concepts/patrol-cycles) and [Monitoring](/docs/operations/monitoring). |
-| **[Escalation](/docs/operations/escalations)** | A routing mechanism for problems that an agent cannot resolve on its own. Escalations travel up the agent hierarchy until someone (or the human) handles them. |
-| **[Sling](/docs/cli-reference/sling)** | Assigning a bead to an agent. `gt sling gt-a1b2c myrig` sends the bead to the specified rig for a polecat to pick up. |
-| **Feed** | The live activity stream showing real-time events from all agents across all rigs. See [Diagnostics](/docs/cli-reference/diagnostics). |
-| **Trail** | A summary of recent activity, more condensed than the live feed. See [Diagnostics](/docs/cli-reference/diagnostics). |
-| **Prime** | Reloading an agent's full context from its CLAUDE.md file, hooks, and beads state. Run `gt prime` after compaction, crashes, or new sessions. See [Session & Handoff](/docs/cli-reference/sessions). |
-| **[Handoff](/docs/workflows/handoff-ceremony)** | Transferring context from one session to the next. Writes summary notes that the next session picks up automatically. See [Handoff Ceremony](/docs/workflows/handoff-ceremony) and [Session Cycling](/docs/concepts/session-cycling). |
-| **[Session Cycling](/docs/concepts/session-cycling)** | Refreshing an agent's context window without losing work. The hook persists across sessions; handoff mail carries context notes. |
-| **[Death Warrant](/docs/operations/lifecycle)** | A structured cleanup request filed by the Deacon when an agent becomes a zombie. Boot processes warrants to recover work before terminating the process. |
-| **Park** | Pausing a rig. The rig's agents stop, but state is preserved. `gt rig park myrig`. See [Rig Management](/docs/cli-reference/rigs). |
+| **[Patrol Cycle](../concepts/patrol-cycles.md)** | A recurring monitoring cycle. Witnesses, Refinery, and Deacon all run patrol molecules — looping through check-act cycles. See [Patrol Cycles](../concepts/patrol-cycles.md) and [Monitoring](../operations/monitoring.md). |
+| **[Escalation](../operations/escalations.md)** | A routing mechanism for problems that an agent cannot resolve on its own. Escalations travel up the agent hierarchy until someone (or the human) handles them. |
+| **[Sling](../cli-reference/sling.md)** | Assigning a bead to an agent. `gt sling gt-a1b2c myrig` sends the bead to the specified rig for a polecat to pick up. |
+| **Feed** | The live activity stream showing real-time events from all agents across all rigs. See [Diagnostics](../cli-reference/diagnostics.md). |
+| **Trail** | A summary of recent activity, more condensed than the live feed. See [Diagnostics](../cli-reference/diagnostics.md). |
+| **Prime** | Reloading an agent's full context from its CLAUDE.md file, hooks, and beads state. Run `gt prime` after compaction, crashes, or new sessions. See [Session & Handoff](../cli-reference/sessions.md). |
+| **[Handoff](../workflows/handoff-ceremony.md)** | Transferring context from one session to the next. Writes summary notes that the next session picks up automatically. See [Handoff Ceremony](../workflows/handoff-ceremony.md) and [Session Cycling](../concepts/session-cycling.md). |
+| **[Session Cycling](../concepts/session-cycling.md)** | Refreshing an agent's context window without losing work. The hook persists across sessions; handoff mail carries context notes. |
+| **[Death Warrant](../operations/lifecycle.md)** | A structured cleanup request filed by the Deacon when an agent becomes a zombie. Boot processes warrants to recover work before terminating the process. |
+| **Park** | Pausing a rig. The rig's agents stop, but state is preserved. `gt rig park myrig`. See [Rig Management](../cli-reference/rigs.md). |
 
 ## Software Survival 3.0
 
 | Term | Definition |
 |------|------------|
-| **Software Survival 3.0** | Steve Yegge's thesis that competitive selection pressure now favors teams that effectively use multi-agent AI. The third era of software selection pressure. See [The 8 Stages](/docs/guides/eight-stages). |
-| **[The 8 Stages](/docs/guides/eight-stages)** | A maturity model for AI-assisted development, from Stage 1 (zero AI) through Stage 8 (building your own orchestrator). Gas Town targets Stage 7+ users. |
+| **Software Survival 3.0** | Steve Yegge's thesis that competitive selection pressure now favors teams that effectively use multi-agent AI. The third era of software selection pressure. See [The 8 Stages](eight-stages.md). |
+| **[The 8 Stages](eight-stages.md)** | A maturity model for AI-assisted development, from Stage 1 (zero AI) through Stage 8 (building your own orchestrator). Gas Town targets Stage 7+ users. |
 | **Survival Formula** | (Savings x Usage x H) / (Awareness + Friction) — the formula determining whether a software tool survives. |
 | **Plot Armor** | A survival ratio so high (in the thousands) that a tool becomes effectively indestructible. No LLM will waste tokens re-synthesizing what the tool already does perfectly. `grep` is the canonical example. Extreme velocity from AI orchestration can provide plot armor. |
 | **Human Coefficient (H)** | A multiplier in the survival formula representing human preference for human-made output. Higher H means the domain values human involvement, giving software in that domain an extra survival advantage beyond pure efficiency. |
@@ -108,9 +108,9 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | Term | Definition |
 |------|------------|
 | **Three Developer Loops** | The nested feedback loops for Gas Town operations: Outer Loop (days-weeks, strategic planning), Middle Loop (hours-days, agent coordination), Inner Loop (minutes, task delegation and output review). |
-| **PR Sheriff** | An ad-hoc Crew role with a permanent hook to manage pull requests. On each session startup, the PR Sheriff checks open PRs, classifies them by complexity, and slings easy wins to other Crew or polecats. See [Crew Collaboration](/docs/workflows/crew-collaboration). |
+| **PR Sheriff** | An ad-hoc Crew role with a permanent hook to manage pull requests. On each session startup, the PR Sheriff checks open PRs, classifies them by complexity, and slings easy wins to other Crew or polecats. See [Crew Collaboration](../workflows/crew-collaboration.md). |
 | **Vibe Coding** | A development approach where you let the AI do the work while focusing on direction and review. Gas Town embraces vibe coding as a core philosophy -- tolerating some work loss in exchange for throughput. |
-| **Guzzoline** | Slang for the specifications, plans, and design work that Crew members produce. Polecats consume this guzzoline to execute well-specified tasks. From the Mad Max fuel terminology. See [Crew Collaboration](/docs/workflows/crew-collaboration). |
+| **Guzzoline** | Slang for the specifications, plans, and design work that Crew members produce. Polecats consume this guzzoline to execute well-specified tasks. From the Mad Max fuel terminology. See [Crew Collaboration](../workflows/crew-collaboration.md). |
 
 ## CLI Quick Reference
 

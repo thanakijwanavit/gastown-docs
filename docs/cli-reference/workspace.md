@@ -746,7 +746,7 @@ gt worktree remove beads
 
 ## See Also
 
-- [Architecture Overview](/docs/architecture/overview) — How the workspace fits into Gas Town's architecture
-- [Rig Management](/docs/cli-reference/rigs) — Managing individual project containers within the workspace
-- [Configuration](/docs/cli-reference/configuration) — Town-level settings and agent configuration
-- [gt dolt](/docs/cli-reference/dolt) — Dolt SQL server that backs the beads database
+- [Architecture Overview](../architecture/overview.md) — How the workspace fits into Gas Town's architecture
+- [Rig Management](rigs.md) — Managing individual project containers within the workspace
+- [Configuration](configuration.md) — Town-level settings and agent configuration
+- [gt dolt](dolt.md) — Dolt SQL server that backs the beads database

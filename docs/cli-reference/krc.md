@@ -69,6 +69,6 @@ KRC only manages Level 0. Higher levels are managed by Dolt directly.
 
 ## See Also
 
-- [gt patrol](/docs/cli-reference/patrol) — Patrol digest aggregation
-- [gt dolt](/docs/cli-reference/dolt) — Dolt SQL server management
-- [Monitoring](/docs/operations/monitoring) — Operational monitoring patterns
+- [gt patrol](patrol.md) — Patrol digest aggregation
+- [gt dolt](dolt.md) — Dolt SQL server management
+- [Monitoring](../operations/monitoring.md) — Operational monitoring patterns

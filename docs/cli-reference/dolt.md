@@ -81,5 +81,5 @@ gt dolt list           # Verify it appears
 
 ## See Also
 
-- [Beads](/docs/concepts/beads) — The work tracking system backed by Dolt
-- [Configuration](/docs/cli-reference/configuration) — Town-level settings
+- [Beads](../concepts/beads.md) — The work tracking system backed by Dolt
+- [Configuration](configuration.md) — Town-level settings

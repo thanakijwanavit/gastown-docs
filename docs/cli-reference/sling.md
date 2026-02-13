@@ -145,7 +145,7 @@ The `--args` string is stored in the bead and shown via `gt prime`. Since the ex
 
 ## See Also
 
-- [GUPP](/docs/concepts/gupp) — The propulsion principle that drives work assignment
-- [Hooks](/docs/concepts/hooks) — How agents claim work via hooks
-- [Work Management](/docs/cli-reference/work) — Full work lifecycle commands
-- [gt nudge](/docs/cli-reference/nudge) — Wake agents after slinging work
+- [GUPP](../concepts/gupp.md) — The propulsion principle that drives work assignment
+- [Hooks](../concepts/hooks.md) — How agents claim work via hooks
+- [Work Management](work.md) — Full work lifecycle commands
+- [gt nudge](nudge.md) — Wake agents after slinging work

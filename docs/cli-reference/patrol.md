@@ -36,7 +36,7 @@ Each patrol cycle generates ephemeral data (heartbeats, status checks, health re
 
 ## See Also
 
-- [Monitoring](/docs/operations/monitoring) — Operational monitoring patterns
-- [gt krc](/docs/cli-reference/krc) — TTL-based lifecycle for ephemeral patrol data
-- [Witness](/docs/agents/witness) — Per-rig patrol agent
-- [Deacon](/docs/agents/deacon) — Town-wide health coordinator
+- [Monitoring](../operations/monitoring.md) — Operational monitoring patterns
+- [gt krc](krc.md) — TTL-based lifecycle for ephemeral patrol data
+- [Witness](../agents/witness.md) — Per-rig patrol agent
+- [Deacon](../agents/deacon.md) — Town-wide health coordinator

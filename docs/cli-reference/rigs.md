@@ -470,6 +470,6 @@ gt rig settings myproject --unset "validation.timeout"
 
 ## See Also
 
-- [Rigs](/docs/concepts/rigs) — Conceptual overview of project containers
-- [Workspace Management](/docs/cli-reference/workspace) — Town-level workspace commands
-- [Configuration](/docs/cli-reference/configuration) — Town-level configuration
+- [Rigs](../concepts/rigs.md) — Conceptual overview of project containers
+- [Workspace Management](workspace.md) — Town-level workspace commands
+- [Configuration](configuration.md) — Town-level configuration

@@ -670,8 +670,8 @@ Moving a hooked bead without `--force` will fail. Unsling it first, or use `--fo
 
 ## See Also
 
-- [Beads](/docs/concepts/beads) — The work tracking primitive
-- [Hooks](/docs/concepts/hooks) — How agents claim and track work
-- [GUPP](/docs/concepts/gupp) — The propulsion principle behind work assignment
-- [gt sling](/docs/cli-reference/sling) — Detailed sling command reference
-- [Convoy & Tracking](/docs/cli-reference/convoys) — Batch work management
+- [Beads](../concepts/beads.md) — The work tracking primitive
+- [Hooks](../concepts/hooks.md) — How agents claim and track work
+- [GUPP](../concepts/gupp.md) — The propulsion principle behind work assignment
+- [gt sling](sling.md) — Detailed sling command reference
+- [Convoy & Tracking](convoys.md) — Batch work management

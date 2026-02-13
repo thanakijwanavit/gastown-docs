@@ -314,6 +314,6 @@ All subcommands that accept `[rig]` infer the rig from the current directory whe
 
 ## See Also
 
-- [Refinery](/docs/agents/refinery) — The merge queue agent
-- [Merge Queue](/docs/cli-reference/merge-queue) — MQ list, submit, and status commands
-- [Work Management](/docs/cli-reference/work) — Submitting work via `gt done`
+- [Refinery](../agents/refinery.md) — The merge queue agent
+- [Merge Queue](merge-queue.md) — MQ list, submit, and status commands
+- [Work Management](work.md) — Submitting work via `gt done`

@@ -275,6 +275,6 @@ If a merge conflict occurs during rebase, the Refinery can spawn a fresh polecat
 
 ## See Also
 
-- [Refinery](/docs/agents/refinery) — The merge queue agent
-- [gt refinery](/docs/cli-reference/refinery-commands) — Refinery management commands
-- [Work Management](/docs/cli-reference/work) — Submitting work to the merge queue via `gt done`
+- [Refinery](../agents/refinery.md) — The merge queue agent
+- [gt refinery](refinery-commands.md) — Refinery management commands
+- [Work Management](work.md) — Submitting work to the merge queue via `gt done`

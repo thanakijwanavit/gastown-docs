@@ -370,6 +370,6 @@ Merge status: 2 merged, 0 in queue
 
 ## See Also
 
-- [Convoys](/docs/concepts/convoys) — Conceptual overview of convoy-based work batching
-- [Work Management](/docs/cli-reference/work) — Individual bead lifecycle commands
-- [gt sling](/docs/cli-reference/sling) — Dispatching convoy beads to rigs
+- [Convoys](../concepts/convoys.md) — Conceptual overview of convoy-based work batching
+- [Work Management](work.md) — Individual bead lifecycle commands
+- [gt sling](sling.md) — Dispatching convoy beads to rigs

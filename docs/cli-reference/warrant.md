@@ -56,6 +56,6 @@ Warrants are typically filed automatically by patrol agents when they detect:
 
 ## See Also
 
-- [Lifecycle](/docs/operations/lifecycle) — Agent lifecycle management including death warrants
-- [Boot](/docs/agents/boot) — The triage agent that processes warrants
-- [Deacon](/docs/agents/deacon) — Files warrants when agents need termination
+- [Lifecycle](../operations/lifecycle.md) — Agent lifecycle management including death warrants
+- [Boot](../agents/boot.md) — The triage agent that processes warrants
+- [Deacon](../agents/deacon.md) — Files warrants when agents need termination

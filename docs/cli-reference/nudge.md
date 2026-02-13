@@ -110,6 +110,6 @@ For non-urgent communication, use `gt mail send` instead. Nudges interrupt the t
 
 ## See Also
 
-- [Communication](/docs/cli-reference/communication) — Full communication command reference including mail and escalations
-- [gt sling](/docs/cli-reference/sling) — Assign work (often paired with nudge to wake agents)
-- [gt session](/docs/cli-reference/session-commands) — Low-level session management
+- [Communication](communication.md) — Full communication command reference including mail and escalations
+- [gt sling](sling.md) — Assign work (often paired with nudge to wake agents)
+- [gt session](session-commands.md) — Low-level session management

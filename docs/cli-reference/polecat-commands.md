@@ -349,7 +349,7 @@ gt polecat identity rename myproject/toast myproject/alpha
 
 ## See Also
 
-- [Polecats](/docs/agents/polecats) — Ephemeral worker agent documentation
-- [Lifecycle](/docs/operations/lifecycle) — Agent lifecycle management
-- [gt warrant](/docs/cli-reference/warrant) — Death warrants for stuck polecats
-- [Agent Operations](/docs/cli-reference/agents) — General agent management commands
+- [Polecats](../agents/polecats.md) — Ephemeral worker agent documentation
+- [Lifecycle](../operations/lifecycle.md) — Agent lifecycle management
+- [gt warrant](warrant.md) — Death warrants for stuck polecats
+- [Agent Operations](agents.md) — General agent management commands

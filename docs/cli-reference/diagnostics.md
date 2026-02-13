@@ -664,7 +664,7 @@ To send messages to a running session, use `gt nudge` instead of `gt session inj
 
 ## See Also
 
-- [Monitoring](/docs/operations/monitoring) — Operational monitoring patterns
-- [Troubleshooting](/docs/operations/troubleshooting) — Common issues and solutions
-- [gt krc](/docs/cli-reference/krc) — Ephemeral data lifecycle management
-- [gt patrol](/docs/cli-reference/patrol) — Patrol digest aggregation
+- [Monitoring](../operations/monitoring.md) — Operational monitoring patterns
+- [Troubleshooting](../operations/troubleshooting.md) — Common issues and solutions
+- [gt krc](krc.md) — Ephemeral data lifecycle management
+- [gt patrol](patrol.md) — Patrol digest aggregation
