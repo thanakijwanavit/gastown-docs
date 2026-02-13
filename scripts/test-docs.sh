@@ -996,6 +996,38 @@ else
     fail_test "Found $BLOG_DOC_LINK_ISSUES blog post(s) without doc cross-links" "Add at least one link to /docs/ in each blog post's Next Steps section"
 fi
 
+# Test 32: Doc-to-blog cross-links reference valid blog slugs
+echo ""
+echo "Test 32: Checking doc-to-blog links reference valid slugs..."
+BLOG_SLUG_ISSUES=0
+
+# Build list of valid blog slugs
+VALID_SLUGS=""
+for blog_file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    slug=$(awk '/^---$/{if(++n==2)exit}n==1 && /^slug:/{print $2; exit}' "$blog_file" 2>/dev/null)
+    [ -n "$slug" ] && VALID_SLUGS="$VALID_SLUGS $slug"
+done
+
+# Check all /blog/ references in docs
+for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
+    while read -r blog_link; do
+        # Extract slug from /blog/slug-name format
+        slug=$(echo "$blog_link" | sed 's|^/blog/||' | sed 's|/$||')
+        [ -z "$slug" ] && continue
+        if ! echo "$VALID_SLUGS" | grep -qw "$slug"; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Invalid blog slug '/blog/$slug' in $rel_file"
+            BLOG_SLUG_ISSUES=$((BLOG_SLUG_ISSUES + 1))
+        fi
+    done < <(grep -oP '\(/blog/[a-z0-9-]+\)' "$file" 2>/dev/null | sed 's/[()]//g' | sort -u || true)
+done
+
+if [ "$BLOG_SLUG_ISSUES" -eq 0 ]; then
+    pass_test "All doc-to-blog links reference valid blog slugs"
+else
+    fail_test "Found $BLOG_SLUG_ISSUES invalid blog slug reference(s)" "Ensure blog slugs in docs match actual blog post slugs"
+fi
+
 # Summary
 echo ""
 echo "========================================"
