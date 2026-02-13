@@ -20859,6 +20859,7 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Nudge** | A synchronous message that interrupts an agent with new context or instructions. The escape hatch for stuck agents. |
 | **Let It Crash** | Erlang-inspired philosophy: rather than preventing every failure, design for recovery. Polecats are expected to crash; the system handles it gracefully. |
 | **Discovery over Tracking** | Agents observe reality each patrol cycle rather than maintaining fragile in-memory state. |
+| **Scotty Principle** | Named after the Star Trek engineer: never proceed past a failure. The Refinery does not merge code that fails validation. Polecats run preflight tests before starting. |
 
 ## Operations
 
@@ -20872,6 +20873,8 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Trail** | A summary of recent activity, more condensed than the live feed. |
 | **Prime** | Reloading an agent's full context from its CLAUDE.md file, hooks, and beads state. Run `gt prime` after compaction, crashes, or new sessions. |
 | **Handoff** | Transferring context from one session to the next. Writes summary notes that the next session picks up automatically. |
+| **Session Cycling** | Refreshing an agent's context window without losing work. The hook persists across sessions; handoff mail carries context notes. |
+| **Death Warrant** | A structured cleanup request filed by the Deacon when an agent becomes a zombie. Boot processes warrants to recover work before terminating the process. |
 | **Park** | Pausing a rig. The rig's agents stop, but state is preserved. `gt rig park myrig`. |
 
 ## Software Survival 3.0
