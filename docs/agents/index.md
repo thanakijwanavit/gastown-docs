@@ -204,6 +204,14 @@ gt polecat nuke <name>       # Last resort: destroy polecat
 
 If agents are not escalating properly, verify the chain from the bottom up: Daemon -> Boot -> Deacon -> Witnesses. A broken link anywhere stops escalations from flowing.
 
+## From the Blog
+
+- [The Witness Explained](/blog/witness-explained) -- Deep dive into Gas Town's self-healing watchdog
+- [The Deacon Patrol](/blog/deacon-patrol) -- How the background coordinator keeps the fleet healthy
+- [The Crew Workflow](/blog/crew-workflow) -- Human developers working alongside AI agents
+- [The Mayor Workflow](/blog/mayor-workflow) -- Gas Town's fully automated pipeline
+- [The Refinery Deep Dive](/blog/refinery-deep-dive) -- How merges actually work in Gas Town
+
 ## Related
 
 - **[Architecture Overview](../architecture/overview.md)** — How agents fit into the larger system

@@ -74,6 +74,13 @@ If you have completed the [Getting Started](../getting-started/index.md) guide a
 
 :::
 
+## From the Blog
+
+- [Cost Tracking and Optimization](/blog/cost-optimization) -- Practical strategies for managing token spend at scale
+- [Multi-Runtime Workflows](/blog/multi-runtime-workflows) -- Using Gas Town with Claude, Gemini, Codex, and more
+- [What Stage Are You?](/blog/eight-stages-self-assessment) -- Self-assessment for AI coding maturity
+- [5 Common Pitfalls When Starting](/blog/common-pitfalls) -- Mistakes to avoid as a new Gas Town user
+
 ## Related
 
 - **[Getting Started](../getting-started/index.md)** — Installation and first steps

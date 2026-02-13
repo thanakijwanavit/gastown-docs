@@ -95,6 +95,13 @@ These concepts share several common design principles, rooted in [GUPP & NDI](gu
 - **Discovery over tracking** -- Agents observe reality each patrol cycle rather than maintaining fragile in-memory state
 - **Composable** -- Primitives combine to form complex workflows without a monolithic orchestration layer
 
+## From the Blog
+
+- [Why Beads? AI-Native Issue Tracking](/blog/why-beads) -- The design philosophy behind git-backed issues
+- [Understanding GUPP](/blog/understanding-gupp) -- Why crashes don't lose work in Gas Town
+- [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How persistent hooks enable crash-safe agent execution
+- [Session Cycling Explained](/blog/session-cycling) -- Context refresh without losing work state
+
 ## Related
 
 - **[Architecture](../architecture/index.md)** — How concepts map to system components

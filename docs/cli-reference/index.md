@@ -110,6 +110,11 @@ Not sure which command you need? Find it by scenario:
 | Hand off to a fresh session | `gt handoff` | [Sessions](sessions.md) |
 | Find orphaned work | `gt orphans` | [Orphans](orphans.md) |
 
+## From the Blog
+
+- [Understanding GUPP](/blog/understanding-gupp) -- The propulsion principle behind every Gas Town command
+- [Session Cycling Explained](/blog/session-cycling) -- How agents hand off context without losing work
+
 ## Related
 
 - **[Core Concepts](../concepts/index.md)** — The primitives behind these commands

@@ -115,6 +115,12 @@ These workflows are not mutually exclusive. You can use the Mayor for most work,
 
 :::
 
+## From the Blog
+
+- [The Mayor Workflow](/blog/mayor-workflow) -- Gas Town's fully automated pipeline from intent to merged code
+- [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- Multi-rig convoys, dependency chains, and parallel execution
+- [Building Your First Custom Formula](/blog/custom-formulas) -- Create repeatable workflow templates
+
 ## Related
 
 - **[Core Concepts](../concepts/index.md)** — Beads, hooks, convoys, and molecules that power these workflows

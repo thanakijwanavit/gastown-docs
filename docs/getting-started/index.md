@@ -56,6 +56,12 @@ gt mayor attach               # Start the Mayor
 # Tell the Mayor what to build
 ```
 
+## From the Blog
+
+- [Your First Convoy in 5 Minutes](/blog/first-convoy) -- Step-by-step walkthrough of creating and running your first convoy
+- [5 Common Pitfalls When Starting](/blog/common-pitfalls) -- Avoid these mistakes when setting up Gas Town
+- [Understanding GUPP](/blog/understanding-gupp) -- Why agents never lose work, even when they crash
+
 ## Next Steps
 
 Once you're up and running, explore these areas:

@@ -135,6 +135,12 @@ Avoid these common mistakes when running Gas Town:
 | Never running `gt cleanup` | Disk fills with orphaned worktrees | Schedule regular cleanup or add it to your weekly checklist |
 | Over-slinging work to one rig | Creates merge queue bottlenecks | Distribute work across rigs when possible |
 
+## From the Blog
+
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Dashboards, alerts, and health checks for production fleets
+- [Incident Response with Gas Town](/blog/incident-response) -- What to do when things go wrong
+- [Gas Town's Security Model](/blog/security-model) -- Trust boundaries and workspace isolation
+
 ## Related
 
 - **[Architecture](../architecture/index.md)** — How the supervisor tree enables self-healing operations

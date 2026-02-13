@@ -83,6 +83,13 @@ Then tell the Mayor what to build. It handles the rest.
 | [Operations](operations/index.md) | Running, monitoring, and troubleshooting |
 | [Guides](guides/index.md) | Usage guide, philosophy, and tips |
 
+## From the Blog
+
+- [Welcome to Gas Town](/blog/welcome) -- Introduction to what Gas Town is and why it exists
+- [Gas Town vs Traditional CI/CD](/blog/gas-town-vs-cicd) -- How multi-agent orchestration compares to conventional pipelines
+- [5 Common Pitfalls When Starting](/blog/common-pitfalls) -- Mistakes to avoid when setting up your first Gas Town workspace
+- [What Stage Are You?](/blog/eight-stages-self-assessment) -- Self-assessment for AI coding maturity
+
 ## Origin
 
 Gas Town is created by [Steve Yegge](https://steve-yegge.medium.com/) and named after the oil refinery citadel in Mad Max. The alternative name "Gastown" references Vancouver B.C.'s historic Gastown district.
