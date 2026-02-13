@@ -24,6 +24,7 @@ Gas Town is built on a small set of powerful primitives. Understanding these con
 | [GUPP & NDI](gupp.md) | Core design principles for reliability at scale | -- |
 | [Wisps](wisps.md) | Ephemeral sub-beads tracking molecule steps | `gt mol status` |
 | [Session Cycling](session-cycling.md) | Context refresh without losing work | `gt handoff` |
+| [Patrol Cycles](patrol-cycles.md) | Periodic health monitoring and self-healing | `gt patrol` |
 
 ## How They Fit Together
 

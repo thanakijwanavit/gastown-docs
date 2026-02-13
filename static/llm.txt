@@ -66,6 +66,7 @@
 - GUPP & NDI: /docs/concepts/gupp
 - Wisps (Ephemeral Sub-Beads): /docs/concepts/wisps
 - Session Cycling: /docs/concepts/session-cycling
+- Patrol Cycles: /docs/concepts/patrol-cycles
 
 ### Workflows
 - Workflows: /docs/workflows
@@ -75,6 +76,7 @@
 - Formula Workflow: /docs/workflows/formula-workflow
 - Code Review Workflow: /docs/workflows/code-review
 - Crew Collaboration: /docs/workflows/crew-collaboration
+- Handoff Ceremony: /docs/workflows/handoff-ceremony
 
 ### Operations
 - Operations: /docs/operations
@@ -557,6 +559,15 @@ Session cycling is Gas Town's mechanism for refreshing an agent's context window
 
 ---
 
+## Patrol Cycles
+> /docs/concepts/patrol-cycles
+
+Patrol cycles are the heartbeat of Gas Town's monitoring infrastructure. Persistent agents periodically observe system state and take corrective action — preferring discovery over tracking.
+
+**Patrol cycles** are the heartbeat of Gas Town's monitoring infrastructure. Every 5 minutes, persistent agents — the [Deacon](../agents/deacon.md), [Witness](../agents/witness.md), and [Refinery](../agents/refinery.md) — wake up, observe the current state of the system, and take corrective action.
+
+---
+
 ## Workflows
 > /docs/workflows
 
@@ -617,6 +628,15 @@ Gas Town provides a powerful **parallel code review** system using the `code-rev
 Patterns for humans working alongside AI agents in crew workspaces -- reviewing polecat output, feeding guzzoline, and maintaining code quality while the fleet runs.
 
 This workflow describes how human developers in [Crew workspaces](../agents/crew.md) work alongside AI polecats. The core pattern: humans produce **guzzoline** (specifications, designs, reviews) and polecats consume it (implementation, testing, fixes).
+
+---
+
+## Handoff Ceremony
+> /docs/workflows/handoff-ceremony
+
+The handoff ceremony is the protocol agents follow when cycling to a fresh session. It ensures work continuity across context boundaries by persisting state in hooks and communicating context through handoff mail.
+
+The **handoff ceremony** is the protocol agents follow when transitioning from one session to the next. It ensures that work survives context boundaries — no progress is lost, no context is orphaned, and the next session can resume immediately.
 
 ---
 

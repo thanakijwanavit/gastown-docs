@@ -20,6 +20,7 @@ Gas Town supports several workflow patterns for getting work done. Choose the on
 | [Formula Workflow](formula-workflow.md) | Repeatable processes | Optional | Medium |
 | [Code Review](code-review.md) | Thorough parallel reviews | Yes | Full |
 | [Crew Collaboration](crew-collaboration.md) | Humans working alongside polecats | Optional | Medium |
+| [Handoff Ceremony](handoff-ceremony.md) | Clean session transitions | No | Low |
 
 ## Decision Tree
 

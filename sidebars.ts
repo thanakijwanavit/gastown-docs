@@ -85,6 +85,7 @@ const sidebars: SidebarsConfig = {
         'concepts/gupp',
         'concepts/wisps',
         'concepts/session-cycling',
+        'concepts/patrol-cycles',
       ],
     },
     {
@@ -98,6 +99,7 @@ const sidebars: SidebarsConfig = {
         'workflows/formula-workflow',
         'workflows/code-review',
         'workflows/crew-collaboration',
+        'workflows/handoff-ceremony',
       ],
     },
     {

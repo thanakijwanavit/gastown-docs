@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T15:01:03.756Z",
+  "generated": "2026-02-13T15:09:07.323Z",
   "sections": [
     {
       "id": "getting-started",
@@ -281,6 +281,11 @@
           "title": "Session Cycling",
           "path": "/docs/concepts/session-cycling",
           "description": "Session cycling is Gas Town's mechanism for refreshing an agent's context window without losing work. When an agent's context fills up, it hands off to a fresh session that resumes from where it left off."
+        },
+        {
+          "title": "Patrol Cycles",
+          "path": "/docs/concepts/patrol-cycles",
+          "description": "Patrol cycles are the heartbeat of Gas Town's monitoring infrastructure. Persistent agents periodically observe system state and take corrective action — preferring discovery over tracking."
         }
       ]
     },
@@ -322,6 +327,11 @@
           "title": "Crew Collaboration",
           "path": "/docs/workflows/crew-collaboration",
           "description": "Patterns for humans working alongside AI agents in crew workspaces -- reviewing polecat output, feeding guzzoline, and maintaining code quality while the fleet runs."
+        },
+        {
+          "title": "Handoff Ceremony",
+          "path": "/docs/workflows/handoff-ceremony",
+          "description": "The handoff ceremony is the protocol agents follow when cycling to a fresh session. It ensures work continuity across context boundaries by persisting state in hooks and communicating context through handoff mail."
         }
       ]
     },
@@ -673,6 +683,12 @@
       "description": "Molecules are Gas Town's multi-step workflow execution units. A molecule guides an agent through a sequence of steps, tracking progress so that work can resu..."
     },
     {
+      "title": "Patrol Cycles",
+      "path": "/docs/concepts/patrol-cycles",
+      "section": "concepts",
+      "description": "Patrol cycles are the heartbeat of Gas Town's monitoring infrastructure. Persistent agents periodically observe system state and take corrective action — preferring discovery over tracking."
+    },
+    {
       "title": "Rigs (Project Containers)",
       "path": "/docs/concepts/rigs",
       "section": "concepts",
@@ -827,6 +843,12 @@
       "path": "/docs/workflows/formula-workflow",
       "section": "workflows",
       "description": "The Formula Workflow uses predefined TOML templates to orchestrate structured, repeatable processes. Instead of describing work in free-form text, you select..."
+    },
+    {
+      "title": "Handoff Ceremony",
+      "path": "/docs/workflows/handoff-ceremony",
+      "section": "workflows",
+      "description": "The handoff ceremony is the protocol agents follow when cycling to a fresh session. It ensures work continuity across context boundaries by persisting state in hooks and communicating context through handoff mail."
     },
     {
       "title": "Workflows",

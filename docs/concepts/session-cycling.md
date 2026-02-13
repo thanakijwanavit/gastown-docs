@@ -167,3 +167,5 @@ gt mail inbox
 - **[GUPP](gupp.md)** -- The propulsion principle ensures the new session immediately executes hooked work
 - **[Hooks](hooks.md)** -- The persistence mechanism that survives session cycling
 - **[Molecules](molecules.md)** -- Multi-step workflows track progress across session boundaries
+- **[Patrol Cycles](patrol-cycles.md)** -- Persistent agents use patrol molecules that squash-and-respawn across session boundaries
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Step-by-step guide for clean session transitions

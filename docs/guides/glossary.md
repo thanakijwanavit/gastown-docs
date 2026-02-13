@@ -61,7 +61,7 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **NDI** | Nondeterministic Idempotence — operations may produce different outputs each time (because AI is nondeterministic), but the system state after execution is equivalent. See [Design Principles](/docs/architecture/design-principles). |
 | **[Nudge](/docs/cli-reference/nudge)** | A synchronous message that interrupts an agent with new context or instructions. The escape hatch for stuck agents. |
 | **Let It Crash** | Erlang-inspired philosophy: rather than preventing every failure, design for recovery. Polecats are expected to crash; the system handles it gracefully. See [Design Principles](/docs/architecture/design-principles). |
-| **Discovery over Tracking** | Agents observe reality each patrol cycle rather than maintaining fragile in-memory state. See [Design Principles](/docs/architecture/design-principles). |
+| **Discovery over Tracking** | Agents observe reality each patrol cycle rather than maintaining fragile in-memory state. See [Patrol Cycles](/docs/concepts/patrol-cycles) and [Design Principles](/docs/architecture/design-principles). |
 | **Scotty Principle** | Named after the Star Trek engineer: never proceed past a failure. The Refinery does not merge code that fails validation. Polecats run preflight tests before starting. See [Design Principles](/docs/architecture/design-principles). |
 
 ## Operations
@@ -69,13 +69,13 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | Term | Definition |
 |------|------------|
 | **Landing the Plane** | The mandatory session completion workflow. Includes filing remaining work, running quality gates, updating issues, pushing to remote, and writing handoff notes. |
-| **Patrol** | A recurring monitoring cycle. Witnesses, Refinery, and Deacon all run patrol molecules — looping through check-act cycles. See [Monitoring](/docs/operations/monitoring). |
+| **[Patrol Cycle](/docs/concepts/patrol-cycles)** | A recurring monitoring cycle. Witnesses, Refinery, and Deacon all run patrol molecules — looping through check-act cycles. See [Patrol Cycles](/docs/concepts/patrol-cycles) and [Monitoring](/docs/operations/monitoring). |
 | **[Escalation](/docs/operations/escalations)** | A routing mechanism for problems that an agent cannot resolve on its own. Escalations travel up the agent hierarchy until someone (or the human) handles them. |
 | **[Sling](/docs/cli-reference/sling)** | Assigning a bead to an agent. `gt sling gt-a1b2c myrig` sends the bead to the specified rig for a polecat to pick up. |
 | **Feed** | The live activity stream showing real-time events from all agents across all rigs. See [Diagnostics](/docs/cli-reference/diagnostics). |
 | **Trail** | A summary of recent activity, more condensed than the live feed. See [Diagnostics](/docs/cli-reference/diagnostics). |
 | **Prime** | Reloading an agent's full context from its CLAUDE.md file, hooks, and beads state. Run `gt prime` after compaction, crashes, or new sessions. See [Session & Handoff](/docs/cli-reference/sessions). |
-| **Handoff** | Transferring context from one session to the next. Writes summary notes that the next session picks up automatically. See [Session Cycling](/docs/concepts/session-cycling). |
+| **[Handoff](/docs/workflows/handoff-ceremony)** | Transferring context from one session to the next. Writes summary notes that the next session picks up automatically. See [Handoff Ceremony](/docs/workflows/handoff-ceremony) and [Session Cycling](/docs/concepts/session-cycling). |
 | **[Session Cycling](/docs/concepts/session-cycling)** | Refreshing an agent's context window without losing work. The hook persists across sessions; handoff mail carries context notes. |
 | **[Death Warrant](/docs/operations/lifecycle)** | A structured cleanup request filed by the Deacon when an agent becomes a zombie. Boot processes warrants to recover work before terminating the process. |
 | **Park** | Pausing a rig. The rig's agents stop, but state is preserved. `gt rig park myrig`. See [Rig Management](/docs/cli-reference/rigs). |
