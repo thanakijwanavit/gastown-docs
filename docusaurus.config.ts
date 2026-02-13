@@ -43,7 +43,12 @@ const config: Config = {
           showReadingTime: true,
           blogSidebarTitle: 'Recent posts',
           blogSidebarCount: 5,
-          onInlineAuthors: 'ignore',
+          onInlineAuthors: 'warn',
+          feedOptions: {
+            type: ['rss', 'atom'],
+            title: 'Gas Town Blog',
+            description: 'Updates, tutorials, and release notes from Gas Town',
+          },
         },
         theme: {
           customCss: './src/css/custom.css',
