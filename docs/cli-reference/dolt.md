@@ -72,14 +72,65 @@ gt dolt recover        # Auto-detect and fix read-only state
 gt dolt status         # Verify recovery
 ```
 
+This typically happens when the Dolt server shuts down uncleanly or when multiple writers conflict. The `recover` command detects the issue and restarts the server with a clean lock state.
+
 ### Adding a New Rig
+
+When a new rig is created, it needs its own database:
 
 ```bash
 gt dolt init-rig       # Creates database for the new rig
-gt dolt list           # Verify it appears
+gt dolt list           # Verify it appears in the database list
 ```
+
+### Inspecting Data with SQL
+
+The `sql` subcommand opens an interactive SQL shell connected to the running Dolt server. Useful for debugging beads state:
+
+```bash
+gt dolt sql
+# Then in the SQL shell:
+# USE gastowndocs;
+# SELECT * FROM beads WHERE status = 'in_progress';
+# SHOW TABLES;
+```
+
+### Migration from Embedded Mode
+
+If upgrading from embedded Dolt (per-rig `.beads/` databases) to the centralized server:
+
+```bash
+gt dolt migrate        # Move databases to centralized .dolt-data/
+gt dolt start          # Start the server against the new location
+gt dolt fix-metadata   # Update rig metadata to point to the server
+```
+
+If migration goes wrong, roll back:
+
+```bash
+gt dolt rollback       # Restore from the pre-migration backup
+```
+
+## Architecture
+
+```
+$GT_ROOT/
+├── .dolt-data/              ← Centralized data directory
+│   ├── hq/                  ← HQ (town-level) database
+│   ├── gastowndocs/         ← Per-rig database
+│   ├── beads/               ← Per-rig database
+│   └── ...
+└── gt/
+    └── gastowndocs/
+        └── .beads/
+            └── metadata.json  ← Points to Dolt server on port 3307
+```
+
+All `bd` commands route through the Dolt server automatically when it's running. If the server is down, commands fall back to embedded mode (single-writer).
 
 ## See Also
 
 - [Beads](../concepts/beads.md) — The work tracking system backed by Dolt
 - [Configuration](configuration.md) — Town-level settings
+- [gt krc](krc.md) — TTL-based lifecycle for ephemeral data stored in Dolt
+- [Monitoring](../operations/monitoring.md) — Operational monitoring patterns
