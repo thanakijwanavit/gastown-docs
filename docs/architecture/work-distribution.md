@@ -28,6 +28,10 @@ stateDiagram-v2
 
 ### Exit States (Polecat Completion)
 
+:::info
+Every polecat must exit through one of these states. There is no "just stop" — the exit state tells the system what happens next.
+:::
+
 When a polecat finishes work, it exits in one of four states:
 
 | State | Meaning | Next Action |
@@ -64,6 +68,10 @@ What happens:
 
 ### Hook Persistence
 
+:::note
+Hooks are the reason Gas Town is crash-safe. Unlike in-memory job queues, a hook persists on the filesystem — so even if an agent's session is killed, restarting it picks up right where it left off.
+:::
+
 The **hook** is Gas Town's durability primitive. Work on a hook survives:
 
 - Session restarts
@@ -83,6 +91,10 @@ gt unsling gt-abc12
 ```
 
 ## The Propulsion Principle
+
+:::tip
+This is the single most important concept in Gas Town. If you understand nothing else, understand the hook: work on your hook means you execute immediately, no questions asked.
+:::
 
 > "If it's on your hook, YOU RUN IT."
 

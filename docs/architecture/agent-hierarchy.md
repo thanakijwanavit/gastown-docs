@@ -51,6 +51,10 @@ graph TD
 
 ## Patrol Cycles
 
+:::tip
+Patrol intervals are tuned for balance: frequent enough to catch problems quickly, but not so frequent that agents spend all their time monitoring instead of working.
+:::
+
 Persistent agents run patrol cycles — periodic health checks:
 
 | Agent | Interval | Actions |
@@ -62,7 +66,11 @@ Persistent agents run patrol cycles — periodic health checks:
 
 ## Boot Dog: The Triage Agent
 
-The Boot dog is a special agent spawned by the Deacon to assess situations that need triage — new work arriving, health check failures, or ambiguous states. Boot performs a quick assessment and reports back to the Deacon, which then takes action (spawn polecats, escalate, etc.). Boot is short-lived and focused: assess, report, exit.
+:::note
+Boot is deliberately short-lived. It assesses a situation and exits — it never takes action itself. This keeps triage cheap and prevents Boot from becoming a bottleneck.
+:::
+
+The Boot dog is a special agent spawned by the Deacon to assess situations that need triage — new work arriving, health check failures, or ambiguous states. Boot performs a quick assessment and reports back to the Deacon, which then takes action (spawn polecats, escalate, etc.).
 
 ## Escalation Path
 
@@ -82,6 +90,10 @@ Agents can also self-escalate using `gt escalate`:
 ```bash
 gt escalate "Brief description" -s HIGH -m "Details"
 ```
+
+:::warning
+P0 escalations route all the way to SMS. Reserve them for genuine emergencies — a broken main branch, data loss, or security issues. Overuse of P0 causes alert fatigue.
+:::
 
 Severity levels control routing:
 

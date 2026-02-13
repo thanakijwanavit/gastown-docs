@@ -10,6 +10,10 @@ Gas Town is built on several core design principles that guide its architecture 
 
 ## 1. The Propulsion Principle
 
+:::tip
+This is Gas Town's most fundamental design choice. Every other principle builds on the idea that agents are self-propelled by their hooks.
+:::
+
 > "If it's on your hook, YOU RUN IT."
 
 Work attached to an agent's hook drives that agent's behavior. The hook is the primary scheduling mechanism — no central scheduler decides what agents do. Each agent is self-propelled by its hook.
@@ -24,6 +28,10 @@ Gas Town borrows heavily from Erlang/OTP patterns:
 - **Process isolation** — Each agent runs in its own session
 
 ## 3. Git as Ground Truth
+
+:::info
+This design means you can reconstruct Gas Town state from a filesystem backup alone. No external services, no cloud dependencies, no network required.
+:::
 
 All persistent state lives in git or git-adjacent storage:
 
@@ -45,6 +53,10 @@ The daemon is intentionally simple — it just sends heartbeats and processes li
 - **Polecats** decide how to implement features
 
 ## 5. Self-Cleaning Workers
+
+:::note
+Self-cleaning means zero human intervention for normal polecat lifecycle. If a polecat finishes or crashes, the system handles cleanup automatically.
+:::
 
 Polecats follow a strict lifecycle:
 
@@ -118,11 +130,13 @@ Gas Town automates everything it can, but keeps humans in control.
 
 ## 11. The Scotty Principle
 
+:::warning
+Ignoring a failing test to "deal with later" is the single most expensive mistake in Gas Town. One broken test can cascade into dozens of wasted polecat sessions.
+:::
+
 > "Never walk past a warp core leak."
 
 Named after the Star Trek engineer: Gas Town agents never proceed past failures. The [Refinery](../agents/refinery.md) does not merge code that fails validation. Polecats run [preflight tests](../agents/polecats.md) before starting implementation to ensure `main` is clean. If something is broken, you fix it or file it -- you don't skip past it.
-
-This principle prevents failure cascading through the system. One broken test, left unaddressed, can waste dozens of polecat hours.
 
 ## 12. Discovery Over Tracking
 

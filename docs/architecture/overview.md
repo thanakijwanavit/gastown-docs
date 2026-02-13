@@ -21,6 +21,10 @@ The town is the root directory (typically `~/gt/`) containing all projects and c
 
 ### 2. Rigs (Project Containers)
 
+:::info
+A rig is more than just a repository — it's a self-contained project environment with its own agents, issue tracking, and merge queue.
+:::
+
 Each rig wraps a git repository with the full agent infrastructure:
 
 ```text
@@ -67,6 +71,10 @@ A simple Go process that:
 
 The daemon is intentionally "dumb" — all intelligence lives in the agents.
 
+:::note
+This is a deliberate design choice. By keeping the scheduler simple, the system avoids single-point-of-failure complexity. If the daemon crashes, restarting it is trivial — all state lives in the agents and their hooks.
+:::
+
 ### 5. Communication Layer
 
 Agents communicate through:
@@ -92,6 +100,10 @@ Human gives Mayor instructions
 ```
 
 ## State Management
+
+:::tip
+All Gas Town state is crash-safe. If any component fails, the data it needs to recover is already on disk — no external databases or cloud services required.
+:::
 
 All state is persisted in git or the filesystem:
 
