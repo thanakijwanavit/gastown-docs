@@ -868,6 +868,58 @@ else
     fail_test "Found $RELATED_ISSUES Related section(s) with too few links" "Add at least 2 cross-reference links to each Related section"
 fi
 
+# Test 27: Blog posts have Next Steps sections
+echo ""
+echo "Test 27: Checking blog posts have Next Steps sections..."
+BLOG_NEXTSTEPS_ISSUES=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    # Skip the welcome post (it has "Getting Started" instead)
+    basename=$(basename "$file")
+    [ "$basename" = "2026-02-04-welcome.md" ] && continue
+
+    if ! grep -qE '^## (Next Steps|Further Reading)' "$file" 2>/dev/null; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Missing Next Steps/Further Reading section in $rel_file"
+        BLOG_NEXTSTEPS_ISSUES=$((BLOG_NEXTSTEPS_ISSUES + 1))
+    fi
+done
+
+if [ "$BLOG_NEXTSTEPS_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts have Next Steps or Further Reading sections"
+else
+    fail_test "Found $BLOG_NEXTSTEPS_ISSUES blog post(s) without Next Steps/Further Reading" "Add ## Next Steps with links to related docs and blog posts"
+fi
+
+# Test 28: Check for consistent frontmatter description quoting
+echo ""
+echo "Test 28: Checking frontmatter description formatting..."
+DESC_FORMAT_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    # Check that descriptions with colons or special chars are quoted
+    desc_line=$(awk '/^---$/{if(++n==2)exit}n==1 && /^description:/{print; exit}' "$file" 2>/dev/null)
+    [ -z "$desc_line" ] && continue
+
+    # Extract the value after "description: "
+    desc_val=$(echo "$desc_line" | sed 's/^description:[[:space:]]*//')
+
+    # If the value contains a colon but is NOT quoted, flag it
+    if echo "$desc_val" | grep -q ':' 2>/dev/null; then
+        if ! echo "$desc_val" | grep -qE '^".*"$' 2>/dev/null; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Unquoted description with colon in $rel_file"
+            DESC_FORMAT_ISSUES=$((DESC_FORMAT_ISSUES + 1))
+        fi
+    fi
+done
+
+if [ "$DESC_FORMAT_ISSUES" -eq 0 ]; then
+    pass_test "All frontmatter descriptions are properly formatted"
+else
+    fail_test "Found $DESC_FORMAT_ISSUES description(s) with unquoted colons" "Wrap descriptions containing colons in double quotes"
+fi
+
 # Summary
 echo ""
 echo "========================================"
