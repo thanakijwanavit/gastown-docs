@@ -549,6 +549,45 @@ else
     fail_test "Found $BROKEN_ANCHORS broken anchor link(s)" "Fix heading references to match actual heading text"
 fi
 
+# Test 18: Check that Mermaid diagrams have accessible descriptions nearby
+echo ""
+echo "Test 18: Checking Mermaid diagram accessibility..."
+MERMAID_ACCESS_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Count mermaid blocks in this file
+    mermaid_count=$(grep -c '```mermaid' "$file" 2>/dev/null || true)
+    mermaid_count="${mermaid_count:-0}"
+    if [ "$mermaid_count" -gt 0 ] 2>/dev/null; then
+        # Check that the file has at least as many headings or descriptive text near diagrams
+        # Specifically: every mermaid block should be preceded by a heading or paragraph within 5 lines
+        line_num=0
+        last_text_line=0
+        while IFS= read -r line; do
+            line_num=$((line_num + 1))
+            # Track lines with text content (not blank, not code fence)
+            if [[ -n "${line// }" ]] && [[ ! "$line" =~ ^'```' ]]; then
+                last_text_line=$line_num
+            fi
+            # Check mermaid blocks
+            if [[ "$line" =~ ^'```mermaid' ]]; then
+                gap=$((line_num - last_text_line))
+                if [ "$gap" -gt 5 ] && [ "$last_text_line" -gt 0 ]; then
+                    rel_file="${file#$ROOT_DIR/}"
+                    echo "  Mermaid diagram without nearby description in $rel_file:$line_num (gap: $gap lines)"
+                    MERMAID_ACCESS_ISSUES=$((MERMAID_ACCESS_ISSUES + 1))
+                fi
+            fi
+        done < "$file"
+    fi
+done
+
+if [ "$MERMAID_ACCESS_ISSUES" -eq 0 ]; then
+    pass_test "All Mermaid diagrams have nearby descriptive text"
+else
+    fail_test "Found $MERMAID_ACCESS_ISSUES Mermaid diagram(s) without nearby descriptions" "Add explanatory text above Mermaid diagrams"
+fi
+
 # Summary
 echo ""
 echo "========================================"
