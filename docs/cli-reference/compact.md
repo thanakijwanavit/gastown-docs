@@ -87,6 +87,48 @@ gt compact report --dry-run    # Preview the report without sending
 gt compact report --weekly     # Send weekly rollup to mayor/
 ```
 
+## When to Run Compaction
+
+### Automated (Recommended)
+
+The Deacon runs compaction automatically as part of its patrol cycle. The daily digest goes to the Deacon, and the weekly rollup goes to the Mayor. No manual intervention is needed for normal operations.
+
+```text
+Daemon heartbeat (3m) → Deacon patrol → gt compact → gt compact report
+```
+
+### Manual
+
+Run compaction manually when:
+
+- Investigating wisp accumulation after a long outage
+- Cleaning up after a large convoy with many patrol wisps
+- Verifying compaction behavior before changing TTL configuration
+
+```bash
+# Always preview first
+gt compact --dry-run --verbose
+
+# Then compact
+gt compact --verbose
+```
+
+## Understanding the Output
+
+A typical compaction run produces output like:
+
+```text
+Compacting gastowndocs...
+  Scanned: 47 wisps
+  Deleted: 12 (closed, past TTL)
+  Promoted: 2 (open, past TTL — possible stuck work)
+  Skipped: 33 (within TTL or has keep label)
+```
+
+- **Deleted**: Closed wisps whose TTL has expired. These were successfully completed work steps.
+- **Promoted**: Open wisps past their TTL. This usually indicates something is stuck — check the promoted bead for context.
+- **Skipped**: Wisps that are either still within their TTL or have the `keep` label.
+
 ## Troubleshooting
 
 ### Wisps Not Being Compacted

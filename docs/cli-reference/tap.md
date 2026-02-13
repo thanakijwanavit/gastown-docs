@@ -28,6 +28,36 @@ The tap system uses Claude Code's hook mechanism to intercept tool calls at two 
 | `inject` | PreToolUse | Modify tool inputs (updatedInput) | Planned |
 | `check` | PostToolUse | Validate after execution | Planned |
 
+## How It Works
+
+```mermaid
+sequenceDiagram
+    participant Agent as Agent (Claude Code)
+    participant Hook as Claude Code Hook
+    participant Tap as gt tap handler
+    participant Tool as Tool Execution
+
+    Agent->>Hook: Tool call (e.g., Bash: gh pr create)
+    Hook->>Tap: PreToolUse: gt tap guard pr-workflow
+    alt Policy violation
+        Tap-->>Hook: Exit code 2 (BLOCKED)
+        Hook-->>Agent: Tool call blocked
+    else Allowed
+        Tap-->>Hook: Exit code 0 (OK)
+        Hook->>Tool: Execute tool
+        Tool-->>Hook: Result
+        Hook->>Tap: PostToolUse: gt tap audit (planned)
+        Tap-->>Hook: Exit code 0
+        Hook-->>Agent: Tool result
+    end
+```
+
+The tap system sits between Claude Code and tool execution. Each handler is a standalone binary invoked by the hook system, receiving the tool call context via stdin (JSON) and signaling decisions via exit codes.
+
+### Context Detection
+
+Tap handlers check `GT_ROLE` and `GT_SESSION` environment variables to determine if they're running inside a Gas Town agent context. When these variables are absent (e.g., a human running Claude Code directly), all guards pass silently — the tap system never interferes with normal human usage.
+
 ## Subcommands
 
 | Command | Description |
@@ -98,6 +128,38 @@ gt tap guard pr-workflow
 
 # Example: agent tries to create a PR
 # Hook intercepts: gt tap guard pr-workflow → exits 2 → tool call BLOCKED
+```
+
+### Writing Custom Guards
+
+Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:
+
+```bash
+#!/bin/bash
+# my-custom-guard.sh - Block destructive git operations
+
+# Only activate in Gas Town context
+[ -z "$GT_ROLE" ] && exit 0
+
+# Read tool input from stdin
+INPUT=$(cat)
+
+# Check for destructive patterns
+if echo "$INPUT" | grep -qE "git (reset --hard|clean -fd|push --force)"; then
+  echo "BLOCKED: Destructive git operation not allowed" >&2
+  exit 2
+fi
+
+exit 0
+```
+
+```json
+{
+  "PreToolUse": [{
+    "matcher": "Bash(git *)",
+    "hooks": [{"command": "/path/to/my-custom-guard.sh"}]
+  }]
+}
 ```
 
 :::tip

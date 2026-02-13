@@ -25,6 +25,42 @@ The warrant lifecycle:
 
 Warrants are stored in `~/gt/warrants/` as JSON files.
 
+### Warrant Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Filed: Deacon/Witness files warrant
+    Filed --> Picked_Up: Boot discovers during triage
+    Picked_Up --> Executed: Boot terminates agent session
+    Executed --> [*]: Warrant marked complete
+    Filed --> Expired: Agent self-recovers before execution
+```
+
+### When Warrants Are Filed
+
+Warrants are filed automatically by the supervision chain:
+
+| Filed By | Reason | Example |
+|----------|--------|---------|
+| **Witness** | Polecat unresponsive after repeated nudges | Polecat has no output for 15+ minutes |
+| **Deacon** | Patrol agent (Witness/Refinery) stuck | Witness hasn't patrolled in 3+ cycles |
+| **Human** | Manual intervention needed | Agent in bad state after infrastructure failure |
+
+### Warrant Storage Format
+
+Each warrant is a JSON file in `~/gt/warrants/`:
+
+```json
+{
+  "target": "gastowndocs/polecats/alpha",
+  "reason": "Zombie: no session, idle >10m",
+  "filed_by": "gastowndocs/witness",
+  "filed_at": "2026-02-13T14:30:00Z",
+  "executed": false,
+  "executed_at": null
+}
+```
+
 ## Subcommands
 
 | Command | Description |
@@ -116,6 +152,24 @@ gt warrant execute deacon/dogs/bravo --force
 Using `--force` bypasses the warrant system entirely. Only use this for emergency termination when you can't wait for the normal warrant flow.
 
 :::
+
+## Troubleshooting
+
+### Warrant Not Being Executed
+
+If a warrant sits in `pending` state:
+
+1. **Is Boot running?** Boot executes warrants during triage cycles. Check: `gt daemon status`
+2. **Is the Deacon alive?** Boot is triggered by Deacon triage. Check: `gt deacon status`
+3. **Manual execution**: If Boot is unavailable, execute directly: `gt warrant execute <target>`
+
+### Agent Keeps Respawning After Warrant
+
+If an agent is terminated but respawns immediately:
+
+- The Witness may be respawning the polecat because it sees work on the hook
+- Clear the hook first: `gt hook clear --target <agent>`, then re-file the warrant
+- Consider parking the rig temporarily: `gt rig park <rig>`
 
 ## Related
 

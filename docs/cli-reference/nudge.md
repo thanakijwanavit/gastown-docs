@@ -96,11 +96,72 @@ gt nudge channel:workers "New priority work available"
 gt nudge myproject/toast "Urgent fix needed" --force
 ```
 
+## Nudge vs Mail
+
+| Characteristic | `gt nudge` | `gt mail send` |
+|----------------|-----------|----------------|
+| **Delivery** | Synchronous (immediate) | Async (queued) |
+| **Interrupts target** | Yes | No |
+| **Persists** | No (ephemeral) | Yes (in mailbox) |
+| **DND respected** | Yes (unless `--force`) | Always delivered |
+| **Best for** | Wake-ups, status checks | Task assignments, handoff context |
+
+### When to Use Each
+
+Use **nudge** when:
+- You need an immediate response ("What's your status?")
+- Waking a sleeping agent ("Check your mail")
+- Time-sensitive coordination ("Merge queue conflict, pause work")
+
+Use **mail** when:
+- Assigning work that can wait for the agent's next check
+- Sending handoff context between sessions
+- Communicating across time zones or offline periods
+
+### Combining Both
+
+The most common pattern is sending mail first, then nudging:
+
+```bash
+# Send detailed instructions via mail
+gt mail send myproject/polecats/alpha -s "Priority fix" -m "Fix the auth bug in login.go"
+
+# Then wake the agent to check their mail
+gt nudge myproject/alpha "Check your mail - priority fix waiting"
+```
+
 :::tip
 
 For non-urgent communication, use `gt mail send` instead. Nudges interrupt the target's current activity and should be reserved for time-sensitive coordination.
 
 :::
+
+## Troubleshooting
+
+### Nudge Not Delivered
+
+If a nudge appears to have no effect:
+
+1. **Check the target session exists**: `gt session list | grep <target>`
+2. **Check DND status**: The target may have DND enabled. Use `--force` to override.
+3. **Check session name**: Role shortcuts depend on the current rig. Use `--rig` if needed.
+4. **Check tmux**: Ensure tmux is running and the session is active.
+
+### Target Not Responding
+
+A delivered nudge may not get a response if:
+
+- The agent is in the middle of a long tool call (it will see the nudge when the call completes)
+- The agent's context is compacted and it lost the nudge context
+- The session has crashed but tmux still shows it as alive
+
+```bash
+# Check if the session is actually alive
+gt session list --rig myproject
+
+# Check recent output from the target
+gt session capture <target> --tail 20
+```
 
 :::note
 

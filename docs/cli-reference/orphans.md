@@ -23,6 +23,30 @@ Polecat work can get lost when:
 
 This command uses `git fsck --unreachable` to find dangling commits, filters to recent ones, and shows details to help recovery.
 
+### How Orphans Occur
+
+```mermaid
+flowchart TD
+    A[Polecat completes work] --> B{Session killed?}
+    B -->|Before gt done| C[Commits exist on branch]
+    B -->|After gt done| D[MR submitted to Refinery]
+    C --> E{Branch pushed?}
+    E -->|No| F[Orphaned commits<br/>Only in local git objects]
+    E -->|Yes| G{Refinery processed?}
+    G -->|No - Merge conflict| H[Orphaned branch<br/>Never merged to main]
+    G -->|Yes| I[Work landed safely]
+    D --> G
+```
+
+Common scenarios that create orphans:
+
+| Scenario | What's orphaned | Recovery |
+|----------|-----------------|----------|
+| Session killed mid-work | Uncommitted changes | Lost (not in git) |
+| Session killed after commit, before push | Local commits | `gt orphans` finds them |
+| Push succeeded, Refinery failed | Remote branch | `gt orphans` + manual merge |
+| Process crashed, tmux still running | Claude process consuming resources | `gt orphans procs kill` |
+
 ## Subcommands
 
 | Command | Description |
@@ -124,6 +148,33 @@ gt orphans procs              # List orphaned processes (PPID=1 only)
 gt orphans procs --aggressive # List ALL orphaned processes
 gt orphans procs kill         # Kill orphaned processes
 ```
+
+## Recovery Workflow
+
+When `gt orphans` finds valuable commits, recover them before they're garbage collected:
+
+```bash
+# Step 1: Find orphaned commits
+gt orphans --rig myproject
+
+# Step 2: Inspect a specific orphan
+git show <commit-hash>
+
+# Step 3: Cherry-pick the valuable commit to main
+git cherry-pick <commit-hash>
+
+# Step 4: Push the recovered work
+git push
+
+# Step 5: Clean up remaining orphans
+gt orphans kill --rig myproject
+```
+
+:::tip
+
+Run `gt orphans` as part of your weekly maintenance routine. Orphaned commits are only recoverable until `git gc` prunes them (typically 2 weeks for unreachable objects).
+
+:::
 
 ## Related
 

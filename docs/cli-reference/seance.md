@@ -109,6 +109,57 @@ gt seance --recent 20
 gt seance --talk sess-ghi789 -p "What went wrong and what did you try?"
 ```
 
+## How It Works Under the Hood
+
+Seance leverages Claude Code's `--fork-session` and `--resume` flags:
+
+```text
+gt seance --talk <session-id>
+  └─> claude --fork-session --resume <session-id>
+       └─> Loads predecessor's full context (read-only)
+            └─> You ask questions
+```
+
+The fork creates a separate conversation branch. The predecessor's session is never modified — they won't even know you communed with them. This makes seance safe to use on active sessions.
+
+### Session Events
+
+Sessions are tracked in `~/gt/.events.jsonl`. Each Gas Town session emits a `session_start` event containing:
+
+```json
+{
+  "type": "session_start",
+  "session_id": "sess-abc123",
+  "role": "crew",
+  "rig": "gastowndocs",
+  "agent": "nic",
+  "timestamp": "2026-02-13T14:00:00Z"
+}
+```
+
+Seance reads these events to build the session list. If events are missing, sessions won't appear in discovery.
+
+## Best Practices
+
+### Asking Good Questions
+
+Predecessors respond best to specific questions:
+
+| Good Question | Why |
+|---------------|-----|
+| "What files did you modify for the auth fix?" | Specific, actionable |
+| "Why did you choose Redis over memcached?" | Decision-focused |
+| "Where were you blocked when the session ended?" | Context recovery |
+
+| Poor Question | Why |
+|---------------|-----|
+| "What happened?" | Too vague |
+| "Tell me everything" | No focus, wastes tokens |
+
+### One-Shot vs Interactive
+
+Use **one-shot** (`-p`) when you have a specific question and want a quick answer. Use **interactive** (no `-p`) when you need to explore and follow up on answers.
+
 :::note
 Seance spawns a read-only fork of the predecessor session. It cannot modify the original session's state or history.
 :::
