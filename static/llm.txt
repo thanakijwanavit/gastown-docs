@@ -6,8 +6,6 @@
 
 ### Home
 - Gas Town Documentation: /docs/index
-- intro: /docs/intro
-- troubleshooting: /docs/troubleshooting
 
 ### Getting Started
 - Getting Started: /docs/getting-started
@@ -97,20 +95,6 @@
 Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of Claude Co...
 
 **Gas Town** is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of [Claude Code](https://claude.ai/), it scales from a single agent to 20-30 concurrent workers — all managed through the `gt` CLI.
-
----
-
-## intro
-> /docs/intro
-
-Gas Town is a multi-agent orchestration system for AI coding agents. It coordinates fleets of workers — from a single agent to 20-30 concurrent polecats — all through the `gt` CLI.
-
----
-
-## troubleshooting
-> /docs/troubleshooting
-
-This guide covers common errors and their solutions when working with Gas Town.
 
 ---
 

@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T13:39:11.073Z",
+  "generated": "2026-02-13T14:13:07.364Z",
   "sections": [
     {
       "id": "getting-started",
@@ -693,12 +693,6 @@
       "description": "Gas Town is a multi-agent orchestration system that coordinates fleets of AI coding agents working on your projects simultaneously. Built on top of Claude Co..."
     },
     {
-      "title": "intro",
-      "path": "/docs/intro",
-      "section": "root",
-      "description": ""
-    },
-    {
       "title": "Escalation System",
       "path": "/docs/operations/escalations",
       "section": "operations",
@@ -733,12 +727,6 @@
       "path": "/docs/operations/troubleshooting",
       "section": "operations",
       "description": "This guide covers common Gas Town problems, their diagnosis, and resolution. Start with gt doctor for automated diagnostics, then consult the specific sectio..."
-    },
-    {
-      "title": "troubleshooting",
-      "path": "/docs/troubleshooting",
-      "section": "root",
-      "description": ""
     },
     {
       "title": "Code Review Workflow",
