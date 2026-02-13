@@ -25,6 +25,10 @@ This creates race conditions where your local branch diverges from remote almost
 
 ## Golden Rules
 
+:::warning
+In Gas Town, unpushed work is invisible to every other agent. The longer you wait to push, the more merge conflicts you accumulate and the more work you risk losing.
+:::
+
 ### 1. Pull Before Every Push
 
 **Always pull before pushing**, even if you just pulled 5 minutes ago:
@@ -370,6 +374,10 @@ git pull --rebase
 ---
 
 ## Emergency Recovery
+
+:::tip
+Git's reflog is your safety net. Even after a bad rebase or reset, `git reflog` shows every state your HEAD has been in. You can almost always recover.
+:::
 
 ### Lost Work After Session Restart
 

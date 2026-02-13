@@ -177,7 +177,11 @@ The Witness is also responsible for **nuking** polecat sandboxes after they comp
 
 ### Refinery: The Gatekeeper
 
-Each rig has one Refinery that holds the **canonical git clone** and processes the merge queue. All code merges to `main` go through the Refinery -- there is no other path.
+:::warning
+All code merges to `main` go through the Refinery — there is no other path. Pushing directly to main bypasses validation and can break the system for all agents.
+:::
+
+Each rig has one Refinery that holds the **canonical git clone** and processes the merge queue.
 
 The Refinery processes merge requests (MRs) strictly one at a time to prevent race conditions. For each MR:
 
@@ -579,6 +583,10 @@ sequenceDiagram
 ```
 
 ### The Five Invariants
+
+:::info
+These invariants are enforced by the system architecture, not by convention. Violating any of them indicates a bug, not a workflow choice.
+:::
 
 These properties hold true at all times in a healthy Gas Town:
 

@@ -77,6 +77,10 @@ See [Molecules & Formulas](molecules.md) for the full reference.
 
 ### Layer 4: Protomolecules (Convoy-Level Orchestration)
 
+:::note
+Protomolecules are the most advanced MEOW concept. Most Gas Town users work at Layers 1-3 daily and only encounter protomolecules when orchestrating large, multi-agent efforts.
+:::
+
 **Protomolecules** are higher-order orchestration patterns that coordinate multiple molecules working in parallel. They represent convoy-level workflows where multiple agents work simultaneously on related tasks with coordination points.
 
 Examples:
@@ -120,6 +124,10 @@ Gas Town ships with 30+ built-in formulas. See [Molecules & Formulas](molecules.
 ---
 
 ## Why "MEOW"?
+
+:::tip
+You don't need to understand all five layers to use Gas Town. Start with Beads (create issues) and Convoys (batch them). Molecules and Formulas become relevant when you want structured agent workflows.
+:::
 
 The name is a backronym: **M**olecules, **E**pics, **O**rchestration, **W**orkflows. But more importantly, it reflects Gas Town's philosophy that work organization should be:
 

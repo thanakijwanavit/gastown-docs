@@ -24,6 +24,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Boot** | Triage agent that assesses incoming work, classifies complexity, and recommends assignment strategies. |
 | **Daemon** | The background Go process that manages agent lifecycles, runs health checks, and provides the `gt` CLI interface. |
 
+:::tip
+Use your browser's search (Ctrl+F) to quickly find terms. For deeper explanations, follow the links in the Related section at the bottom.
+:::
+
 ## Core Concepts
 
 | Term | Definition |
@@ -54,6 +58,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Burn** | Archiving a completed molecule. The molecule is marked done and no longer appears in active status. |
 
 ## Design Principles
+
+:::note
+These principles are not just theory — they are enforced by specific Gas Town primitives. See [Design Principles](../architecture/design-principles.md) for how each one is implemented.
+:::
 
 | Term | Definition |
 |------|------------|
