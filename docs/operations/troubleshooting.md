@@ -793,7 +793,7 @@ gt mail send <rig>/<agent> -s "test" -m "ping"
 
 Use this to quickly find the right troubleshooting section:
 
-```
+```text
 Is anything running at all?
 ├── No → Daemon Issues / Agent Boot Failures
 └── Yes

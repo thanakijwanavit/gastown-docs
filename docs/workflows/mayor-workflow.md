@@ -81,7 +81,7 @@ The Mayor automatically:
 
 Example Mayor response:
 
-```
+```text
 I've created the following plan:
 
 Convoy: hq-cv-012 "Auth Module Improvements"
@@ -143,7 +143,7 @@ When all convoy items are done, the convoy auto-closes and the Mayor notifies yo
 
 Here is a complete example session from start to finish:
 
-```
+```text
 $ gt mayor attach
 
 Mayor> Welcome! I see 2 active rigs: myproject, docs. How can I help?

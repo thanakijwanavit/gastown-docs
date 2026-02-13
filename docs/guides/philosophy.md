@@ -115,7 +115,7 @@ Gas Town's architecture borrows directly from Erlang/OTP, the telecommunications
 
 ### Supervisor Trees
 
-```
+```text
                       Daemon
                         |
                       Deacon
@@ -174,7 +174,7 @@ Yegge calls his survival framework the **Squirrel Selection Model** -- a deliber
 
 The model expresses software fitness as a ratio of cognitive value to cognitive cost:
 
-```
+```text
 Survival(T) = (Savings x Usage x H) / (Awareness + Friction)
 ```
 
@@ -315,7 +315,7 @@ Yegge has publicly tracked his predictions about AI coding adoption:
 
 ### Exponential Curve Intuition
 
-```
+```text
      Capability
          ^
          |                                    *

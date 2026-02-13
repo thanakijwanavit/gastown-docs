@@ -94,7 +94,7 @@ claude
 
 When Claude starts, it should run `gt prime` (via the SessionStart hook) and discover the work on its hook. If it does not auto-prime, tell it:
 
-```
+```text
 Run gt prime and check your hook for assigned work.
 ```
 

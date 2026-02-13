@@ -44,7 +44,7 @@ graph TD
 
 When you add a rig with `gt rig add`, the following directory structure is created:
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/              # Rig-level issue tracking (SQLite)
 │   ├── beads.db         # Issue database
@@ -189,7 +189,7 @@ gt rig list
 
 Example output:
 
-```
+```text
 Name          Status    Branch    Polecats    MQ
 myproject     Active    main      2/3         1 pending
 docs          Active    master    0/0         0 pending

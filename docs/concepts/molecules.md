@@ -324,7 +324,7 @@ gt formula run my-deploy --var version="2.3.1"
 
 Molecules are stored on an agent's [Hook](hooks.md), creating the crash-safe execution model:
 
-```
+```text
 Hook
 ├── hook_bead: gt-a1b2c            # The assigned issue
 └── molecule: mol-polecat-work     # Active workflow

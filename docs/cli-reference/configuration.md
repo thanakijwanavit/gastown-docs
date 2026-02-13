@@ -36,7 +36,7 @@ gt config agent list
 
 **Sample output:**
 
-```
+```text
 AGENT      COMMAND     STATUS      DEFAULT
 claude     claude      available   *
 gemini     gemini      available

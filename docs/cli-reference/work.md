@@ -47,7 +47,7 @@ gt ready --rig myproject
 
 **Sample output:**
 
-```
+```text
 ID         PRIORITY   TYPE      TITLE                           RIG
 gt-abc12   high       bug       Fix login redirect loop         myproject
 gt-def34   medium     feature   Add email validation            myproject
@@ -134,7 +134,7 @@ gt hook gt-abc12
 
 **Sample output:**
 
-```
+```text
 Hook: gt-abc12 "Fix login redirect loop" [in_progress]
   Rig: myproject
   Branch: fix/login-bug
@@ -303,7 +303,7 @@ gt show gt-abc12 --history
 
 **Sample output:**
 
-```
+```text
 Bead: gt-abc12
 Title: Fix login redirect loop
 Type: bug
@@ -376,7 +376,7 @@ gt commit -- --amend
 
 **Identity mapping:**
 
-```
+```text
 Agent: gastown/crew/jack  →  Name: gastown/crew/jack
                               Email: gastown.crew.jack@gastown.local
 ```

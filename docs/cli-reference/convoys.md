@@ -102,7 +102,7 @@ gt convoy list --status active
 
 **Sample output:**
 
-```
+```text
 ID          TITLE                    STATUS     PROGRESS   AGE
 hq-cv-001   Auth System Fixes        active     2/3        2h
 hq-cv-002   API Refactor             active     0/5        30m
@@ -164,7 +164,7 @@ gt convoy show hq-cv-001
 
 **Sample output:**
 
-```
+```text
 Convoy: hq-cv-001
 Title: Auth System Fixes
 Status: active
@@ -268,7 +268,7 @@ gt convoy stranded
 
 **Sample output:**
 
-```
+```text
 CONVOY       TITLE                    STRANDED   TOTAL
 hq-cv-002    API Refactor             3          5
 hq-cv-004    Documentation Update     1          2
@@ -349,7 +349,7 @@ gt convoy synthesis hq-cv-001 --verbose
 
 **Sample output:**
 
-```
+```text
 Convoy Synthesis: Auth System Fixes (hq-cv-001)
 ================================================
 

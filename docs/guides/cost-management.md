@@ -83,7 +83,7 @@ gt costs --json
 
 ### Sample Output
 
-```
+```text
 Gas Town Costs (today)
 
   Total tokens:  4,800,000 input / 1,620,000 output

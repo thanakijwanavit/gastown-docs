@@ -173,7 +173,7 @@ gt formula run code-review --pr=42 --legs=security,correctness,wiring,test-quali
 
 Each leg writes its findings to `.reviews/<review-id>/<leg-id>-findings.md`:
 
-```
+```text
 .reviews/review-abc123/
 ├── correctness-findings.md
 ├── security-findings.md

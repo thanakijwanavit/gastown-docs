@@ -42,7 +42,7 @@ The dashboard is only available while the `gt dashboard` command is running. It 
 
 **Symptom:** A polecat finishes its work, runs `gt done`, and gets:
 
-```
+```text
 Error: not inside a rig directory
 ```
 
@@ -143,7 +143,7 @@ If you see the same bead ID appearing repeatedly in `gt trail`, that is a churn 
 
 **Symptom:** Git commands fail with errors like:
 
-```
+```text
 fatal: couldn't find remote ref main
 ```
 
@@ -249,11 +249,11 @@ BD_DEBUG_ROUTING=1 bd show <bead-id>
 
 **Common errors:**
 
-```
+```text
 hook already attached
 ```
 
-```
+```text
 no work on hook
 ```
 

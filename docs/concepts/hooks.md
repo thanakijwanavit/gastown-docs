@@ -92,7 +92,7 @@ gt hook
 
 Output shows the hooked bead ID and any attached molecule:
 
-```
+```text
 Hook: gt-a1b2c  "Fix login bug"
   Molecule: mol-polecat-work (step: implement)
   Branch: polecat/toast
@@ -185,7 +185,7 @@ The Mayor's hook typically holds a coordination molecule or convoy management ta
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:
 
-```
+```text
 Hook
 ├── hook_bead: gt-a1b2c        # The assigned issue
 └── molecule: mol-polecat-work  # The workflow template

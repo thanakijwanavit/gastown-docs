@@ -185,7 +185,7 @@ gt daemon status
 
 Sample output:
 
-```
+```text
 Daemon: running (PID 12345)
 Uptime: 4h 23m
 Last heartbeat: 12s ago

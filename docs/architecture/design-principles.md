@@ -48,7 +48,7 @@ The daemon is intentionally simple — it just sends heartbeats and processes li
 
 Polecats follow a strict lifecycle:
 
-```
+```text
 Spawn → Work → Done → Nuke
 ```
 

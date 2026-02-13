@@ -189,7 +189,7 @@ gt escalate list --json
 
 Sample output:
 
-```
+```text
 Open Escalations (3):
 
   ESC-001  P0  CRITICAL  "Database migration broke all tests"
@@ -251,7 +251,7 @@ gt escalate stale
 
 Sample output:
 
-```
+```text
 Stale Escalations (1):
 
   ESC-003  P2  MEDIUM  "Flaky test in auth module"

@@ -139,7 +139,7 @@ gt mq list
 
 Example convoy output:
 
-```
+```text
 Convoy: hq-cv-007 "API Security Hardening"
 Status: OPEN
 Progress: 1/3 issues completed

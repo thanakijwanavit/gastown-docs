@@ -46,7 +46,7 @@ gt feed --json
 
 Sample output:
 
-```
+```text
 14:23:01 [myproject] polecat:toast  STARTED  gt-a1b2c "Fix login bug"
 14:23:45 [docs]      polecat:bravo  DONE     gt-d3e4f "Update API docs"
 14:24:02 [myproject] refinery       MERGE    gt-d3e4f merged to main
@@ -84,7 +84,7 @@ gt trail --since 1h
 
 Sample output:
 
-```
+```text
 Last 1h activity (23 events):
 
   myproject  4 polecats spawned, 3 completed, 1 active
@@ -164,7 +164,7 @@ gt audit --json
 
 Sample output:
 
-```
+```text
 Audit: polecat:toast (myproject)
 
   2025-06-15 14:23  SPAWNED   hook: gt-a1b2c "Fix login bug"
@@ -240,7 +240,7 @@ gt doctor --fix
 
 Sample output:
 
-```
+```text
 Gas Town Doctor v1.2.0
 
   [PASS] Dependencies: all present
@@ -358,7 +358,7 @@ gt costs --json
 
 Sample output:
 
-```
+```text
 Gas Town Costs (last 24h)
 
   Total tokens:  2,450,000 input / 890,000 output

@@ -35,7 +35,7 @@ The rest of this guide explains each component in that pipeline.
 
 A **town** is the root directory (typically `~/gt/`) that contains all projects, agents, and coordination state. Think of it as the factory floor where everything happens.
 
-```
+```text
 ~/gt/
 ├── mayor/              # Global coordinator
 ├── deacon/             # Town-level health monitor
@@ -57,7 +57,7 @@ Town-level state includes the global beads database (prefixed `hq-*`), Mayor and
 
 A **rig** is a self-contained project unit. Each rig wraps a git repository and provides the full agent infrastructure needed to work on that project autonomously. See the [Rigs concept page](../concepts/rigs.md) for reference details.
 
-```
+```text
 myproject/                # One rig
 ├── .beads/               # Rig-level issue tracking
 ├── metadata.json         # Rig identity and configuration
@@ -484,7 +484,7 @@ Persistent agents (Witness, Refinery, Deacon) use **patrol molecules** that foll
 
 Gas Town uses git worktrees to enable concurrent work on the same repository. Each polecat gets its own worktree -- an independent working directory linked to the same git repository.
 
-```
+```text
 myproject/
 ├── refinery/rig/      # Canonical clone (.repo.git)
 ├── mayor/rig/         # Mayor's reference worktree

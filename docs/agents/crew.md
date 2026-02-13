@@ -47,7 +47,7 @@ Full clones give human developers complete independence -- they can rebase, forc
 
 Crew members are named after the humans who use them:
 
-```
+```text
 ~/gt/myproject/crew/
 ├── dave/          # Dave's workspace
 ├── emma/          # Emma's workspace
@@ -133,7 +133,7 @@ Unlike polecats, crew workspaces are never automatically nuked. They persist unt
 
 ## Directory Structure
 
-```
+```text
 ~/gt/<rig>/crew/<name>/
 ├── .git/              # Full git repository
 ├── CLAUDE.md          # Gas Town context (if using Claude Code)

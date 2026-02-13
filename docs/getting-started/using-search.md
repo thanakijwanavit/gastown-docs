@@ -53,7 +53,7 @@ The search indexes:
 
 Just start typing - results appear instantly:
 
-```
+```text
 witness
 ```
 
@@ -63,7 +63,7 @@ Finds all pages mentioning "witness" (the patrol agent type).
 
 Search for multiple words together:
 
-```
+```bash
 git merge conflict
 ```
 
@@ -73,7 +73,7 @@ Finds pages discussing git merge conflicts.
 
 Use quotes for exact phrases:
 
-```
+```text
 "gt doctor --fix"
 ```
 
@@ -83,7 +83,7 @@ Finds exact command references.
 
 Search for specific commands:
 
-```
+```bash
 bd ready
 ```
 
@@ -93,7 +93,7 @@ Finds documentation for the `bd ready` command.
 
 Search by concept or feature:
 
-```
+```text
 convoy tracking
 ```
 
@@ -131,7 +131,7 @@ When you click a search result, the matching terms are **highlighted in yellow**
 
 To find a specific command:
 
-```
+```bash
 gt mail send
 ```
 
@@ -141,7 +141,7 @@ Returns all references to the mail sending command across guides and references.
 
 Looking for solutions to problems:
 
-```
+```text
 zombie session
 agent stuck
 merge conflict
@@ -151,7 +151,7 @@ merge conflict
 
 Understanding how things work:
 
-```
+```text
 how polecats work
 witness patrol cycle
 refinery merge queue
@@ -161,7 +161,7 @@ refinery merge queue
 
 Looking up specific syntax:
 
-```
+```bash
 bd create flags
 convoy syntax
 hook format
@@ -207,7 +207,7 @@ hook format
 
 ### For New Users
 
-```
+```text
 installation
 quickstart
 first convoy
@@ -216,7 +216,7 @@ getting started
 
 ### For Troubleshooting
 
-```
+```text
 agent not responding
 error messages
 zombie
@@ -226,7 +226,7 @@ failed
 
 ### For Command Reference
 
-```
+```bash
 gt status
 bd create
 convoy list
@@ -235,7 +235,7 @@ mail send
 
 ### For Understanding Concepts
 
-```
+```text
 what is a polecat
 how witnesses work
 beads system

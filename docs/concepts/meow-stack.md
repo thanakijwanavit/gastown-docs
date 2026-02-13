@@ -43,7 +43,7 @@ See [Beads](beads.md) for the full reference.
 
 **Convoys** group related beads into batches that travel together. When you tell the Mayor "build the auth system," it creates a convoy containing all the individual beads needed:
 
-```
+```text
 Convoy: auth-system-v2
 ├── gt-a1b2c  Add login endpoint
 ├── gt-d3e4f  Add JWT middleware
@@ -60,7 +60,7 @@ See [Convoys](convoys.md) for details.
 
 **Molecules** are execution plans for individual beads. When a polecat picks up a bead, it follows a molecule — a sequence of ordered steps with dependencies, gates, and checkpoints.
 
-```
+```text
 Molecule: mol-polecat-work
 ├── load-context      [done]
 ├── branch-setup      [done]

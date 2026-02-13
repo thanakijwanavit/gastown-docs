@@ -76,7 +76,7 @@ The inner loop is the moment-to-moment operational cadence:
 
 The inner loop is where execution happens. Speed here comes from clear instructions and fast feedback cycles.
 
-```
+```text
 Outer Loop (Days-Weeks)
 │  Strategic planning, upgrades, capacity decisions
 │
@@ -105,7 +105,7 @@ This attaches your terminal to the Mayor's tmux session. You can now interact wi
 
 Be specific and action-oriented:
 
-```
+```text
 Good:  "Fix the 5 failing tests in the auth module and add input
         validation to the user registration endpoint."
 
@@ -124,7 +124,7 @@ The Mayor will:
 
 You can ask the Mayor directly:
 
-```
+```text
 "What's the status of the auth fixes?"
 "How many polecats are running right now?"
 "Are there any blocked items?"
@@ -156,7 +156,7 @@ gt rig list
 
 Sample output:
 
-```
+```text
 Rigs (3):
   myapp        active   3 polecats   witness: up   refinery: up
   api-server   active   1 polecat    witness: up   refinery: up

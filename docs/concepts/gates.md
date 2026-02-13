@@ -152,7 +152,7 @@ bd gate create --type gh:run --run-id <run-id> --title "Wait for CI"
 
 # Park on the gate
 gt mol step park --gate <gate-id>
-```
+```text
 
 The Deacon will close this gate when CI completes. Your next patrol
 cycle (or a fresh session) will pick up from here.
@@ -174,7 +174,7 @@ bd gate create --type human --title "Approve deploy v2.3.1 to production"
 # Notify the overseer
 gt mail send mayor/ -s "APPROVAL NEEDED: Deploy v2.3.1" \
   -m "Please review and approve: bd gate approve <gate-id>"
-```
+```text
 
 This step cannot proceed until a human runs `bd gate approve`.
 """

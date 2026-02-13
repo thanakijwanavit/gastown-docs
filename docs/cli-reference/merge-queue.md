@@ -44,7 +44,7 @@ gt mq list --status pending
 
 **Sample output:**
 
-```
+```text
 POS  ID       BEAD       BRANCH                  STATUS       RIG          AGE
 1    mr-001   gt-abc12   fix/login-bug           processing   myproject    5m
 2    mr-002   gt-def34   feat/email-validation   pending      myproject    2m
@@ -152,7 +152,7 @@ gt mq status --all
 
 **Sample output:**
 
-```
+```text
 Merge Queue Status: myproject
   Queue depth: 3
   Currently processing: mr-001 (fix/login-bug)
@@ -252,7 +252,7 @@ gt mq integration --disable lint --rig myproject
 
 **Sample configuration output:**
 
-```
+```text
 Integration Checks: myproject
   [enabled]   build     npm run build
   [enabled]   test      npm test

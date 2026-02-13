@@ -154,7 +154,7 @@ Refinery behavior is configured per-rig:
 
 The Refinery holds the **canonical clone** of the repository -- the authoritative copy from which merges to `main` happen:
 
-```
+```text
 ~/gt/<rig>/refinery/rig/     # Canonical git clone
 ~/gt/<rig>/refinery/CLAUDE.md # Refinery agent context
 ```
@@ -220,7 +220,7 @@ Each rig has exactly one Refinery. Cross-rig merges are coordinated by Dogs and 
 
 After merging a branch to `main`, the Refinery **must immediately** send a `MERGED` mail to the Witness. This is the critical signal that triggers polecat sandbox cleanup:
 
-```
+```text
 Merge to main → Push → Send MERGED mail → Close MR bead → Archive mail → Cleanup branches
 ```
 
@@ -239,7 +239,7 @@ The Refinery never merges code that fails validation.
 
 The Refinery processes one MR at a time, strictly serialized. After each successful merge, it loops back to check for more:
 
-```
+```text
 Process MR 1 → merge → Process MR 2 → merge → ... → Queue empty → Wait for next patrol
 ```
 

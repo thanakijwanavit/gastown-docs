@@ -22,7 +22,7 @@ The framework is based on the work of [Steve Yegge](https://steve-yegge.medium.c
 
 You write all code by hand. No AI assistance of any kind.
 
-```
+```text
 You: *types every character*
 AI:  *does not exist in your workflow*
 ```
@@ -41,7 +41,7 @@ AI:  *does not exist in your workflow*
 
 You use AI-powered code completion -- a smarter version of autocomplete that predicts multiple lines at once.
 
-```
+```text
 You: def calculate_tax(
 AI:  income, rate=0.25):
          return income * rate
@@ -68,7 +68,7 @@ AI:  income, rate=0.25):
 
 You use an AI chat panel alongside your editor. You ask questions, get explanations, request code snippets, and paste them into your project.
 
-```
+```text
 You: "How do I add JWT authentication to this Express app?"
 AI:  *provides explanation and code snippet*
 You: *copies and adapts the code*
@@ -95,7 +95,7 @@ You: *copies and adapts the code*
 
 You let the AI agent edit files directly in your IDE. In "YOLO mode," you approve changes in batches rather than line by line. The agent can read your codebase, run commands, and make multi-file changes.
 
-```
+```text
 You: "Refactor the auth module to use middleware pattern"
 AI:  *edits 6 files, runs tests, shows diff*
 You: "Looks good, apply it"
@@ -344,7 +344,7 @@ Steve Yegge's core thesis: each stage is **inevitable**. Once developers discove
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
 
-```
+```text
 Stage 5 developers: "Why would I need more than one agent?"
 Stage 6 developers: "OK, 3 agents is amazing, but 10 is chaos"
 Stage 7 developers: "I've built a pile of scripts... wait, is this an orchestrator?"

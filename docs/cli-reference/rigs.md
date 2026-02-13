@@ -37,7 +37,7 @@ gt rig list --status active
 
 **Sample output:**
 
-```
+```text
 RIG          STATUS    POLECATS   QUEUE   OPEN BEADS   BRANCH
 myproject    active    3          2       7            main
 docs         active    1          0       2            main
@@ -80,7 +80,7 @@ gt rig add docs https://github.com/you/docs.git --no-start
 
 **Created structure:**
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration
@@ -202,7 +202,7 @@ gt rig status myproject
 
 **Sample output:**
 
-```
+```text
 Rig: myproject
 Repository: https://github.com/you/repo.git
 Branch: main

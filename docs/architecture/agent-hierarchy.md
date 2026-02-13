@@ -68,7 +68,7 @@ The Boot dog is a special agent spawned by the Deacon to assess situations that 
 
 When an agent encounters a problem it cannot resolve:
 
-```
+```text
 Polecat (stuck)
   → Witness detects stall (patrol cycle)
     → Witness nudges polecat

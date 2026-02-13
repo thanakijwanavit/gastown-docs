@@ -216,7 +216,7 @@ The Deacon handles **operational health** (is everything running?). The Mayor ha
 
 When no active work exists across rigs, the Deacon enters idle monitoring mode. It skips health nudges for docked rigs and uses exponential backoff to reduce resource usage:
 
-```
+```text
 Active rigs with polecats → Full patrol cycle
 No active work anywhere → Idle monitoring (reduced frequency)
 ```
@@ -241,7 +241,7 @@ bd gate list                 # See open gates
 
 The "who watches the watchers" problem is solved by Witness pings. Each Witness sends a `WITNESS_PING` to the Deacon during its patrol. If the Deacon stops receiving pings, it knows a Witness has died:
 
-```
+```text
 Witness patrol → sends WITNESS_PING → Deacon archives it
 No ping for 3+ cycles → Deacon restarts the Witness
 No ping for 5+ cycles → Deacon escalates to Mayor

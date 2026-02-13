@@ -33,7 +33,7 @@ The Mayor is the primary human-facing agent in Gas Town. When you run `gt mayor 
 
 The Mayor is your interface to Gas Town. You describe what you want built, fixed, or changed in natural language:
 
-```
+```text
 > Fix the 5 failing tests in auth and add input validation to registration.
 ```
 

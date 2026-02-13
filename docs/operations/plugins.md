@@ -16,7 +16,7 @@ Gas Town's plugin system extends the platform with custom automation, gates, and
 
 Town-level plugins live in `~/gt/plugins/` and are available across all rigs.
 
-```
+```text
 ~/gt/plugins/
 ├── eslint-gate/
 │   ├── plugin.json
@@ -33,7 +33,7 @@ Town-level plugins live in `~/gt/plugins/` and are available across all rigs.
 
 Rig-level plugins live in `<rig>/plugins/` and only affect that specific project.
 
-```
+```text
 ~/gt/myproject/plugins/
 ├── integration-tests/
 │   ├── plugin.json
@@ -267,7 +267,7 @@ gt plugin list --json
 
 Sample output:
 
-```
+```text
 Town plugins:
   eslint-gate       gate/condition   pre-merge   v1.0.0
   deploy-notify     action           post-merge  v1.2.0
@@ -322,7 +322,7 @@ gt plugin history --json
 
 Sample output:
 
-```
+```text
 Plugin: integration-tests (last 5 runs)
 
   2025-06-15 14:23  PASSED  branch: fix/login    12.4s

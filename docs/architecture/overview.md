@@ -23,7 +23,7 @@ The town is the root directory (typically `~/gt/`) containing all projects and c
 
 Each rig wraps a git repository with the full agent infrastructure:
 
-```
+```text
 myproject/
 ├── .beads/           # Rig-level issue tracking (SQLite + JSONL export)
 ├── metadata.json     # Rig configuration and identity
@@ -79,7 +79,7 @@ Agents communicate through:
 
 ## Data Flow
 
-```
+```text
 Human gives Mayor instructions
     → Mayor creates beads + convoy
     → Mayor slings work to rigs

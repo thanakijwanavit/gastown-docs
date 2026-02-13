@@ -46,7 +46,7 @@ gt agents --rig myproject
 
 **Sample output:**
 
-```
+```text
 ROLE        RIG          STATUS     PID    AGE
 mayor       (town)       running    1234   2h
 deacon      (town)       running    1235   2h
@@ -167,7 +167,7 @@ gt mayor status
 
 **Sample output:**
 
-```
+```text
 Mayor: running (PID 1234)
 Session: sess-abc123
 Uptime: 2h 15m
@@ -408,7 +408,7 @@ gt polecat list --rig myproject --status running
 
 **Sample output:**
 
-```
+```text
 NAME     RIG          STATUS    BEAD       AGE     BRANCH
 toast    myproject    running   gt-abc12   15m     fix/login-bug
 alpha    myproject    running   gt-def34   10m     feat/email-validation
@@ -550,7 +550,7 @@ gt dog list
 
 **Sample output:**
 
-```
+```text
 NAME     STATUS    CURRENT TASK     SINCE
 boot     idle      -                -
 fetch    running   sync-upstream    5m

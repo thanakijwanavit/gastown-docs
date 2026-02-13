@@ -34,7 +34,7 @@ Beads is an open-source project. Learn more at [github.com/steveyegge/beads](htt
 
 Beads stores issues in a **SQLite database** located in the `.beads/` directory at the root of each repository (or town):
 
-```
+```text
 .beads/
 ├── beads.db           # SQLite database (primary store)
 ├── formulas/          # TOML workflow templates
@@ -135,7 +135,7 @@ bd blocked
 
 Beads supports **cross-prefix tracking**, allowing issues in different rigs to reference each other. Each rig has its own bead prefix (configured in `config.json`):
 
-```
+```text
 Town (.beads/)  prefix: hq-
 Rig A (.beads/) prefix: gt-
 Rig B (.beads/) prefix: bd-

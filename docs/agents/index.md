@@ -94,7 +94,7 @@ graph TD
 
 The monitoring chain ensures no agent runs unsupervised:
 
-```
+```text
 Daemon --[heartbeat]--> Deacon
 Deacon --[monitors]---> Witnesses (all rigs)
 Witness --[watches]---> Polecats (in its rig)
@@ -104,7 +104,7 @@ Mayor  --[strategy]---> Deacon
 
 When something goes wrong, escalations flow upward:
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat

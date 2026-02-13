@@ -93,7 +93,7 @@ bd create --title "Fix: rate limiter missing IPv6 normalization" \
 
 The most productive crew collaboration involves working in parallel with polecats:
 
-```
+```text
 You (Crew)                    Polecats
 ─────────────                 ─────────
 Design feature A              Implement feature B (from earlier spec)

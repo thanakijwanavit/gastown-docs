@@ -23,7 +23,7 @@ GUPP is the single most important design principle in Gas Town. It means:
 
 ### GUPP in Practice
 
-```
+```text
 Before crash:     load-context [done] → branch-setup [done] → implement [in_progress]
 After restart:    load-context [done] → branch-setup [done] → implement [in_progress]
                                                                 ↑ resumes here
@@ -68,7 +68,7 @@ NDI is the practical companion to GUPP. AI agents are inherently nondeterministi
 
 Consider a polecat working on bead `gt-a1b2c` (add input validation):
 
-```
+```text
 Run 1:  Implements validation with Joi library
         Tests pass → step marked done
 
@@ -79,7 +79,7 @@ Run 2:  (after crash and restart)
 
 If the agent had crashed *during* implementation (before marking done):
 
-```
+```text
 Run 1:  Starts implementing with Joi, crashes at 60%
         Step still marked in_progress
 

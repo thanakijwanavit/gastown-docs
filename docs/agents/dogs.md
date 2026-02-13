@@ -134,7 +134,7 @@ The Deacon:
 
 All Dogs operate from the Deacon's dog directory:
 
-```
+```text
 ~/gt/deacon/dogs/
 ├── boot/              # Boot dog (special - see Boot docs)
 ├── dog-001/           # General purpose dog
@@ -200,7 +200,7 @@ The Deacon maintains a minimum pool of idle dogs so infrastructure tasks can be 
 
 A typical dog cleanup task might span all rigs:
 
-```
+```text
 Dog receives: "Clean orphaned worktrees across all rigs"
   → Scan rig 1: Remove 3 orphaned directories
   → Scan rig 2: Remove 1 orphaned directory

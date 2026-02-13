@@ -129,7 +129,7 @@ Each name is unique within a rig at any given time. Names are recycled after a p
 
 Every polecat gets its own git identity:
 
-```
+```text
 Author: Toast <toast@myproject.gt>
 Author: Alpha <alpha@myproject.gt>
 ```
@@ -198,7 +198,7 @@ Polecat behavior is configured per-rig:
 
 ## Directory Structure
 
-```
+```text
 ~/gt/<rig>/polecats/
 ├── toast/                # Polecat sandbox (git worktree)
 │   ├── .git              # Worktree link
@@ -292,7 +292,7 @@ The next session picks up context from the handoff mail.
 
 Polecat branches follow the convention:
 
-```
+```text
 polecat/<name>/<issue-id>@<molecule-id>
 ```
 

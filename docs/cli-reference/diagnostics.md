@@ -105,7 +105,7 @@ gt activity --rig myproject --limit 50
 
 **Sample output:**
 
-```
+```text
 TIME       TYPE        AGENT           EVENT
 14:30      work        polecat/toast   Completed gt-abc12 (fix/login-bug)
 14:28      merge       refinery        Merged mr-001 to main
@@ -212,7 +212,7 @@ gt trail polecat/toast
 
 **Sample output (bead trail):**
 
-```
+```text
 gt-abc12: Fix login redirect loop
   14:00  created     by mayor          priority=high type=bug
   14:05  assigned    to myproject      via gt sling
@@ -292,7 +292,7 @@ gt doctor --fix
 
 **Sample output:**
 
-```
+```text
 Gas Town Doctor
 ===============
 
@@ -387,7 +387,7 @@ gt costs --agent polecat/toast
 
 **Sample output:**
 
-```
+```text
 Gas Town Costs (last 24h)
 =========================
 
@@ -497,7 +497,7 @@ gt orphans
 
 **Sample output:**
 
-```
+```text
 Orphaned Resources
 ==================
 
@@ -604,7 +604,7 @@ gt peek mayor
 
 **Sample output:**
 
-```
+```text
 Peek: polecat/toast (myproject)
   Status: running
   Hook: gt-abc12 "Fix login redirect loop"

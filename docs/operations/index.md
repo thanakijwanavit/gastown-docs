@@ -30,7 +30,7 @@ The daemon process is a simple Go scheduler that sends heartbeats and processes 
 
 ### 2. Escalations Flow Upward
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat
@@ -83,7 +83,7 @@ gt shutdown --all
 
 When something goes wrong, follow this decision tree:
 
-```
+```text
 Is the system completely down?
 ├── Yes → gt daemon start && gt start --all (see Lifecycle: Emergency Recovery)
 └── No

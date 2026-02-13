@@ -17,7 +17,7 @@ cd ~/gt
 
 This creates:
 
-```
+```text
 ~/gt/
 ├── .beads/          # Town-level issue tracking
 ├── .claude/         # Claude Code integration
@@ -40,7 +40,7 @@ gt rig add myproject https://github.com/you/repo.git
 
 This creates the rig structure:
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration

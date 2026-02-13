@@ -46,7 +46,7 @@ flowchart TD
 
 ### Automation Spectrum
 
-```
+```text
   Manual                                              Fully Automated
     |                                                        |
     |   Minimal    Manual Convoy    Formula    MEOW          |
@@ -88,7 +88,7 @@ gt mail inbox      # Check for messages
 
 Workers always follow the self-cleaning model:
 
-```
+```text
 Spawn -> Work -> Done -> Nuke
 ```
 
@@ -96,7 +96,7 @@ Spawn -> Work -> Done -> Nuke
 
 Completed work always flows through the Refinery:
 
-```
+```text
 Polecat pushes branch -> Witness sends MERGE_READY ->
 Refinery rebases + tests -> Refinery merges to main
 ```

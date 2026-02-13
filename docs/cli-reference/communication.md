@@ -49,7 +49,7 @@ gt mail inbox --from mayor --since 1h
 
 **Sample output:**
 
-```
+```text
 ID     FROM        TIME     READ   SUBJECT
 m-001  deacon      5m ago   *      Witness myproject unresponsive
 m-002  polecat     15m ago  .      gt-abc12 completed
@@ -675,7 +675,7 @@ gt escalate list --severity P0 --status open
 
 **Sample output:**
 
-```
+```text
 ID       SEVERITY   STATUS   FROM      AGE    MESSAGE
 esc-001  P0         open     witness   5m     Production DB migration failed
 esc-002  P2         acked    polecat   1h     Need API schema decision

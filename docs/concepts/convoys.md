@@ -55,7 +55,7 @@ stateDiagram-v2
 
 Convoys use the `hq-cv-` prefix by default (since they are town-level coordination beads):
 
-```
+```text
 hq-cv-001   # First convoy
 hq-cv-abc   # Auto-generated short ID
 ```
@@ -154,7 +154,7 @@ gt convoy status hq-cv-001
 
 Example output:
 
-```
+```text
 Convoy: hq-cv-001 "Auth System Fixes"
 Status: OPEN
 Progress: 2/3 issues completed

@@ -122,7 +122,7 @@ git cherry-pick <commit-hash>
 
 **Symptom:** Multiple agents create the same file with different content.
 
-```
+```text
 Auto-merging docs/new-guide.md
 CONFLICT (add/add): Merge conflict in docs/new-guide.md
 ```
@@ -158,7 +158,7 @@ git ls-tree origin/master | grep <filename>
 
 **Symptom:** Same file modified by multiple agents.
 
-```
+```text
 Auto-merging src/main.go
 CONFLICT (content): Merge conflict in src/main.go
 ```

@@ -41,7 +41,7 @@ gt install ~/gt --git --agent gemini
 
 **Created structure:**
 
-```
+```text
 ~/gt/
 ├── .beads/          # Town-level issue tracking
 ├── .claude/         # Claude Code integration

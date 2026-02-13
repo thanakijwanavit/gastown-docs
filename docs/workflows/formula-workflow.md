@@ -49,7 +49,7 @@ gt formula list
 
 Example output:
 
-```
+```text
 Name                        Type      Steps  Description
 shiny                       workflow  5      Design-implement-review-test-submit
 shiny-secure                workflow  6      Shiny with security audit
@@ -118,7 +118,7 @@ gt mol dag <mol-id>
 
 Example progress output:
 
-```
+```text
 Molecule: mol-shiny-x1y2z "Add notification system"
 Formula: shiny v1
 Progress: 2/5 steps complete

@@ -118,7 +118,7 @@ Because Boot starts clean every time, it has unique advantages:
 
 Boot lives within the Deacon's dog directory:
 
-```
+```text
 ~/gt/deacon/dogs/boot/
 ├── CLAUDE.md          # Boot agent context and instructions
 ├── last-run.json      # Timestamp and results of last run
@@ -129,7 +129,7 @@ Boot lives within the Deacon's dog directory:
 
 Boot runs on the daemon's tick cycle:
 
-```
+```text
 Daemon tick (every ~3 min)
   → Spawn Boot
   → Boot observes, decides, acts
@@ -209,7 +209,7 @@ Boot uses a precise decision matrix during the Decide phase:
 
 Most Boot runs result in no action:
 
-```
+```text
 Spawn → Observe: Deacon active, recent output → Decide: NOTHING → Exit
 ```
 
@@ -219,7 +219,7 @@ This is the expected state. Boot confirms health and exits in seconds.
 
 When the Deacon session crashes:
 
-```
+```text
 Spawn → Observe: Deacon session dead → Decide: START → Act: Request Deacon wake → Exit
 Next tick: Spawn → Observe: Deacon alive but fresh → Decide: NUDGE (stale hooks, pending work) → Exit
 ```
