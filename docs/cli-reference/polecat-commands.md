@@ -39,6 +39,7 @@ Polecats are **ephemeral workers**: spawned for one task, nuked when done. There
 | [`check-recovery`](#gt-polecat-check-recovery) | Check if polecat needs recovery vs safe to nuke |
 | [`git-state`](#gt-polecat-git-state) | Show git state for pre-kill verification |
 | [`identity`](#gt-polecat-identity) | Manage polecat identities |
+| [`sync`](#gt-polecat-sync) | Sync beads for a polecat (**deprecated**) |
 
 ---
 
@@ -346,3 +347,21 @@ gt polecat identity list myproject
 gt polecat identity show myproject/toast
 gt polecat identity rename myproject/toast myproject/alpha
 ```
+
+---
+
+## gt polecat sync
+
+:::caution Deprecated
+
+This command is **deprecated** with the Dolt backend. Beads are now stored in Dolt and synced automatically — no manual sync step is needed.
+
+:::
+
+Sync beads for a polecat.
+
+```bash
+gt polecat sync <rig>/<polecat> [flags]
+```
+
+Previously required when beads used file-based storage to ensure polecat bead state was consistent with the rig's beads directory. With the Dolt backend, all beads operations go through the database directly, making this command unnecessary.
