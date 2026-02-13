@@ -107,3 +107,8 @@ For non-urgent communication, use `gt mail send` instead. Nudges interrupt the t
 `gt nudge` is the preferred way to send messages to running sessions. The lower-level `gt session inject` exists but lacks the reliable delivery guarantees that `gt nudge` provides.
 
 :::
+
+## Related
+
+- [Communication](./communication.md) -- Full communication command reference (mail, escalations, broadcasts)
+- [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The escalation path that nudge supports

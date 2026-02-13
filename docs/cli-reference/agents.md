@@ -859,3 +859,9 @@ gt crew restart <rig> <member> [options]
 ```bash
 gt crew restart myproject dave
 ```
+
+## Related
+
+- [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Supervision tree and monitoring chain
+- [Polecats](../agents/polecats.md) -- Ephemeral worker lifecycle details
+- [Crew](../agents/crew.md) -- Persistent crew worker details

@@ -611,3 +611,9 @@ gt formula create my-workflow --from workflow.yaml
 # Create from an existing molecule
 gt formula create api-migration --from-molecule mol-auth-001 --description "API version migration workflow"
 ```
+
+## Related
+
+- [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes
+- [gt seance](./seance.md) -- Talk to predecessor sessions to recover context
+- [Molecules](../concepts/molecules.md) -- Multi-step workflow definitions

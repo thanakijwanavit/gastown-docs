@@ -738,3 +738,9 @@ gt thanks
 ```
 
 **Description:** Shows the humans who have contributed to the Gas Town project.
+
+## Related
+
+- [Troubleshooting](../operations/troubleshooting.md) -- Common issues and solutions
+- [Monitoring](../operations/monitoring.md) -- Health monitoring and observability
+- [gt compact](./compact.md) -- TTL-based compaction for ephemeral wisps

@@ -86,3 +86,8 @@ gt compact report              # Run compaction + send daily digest
 gt compact report --dry-run    # Preview the report without sending
 gt compact report --weekly     # Send weekly rollup to mayor/
 ```
+
+## Related
+
+- [Wisps](../concepts/wisps.md) -- The ephemeral beads that compaction manages
+- [Diagnostics](./diagnostics.md) -- Other maintenance and diagnostic commands

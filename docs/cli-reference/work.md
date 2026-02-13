@@ -668,3 +668,8 @@ Moving a hooked bead without `--force` will fail. Unsling it first, or use `--fo
 
 
 :::
+## Related
+
+- [Work Distribution](../architecture/work-distribution.md) -- How work flows through Gas Town
+- [Beads](../concepts/beads.md) -- The issue tracking system underlying work commands
+- [GUPP (Propulsion Principle)](../concepts/gupp.md) -- The hook-driven execution model
