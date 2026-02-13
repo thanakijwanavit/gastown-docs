@@ -10,9 +10,9 @@ Gas Town is a multi-agent orchestration system for AI coding agents. It coordina
 
 ## Where to Start
 
-- **[Getting Started](/docs/getting-started/)** — Install Gas Town and run your first convoy
-- **[Architecture Overview](/docs/architecture/)** — Understand how the system fits together
-- **[Core Concepts](/docs/concepts/)** — Learn about beads, hooks, molecules, and convoys
+- **[Getting Started](./getting-started/index.md)** — Install Gas Town and run your first convoy
+- **[Architecture Overview](./architecture/index.md)** — Understand how the system fits together
+- **[Core Concepts](./concepts/index.md)** — Learn about beads, hooks, molecules, and convoys
 
 ## What Problem Does It Solve?
 
@@ -23,4 +23,4 @@ When you scale beyond a single AI coding agent, you hit coordination problems: a
 - **Serialized merges** — The Refinery prevents merge chaos
 - **Built-in monitoring** — Witnesses track health; the Deacon coordinates recovery
 
-For the full documentation, see the [docs home](/docs/).
+For the full documentation, see the [docs home](./index.md).

@@ -219,7 +219,7 @@ You can always interrupt:
 
 ```bash
 # Stop a specific polecat
-gt polecat stop myproject/toast
+gt polecat nuke myproject/toast
 
 # Release an issue back to the pool
 gt release gt-a1b2c

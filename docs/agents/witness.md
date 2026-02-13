@@ -293,5 +293,5 @@ gt nudge <rig>/witness "context check"
 - [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it
 - [Polecats](polecats.md) -- Workers the Witness monitors
 - [Refinery](refinery.md) -- Merge processor the Witness health-checks
-- [Hooks](/docs/concepts/hooks.md) -- Mechanism for attaching work to polecats
-- [GUPP](/docs/concepts/gupp.md) -- The principle that drives polecat execution
+- [Hooks](../concepts/hooks.md) -- Mechanism for attaching work to polecats
+- [GUPP](../concepts/gupp.md) -- The principle that drives polecat execution

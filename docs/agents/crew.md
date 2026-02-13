@@ -270,5 +270,5 @@ gt crew restart myproject dave
 
 - [Polecats](polecats.md) -- AI workers that crew members work alongside
 - [Refinery](refinery.md) -- Merge queue that crew work flows through
-- [Beads](/docs/concepts/beads.md) -- Issue tracking available to crew members
-- [Rigs](/docs/concepts/rigs.md) -- Project containers where crew workspaces live
+- [Beads](../concepts/beads.md) -- Issue tracking available to crew members
+- [Rigs](../concepts/rigs.md) -- Project containers where crew workspaces live

@@ -382,7 +382,7 @@ A polecat keeps trying the same approach to a problem, failing, and trying again
 gt escalate ack ESC-002 --note "Reviewing stuck polecat"
 
 # Stop the polecat and release its work
-gt polecat stop toast --rig myproject
+gt polecat nuke toast --rig myproject
 gt release gt-a1b2c
 
 # Add more detail to the bead before re-slinging
@@ -411,7 +411,7 @@ gt costs --since 12h --by-agent
 gt trail --since 12h
 
 # If a runaway agent, stop it
-gt polecat stop <name> --rig myproject
+gt polecat nuke <name> --rig myproject
 
 # Acknowledge and close
 gt escalate ack ESC-003 --note "Cost spike from runaway polecat"

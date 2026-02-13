@@ -310,5 +310,5 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 
 - [Polecats](polecats.md) -- Submit MRs that the Refinery processes
 - [Witness](witness.md) -- Monitors the Refinery and receives `MERGED` signals
-- [Molecules](/docs/concepts/molecules.md) -- The `mol-refinery-patrol` formula defines the merge workflow
-- [Beads](/docs/concepts/beads.md) -- MR beads track each merge request through the queue
+- [Molecules](../concepts/molecules.md) -- The `mol-refinery-patrol` formula defines the merge workflow
+- [Beads](../concepts/beads.md) -- MR beads track each merge request through the queue

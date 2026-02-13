@@ -293,5 +293,5 @@ gt polecat list              # See zombie states
 - [Dogs](dogs.md) -- Infrastructure workers managed by the Deacon
 - [Witness](witness.md) -- Per-rig monitors that the Deacon supervises
 - [Mayor](mayor.md) -- Provides strategic direction to the Deacon
-- [Gates](/docs/concepts/gates.md) -- Async coordination primitives the Deacon evaluates
-- [Molecules](/docs/concepts/molecules.md) -- Workflows the Deacon dispatches when gates open
+- [Gates](../concepts/gates.md) -- Async coordination primitives the Deacon evaluates
+- [Molecules](../concepts/molecules.md) -- Workflows the Deacon dispatches when gates open

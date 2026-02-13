@@ -223,7 +223,7 @@ gt peek polecat:toast --rig myproject
 
     ```bash
     # Stop the polecat
-    gt polecat stop toast --rig myproject
+    gt polecat nuke toast --rig myproject
 
     # Release its work
     gt release gt-a1b2c
@@ -413,7 +413,7 @@ gt mq show <mr-id>
 
     ```bash
     # Skip the problematic MR
-    gt mq skip <mr-id>
+    gt mq reject <mr-id>
 
     # The bead goes back to pending for reassignment
     gt sling gt-a1b2c myproject
@@ -581,7 +581,7 @@ git log --oneline -5
     git push
 
     # Then stop and respawn
-    gt polecat stop <name> --rig myproject
+    gt polecat nuke <name> --rig myproject
     gt sling <bead-id> myproject
     ```
 

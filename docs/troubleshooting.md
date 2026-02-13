@@ -121,12 +121,12 @@ gt status
 
 **2. Restart the daemon if needed**
 ```bash
-gt daemon restart
+gt daemon stop && gt daemon start
 ```
 
 **3. Check current session count**
 ```bash
-gt list
+gt polecat list
 ```
 
 **4. Clean up orphaned sessions**

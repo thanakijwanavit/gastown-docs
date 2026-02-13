@@ -250,4 +250,4 @@ gt deacon status             # Verify Deacon is processing mail
 - [Deacon](deacon.md) -- Manages the dog pool and dispatches tasks
 - [Boot](boot.md) -- A special-purpose dog for system triage
 - [Polecats](polecats.md) -- Feature workers (contrast with infrastructure dogs)
-- [Rigs](/docs/concepts/rigs.md) -- Dogs operate across rigs, unlike polecats
+- [Rigs](../concepts/rigs.md) -- Dogs operate across rigs, unlike polecats

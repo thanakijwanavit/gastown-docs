@@ -143,10 +143,10 @@ Each role has clear, non-overlapping responsibilities:
 
 The agent hierarchy depends on several core Gas Town concepts:
 
-- **[GUPP](/docs/concepts/gupp.md)** (Gas Town Universal Propulsion Principle) -- Work on a hook is an immediate assignment. No confirmation needed. This is what makes polecats fire instantly when spawned.
-- **[Hooks](/docs/concepts/hooks.md)** -- The mechanism for attaching work to an agent. Every polecat checks its hook on startup.
-- **[Molecules](/docs/concepts/molecules.md)** -- Workflow templates that define step-by-step execution plans. Every agent role has a formula (e.g., `mol-polecat-work`, `mol-witness-patrol`).
-- **[Beads](/docs/concepts/beads.md)** -- The issue tracking system all agents use to create, update, and close work items.
+- **[GUPP](../concepts/gupp.md)** (Gas Town Universal Propulsion Principle) -- Work on a hook is an immediate assignment. No confirmation needed. This is what makes polecats fire instantly when spawned.
+- **[Hooks](../concepts/hooks.md)** -- The mechanism for attaching work to an agent. Every polecat checks its hook on startup.
+- **[Molecules](../concepts/molecules.md)** -- Workflow templates that define step-by-step execution plans. Every agent role has a formula (e.g., `mol-polecat-work`, `mol-witness-patrol`).
+- **[Beads](../concepts/beads.md)** -- The issue tracking system all agents use to create, update, and close work items.
 
 ## Common Patterns
 
