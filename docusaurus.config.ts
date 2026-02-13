@@ -42,7 +42,7 @@ const config: Config = {
         blog: {
           showReadingTime: true,
           blogSidebarTitle: 'Recent posts',
-          blogSidebarCount: 5,
+          blogSidebarCount: 10,
           onInlineAuthors: 'ignore',
         },
         theme: {
@@ -72,6 +72,7 @@ const config: Config = {
           position: 'left',
           label: 'Documentation',
         },
+        {to: '/blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/steveyegge/gastown',
           label: 'GitHub',
@@ -101,6 +102,7 @@ const config: Config = {
         {
           title: 'More',
           items: [
+            {label: 'Blog', to: '/blog'},
             {label: 'GitHub', href: 'https://github.com/steveyegge/gastown'},
             {
               label: 'Welcome to Gas Town (Medium)',
