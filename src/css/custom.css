@@ -87,11 +87,24 @@ table:not(.tabs) th {
 .hero__title {
   font-size: 3rem;
   font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .hero__subtitle {
   font-size: 1.3rem;
   opacity: 0.9;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 768px) {
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__subtitle {
+    font-size: 1rem;
+  }
 }
 
 .feature-card {
