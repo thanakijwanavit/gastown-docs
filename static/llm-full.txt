@@ -15174,6 +15174,54 @@ gt polecat attach toast --rig myproject
 
 ---
 
+## Death Warrants (Agent Cleanup)
+
+When an agent becomes unresponsive, exceeds its timeout, or turns into a zombie process, Gas Town uses **death warrants** to coordinate cleanup. A death warrant is not an immediate kill -- it's a structured cleanup request that ensures work is recovered before the agent is terminated.
+
+### How Death Warrants Work
+
+```mermaid
+sequenceDiagram
+    participant D as Deacon
+    participant W as Witness
+    participant P as Stuck Polecat
+    participant B as Boot
+
+    D->>D: Patrol detects zombie polecat
+    D->>D: Files death warrant (bead)
+    D->>B: Boot picks up warrant on next tick
+    B->>P: Attempts graceful shutdown
+    B->>B: Recovers uncommitted work if possible
+    B->>P: Terminates process
+    B->>D: Reports cleanup complete
+```
+
+1. **Detection**: The [Deacon](../agents/deacon.md) detects zombies during its patrol cycle -- sessions that are alive but not responding, or processes consuming resources without producing output.
+2. **Filing**: The Deacon files a death warrant as a bead, not an immediate kill. This creates an audit trail.
+3. **Execution**: [Boot](../agents/boot.md) processes death warrants on daemon ticks. It attempts graceful shutdown first, recovers any uncommitted work, then terminates the process.
+4. **Recovery**: Hooked work is released back to `pending` status. The [Witness](../agents/witness.md) can then re-sling the work to a fresh polecat.
+
+### Death Warrants for Dogs
+
+[Dogs](../agents/dogs.md) (Deacon infrastructure helpers) that exceed their task timeout also receive death warrants:
+
+```bash
+gt dog list                  # Check dog states
+# Dogs past timeout show "death warrant pending"
+```
+
+### Why Not Kill Immediately?
+
+The warrant system exists because immediate kills risk data loss:
+
+- A polecat may have uncommitted changes worth saving
+- A dog may be mid-write on a critical file
+- The cleanup process itself needs coordination (remove worktree, release hooks, update beads)
+
+The warrant gives Boot time to do this safely.
+
+---
+
 ## Per-Rig Lifecycle
 
 Rigs (project containers) have their own lifecycle commands that control the agents running within them.
