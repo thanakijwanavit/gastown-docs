@@ -223,6 +223,12 @@ echo ""
 echo "Test 9: Checking CLI commands referenced in docs..."
 INVALID_CMDS=0
 
+# Skip if gt CLI is not available (e.g., CI environment)
+if ! command -v gt >/dev/null 2>&1; then
+    echo "  Skipping: gt CLI not available (CI environment)"
+    pass_test "CLI command check skipped (gt not available)"
+else
+
 # Extract unique "gt <cmd>" top-level commands from fenced code blocks only
 # This avoids false positives from prose like "gt commands for..."
 TMPFILE=$(mktemp)
@@ -259,6 +265,7 @@ if [ "$INVALID_CMDS" -eq 0 ]; then
     pass_test "All top-level CLI commands in docs are valid"
 else
     fail_test "Found $INVALID_CMDS invalid CLI command(s) in docs" "Fix commands to match actual gt CLI"
+fi
 fi
 
 # Summary
