@@ -368,3 +368,7 @@ Happy searching! If you can't find what you need, consider filing a [documentati
 - [Quick Start](quickstart.md) -- Get started with Gas Town from scratch
 - [Architecture Guide](../guides/architecture.md) -- Narrative overview of how all the pieces fit together
 - [Troubleshooting Guide](../guides/troubleshooting.md) -- Solutions for the most common Gas Town problems
+
+### Blog Posts
+
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog with multi-agent orchestration tips and workflow patterns

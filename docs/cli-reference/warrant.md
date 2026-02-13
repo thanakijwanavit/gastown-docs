@@ -123,3 +123,7 @@ Using `--force` bypasses the warrant system entirely. Only use this for emergenc
 - [Deacon](../agents/deacon.md) -- Health-check orchestrator that files warrants
 - [Witness](../agents/witness.md) -- Polecat monitor that escalates stuck agents
 - [Lifecycle Management](../operations/lifecycle.md) -- Agent lifecycle and termination flows
+
+### Blog Posts
+
+- [Gas Town's Security Model: Trust Boundaries for AI Agents](/blog/security-model) -- How Gas Town implements security through workspace isolation, permission scoping, and trust boundaries

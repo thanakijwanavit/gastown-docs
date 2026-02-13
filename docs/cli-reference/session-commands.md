@@ -267,3 +267,8 @@ gt session inject myproject/toast -f prompt.txt
 - [gt nudge](./nudge.md) -- Reliable message delivery to running sessions
 - [Session Cycling](../concepts/session-cycling.md) -- How agents cycle sessions for fresh context
 - [Monitoring](../operations/monitoring.md) -- Monitoring agent session health
+
+### Blog Posts
+
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents automatically hand off work when their context window fills up
+- [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces

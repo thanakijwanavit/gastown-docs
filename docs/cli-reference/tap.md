@@ -110,3 +110,7 @@ See the [Operations Guide](../operations/troubleshooting.md) and [Lifecycle Mana
 
 - [Git Workflow Guide](../guides/git-workflow.md) -- Why Gas Town uses direct-to-main instead of PRs
 - [GUPP (Propulsion Principle)](../concepts/gupp.md) -- The autonomous execution model that tap guards enforce
+
+### Blog Posts
+
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking work progress, and catching problems early

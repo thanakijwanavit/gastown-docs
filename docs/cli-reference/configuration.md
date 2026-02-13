@@ -366,3 +366,7 @@ gt plugin list --json
 - [Hooks](../concepts/hooks.md) -- How Claude Code hooks integrate with Gas Town
 - [Plugins](../operations/plugins.md) -- Plugin system for periodic automation
 - [Architecture Overview](../architecture/overview.md) -- How configuration fits into the overall system
+
+### Blog Posts
+
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make, from vague beads to ignoring the Refinery queue

@@ -131,3 +131,7 @@ gt orphans procs kill         # Kill orphaned processes
 - [Witness](../agents/witness.md) -- Agent that detects stuck polecats and triggers recovery
 - [Lifecycle Management](../operations/lifecycle.md) -- Agent lifecycle and cleanup operations
 - [Git Workflow](../guides/git-workflow.md) -- How branches and merges work in Gas Town
+
+### Blog Posts
+
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking work progress, and catching problems early

@@ -118,3 +118,7 @@ Seance spawns a read-only fork of the predecessor session. It cannot modify the 
 - [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes across agent sessions
 - [Session & Handoff](./sessions.md) -- The handoff commands that create the sessions seance can query
 - [gt compact](./compact.md) -- TTL-based compaction, another approach to context management
+
+### Blog Posts
+
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents automatically hand off work when their context window fills up
