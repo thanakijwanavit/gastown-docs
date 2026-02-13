@@ -765,3 +765,8 @@ Stale P0/P1 escalations indicate that critical issues are going unaddressed. The
 - [gt nudge](./nudge.md) -- Synchronous message delivery to running sessions
 - [Architecture Overview](../architecture/overview.md) -- How the communication layer fits into Gas Town
 - [Crew Collaboration](../workflows/crew-collaboration.md) -- Communication patterns for crew workers
+
+### Blog Posts
+
+- [Gas Town's Mail System](/blog/mail-system) -- Async communication patterns between agents
+- [Session Cycling](/blog/session-cycling) -- How handoff mail preserves context across sessions

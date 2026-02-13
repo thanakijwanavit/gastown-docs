@@ -1028,6 +1028,34 @@ else
     fail_test "Found $BLOG_SLUG_ISSUES invalid blog slug reference(s)" "Ensure blog slugs in docs match actual blog post slugs"
 fi
 
+# Test 33: Blog posts cover core topic areas
+echo ""
+echo "Test 33: Checking blog coverage of core topic areas..."
+COVERAGE_ISSUES=0
+
+# Core topic areas that should have at least one blog post
+REQUIRED_TOPICS="agents architecture concepts operations workflow"
+
+for topic in $REQUIRED_TOPICS; do
+    topic_count=0
+    for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+        tags_line=$(awk '/^---$/{if(++n==2)exit}n==1 && /^tags:/{print; exit}' "$file" 2>/dev/null)
+        if echo "$tags_line" | grep -qi "$topic"; then
+            topic_count=$((topic_count + 1))
+        fi
+    done
+    if [ "$topic_count" -lt 1 ]; then
+        echo "  No blog posts tagged with '$topic'"
+        COVERAGE_ISSUES=$((COVERAGE_ISSUES + 1))
+    fi
+done
+
+if [ "$COVERAGE_ISSUES" -eq 0 ]; then
+    pass_test "Blog posts cover all core topic areas"
+else
+    fail_test "Missing blog coverage for $COVERAGE_ISSUES topic area(s)" "Add blog posts tagged with the missing topics"
+fi
+
 # Summary
 echo ""
 echo "========================================"
