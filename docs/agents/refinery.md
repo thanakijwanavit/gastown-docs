@@ -314,3 +314,4 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 - **[Beads](../concepts/beads.md)** -- MR beads track each merge request through the queue
 - **[Merge Queue CLI](../cli-reference/merge-queue.md)** -- CLI commands for interacting with the merge queue
 - **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic processing cadence the Refinery follows
+- **[Refinery Commands](../cli-reference/refinery-commands.md)** -- CLI commands for Refinery management and queue operations

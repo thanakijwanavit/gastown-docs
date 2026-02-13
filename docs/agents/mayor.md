@@ -282,3 +282,4 @@ gt rig start <rig>           # Start rig agents if needed
 - **[Polecats](polecats.md)** -- Workers the Mayor assigns tasks to
 - **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence used by all persistent agents
 - **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Session cycling protocol for long-running agents
+- **[Agent Commands](../cli-reference/agents.md)** -- CLI commands for Mayor lifecycle and operations

@@ -169,3 +169,4 @@ gt mail inbox
 - **[Molecules](molecules.md)** -- Multi-step workflows track progress across session boundaries
 - **[Patrol Cycles](patrol-cycles.md)** -- Persistent agents use patrol molecules that squash-and-respawn across session boundaries
 - **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Step-by-step guide for clean session transitions
+- **[Session Commands](../cli-reference/sessions.md)** -- CLI commands for session management and handoff

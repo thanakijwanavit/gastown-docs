@@ -370,3 +370,4 @@ Next: <what remains>"
 - **[Beads](../concepts/beads.md)** -- Issue tracking system polecats use for task management
 - **[Session Cycling](../concepts/session-cycling.md)** -- How polecats hand off context when sessions fill up
 - **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Protocol for transferring work between sessions
+- **[Polecat Commands](../cli-reference/polecat-commands.md)** -- CLI commands for polecat lifecycle and management

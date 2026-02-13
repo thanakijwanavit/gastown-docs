@@ -297,3 +297,4 @@ gt nudge <rig>/witness "context check"
 - **[GUPP](../concepts/gupp.md)** -- The principle that drives polecat execution
 - **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence the Witness follows
 - **[Session Cycling](../concepts/session-cycling.md)** -- How the Witness manages context limits via handoff
+- **[Agent Commands](../cli-reference/agents.md)** -- CLI commands for Witness lifecycle and operations
