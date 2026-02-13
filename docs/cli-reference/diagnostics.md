@@ -674,7 +674,7 @@ Key Record Chronicle — manages TTL-based lifecycle for Level 0 ephemeral data.
 gt krc [command]
 ```
 
-**Description:** Manages patrol heartbeats, status checks, and other operational data that decays in forensic value over days. Provides configurable TTLs, auto-pruning, and statistics.
+**Description:** Manages patrol heartbeats, status checks, and other operational data ([wisps](../concepts/wisps.md)) that decays in forensic value over days. Provides configurable TTLs, auto-pruning, and statistics. See also [`gt compact`](compact.md) for wisp compaction.
 
 **Subcommands:**
 

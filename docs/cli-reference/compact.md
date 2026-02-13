@@ -15,7 +15,7 @@ gt compact [command]
 
 ## Description
 
-Wisps are lightweight, ephemeral beads (heartbeats, pings, patrol reports). Over time they accumulate and need cleanup. Compaction applies TTL (time-to-live) policies:
+[Wisps](../concepts/wisps.md) are lightweight, ephemeral beads (heartbeats, pings, patrol reports). Over time they accumulate and need cleanup. Compaction applies TTL (time-to-live) policies:
 
 - **Non-closed wisps past TTL** are promoted to permanent beads (something is stuck)
 - **Closed wisps past TTL** are deleted (Dolt `AS OF` preserves history)
