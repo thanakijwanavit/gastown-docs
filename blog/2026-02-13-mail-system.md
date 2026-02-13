@@ -43,6 +43,15 @@ Status:  unread
 
 Because mail is stored as beads, it benefits from all bead features: persistence, sync, cross-rig routing, and searchability.
 
+```mermaid
+flowchart TD
+    A[Agent A] -->|gt mail send| MB[(Town Beads DB)]
+    MB -->|gt mail inbox| B[Agent B]
+    A -->|gt nudge| B
+    A -->|gt handoff| MB
+    MB -->|next session| A
+```
+
 ## Common Mail Patterns
 
 ### Handoff Mail

@@ -10,6 +10,21 @@ Formulas are Gas Town's workflow templates. When you pour a formula, it becomes 
 
 <!-- truncate -->
 
+```mermaid
+flowchart TD
+    subgraph Linear["Pattern 1: Linear"]
+        L1[load] --> L2[implement] --> L3[test] --> L4[submit]
+    end
+    subgraph Parallel["Pattern 2: Fan-Out"]
+        P0[load] --> PA[api]
+        P0 --> PB[ui]
+        P0 --> PC[tests]
+        PA --> PI[integrate]
+        PB --> PI
+        PC --> PI
+    end
+```
+
 ## Formula Basics
 
 A formula is a TOML file that defines a sequence of steps. Each step becomes a [wisp](/docs/concepts/wisps) when the formula is poured into a [molecule](/docs/concepts/molecules):

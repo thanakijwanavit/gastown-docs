@@ -1246,6 +1246,25 @@ else
     fail_test "Found $ORPHAN_ISSUES orphaned blog slug(s)" "Add a link to each orphaned blog post from a relevant doc page's Blog Posts section"
 fi
 
+# Test 41: All blog posts have Mermaid diagrams
+echo ""
+echo "Test 41: Checking all blog posts have Mermaid diagrams..."
+BLOG_MERMAID_MISSING=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    if ! grep -q '```mermaid' "$file" 2>/dev/null; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Missing Mermaid diagram in $rel_file"
+        BLOG_MERMAID_MISSING=$((BLOG_MERMAID_MISSING + 1))
+    fi
+done
+
+if [ "$BLOG_MERMAID_MISSING" -eq 0 ]; then
+    pass_test "All blog posts have at least one Mermaid diagram"
+else
+    fail_test "Found $BLOG_MERMAID_MISSING blog post(s) without Mermaid diagrams" "Add a relevant Mermaid diagram to each blog post for visual clarity"
+fi
+
 # Summary
 echo ""
 echo "========================================"

@@ -68,6 +68,19 @@ This self-healing loop doesn't exist in traditional CI/CD.
 
 CI/CD doesn't decompose work — it processes whatever gets pushed. Gas Town actively decomposes high-level requests into atomic units (beads) before any code is written. The Mayor does this decomposition, creating a plan before execution begins.
 
+```mermaid
+flowchart LR
+    subgraph GT["Gas Town (Upstream)"]
+        I[Intent] --> M[Mayor]
+        M --> P[Polecats Write Code]
+        P --> RF[Refinery]
+    end
+    subgraph CICD["Your CI/CD (Downstream)"]
+        RF --> CI[CI Validates]
+        CI --> CD[CD Deploys]
+    end
+```
+
 ## How They Work Together
 
 The recommended setup uses Gas Town upstream of your existing CI/CD:

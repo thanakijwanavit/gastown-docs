@@ -10,6 +10,22 @@ Move past the basics. Once you've run your first convoy, these patterns will hel
 
 <!-- truncate -->
 
+```mermaid
+flowchart TD
+    subgraph Chain["Dependency Chain"]
+        S[Schema] --> EP[Endpoints]
+        EP --> T[Tests]
+    end
+    subgraph FanOut["Fan-Out / Fan-In"]
+        FO[Start] --> M1[Migration 1]
+        FO --> M2[Migration 2]
+        FO --> M3[Migration 3]
+        M1 --> FI[Convoy Complete]
+        M2 --> FI
+        M3 --> FI
+    end
+```
+
 ## Pattern 1: Dependency Chains
 
 Not all work can run in parallel. Sometimes bead B depends on bead A completing first. Gas Town handles this with bead dependencies inside a convoy:

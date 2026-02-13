@@ -85,6 +85,15 @@ git log --oneline -5
 
 ## What Just Happened?
 
+```mermaid
+flowchart LR
+    A[Create Beads] --> B[Bundle Convoy]
+    B --> C[Sling to Rig]
+    C --> D[Polecats Execute]
+    D --> E[Refinery Merges]
+    E --> F[Code on Main]
+```
+
 In five minutes, you:
 
 1. **Created** three focused work items (beads)

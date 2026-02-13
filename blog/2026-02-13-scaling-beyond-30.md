@@ -40,6 +40,18 @@ The Deacon patrols all rigs sequentially. With 10+ rigs, each patrol cycle takes
 
 The Mayor dispatches work across all rigs. With many concurrent convoys, the Mayor spends more time in coordination overhead and less time on strategic planning.
 
+```mermaid
+flowchart TD
+    subgraph Before["Before: Single Rig Bottleneck"]
+        R1[myproject: 20 polecats] --> RF1[1 Refinery]
+    end
+    subgraph After["After: Horizontal Partition"]
+        R2[core: 7 polecats] --> RF2[Refinery]
+        R3[ui: 7 polecats] --> RF3[Refinery]
+        R4[tests: 6 polecats] --> RF4[Refinery]
+    end
+```
+
 ## Scaling Strategies
 
 ### Strategy 1: Partition by Rig

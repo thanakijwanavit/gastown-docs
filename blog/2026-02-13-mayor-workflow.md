@@ -27,6 +27,21 @@ You: "Add input validation to all API endpoints"
 
 You give one instruction. Gas Town does the rest.
 
+```mermaid
+flowchart TD
+    U[You: Natural Language Request] --> M[Mayor Decomposes]
+    M --> B1[Bead 1]
+    M --> B2[Bead 2]
+    M --> B3[Bead N]
+    B1 --> P1[Polecat 1]
+    B2 --> P2[Polecat 2]
+    B3 --> P3[Polecat N]
+    P1 --> R[Refinery]
+    P2 --> R
+    P3 --> R
+    R --> Main[Code on Main]
+```
+
 ## Getting Started with MEOW
 
 ### Step 1: Start the Mayor

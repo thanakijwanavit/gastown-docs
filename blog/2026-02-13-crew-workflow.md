@@ -24,6 +24,16 @@ Polecats are ephemeral. They spawn, do one task, submit to the merge queue, and 
 
 Crew workers push directly to main because they have human judgment. There is no need for the Refinery to validate their work -- the human reviewer is already in the loop.
 
+```mermaid
+flowchart TD
+    H[Human Overseer] --> C[Crew Worker]
+    C -->|push direct| M[Main Branch]
+    C -->|gt mail send| Mayor
+    C -->|gt sling| P[Polecats]
+    P -->|gt done| R[Refinery]
+    R -->|merge| M
+```
+
 ## Setting Up a Crew Workspace
 
 Adding a crew member to a rig creates a full git clone:

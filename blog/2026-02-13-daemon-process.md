@@ -31,6 +31,17 @@ The daemon is written in Go for practical reasons:
 - **Concurrency**: Goroutines handle lifecycle requests without blocking heartbeats.
 - **Crash recovery**: If the daemon crashes, `systemd` or `launchd` restarts it in seconds. Agents don't lose work because their state lives in hooks, not in the daemon.
 
+```mermaid
+flowchart TD
+    D[Daemon Process] -->|every 3 min| HB[Heartbeat]
+    HB --> DC[Deacon]
+    DC --> W1[Witness Rig 1]
+    DC --> W2[Witness Rig 2]
+    DC --> W3[Witness Rig N]
+    D -->|on demand| LC[Lifecycle Requests]
+    LC --> TM[Create/Stop tmux Sessions]
+```
+
 ## The Dumb Scheduler Principle
 
 The daemon is intentionally "dumb" -- a design choice borrowed from Erlang/OTP. In Erlang, the VM scheduler is simple; all intelligence lives in the processes (actors). Gas Town follows the same pattern:

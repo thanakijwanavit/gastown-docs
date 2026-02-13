@@ -27,6 +27,16 @@ Overseer (Human)     ← Full access, all rigs, all secrets
 
 Each agent can only affect what its trust level permits. A polecat cannot push to main directly -- it submits to the Refinery, which validates and merges. The Witness can observe but not modify code. The Mayor can dispatch but not implement.
 
+```mermaid
+flowchart TD
+    O[Overseer: Full Access] --> MY[Mayor: Read + Dispatch]
+    MY --> DC[Deacon: Infrastructure Only]
+    MY --> W[Witness: Read-Only]
+    MY --> RF[Refinery: Write Main Only]
+    MY --> CR[Crew: Write Own Clone]
+    MY --> PC[Polecats: Sandboxed Worktree]
+```
+
 ## Workspace Isolation
 
 The first line of defense is **physical isolation through git worktrees**. Every polecat works in its own isolated worktree:

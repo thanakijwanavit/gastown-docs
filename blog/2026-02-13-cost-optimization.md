@@ -22,6 +22,13 @@ In a Gas Town setup, costs come from three main sources:
 
 The single biggest cost driver is polecat sessions — each one consumes tokens to read context, reason about the task, write code, and self-review. Optimizing polecat efficiency gives the best return.
 
+```mermaid
+pie title Token Cost Distribution
+    "Polecat Sessions" : 65
+    "Patrol Agents" : 20
+    "Mayor Coordination" : 15
+```
+
 ## Strategy 1: Write Better Beads
 
 The most impactful cost optimization is free: write better task descriptions. A well-scoped bead completes in one session. A vague bead burns through context trying to figure out what to do.

@@ -43,6 +43,18 @@ Because hooks live in the filesystem (specifically, in the git worktree), they s
 
 The new session simply reads the hook and picks up where the previous session left off.
 
+```mermaid
+flowchart TD
+    S[Session Start] --> P[gt prime]
+    P --> H{gt hook}
+    H -->|work found| E[Execute Immediately]
+    H -->|empty| I[Check Inbox]
+    I -->|mail found| HK[Hook Mail]
+    HK --> E
+    I -->|empty| W[Wait for Assignment]
+    E -->|crash| S
+```
+
 ## The Propulsion Cycle
 
 Hooks create a self-propelling work cycle. Every agent follows the same startup protocol:

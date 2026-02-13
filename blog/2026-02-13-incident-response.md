@@ -28,6 +28,18 @@ gt feed --errors
 
 This gives you a snapshot of system health in under 90 seconds. Most issues become obvious from here.
 
+```mermaid
+flowchart TD
+    T[Something Wrong?] --> S[gt status]
+    S --> CS[gt convoy stranded]
+    CS --> FE[gt feed --errors]
+    FE --> D{Diagnosis}
+    D -->|stuck polecat| SP[Nudge or Kill + Re-sling]
+    D -->|stalled convoy| SC[Check Deps + Re-sling]
+    D -->|refinery jam| RJ[gt mq list + Restart]
+    D -->|git corruption| GC[Reset + Re-sling]
+```
+
 ## Scenario 1: Stuck Polecat
 
 **Symptoms:** A bead shows `in_progress` but no commits are appearing. The polecat's session might be unresponsive.

@@ -20,6 +20,16 @@ Formula (TOML template)  →  pour  →  Molecule (running workflow)
 
 The key benefit: if an agent crashes mid-workflow, the molecule remembers which steps completed. The next agent picks up exactly where the last one left off.
 
+```mermaid
+flowchart LR
+    F[Formula TOML] -->|pour| M[Molecule]
+    M --> W1[Wisp: Step 1]
+    M --> W2[Wisp: Step 2]
+    M --> W3[Wisp: Step N]
+    W1 -->|done| W2
+    W2 -->|done| W3
+```
+
 ## Anatomy of a Formula
 
 Every formula lives in `.beads/formulas/` and follows this structure:

@@ -29,6 +29,19 @@ Plugins are scripts or configurations that hook into Gas Town's lifecycle events
 
 Plugins live in the rig's `plugins/` directory and are version-controlled alongside your code. This means plugin changes go through the same review process as code changes.
 
+```mermaid
+flowchart LR
+    subgraph Lifecycle["Plugin Hook Points"]
+        SP[on-spawn] --> PM[pre-merge]
+        PM --> PO[post-merge]
+        PO --> OS[on-stall]
+        OS --> ON[on-nuke]
+    end
+    PM -->|fail| RJ[Reject MR]
+    PM -->|pass| MG[Merge to Main]
+    PO --> SL[Notify Slack]
+```
+
 ## Plugin Types
 
 ### Quality Gate Plugins

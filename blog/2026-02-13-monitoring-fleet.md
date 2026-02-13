@@ -25,6 +25,22 @@ gt costs       → Token spend tracking (what it's costing)
 
 Each tool serves a different purpose. Here's when to use each one.
 
+```mermaid
+flowchart TD
+    subgraph Quick["Quick Checks"]
+        ST[gt status] --> FD[gt feed]
+    end
+    subgraph Deep["Deep Diagnostics"]
+        DB[gt dashboard] --> DR[gt doctor]
+        DR --> TR[gt trail]
+    end
+    subgraph Cost["Cost Tracking"]
+        CO[gt costs]
+    end
+    Quick --> Deep
+    Deep --> Cost
+```
+
 ## gt feed: The Activity Stream
 
 `gt feed` is your real-time window into Gas Town. It shows events as they happen — agents starting, work being assigned, merges completing, escalations firing.

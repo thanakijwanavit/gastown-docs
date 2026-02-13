@@ -68,6 +68,16 @@ The differences are exactly what you'd expect — you're doing manually what the
 
 The hook system is the critical piece that makes Minimal Mode viable. When your agent crashes mid-work, the hook still has the bead ID attached. The next time you start a session in that workspace, `gt prime` finds the hook and picks up where the last session left off. You don't lose work — you just need to restart the session yourself.
 
+```mermaid
+flowchart LR
+    subgraph Levels["Incremental Scaling"]
+        L0["Minimal: Hooks + Beads"] --> L1["+ Tmux"]
+        L1 --> L2["+ Refinery"]
+        L2 --> L3["+ Witness"]
+        L3 --> L4["Full Stack: Mayor"]
+    end
+```
+
 ## When to Use Minimal Mode
 
 **Starting out.** Minimal Mode is the best way to learn Gas Town. You see every step explicitly, which builds intuition for how the full system works.

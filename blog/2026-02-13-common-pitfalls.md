@@ -102,6 +102,17 @@ gt doctor
 
 When the Witness escalates something, address it promptly. A stalled polecat wastes tokens every minute it loops.
 
+```mermaid
+flowchart TD
+    subgraph Pitfalls["Common Pitfalls"]
+        VB[Vague Beads] --> FAIL1[Polecat Confused]
+        NP[Not Pushing] --> FAIL2[Lost Work]
+        FR[Fighting Refinery] --> FAIL3[Divergent State]
+        BIG[Too-Large Beads] --> FAIL4[Context Exhaustion]
+        IW[Ignoring Witness] --> FAIL5[Silent Failures]
+    end
+```
+
 ## The Meta-Lesson
 
 All five pitfalls share a common root: treating Gas Town like a single-developer tool. It's a **multi-agent system**, which means:

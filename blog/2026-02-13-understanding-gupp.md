@@ -35,6 +35,18 @@ This means:
 
 ## How It Works: Three Primitives
 
+```mermaid
+flowchart LR
+    subgraph GUPP["Forward-Only Progress"]
+        direction LR
+        A["open"] -->|claim| B["in_progress"]
+        B -->|complete| C["done"]
+    end
+    style A fill:#f9f,stroke:#333
+    style B fill:#ff9,stroke:#333
+    style C fill:#9f9,stroke:#333
+```
+
 GUPP is enforced by three concrete mechanisms:
 
 ### 1. Hooks (Persistent Assignment)

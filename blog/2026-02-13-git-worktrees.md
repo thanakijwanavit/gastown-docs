@@ -80,6 +80,16 @@ myproject/
 
 Worktree creation is essentially instant -- it's just creating a directory and checking out files. No network calls, no image pulls, no history duplication.
 
+```mermaid
+flowchart TD
+    GIT[".git/ (shared history)"] --> WT1["polecats/toast/ (branch A)"]
+    GIT --> WT2["polecats/alpha/ (branch B)"]
+    GIT --> WT3["crew/dave/ (main)"]
+    GIT --> RF["refinery/rig/ (main)"]
+    WT1 -.->|isolated| WT2
+    WT2 -.->|isolated| WT3
+```
+
 ## How Gas Town Uses Worktrees
 
 ### Polecat Sandboxes

@@ -28,6 +28,18 @@ Town
 └── infra/          ← Gemini CLI agents (Terraform/GCP native)
 ```
 
+```mermaid
+flowchart TD
+    GT[Gas Town Orchestration] --> R1[Backend Rig: Claude Code]
+    GT --> R2[Frontend Rig: Cursor]
+    GT --> R3[ML Rig: Codex]
+    GT --> R4[Infra Rig: Gemini CLI]
+    R1 --> CV[Shared Convoy Tracking]
+    R2 --> CV
+    R3 --> CV
+    R4 --> CV
+```
+
 ## How Runtimes Plug In
 
 Each Gas Town rig has a **runtime configuration** that tells the system how to spawn and manage agents:

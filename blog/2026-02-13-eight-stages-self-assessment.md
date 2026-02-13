@@ -32,6 +32,19 @@ Answer honestly. Which statement best describes your daily workflow?
 
 Most developers reading this blog are probably at Stage 4-6. That's fine — Gas Town will make more sense once you understand the progression.
 
+```mermaid
+flowchart LR
+    S1["1: Manual"] --> S2["2: Completions"]
+    S2 --> S3["3: Chat"]
+    S3 --> S4["4: Agent Edits"]
+    S4 --> S5["5: Multi-File"]
+    S5 --> S6["6: Intent-Level"]
+    S6 --> S7["7: Parallel Agents"]
+    S7 --> S8["8: Agents Managing Agents"]
+    style S7 fill:#ff9,stroke:#333
+    style S8 fill:#9f9,stroke:#333
+```
+
 ## What Each Stage Transition Feels Like
 
 ### Stage 2 → 3: "I Can Ask Questions"

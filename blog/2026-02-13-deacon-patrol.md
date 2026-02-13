@@ -26,6 +26,18 @@ Deacon Patrol Cycle:
 
 Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`), so if the Deacon crashes mid-patrol, the next session picks up from the last completed step.
 
+```mermaid
+flowchart TD
+    D[Deacon Patrol] --> W[Check Witnesses]
+    D --> G[Evaluate Gates]
+    D --> L[Process Lifecycle]
+    D --> CV[Check Convoys]
+    W -->|unhealthy| RW[Restart Witness]
+    G -->|expired| DM[Dispatch Molecule]
+    L -->|park/unpark| RL[Update Rig State]
+    CV -->|all done| AC[Auto-Close Convoy]
+```
+
 ## Gate Evaluation
 
 Gates are the Deacon's most important responsibility. When a workflow step needs to wait for an external condition -- CI completing, a human approving, a timer expiring -- it parks on a gate. The Deacon evaluates all open gates during each patrol:

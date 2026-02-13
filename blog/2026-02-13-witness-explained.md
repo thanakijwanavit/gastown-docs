@@ -25,6 +25,17 @@ Patrol Cycle:
 
 Think of the Witness as a shift supervisor walking the factory floor. It doesn't do the work — it makes sure the workers are doing the work.
 
+```mermaid
+flowchart TD
+    W[Witness Patrol] --> PC[Check Polecats]
+    W --> RF[Check Refinery]
+    W --> MQ[Check Merge Queue]
+    PC -->|stalled| N1[Nudge 1]
+    N1 -->|no response| N2[Nudge 2]
+    N2 -->|no response| E[Escalate to Deacon]
+    E --> WR[File Warrant + Re-sling]
+```
+
 ## Detecting Stalled Polecats
 
 The most common problem the Witness catches is a stalled polecat — an agent that stops making progress.

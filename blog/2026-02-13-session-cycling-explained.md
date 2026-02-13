@@ -80,6 +80,21 @@ gt mail inbox     # Read the handoff mail for context
 
 The hook persists because it's stored in the filesystem, not in the agent's context. The molecule tracks which step the agent was on. The handoff mail provides context that the previous session had accumulated.
 
+```mermaid
+sequenceDiagram
+    participant S1 as Session 1
+    participant FS as Filesystem
+    participant S2 as Session 2
+    S1->>FS: git commit + push
+    S1->>FS: gt handoff (write mail)
+    S1->>FS: Hook persists on disk
+    Note over S1: Session ends
+    S2->>FS: gt prime (load context)
+    S2->>FS: gt hook (find work)
+    S2->>FS: gt mail inbox (read notes)
+    Note over S2: Resumes work
+```
+
 ## What Gets Preserved
 
 | State | How It Survives |

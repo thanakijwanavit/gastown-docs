@@ -40,6 +40,16 @@ Step 3: Rebase polecat2's work onto new main
 
 The result is always a clean linear history, no matter how many agents are working in parallel.
 
+```mermaid
+flowchart LR
+    P[Polecat: gt done] --> Q[Queue]
+    Q --> RB[Rebase onto Main]
+    RB --> V{Validation}
+    V -->|pass| MG[Merge to Main]
+    V -->|fail| RJ[Reject MR]
+    MG --> CL[Cleanup Branch]
+```
+
 ## Anatomy of a Merge Request
 
 When a polecat runs `gt done`, it creates a merge request (MR) in the Refinery's queue:
