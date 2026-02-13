@@ -744,6 +744,46 @@ else
     fail_test "Found $HEADING_ISSUES heading hierarchy issue(s)" "Don't skip heading levels (e.g. ## → #### without ###)"
 fi
 
+# Test 23: Check for empty code blocks
+echo ""
+echo "Test 23: Checking for empty code blocks..."
+EMPTY_BLOCKS=0
+
+for file in $(find "$ROOT_DIR/docs" "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    # Use awk to find code blocks with no content between fences
+    while IFS= read -r block_info; do
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Empty code block in $rel_file:$block_info"
+        EMPTY_BLOCKS=$((EMPTY_BLOCKS + 1))
+    done < <(awk '
+        /^```/ {
+            if (in_block) {
+                # Closing fence — check if block was empty
+                if (content_lines == 0) {
+                    print start_line
+                }
+                in_block = 0
+            } else {
+                # Opening fence
+                in_block = 1
+                start_line = NR
+                content_lines = 0
+            }
+            next
+        }
+        in_block {
+            # Count non-empty lines
+            if ($0 !~ /^[[:space:]]*$/) content_lines++
+        }
+    ' "$file")
+done
+
+if [ "$EMPTY_BLOCKS" -eq 0 ]; then
+    pass_test "No empty code blocks found"
+else
+    fail_test "Found $EMPTY_BLOCKS empty code block(s)" "Add content or remove empty code blocks"
+fi
+
 # Summary
 echo ""
 echo "========================================"
