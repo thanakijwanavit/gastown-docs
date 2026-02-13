@@ -175,3 +175,7 @@ The next session has zero memory of the current one. Write handoff notes as if b
 - **[GUPP](gupp.md)** -- The propulsion principle ensures the new session immediately executes hooked work
 - **[Hooks](hooks.md)** -- The persistence mechanism that survives session cycling
 - **[Molecules](molecules.md)** -- Multi-step workflows track progress across session boundaries
+
+### Blog Posts
+
+- [Session Cycling Explained](/blog/session-cycling) -- Practical guide to context refresh and handoff patterns

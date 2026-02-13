@@ -122,6 +122,16 @@ These principles are not just theory — they are enforced by specific Gas Town 
 
 ## CLI Quick Reference
 
+The two primary CLIs for interacting with Gas Town:
+
+```bash
+# Gas Town orchestration
+gt <command> [options]
+
+# Beads issue tracking
+bd <command> [options]
+```
+
 | Command | Purpose |
 |---------|---------|
 | `gt` | The main Gas Town CLI |

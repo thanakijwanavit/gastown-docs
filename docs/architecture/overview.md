@@ -123,3 +123,9 @@ All state is persisted in git or the filesystem:
 - [Design Principles](design-principles.md) -- The twelve core principles that guide Gas Town's architecture
 - [Architecture Guide](../guides/architecture.md) -- Narrative walkthrough of how all the pieces fit together
 - [Rigs](../concepts/rigs.md) -- Project containers that wrap git repositories with full agent infrastructure
+
+### Blog Posts
+
+- [Gas Town's Security Model](/blog/security-model) -- Trust boundaries and workspace isolation in the architecture
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for large-scale deployments
+- [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor coordinates work across the architecture

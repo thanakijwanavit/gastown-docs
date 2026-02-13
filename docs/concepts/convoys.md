@@ -208,6 +208,22 @@ This is useful for the Mayor to identify work that needs to be [slung](hooks.md)
 | `gt convoy check <convoy-id>` | Check if convoy can auto-close |
 | `gt convoy stranded` | Find convoys with unassigned work |
 
+## When to Use Convoys
+
+Convoys are the right tool when you have **related work items that should be tracked as a group**:
+
+- **Multi-part feature work** -- "Build the auth system" becomes 5 beads. A convoy tracks them as one effort, auto-closing when all parts land.
+- **Sprint planning** -- Group a sprint's worth of beads into a convoy. Use `gt convoy list` as your sprint dashboard.
+- **Cross-rig coordination** -- Work that spans multiple projects (e.g., API change + client update + docs update) needs a convoy to track completion across rig boundaries.
+- **Batch delegation** -- When the Mayor dispatches work to multiple polecats, a convoy provides single-point progress monitoring.
+- **Dependency-free grouping** -- Unlike bead dependencies (which block execution), convoys are purely observational. Beads in a convoy execute independently; the convoy just watches.
+
+:::note[When NOT to Use Convoys]
+
+Don't wrap a single bead in a convoy. If there is only one work item, the bead itself is sufficient. Convoys add value at 2+ beads where batch-level tracking matters.
+
+:::
+
 ## Convoy + Mayor Workflow
 
 In the recommended [Mayor Workflow](../workflows/mayor-workflow.md), convoys are created automatically:

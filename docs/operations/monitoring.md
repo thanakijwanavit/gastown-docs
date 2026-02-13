@@ -502,3 +502,9 @@ gt activity --type polecat --since 1h --json
 - [Escalation System](escalations.md) -- Priority-routed alerts that flow from monitoring to human attention
 - [Cost Management](../guides/cost-management.md) -- Token cost tracking and optimization strategies
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that drives patrol cycles and health checks
+
+### Blog Posts
+
+- [Monitoring Your Fleet](/blog/monitoring-fleet) -- Practical monitoring patterns for multi-agent deployments
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Monitoring strategies for large-scale deployments
+- [The Witness Explained](/blog/witness-explained) -- Deep dive into the per-rig health monitor

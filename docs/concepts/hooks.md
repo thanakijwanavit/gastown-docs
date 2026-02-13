@@ -140,6 +140,38 @@ gt unsling gt-a1b2c
 
 This releases the work back to the available pool without marking it done. Another agent can pick it up later.
 
+## When to Use Hooks
+
+### Automatic Hooking (Most Common)
+
+In normal Gas Town operation, you rarely hook work manually. Hooks are set automatically by:
+
+- **`gt sling`** -- Slinging a bead to a rig hooks it to the spawned polecat
+- **`gt handoff`** -- Your current hook persists for the successor session
+- **`gt mol attach`** -- Attaching a molecule also hooks it
+
+### Manual Hooking
+
+Manually hook work when:
+
+- **Self-assigning from the ready queue** -- You found a bead via `bd ready` and want to claim it: `gt hook <bead-id>`
+- **Hooking mail as instructions** -- The overseer sent you mail with ad-hoc instructions: `gt mail hook <mail-id>`
+- **Resuming interrupted work** -- A bead fell off your hook (e.g., after `gt unsling`) and you want to re-attach it
+
+### Unhooking
+
+Use `gt unsling` when:
+
+- **Work should be reassigned** -- You can't complete the bead and another agent should take it
+- **Bead was assigned in error** -- The wrong bead was slung to you
+- **Deprioritization** -- Higher-priority work arrived and this bead should return to the pool
+
+:::warning[Never Abandon Hooked Work]
+
+If work is on your hook, either complete it, hand it off properly, or unsling it. Never leave a session with hooked work in an ambiguous state. The hook is a commitment.
+
+:::
+
 ## Hook Persistence Guarantees
 
 Hooks are the core mechanism behind [GUPP](gupp.md) (the Gas Town Universal Propulsion Principle). They ensure that no session boundary can lose work state. Hooks survive every type of disruption:
@@ -218,3 +250,8 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 - **[Rigs](rigs.md)** -- Hooks are implemented as git worktrees within a rig's directory structure
 - **[Gates](gates.md)** -- When a molecule step is gated, the hook preserves the parked state until the gate closes
 - **[Session Cycling](session-cycling.md)** -- Hooks persist across session boundaries, enabling context refresh without losing work
+
+### Blog Posts
+
+- [Understanding GUPP](/blog/understanding-gupp) -- How hooks implement the propulsion principle
+- [Session Cycling Explained](/blog/session-cycling) -- Hooks and handoff mail working together across sessions

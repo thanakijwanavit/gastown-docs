@@ -62,6 +62,11 @@ for file in $(find . -name "*.md"); do
             continue
         fi
 
+        # Skip blog links (resolved by Docusaurus at build time, not filesystem paths)
+        if [[ "$link" =~ ^/blog/ ]]; then
+            continue
+        fi
+
         # Strip anchor from link for filesystem check
         link_no_anchor="${link%%#*}"
         if [[ -z "$link_no_anchor" ]]; then
@@ -931,7 +936,7 @@ for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
     [ "$basename" = "index.md" ] && continue
 
     # Count code blocks (``` markers come in pairs, so divide by 2)
-    code_blocks=$(grep -c '^```' "$file" 2>/dev/null || echo 0)
+    code_blocks=$(grep -c '^```' "$file" 2>/dev/null) || code_blocks=0
 
     if [ "$code_blocks" -lt 2 ]; then
         rel_file="${file#$ROOT_DIR/}"

@@ -580,3 +580,8 @@ Scheduled plugins run on a cron schedule independently of workflow events.
 - [Molecules](../concepts/molecules.md) -- Multi-step workflows that plugins can extend with custom gates and actions
 - [Refinery](../agents/refinery.md) -- The merge queue agent that invokes gate plugins during validation
 - [Cost Management](../guides/cost-management.md) -- Using cost alert plugins to monitor token spend
+
+### Blog Posts
+
+- [Extending Gas Town with Plugins](/blog/plugin-system) -- Practical guide to writing custom plugins
+- [Gas Town's Security Model](/blog/security-model) -- How plugins fit into the security architecture

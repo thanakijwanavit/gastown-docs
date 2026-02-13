@@ -320,6 +320,32 @@ Then run it:
 gt formula run my-deploy --var version="2.3.1"
 ```
 
+## When to Use Molecules and Formulas
+
+### When to Use Molecules
+
+Molecules are the right tool when **work has multiple ordered steps that benefit from crash-safe progress tracking**:
+
+- **Polecat work** -- Every polecat task is guided by a molecule. The `mol-polecat-work` formula provides the standard 9-step lifecycle (load context, branch, implement, test, submit).
+- **Patrol cycles** -- Persistent agents (Witness, Refinery, Deacon) use patrol molecules to track their monitoring steps.
+- **Complex multi-step tasks** -- If a task has clear phases that could be interrupted by a crash, wrap it in a molecule so progress is checkpointed.
+
+:::note[When NOT to Use Molecules]
+
+Don't create a molecule for a simple, single-step task. If an agent can complete the work in one shot without crash-safety concerns, a plain bead is enough.
+
+:::
+
+### When to Use Custom Formulas
+
+Create a custom formula when you have a **repeatable multi-step process** that agents should follow consistently:
+
+- **Deployment pipelines** -- Standard steps like pre-checks, staging deploy, smoke tests, and production deploy.
+- **Release processes** -- Version bump, changelog generation, tag creation, and publishing.
+- **Review workflows** -- Multi-dimension reviews (correctness, security, performance) with a synthesis step.
+
+If a workflow is one-off or experimental, guide the agent with a bead description instead. Formulas are for patterns you want to encode permanently.
+
 ## Molecule + Hook Integration
 
 Molecules are stored on an agent's [Hook](hooks.md), creating the crash-safe execution model:
@@ -353,3 +379,8 @@ Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for d
 - **[Rigs](rigs.md)** -- Formulas are stored in the rig's `.beads/formulas/` directory; molecules execute within a rig's context
 - **[GUPP & NDI](gupp.md)** -- Molecules implement GUPP through step-level checkpointing: completed steps are never re-executed, and NDI allows different agents to produce different but equivalent implementations
 - **[The MEOW Stack](meow-stack.md)** -- Molecules are Layer 3, Formulas are Layer 5 in the MEOW abstraction model
+
+### Blog Posts
+
+- [Creating Custom Formulas](/blog/custom-formulas) -- Step-by-step guide to writing your own workflow formulas
+- [Refinery Deep Dive](/blog/refinery-deep-dive) -- How molecules drive the merge queue processing pipeline

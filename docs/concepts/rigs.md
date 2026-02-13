@@ -263,6 +263,31 @@ gt rig undock myproject
 | `gt rig dock <name>` | Fully shut down a rig |
 | `gt rig undock <name>` | Bring a docked rig back online |
 
+## When to Use Rigs
+
+### When to Add a New Rig
+
+Create a new rig when you have a **distinct codebase that needs its own agent infrastructure**:
+
+- **Separate git repository** -- Each rig wraps one git repo. If you have a new repo you want Gas Town to manage, add it as a rig.
+- **Independent deployment unit** -- If a project has its own build, test, and deploy pipeline, it deserves its own rig with its own Refinery.
+- **Different team ownership** -- Projects owned by different teams benefit from separate rigs with independent beads databases.
+
+### When NOT to Add a Rig
+
+- **Monorepo subdirectories** -- If multiple projects live in one repo, they share one rig. Use labels or conventions in beads to distinguish work areas.
+- **Temporary experiments** -- Don't create a rig for a throwaway experiment. Use a regular git clone outside of Gas Town.
+- **Documentation-only projects** -- If a docs project is tightly coupled to a code project, consider keeping them in the same rig rather than splitting.
+
+### Rig Lifecycle Decisions
+
+| Scenario | Action |
+|----------|--------|
+| Project is active, agents should work on it | `gt rig start` (Active) |
+| Taking a break, resume soon | `gt rig park` (Parked) |
+| Project on hold, indefinite pause | `gt rig dock` (Docked) |
+| Project abandoned, cleanup | Remove the rig directory |
+
 ## Rig in the Bigger Picture
 
 Rigs are the physical foundation on which all other concepts operate:
@@ -291,3 +316,8 @@ See the [Quick Start](../getting-started/quickstart.md) guide for a step-by-step
 - **[Gates](gates.md)** -- The Deacon evaluates gates across all active rigs during patrol cycles
 - **[GUPP & NDI](gupp.md)** -- Rig state (Active, Parked, Docked) follows forward-only transitions
 - **[The MEOW Stack](meow-stack.md)** -- Rigs are the physical infrastructure in which the entire MEOW stack operates
+
+### Blog Posts
+
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- How to partition and scale rigs for large deployments
+- [Gas Town's Security Model](/blog/security-model) -- How rig isolation provides security boundaries

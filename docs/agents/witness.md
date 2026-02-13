@@ -297,3 +297,8 @@ gt nudge <rig>/witness "context check"
 - [Session Cycling](../concepts/session-cycling.md) -- How the Witness refreshes its own context
 - [Hooks](../concepts/hooks.md) -- Mechanism for attaching work to polecats
 - [GUPP](../concepts/gupp.md) -- The principle that drives polecat execution
+
+### Blog Posts
+
+- [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- Deep dive into Witness patrol cycles and recovery patterns
+- [Monitoring Your Fleet](/blog/monitoring-fleet) -- How to observe Witness activity across rigs

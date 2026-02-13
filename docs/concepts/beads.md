@@ -237,6 +237,22 @@ bd onboard
 | `bd blocked` | Show blocked beads waiting on dependencies |
 | `bd quickstart` | Interactive getting-started guide |
 
+## When to Use Beads
+
+Beads are the right tool when you need to **track, assign, or coordinate work**:
+
+- **Single task tracking** -- Any work item that an agent or human should pick up, execute, and close. If it needs to be remembered across sessions, make it a bead.
+- **Bug reports** -- Discovered a defect? File a `bug` bead so it enters the ready queue and gets picked up.
+- **Feature requests** -- New functionality requests become `feature` beads, prioritized and scheduled through the normal work pipeline.
+- **Cross-agent coordination** -- When Agent A discovers work that Agent B should do, create a bead and [sling](hooks.md) it. The bead carries the assignment across session boundaries.
+- **Audit trail** -- Every bead records who created it, who worked on it, and when it closed. This is your project's permanent work history.
+
+:::note[When NOT to Use Beads]
+
+Don't create beads for trivial, in-flight work that you'll complete in the same session. If you're about to fix a one-line typo, just fix it -- don't create a bead, claim it, close it, and sync it. Beads have overhead; use them for work that benefits from tracking.
+
+:::
+
 ## For AI Agents
 
 Beads is specifically designed for AI agent workflows:
@@ -270,3 +286,7 @@ Work is **not complete** until `git push` succeeds. Agents must always push thei
 - **[Rigs](rigs.md)** -- Each rig has its own `.beads/` directory with a unique prefix for cross-project identification
 - **[Gates](gates.md)** -- Gates can block bead progress, pausing workflow until an external condition is met
 - **[GUPP & NDI](gupp.md)** -- Bead statuses follow GUPP's forward-only principle: they progress from `open` to `done` and never go backward
+
+### Blog Posts
+
+- [Why Beads? AI-Native Issue Tracking](/blog/why-beads) -- The design philosophy behind choosing git-backed issues over web-based trackers
