@@ -1,6 +1,6 @@
 ---
 title: "Mastering gt sling: Work Assignment Patterns in Gas Town"
-description: "A practical guide to gt sling — the core command for assigning work to agents, spanning basic usage, cross-rig slinging, formula integration, and troubleshooting."
+description: "A practical guide to gt sling — the core command for assigning work to agents, from basic usage to cross-rig patterns."
 slug: mastering-gt-sling
 authors: [gastown]
 tags: [cli, operations, workflow, agents]

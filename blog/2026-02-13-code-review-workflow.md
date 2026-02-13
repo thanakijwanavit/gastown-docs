@@ -1,6 +1,6 @@
 ---
 title: "Code Review with Gas Town Polecats: 10 Perspectives in Parallel"
-description: "How Gas Town's code-review formula spawns 10 specialized polecat reviewers to examine code from correctness, security, performance, and seven other perspectives — then synthesizes findings into one prioritized report."
+description: "How Gas Town's code-review formula spawns 10 specialized polecat reviewers in parallel, then synthesizes findings into one prioritized report."
 slug: code-review-workflow
 authors: [gastown]
 tags: [workflows, polecats, code-review, formulas, quality]

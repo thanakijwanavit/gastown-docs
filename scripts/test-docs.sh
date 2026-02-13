@@ -1166,6 +1166,36 @@ else
     fail_test "Found $BLOG_CROSSLINK_ISSUES doc page(s) with fewer than 2 blog cross-links" "Add at least 2 /blog/ links to each doc page's Related section"
 fi
 
+# Test 38: Blog post meta description lengths within SEO range (50-160 chars)
+echo ""
+echo "Test 38: Checking blog post meta description lengths..."
+BLOG_DESC_ISSUES=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    desc=$(awk '/^---$/{if(++n==2)exit}n==1 && /^description:/{
+        sub(/^description:[[:space:]]*"?/, ""); sub(/"[[:space:]]*$/, ""); print
+    }' "$file" 2>/dev/null)
+
+    [ -z "$desc" ] && continue
+
+    desc_len=${#desc}
+    rel_file="${file#$ROOT_DIR/}"
+
+    if [ "$desc_len" -lt 50 ]; then
+        echo "  Short description ($desc_len chars) in $rel_file"
+        BLOG_DESC_ISSUES=$((BLOG_DESC_ISSUES + 1))
+    elif [ "$desc_len" -gt 160 ]; then
+        echo "  Long description ($desc_len chars) in $rel_file"
+        BLOG_DESC_ISSUES=$((BLOG_DESC_ISSUES + 1))
+    fi
+done
+
+if [ "$BLOG_DESC_ISSUES" -eq 0 ]; then
+    pass_test "All blog post meta descriptions are within SEO range (50-160 chars)"
+else
+    fail_test "Found $BLOG_DESC_ISSUES blog description(s) outside optimal length" "Aim for 50-160 character blog descriptions"
+fi
+
 # Summary
 echo ""
 echo "========================================"
