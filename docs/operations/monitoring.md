@@ -299,6 +299,12 @@ Launch a web-based dashboard for visual convoy and system tracking.
 gt dashboard
 ```
 
+:::note[Local-Only Service]
+
+`gt dashboard` runs a **local** web server on your machine. There is no hosted dashboard service. The dashboard is only accessible while the command is running and only from your local machine (or network, if configured).
+
+:::
+
 This opens a local web server (default: `http://localhost:8420`) with:
 
 - **Convoy overview** -- All active convoys with progress bars
