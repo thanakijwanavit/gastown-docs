@@ -815,6 +815,32 @@ else
     fail_test "Found $DESC_ISSUES description(s) outside optimal length" "Aim for 50-160 character descriptions"
 fi
 
+# Test 25: Validate admonition syntax (matching ::: openers and closers)
+echo ""
+echo "Test 25: Checking admonition syntax..."
+ADMONITION_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Count ::: openers (with type) and ::: closers (bare)
+    # Openers: :::tip, :::note, :::warning, :::info, :::caution, :::danger
+    openers=$(grep -cE '^:::[a-z]' "$file" 2>/dev/null | tail -1)
+    closers=$(grep -cE '^:::$' "$file" 2>/dev/null | tail -1)
+    openers="${openers:-0}"
+    closers="${closers:-0}"
+
+    if [ "$openers" -ne "$closers" ] 2>/dev/null; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Unbalanced admonitions in $rel_file ($openers openers, $closers closers)"
+        ADMONITION_ISSUES=$((ADMONITION_ISSUES + 1))
+    fi
+done
+
+if [ "$ADMONITION_ISSUES" -eq 0 ]; then
+    pass_test "All admonitions have matching open/close syntax"
+else
+    fail_test "Found $ADMONITION_ISSUES file(s) with unbalanced admonitions" "Ensure every :::type has a matching :::"
+fi
+
 # Summary
 echo ""
 echo "========================================"
