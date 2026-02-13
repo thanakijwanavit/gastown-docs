@@ -1265,6 +1265,29 @@ else
     fail_test "Found $BLOG_MERMAID_MISSING blog post(s) without Mermaid diagrams" "Add a relevant Mermaid diagram to each blog post for visual clarity"
 fi
 
+# Test 42: Blog posts have sufficient content (200+ words after truncate)
+echo ""
+echo "Test 42: Checking blog post content length..."
+BLOG_LENGTH_ISSUES=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    # Count words after the <!-- truncate --> marker
+    word_count=$(awk '/<!-- truncate -->/{found=1;next} found{print}' "$file" | wc -w 2>/dev/null)
+    word_count="${word_count:-0}"
+
+    if [ "$word_count" -lt 200 ]; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Short blog post ($word_count words after truncate) in $rel_file"
+        BLOG_LENGTH_ISSUES=$((BLOG_LENGTH_ISSUES + 1))
+    fi
+done
+
+if [ "$BLOG_LENGTH_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts have 200+ words of content after truncate marker"
+else
+    fail_test "Found $BLOG_LENGTH_ISSUES blog post(s) with insufficient content" "Blog posts should have at least 200 words after the truncate marker"
+fi
+
 # Summary
 echo ""
 echo "========================================"
