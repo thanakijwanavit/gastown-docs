@@ -1,7 +1,7 @@
 ---
 title: "System Overview"
 sidebar_position: 1
-description: "Gas Town consists of five layers:"
+description: "Gas Town consists of five layers: the Town workspace, Rigs for each project, Agents that do the work, a Daemon scheduler, and a Communication layer connecting everything."
 ---
 
 # System Overview
