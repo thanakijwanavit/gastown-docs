@@ -295,3 +295,8 @@ gt polecat list              # See zombie states
 - [Mayor](mayor.md) -- Provides strategic direction to the Deacon
 - [Gates](../concepts/gates.md) -- Async coordination primitives the Deacon evaluates
 - [Molecules](../concepts/molecules.md) -- Workflows the Deacon dispatches when gates open
+
+### Blog Posts
+
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- Deep dive into patrol cycles, gate evaluation, and lifecycle management
+- [Monitoring Your Fleet](/blog/monitoring-fleet) -- How to observe Deacon activity across the town

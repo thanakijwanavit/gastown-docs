@@ -306,3 +306,8 @@ Use gates whenever your workflow needs to wait for something external. Prefer ga
 - **[Beads](beads.md)** -- Gates are themselves beads with their own status lifecycle (open, closed, expired)
 - **[GUPP & NDI](gupp.md)** -- Gates respect GUPP: they pause forward progress but never move the system backward; when the gate opens, the workflow resumes from where it left off
 - **[Rigs](rigs.md)** -- The Deacon evaluates gates across all active rigs during its patrol cycle
+
+### Blog Posts
+
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon evaluates gates during patrol cycles
+- [Gas Town's Security Model](/blog/security-model) -- Human approval gates as security checkpoints
