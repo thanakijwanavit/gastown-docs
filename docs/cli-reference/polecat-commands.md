@@ -365,3 +365,10 @@ gt polecat sync <rig>/<polecat> [flags]
 ```
 
 Previously required when beads used file-based storage to ensure polecat bead state was consistent with the rig's beads directory. With the Dolt backend, all beads operations go through the database directly, making this command unnecessary.
+
+## Related
+
+- [Polecats](../agents/polecats.md) -- Ephemeral worker lifecycle and design philosophy
+- [gt session](./session-commands.md) -- Managing tmux sessions for polecats
+- [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Where polecats fit in the supervision tree
+- [Session Cycling](../concepts/session-cycling.md) -- How context cycling works for agents

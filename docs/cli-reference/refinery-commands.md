@@ -311,3 +311,10 @@ gt refinery release gt-abc123
 All subcommands that accept `[rig]` infer the rig from the current directory when not specified.
 
 :::
+
+## Related
+
+- [Refinery](../agents/refinery.md) -- How the Refinery agent processes merge requests
+- [gt mq](./merge-queue.md) -- Merge queue commands for submitting and managing MRs
+- [Git Workflow](../guides/git-workflow.md) -- Branch management and merge strategies
+- [Work Distribution](../architecture/work-distribution.md) -- End-to-end work flow through Gas Town

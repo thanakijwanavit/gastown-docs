@@ -116,3 +116,10 @@ gt warrant execute deacon/dogs/bravo --force
 Using `--force` bypasses the warrant system entirely. Only use this for emergency termination when you can't wait for the normal warrant flow.
 
 :::
+
+## Related
+
+- [Boot](../agents/boot.md) -- Infrastructure helper that executes warrants during triage
+- [Deacon](../agents/deacon.md) -- Health-check orchestrator that files warrants
+- [Witness](../agents/witness.md) -- Polecat monitor that escalates stuck agents
+- [Lifecycle Management](../operations/lifecycle.md) -- Agent lifecycle and termination flows

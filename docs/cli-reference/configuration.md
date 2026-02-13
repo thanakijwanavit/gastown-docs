@@ -359,3 +359,10 @@ gt plugin run my-plugin
 # List as JSON
 gt plugin list --json
 ```
+
+## Related
+
+- [Multi-Runtime Guide](../guides/multi-runtime.md) -- Using multiple AI coding agents with Gas Town
+- [Hooks](../concepts/hooks.md) -- How Claude Code hooks integrate with Gas Town
+- [Plugins](../operations/plugins.md) -- Plugin system for periodic automation
+- [Architecture Overview](../architecture/overview.md) -- How configuration fits into the overall system

@@ -367,3 +367,10 @@ Remaining:
 Blockers: none
 Merge status: 2 merged, 0 in queue
 ```
+
+## Related
+
+- [Convoys (Concept)](../concepts/convoys.md) -- What convoys are and how they track work
+- [Manual Convoy Workflow](../workflows/manual-convoy.md) -- Step-by-step guide for running convoys
+- [gt sling](./sling.md) -- Assigning work to agents (auto-creates convoys)
+- [Work Distribution](../architecture/work-distribution.md) -- How work flows through Gas Town

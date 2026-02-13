@@ -124,3 +124,10 @@ gt orphans procs              # List orphaned processes (PPID=1 only)
 gt orphans procs --aggressive # List ALL orphaned processes
 gt orphans procs kill         # Kill orphaned processes
 ```
+
+## Related
+
+- [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)
+- [Witness](../agents/witness.md) -- Agent that detects stuck polecats and triggers recovery
+- [Lifecycle Management](../operations/lifecycle.md) -- Agent lifecycle and cleanup operations
+- [Git Workflow](../guides/git-workflow.md) -- How branches and merges work in Gas Town

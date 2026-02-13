@@ -370,8 +370,14 @@ gt shell --rig myproject
 
 The Gas Town shell sets the `GT_ROLE` environment variable and configures the prompt to show your current context.
 
-
 :::
+
+## Related
+
+- [Installation](../getting-started/installation.md) -- Step-by-step setup guide for new users
+- [Quick Start](../getting-started/quickstart.md) -- From zero to running Gas Town
+- [Rigs](../concepts/rigs.md) -- Project containers managed within the workspace
+- [Architecture Overview](../architecture/overview.md) -- How the workspace fits into the larger system
 
 ---
 

@@ -142,3 +142,10 @@ gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
 The `--args` string is stored in the bead and shown via `gt prime`. Since the executor is an LLM, it interprets these instructions naturally -- write them as you would explain the task to a person.
 
 :::
+
+## Related
+
+- [Work Distribution](../architecture/work-distribution.md) -- How work flows from beads to agents
+- [GUPP (Propulsion Principle)](../concepts/gupp.md) -- The hook-driven execution model that sling triggers
+- [Convoy & Tracking](./convoys.md) -- Managing batches of slung work
+- [Polecats](../agents/polecats.md) -- Ephemeral workers auto-spawned by sling

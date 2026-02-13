@@ -260,3 +260,10 @@ gt nudge myproject/furiosa "Check your mail"
 # Low-level: file injection
 gt session inject myproject/toast -f prompt.txt
 ```
+
+## Related
+
+- [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (list, nuke, stale)
+- [gt nudge](./nudge.md) -- Reliable message delivery to running sessions
+- [Session Cycling](../concepts/session-cycling.md) -- How agents cycle sessions for fresh context
+- [Monitoring](../operations/monitoring.md) -- Monitoring agent session health
