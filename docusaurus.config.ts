@@ -59,6 +59,10 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/logo.svg',
+    metadata: [
+      {name: 'twitter:card', content: 'summary'},
+      {name: 'og:type', content: 'website'},
+    ],
     navbar: {
       title: 'Gas Town',
       logo: {
