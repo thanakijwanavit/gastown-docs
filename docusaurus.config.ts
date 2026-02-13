@@ -17,6 +17,25 @@ const config: Config = {
   onBrokenLinks: 'throw',
   onBrokenAnchors: 'throw',
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {type: 'application/ld+json'},
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Gas Town Documentation',
+        url: 'https://docs.gt.villamarket.ai',
+        description: 'Multi-agent orchestration for AI coding agents',
+        publisher: {
+          '@type': 'Organization',
+          name: 'Villa Market AI',
+          url: 'https://github.com/steveyegge/gastown',
+        },
+      }),
+    },
+  ],
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
