@@ -91,3 +91,12 @@ Gas Town is created by [Steve Yegge](https://steve-yegge.medium.com/) and named 
 - [Gas Town Emergency User Manual](https://steve-yegge.medium.com/gas-town-emergency-user-manual-cf0e4556d74b) — Practical usage guide
 - [Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) — Philosophy and predictions
 - [GitHub Repository](https://github.com/steveyegge/gastown) — Source code
+
+## Next Steps
+
+New to Gas Town? Follow this path:
+
+1. **[Quick Start](getting-started/quickstart.md)** — Install and run your first convoy in 10 minutes
+2. **[Core Concepts](concepts/index.md)** — Learn the primitives: beads, hooks, convoys, molecules
+3. **[Workflows](workflows/index.md)** — Choose the right workflow for your team
+4. **[Guides](guides/index.md)** — In-depth usage patterns, philosophy, and troubleshooting

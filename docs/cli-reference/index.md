@@ -90,5 +90,29 @@ Install tab completions for a better CLI experience. See [Workspace Management](
 
 Many `gt` commands auto-detect the current rig based on your working directory. Use `--rig <name>` to override this when needed.
 
-
 :::
+
+## Commands by Use Case
+
+Not sure which command you need? Find it by scenario:
+
+| I want to... | Command | Reference |
+|--------------|---------|-----------|
+| Set up a new workspace | `gt install`, `gt start` | [Workspace](workspace.md) |
+| Add a project | `gt rig add` | [Rigs](rigs.md) |
+| Assign work to an agent | `gt sling` | [Sling](sling.md) |
+| Check what an agent is working on | `gt hook` | [Work Management](work.md) |
+| Send a message to another agent | `gt nudge` | [Nudge](nudge.md) |
+| View the merge queue | `gt mq list` | [Merge Queue](merge-queue.md) |
+| Debug a stalled polecat | `gt polecat list`, `gt nudge` | [Polecat](polecat-commands.md) |
+| Check system health | `gt doctor`, `gt status` | [Diagnostics](diagnostics.md) |
+| Monitor real-time activity | `gt feed`, `gt dashboard` | [Diagnostics](diagnostics.md) |
+| Hand off to a fresh session | `gt handoff` | [Sessions](sessions.md) |
+| Find orphaned work | `gt orphans` | [Orphans](orphans.md) |
+
+## Related
+
+- **[Core Concepts](../concepts/index.md)** — The primitives behind these commands
+- **[Workflows](../workflows/index.md)** — How commands combine into end-to-end workflows
+- **[Operations](../operations/index.md)** — Operational patterns using these commands
+- **[Guides](../guides/usage-guide.md)** — Practical usage walkthroughs

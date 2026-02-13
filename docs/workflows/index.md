@@ -113,5 +113,11 @@ If you are new to Gas Town, start with the [Mayor Workflow](mayor-workflow.md) -
 
 These workflows are not mutually exclusive. You can use the Mayor for most work, drop to Manual Convoy for specific tasks, and run Formulas for specialized processes -- all in the same town.
 
-
 :::
+
+## Related
+
+- **[Core Concepts](../concepts/index.md)** — Beads, hooks, convoys, and molecules that power these workflows
+- **[Agents](../agents/index.md)** — The agent roles involved in each workflow
+- **[Operations](../operations/index.md)** — Monitoring and troubleshooting running workflows
+- **[Guides](../guides/index.md)** — In-depth usage patterns and best practices

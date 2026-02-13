@@ -34,9 +34,32 @@ Gas Town is a power tool. These guides assume you are:
 
 If you are new to AI-assisted coding, start with a single agent (Stage 5-6 in the [8 Stages model](eight-stages.md)) before adopting Gas Town.
 
+## Learning Paths by Role
+
+Different roles need different guides. Find your starting point:
+
+### Developer (writing code with Gas Town)
+
+1. **[The 8 Stages of AI Coding](eight-stages.md)** — Understand where you are on the maturity curve
+2. **[Usage Guide](usage-guide.md)** — Day-to-day workflows: slinging work, monitoring polecats, reviewing output
+3. **[Multi-Runtime Support](multi-runtime.md)** — If you use Gemini, Codex, or Cursor alongside Claude
+
+### Operator (running Gas Town in production)
+
+1. **[Architecture Guide](architecture.md)** — How agents, rigs, and supervision fit together
+2. **[Usage Guide](usage-guide.md)** — Core commands and operational patterns
+3. **[Cost Management](cost-management.md)** — Token budgets, model tiers, and cost alerts
+4. **[Troubleshooting](troubleshooting.md)** — Diagnosis and recovery for common failures
+
+### Evaluator (deciding whether to adopt Gas Town)
+
+1. **[The 8 Stages of AI Coding](eight-stages.md)** — Is your team ready for multi-agent orchestration?
+2. **[Background & Philosophy](philosophy.md)** — Why Gas Town exists and the design thinking behind it
+3. **[Architecture Guide](architecture.md)** — Technical overview of the system
+
 ## Reading Order
 
-For new Gas Town users, we recommend this reading order:
+For new Gas Town users, we recommend this sequential reading order:
 
 1. **[The 8 Stages of AI Coding](eight-stages.md)** -- Understand where Gas Town fits and whether you are ready for it
 2. **[Background & Philosophy](philosophy.md)** -- Understand why Gas Town exists and the mental model behind it
@@ -49,5 +72,11 @@ For new Gas Town users, we recommend this reading order:
 
 If you have completed the [Getting Started](../getting-started/index.md) guide and have a working installation, jump straight to the [Usage Guide](usage-guide.md) for practical workflows and patterns.
 
-
 :::
+
+## Related
+
+- **[Getting Started](../getting-started/index.md)** — Installation and first steps
+- **[Core Concepts](../concepts/index.md)** — The primitives that power Gas Town
+- **[Operations](../operations/index.md)** — Running and monitoring the system in production
+- **[CLI Reference](../cli-reference/index.md)** — Complete command reference

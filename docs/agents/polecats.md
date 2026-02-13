@@ -321,7 +321,7 @@ bd list --status=open        # See all open issues
 gt mail inbox                # Check for hooked mail
 ```
 
-If the hook is truly empty and you are a polecat, escalate to the Witness -- polecats should always have work.
+If the hook is truly empty and you are a polecat, [escalate](../operations/escalations.md) to the Witness -- polecats should always have work.
 
 ### gt done Fails
 
@@ -351,7 +351,7 @@ gt done --status=ESCALATED
 
 ### Session Context Is Filling Up
 
-Long implementations can exhaust session context. Use `gt handoff` to cycle to a fresh session with preserved context:
+Long implementations can exhaust session context. Use `gt handoff` to cycle to a fresh session with preserved context (see [Session Cycling](../concepts/session-cycling.md)):
 
 ```bash
 gt handoff -s "Context full, continuing work" -m "Issue: <id>

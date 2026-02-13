@@ -293,5 +293,7 @@ gt nudge <rig>/witness "context check"
 - [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it
 - [Polecats](polecats.md) -- Workers the Witness monitors
 - [Refinery](refinery.md) -- Merge processor the Witness health-checks
+- [Escalation System](../operations/escalations.md) -- How escalations flow from Witness to Deacon
+- [Session Cycling](../concepts/session-cycling.md) -- How the Witness refreshes its own context
 - [Hooks](../concepts/hooks.md) -- Mechanism for attaching work to polecats
 - [GUPP](../concepts/gupp.md) -- The principle that drives polecat execution

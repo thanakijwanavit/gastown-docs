@@ -203,3 +203,10 @@ gt polecat nuke <name>       # Last resort: destroy polecat
 ### Escalation Chain Is Broken
 
 If agents are not escalating properly, verify the chain from the bottom up: Daemon -> Boot -> Deacon -> Witnesses. A broken link anywhere stops escalations from flowing.
+
+## Related
+
+- **[Architecture Overview](../architecture/overview.md)** — How agents fit into the larger system
+- **[Escalation System](../operations/escalations.md)** — Full escalation model with severity levels
+- **[GUPP & NDI](../concepts/gupp.md)** — The propulsion principle that drives agent execution
+- **[Hooks](../concepts/hooks.md)** — How work is attached to agents
