@@ -841,6 +841,33 @@ else
     fail_test "Found $ADMONITION_ISSUES file(s) with unbalanced admonitions" "Ensure every :::type has a matching :::"
 fi
 
+# Test 26: Validate Related sections have enough cross-references
+echo ""
+echo "Test 26: Checking Related section quality..."
+RELATED_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md"); do
+    # Check if file has a Related section
+    if ! grep -q '^## Related' "$file" 2>/dev/null; then
+        continue  # Test 12 already catches missing Related sections
+    fi
+
+    # Count links in the Related section (from ## Related to next ## or EOF)
+    link_count=$(awk '/^## Related/{found=1;next} found && /^## /{exit} found' "$file" | grep -cE '\[.*\]\(.*\)' 2>/dev/null || echo 0)
+
+    if [ "$link_count" -lt 2 ]; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Too few links in Related section ($link_count) in $rel_file"
+        RELATED_ISSUES=$((RELATED_ISSUES + 1))
+    fi
+done
+
+if [ "$RELATED_ISSUES" -eq 0 ]; then
+    pass_test "All Related sections have sufficient cross-references (2+)"
+else
+    fail_test "Found $RELATED_ISSUES Related section(s) with too few links" "Add at least 2 cross-reference links to each Related section"
+fi
+
 # Summary
 echo ""
 echo "========================================"
