@@ -1,6 +1,6 @@
 ---
 title: "Configuration"
-sidebar_position: 10
+sidebar_position: 15
 description: "Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and..."
 ---
 

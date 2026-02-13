@@ -1,6 +1,6 @@
 ---
 title: "Session & Handoff"
-sidebar_position: 8
+sidebar_position: 10
 description: "Commands for managing agent sessions, handoffs between sessions, molecules (multi-step workflows), and formulas (reusable workflow templates)."
 ---
 

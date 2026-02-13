@@ -27,16 +27,16 @@
 - Work Management: /docs/cli-reference/work
 - Convoy & Tracking: /docs/cli-reference/convoys
 - Communication: /docs/cli-reference/communication
+- gt nudge: /docs/cli-reference/nudge
+- gt sling: /docs/cli-reference/sling
 - Merge Queue: /docs/cli-reference/merge-queue
 - Rig Management: /docs/cli-reference/rigs
 - Session & Handoff: /docs/cli-reference/sessions
+- gt session: /docs/cli-reference/session-commands
+- gt polecat: /docs/cli-reference/polecat-commands
+- gt refinery: /docs/cli-reference/refinery-commands
 - Diagnostics: /docs/cli-reference/diagnostics
 - Configuration: /docs/cli-reference/configuration
-- gt sling: /docs/cli-reference/sling
-- gt refinery: /docs/cli-reference/refinery-commands
-- gt polecat: /docs/cli-reference/polecat-commands
-- gt nudge: /docs/cli-reference/nudge
-- gt session: /docs/cli-reference/session-commands
 
 ### Agents
 - Agents: /docs/agents
@@ -237,6 +237,24 @@ Commands for inter-agent messaging, notifications, escalations, and broadcasts. 
 
 ---
 
+## gt nudge
+> /docs/cli-reference/nudge
+
+Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents.
+
+Send a synchronous message to any Gas Town worker's Claude Code session.
+
+---
+
+## gt sling
+> /docs/cli-reference/sling
+
+Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch.
+
+Sling work onto an agent's hook and start working immediately. This is the primary command for assigning work in Gas Town.
+
+---
+
 ## Merge Queue
 > /docs/cli-reference/merge-queue
 
@@ -264,6 +282,33 @@ Commands for managing agent sessions, handoffs between sessions, molecules (mult
 
 ---
 
+## gt session
+> /docs/cli-reference/session-commands
+
+Manage tmux sessions for polecats: start, stop, restart, attach, monitor health, and capture output.
+
+Manage tmux sessions for polecats.
+
+---
+
+## gt polecat
+> /docs/cli-reference/polecat-commands
+
+Manage polecat lifecycle: list, inspect, nuke, garbage collect, detect stale workers, check recovery state, and manage identities.
+
+Manage polecat lifecycle in rigs.
+
+---
+
+## gt refinery
+> /docs/cli-reference/refinery-commands
+
+Manage the Refinery, the per-rig merge queue processor that serializes all merges to main. Start, stop, monitor, and inspect merge requests.
+
+Manage the Refinery -- the per-rig merge queue processor.
+
+---
+
 ## Diagnostics
 > /docs/cli-reference/diagnostics
 
@@ -279,51 +324,6 @@ Commands for monitoring, auditing, and troubleshooting Gas Town. These tools pro
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and...
 
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and rig levels.
-
----
-
-## gt sling
-> /docs/cli-reference/sling
-
-Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch.
-
-Sling work onto an agent's hook and start working immediately. This is the primary command for assigning work in Gas Town.
-
----
-
-## gt refinery
-> /docs/cli-reference/refinery-commands
-
-Manage the Refinery, the per-rig merge queue processor that serializes all merges to main. Start, stop, monitor, and inspect merge requests.
-
-Manage the Refinery -- the per-rig merge queue processor.
-
----
-
-## gt polecat
-> /docs/cli-reference/polecat-commands
-
-Manage polecat lifecycle: list, inspect, nuke, garbage collect, detect stale workers, check recovery state, and manage identities.
-
-Manage polecat lifecycle in rigs.
-
----
-
-## gt nudge
-> /docs/cli-reference/nudge
-
-Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents.
-
-Send a synchronous message to any Gas Town worker's Claude Code session.
-
----
-
-## gt session
-> /docs/cli-reference/session-commands
-
-Manage tmux sessions for polecats: start, stop, restart, attach, monitor health, and capture output.
-
-Manage tmux sessions for polecats.
 
 ---
 

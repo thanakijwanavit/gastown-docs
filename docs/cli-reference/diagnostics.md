@@ -1,6 +1,6 @@
 ---
 title: "Diagnostics"
-sidebar_position: 9
+sidebar_position: 14
 description: "Commands for monitoring, auditing, and troubleshooting Gas Town. These tools provide visibility into system health, agent activity, resource usage, and opera..."
 ---
 

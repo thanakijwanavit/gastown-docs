@@ -1,6 +1,6 @@
 ---
 title: "gt sling"
-sidebar_position: 10
+sidebar_position: 7
 description: "Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch."
 ---
 

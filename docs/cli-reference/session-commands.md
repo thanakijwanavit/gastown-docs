@@ -1,6 +1,6 @@
 ---
 title: "gt session"
-sidebar_position: 14
+sidebar_position: 11
 description: "Manage tmux sessions for polecats: start, stop, restart, attach, monitor health, and capture output."
 ---
 

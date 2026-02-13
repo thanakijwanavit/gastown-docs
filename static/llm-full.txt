@@ -4561,6 +4561,261 @@ Stale P0/P1 escalations indicate that critical issues are going unaddressed. The
 
 
 ========================================================================
+# gt nudge
+# URL: /docs/cli-reference/nudge
+========================================================================
+
+# gt nudge
+
+Send a synchronous message to any Gas Town worker's Claude Code session.
+
+```bash
+gt nudge <target> [message] [flags]
+```
+
+## Description
+
+`gt nudge` delivers a message directly to a running Claude Code session: polecats, crew, witness, refinery, mayor, or deacon. Unlike `gt mail` (async mailbox), nudges interrupt the target immediately for real-time coordination.
+
+Uses a reliable delivery pattern:
+
+1. Sends text in literal mode (`-l` flag)
+2. Waits 500ms for paste to complete
+3. Sends Enter as a separate command
+
+This is the **only** recommended way to send messages to Claude sessions. Do not use raw `tmux send-keys` elsewhere.
+
+## Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Send even if target has DND enabled |
+| `--message <text>` | `-m` | Message to send (alternative to positional argument) |
+
+## Target Resolution
+
+### Role Shortcuts
+
+Role shortcuts expand to the appropriate session name:
+
+| Shortcut | Expands to |
+|----------|-----------|
+| `mayor` | `gt-mayor` |
+| `deacon` | `gt-deacon` |
+| `witness` | `gt-<rig>-witness` (uses current rig) |
+| `refinery` | `gt-<rig>-refinery` (uses current rig) |
+
+### Direct Targets
+
+Specify polecats and other agents by their full path:
+
+```bash
+gt nudge myproject/toast "Check your mail"
+gt nudge myproject/alpha "What's your status?"
+```
+
+### Channel Syntax
+
+Nudge all members of a named channel defined in `~/gt/config/messaging.json`:
+
+```bash
+gt nudge channel:workers "New priority work available"
+```
+
+Patterns like `myproject/polecats/*` in the channel definition are expanded to all matching agents.
+
+## DND (Do Not Disturb)
+
+If the target has DND enabled (`gt dnd on`), the nudge is skipped. Use `--force` to override DND and send anyway.
+
+```bash
+gt nudge myproject/toast "Urgent: check your mail" --force
+```
+
+## Examples
+
+```bash
+# Nudge a polecat
+gt nudge myproject/furiosa "Check your mail and start working"
+
+# Nudge with -m flag
+gt nudge myproject/alpha -m "What's your status?"
+
+# Nudge the mayor
+gt nudge mayor "Status update requested"
+
+# Nudge the current rig's witness
+gt nudge witness "Check polecat health"
+
+# Nudge the deacon
+gt nudge deacon session-started
+
+# Nudge a channel
+gt nudge channel:workers "New priority work available"
+
+# Force nudge past DND
+gt nudge myproject/toast "Urgent fix needed" --force
+```
+
+:::tip
+
+For non-urgent communication, use `gt mail send` instead. Nudges interrupt the target's current activity and should be reserved for time-sensitive coordination.
+
+:::
+
+:::note
+
+`gt nudge` is the preferred way to send messages to running sessions. The lower-level `gt session inject` exists but lacks the reliable delivery guarantees that `gt nudge` provides.
+
+:::
+
+
+========================================================================
+# gt sling
+# URL: /docs/cli-reference/sling
+========================================================================
+
+# gt sling
+
+Sling work onto an agent's hook and start working immediately. This is the primary command for assigning work in Gas Town.
+
+```bash
+gt sling <bead-or-formula> [target] [flags]
+```
+
+## Description
+
+`gt sling` handles the full lifecycle of work assignment:
+
+- **Existing agents** -- sling to mayor, crew, witness, or refinery
+- **Auto-spawning polecats** -- when the target is a rig, a new polecat is created
+- **Dog dispatch** -- route work to Deacon's helper workers
+- **Formula instantiation** -- cook formulas into molecules and attach them
+- **Auto-convoy creation** -- ensures all slung work appears in `gt convoy list`
+
+## Target Resolution
+
+The target argument is flexible and resolves based on context:
+
+| Target | Resolves to |
+|--------|------------|
+| *(none)* | Self (current agent) |
+| `crew` | Crew worker in current rig |
+| `<rig>` | Auto-spawn polecat in rig |
+| `<rig>/<polecat>` | Specific polecat |
+| `mayor` | Mayor agent |
+| `deacon/dogs` | Auto-dispatch to idle dog |
+| `deacon/dogs/<name>` | Specific dog |
+
+## Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--account <handle>` | | Claude Code account handle to use |
+| `--agent <runtime>` | | Override agent/runtime (e.g., `claude`, `gemini`, `codex`, or custom alias) |
+| `--args <text>` | `-a` | Natural language instructions for the executor |
+| `--create` | | Create polecat if it doesn't exist |
+| `--dry-run` | `-n` | Show what would be done without executing |
+| `--force` | | Force spawn even if polecat has unread mail |
+| `--hook-raw-bead` | | Hook raw bead without default formula (expert mode) |
+| `--message <text>` | `-m` | Context message for the work |
+| `--no-convoy` | | Skip auto-convoy creation for single-issue sling |
+| `--no-merge` | | Skip merge queue on completion (keep work on feature branch for review) |
+| `--on <bead>` | | Apply formula to existing bead (implies wisp scaffolding) |
+| `--subject <text>` | `-s` | Context subject for the work |
+| `--var <key=value>` | | Formula variable (can be repeated) |
+
+## Examples
+
+### Basic work assignment
+
+```bash
+# Sling a bead to a rig (auto-spawns a polecat)
+gt sling gt-abc myproject
+
+# Sling to a specific polecat
+gt sling gt-abc myproject/toast
+
+# Sling to the mayor
+gt sling gt-abc mayor
+```
+
+### Batch slinging
+
+```bash
+# Sling multiple beads to a rig -- each gets its own polecat
+gt sling gt-abc gt-def gt-ghi myproject
+```
+
+### Natural language instructions
+
+```bash
+# Pass context to the executing agent
+gt sling gt-abc myproject --args "patch release"
+gt sling gt-abc myproject --args "focus on security"
+```
+
+### Formula slinging
+
+```bash
+# Cook a formula into a molecule and sling it
+gt sling mol-release mayor/
+
+# Formula with variables
+gt sling towers-of-hanoi --var disks=3
+
+# Apply a formula to an existing bead
+gt sling mol-review --on gt-abc
+
+# Apply formula, then sling to a target
+gt sling shiny --on gt-abc crew
+```
+
+### Spawning options
+
+```bash
+# Create polecat if it doesn't exist
+gt sling gt-abc myproject --create
+
+# Force spawn even with unread mail
+gt sling gt-abc myproject --force
+
+# Use a specific Claude account
+gt sling gt-abc myproject --account work
+```
+
+### Dry run
+
+```bash
+# Preview what would happen
+gt sling gt-abc myproject --dry-run
+```
+
+## Auto-Convoy
+
+When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.
+
+```bash
+gt sling gt-abc myproject              # Creates "Work: <issue-title>" convoy
+gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
+```
+
+## Comparison with Related Commands
+
+| Command | Behavior |
+|---------|----------|
+| `gt hook <bead>` | Just attach (no action taken) |
+| `gt sling <bead>` | Attach + start now (keep context) |
+| `gt handoff <bead>` | Attach + restart (fresh context) |
+
+:::tip
+
+The `--args` string is stored in the bead and shown via `gt prime`. Since the executor is an LLM, it interprets these instructions naturally -- write them as you would explain the task to a person.
+
+:::
+
+
+========================================================================
 # Merge Queue
 # URL: /docs/cli-reference/merge-queue
 ========================================================================
@@ -5921,6 +6176,932 @@ gt formula create api-migration --from-molecule mol-auth-001 --description "API 
 
 
 ========================================================================
+# gt session
+# URL: /docs/cli-reference/session-commands
+========================================================================
+
+# gt session
+
+Manage tmux sessions for polecats.
+
+```bash
+gt session [command] [flags]
+```
+
+**Alias:** `gt sess`
+
+## Description
+
+Sessions are tmux sessions running Claude for each polecat. Use the subcommands to start, stop, attach, and monitor sessions.
+
+:::tip
+
+To send messages to a running session, use `gt nudge` (not `gt session inject`). The nudge command uses reliable delivery that works correctly with Claude Code.
+
+:::
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`list`](#gt-session-list) | List all sessions |
+| [`start`](#gt-session-start) | Start a polecat session |
+| [`stop`](#gt-session-stop) | Stop a polecat session |
+| [`restart`](#gt-session-restart) | Restart a polecat session |
+| [`at`](#gt-session-at) | Attach to a running session |
+| [`status`](#gt-session-status) | Show session status details |
+| [`check`](#gt-session-check) | Check session health |
+| [`capture`](#gt-session-capture) | Capture recent session output |
+| [`inject`](#gt-session-inject) | Send message to session (prefer `gt nudge`) |
+
+---
+
+## gt session list
+
+List all running polecat sessions.
+
+```bash
+gt session list [flags]
+```
+
+Shows session status, rig, and polecat name.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+| `--rig <name>` | Filter by rig name |
+
+**Examples:**
+
+```bash
+gt session list
+gt session list --rig myproject
+gt session list --json
+```
+
+---
+
+## gt session start
+
+Start a new tmux session for a polecat.
+
+```bash
+gt session start <rig>/<polecat> [flags]
+```
+
+Creates a tmux session, navigates to the polecat's working directory, and launches Claude. Optionally inject an initial issue to work on.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--issue <id>` | Issue ID to work on |
+
+**Examples:**
+
+```bash
+gt session start myproject/toast
+gt session start myproject/toast --issue gt-123
+```
+
+---
+
+## gt session stop
+
+Stop a running polecat session.
+
+```bash
+gt session stop <rig>/<polecat> [flags]
+```
+
+Attempts graceful shutdown first (Ctrl-C), then kills the tmux session. Use `--force` to skip graceful shutdown.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Force immediate shutdown |
+
+**Examples:**
+
+```bash
+gt session stop myproject/toast
+gt session stop myproject/toast --force
+```
+
+---
+
+## gt session restart
+
+Restart a polecat session (stop + start).
+
+```bash
+gt session restart <rig>/<polecat> [flags]
+```
+
+Gracefully stops the current session and starts a fresh one.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Force immediate shutdown before restart |
+
+**Examples:**
+
+```bash
+gt session restart myproject/toast
+gt session restart myproject/toast --force
+```
+
+---
+
+## gt session at
+
+Attach to a running polecat session.
+
+```bash
+gt session at <rig>/<polecat> [flags]
+```
+
+**Alias:** `gt session attach`
+
+Attaches the current terminal to the tmux session. Detach with `Ctrl-B D`.
+
+**Examples:**
+
+```bash
+gt session at myproject/toast
+```
+
+---
+
+## gt session status
+
+Show detailed status for a polecat session.
+
+```bash
+gt session status <rig>/<polecat> [flags]
+```
+
+Displays running state, uptime, session info, and activity.
+
+**Examples:**
+
+```bash
+gt session status myproject/toast
+```
+
+---
+
+## gt session check
+
+Check session health for polecats.
+
+```bash
+gt session check [rig] [flags]
+```
+
+Validates that:
+
+1. Polecats with work-on-hook have running tmux sessions
+2. Sessions are responsive
+
+Use this for manual health checks or debugging session issues.
+
+**Examples:**
+
+```bash
+gt session check              # Check all rigs
+gt session check myproject    # Check specific rig
+```
+
+---
+
+## gt session capture
+
+Capture recent output from a polecat session.
+
+```bash
+gt session capture <rig>/<polecat> [count] [flags]
+```
+
+Returns the last N lines of terminal output. Useful for checking progress without attaching to the session.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--lines <n>` | `-n` | Number of lines to capture (default: 100) |
+
+**Examples:**
+
+```bash
+gt session capture myproject/toast          # Last 100 lines (default)
+gt session capture myproject/toast 50       # Last 50 lines
+gt session capture myproject/toast -n 50    # Same as above
+```
+
+---
+
+## gt session inject
+
+Send a message to a polecat session (low-level).
+
+```bash
+gt session inject <rig>/<polecat> [flags]
+```
+
+:::warning
+
+For sending messages to Claude sessions, use `gt nudge` instead. It uses reliable delivery (literal mode + timing) that works correctly with Claude Code's input handling. This command is a low-level primitive for file-based injection or cases where you need raw tmux `send-keys` behavior.
+
+:::
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--file <path>` | `-f` | File to read message from |
+| `--message <text>` | `-m` | Message to inject |
+
+**Examples:**
+
+```bash
+# Preferred: use gt nudge
+gt nudge myproject/furiosa "Check your mail"
+
+# Low-level: file injection
+gt session inject myproject/toast -f prompt.txt
+```
+
+
+========================================================================
+# gt polecat
+# URL: /docs/cli-reference/polecat-commands
+========================================================================
+
+# gt polecat
+
+Manage polecat lifecycle in rigs.
+
+```bash
+gt polecat [command] [flags]
+```
+
+**Alias:** `gt polecats`
+
+## Description
+
+Polecats are **ephemeral workers**: spawned for one task, nuked when done. There is no idle state. A polecat is either:
+
+- **Working** -- actively doing assigned work
+- **Stalled** -- session crashed mid-work (needs Witness intervention)
+- **Zombie** -- finished but `gt done` failed (needs cleanup)
+
+**Self-cleaning model:** When work completes, the polecat runs `gt done`, which pushes the branch, submits to the merge queue, and exits. The Witness then nukes the sandbox. Polecats don't wait for more work.
+
+**Session vs sandbox:** The Claude session cycles frequently (handoffs, compaction). The git worktree (sandbox) persists until nuke. Work survives session restarts.
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`list`](#gt-polecat-list) | List polecats in a rig |
+| [`status`](#gt-polecat-status) | Show detailed polecat status |
+| [`nuke`](#gt-polecat-nuke) | Completely destroy a polecat |
+| [`remove`](#gt-polecat-remove) | Remove polecats from a rig |
+| [`stale`](#gt-polecat-stale) | Detect stale polecats |
+| [`gc`](#gt-polecat-gc) | Garbage collect stale branches |
+| [`check-recovery`](#gt-polecat-check-recovery) | Check if polecat needs recovery vs safe to nuke |
+| [`git-state`](#gt-polecat-git-state) | Show git state for pre-kill verification |
+| [`identity`](#gt-polecat-identity) | Manage polecat identities |
+
+---
+
+## gt polecat list
+
+List polecats in a rig or all rigs.
+
+```bash
+gt polecat list [rig] [flags]
+```
+
+Shows all currently active polecats with their states: `working`, `done`, or `stuck`.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--all` | List polecats in all rigs |
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat list myproject
+gt polecat list --all
+gt polecat list myproject --json
+```
+
+---
+
+## gt polecat status
+
+Show detailed status for a polecat.
+
+```bash
+gt polecat status <rig>/<polecat> [flags]
+```
+
+Displays comprehensive information including:
+
+- Current lifecycle state (working, done, stuck, idle)
+- Assigned issue (if any)
+- Session status (running/stopped, attached/detached)
+- Session creation time
+- Last activity time
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat status myproject/toast
+gt polecat status myproject/toast --json
+```
+
+---
+
+## gt polecat nuke
+
+Completely destroy a polecat and all its artifacts.
+
+```bash
+gt polecat nuke <rig>/<polecat>... | <rig> --all [flags]
+```
+
+This is the nuclear option for post-merge cleanup. It:
+
+1. Kills the Claude session (if running)
+2. Deletes the git worktree (bypassing all safety checks)
+3. Deletes the polecat branch
+4. Closes the agent bead (if exists)
+
+**Safety checks** -- the command refuses to nuke a polecat if:
+
+- Worktree has unpushed/uncommitted changes
+- Polecat has an open merge request (MR bead)
+- Polecat has work on its hook
+
+Use `--force` to bypass safety checks. Use `--dry-run` to preview.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--all` | | Nuke all polecats in the rig |
+| `--dry-run` | | Show what would be nuked without doing it |
+| `--force` | `-f` | Force nuke, bypassing all safety checks (LOSES WORK) |
+
+**Examples:**
+
+```bash
+# Nuke a specific polecat
+gt polecat nuke myproject/toast
+
+# Nuke multiple polecats
+gt polecat nuke myproject/toast myproject/furiosa
+
+# Nuke all polecats in a rig
+gt polecat nuke myproject --all
+
+# Preview what would be nuked
+gt polecat nuke myproject --all --dry-run
+
+# Force nuke (bypasses safety checks)
+gt polecat nuke myproject/toast --force
+```
+
+:::warning
+
+Nuking with `--force` bypasses all safety checks and will destroy uncommitted work. Always use `--dry-run` first to verify what will be affected.
+
+:::
+
+---
+
+## gt polecat remove
+
+Remove one or more polecats from a rig.
+
+```bash
+gt polecat remove <rig>/<polecat>... | <rig> --all [flags]
+```
+
+Fails if session is running (stop first). Warns if uncommitted changes exist.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--all` | | Remove all polecats in the rig |
+| `--force` | `-f` | Force removal, bypassing checks |
+
+**Examples:**
+
+```bash
+gt polecat remove myproject/toast
+gt polecat remove myproject/toast myproject/furiosa
+gt polecat remove myproject --all
+gt polecat remove myproject --all --force
+```
+
+---
+
+## gt polecat stale
+
+Detect stale polecats that are candidates for cleanup.
+
+```bash
+gt polecat stale <rig> [flags]
+```
+
+A polecat is considered stale if:
+
+- No active tmux session
+- Way behind main (>threshold commits) OR no agent bead
+- Has no uncommitted work that could be lost
+
+The default threshold is 20 commits behind main.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--cleanup` | Automatically nuke stale polecats |
+| `--json` | Output as JSON |
+| `--threshold <n>` | Commits behind main to consider stale (default: 20) |
+
+**Examples:**
+
+```bash
+gt polecat stale myproject
+gt polecat stale myproject --threshold 50
+gt polecat stale myproject --json
+
+# Auto-cleanup stale polecats
+gt polecat stale myproject --cleanup
+
+# Preview cleanup
+gt polecat stale myproject --cleanup --dry-run
+```
+
+---
+
+## gt polecat gc
+
+Garbage collect stale polecat branches in a rig.
+
+```bash
+gt polecat gc <rig> [flags]
+```
+
+Polecats use unique timestamped branches (`polecat/<name>-<timestamp>`) to prevent drift issues. Over time, these branches accumulate when stale polecats are repaired.
+
+This command removes orphaned branches:
+
+- Branches for polecats that no longer exist
+- Old timestamped branches (keeps only the current one per polecat)
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Show what would be deleted without deleting |
+
+**Examples:**
+
+```bash
+gt polecat gc myproject
+gt polecat gc myproject --dry-run
+```
+
+---
+
+## gt polecat check-recovery
+
+Check recovery status of a polecat.
+
+```bash
+gt polecat check-recovery <rig>/<polecat> [flags]
+```
+
+Used by the Witness to determine appropriate cleanup action based on `cleanup_status` in the agent bead:
+
+- **SAFE_TO_NUKE** -- `cleanup_status` is `clean`, no work at risk
+- **NEEDS_RECOVERY** -- unpushed/uncommitted work detected
+
+The Witness should escalate `NEEDS_RECOVERY` cases to the Mayor.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat check-recovery myproject/toast
+gt polecat check-recovery myproject/toast --json
+```
+
+---
+
+## gt polecat git-state
+
+Show git state for a polecat's worktree.
+
+```bash
+gt polecat git-state <rig>/<polecat> [flags]
+```
+
+Used by the Witness for pre-kill verification to ensure no work is lost. Returns whether the worktree is clean (safe to kill) or dirty (needs cleanup).
+
+Checks:
+
+- **Working tree** -- uncommitted changes
+- **Unpushed commits** -- commits ahead of origin/main
+- **Stashes** -- stashed changes
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat git-state myproject/toast
+gt polecat git-state myproject/toast --json
+```
+
+---
+
+## gt polecat identity
+
+Manage polecat identity beads in rigs.
+
+```bash
+gt polecat identity [command] [flags]
+```
+
+**Alias:** `gt polecat id`
+
+Identity beads track polecat metadata, CV history, and lifecycle state.
+
+**Subcommands:**
+
+| Command | Description |
+|---------|-------------|
+| `add` | Create an identity bead for a polecat |
+| `list` | List polecat identity beads in a rig |
+| `show` | Show polecat identity with CV summary |
+| `rename` | Rename a polecat identity (preserves CV) |
+| `remove` | Remove a polecat identity |
+
+**Examples:**
+
+```bash
+gt polecat identity list myproject
+gt polecat identity show myproject/toast
+gt polecat identity rename myproject/toast myproject/alpha
+```
+
+
+========================================================================
+# gt refinery
+# URL: /docs/cli-reference/refinery-commands
+========================================================================
+
+# gt refinery
+
+Manage the Refinery -- the per-rig merge queue processor.
+
+```bash
+gt refinery [command] [flags]
+```
+
+**Alias:** `gt ref`
+
+## Description
+
+The Refinery serializes all merges to main for a rig:
+
+1. Receives MRs submitted by polecats (via `gt done`)
+2. Rebases work branches onto latest main
+3. Runs validation (tests, builds, checks)
+4. Merges to main when clear
+5. If conflict: spawns a fresh polecat to re-implement (original is already gone)
+
+One Refinery per rig. It is a persistent agent that processes work as it arrives. The polecat is already nuked by the time the Refinery processes its MR.
+
+**Role shortcuts:** `refinery` in mail/nudge addresses resolves to the current rig's Refinery.
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`start`](#gt-refinery-start) | Start the Refinery |
+| [`stop`](#gt-refinery-stop) | Stop the Refinery |
+| [`restart`](#gt-refinery-restart) | Restart the Refinery |
+| [`status`](#gt-refinery-status) | Show Refinery status |
+| [`attach`](#gt-refinery-attach) | Attach to Refinery session |
+| [`queue`](#gt-refinery-queue) | Show merge queue |
+| [`ready`](#gt-refinery-ready) | List MRs ready for processing |
+| [`blocked`](#gt-refinery-blocked) | List MRs blocked by open tasks |
+| [`unclaimed`](#gt-refinery-unclaimed) | List unclaimed MRs |
+| [`claim`](#gt-refinery-claim) | Claim an MR for processing |
+| [`release`](#gt-refinery-release) | Release a claimed MR |
+
+---
+
+## gt refinery start
+
+Start the Refinery for a rig.
+
+```bash
+gt refinery start [rig] [flags]
+```
+
+**Alias:** `gt refinery spawn`
+
+Launches the merge queue processor which monitors for polecat work branches and merges them to the appropriate target branches. If rig is not specified, infers it from the current directory.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
+| `--foreground` | Run in foreground (default: background) |
+
+**Examples:**
+
+```bash
+gt refinery start myproject
+gt refinery start myproject --foreground
+gt refinery start              # infer rig from cwd
+```
+
+---
+
+## gt refinery stop
+
+Gracefully stop a running Refinery.
+
+```bash
+gt refinery stop [rig] [flags]
+```
+
+Completes any in-progress merge first, then stops. If rig is not specified, infers it from the current directory.
+
+---
+
+## gt refinery restart
+
+Restart the Refinery for a rig.
+
+```bash
+gt refinery restart [rig] [flags]
+```
+
+Stops the current session (if running) and starts a fresh one.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
+
+**Examples:**
+
+```bash
+gt refinery restart myproject
+gt refinery restart             # infer rig from cwd
+```
+
+---
+
+## gt refinery status
+
+Show Refinery status for a rig.
+
+```bash
+gt refinery status [rig] [flags]
+```
+
+Displays running state, current work, queue length, and statistics.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery status
+gt refinery status myproject
+gt refinery status --json
+```
+
+---
+
+## gt refinery attach
+
+Attach to a running Refinery's Claude session.
+
+```bash
+gt refinery attach [rig] [flags]
+```
+
+Allows interactive access to the Refinery agent for debugging or manual intervention. Detach with `Ctrl-B D`.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
+
+**Examples:**
+
+```bash
+gt refinery attach myproject
+gt refinery attach              # infer rig from cwd
+```
+
+---
+
+## gt refinery queue
+
+Show the merge queue for a rig.
+
+```bash
+gt refinery queue [rig] [flags]
+```
+
+Lists all pending merge requests waiting to be processed.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery queue
+gt refinery queue myproject
+gt refinery queue --json
+```
+
+---
+
+## gt refinery ready
+
+List MRs ready for processing.
+
+```bash
+gt refinery ready [rig] [flags]
+```
+
+Shows MRs that are:
+
+- Not currently claimed by any worker (or claim is stale)
+- Not blocked by an open task (e.g., conflict resolution in progress)
+
+This is the preferred command for finding work to process.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery ready
+gt refinery ready --json
+```
+
+---
+
+## gt refinery blocked
+
+List MRs blocked by open tasks.
+
+```bash
+gt refinery blocked [rig] [flags]
+```
+
+Shows MRs waiting for conflict resolution or other blocking tasks to complete. When the blocking task closes, the MR will appear in `ready`.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery blocked
+gt refinery blocked --json
+```
+
+---
+
+## gt refinery unclaimed
+
+List MRs available for claiming.
+
+```bash
+gt refinery unclaimed [rig] [flags]
+```
+
+Shows MRs that are not currently claimed by any worker, or have stale claims (worker may have crashed). Useful for parallel refinery workers to find work.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery unclaimed
+gt refinery unclaimed --json
+```
+
+---
+
+## gt refinery claim
+
+Claim an MR for processing.
+
+```bash
+gt refinery claim <mr-id> [flags]
+```
+
+When running multiple refinery workers in parallel, each worker must claim an MR before processing to prevent double-processing. Claims expire after 10 minutes if not processed (for crash recovery).
+
+The worker ID is automatically determined from the `GT_REFINERY_WORKER` environment variable, or defaults to `refinery-1`.
+
+**Examples:**
+
+```bash
+gt refinery claim gt-abc123
+GT_REFINERY_WORKER=refinery-2 gt refinery claim gt-abc123
+```
+
+---
+
+## gt refinery release
+
+Release a claimed MR back to the queue.
+
+```bash
+gt refinery release <mr-id> [flags]
+```
+
+Called when processing fails and the MR should be retried by another worker. Clears the claim so other workers can pick up the MR.
+
+**Examples:**
+
+```bash
+gt refinery release gt-abc123
+```
+
+:::note
+
+All subcommands that accept `[rig]` infer the rig from the current directory when not specified.
+
+:::
+
+
+========================================================================
 # Diagnostics
 # URL: /docs/cli-reference/diagnostics
 ========================================================================
@@ -6943,1187 +8124,6 @@ gt plugin run my-plugin
 
 # List as JSON
 gt plugin list --json
-```
-
-
-========================================================================
-# gt sling
-# URL: /docs/cli-reference/sling
-========================================================================
-
-# gt sling
-
-Sling work onto an agent's hook and start working immediately. This is the primary command for assigning work in Gas Town.
-
-```bash
-gt sling <bead-or-formula> [target] [flags]
-```
-
-## Description
-
-`gt sling` handles the full lifecycle of work assignment:
-
-- **Existing agents** -- sling to mayor, crew, witness, or refinery
-- **Auto-spawning polecats** -- when the target is a rig, a new polecat is created
-- **Dog dispatch** -- route work to Deacon's helper workers
-- **Formula instantiation** -- cook formulas into molecules and attach them
-- **Auto-convoy creation** -- ensures all slung work appears in `gt convoy list`
-
-## Target Resolution
-
-The target argument is flexible and resolves based on context:
-
-| Target | Resolves to |
-|--------|------------|
-| *(none)* | Self (current agent) |
-| `crew` | Crew worker in current rig |
-| `<rig>` | Auto-spawn polecat in rig |
-| `<rig>/<polecat>` | Specific polecat |
-| `mayor` | Mayor agent |
-| `deacon/dogs` | Auto-dispatch to idle dog |
-| `deacon/dogs/<name>` | Specific dog |
-
-## Flags
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--account <handle>` | | Claude Code account handle to use |
-| `--agent <runtime>` | | Override agent/runtime (e.g., `claude`, `gemini`, `codex`, or custom alias) |
-| `--args <text>` | `-a` | Natural language instructions for the executor |
-| `--create` | | Create polecat if it doesn't exist |
-| `--dry-run` | `-n` | Show what would be done without executing |
-| `--force` | | Force spawn even if polecat has unread mail |
-| `--hook-raw-bead` | | Hook raw bead without default formula (expert mode) |
-| `--message <text>` | `-m` | Context message for the work |
-| `--no-convoy` | | Skip auto-convoy creation for single-issue sling |
-| `--no-merge` | | Skip merge queue on completion (keep work on feature branch for review) |
-| `--on <bead>` | | Apply formula to existing bead (implies wisp scaffolding) |
-| `--subject <text>` | `-s` | Context subject for the work |
-| `--var <key=value>` | | Formula variable (can be repeated) |
-
-## Examples
-
-### Basic work assignment
-
-```bash
-# Sling a bead to a rig (auto-spawns a polecat)
-gt sling gt-abc myproject
-
-# Sling to a specific polecat
-gt sling gt-abc myproject/toast
-
-# Sling to the mayor
-gt sling gt-abc mayor
-```
-
-### Batch slinging
-
-```bash
-# Sling multiple beads to a rig -- each gets its own polecat
-gt sling gt-abc gt-def gt-ghi myproject
-```
-
-### Natural language instructions
-
-```bash
-# Pass context to the executing agent
-gt sling gt-abc myproject --args "patch release"
-gt sling gt-abc myproject --args "focus on security"
-```
-
-### Formula slinging
-
-```bash
-# Cook a formula into a molecule and sling it
-gt sling mol-release mayor/
-
-# Formula with variables
-gt sling towers-of-hanoi --var disks=3
-
-# Apply a formula to an existing bead
-gt sling mol-review --on gt-abc
-
-# Apply formula, then sling to a target
-gt sling shiny --on gt-abc crew
-```
-
-### Spawning options
-
-```bash
-# Create polecat if it doesn't exist
-gt sling gt-abc myproject --create
-
-# Force spawn even with unread mail
-gt sling gt-abc myproject --force
-
-# Use a specific Claude account
-gt sling gt-abc myproject --account work
-```
-
-### Dry run
-
-```bash
-# Preview what would happen
-gt sling gt-abc myproject --dry-run
-```
-
-## Auto-Convoy
-
-When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.
-
-```bash
-gt sling gt-abc myproject              # Creates "Work: <issue-title>" convoy
-gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
-```
-
-## Comparison with Related Commands
-
-| Command | Behavior |
-|---------|----------|
-| `gt hook <bead>` | Just attach (no action taken) |
-| `gt sling <bead>` | Attach + start now (keep context) |
-| `gt handoff <bead>` | Attach + restart (fresh context) |
-
-:::tip
-
-The `--args` string is stored in the bead and shown via `gt prime`. Since the executor is an LLM, it interprets these instructions naturally -- write them as you would explain the task to a person.
-
-:::
-
-
-========================================================================
-# gt refinery
-# URL: /docs/cli-reference/refinery-commands
-========================================================================
-
-# gt refinery
-
-Manage the Refinery -- the per-rig merge queue processor.
-
-```bash
-gt refinery [command] [flags]
-```
-
-**Alias:** `gt ref`
-
-## Description
-
-The Refinery serializes all merges to main for a rig:
-
-1. Receives MRs submitted by polecats (via `gt done`)
-2. Rebases work branches onto latest main
-3. Runs validation (tests, builds, checks)
-4. Merges to main when clear
-5. If conflict: spawns a fresh polecat to re-implement (original is already gone)
-
-One Refinery per rig. It is a persistent agent that processes work as it arrives. The polecat is already nuked by the time the Refinery processes its MR.
-
-**Role shortcuts:** `refinery` in mail/nudge addresses resolves to the current rig's Refinery.
-
-## Subcommands
-
-| Command | Description |
-|---------|-------------|
-| [`start`](#gt-refinery-start) | Start the Refinery |
-| [`stop`](#gt-refinery-stop) | Stop the Refinery |
-| [`restart`](#gt-refinery-restart) | Restart the Refinery |
-| [`status`](#gt-refinery-status) | Show Refinery status |
-| [`attach`](#gt-refinery-attach) | Attach to Refinery session |
-| [`queue`](#gt-refinery-queue) | Show merge queue |
-| [`ready`](#gt-refinery-ready) | List MRs ready for processing |
-| [`blocked`](#gt-refinery-blocked) | List MRs blocked by open tasks |
-| [`unclaimed`](#gt-refinery-unclaimed) | List unclaimed MRs |
-| [`claim`](#gt-refinery-claim) | Claim an MR for processing |
-| [`release`](#gt-refinery-release) | Release a claimed MR |
-
----
-
-## gt refinery start
-
-Start the Refinery for a rig.
-
-```bash
-gt refinery start [rig] [flags]
-```
-
-**Alias:** `gt refinery spawn`
-
-Launches the merge queue processor which monitors for polecat work branches and merges them to the appropriate target branches. If rig is not specified, infers it from the current directory.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
-| `--foreground` | Run in foreground (default: background) |
-
-**Examples:**
-
-```bash
-gt refinery start myproject
-gt refinery start myproject --foreground
-gt refinery start              # infer rig from cwd
-```
-
----
-
-## gt refinery stop
-
-Gracefully stop a running Refinery.
-
-```bash
-gt refinery stop [rig] [flags]
-```
-
-Completes any in-progress merge first, then stops. If rig is not specified, infers it from the current directory.
-
----
-
-## gt refinery restart
-
-Restart the Refinery for a rig.
-
-```bash
-gt refinery restart [rig] [flags]
-```
-
-Stops the current session (if running) and starts a fresh one.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
-
-**Examples:**
-
-```bash
-gt refinery restart myproject
-gt refinery restart             # infer rig from cwd
-```
-
----
-
-## gt refinery status
-
-Show Refinery status for a rig.
-
-```bash
-gt refinery status [rig] [flags]
-```
-
-Displays running state, current work, queue length, and statistics.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt refinery status
-gt refinery status myproject
-gt refinery status --json
-```
-
----
-
-## gt refinery attach
-
-Attach to a running Refinery's Claude session.
-
-```bash
-gt refinery attach [rig] [flags]
-```
-
-Allows interactive access to the Refinery agent for debugging or manual intervention. Detach with `Ctrl-B D`.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
-
-**Examples:**
-
-```bash
-gt refinery attach myproject
-gt refinery attach              # infer rig from cwd
-```
-
----
-
-## gt refinery queue
-
-Show the merge queue for a rig.
-
-```bash
-gt refinery queue [rig] [flags]
-```
-
-Lists all pending merge requests waiting to be processed.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt refinery queue
-gt refinery queue myproject
-gt refinery queue --json
-```
-
----
-
-## gt refinery ready
-
-List MRs ready for processing.
-
-```bash
-gt refinery ready [rig] [flags]
-```
-
-Shows MRs that are:
-
-- Not currently claimed by any worker (or claim is stale)
-- Not blocked by an open task (e.g., conflict resolution in progress)
-
-This is the preferred command for finding work to process.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt refinery ready
-gt refinery ready --json
-```
-
----
-
-## gt refinery blocked
-
-List MRs blocked by open tasks.
-
-```bash
-gt refinery blocked [rig] [flags]
-```
-
-Shows MRs waiting for conflict resolution or other blocking tasks to complete. When the blocking task closes, the MR will appear in `ready`.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt refinery blocked
-gt refinery blocked --json
-```
-
----
-
-## gt refinery unclaimed
-
-List MRs available for claiming.
-
-```bash
-gt refinery unclaimed [rig] [flags]
-```
-
-Shows MRs that are not currently claimed by any worker, or have stale claims (worker may have crashed). Useful for parallel refinery workers to find work.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt refinery unclaimed
-gt refinery unclaimed --json
-```
-
----
-
-## gt refinery claim
-
-Claim an MR for processing.
-
-```bash
-gt refinery claim <mr-id> [flags]
-```
-
-When running multiple refinery workers in parallel, each worker must claim an MR before processing to prevent double-processing. Claims expire after 10 minutes if not processed (for crash recovery).
-
-The worker ID is automatically determined from the `GT_REFINERY_WORKER` environment variable, or defaults to `refinery-1`.
-
-**Examples:**
-
-```bash
-gt refinery claim gt-abc123
-GT_REFINERY_WORKER=refinery-2 gt refinery claim gt-abc123
-```
-
----
-
-## gt refinery release
-
-Release a claimed MR back to the queue.
-
-```bash
-gt refinery release <mr-id> [flags]
-```
-
-Called when processing fails and the MR should be retried by another worker. Clears the claim so other workers can pick up the MR.
-
-**Examples:**
-
-```bash
-gt refinery release gt-abc123
-```
-
-:::note
-
-All subcommands that accept `[rig]` infer the rig from the current directory when not specified.
-
-:::
-
-
-========================================================================
-# gt polecat
-# URL: /docs/cli-reference/polecat-commands
-========================================================================
-
-# gt polecat
-
-Manage polecat lifecycle in rigs.
-
-```bash
-gt polecat [command] [flags]
-```
-
-**Alias:** `gt polecats`
-
-## Description
-
-Polecats are **ephemeral workers**: spawned for one task, nuked when done. There is no idle state. A polecat is either:
-
-- **Working** -- actively doing assigned work
-- **Stalled** -- session crashed mid-work (needs Witness intervention)
-- **Zombie** -- finished but `gt done` failed (needs cleanup)
-
-**Self-cleaning model:** When work completes, the polecat runs `gt done`, which pushes the branch, submits to the merge queue, and exits. The Witness then nukes the sandbox. Polecats don't wait for more work.
-
-**Session vs sandbox:** The Claude session cycles frequently (handoffs, compaction). The git worktree (sandbox) persists until nuke. Work survives session restarts.
-
-## Subcommands
-
-| Command | Description |
-|---------|-------------|
-| [`list`](#gt-polecat-list) | List polecats in a rig |
-| [`status`](#gt-polecat-status) | Show detailed polecat status |
-| [`nuke`](#gt-polecat-nuke) | Completely destroy a polecat |
-| [`remove`](#gt-polecat-remove) | Remove polecats from a rig |
-| [`stale`](#gt-polecat-stale) | Detect stale polecats |
-| [`gc`](#gt-polecat-gc) | Garbage collect stale branches |
-| [`check-recovery`](#gt-polecat-check-recovery) | Check if polecat needs recovery vs safe to nuke |
-| [`git-state`](#gt-polecat-git-state) | Show git state for pre-kill verification |
-| [`identity`](#gt-polecat-identity) | Manage polecat identities |
-
----
-
-## gt polecat list
-
-List polecats in a rig or all rigs.
-
-```bash
-gt polecat list [rig] [flags]
-```
-
-Shows all currently active polecats with their states: `working`, `done`, or `stuck`.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--all` | List polecats in all rigs |
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt polecat list myproject
-gt polecat list --all
-gt polecat list myproject --json
-```
-
----
-
-## gt polecat status
-
-Show detailed status for a polecat.
-
-```bash
-gt polecat status <rig>/<polecat> [flags]
-```
-
-Displays comprehensive information including:
-
-- Current lifecycle state (working, done, stuck, idle)
-- Assigned issue (if any)
-- Session status (running/stopped, attached/detached)
-- Session creation time
-- Last activity time
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt polecat status myproject/toast
-gt polecat status myproject/toast --json
-```
-
----
-
-## gt polecat nuke
-
-Completely destroy a polecat and all its artifacts.
-
-```bash
-gt polecat nuke <rig>/<polecat>... | <rig> --all [flags]
-```
-
-This is the nuclear option for post-merge cleanup. It:
-
-1. Kills the Claude session (if running)
-2. Deletes the git worktree (bypassing all safety checks)
-3. Deletes the polecat branch
-4. Closes the agent bead (if exists)
-
-**Safety checks** -- the command refuses to nuke a polecat if:
-
-- Worktree has unpushed/uncommitted changes
-- Polecat has an open merge request (MR bead)
-- Polecat has work on its hook
-
-Use `--force` to bypass safety checks. Use `--dry-run` to preview.
-
-**Flags:**
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--all` | | Nuke all polecats in the rig |
-| `--dry-run` | | Show what would be nuked without doing it |
-| `--force` | `-f` | Force nuke, bypassing all safety checks (LOSES WORK) |
-
-**Examples:**
-
-```bash
-# Nuke a specific polecat
-gt polecat nuke myproject/toast
-
-# Nuke multiple polecats
-gt polecat nuke myproject/toast myproject/furiosa
-
-# Nuke all polecats in a rig
-gt polecat nuke myproject --all
-
-# Preview what would be nuked
-gt polecat nuke myproject --all --dry-run
-
-# Force nuke (bypasses safety checks)
-gt polecat nuke myproject/toast --force
-```
-
-:::warning
-
-Nuking with `--force` bypasses all safety checks and will destroy uncommitted work. Always use `--dry-run` first to verify what will be affected.
-
-:::
-
----
-
-## gt polecat remove
-
-Remove one or more polecats from a rig.
-
-```bash
-gt polecat remove <rig>/<polecat>... | <rig> --all [flags]
-```
-
-Fails if session is running (stop first). Warns if uncommitted changes exist.
-
-**Flags:**
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--all` | | Remove all polecats in the rig |
-| `--force` | `-f` | Force removal, bypassing checks |
-
-**Examples:**
-
-```bash
-gt polecat remove myproject/toast
-gt polecat remove myproject/toast myproject/furiosa
-gt polecat remove myproject --all
-gt polecat remove myproject --all --force
-```
-
----
-
-## gt polecat stale
-
-Detect stale polecats that are candidates for cleanup.
-
-```bash
-gt polecat stale <rig> [flags]
-```
-
-A polecat is considered stale if:
-
-- No active tmux session
-- Way behind main (>threshold commits) OR no agent bead
-- Has no uncommitted work that could be lost
-
-The default threshold is 20 commits behind main.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--cleanup` | Automatically nuke stale polecats |
-| `--json` | Output as JSON |
-| `--threshold <n>` | Commits behind main to consider stale (default: 20) |
-
-**Examples:**
-
-```bash
-gt polecat stale myproject
-gt polecat stale myproject --threshold 50
-gt polecat stale myproject --json
-
-# Auto-cleanup stale polecats
-gt polecat stale myproject --cleanup
-
-# Preview cleanup
-gt polecat stale myproject --cleanup --dry-run
-```
-
----
-
-## gt polecat gc
-
-Garbage collect stale polecat branches in a rig.
-
-```bash
-gt polecat gc <rig> [flags]
-```
-
-Polecats use unique timestamped branches (`polecat/<name>-<timestamp>`) to prevent drift issues. Over time, these branches accumulate when stale polecats are repaired.
-
-This command removes orphaned branches:
-
-- Branches for polecats that no longer exist
-- Old timestamped branches (keeps only the current one per polecat)
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--dry-run` | Show what would be deleted without deleting |
-
-**Examples:**
-
-```bash
-gt polecat gc myproject
-gt polecat gc myproject --dry-run
-```
-
----
-
-## gt polecat check-recovery
-
-Check recovery status of a polecat.
-
-```bash
-gt polecat check-recovery <rig>/<polecat> [flags]
-```
-
-Used by the Witness to determine appropriate cleanup action based on `cleanup_status` in the agent bead:
-
-- **SAFE_TO_NUKE** -- `cleanup_status` is `clean`, no work at risk
-- **NEEDS_RECOVERY** -- unpushed/uncommitted work detected
-
-The Witness should escalate `NEEDS_RECOVERY` cases to the Mayor.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt polecat check-recovery myproject/toast
-gt polecat check-recovery myproject/toast --json
-```
-
----
-
-## gt polecat git-state
-
-Show git state for a polecat's worktree.
-
-```bash
-gt polecat git-state <rig>/<polecat> [flags]
-```
-
-Used by the Witness for pre-kill verification to ensure no work is lost. Returns whether the worktree is clean (safe to kill) or dirty (needs cleanup).
-
-Checks:
-
-- **Working tree** -- uncommitted changes
-- **Unpushed commits** -- commits ahead of origin/main
-- **Stashes** -- stashed changes
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-
-**Examples:**
-
-```bash
-gt polecat git-state myproject/toast
-gt polecat git-state myproject/toast --json
-```
-
----
-
-## gt polecat identity
-
-Manage polecat identity beads in rigs.
-
-```bash
-gt polecat identity [command] [flags]
-```
-
-**Alias:** `gt polecat id`
-
-Identity beads track polecat metadata, CV history, and lifecycle state.
-
-**Subcommands:**
-
-| Command | Description |
-|---------|-------------|
-| `add` | Create an identity bead for a polecat |
-| `list` | List polecat identity beads in a rig |
-| `show` | Show polecat identity with CV summary |
-| `rename` | Rename a polecat identity (preserves CV) |
-| `remove` | Remove a polecat identity |
-
-**Examples:**
-
-```bash
-gt polecat identity list myproject
-gt polecat identity show myproject/toast
-gt polecat identity rename myproject/toast myproject/alpha
-```
-
-
-========================================================================
-# gt nudge
-# URL: /docs/cli-reference/nudge
-========================================================================
-
-# gt nudge
-
-Send a synchronous message to any Gas Town worker's Claude Code session.
-
-```bash
-gt nudge <target> [message] [flags]
-```
-
-## Description
-
-`gt nudge` delivers a message directly to a running Claude Code session: polecats, crew, witness, refinery, mayor, or deacon. Unlike `gt mail` (async mailbox), nudges interrupt the target immediately for real-time coordination.
-
-Uses a reliable delivery pattern:
-
-1. Sends text in literal mode (`-l` flag)
-2. Waits 500ms for paste to complete
-3. Sends Enter as a separate command
-
-This is the **only** recommended way to send messages to Claude sessions. Do not use raw `tmux send-keys` elsewhere.
-
-## Flags
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--force` | `-f` | Send even if target has DND enabled |
-| `--message <text>` | `-m` | Message to send (alternative to positional argument) |
-
-## Target Resolution
-
-### Role Shortcuts
-
-Role shortcuts expand to the appropriate session name:
-
-| Shortcut | Expands to |
-|----------|-----------|
-| `mayor` | `gt-mayor` |
-| `deacon` | `gt-deacon` |
-| `witness` | `gt-<rig>-witness` (uses current rig) |
-| `refinery` | `gt-<rig>-refinery` (uses current rig) |
-
-### Direct Targets
-
-Specify polecats and other agents by their full path:
-
-```bash
-gt nudge myproject/toast "Check your mail"
-gt nudge myproject/alpha "What's your status?"
-```
-
-### Channel Syntax
-
-Nudge all members of a named channel defined in `~/gt/config/messaging.json`:
-
-```bash
-gt nudge channel:workers "New priority work available"
-```
-
-Patterns like `myproject/polecats/*` in the channel definition are expanded to all matching agents.
-
-## DND (Do Not Disturb)
-
-If the target has DND enabled (`gt dnd on`), the nudge is skipped. Use `--force` to override DND and send anyway.
-
-```bash
-gt nudge myproject/toast "Urgent: check your mail" --force
-```
-
-## Examples
-
-```bash
-# Nudge a polecat
-gt nudge myproject/furiosa "Check your mail and start working"
-
-# Nudge with -m flag
-gt nudge myproject/alpha -m "What's your status?"
-
-# Nudge the mayor
-gt nudge mayor "Status update requested"
-
-# Nudge the current rig's witness
-gt nudge witness "Check polecat health"
-
-# Nudge the deacon
-gt nudge deacon session-started
-
-# Nudge a channel
-gt nudge channel:workers "New priority work available"
-
-# Force nudge past DND
-gt nudge myproject/toast "Urgent fix needed" --force
-```
-
-:::tip
-
-For non-urgent communication, use `gt mail send` instead. Nudges interrupt the target's current activity and should be reserved for time-sensitive coordination.
-
-:::
-
-:::note
-
-`gt nudge` is the preferred way to send messages to running sessions. The lower-level `gt session inject` exists but lacks the reliable delivery guarantees that `gt nudge` provides.
-
-:::
-
-
-========================================================================
-# gt session
-# URL: /docs/cli-reference/session-commands
-========================================================================
-
-# gt session
-
-Manage tmux sessions for polecats.
-
-```bash
-gt session [command] [flags]
-```
-
-**Alias:** `gt sess`
-
-## Description
-
-Sessions are tmux sessions running Claude for each polecat. Use the subcommands to start, stop, attach, and monitor sessions.
-
-:::tip
-
-To send messages to a running session, use `gt nudge` (not `gt session inject`). The nudge command uses reliable delivery that works correctly with Claude Code.
-
-:::
-
-## Subcommands
-
-| Command | Description |
-|---------|-------------|
-| [`list`](#gt-session-list) | List all sessions |
-| [`start`](#gt-session-start) | Start a polecat session |
-| [`stop`](#gt-session-stop) | Stop a polecat session |
-| [`restart`](#gt-session-restart) | Restart a polecat session |
-| [`at`](#gt-session-at) | Attach to a running session |
-| [`status`](#gt-session-status) | Show session status details |
-| [`check`](#gt-session-check) | Check session health |
-| [`capture`](#gt-session-capture) | Capture recent session output |
-| [`inject`](#gt-session-inject) | Send message to session (prefer `gt nudge`) |
-
----
-
-## gt session list
-
-List all running polecat sessions.
-
-```bash
-gt session list [flags]
-```
-
-Shows session status, rig, and polecat name.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--json` | Output as JSON |
-| `--rig <name>` | Filter by rig name |
-
-**Examples:**
-
-```bash
-gt session list
-gt session list --rig myproject
-gt session list --json
-```
-
----
-
-## gt session start
-
-Start a new tmux session for a polecat.
-
-```bash
-gt session start <rig>/<polecat> [flags]
-```
-
-Creates a tmux session, navigates to the polecat's working directory, and launches Claude. Optionally inject an initial issue to work on.
-
-**Flags:**
-
-| Flag | Description |
-|------|-------------|
-| `--issue <id>` | Issue ID to work on |
-
-**Examples:**
-
-```bash
-gt session start myproject/toast
-gt session start myproject/toast --issue gt-123
-```
-
----
-
-## gt session stop
-
-Stop a running polecat session.
-
-```bash
-gt session stop <rig>/<polecat> [flags]
-```
-
-Attempts graceful shutdown first (Ctrl-C), then kills the tmux session. Use `--force` to skip graceful shutdown.
-
-**Flags:**
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--force` | `-f` | Force immediate shutdown |
-
-**Examples:**
-
-```bash
-gt session stop myproject/toast
-gt session stop myproject/toast --force
-```
-
----
-
-## gt session restart
-
-Restart a polecat session (stop + start).
-
-```bash
-gt session restart <rig>/<polecat> [flags]
-```
-
-Gracefully stops the current session and starts a fresh one.
-
-**Flags:**
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--force` | `-f` | Force immediate shutdown before restart |
-
-**Examples:**
-
-```bash
-gt session restart myproject/toast
-gt session restart myproject/toast --force
-```
-
----
-
-## gt session at
-
-Attach to a running polecat session.
-
-```bash
-gt session at <rig>/<polecat> [flags]
-```
-
-**Alias:** `gt session attach`
-
-Attaches the current terminal to the tmux session. Detach with `Ctrl-B D`.
-
-**Examples:**
-
-```bash
-gt session at myproject/toast
-```
-
----
-
-## gt session status
-
-Show detailed status for a polecat session.
-
-```bash
-gt session status <rig>/<polecat> [flags]
-```
-
-Displays running state, uptime, session info, and activity.
-
-**Examples:**
-
-```bash
-gt session status myproject/toast
-```
-
----
-
-## gt session check
-
-Check session health for polecats.
-
-```bash
-gt session check [rig] [flags]
-```
-
-Validates that:
-
-1. Polecats with work-on-hook have running tmux sessions
-2. Sessions are responsive
-
-Use this for manual health checks or debugging session issues.
-
-**Examples:**
-
-```bash
-gt session check              # Check all rigs
-gt session check myproject    # Check specific rig
-```
-
----
-
-## gt session capture
-
-Capture recent output from a polecat session.
-
-```bash
-gt session capture <rig>/<polecat> [count] [flags]
-```
-
-Returns the last N lines of terminal output. Useful for checking progress without attaching to the session.
-
-**Flags:**
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--lines <n>` | `-n` | Number of lines to capture (default: 100) |
-
-**Examples:**
-
-```bash
-gt session capture myproject/toast          # Last 100 lines (default)
-gt session capture myproject/toast 50       # Last 50 lines
-gt session capture myproject/toast -n 50    # Same as above
-```
-
----
-
-## gt session inject
-
-Send a message to a polecat session (low-level).
-
-```bash
-gt session inject <rig>/<polecat> [flags]
-```
-
-:::warning
-
-For sending messages to Claude sessions, use `gt nudge` instead. It uses reliable delivery (literal mode + timing) that works correctly with Claude Code's input handling. This command is a low-level primitive for file-based injection or cases where you need raw tmux `send-keys` behavior.
-
-:::
-
-**Flags:**
-
-| Flag | Short | Description |
-|------|-------|-------------|
-| `--file <path>` | `-f` | File to read message from |
-| `--message <text>` | `-m` | Message to inject |
-
-**Examples:**
-
-```bash
-# Preferred: use gt nudge
-gt nudge myproject/furiosa "Check your mail"
-
-# Low-level: file injection
-gt session inject myproject/toast -f prompt.txt
 ```
 
 

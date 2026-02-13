@@ -1,6 +1,6 @@
 ---
 title: "gt nudge"
-sidebar_position: 13
+sidebar_position: 6
 description: "Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents."
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "gt refinery"
-sidebar_position: 11
+sidebar_position: 13
 description: "Manage the Refinery, the per-rig merge queue processor that serializes all merges to main. Start, stop, monitor, and inspect merge requests."
 ---
 
