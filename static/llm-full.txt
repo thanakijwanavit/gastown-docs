@@ -1066,7 +1066,7 @@ The search index is approximately:
 
 - **First visit**: Index downloads with the page (~200ms)
 - **Subsequent visits**: Index loads from browser cache (instant)
-- **Search results**: Appear as you type (<50ms per keystroke)
+- **Search results**: Appear as you type (under 50ms per keystroke)
 
 ---
 
