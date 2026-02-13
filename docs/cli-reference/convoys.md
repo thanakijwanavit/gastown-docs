@@ -10,7 +10,7 @@ Convoys are Gas Town's primary mechanism for bundling and tracking batches of re
 
 ---
 
-### `gt convoy create`
+## `gt convoy create`
 
 Create a new convoy.
 
@@ -45,7 +45,7 @@ gt convoy create "API Refactor" --description "Migrate all endpoints from v1 to 
 
 ---
 
-### `gt convoy add`
+## `gt convoy add`
 
 Add beads to an existing convoy.
 
@@ -73,7 +73,7 @@ Beads can belong to multiple convoys. This is useful when a single fix addresses
 
 ---
 
-### `gt convoy list`
+## `gt convoy list`
 
 List all convoys.
 
@@ -111,7 +111,7 @@ hq-cv-003   Bug Fix Sprint           completed  4/4        1d
 
 ---
 
-### `gt convoy status`
+## `gt convoy status`
 
 Show summary status of all convoys or a specific convoy.
 
@@ -139,7 +139,7 @@ gt convoy status hq-cv-001
 
 ---
 
-### `gt convoy show`
+## `gt convoy show`
 
 Show detailed information about a convoy.
 
@@ -179,7 +179,7 @@ gt-g5h6i   pending        -               Update auth docs
 
 ---
 
-### `gt convoy close`
+## `gt convoy close`
 
 Manually close a convoy.
 
@@ -214,7 +214,7 @@ Convoys auto-close when all tracked beads reach a terminal state (completed, clo
 
 ---
 
-### `gt convoy check`
+## `gt convoy check`
 
 Check convoy health and consistency.
 
@@ -244,7 +244,7 @@ gt convoy check --all --fix
 
 ---
 
-### `gt convoy stranded`
+## `gt convoy stranded`
 
 Find convoys with work that is ready but unassigned.
 
@@ -282,7 +282,7 @@ Stranded convoys indicate work that has fallen through the cracks. The Mayor sho
 
 ---
 
-### `gt synthesis`
+## `gt synthesis`
 
 Manage convoy synthesis steps.
 
@@ -317,7 +317,7 @@ gt synthesis close hq-cv-abc
 
 ---
 
-### `gt convoy synthesis`
+## `gt convoy synthesis`
 
 Generate a synthesis report for a convoy.
 

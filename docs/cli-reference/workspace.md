@@ -10,7 +10,7 @@ Commands for installing, initializing, and managing your Gas Town workspace (the
 
 ---
 
-### `gt install`
+## `gt install`
 
 Create a new Gas Town workspace.
 
@@ -62,7 +62,7 @@ Running `gt install` on an existing workspace without `--force` will abort to pr
 
 ---
 
-### `gt init`
+## `gt init`
 
 Initialize Gas Town in an existing directory.
 
@@ -89,7 +89,7 @@ gt init --git
 
 ---
 
-### `gt uninstall`
+## `gt uninstall`
 
 Remove Gas Town from a workspace.
 
@@ -126,7 +126,7 @@ Using `--all` permanently deletes all rig data, worktrees, and agent state. This
 
 ---
 
-### `gt git-init`
+## `gt git-init`
 
 Initialize or repair git configuration for a Gas Town workspace.
 
@@ -155,7 +155,7 @@ gt git-init --repair
 
 ---
 
-### `gt enable`
+## `gt enable`
 
 Enable Gas Town for all agentic coding tools.
 
@@ -175,7 +175,7 @@ gt enable
 
 ---
 
-### `gt disable`
+## `gt disable`
 
 Disable Gas Town for all agentic coding tools.
 
@@ -203,7 +203,7 @@ gt disable --clean
 
 ---
 
-### `gt stale`
+## `gt stale`
 
 Check if the `gt` binary needs rebuilding.
 
@@ -243,7 +243,7 @@ gt stale --quiet && echo "Rebuild needed"
 
 ---
 
-### `gt info`
+## `gt info`
 
 Display Gas Town version and release notes.
 
@@ -275,7 +275,7 @@ gt info --whats-new --json
 
 ---
 
-### `gt help`
+## `gt help`
 
 Display help information for any command.
 
@@ -303,7 +303,7 @@ gt convoy create --help
 
 ---
 
-### `gt completion`
+## `gt completion`
 
 Generate shell completion scripts.
 
@@ -339,7 +339,7 @@ After installing completions, restart your shell or source the completion file f
 
 ---
 
-### `gt shell`
+## `gt shell`
 
 Launch an interactive Gas Town shell.
 
@@ -381,7 +381,7 @@ The Gas Town shell sets the `GT_ROLE` environment variable and configures the pr
 
 ---
 
-### `gt version`
+## `gt version`
 
 Print Gas Town version information.
 
@@ -397,7 +397,7 @@ gt version
 
 ---
 
-### `gt status`
+## `gt status`
 
 Display overall town status.
 
@@ -432,7 +432,7 @@ gt status --fast
 
 ---
 
-### `gt whoami`
+## `gt whoami`
 
 Show the identity used for mail commands.
 
@@ -454,7 +454,7 @@ gt whoami
 
 Commands for managing Gas Town background services and infrastructure.
 
-### `gt start`
+## `gt start`
 
 Start Gas Town by launching the Deacon and Mayor.
 
@@ -486,7 +486,7 @@ gt start myproject/crew/dave
 
 ---
 
-### `gt up`
+## `gt up`
 
 Bring up all Gas Town long-lived services.
 
@@ -512,7 +512,7 @@ gt up --restore
 
 ---
 
-### `gt down`
+## `gt down`
 
 Stop Gas Town services (reversible pause).
 
@@ -554,7 +554,7 @@ gt down --dry-run
 
 ---
 
-### `gt shutdown`
+## `gt shutdown`
 
 Shut down Gas Town with full cleanup.
 
@@ -607,7 +607,7 @@ gt shutdown --all --force
 
 ---
 
-### `gt daemon`
+## `gt daemon`
 
 Manage the Gas Town background daemon.
 
@@ -635,7 +635,7 @@ gt daemon logs
 
 ---
 
-### `gt dolt`
+## `gt dolt`
 
 Manage the Dolt SQL server for beads.
 
@@ -668,7 +668,7 @@ gt dolt list
 
 ---
 
-### `gt namepool`
+## `gt namepool`
 
 Manage themed name pools for polecats.
 
@@ -714,7 +714,7 @@ gt namepool reset
 
 ---
 
-### `gt worktree`
+## `gt worktree`
 
 Create a git worktree in another rig for cross-rig work.
 

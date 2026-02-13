@@ -704,6 +704,46 @@ else
     fail_test "Found $TERM_ISSUES terminology inconsistenc(ies)" "Use canonical terms: Gas Town/Gastown, polecat, worktree"
 fi
 
+# Test 22: Validate heading hierarchy (no skipped levels)
+echo ""
+echo "Test 22: Checking heading hierarchy..."
+HEADING_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract headings outside code blocks, check hierarchy
+    # Use awk to reliably handle nested code fences
+    prev_level=1
+    while IFS= read -r heading_info; do
+        level="${heading_info%%:*}"
+        rest="${heading_info#*:}"
+        lnum="${rest%%:*}"
+        # Only check h2+ (h1 is the page title, and # appears in code comments)
+        [ "$level" -le 1 ] && continue
+        if [ "$level" -gt $((prev_level + 1)) ] && [ "$prev_level" -gt 0 ]; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Skipped heading level in $rel_file:$lnum (h$prev_level → h$level)"
+            HEADING_ISSUES=$((HEADING_ISSUES + 1))
+        fi
+        prev_level=$level
+    done < <(awk '
+        /^---$/ && NR<=2 { in_fm=!in_fm; next }
+        in_fm { next }
+        /^```/ { in_code=!in_code; next }
+        in_code { next }
+        /^##+ / {
+            match($0, /^(#+) /, arr)
+            level = length(arr[1])
+            print level ":" NR ":" $0
+        }
+    ' "$file")
+done
+
+if [ "$HEADING_ISSUES" -eq 0 ]; then
+    pass_test "All heading hierarchies are properly nested"
+else
+    fail_test "Found $HEADING_ISSUES heading hierarchy issue(s)" "Don't skip heading levels (e.g. ## → #### without ###)"
+fi
+
 # Summary
 echo ""
 echo "========================================"

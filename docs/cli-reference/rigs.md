@@ -10,7 +10,7 @@ Commands for adding, configuring, starting, stopping, and managing rigs. A rig i
 
 ---
 
-### `gt rig list`
+## `gt rig list`
 
 List all rigs in the town.
 
@@ -46,7 +46,7 @@ backend      parked    0          0       4            main
 
 ---
 
-### `gt rig add`
+## `gt rig add`
 
 Add a new rig to the town.
 
@@ -94,7 +94,7 @@ gt rig add docs https://github.com/you/docs.git --no-start
 
 ---
 
-### `gt rig start`
+## `gt rig start`
 
 Start all agents for a rig.
 
@@ -119,7 +119,7 @@ gt rig start myproject --agents witness,refinery
 
 ---
 
-### `gt rig stop`
+## `gt rig stop`
 
 Stop all agents for a rig.
 
@@ -151,7 +151,7 @@ Stopping a rig with active polecats may result in lost uncommitted work. Use `--
 
 ---
 
-### `gt rig shutdown`
+## `gt rig shutdown`
 
 Fully shut down a rig including cleanup.
 
@@ -177,7 +177,7 @@ gt rig shutdown myproject --drain
 
 ---
 
-### `gt rig status`
+## `gt rig status`
 
 Show detailed status for a rig.
 
@@ -224,7 +224,7 @@ Active Convoy: hq-cv-001 (2/3)
 
 ---
 
-### `gt rig reset`
+## `gt rig reset`
 
 Reset a rig to a clean state.
 
@@ -257,7 +257,7 @@ gt rig reset myproject --hard --force
 
 ---
 
-### `gt rig boot`
+## `gt rig boot`
 
 Boot a rig from cold state.
 
@@ -282,7 +282,7 @@ gt rig boot myproject --full
 
 ---
 
-### `gt rig reboot`
+## `gt rig reboot`
 
 Reboot a running rig.
 
@@ -306,7 +306,7 @@ gt rig reboot myproject
 
 ---
 
-### `gt rig park`
+## `gt rig park`
 
 Park a rig (suspend without removing).
 
@@ -330,7 +330,7 @@ gt rig park backend --reason "Waiting for API spec finalization"
 
 ---
 
-### `gt rig unpark`
+## `gt rig unpark`
 
 Resume a parked rig.
 
@@ -348,7 +348,7 @@ gt rig unpark backend
 
 ---
 
-### `gt rig dock`
+## `gt rig dock`
 
 Dock a rig (deep storage mode).
 
@@ -372,7 +372,7 @@ gt rig dock backend
 
 ---
 
-### `gt rig undock`
+## `gt rig undock`
 
 Restore a docked rig.
 
@@ -390,7 +390,7 @@ gt rig undock backend
 
 ---
 
-### `gt rig config`
+## `gt rig config`
 
 View or modify rig configuration.
 
@@ -436,7 +436,7 @@ gt rig config myproject --reset
 
 ---
 
-### `gt rig settings`
+## `gt rig settings`
 
 Manage advanced rig settings.
 

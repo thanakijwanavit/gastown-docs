@@ -10,7 +10,7 @@ Commands for managing the Refinery's merge queue. The Refinery processes merge r
 
 ---
 
-### `gt mq list`
+## `gt mq list`
 
 List items in the merge queue.
 
@@ -53,7 +53,7 @@ POS  ID       BEAD       BRANCH                  STATUS       RIG          AGE
 
 ---
 
-### `gt mq next`
+## `gt mq next`
 
 Show or process the next item in the merge queue.
 
@@ -83,7 +83,7 @@ gt mq next --process
 
 ---
 
-### `gt mq submit`
+## `gt mq submit`
 
 Submit a merge request to the queue.
 
@@ -125,7 +125,7 @@ The standard polecat workflow uses `gt done` which handles `gt mq submit` automa
 
 ---
 
-### `gt mq status`
+## `gt mq status`
 
 Show overall merge queue status.
 
@@ -164,7 +164,7 @@ Merge Queue Status: myproject
 
 ---
 
-### `gt mq reject`
+## `gt mq reject`
 
 Reject a merge request.
 
@@ -190,7 +190,7 @@ gt mq reject mr-003 --reason "Superseded by mr-005" --reassign
 
 ---
 
-### `gt mq retry`
+## `gt mq retry`
 
 Retry a failed or rejected merge request.
 
@@ -216,7 +216,7 @@ gt mq retry mr-002 --rebase --priority
 
 ---
 
-### `gt mq integration`
+## `gt mq integration`
 
 Manage integration validation for the merge queue.
 
