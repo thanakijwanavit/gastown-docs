@@ -254,6 +254,15 @@ gt formula list
 gt formula show <name>
 ```
 
+```mermaid
+flowchart TD
+    subgraph Gated["Pattern 3: Gated Workflow"]
+        IM[implement] --> WR[wait-for-review]
+        WR -->|human approves| DP[deploy]
+        WR -.->|gate pauses molecule| WR
+    end
+```
+
 ## Built-In Formulas
 
 Gas Town ships with several built-in formulas:

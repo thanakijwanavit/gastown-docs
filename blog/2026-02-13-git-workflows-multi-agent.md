@@ -26,6 +26,16 @@ In Gas Town, the remote changes at **agent speed**:
 
 If you follow the standard "branch, work, push, merge" pattern, you'll spend more time resolving conflicts than writing code. Gas Town solves this with three principles.
 
+```mermaid
+flowchart TD
+    CR[Crew Worker] -->|git push| MAIN[Main Branch]
+    PC[Polecat] -->|gt done| MQ[Merge Queue]
+    MQ --> RF[Refinery]
+    RF -->|rebase + test + merge| MAIN
+    MAIN -->|git pull| CR
+    MAIN -->|base for new polecats| PC
+```
+
 ## Principle 1: The Landing Rule
 
 > Work is NOT landed until it's either on main or submitted to the Refinery merge queue.

@@ -127,6 +127,15 @@ needs = ["run-tests"]
 
 The `needs` field creates a DAG (directed acyclic graph) of step dependencies. Steps without `needs` can run immediately. Steps with `needs` wait until all dependencies complete.
 
+```mermaid
+flowchart LR
+    F[Formula TOML] -->|pour| M[Molecule Instance]
+    M --> W1["wisp: load-context ✓"]
+    M --> W2["wisp: implement ●"]
+    M --> W3["wisp: test ○"]
+    M --> W4["wisp: submit ○"]
+```
+
 ## Two Kinds of Molecules
 
 Gas Town uses molecules for two distinct purposes:

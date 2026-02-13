@@ -95,6 +95,14 @@ gt convoy list
 gt feed
 ```
 
+```mermaid
+flowchart LR
+    subgraph Control["Control vs Automation"]
+        MC["Manual Convoy<br/>High Control"] ~~~ FW["Formula<br/>Medium Control"]
+        FW ~~~ MW["Mayor MEOW<br/>Low Control"]
+    end
+```
+
 **Overhead**: Minimal. You describe, the Mayor executes.
 **Control**: Low. The Mayor makes decomposition and routing decisions.
 

@@ -130,6 +130,17 @@ gt mayor attach
 
 Congratulations — you've graduated from Minimal Mode to the full [Mayor Workflow](/docs/workflows/mayor-workflow).
 
+```mermaid
+flowchart TD
+    subgraph Minimal["Minimal Mode Loop"]
+        CR[bd create] --> SL[gt sling]
+        SL --> AG[Start agent manually]
+        AG --> DN[Agent: gt done]
+        DN --> CV[gt convoy show]
+        CV -->|more work| SL
+    end
+```
+
 ## Tips
 
 :::tip

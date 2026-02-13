@@ -144,6 +144,15 @@ done
 
 Batching reduces Refinery overhead (fewer individual merge cycles) and gives the Mayor better visibility for progress reporting.
 
+```mermaid
+flowchart TD
+    subgraph Tiers["Model Tier Selection"]
+        CT[Complex Refactoring] --> OP[Opus]
+        SF[Standard Features] --> SN[Sonnet]
+        TF[Typo Fixes] --> HK[Haiku]
+    end
+```
+
 ## Common Cost Traps
 
 **The "just one more polecat" trap.** It's tempting to throw more parallelism at a problem. But each polecat has startup costs, and if they touch overlapping files, the Refinery spends more time resolving conflicts — which triggers re-runs.

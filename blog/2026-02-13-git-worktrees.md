@@ -142,6 +142,20 @@ The Refinery uses the canonical clone in `refinery/rig/` for merge operations:
 
 This happens in the Refinery's own working directory, completely isolated from all polecat worktrees.
 
+```mermaid
+sequenceDiagram
+    participant MY as Mayor
+    participant WT as git worktree add
+    participant PC as Polecat Session
+    participant RF as Refinery
+    MY->>WT: Create polecats/toast
+    WT->>PC: Agent starts in worktree
+    PC->>PC: Implement + test
+    PC->>RF: gt done (submit MR)
+    RF->>RF: Merge to main
+    RF->>WT: git worktree remove
+```
+
 ## The Trade-Off
 
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).

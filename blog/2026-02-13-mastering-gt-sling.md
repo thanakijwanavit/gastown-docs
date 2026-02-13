@@ -35,6 +35,18 @@ sequenceDiagram
     W->>T: Work completes → gt done
 ```
 
+```mermaid
+flowchart TD
+    SL[gt sling] --> TR{Target Type}
+    TR -->|rig name| AS[Auto-Spawn Polecat]
+    TR -->|agent path| DA[Direct Assignment]
+    TR -->|crew name| CW[Crew Hook]
+    AS --> HK[Attach to Hook]
+    DA --> HK
+    CW --> HK
+    HK --> EX[Agent Executes]
+```
+
 ## Basic Patterns
 
 ### Sling to a Rig (Auto-Spawn)

@@ -32,6 +32,17 @@ stateDiagram-v2
     Filed --> Expired: Agent self-recovers
 ```
 
+```mermaid
+flowchart TD
+    WI[Witness] -->|zombie polecat| WR[File Warrant]
+    DC[Deacon] -->|stuck Witness| WR
+    WR --> BT[Boot Picks Up]
+    BT --> SV[Save Work: git stash/push]
+    SV --> KL[Kill Session]
+    KL --> CL[Clean Worktree]
+    CL --> RS[Re-sling Bead]
+```
+
 ### Step 1: Filing
 
 Warrants are filed by the supervision chain — the Witness for polecats, the Deacon for patrol agents:

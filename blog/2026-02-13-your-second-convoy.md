@@ -129,6 +129,16 @@ Key signals to watch for:
 gt convoy stranded
 ```
 
+```mermaid
+flowchart TD
+    subgraph Recovery["Stuck Polecat Recovery"]
+        ND[gt nudge] -->|responds| OK[Resume Work]
+        ND -->|no response| AT[gt polecat attach]
+        AT -->|fixable| FX[Fix + Continue]
+        AT -->|hopeless| KL[gt polecat kill + re-sling]
+    end
+```
+
 ## Pattern 4: Handling Stuck Polecats
 
 Polecats get stuck. Tests fail. Dependencies are missing. Context windows fill up. Here's the recovery playbook:

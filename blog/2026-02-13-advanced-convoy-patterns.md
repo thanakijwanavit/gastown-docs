@@ -160,6 +160,16 @@ gt convoy stranded
 - **Stalled beads** — a polecat may have crashed; the Witness should restart it
 - **Dependency deadlocks** — circular deps prevent progress; check with `bd blocked`
 
+```mermaid
+flowchart TD
+    subgraph CrossRig["Cross-Rig Convoy"]
+        BE[Backend Rig] -->|be-webhook| CV[Convoy Progress]
+        FE[Frontend Rig] -->|fe-config| CV
+        DOC[Docs Rig] -->|doc-webhook| CV
+        CV --> AC[Auto-Close]
+    end
+```
+
 ## Anti-Patterns to Avoid
 
 **Mega-convoys**: Don't put 50 beads in one convoy. If a single bead stalls, you can't close the convoy. Keep convoys focused (3-10 beads).

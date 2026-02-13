@@ -132,6 +132,15 @@ gt worktree beads    # Creates ~/gt/beads/crew/myproject-dave/
 # Submit when done — your identity is preserved
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Active: gt rig start
+    Active --> Parked: gt rig park
+    Parked --> Active: gt rig unpark
+    Active --> Docked: gt rig dock
+    Docked --> Active: gt rig undock
+```
+
 ## Practical Tips
 
 :::tip

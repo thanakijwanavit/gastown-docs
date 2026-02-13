@@ -47,6 +47,14 @@ sequenceDiagram
 
 The Witness doesn't just create an escalation and forget about it. If no one acknowledges the escalation within the configured threshold (1 hour for P1 by default), the system **automatically re-escalates** — sending notifications again through the same channels. This happens up to `max_re_escalations` times before the escalation is marked as stale.
 
+```mermaid
+flowchart LR
+    P0["P0 Critical"] -->|SMS + Email + Mail| HU[Human]
+    P1["P1 High"] -->|Email + Mail| HU
+    P2["P2 Medium"] -->|Mail to Mayor| MY[Mayor]
+    P3["P3 Low"] -->|Bead only| BD[(Beads DB)]
+```
+
 ## Creating Escalations
 
 Any agent can create an escalation, and you can create them manually too:

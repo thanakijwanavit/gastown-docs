@@ -125,6 +125,15 @@ All five pitfalls share a common root: treating Gas Town like a single-developer
 
 Once you internalize these principles, Gas Town becomes remarkably smooth.
 
+```mermaid
+flowchart LR
+    subgraph Right["Multi-Agent Mindset"]
+        EX[Explicit Comms] --> SH[Shared State]
+        SH --> RS[Right-Sized Work]
+        RS --> MN[Monitor Always]
+    end
+```
+
 ## Further Reading
 
 - **[Quick Start](/docs/getting-started/quickstart)** — Set up your first workspace correctly

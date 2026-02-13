@@ -133,6 +133,17 @@ Watch what happens. The polecat will:
 
 If it works on the first try, congratulations — you just moved to Stage 7.
 
+```mermaid
+flowchart TD
+    subgraph S7Kit["Stage 7 Starter Kit"]
+        INS[gt install + gt init] --> RIG[gt rig add]
+        RIG --> BD[bd create bead]
+        BD --> SL[gt sling]
+        SL --> PC[Polecat Executes]
+        PC --> MG[Code on Main]
+    end
+```
+
 ## The Honest Truth About Stage 8
 
 Stage 8 is not for everyone. It requires:
