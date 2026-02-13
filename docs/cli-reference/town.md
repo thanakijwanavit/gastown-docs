@@ -12,6 +12,12 @@ Commands for town-level operations including session cycling.
 gt town [command]
 ```
 
+## Description
+
+The `gt town` commands manage navigation between **town-level sessions** -- the Mayor and Deacon. These are the two persistent agents that run at the Gas Town infrastructure level (above individual rigs).
+
+Town sessions live in tmux and `gt town` provides quick cycling between them, similar to how `gt rig` commands manage rig-level agents.
+
 ## Subcommands
 
 | Command | Description |
@@ -29,7 +35,7 @@ Switch to the next town session (mayor/deacon).
 gt town next
 ```
 
-Cycles forward through town-level tmux sessions, allowing quick navigation between the mayor and deacon sessions.
+Cycles forward through town-level tmux sessions, allowing quick navigation between the mayor and deacon sessions. Useful when monitoring or debugging town-level coordination.
 
 ---
 
@@ -42,3 +48,20 @@ gt town prev
 ```
 
 Cycles backward through town-level tmux sessions.
+
+## Examples
+
+```bash
+# Cycle to the next town-level session
+gt town next
+
+# Cycle back to the previous town-level session
+gt town prev
+```
+
+## Related
+
+- [Starting & Stopping](../operations/lifecycle.md) -- Full lifecycle management for town and rig agents
+- [Architecture Overview](../architecture/overview.md) -- How Mayor and Deacon fit into the Gas Town architecture
+- [Mayor](../agents/mayor.md) -- The Mayor agent that coordinates across rigs
+- [Deacon](../agents/deacon.md) -- The Deacon agent that manages infrastructure

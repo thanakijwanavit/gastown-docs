@@ -72,3 +72,9 @@ gt seance --talk sess-abc123
 Sessions are discovered from events emitted by SessionStart hooks. The `[GAS TOWN]` beacon in each session makes them searchable via `/resume`.
 
 :::
+
+## Related
+
+- [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes across agent sessions
+- [Session & Handoff](./sessions.md) -- The handoff commands that create the sessions seance can query
+- [gt compact](./compact.md) -- TTL-based compaction, another approach to context management

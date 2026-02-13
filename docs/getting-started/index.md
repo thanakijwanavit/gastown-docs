@@ -24,6 +24,7 @@ Before installing Gas Town, ensure you have:
 1. [Installation](installation.md) — Install Gas Town and its dependencies
 2. [Quick Start](quickstart.md) — Set up your workspace and add your first project
 3. [Your First Convoy](first-convoy.md) — Assign work and watch agents deliver
+4. [Using Search](using-search.md) — Find what you need in the documentation
 
 ## The 30-Second Version
 

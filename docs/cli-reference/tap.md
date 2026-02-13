@@ -68,6 +68,6 @@ gt tap guard pr-workflow
 
 :::tip
 
-See `~/gt/docs/HOOKS.md` for full hook documentation and configuration examples.
+See the [Operations Guide](../operations/troubleshooting.md) and [Lifecycle Management](../operations/lifecycle.md) for more on how hooks integrate with the Gas Town agent lifecycle.
 
 :::
