@@ -48,6 +48,11 @@ const sidebars: SidebarsConfig = {
         'cli-reference/refinery-commands',
         'cli-reference/diagnostics',
         'cli-reference/configuration',
+        'cli-reference/formula',
+        'cli-reference/dolt',
+        'cli-reference/warrant',
+        'cli-reference/patrol',
+        'cli-reference/krc',
       ],
     },
     {

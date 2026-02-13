@@ -37,6 +37,11 @@ Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name
 | [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol`, `gt cycle` |
 | [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt status` |
 | [Configuration](configuration.md) | Configure agents, accounts, themes, hooks, and plugins | `gt config`, `gt account`, `gt theme`, `gt hooks`, `gt plugin` |
+| [Formula](formula.md) | Manage workflow formula templates | `gt formula list`, `gt formula run`, `gt formula show` |
+| [Dolt](dolt.md) | Manage the Dolt SQL server for beads storage | `gt dolt start`, `gt dolt status`, `gt dolt sql` |
+| [Warrant](warrant.md) | File and execute death warrants for stuck agents | `gt warrant file`, `gt warrant list`, `gt warrant execute` |
+| [Patrol](patrol.md) | Aggregate patrol cycle digests | `gt patrol digest` |
+| [KRC](krc.md) | TTL-based lifecycle for ephemeral data | `gt krc stats`, `gt krc prune`, `gt krc config` |
 
 ## Command Deep Dives
 
@@ -49,6 +54,11 @@ Comprehensive reference for frequently used commands with all flags, subcommands
 | [`gt polecat`](polecat-commands.md) | Manage polecat lifecycle: list, nuke, stale detection, identities |
 | [`gt nudge`](nudge.md) | Send synchronous messages to running agent sessions |
 | [`gt session`](session-commands.md) | Manage tmux sessions: start, stop, attach, capture output |
+| [`gt formula`](formula.md) | Manage workflow formulas — reusable molecule templates |
+| [`gt dolt`](dolt.md) | Manage Dolt SQL server for multi-client beads access |
+| [`gt warrant`](warrant.md) | Death warrant lifecycle for zombie agent cleanup |
+| [`gt patrol`](patrol.md) | Patrol cycle digest aggregation |
+| [`gt krc`](krc.md) | Key Record Chronicle — ephemeral data TTL management |
 
 ## Related Tools
 

@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T14:54:05.767Z",
+  "generated": "2026-02-13T14:58:26.855Z",
   "sections": [
     {
       "id": "getting-started",
@@ -144,6 +144,31 @@
           "title": "Configuration",
           "path": "/docs/cli-reference/configuration",
           "description": "Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and..."
+        },
+        {
+          "title": "gt formula",
+          "path": "/docs/cli-reference/formula",
+          "description": "Manage workflow formulas — reusable TOML/JSON templates that define multi-step molecules with variables and composition rules."
+        },
+        {
+          "title": "gt dolt",
+          "path": "/docs/cli-reference/dolt",
+          "description": "Manage the Dolt SQL server that provides multi-client access to all rig bead databases."
+        },
+        {
+          "title": "gt warrant",
+          "path": "/docs/cli-reference/warrant",
+          "description": "File and execute death warrants for stuck or unresponsive agents that need controlled termination."
+        },
+        {
+          "title": "gt patrol",
+          "path": "/docs/cli-reference/patrol",
+          "description": "Manage patrol cycle digests — aggregate ephemeral per-cycle data into daily summaries."
+        },
+        {
+          "title": "gt krc",
+          "path": "/docs/cli-reference/krc",
+          "description": "Key Record Chronicle — TTL-based lifecycle management for ephemeral operational data like patrol heartbeats and status checks."
         }
       ]
     },
@@ -504,10 +529,28 @@
       "description": "Commands for monitoring, auditing, and troubleshooting Gas Town. These tools provide visibility into system health, agent activity, resource usage, and opera..."
     },
     {
+      "title": "gt dolt",
+      "path": "/docs/cli-reference/dolt",
+      "section": "cli-reference",
+      "description": "Manage the Dolt SQL server that provides multi-client access to all rig bead databases."
+    },
+    {
+      "title": "gt formula",
+      "path": "/docs/cli-reference/formula",
+      "section": "cli-reference",
+      "description": "Manage workflow formulas — reusable TOML/JSON templates that define multi-step molecules with variables and composition rules."
+    },
+    {
       "title": "CLI Reference",
       "path": "/docs/cli-reference",
       "section": "cli-reference",
       "description": "The gt CLI is the primary interface for interacting with Gas Town. It manages workspaces, agents, work distribution, communication, and diagnostics across yo..."
+    },
+    {
+      "title": "gt krc",
+      "path": "/docs/cli-reference/krc",
+      "section": "cli-reference",
+      "description": "Key Record Chronicle — TTL-based lifecycle management for ephemeral operational data like patrol heartbeats and status checks."
     },
     {
       "title": "Merge Queue",
@@ -520,6 +563,12 @@
       "path": "/docs/cli-reference/nudge",
       "section": "cli-reference",
       "description": "Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents."
+    },
+    {
+      "title": "gt patrol",
+      "path": "/docs/cli-reference/patrol",
+      "section": "cli-reference",
+      "description": "Manage patrol cycle digests — aggregate ephemeral per-cycle data into daily summaries."
     },
     {
       "title": "gt polecat",
@@ -556,6 +605,12 @@
       "path": "/docs/cli-reference/sling",
       "section": "cli-reference",
       "description": "Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch."
+    },
+    {
+      "title": "gt warrant",
+      "path": "/docs/cli-reference/warrant",
+      "section": "cli-reference",
+      "description": "File and execute death warrants for stuck or unresponsive agents that need controlled termination."
     },
     {
       "title": "Work Management",

@@ -37,6 +37,11 @@
 - gt refinery: /docs/cli-reference/refinery-commands
 - Diagnostics: /docs/cli-reference/diagnostics
 - Configuration: /docs/cli-reference/configuration
+- gt formula: /docs/cli-reference/formula
+- gt dolt: /docs/cli-reference/dolt
+- gt warrant: /docs/cli-reference/warrant
+- gt patrol: /docs/cli-reference/patrol
+- gt krc: /docs/cli-reference/krc
 
 ### Agents
 - Agents: /docs/agents
@@ -324,6 +329,51 @@ Commands for monitoring, auditing, and troubleshooting Gas Town. These tools pro
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and...
 
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and rig levels.
+
+---
+
+## gt formula
+> /docs/cli-reference/formula
+
+Manage workflow formulas — reusable TOML/JSON templates that define multi-step molecules with variables and composition rules.
+
+Manage workflow formulas — reusable templates that define multi-step molecules.
+
+---
+
+## gt dolt
+> /docs/cli-reference/dolt
+
+Manage the Dolt SQL server that provides multi-client access to all rig bead databases.
+
+Manage the Dolt SQL server for Gas Town beads storage.
+
+---
+
+## gt warrant
+> /docs/cli-reference/warrant
+
+File and execute death warrants for stuck or unresponsive agents that need controlled termination.
+
+Manage death warrants for agents that need termination.
+
+---
+
+## gt patrol
+> /docs/cli-reference/patrol
+
+Manage patrol cycle digests — aggregate ephemeral per-cycle data into daily summaries.
+
+Manage patrol cycle digests.
+
+---
+
+## gt krc
+> /docs/cli-reference/krc
+
+Key Record Chronicle — TTL-based lifecycle management for ephemeral operational data like patrol heartbeats and status checks.
+
+Key Record Chronicle (KRC) manages TTL-based lifecycle for ephemeral data.
 
 ---
 
