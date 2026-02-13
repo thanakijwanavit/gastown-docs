@@ -55,8 +55,10 @@ for file in $(find . -name "*.md"); do
             continue
         fi
 
-        # Skip absolute doc paths (handled by Docusaurus routing, not filesystem)
+        # Flag absolute doc paths as broken (should use relative paths)
         if [[ "$link" =~ ^/docs/ ]]; then
+            echo "  Absolute link in $file: $link (use relative path instead)"
+            BROKEN_LINKS=$((BROKEN_LINKS + 1))
             continue
         fi
 
@@ -110,13 +112,13 @@ fi
 # Test 4: Check for TODO/FIXME markers
 echo ""
 echo "Test 4: Checking for unresolved TODO/FIXME markers..."
-TODO_COUNT=$(grep -r "TODO\|FIXME\|XXX" docs/ --include="*.md" 2>/dev/null | wc -l)
+TODO_COUNT=$(grep -r "TODO\|FIXME\|XXX" "$ROOT_DIR/docs/" --include="*.md" 2>/dev/null | wc -l)
 
 if [ "$TODO_COUNT" -eq 0 ]; then
     pass_test "No unresolved TODO markers"
 else
     echo "  Found $TODO_COUNT TODO/FIXME marker(s) in documentation"
-    grep -r "TODO\|FIXME\|XXX" docs/ --include="*.md" 2>/dev/null | head -5
+    grep -r "TODO\|FIXME\|XXX" "$ROOT_DIR/docs/" --include="*.md" 2>/dev/null | head -5
     if [ "$TODO_COUNT" -gt 5 ]; then
         echo "  ... and $((TODO_COUNT - 5)) more"
     fi
@@ -180,6 +182,40 @@ if [ -f "$ROOT_DIR/sidebars.ts" ] || [ -f "$ROOT_DIR/sidebars.js" ]; then
     pass_test "Sidebar configuration exists"
 else
     fail_test "Sidebar configuration missing" "Create sidebars.ts or sidebars.js"
+fi
+
+# Test 8: Verify all doc files are referenced in sidebar
+echo ""
+echo "Test 8: Checking sidebar covers all doc files..."
+SIDEBAR_FILE=""
+if [ -f "$ROOT_DIR/sidebars.ts" ]; then
+    SIDEBAR_FILE="$ROOT_DIR/sidebars.ts"
+elif [ -f "$ROOT_DIR/sidebars.js" ]; then
+    SIDEBAR_FILE="$ROOT_DIR/sidebars.js"
+fi
+
+if [ -n "$SIDEBAR_FILE" ]; then
+    ORPHANED_DOCS=0
+    while IFS= read -r -d '' file; do
+        # Get doc ID (relative path without .md extension)
+        rel_path="${file#$ROOT_DIR/docs/}"
+        doc_id="${rel_path%.md}"
+
+        # Check if this doc ID appears in the sidebar config
+        if ! grep -q "'${doc_id}'" "$SIDEBAR_FILE" && \
+           ! grep -q "\"${doc_id}\"" "$SIDEBAR_FILE"; then
+            echo "  Not in sidebar: docs/$rel_path"
+            ORPHANED_DOCS=$((ORPHANED_DOCS + 1))
+        fi
+    done < <(find "$ROOT_DIR/docs" -name "*.md" -print0)
+
+    if [ "$ORPHANED_DOCS" -eq 0 ]; then
+        pass_test "All doc files are referenced in sidebar"
+    else
+        fail_test "Found $ORPHANED_DOCS doc file(s) not in sidebar" "Add missing pages to sidebars.ts"
+    fi
+else
+    fail_test "No sidebar config found" "Cannot verify sidebar coverage"
 fi
 
 # Summary
