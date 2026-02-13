@@ -360,5 +360,6 @@ You can create your own code review formula with custom legs tailored to your co
 
 ### Blog Posts
 
+- [Code Review with Gas Town Polecats: 10 Perspectives in Parallel](/blog/code-review-workflow) -- How the code-review formula spawns 10 specialized polecats to review code from different perspectives
 - [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into the merge queue that integrates with review gate presets
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating custom TOML formulas for specialized workflows
