@@ -53,6 +53,8 @@ const sidebars: SidebarsConfig = {
         'cli-reference/rigs',
         'cli-reference/sessions',
         'cli-reference/diagnostics',
+        'cli-reference/seance',
+        'cli-reference/orphans',
         'cli-reference/configuration',
       ],
     },
