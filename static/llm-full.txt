@@ -10718,6 +10718,8 @@ Gas Town is built on a small set of powerful primitives. Understanding these con
 | [Rigs](rigs.md) | Project containers wrapping git repositories | `gt rig` |
 | [The MEOW Stack](meow-stack.md) | Layered abstraction model for work organization | -- |
 | [GUPP & NDI](gupp.md) | Core design principles for reliability at scale | -- |
+| [Wisps](wisps.md) | Ephemeral sub-beads tracking molecule steps | `gt mol status` |
+| [Session Cycling](session-cycling.md) | Context refresh without losing work | `gt handoff` |
 
 ## How They Fit Together
 
