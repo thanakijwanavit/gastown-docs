@@ -440,3 +440,4 @@ Increment the `version` field when making breaking changes to a formula. Existin
 
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating TOML formulas for custom agent workflows
 - [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- Cross-rig tracking, dependency chains, and parallel fan-out for convoy formulas
+- [Work Distribution Patterns](/blog/work-distribution-patterns) -- Decision framework comparing formula workflows with manual convoys and Mayor orchestration

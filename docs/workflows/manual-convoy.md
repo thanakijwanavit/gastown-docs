@@ -271,3 +271,4 @@ gt convoy stranded
 
 - [Your First Convoy](/blog/first-convoy) -- Step-by-step guide to creating and running your first convoy
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Cross-rig coordination and dependency management techniques
+- [Work Distribution Patterns](/blog/work-distribution-patterns) -- When to use manual convoys vs. Mayor vs. formula workflows

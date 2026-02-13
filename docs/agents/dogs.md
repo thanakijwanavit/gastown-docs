@@ -256,3 +256,4 @@ gt deacon status             # Verify Deacon is processing mail
 
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, manages agent lifecycles, and dispatches dogs
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for running at scale with dozens of concurrent agents
+- [Infrastructure Dogs: The Cleanup Crew Behind Gas Town](/blog/infrastructure-dogs) -- How dogs handle cross-rig cleanup, syncing, migrations, and rebuilding

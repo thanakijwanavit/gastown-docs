@@ -185,3 +185,4 @@ bd show hq-abc              # Routes to town-level beads
 - [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor distributes work across rigs
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Distribution strategies for large deployments
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How hooks drive the distribution cycle
+- [Work Distribution Patterns](/blog/work-distribution-patterns) -- Decision framework for choosing manual convoy vs. Mayor vs. formula workflows
