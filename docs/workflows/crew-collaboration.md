@@ -193,9 +193,12 @@ gt worktree remove beads
 
 ---
 
-## Related
+## See Also
 
 - **[Crew Workspaces](../agents/crew.md)** -- Full documentation of crew workspace setup and capabilities
 - **[Mayor Workflow](mayor-workflow.md)** -- The fully automated alternative where the Mayor coordinates everything
 - **[Manual Convoy](manual-convoy.md)** -- Fine-grained control over work assignment
 - **[Session Cycling](../concepts/session-cycling.md)** -- How to handle context limits in crew sessions
+- **[Crew](../agents/crew.md)** -- The Crew agent type
+- **[Handoff Ceremony](handoff-ceremony.md)** -- Session transition protocol for crew
+- **[Hooks](../concepts/hooks.md)** -- Work assignment for crew members

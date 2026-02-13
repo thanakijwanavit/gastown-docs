@@ -158,7 +158,7 @@ Two concepts cut across all MEOW layers rather than living in a single layer:
 - **[Gates](gates.md)** -- Gates can pause execution at any layer. A molecule step can be gated, a convoy can be blocked on gated beads, and formulas can define gate conditions in their step definitions.
 - **[GUPP & NDI](gupp.md)** -- The forward-only progress guarantee applies at every layer: beads move forward, molecules checkpoint steps, convoys auto-close when complete, and formulas produce idempotent molecules.
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- Layer 1: the atomic work units that form the foundation
 - **[Convoys](convoys.md)** -- Layer 2: batch tracking of related beads

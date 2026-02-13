@@ -258,7 +258,7 @@ Longer patrol intervals mean slower detection of problems. A 15-minute interval 
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[GUPP & NDI](gupp.md)** -- Patrol cycles embody GUPP: each cycle moves the system forward or leaves it unchanged
 - **[Molecules & Formulas](molecules.md)** -- Patrol cycles are implemented as patrol molecules with squash-and-respawn

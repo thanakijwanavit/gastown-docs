@@ -343,7 +343,7 @@ Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for d
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Hooks](hooks.md)** -- Molecules are stored on an agent's hook, enabling crash-safe workflow resume across sessions
 - **[Beads](beads.md)** -- Each molecule step is tracked as a wisp bead; the molecule itself is also a bead

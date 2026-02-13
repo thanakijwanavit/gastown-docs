@@ -489,3 +489,10 @@ gt activity --type polecat --since 1h --json
 7. **Watch for silence.** A quiet feed is not always good news. If no events appear for an extended period, verify the daemon is running and agents are active.
 
 8. **Track trends, not just snapshots.** A single stale polecat is normal. Three stale polecats in the same rig within an hour suggests a systemic problem.
+
+## See Also
+
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- The core monitoring pattern
+- **[Diagnostics CLI](../cli-reference/diagnostics.md)** -- CLI tools for monitoring
+- **[Witness](../agents/witness.md)** -- Per-rig monitoring agent
+- **[Deacon](../agents/deacon.md)** -- Town-wide health coordinator

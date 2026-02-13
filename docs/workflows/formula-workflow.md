@@ -426,5 +426,10 @@ If a step needs to wait for CI, human approval, or a timer, use a [Gate](../conc
 
 Increment the `version` field when making breaking changes to a formula. Existing molecules poured from the old version will continue using the old step definitions.
 
-
 :::
+
+## See Also
+
+- **[Molecules & Formulas](../concepts/molecules.md)** -- The concept behind formulas and molecules
+- **[Formula CLI](../cli-reference/formula.md)** -- Formula management commands
+- **[MEOW Stack](../concepts/meow-stack.md)** -- Where formulas fit in the abstraction model

@@ -162,7 +162,7 @@ gt mail inbox
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[GUPP](gupp.md)** -- The propulsion principle ensures the new session immediately executes hooked work
 - **[Hooks](hooks.md)** -- The persistence mechanism that survives session cycling

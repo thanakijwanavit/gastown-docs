@@ -210,7 +210,7 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- The hook stores the bead ID of the assigned work; the bead's status transitions to `hooked` when slung
 - **[Molecules & Formulas](molecules.md)** -- The molecule attached to a hook tracks step-level progress, enabling crash-safe resume

@@ -299,7 +299,7 @@ Use gates whenever your workflow needs to wait for something external. Prefer ga
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Molecules & Formulas](molecules.md)** -- Gates are embedded within molecule steps, pausing the workflow at the gated step
 - **[Hooks](hooks.md)** -- When an agent parks on a gate and exits, the hook preserves the molecule state so a fresh session can check the gate and resume

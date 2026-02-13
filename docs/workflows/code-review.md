@@ -348,5 +348,8 @@ The `full` preset spawns 10 polecats plus a synthesis step. This uses significan
 
 You can create your own code review formula with custom legs tailored to your codebase. For example, add legs for "accessibility", "i18n", or "API compatibility" based on your project's needs.
 
-
 :::
+
+## See Also
+
+- **[Refinery](../agents/refinery.md)** -- Merge queue agent

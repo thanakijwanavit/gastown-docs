@@ -316,7 +316,7 @@ Reproduction: Run gt convoy create with 3 beads, gt done on all 3 within 5s.
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[Session Cycling](../concepts/session-cycling.md)** -- The broader concept of context refresh that handoffs enable
 - **[GUPP](../concepts/gupp.md)** -- The propulsion principle that drives immediate execution after handoff

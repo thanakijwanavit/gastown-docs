@@ -135,3 +135,8 @@ Configure the default runtime:
 gt config default-agent claude
 gt config agent set gemini "gemini"
 ```
+
+## See Also
+
+- **[Quickstart](quickstart.md)** -- Get up and running with your first Gas Town session
+- **[Multi-Runtime Support](../guides/multi-runtime.md)** -- Detailed guide for configuring multiple AI runtimes

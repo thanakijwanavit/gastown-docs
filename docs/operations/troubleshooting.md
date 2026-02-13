@@ -749,3 +749,9 @@ Before running `gt shutdown --all`, check if any polecats have uncommitted work:
 
 
 :::
+
+## See Also
+
+- **[Monitoring](monitoring.md)** -- Proactive monitoring to prevent issues
+- **[Diagnostics CLI](../cli-reference/diagnostics.md)** -- Diagnostic commands for debugging
+- **[Lifecycle](lifecycle.md)** -- Agent lifecycle management

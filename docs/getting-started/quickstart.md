@@ -114,8 +114,9 @@ gt feed
 gt ready
 ```
 
-## Next Steps
+## See Also
 
-- [Your First Convoy](first-convoy.md) — Detailed walkthrough of the convoy workflow
-- [CLI Reference](../cli-reference/index.md) — Full command documentation
-- [Architecture](../architecture/index.md) — Understand the system design
+- **[Your First Convoy](first-convoy.md)** -- Detailed walkthrough of the convoy workflow
+- **[CLI Reference](../cli-reference/index.md)** -- Full command documentation
+- **[Architecture](../architecture/index.md)** -- Understand the system design
+- **[Usage Guide](../guides/usage-guide.md)** -- Comprehensive usage patterns and tips

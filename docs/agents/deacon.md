@@ -287,11 +287,14 @@ gt daemon status             # Boot runs on daemon ticks
 gt polecat list              # See zombie states
 ```
 
-## Related
+## See Also
 
-- [Boot](boot.md) -- The Daemon's watchdog that wakes the Deacon
-- [Dogs](dogs.md) -- Infrastructure workers managed by the Deacon
-- [Witness](witness.md) -- Per-rig monitors that the Deacon supervises
-- [Mayor](mayor.md) -- Provides strategic direction to the Deacon
-- [Gates](../concepts/gates.md) -- Async coordination primitives the Deacon evaluates
-- [Molecules](../concepts/molecules.md) -- Workflows the Deacon dispatches when gates open
+- **[Boot](boot.md)** -- The Daemon's watchdog that wakes the Deacon
+- **[Dogs](dogs.md)** -- Infrastructure workers managed by the Deacon
+- **[Witness](witness.md)** -- Per-rig monitors that the Deacon supervises
+- **[Mayor](mayor.md)** -- Provides strategic direction to the Deacon
+- **[Gates](../concepts/gates.md)** -- Async coordination primitives the Deacon evaluates
+- **[Molecules](../concepts/molecules.md)** -- Workflows the Deacon dispatches when gates open
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence the Deacon follows
+- **[Escalations](../operations/escalations.md)** -- How problems are routed up from Witnesses to the Deacon
+- **[Lifecycle](../operations/lifecycle.md)** -- Agent lifecycle management the Deacon oversees

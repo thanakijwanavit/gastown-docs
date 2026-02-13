@@ -266,9 +266,13 @@ gt crew at myproject dave            # Re-attach to existing session
 gt crew restart myproject dave
 ```
 
-## Related
+## See Also
 
-- [Polecats](polecats.md) -- AI workers that crew members work alongside
-- [Refinery](refinery.md) -- Merge queue that crew work flows through
-- [Beads](../concepts/beads.md) -- Issue tracking available to crew members
-- [Rigs](../concepts/rigs.md) -- Project containers where crew workspaces live
+- **[Polecats](polecats.md)** -- AI workers that crew members work alongside
+- **[Refinery](refinery.md)** -- Merge queue that crew work flows through
+- **[Beads](../concepts/beads.md)** -- Issue tracking available to crew members
+- **[Rigs](../concepts/rigs.md)** -- Project containers where crew workspaces live
+- **[Hooks](../concepts/hooks.md)** -- Mechanism for attaching work to crew members
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Protocol for transferring work between sessions
+- **[Session Cycling](../concepts/session-cycling.md)** -- How context limits are managed across sessions
+- **[Crew Collaboration](../workflows/crew-collaboration.md)** -- Workflows for human-AI collaboration in Gas Town

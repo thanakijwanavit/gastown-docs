@@ -129,3 +129,9 @@ This principle prevents failure cascading through the system. One broken test, l
 Gas Town favors agents discovering what needs to happen over centralized tracking that tells them. The [Witness](../agents/witness.md) discovers stale polecats by inspecting them, not by reading a checklist. The [Deacon](../agents/deacon.md) discovers zombies by scanning processes, not by maintaining a process table.
 
 This makes the system resilient to state corruption: even if tracking data is lost, agents can recover by rediscovering the current state. See [Patrol Cycles](../concepts/patrol-cycles.md) for a deep dive on how this principle is implemented.
+
+## See Also
+
+- **[GUPP & NDI](../concepts/gupp.md)** -- Deep dive on the two foundational design principles
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Discovery over Tracking in practice
+- **[Agent Hierarchy](agent-hierarchy.md)** -- Erlang-inspired supervision trees in practice

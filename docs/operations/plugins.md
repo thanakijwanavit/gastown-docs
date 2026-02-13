@@ -573,3 +573,8 @@ Scheduled plugins run on a cron schedule independently of workflow events.
 
 
 :::
+
+## See Also
+
+- **[Configuration CLI](../cli-reference/configuration.md)** -- Plugin configuration commands
+- **[Deacon](../agents/deacon.md)** -- Runs plugins during patrol cycles

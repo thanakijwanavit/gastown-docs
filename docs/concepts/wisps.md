@@ -114,7 +114,7 @@ If you need persistent tracking of sub-tasks, use regular beads with dependency 
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[Molecules & Formulas](molecules.md)** -- Wisps are the per-step tracking units within molecules
 - **[Beads](beads.md)** -- Wisps are a specialized bead type (`type: wisp`) with ephemeral lifecycle

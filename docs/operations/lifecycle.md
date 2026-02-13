@@ -596,3 +596,9 @@ stateDiagram-v2
 | `gt rig reboot <name>` | Single rig | Stop + restart | **Recreated** | Reset |
 | `gt rig park <name>` | Single rig | Stop | Unchanged | Parked |
 | `gt rig dock <name>` | Single rig | Stop | **Removed** | Archived |
+
+## See Also
+
+- **[Agent Hierarchy](../architecture/agent-hierarchy.md)** -- How agents are organized for lifecycle management
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic health monitoring that detects lifecycle issues
+- **[Deacon](../agents/deacon.md)** -- The agent responsible for lifecycle coordination

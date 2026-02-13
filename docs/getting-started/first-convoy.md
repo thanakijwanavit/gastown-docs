@@ -112,3 +112,9 @@ The Mayor handles convoy creation, issue tracking, and agent assignment automati
 - If a polecat stalls, the Witness will detect and handle it
 - Use `gt escalate` for issues that need human attention
 - Convoys can span multiple rigs for cross-project work
+
+## See Also
+
+- **[Convoys](../concepts/convoys.md)** -- The convoy concept in depth
+- **[Mayor Workflow](../workflows/mayor-workflow.md)** -- Full Mayor-driven workflow documentation
+- **[Manual Convoy](../workflows/manual-convoy.md)** -- Fine-grained convoy control without the Mayor

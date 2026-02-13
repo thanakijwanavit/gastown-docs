@@ -615,3 +615,11 @@ Git is the ground truth. The Refinery's canonical clone is the single source of 
 - **[Design Principles](../architecture/design-principles.md)** -- The ten principles behind the architecture
 - **[Usage Guide](usage-guide.md)** -- Practical day-to-day workflows
 - **[Background & Philosophy](philosophy.md)** -- Why Gas Town exists and how it evolved
+
+---
+
+## See Also
+
+- **[Architecture Overview](../architecture/overview.md)** -- The formal architecture documentation
+- **[Agent Hierarchy](../architecture/agent-hierarchy.md)** -- How agents are organized
+- **[Design Principles](../architecture/design-principles.md)** -- Core architectural principles

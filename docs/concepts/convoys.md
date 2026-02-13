@@ -228,7 +228,7 @@ Run `gt convoy list` frequently to see the big picture. For live progress, use `
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- Convoys track collections of beads; each tracked item is a bead with its own status and lifecycle
 - **[Hooks](hooks.md)** -- When work is slung to a polecat, the bead is hooked to that agent for execution

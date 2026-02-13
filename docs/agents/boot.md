@@ -260,8 +260,10 @@ Boot is designed for rapid triage (seconds, not minutes). If Boot is slow:
 - Agent state files may be corrupted or very large
 - The system may have many rigs/agents to inventory
 
-## Related
+## See Also
 
-- [Deacon](deacon.md) -- The agent that Boot monitors and wakes
-- [Dogs](dogs.md) -- Boot is a specialized dog managed by the Deacon
-- [Molecules](../concepts/molecules.md) -- The `mol-boot-triage` formula defines Boot's triage cycle
+- **[Deacon](deacon.md)** -- The agent that Boot monitors and wakes
+- **[Dogs](dogs.md)** -- Boot is a specialized dog managed by the Deacon
+- **[Molecules](../concepts/molecules.md)** -- The `mol-boot-triage` formula defines Boot's triage cycle
+- **[Witness](witness.md)** -- Per-rig monitors that Boot inventories during triage
+- **[Lifecycle](../operations/lifecycle.md)** -- Agent lifecycle management that Boot helps initiate

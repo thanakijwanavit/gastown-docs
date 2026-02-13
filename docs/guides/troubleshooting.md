@@ -383,3 +383,10 @@ The Refinery merges MRs **one at a time**, rebasing each onto the latest `main`.
 | Open escalations | `gt escalate list` |
 
 For the full troubleshooting reference, see [Operations: Troubleshooting](../operations/troubleshooting.md).
+
+---
+
+## See Also
+
+- **[Operations Troubleshooting](../operations/troubleshooting.md)** -- Detailed operational troubleshooting
+- **[Diagnostics CLI](../cli-reference/diagnostics.md)** -- Diagnostic commands

@@ -288,10 +288,12 @@ Long-running Witness sessions accumulate context. The Witness handles this autom
 gt nudge <rig>/witness "context check"
 ```
 
-## Related
+## See Also
 
-- [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it
-- [Polecats](polecats.md) -- Workers the Witness monitors
-- [Refinery](refinery.md) -- Merge processor the Witness health-checks
-- [Hooks](../concepts/hooks.md) -- Mechanism for attaching work to polecats
-- [GUPP](../concepts/gupp.md) -- The principle that drives polecat execution
+- **[Deacon](deacon.md)** -- Supervises the Witness and handles escalations from it
+- **[Polecats](polecats.md)** -- Workers the Witness monitors
+- **[Refinery](refinery.md)** -- Merge processor the Witness health-checks
+- **[Hooks](../concepts/hooks.md)** -- Mechanism for attaching work to polecats
+- **[GUPP](../concepts/gupp.md)** -- The principle that drives polecat execution
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence the Witness follows
+- **[Session Cycling](../concepts/session-cycling.md)** -- How the Witness manages context limits via handoff

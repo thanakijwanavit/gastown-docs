@@ -338,3 +338,10 @@ The Refinery does not know or care which runtime produced the code. It validates
 4. **Monitor runtime-specific issues.** Different runtimes have different failure modes. Watch `gt feed` for patterns specific to a runtime.
 
 5. **Keep fallback procedures documented.** If you use hook-limited runtimes, document the startup sequence for your team so everyone knows the manual context injection steps.
+
+---
+
+## See Also
+
+- **[Rigs](../concepts/rigs.md)** -- Project containers that can span runtimes
+- **[Configuration CLI](../cli-reference/configuration.md)** -- Runtime configuration options

@@ -153,7 +153,7 @@ These principles are not just abstract ideals -- they are enforced by specific G
 | [Gates](gates.md) | Pause without losing progress | Gate resolution may trigger different downstream execution |
 | [Rigs](rigs.md) | Git worktrees provide durable filesystem state | Each polecat worktree is independent |
 
-## Related Concepts
+## See Also
 
 - **[Hooks](hooks.md)** -- The primary mechanism that makes GUPP possible: hooks persist across all session boundaries
 - **[Molecules & Formulas](molecules.md)** -- Molecules implement GUPP through step-level checkpointing in the beads database

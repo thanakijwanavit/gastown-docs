@@ -306,9 +306,11 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 2. Is the Witness receiving and processing the mail?
 3. Check `gt polecat list` for polecats stuck in `done` state.
 
-## Related
+## See Also
 
-- [Polecats](polecats.md) -- Submit MRs that the Refinery processes
-- [Witness](witness.md) -- Monitors the Refinery and receives `MERGED` signals
-- [Molecules](../concepts/molecules.md) -- The `mol-refinery-patrol` formula defines the merge workflow
-- [Beads](../concepts/beads.md) -- MR beads track each merge request through the queue
+- **[Polecats](polecats.md)** -- Submit MRs that the Refinery processes
+- **[Witness](witness.md)** -- Monitors the Refinery and receives `MERGED` signals
+- **[Molecules](../concepts/molecules.md)** -- The `mol-refinery-patrol` formula defines the merge workflow
+- **[Beads](../concepts/beads.md)** -- MR beads track each merge request through the queue
+- **[Merge Queue CLI](../cli-reference/merge-queue.md)** -- CLI commands for interacting with the merge queue
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic processing cadence the Refinery follows

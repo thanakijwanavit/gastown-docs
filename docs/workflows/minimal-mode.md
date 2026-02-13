@@ -271,3 +271,9 @@ Without Witness and Deacon monitoring, stuck or crashed sessions will not be aut
 | Coordination (Mayor) | No | Yes |
 | Requires Tmux | No | Yes |
 | Resource usage | Low | Higher |
+
+## See Also
+
+- **[Beads](../concepts/beads.md)** -- Manual issue tracking in minimal mode
+- **[Hooks](../concepts/hooks.md)** -- Work assignment mechanism
+- **[Getting Started](../getting-started/quickstart.md)** -- Quick setup for minimal mode

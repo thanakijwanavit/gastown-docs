@@ -352,3 +352,11 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 5. **Park unused rigs aggressively.** Even idle Witnesses and Refineries consume tokens during patrol cycles.
 
 6. **Use `gt down` during breaks.** Do not leave the fleet running during lunch or meetings unless you have active work in progress.
+
+---
+
+## See Also
+
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Tuning patrol intervals to manage costs
+- **[Monitoring](../operations/monitoring.md)** -- Monitoring cost-related metrics
+- **[Configuration CLI](../cli-reference/configuration.md)** -- Cost-related configuration

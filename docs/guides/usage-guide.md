@@ -632,3 +632,11 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | `gt may at` | Attach to Mayor |
 | `gt crew at <name>` | Attach to a Crew workspace |
 | `gt session at <name>` | Attach to a polecat session |
+
+---
+
+## See Also
+
+- **[Getting Started](../getting-started/quickstart.md)** -- Quick setup guide
+- **[Mayor Workflow](../workflows/mayor-workflow.md)** -- The recommended workflow for most users
+- **[CLI Reference](../cli-reference/index.md)** -- Full command reference

@@ -406,3 +406,11 @@ The following articles by Steve Yegge provide the foundational thinking behind G
 - [Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) -- The broader thesis on AI's impact on software development
 - [The 8 Stages of AI Coding](eight-stages.md) -- Maturity model for AI-assisted development
 - [GitHub Repository](https://github.com/steveyegge/gastown) -- Source code and issue tracker
+
+---
+
+## See Also
+
+- **[Design Principles](../architecture/design-principles.md)** -- Concrete design principles derived from the philosophy
+- **[GUPP & NDI](../concepts/gupp.md)** -- Core reliability principles
+- **[Eight Stages](eight-stages.md)** -- The maturity model for AI-assisted development

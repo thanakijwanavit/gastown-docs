@@ -282,7 +282,7 @@ See the [Quick Start](../getting-started/quickstart.md) guide for a step-by-step
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- Each rig has its own `.beads/` database with a unique prefix for issue identification
 - **[Hooks](hooks.md)** -- Agent hooks are implemented as git worktrees within the rig's directory

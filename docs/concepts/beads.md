@@ -262,7 +262,7 @@ Work is **not complete** until `git push` succeeds. Agents must always push thei
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Hooks](hooks.md)** -- Hooks attach beads to agents, creating the `hooked` status and enabling crash-safe work assignment
 - **[Molecules & Formulas](molecules.md)** -- Molecules track multi-step workflows as a sequence of wisp beads (ephemeral sub-beads)

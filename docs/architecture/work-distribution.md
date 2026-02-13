@@ -160,3 +160,10 @@ gt dog list
 bd show gt-abc12            # Routes to gastown rig
 bd show hq-abc              # Routes to town-level beads
 ```
+
+## See Also
+
+- **[Convoys](../concepts/convoys.md)** -- Batch tracking for distributed work
+- **[Hooks](../concepts/hooks.md)** -- How work is assigned to agents
+- **[GUPP](../concepts/gupp.md)** -- The propulsion principle driving work execution
+- **[Sling CLI](../cli-reference/sling.md)** -- The command for dispatching work

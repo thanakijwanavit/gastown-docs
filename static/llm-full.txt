@@ -269,6 +269,11 @@ gt config default-agent claude
 gt config agent set gemini "gemini"
 ```
 
+## See Also
+
+- **[Quickstart](quickstart.md)** -- Get up and running with your first Gas Town session
+- **[Multi-Runtime Support](../guides/multi-runtime.md)** -- Detailed guide for configuring multiple AI runtimes
+
 
 ========================================================================
 # Quick Start
@@ -385,11 +390,12 @@ gt feed
 gt ready
 ```
 
-## Next Steps
+## See Also
 
-- [Your First Convoy](first-convoy.md) — Detailed walkthrough of the convoy workflow
-- [CLI Reference](../cli-reference/index.md) — Full command documentation
-- [Architecture](../architecture/index.md) — Understand the system design
+- **[Your First Convoy](first-convoy.md)** -- Detailed walkthrough of the convoy workflow
+- **[CLI Reference](../cli-reference/index.md)** -- Full command documentation
+- **[Architecture](../architecture/index.md)** -- Understand the system design
+- **[Usage Guide](../guides/usage-guide.md)** -- Comprehensive usage patterns and tips
 
 
 ========================================================================
@@ -505,6 +511,12 @@ The Mayor handles convoy creation, issue tracking, and agent assignment automati
 - If a polecat stalls, the Witness will detect and handle it
 - Use `gt escalate` for issues that need human attention
 - Convoys can span multiple rigs for cross-project work
+
+## See Also
+
+- **[Convoys](../concepts/convoys.md)** -- The convoy concept in depth
+- **[Mayor Workflow](../workflows/mayor-workflow.md)** -- Full Mayor-driven workflow documentation
+- **[Manual Convoy](../workflows/manual-convoy.md)** -- Fine-grained convoy control without the Mayor
 
 
 ========================================================================
@@ -669,6 +681,13 @@ All state is persisted in git or the filesystem:
 | Agent context | CLAUDE.md files | Everything |
 | Activity log | `.events.jsonl` | Everything |
 
+## See Also
+
+- **[Agent Hierarchy](agent-hierarchy.md)** -- How agents are organized and supervised
+- **[Work Distribution](work-distribution.md)** -- How work flows through the system
+- **[Design Principles](design-principles.md)** -- Core principles governing Gas Town's architecture
+- **[Rigs](../concepts/rigs.md)** -- Project containers that form the building blocks of a town
+
 
 ========================================================================
 # Agent Hierarchy
@@ -762,6 +781,12 @@ Severity levels control routing:
 | High | P1 | Bead → Mail:Mayor → Email:Human |
 | Medium | P2 | Bead → Mail:Mayor |
 | Low | P3 | Bead only |
+
+## See Also
+
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- The periodic health monitoring that agents perform
+- **[Escalations](../operations/escalations.md)** -- How problems travel up the hierarchy
+- **[Design Principles](design-principles.md)** -- Erlang-inspired supervision and other architectural principles
 
 
 ========================================================================
@@ -926,6 +951,13 @@ bd show gt-abc12            # Routes to gastown rig
 bd show hq-abc              # Routes to town-level beads
 ```
 
+## See Also
+
+- **[Convoys](../concepts/convoys.md)** -- Batch tracking for distributed work
+- **[Hooks](../concepts/hooks.md)** -- How work is assigned to agents
+- **[GUPP](../concepts/gupp.md)** -- The propulsion principle driving work execution
+- **[Sling CLI](../cli-reference/sling.md)** -- The command for dispatching work
+
 
 ========================================================================
 # Design Principles
@@ -1057,6 +1089,12 @@ This principle prevents failure cascading through the system. One broken test, l
 Gas Town favors agents discovering what needs to happen over centralized tracking that tells them. The [Witness](../agents/witness.md) discovers stale polecats by inspecting them, not by reading a checklist. The [Deacon](../agents/deacon.md) discovers zombies by scanning processes, not by maintaining a process table.
 
 This makes the system resilient to state corruption: even if tracking data is lost, agents can recover by rediscovering the current state. See [Patrol Cycles](../concepts/patrol-cycles.md) for a deep dive on how this principle is implemented.
+
+## See Also
+
+- **[GUPP & NDI](../concepts/gupp.md)** -- Deep dive on the two foundational design principles
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Discovery over Tracking in practice
+- **[Agent Hierarchy](agent-hierarchy.md)** -- Erlang-inspired supervision trees in practice
 
 
 ========================================================================
@@ -9048,13 +9086,15 @@ gt rig status <rig>          # Check rig health
 gt rig start <rig>           # Start rig agents if needed
 ```
 
-## Related
+## See Also
 
-- [MEOW Stack](../concepts/meow-stack.md) -- The Mayor's orchestration workflow
-- [Convoys](../concepts/convoys.md) -- Batch tracking for related work
-- [Beads](../concepts/beads.md) -- Issue tracking system the Mayor uses
-- [Deacon](deacon.md) -- Receives strategic direction from the Mayor
-- [Polecats](polecats.md) -- Workers the Mayor assigns tasks to
+- **[MEOW Stack](../concepts/meow-stack.md)** -- The Mayor's orchestration workflow
+- **[Convoys](../concepts/convoys.md)** -- Batch tracking for related work
+- **[Beads](../concepts/beads.md)** -- Issue tracking system the Mayor uses
+- **[Deacon](deacon.md)** -- Receives strategic direction from the Mayor
+- **[Polecats](polecats.md)** -- Workers the Mayor assigns tasks to
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence used by all persistent agents
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Session cycling protocol for long-running agents
 
 
 ========================================================================
@@ -9345,14 +9385,17 @@ gt daemon status             # Boot runs on daemon ticks
 gt polecat list              # See zombie states
 ```
 
-## Related
+## See Also
 
-- [Boot](boot.md) -- The Daemon's watchdog that wakes the Deacon
-- [Dogs](dogs.md) -- Infrastructure workers managed by the Deacon
-- [Witness](witness.md) -- Per-rig monitors that the Deacon supervises
-- [Mayor](mayor.md) -- Provides strategic direction to the Deacon
-- [Gates](../concepts/gates.md) -- Async coordination primitives the Deacon evaluates
-- [Molecules](../concepts/molecules.md) -- Workflows the Deacon dispatches when gates open
+- **[Boot](boot.md)** -- The Daemon's watchdog that wakes the Deacon
+- **[Dogs](dogs.md)** -- Infrastructure workers managed by the Deacon
+- **[Witness](witness.md)** -- Per-rig monitors that the Deacon supervises
+- **[Mayor](mayor.md)** -- Provides strategic direction to the Deacon
+- **[Gates](../concepts/gates.md)** -- Async coordination primitives the Deacon evaluates
+- **[Molecules](../concepts/molecules.md)** -- Workflows the Deacon dispatches when gates open
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence the Deacon follows
+- **[Escalations](../operations/escalations.md)** -- How problems are routed up from Witnesses to the Deacon
+- **[Lifecycle](../operations/lifecycle.md)** -- Agent lifecycle management the Deacon oversees
 
 
 ========================================================================
@@ -9644,13 +9687,15 @@ Long-running Witness sessions accumulate context. The Witness handles this autom
 gt nudge <rig>/witness "context check"
 ```
 
-## Related
+## See Also
 
-- [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it
-- [Polecats](polecats.md) -- Workers the Witness monitors
-- [Refinery](refinery.md) -- Merge processor the Witness health-checks
-- [Hooks](../concepts/hooks.md) -- Mechanism for attaching work to polecats
-- [GUPP](../concepts/gupp.md) -- The principle that drives polecat execution
+- **[Deacon](deacon.md)** -- Supervises the Witness and handles escalations from it
+- **[Polecats](polecats.md)** -- Workers the Witness monitors
+- **[Refinery](refinery.md)** -- Merge processor the Witness health-checks
+- **[Hooks](../concepts/hooks.md)** -- Mechanism for attaching work to polecats
+- **[GUPP](../concepts/gupp.md)** -- The principle that drives polecat execution
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence the Witness follows
+- **[Session Cycling](../concepts/session-cycling.md)** -- How the Witness manages context limits via handoff
 
 
 ========================================================================
@@ -9960,12 +10005,14 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 2. Is the Witness receiving and processing the mail?
 3. Check `gt polecat list` for polecats stuck in `done` state.
 
-## Related
+## See Also
 
-- [Polecats](polecats.md) -- Submit MRs that the Refinery processes
-- [Witness](witness.md) -- Monitors the Refinery and receives `MERGED` signals
-- [Molecules](../concepts/molecules.md) -- The `mol-refinery-patrol` formula defines the merge workflow
-- [Beads](../concepts/beads.md) -- MR beads track each merge request through the queue
+- **[Polecats](polecats.md)** -- Submit MRs that the Refinery processes
+- **[Witness](witness.md)** -- Monitors the Refinery and receives `MERGED` signals
+- **[Molecules](../concepts/molecules.md)** -- The `mol-refinery-patrol` formula defines the merge workflow
+- **[Beads](../concepts/beads.md)** -- MR beads track each merge request through the queue
+- **[Merge Queue CLI](../cli-reference/merge-queue.md)** -- CLI commands for interacting with the merge queue
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic processing cadence the Refinery follows
 
 
 ========================================================================
@@ -10329,14 +10376,16 @@ Progress: <what is done>
 Next: <what remains>"
 ```
 
-## Related
+## See Also
 
-- [GUPP](../concepts/gupp.md) -- The propulsion principle that drives polecat execution
-- [Hooks](../concepts/hooks.md) -- How work is attached to polecats
-- [Molecules](../concepts/molecules.md) -- The `mol-polecat-work` formula defines polecat workflow steps
-- [Witness](witness.md) -- Monitors polecats for health
-- [Refinery](refinery.md) -- Processes MRs submitted by polecats via `gt done`
-- [Beads](../concepts/beads.md) -- Issue tracking system polecats use for task management
+- **[GUPP](../concepts/gupp.md)** -- The propulsion principle that drives polecat execution
+- **[Hooks](../concepts/hooks.md)** -- How work is attached to polecats
+- **[Molecules](../concepts/molecules.md)** -- The `mol-polecat-work` formula defines polecat workflow steps
+- **[Witness](witness.md)** -- Monitors polecats for health
+- **[Refinery](refinery.md)** -- Processes MRs submitted by polecats via `gt done`
+- **[Beads](../concepts/beads.md)** -- Issue tracking system polecats use for task management
+- **[Session Cycling](../concepts/session-cycling.md)** -- How polecats hand off context when sessions fill up
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Protocol for transferring work between sessions
 
 
 ========================================================================
@@ -10585,12 +10634,12 @@ gt mail inbox                # Check Deacon's mailbox for DOG_DONE messages
 gt deacon status             # Verify Deacon is processing mail
 ```
 
-## Related
+## See Also
 
-- [Deacon](deacon.md) -- Manages the dog pool and dispatches tasks
-- [Boot](boot.md) -- A special-purpose dog for system triage
-- [Polecats](polecats.md) -- Feature workers (contrast with infrastructure dogs)
-- [Rigs](../concepts/rigs.md) -- Dogs operate across rigs, unlike polecats
+- **[Deacon](deacon.md)** -- Manages the dog pool and dispatches tasks
+- **[Boot](boot.md)** -- A special-purpose dog for system triage
+- **[Polecats](polecats.md)** -- Feature workers (contrast with infrastructure dogs)
+- **[Rigs](../concepts/rigs.md)** -- Dogs operate across rigs, unlike polecats
 
 
 ========================================================================
@@ -10860,12 +10909,16 @@ gt crew at myproject dave            # Re-attach to existing session
 gt crew restart myproject dave
 ```
 
-## Related
+## See Also
 
-- [Polecats](polecats.md) -- AI workers that crew members work alongside
-- [Refinery](refinery.md) -- Merge queue that crew work flows through
-- [Beads](../concepts/beads.md) -- Issue tracking available to crew members
-- [Rigs](../concepts/rigs.md) -- Project containers where crew workspaces live
+- **[Polecats](polecats.md)** -- AI workers that crew members work alongside
+- **[Refinery](refinery.md)** -- Merge queue that crew work flows through
+- **[Beads](../concepts/beads.md)** -- Issue tracking available to crew members
+- **[Rigs](../concepts/rigs.md)** -- Project containers where crew workspaces live
+- **[Hooks](../concepts/hooks.md)** -- Mechanism for attaching work to crew members
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Protocol for transferring work between sessions
+- **[Session Cycling](../concepts/session-cycling.md)** -- How context limits are managed across sessions
+- **[Crew Collaboration](../workflows/crew-collaboration.md)** -- Workflows for human-AI collaboration in Gas Town
 
 
 ========================================================================
@@ -11129,11 +11182,13 @@ Boot is designed for rapid triage (seconds, not minutes). If Boot is slow:
 - Agent state files may be corrupted or very large
 - The system may have many rigs/agents to inventory
 
-## Related
+## See Also
 
-- [Deacon](deacon.md) -- The agent that Boot monitors and wakes
-- [Dogs](dogs.md) -- Boot is a specialized dog managed by the Deacon
-- [Molecules](../concepts/molecules.md) -- The `mol-boot-triage` formula defines Boot's triage cycle
+- **[Deacon](deacon.md)** -- The agent that Boot monitors and wakes
+- **[Dogs](dogs.md)** -- Boot is a specialized dog managed by the Deacon
+- **[Molecules](../concepts/molecules.md)** -- The `mol-boot-triage` formula defines Boot's triage cycle
+- **[Witness](witness.md)** -- Per-rig monitors that Boot inventories during triage
+- **[Lifecycle](../operations/lifecycle.md)** -- Agent lifecycle management that Boot helps initiate
 
 
 ========================================================================
@@ -11483,7 +11538,7 @@ Work is **not complete** until `git push` succeeds. Agents must always push thei
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Hooks](hooks.md)** -- Hooks attach beads to agents, creating the `hooked` status and enabling crash-safe work assignment
 - **[Molecules & Formulas](molecules.md)** -- Molecules track multi-step workflows as a sequence of wisp beads (ephemeral sub-beads)
@@ -11704,7 +11759,7 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- The hook stores the bead ID of the assigned work; the bead's status transitions to `hooked` when slung
 - **[Molecules & Formulas](molecules.md)** -- The molecule attached to a hook tracks step-level progress, enabling crash-safe resume
@@ -11943,7 +11998,7 @@ Run `gt convoy list` frequently to see the big picture. For live progress, use `
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- Convoys track collections of beads; each tracked item is a bead with its own status and lifecycle
 - **[Hooks](hooks.md)** -- When work is slung to a polecat, the bead is hooked to that agent for execution
@@ -12297,7 +12352,7 @@ Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for d
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Hooks](hooks.md)** -- Molecules are stored on an agent's hook, enabling crash-safe workflow resume across sessions
 - **[Beads](beads.md)** -- Each molecule step is tracked as a wisp bead; the molecule itself is also a bead
@@ -12609,7 +12664,7 @@ Use gates whenever your workflow needs to wait for something external. Prefer ga
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Molecules & Formulas](molecules.md)** -- Gates are embedded within molecule steps, pausing the workflow at the gated step
 - **[Hooks](hooks.md)** -- When an agent parks on a gate and exits, the hook preserves the molecule state so a fresh session can check the gate and resume
@@ -12901,7 +12956,7 @@ See the [Quick Start](../getting-started/quickstart.md) guide for a step-by-step
 
 :::
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- Each rig has its own `.beads/` database with a unique prefix for issue identification
 - **[Hooks](hooks.md)** -- Agent hooks are implemented as git worktrees within the rig's directory
@@ -13071,7 +13126,7 @@ Two concepts cut across all MEOW layers rather than living in a single layer:
 - **[Gates](gates.md)** -- Gates can pause execution at any layer. A molecule step can be gated, a convoy can be blocked on gated beads, and formulas can define gate conditions in their step definitions.
 - **[GUPP & NDI](gupp.md)** -- The forward-only progress guarantee applies at every layer: beads move forward, molecules checkpoint steps, convoys auto-close when complete, and formulas produce idempotent molecules.
 
-## Related Concepts
+## See Also
 
 - **[Beads](beads.md)** -- Layer 1: the atomic work units that form the foundation
 - **[Convoys](convoys.md)** -- Layer 2: batch tracking of related beads
@@ -13236,7 +13291,7 @@ These principles are not just abstract ideals -- they are enforced by specific G
 | [Gates](gates.md) | Pause without losing progress | Gate resolution may trigger different downstream execution |
 | [Rigs](rigs.md) | Git worktrees provide durable filesystem state | Each polecat worktree is independent |
 
-## Related Concepts
+## See Also
 
 - **[Hooks](hooks.md)** -- The primary mechanism that makes GUPP possible: hooks persist across all session boundaries
 - **[Molecules & Formulas](molecules.md)** -- Molecules implement GUPP through step-level checkpointing in the beads database
@@ -13360,7 +13415,7 @@ If you need persistent tracking of sub-tasks, use regular beads with dependency 
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[Molecules & Formulas](molecules.md)** -- Wisps are the per-step tracking units within molecules
 - **[Beads](beads.md)** -- Wisps are a specialized bead type (`type: wisp`) with ephemeral lifecycle
@@ -13531,7 +13586,7 @@ gt mail inbox
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[GUPP](gupp.md)** -- The propulsion principle ensures the new session immediately executes hooked work
 - **[Hooks](hooks.md)** -- The persistence mechanism that survives session cycling
@@ -13799,7 +13854,7 @@ Longer patrol intervals mean slower detection of problems. A 15-minute interval 
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[GUPP & NDI](gupp.md)** -- Patrol cycles embody GUPP: each cycle moves the system forward or leaves it unchanged
 - **[Molecules & Formulas](molecules.md)** -- Patrol cycles are implemented as patrol molecules with squash-and-respawn
@@ -14171,8 +14226,13 @@ gt convoy add hq-cv-015 gt-newbead
 
 The Mayor maintains context across the session. You can refer back to earlier work, ask for status updates, or modify plans. If the Mayor's session restarts (context compaction), it reads its hook to resume.
 
-
 :::
+
+## See Also
+
+- **[Mayor](../agents/mayor.md)** -- The Mayor agent that drives this workflow
+- **[MEOW Stack](../concepts/meow-stack.md)** -- The layered abstraction model
+- **[Convoys](../concepts/convoys.md)** -- Batch tracking used by the Mayor
 
 
 ========================================================================
@@ -14448,6 +14508,12 @@ Without Witness and Deacon monitoring, stuck or crashed sessions will not be aut
 | Requires Tmux | No | Yes |
 | Resource usage | Low | Higher |
 
+## See Also
+
+- **[Beads](../concepts/beads.md)** -- Manual issue tracking in minimal mode
+- **[Hooks](../concepts/hooks.md)** -- Work assignment mechanism
+- **[Getting Started](../getting-started/quickstart.md)** -- Quick setup for minimal mode
+
 
 ========================================================================
 # Manual Convoy Workflow
@@ -14707,8 +14773,13 @@ gt convoy stranded
 # hq-cv-007 has 1 unassigned issue: gt-n1e2w
 ```
 
-
 :::
+
+## See Also
+
+- **[Convoys](../concepts/convoys.md)** -- The convoy concept
+- **[Sling CLI](../cli-reference/sling.md)** -- Dispatching work to rigs
+- **[Convoy CLI](../cli-reference/convoys.md)** -- Convoy management commands
 
 
 ========================================================================
@@ -15138,8 +15209,13 @@ If a step needs to wait for CI, human approval, or a timer, use a [Gate](../conc
 
 Increment the `version` field when making breaking changes to a formula. Existing molecules poured from the old version will continue using the old step definitions.
 
-
 :::
+
+## See Also
+
+- **[Molecules & Formulas](../concepts/molecules.md)** -- The concept behind formulas and molecules
+- **[Formula CLI](../cli-reference/formula.md)** -- Formula management commands
+- **[MEOW Stack](../concepts/meow-stack.md)** -- Where formulas fit in the abstraction model
 
 
 ========================================================================
@@ -15491,8 +15567,11 @@ The `full` preset spawns 10 polecats plus a synthesis step. This uses significan
 
 You can create your own code review formula with custom legs tailored to your codebase. For example, add legs for "accessibility", "i18n", or "API compatibility" based on your project's needs.
 
-
 :::
+
+## See Also
+
+- **[Refinery](../agents/refinery.md)** -- Merge queue agent
 
 
 ========================================================================
@@ -15689,12 +15768,15 @@ gt worktree remove beads
 
 ---
 
-## Related
+## See Also
 
 - **[Crew Workspaces](../agents/crew.md)** -- Full documentation of crew workspace setup and capabilities
 - **[Mayor Workflow](mayor-workflow.md)** -- The fully automated alternative where the Mayor coordinates everything
 - **[Manual Convoy](manual-convoy.md)** -- Fine-grained control over work assignment
 - **[Session Cycling](../concepts/session-cycling.md)** -- How to handle context limits in crew sessions
+- **[Crew](../agents/crew.md)** -- The Crew agent type
+- **[Handoff Ceremony](handoff-ceremony.md)** -- Session transition protocol for crew
+- **[Hooks](../concepts/hooks.md)** -- Work assignment for crew members
 
 
 ========================================================================
@@ -16014,7 +16096,7 @@ Reproduction: Run gt convoy create with 3 beads, gt done on all 3 within 5s.
 
 ---
 
-## Related Concepts
+## See Also
 
 - **[Session Cycling](../concepts/session-cycling.md)** -- The broader concept of context refresh that handoffs enable
 - **[GUPP](../concepts/gupp.md)** -- The propulsion principle that drives immediate execution after handoff
@@ -16758,6 +16840,12 @@ stateDiagram-v2
 | `gt rig park <name>` | Single rig | Stop | Unchanged | Parked |
 | `gt rig dock <name>` | Single rig | Stop | **Removed** | Archived |
 
+## See Also
+
+- **[Agent Hierarchy](../architecture/agent-hierarchy.md)** -- How agents are organized for lifecycle management
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic health monitoring that detects lifecycle issues
+- **[Deacon](../agents/deacon.md)** -- The agent responsible for lifecycle coordination
+
 
 ========================================================================
 # Monitoring & Health
@@ -17250,6 +17338,13 @@ gt activity --type polecat --since 1h --json
 
 8. **Track trends, not just snapshots.** A single stale polecat is normal. Three stale polecats in the same rig within an hour suggests a systemic problem.
 
+## See Also
+
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- The core monitoring pattern
+- **[Diagnostics CLI](../cli-reference/diagnostics.md)** -- CLI tools for monitoring
+- **[Witness](../agents/witness.md)** -- Per-rig monitoring agent
+- **[Deacon](../agents/deacon.md)** -- Town-wide health coordinator
+
 
 ========================================================================
 # Escalation System
@@ -17729,6 +17824,12 @@ You can override escalation settings at the rig level by placing an `escalation.
 5. **Close with notes.** Future-you will appreciate knowing how past escalations were resolved. Use `--note` and `--commit` flags to leave a trail.
 
 6. **Let agents escalate.** Do not suppress agent escalations. If an agent is escalating too frequently, the root cause is usually a systemic issue (flaky tests, misconfigured rig, etc.) rather than the agent being too aggressive.
+
+## See Also
+
+- **[Agent Hierarchy](../architecture/agent-hierarchy.md)** -- The supervision tree that defines escalation paths
+- **[Deacon](../agents/deacon.md)** -- Primary escalation handler
+- **[Witness](../agents/witness.md)** -- First-level escalation for polecat issues
 
 
 ========================================================================
@@ -18482,6 +18583,12 @@ Before running `gt shutdown --all`, check if any polecats have uncommitted work:
 
 :::
 
+## See Also
+
+- **[Monitoring](monitoring.md)** -- Proactive monitoring to prevent issues
+- **[Diagnostics CLI](../cli-reference/diagnostics.md)** -- Diagnostic commands for debugging
+- **[Lifecycle](lifecycle.md)** -- Agent lifecycle management
+
 
 ========================================================================
 # Plugins
@@ -19057,6 +19164,11 @@ Scheduled plugins run on a cron schedule independently of workflow events.
 
 
 :::
+
+## See Also
+
+- **[Configuration CLI](../cli-reference/configuration.md)** -- Plugin configuration commands
+- **[Deacon](../agents/deacon.md)** -- Runs plugins during patrol cycles
 
 
 ========================================================================
@@ -19747,6 +19859,14 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | `gt crew at <name>` | Attach to a Crew workspace |
 | `gt session at <name>` | Attach to a polecat session |
 
+---
+
+## See Also
+
+- **[Getting Started](../getting-started/quickstart.md)** -- Quick setup guide
+- **[Mayor Workflow](../workflows/mayor-workflow.md)** -- The recommended workflow for most users
+- **[CLI Reference](../cli-reference/index.md)** -- Full command reference
+
 
 ========================================================================
 # The 8 Stages of AI Coding
@@ -20114,6 +20234,13 @@ The pattern is consistent: what seems excessive today becomes standard practice 
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
 
+---
+
+## See Also
+
+- **[Philosophy](philosophy.md)** -- The broader philosophy behind Gas Town
+- **[Mayor Workflow](../workflows/mayor-workflow.md)** -- Stage 7+ workflow automation
+
 
 ========================================================================
 # Multi-Runtime Support
@@ -20454,6 +20581,13 @@ The Refinery does not know or care which runtime produced the code. It validates
 4. **Monitor runtime-specific issues.** Different runtimes have different failure modes. Watch `gt feed` for patterns specific to a runtime.
 
 5. **Keep fallback procedures documented.** If you use hook-limited runtimes, document the startup sequence for your team so everyone knows the manual context injection steps.
+
+---
+
+## See Also
+
+- **[Rigs](../concepts/rigs.md)** -- Project containers that can span runtimes
+- **[Configuration CLI](../cli-reference/configuration.md)** -- Runtime configuration options
 
 
 ========================================================================
@@ -20809,6 +20943,14 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 5. **Park unused rigs aggressively.** Even idle Witnesses and Refineries consume tokens during patrol cycles.
 
 6. **Use `gt down` during breaks.** Do not leave the fleet running during lunch or meetings unless you have active work in progress.
+
+---
+
+## See Also
+
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Tuning patrol intervals to manage costs
+- **[Monitoring](../operations/monitoring.md)** -- Monitoring cost-related metrics
+- **[Configuration CLI](../cli-reference/configuration.md)** -- Cost-related configuration
 
 
 ========================================================================
@@ -21218,6 +21360,14 @@ The following articles by Steve Yegge provide the foundational thinking behind G
 - [Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) -- The broader thesis on AI's impact on software development
 - [The 8 Stages of AI Coding](eight-stages.md) -- Maturity model for AI-assisted development
 - [GitHub Repository](https://github.com/steveyegge/gastown) -- Source code and issue tracker
+
+---
+
+## See Also
+
+- **[Design Principles](../architecture/design-principles.md)** -- Concrete design principles derived from the philosophy
+- **[GUPP & NDI](../concepts/gupp.md)** -- Core reliability principles
+- **[Eight Stages](eight-stages.md)** -- The maturity model for AI-assisted development
 
 
 ========================================================================
@@ -21837,6 +21987,14 @@ Git is the ground truth. The Refinery's canonical clone is the single source of 
 - **[Usage Guide](usage-guide.md)** -- Practical day-to-day workflows
 - **[Background & Philosophy](philosophy.md)** -- Why Gas Town exists and how it evolved
 
+---
+
+## See Also
+
+- **[Architecture Overview](../architecture/overview.md)** -- The formal architecture documentation
+- **[Agent Hierarchy](../architecture/agent-hierarchy.md)** -- How agents are organized
+- **[Design Principles](../architecture/design-principles.md)** -- Core architectural principles
+
 
 ========================================================================
 # Troubleshooting
@@ -22222,6 +22380,13 @@ The Refinery merges MRs **one at a time**, rebasing each onto the latest `main`.
 | Open escalations | `gt escalate list` |
 
 For the full troubleshooting reference, see [Operations: Troubleshooting](../operations/troubleshooting.md).
+
+---
+
+## See Also
+
+- **[Operations Troubleshooting](../operations/troubleshooting.md)** -- Detailed operational troubleshooting
+- **[Diagnostics CLI](../cli-reference/diagnostics.md)** -- Diagnostic commands
 
 
 ========================================================================

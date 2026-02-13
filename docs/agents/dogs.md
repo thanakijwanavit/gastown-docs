@@ -245,9 +245,9 @@ gt mail inbox                # Check Deacon's mailbox for DOG_DONE messages
 gt deacon status             # Verify Deacon is processing mail
 ```
 
-## Related
+## See Also
 
-- [Deacon](deacon.md) -- Manages the dog pool and dispatches tasks
-- [Boot](boot.md) -- A special-purpose dog for system triage
-- [Polecats](polecats.md) -- Feature workers (contrast with infrastructure dogs)
-- [Rigs](../concepts/rigs.md) -- Dogs operate across rigs, unlike polecats
+- **[Deacon](deacon.md)** -- Manages the dog pool and dispatches tasks
+- **[Boot](boot.md)** -- A special-purpose dog for system triage
+- **[Polecats](polecats.md)** -- Feature workers (contrast with infrastructure dogs)
+- **[Rigs](../concepts/rigs.md)** -- Dogs operate across rigs, unlike polecats

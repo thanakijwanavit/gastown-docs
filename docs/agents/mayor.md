@@ -273,10 +273,12 @@ gt rig status <rig>          # Check rig health
 gt rig start <rig>           # Start rig agents if needed
 ```
 
-## Related
+## See Also
 
-- [MEOW Stack](../concepts/meow-stack.md) -- The Mayor's orchestration workflow
-- [Convoys](../concepts/convoys.md) -- Batch tracking for related work
-- [Beads](../concepts/beads.md) -- Issue tracking system the Mayor uses
-- [Deacon](deacon.md) -- Receives strategic direction from the Mayor
-- [Polecats](polecats.md) -- Workers the Mayor assigns tasks to
+- **[MEOW Stack](../concepts/meow-stack.md)** -- The Mayor's orchestration workflow
+- **[Convoys](../concepts/convoys.md)** -- Batch tracking for related work
+- **[Beads](../concepts/beads.md)** -- Issue tracking system the Mayor uses
+- **[Deacon](deacon.md)** -- Receives strategic direction from the Mayor
+- **[Polecats](polecats.md)** -- Workers the Mayor assigns tasks to
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence used by all persistent agents
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Session cycling protocol for long-running agents

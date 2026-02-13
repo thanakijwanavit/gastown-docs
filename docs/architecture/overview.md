@@ -104,3 +104,10 @@ All state is persisted in git or the filesystem:
 | Config | `metadata.json`, `.beads/config.yaml` | Everything |
 | Agent context | CLAUDE.md files | Everything |
 | Activity log | `.events.jsonl` | Everything |
+
+## See Also
+
+- **[Agent Hierarchy](agent-hierarchy.md)** -- How agents are organized and supervised
+- **[Work Distribution](work-distribution.md)** -- How work flows through the system
+- **[Design Principles](design-principles.md)** -- Core principles governing Gas Town's architecture
+- **[Rigs](../concepts/rigs.md)** -- Project containers that form the building blocks of a town

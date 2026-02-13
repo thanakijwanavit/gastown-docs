@@ -364,3 +364,10 @@ The pattern is consistent: what seems excessive today becomes standard practice 
 > "Gas Town has illuminated and kicked off the next wave for everyone."
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
+
+---
+
+## See Also
+
+- **[Philosophy](philosophy.md)** -- The broader philosophy behind Gas Town
+- **[Mayor Workflow](../workflows/mayor-workflow.md)** -- Stage 7+ workflow automation

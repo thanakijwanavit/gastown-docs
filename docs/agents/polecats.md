@@ -360,11 +360,13 @@ Progress: <what is done>
 Next: <what remains>"
 ```
 
-## Related
+## See Also
 
-- [GUPP](../concepts/gupp.md) -- The propulsion principle that drives polecat execution
-- [Hooks](../concepts/hooks.md) -- How work is attached to polecats
-- [Molecules](../concepts/molecules.md) -- The `mol-polecat-work` formula defines polecat workflow steps
-- [Witness](witness.md) -- Monitors polecats for health
-- [Refinery](refinery.md) -- Processes MRs submitted by polecats via `gt done`
-- [Beads](../concepts/beads.md) -- Issue tracking system polecats use for task management
+- **[GUPP](../concepts/gupp.md)** -- The propulsion principle that drives polecat execution
+- **[Hooks](../concepts/hooks.md)** -- How work is attached to polecats
+- **[Molecules](../concepts/molecules.md)** -- The `mol-polecat-work` formula defines polecat workflow steps
+- **[Witness](witness.md)** -- Monitors polecats for health
+- **[Refinery](refinery.md)** -- Processes MRs submitted by polecats via `gt done`
+- **[Beads](../concepts/beads.md)** -- Issue tracking system polecats use for task management
+- **[Session Cycling](../concepts/session-cycling.md)** -- How polecats hand off context when sessions fill up
+- **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Protocol for transferring work between sessions

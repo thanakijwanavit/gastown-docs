@@ -242,5 +242,10 @@ gt convoy add hq-cv-015 gt-newbead
 
 The Mayor maintains context across the session. You can refer back to earlier work, ask for status updates, or modify plans. If the Mayor's session restarts (context compaction), it reads its hook to resume.
 
-
 :::
+
+## See Also
+
+- **[Mayor](../agents/mayor.md)** -- The Mayor agent that drives this workflow
+- **[MEOW Stack](../concepts/meow-stack.md)** -- The layered abstraction model
+- **[Convoys](../concepts/convoys.md)** -- Batch tracking used by the Mayor

@@ -91,3 +91,9 @@ Severity levels control routing:
 | High | P1 | Bead → Mail:Mayor → Email:Human |
 | Medium | P2 | Bead → Mail:Mayor |
 | Low | P3 | Bead only |
+
+## See Also
+
+- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- The periodic health monitoring that agents perform
+- **[Escalations](../operations/escalations.md)** -- How problems travel up the hierarchy
+- **[Design Principles](design-principles.md)** -- Erlang-inspired supervision and other architectural principles
