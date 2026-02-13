@@ -7,6 +7,7 @@
 ### Home
 - Gas Town Documentation: /docs/index
 - intro: /docs/intro
+- troubleshooting: /docs/troubleshooting
 
 ### Getting Started
 - Getting Started: /docs/getting-started
@@ -33,6 +34,11 @@
 - Session & Handoff: /docs/cli-reference/sessions
 - Diagnostics: /docs/cli-reference/diagnostics
 - Configuration: /docs/cli-reference/configuration
+- gt sling: /docs/cli-reference/sling
+- gt refinery: /docs/cli-reference/refinery-commands
+- gt polecat: /docs/cli-reference/polecat-commands
+- gt nudge: /docs/cli-reference/nudge
+- gt session: /docs/cli-reference/session-commands
 
 ### Agents
 - Agents: /docs/agents
@@ -81,6 +87,8 @@
 - Background & Philosophy: /docs/guides/philosophy
 - Architecture Guide: /docs/guides/architecture
 - Glossary: /docs/guides/glossary
+- Multi-Agent Git Workflow: /docs/guides/git-workflow
+- Troubleshooting: /docs/guides/troubleshooting
 
 ---
 
@@ -97,6 +105,13 @@ Gas Town is a multi-agent orchestration system that coordinates fleets of AI cod
 > /docs/intro
 
 Gas Town is a multi-agent orchestration system for AI coding agents. It coordinates fleets of workers — from a single agent to 20-30 concurrent polecats — all through the `gt` CLI.
+
+---
+
+## troubleshooting
+> /docs/troubleshooting
+
+This guide covers common errors and their solutions when working with Gas Town.
 
 ---
 
@@ -278,6 +293,51 @@ Commands for monitoring, auditing, and troubleshooting Gas Town. These tools pro
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and...
 
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and rig levels.
+
+---
+
+## gt sling
+> /docs/cli-reference/sling
+
+Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch.
+
+Sling work onto an agent's hook and start working immediately. This is the primary command for assigning work in Gas Town.
+
+---
+
+## gt refinery
+> /docs/cli-reference/refinery-commands
+
+Manage the Refinery, the per-rig merge queue processor that serializes all merges to main. Start, stop, monitor, and inspect merge requests.
+
+Manage the Refinery -- the per-rig merge queue processor.
+
+---
+
+## gt polecat
+> /docs/cli-reference/polecat-commands
+
+Manage polecat lifecycle: list, inspect, nuke, garbage collect, detect stale workers, check recovery state, and manage identities.
+
+Manage polecat lifecycle in rigs.
+
+---
+
+## gt nudge
+> /docs/cli-reference/nudge
+
+Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents.
+
+Send a synchronous message to any Gas Town worker's Claude Code session.
+
+---
+
+## gt session
+> /docs/cli-reference/session-commands
+
+Manage tmux sessions for polecats: start, stop, restart, attach, monitor health, and capture output.
+
+Manage tmux sessions for polecats.
 
 ---
 
@@ -554,7 +614,7 @@ Gas Town's plugin system extends the platform with custom automation, gates, and
 ## Guides
 > /docs/guides
 
-This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI develop...
+In-depth guides for using Gas Town effectively: usage patterns, architecture, cost management, multi-runtime support, and design philosophy.
 
 This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI development.
 
@@ -620,5 +680,23 @@ Gas Town is a multi-agent AI orchestration system where dozens of autonomous age
 Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions.
 
 A comprehensive reference for Gas Town terminology, drawn from the documentation and Steve Yegge's articles on multi-agent AI orchestration.
+
+---
+
+## Multi-Agent Git Workflow
+> /docs/guides/git-workflow
+
+Best practices for git workflows in multi-agent environments where multiple agents work simultaneously on the same repository.
+
+Gas Town's multi-agent architecture creates unique git workflow challenges. Multiple agents (crew members, polecats, refinery) work simultaneously on the same repository, leading to frequent remote changes and potential merge conflicts. This guide provides strategies for managing git in this environment.
+
+---
+
+## Troubleshooting
+> /docs/guides/troubleshooting
+
+Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries.
+
+This guide covers the most frequently encountered Gas Town problems and their solutions. For a comprehensive reference of all troubleshooting topics, see [Operations: Troubleshooting](../operations/troubleshooting.md).
 
 ---

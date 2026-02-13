@@ -125,6 +125,280 @@ For the full documentation, see the [docs home](/docs/).
 
 
 ========================================================================
+# troubleshooting
+# URL: /docs/troubleshooting
+========================================================================
+
+# Troubleshooting Guide
+
+This guide covers common errors and their solutions when working with Gas Town.
+
+## Dolt Database Locked
+
+### Symptoms
+- Error message: `database is locked` or `database table locked`
+- Commands fail with SQL connection errors
+- `gt hook` or `bd list` commands panic or timeout
+
+### Causes
+1. **Multiple processes accessing the database simultaneously**
+2. **Stale lock files from crashed sessions**
+3. **Dolt server not running or unreachable**
+4. **Split-brain scenario: Dolt server unreachable at 127.0.0.1:3307**
+
+### Solutions
+
+**1. Check Dolt server status**
+```bash
+gt dolt status
+```
+
+**2. Start the Dolt server if not running**
+```bash
+gt dolt start
+```
+
+**3. Remove stale lock files**
+```bash
+rm -f /home/gastown/gt/gastowndocs/.beads/.jsonl.lock
+rm -f /home/gastown/gt/gastowndocs/.beads/dolt-access.lock
+```
+
+**4. Restart Dolt server**
+```bash
+gt dolt stop
+gt dolt start
+```
+
+**5. If database is corrupted, re-import from JSONL**
+```bash
+cd /home/gastown/gt/gastowndocs/.beads
+bd import -i issues.jsonl
+```
+
+**6. Use `--allow-stale` flag for read-only operations**
+```bash
+bd ready --allow-stale
+bd show <issue-id> --allow-stale
+```
+
+## Session Died During Startup
+
+### Symptoms
+- Agent session exits immediately after starting
+- `gt prime` fails with identity collision errors
+- Error: `worker is locked by another agent: PID ...`
+
+### Causes
+1. **Zombie sessions holding locks**
+2. **Stale agent lock files**
+3. **Identity collision with another agent**
+4. **Missing agent beads or configuration**
+
+### Solutions
+
+**1. Run gt doctor to diagnose and fix issues**
+```bash
+gt doctor --fix
+```
+
+**2. Check for stale locks and remove if necessary**
+```bash
+rm /home/gastown/gt/.runtime/agent.lock
+```
+
+**3. Verify the Dolt server is running**
+```bash
+gt dolt status
+```
+
+**4. Check for zombie sessions**
+```bash
+gt doctor
+# Look for: zombie-sessions, orphan-processes
+```
+
+**5. Restart from the correct directory**
+```bash
+cd /home/gastown/gt/gastowndocs/polecats/toast
+gt prime
+```
+
+## gt sling Timeouts
+
+### Symptoms
+- `gt sling` command hangs or times out
+- Unable to spawn new agents
+- Session creation fails after extended wait
+
+### Causes
+1. **Daemon not running**
+2. **Resource exhaustion (too many sessions)**
+3. **Tmux server issues**
+4. **Permission issues with runtime directories**
+
+### Solutions
+
+**1. Check daemon status**
+```bash
+gt status
+# Look for daemon status in output
+```
+
+**2. Restart the daemon if needed**
+```bash
+gt daemon restart
+```
+
+**3. Check current session count**
+```bash
+gt list
+```
+
+**4. Clean up orphaned sessions**
+```bash
+gt doctor --fix
+```
+
+**5. Verify tmux is working**
+```bash
+tmux ls
+```
+
+## Polecat Won't Stay Running
+
+### Symptoms
+- Polecat session exits immediately after starting
+- `gt done` was not run after previous work
+- Agent keeps restarting with "HEALER CHECK" messages
+
+### Causes
+1. **No work on hook and no mail (ephemeral worker)**
+2. **Database sync issues preventing work assignment**
+3. **Missing worktree or incorrect directory**
+4. **Work completed but `gt done` not run**
+
+### Solutions
+
+**1. Check if there's work on the hook**
+```bash
+gt hook
+```
+
+**2. Check for mail assignments**
+```bash
+gt mail inbox --all
+```
+
+**3. If no work, run gt done to exit cleanly**
+```bash
+gt done
+```
+
+**4. Verify correct working directory**
+```bash
+pwd  # Should show .../polecats/<name>/
+```
+
+**5. Check for database issues and fix**
+```bash
+gt doctor --fix
+gt dolt start  # if needed
+```
+
+**6. Claim available work if idle**
+```bash
+bd ready --allow-stale  # See available work
+bd update <issue-id> --status=in_progress --assignee=<polecat-name>
+```
+
+## Witness Offline
+
+### Symptoms
+- No patrol cycles running
+- `gt session status gastowndocs/witness` shows session missing
+- No cleanup of completed polecats
+
+### Causes
+1. **Witness session crashed or was killed**
+2. **Tmux session lost**
+3. **Configuration issues**
+
+### Solutions
+
+**1. Check witness session status**
+```bash
+gt session status gastowndocs/witness
+```
+
+**2. Restart the witness**
+```bash
+gt session start gastowndocs/witness
+```
+
+**3. Or use sling to respawn**
+```bash
+gt sling gastowndocs/witness
+```
+
+**4. Verify witness configuration**
+```bash
+ls -la /home/gastown/gt/gastowndocs/witness/
+```
+
+**5. Check witness logs for errors**
+```bash
+cat /home/gastown/gt/gastowndocs/witness/*.log 2>/dev/null || echo "No logs found"
+```
+
+**6. Run doctor to fix any configuration issues**
+```bash
+gt doctor --fix
+```
+
+## General Recovery Steps
+
+When multiple issues occur simultaneously:
+
+**1. Stop all Gas Town processes**
+```bash
+gt dolt stop
+```
+
+**2. Clean up lock files**
+```bash
+rm -f /home/gastown/gt/.runtime/agent.lock
+rm -f /home/gastown/gt/gastowndocs/.beads/*.lock
+```
+
+**3. Run comprehensive doctor check**
+```bash
+gt doctor --fix
+```
+
+**4. Start services in order**
+```bash
+gt dolt start
+gt daemon start  # if not auto-started
+```
+
+**5. Verify health**
+```bash
+gt status
+bd ready --allow-stale
+```
+
+## Getting Help
+
+If issues persist after trying these solutions:
+
+1. **Check the system status**: `gt status`
+2. **Review recent logs**: `/home/gastown/gt/gastowndocs/.beads/daemon.log`
+3. **Mail the Mayor for cross-rig issues**: `gt mail send mayor/ -s "Help needed" -m "..."`
+4. **Escalate critical issues**: `gt escalate "Description" -s CRITICAL`
+
+
+========================================================================
 # Getting Started
 # URL: /docs/getting-started
 ========================================================================
@@ -1110,6 +1384,18 @@ Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name
 | [Session & Handoff](sessions.md) | Manage agent sessions, handoffs, and molecules | `gt handoff`, `gt resume`, `gt prime`, `gt mol`, `gt cycle` |
 | [Diagnostics](diagnostics.md) | Monitor, audit, and troubleshoot the system | `gt activity`, `gt doctor`, `gt dashboard`, `gt status` |
 | [Configuration](configuration.md) | Configure agents, accounts, themes, hooks, and plugins | `gt config`, `gt account`, `gt theme`, `gt hooks`, `gt plugin` |
+
+## Command Deep Dives
+
+Comprehensive reference for frequently used commands with all flags, subcommands, and examples:
+
+| Command | Description |
+|---------|-------------|
+| [`gt sling`](sling.md) | Assign work to agents and rigs, with formula support and batch dispatch |
+| [`gt refinery`](refinery-commands.md) | Manage the per-rig merge queue processor |
+| [`gt polecat`](polecat-commands.md) | Manage polecat lifecycle: list, nuke, stale detection, identities |
+| [`gt nudge`](nudge.md) | Send synchronous messages to running agent sessions |
+| [`gt session`](session-commands.md) | Manage tmux sessions: start, stop, attach, capture output |
 
 ## Related Tools
 
@@ -6944,6 +7230,1187 @@ gt plugin run my-plugin
 
 # List as JSON
 gt plugin list --json
+```
+
+
+========================================================================
+# gt sling
+# URL: /docs/cli-reference/sling
+========================================================================
+
+# gt sling
+
+Sling work onto an agent's hook and start working immediately. This is the primary command for assigning work in Gas Town.
+
+```bash
+gt sling <bead-or-formula> [target] [flags]
+```
+
+## Description
+
+`gt sling` handles the full lifecycle of work assignment:
+
+- **Existing agents** -- sling to mayor, crew, witness, or refinery
+- **Auto-spawning polecats** -- when the target is a rig, a new polecat is created
+- **Dog dispatch** -- route work to Deacon's helper workers
+- **Formula instantiation** -- cook formulas into molecules and attach them
+- **Auto-convoy creation** -- ensures all slung work appears in `gt convoy list`
+
+## Target Resolution
+
+The target argument is flexible and resolves based on context:
+
+| Target | Resolves to |
+|--------|------------|
+| *(none)* | Self (current agent) |
+| `crew` | Crew worker in current rig |
+| `<rig>` | Auto-spawn polecat in rig |
+| `<rig>/<polecat>` | Specific polecat |
+| `mayor` | Mayor agent |
+| `deacon/dogs` | Auto-dispatch to idle dog |
+| `deacon/dogs/<name>` | Specific dog |
+
+## Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--account <handle>` | | Claude Code account handle to use |
+| `--agent <runtime>` | | Override agent/runtime (e.g., `claude`, `gemini`, `codex`, or custom alias) |
+| `--args <text>` | `-a` | Natural language instructions for the executor |
+| `--create` | | Create polecat if it doesn't exist |
+| `--dry-run` | `-n` | Show what would be done without executing |
+| `--force` | | Force spawn even if polecat has unread mail |
+| `--hook-raw-bead` | | Hook raw bead without default formula (expert mode) |
+| `--message <text>` | `-m` | Context message for the work |
+| `--no-convoy` | | Skip auto-convoy creation for single-issue sling |
+| `--no-merge` | | Skip merge queue on completion (keep work on feature branch for review) |
+| `--on <bead>` | | Apply formula to existing bead (implies wisp scaffolding) |
+| `--subject <text>` | `-s` | Context subject for the work |
+| `--var <key=value>` | | Formula variable (can be repeated) |
+
+## Examples
+
+### Basic work assignment
+
+```bash
+# Sling a bead to a rig (auto-spawns a polecat)
+gt sling gt-abc myproject
+
+# Sling to a specific polecat
+gt sling gt-abc myproject/toast
+
+# Sling to the mayor
+gt sling gt-abc mayor
+```
+
+### Batch slinging
+
+```bash
+# Sling multiple beads to a rig -- each gets its own polecat
+gt sling gt-abc gt-def gt-ghi myproject
+```
+
+### Natural language instructions
+
+```bash
+# Pass context to the executing agent
+gt sling gt-abc myproject --args "patch release"
+gt sling gt-abc myproject --args "focus on security"
+```
+
+### Formula slinging
+
+```bash
+# Cook a formula into a molecule and sling it
+gt sling mol-release mayor/
+
+# Formula with variables
+gt sling towers-of-hanoi --var disks=3
+
+# Apply a formula to an existing bead
+gt sling mol-review --on gt-abc
+
+# Apply formula, then sling to a target
+gt sling shiny --on gt-abc crew
+```
+
+### Spawning options
+
+```bash
+# Create polecat if it doesn't exist
+gt sling gt-abc myproject --create
+
+# Force spawn even with unread mail
+gt sling gt-abc myproject --force
+
+# Use a specific Claude account
+gt sling gt-abc myproject --account work
+```
+
+### Dry run
+
+```bash
+# Preview what would happen
+gt sling gt-abc myproject --dry-run
+```
+
+## Auto-Convoy
+
+When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.
+
+```bash
+gt sling gt-abc myproject              # Creates "Work: <issue-title>" convoy
+gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
+```
+
+## Comparison with Related Commands
+
+| Command | Behavior |
+|---------|----------|
+| `gt hook <bead>` | Just attach (no action taken) |
+| `gt sling <bead>` | Attach + start now (keep context) |
+| `gt handoff <bead>` | Attach + restart (fresh context) |
+
+:::tip
+
+The `--args` string is stored in the bead and shown via `gt prime`. Since the executor is an LLM, it interprets these instructions naturally -- write them as you would explain the task to a person.
+
+:::
+
+
+========================================================================
+# gt refinery
+# URL: /docs/cli-reference/refinery-commands
+========================================================================
+
+# gt refinery
+
+Manage the Refinery -- the per-rig merge queue processor.
+
+```bash
+gt refinery [command] [flags]
+```
+
+**Alias:** `gt ref`
+
+## Description
+
+The Refinery serializes all merges to main for a rig:
+
+1. Receives MRs submitted by polecats (via `gt done`)
+2. Rebases work branches onto latest main
+3. Runs validation (tests, builds, checks)
+4. Merges to main when clear
+5. If conflict: spawns a fresh polecat to re-implement (original is already gone)
+
+One Refinery per rig. It is a persistent agent that processes work as it arrives. The polecat is already nuked by the time the Refinery processes its MR.
+
+**Role shortcuts:** `refinery` in mail/nudge addresses resolves to the current rig's Refinery.
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`start`](#gt-refinery-start) | Start the Refinery |
+| [`stop`](#gt-refinery-stop) | Stop the Refinery |
+| [`restart`](#gt-refinery-restart) | Restart the Refinery |
+| [`status`](#gt-refinery-status) | Show Refinery status |
+| [`attach`](#gt-refinery-attach) | Attach to Refinery session |
+| [`queue`](#gt-refinery-queue) | Show merge queue |
+| [`ready`](#gt-refinery-ready) | List MRs ready for processing |
+| [`blocked`](#gt-refinery-blocked) | List MRs blocked by open tasks |
+| [`unclaimed`](#gt-refinery-unclaimed) | List unclaimed MRs |
+| [`claim`](#gt-refinery-claim) | Claim an MR for processing |
+| [`release`](#gt-refinery-release) | Release a claimed MR |
+
+---
+
+## gt refinery start
+
+Start the Refinery for a rig.
+
+```bash
+gt refinery start [rig] [flags]
+```
+
+**Alias:** `gt refinery spawn`
+
+Launches the merge queue processor which monitors for polecat work branches and merges them to the appropriate target branches. If rig is not specified, infers it from the current directory.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
+| `--foreground` | Run in foreground (default: background) |
+
+**Examples:**
+
+```bash
+gt refinery start myproject
+gt refinery start myproject --foreground
+gt refinery start              # infer rig from cwd
+```
+
+---
+
+## gt refinery stop
+
+Gracefully stop a running Refinery.
+
+```bash
+gt refinery stop [rig] [flags]
+```
+
+Completes any in-progress merge first, then stops. If rig is not specified, infers it from the current directory.
+
+---
+
+## gt refinery restart
+
+Restart the Refinery for a rig.
+
+```bash
+gt refinery restart [rig] [flags]
+```
+
+Stops the current session (if running) and starts a fresh one.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
+
+**Examples:**
+
+```bash
+gt refinery restart myproject
+gt refinery restart             # infer rig from cwd
+```
+
+---
+
+## gt refinery status
+
+Show Refinery status for a rig.
+
+```bash
+gt refinery status [rig] [flags]
+```
+
+Displays running state, current work, queue length, and statistics.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery status
+gt refinery status myproject
+gt refinery status --json
+```
+
+---
+
+## gt refinery attach
+
+Attach to a running Refinery's Claude session.
+
+```bash
+gt refinery attach [rig] [flags]
+```
+
+Allows interactive access to the Refinery agent for debugging or manual intervention. Detach with `Ctrl-B D`.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--agent <alias>` | Agent alias to run the Refinery with (overrides town default) |
+
+**Examples:**
+
+```bash
+gt refinery attach myproject
+gt refinery attach              # infer rig from cwd
+```
+
+---
+
+## gt refinery queue
+
+Show the merge queue for a rig.
+
+```bash
+gt refinery queue [rig] [flags]
+```
+
+Lists all pending merge requests waiting to be processed.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery queue
+gt refinery queue myproject
+gt refinery queue --json
+```
+
+---
+
+## gt refinery ready
+
+List MRs ready for processing.
+
+```bash
+gt refinery ready [rig] [flags]
+```
+
+Shows MRs that are:
+
+- Not currently claimed by any worker (or claim is stale)
+- Not blocked by an open task (e.g., conflict resolution in progress)
+
+This is the preferred command for finding work to process.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery ready
+gt refinery ready --json
+```
+
+---
+
+## gt refinery blocked
+
+List MRs blocked by open tasks.
+
+```bash
+gt refinery blocked [rig] [flags]
+```
+
+Shows MRs waiting for conflict resolution or other blocking tasks to complete. When the blocking task closes, the MR will appear in `ready`.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery blocked
+gt refinery blocked --json
+```
+
+---
+
+## gt refinery unclaimed
+
+List MRs available for claiming.
+
+```bash
+gt refinery unclaimed [rig] [flags]
+```
+
+Shows MRs that are not currently claimed by any worker, or have stale claims (worker may have crashed). Useful for parallel refinery workers to find work.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt refinery unclaimed
+gt refinery unclaimed --json
+```
+
+---
+
+## gt refinery claim
+
+Claim an MR for processing.
+
+```bash
+gt refinery claim <mr-id> [flags]
+```
+
+When running multiple refinery workers in parallel, each worker must claim an MR before processing to prevent double-processing. Claims expire after 10 minutes if not processed (for crash recovery).
+
+The worker ID is automatically determined from the `GT_REFINERY_WORKER` environment variable, or defaults to `refinery-1`.
+
+**Examples:**
+
+```bash
+gt refinery claim gt-abc123
+GT_REFINERY_WORKER=refinery-2 gt refinery claim gt-abc123
+```
+
+---
+
+## gt refinery release
+
+Release a claimed MR back to the queue.
+
+```bash
+gt refinery release <mr-id> [flags]
+```
+
+Called when processing fails and the MR should be retried by another worker. Clears the claim so other workers can pick up the MR.
+
+**Examples:**
+
+```bash
+gt refinery release gt-abc123
+```
+
+:::note
+
+All subcommands that accept `[rig]` infer the rig from the current directory when not specified.
+
+:::
+
+
+========================================================================
+# gt polecat
+# URL: /docs/cli-reference/polecat-commands
+========================================================================
+
+# gt polecat
+
+Manage polecat lifecycle in rigs.
+
+```bash
+gt polecat [command] [flags]
+```
+
+**Alias:** `gt polecats`
+
+## Description
+
+Polecats are **ephemeral workers**: spawned for one task, nuked when done. There is no idle state. A polecat is either:
+
+- **Working** -- actively doing assigned work
+- **Stalled** -- session crashed mid-work (needs Witness intervention)
+- **Zombie** -- finished but `gt done` failed (needs cleanup)
+
+**Self-cleaning model:** When work completes, the polecat runs `gt done`, which pushes the branch, submits to the merge queue, and exits. The Witness then nukes the sandbox. Polecats don't wait for more work.
+
+**Session vs sandbox:** The Claude session cycles frequently (handoffs, compaction). The git worktree (sandbox) persists until nuke. Work survives session restarts.
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`list`](#gt-polecat-list) | List polecats in a rig |
+| [`status`](#gt-polecat-status) | Show detailed polecat status |
+| [`nuke`](#gt-polecat-nuke) | Completely destroy a polecat |
+| [`remove`](#gt-polecat-remove) | Remove polecats from a rig |
+| [`stale`](#gt-polecat-stale) | Detect stale polecats |
+| [`gc`](#gt-polecat-gc) | Garbage collect stale branches |
+| [`check-recovery`](#gt-polecat-check-recovery) | Check if polecat needs recovery vs safe to nuke |
+| [`git-state`](#gt-polecat-git-state) | Show git state for pre-kill verification |
+| [`identity`](#gt-polecat-identity) | Manage polecat identities |
+
+---
+
+## gt polecat list
+
+List polecats in a rig or all rigs.
+
+```bash
+gt polecat list [rig] [flags]
+```
+
+Shows all currently active polecats with their states: `working`, `done`, or `stuck`.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--all` | List polecats in all rigs |
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat list myproject
+gt polecat list --all
+gt polecat list myproject --json
+```
+
+---
+
+## gt polecat status
+
+Show detailed status for a polecat.
+
+```bash
+gt polecat status <rig>/<polecat> [flags]
+```
+
+Displays comprehensive information including:
+
+- Current lifecycle state (working, done, stuck, idle)
+- Assigned issue (if any)
+- Session status (running/stopped, attached/detached)
+- Session creation time
+- Last activity time
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat status myproject/toast
+gt polecat status myproject/toast --json
+```
+
+---
+
+## gt polecat nuke
+
+Completely destroy a polecat and all its artifacts.
+
+```bash
+gt polecat nuke <rig>/<polecat>... | <rig> --all [flags]
+```
+
+This is the nuclear option for post-merge cleanup. It:
+
+1. Kills the Claude session (if running)
+2. Deletes the git worktree (bypassing all safety checks)
+3. Deletes the polecat branch
+4. Closes the agent bead (if exists)
+
+**Safety checks** -- the command refuses to nuke a polecat if:
+
+- Worktree has unpushed/uncommitted changes
+- Polecat has an open merge request (MR bead)
+- Polecat has work on its hook
+
+Use `--force` to bypass safety checks. Use `--dry-run` to preview.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--all` | | Nuke all polecats in the rig |
+| `--dry-run` | | Show what would be nuked without doing it |
+| `--force` | `-f` | Force nuke, bypassing all safety checks (LOSES WORK) |
+
+**Examples:**
+
+```bash
+# Nuke a specific polecat
+gt polecat nuke myproject/toast
+
+# Nuke multiple polecats
+gt polecat nuke myproject/toast myproject/furiosa
+
+# Nuke all polecats in a rig
+gt polecat nuke myproject --all
+
+# Preview what would be nuked
+gt polecat nuke myproject --all --dry-run
+
+# Force nuke (bypasses safety checks)
+gt polecat nuke myproject/toast --force
+```
+
+:::warning
+
+Nuking with `--force` bypasses all safety checks and will destroy uncommitted work. Always use `--dry-run` first to verify what will be affected.
+
+:::
+
+---
+
+## gt polecat remove
+
+Remove one or more polecats from a rig.
+
+```bash
+gt polecat remove <rig>/<polecat>... | <rig> --all [flags]
+```
+
+Fails if session is running (stop first). Warns if uncommitted changes exist.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--all` | | Remove all polecats in the rig |
+| `--force` | `-f` | Force removal, bypassing checks |
+
+**Examples:**
+
+```bash
+gt polecat remove myproject/toast
+gt polecat remove myproject/toast myproject/furiosa
+gt polecat remove myproject --all
+gt polecat remove myproject --all --force
+```
+
+---
+
+## gt polecat stale
+
+Detect stale polecats that are candidates for cleanup.
+
+```bash
+gt polecat stale <rig> [flags]
+```
+
+A polecat is considered stale if:
+
+- No active tmux session
+- Way behind main (>threshold commits) OR no agent bead
+- Has no uncommitted work that could be lost
+
+The default threshold is 20 commits behind main.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--cleanup` | Automatically nuke stale polecats |
+| `--json` | Output as JSON |
+| `--threshold <n>` | Commits behind main to consider stale (default: 20) |
+
+**Examples:**
+
+```bash
+gt polecat stale myproject
+gt polecat stale myproject --threshold 50
+gt polecat stale myproject --json
+
+# Auto-cleanup stale polecats
+gt polecat stale myproject --cleanup
+
+# Preview cleanup
+gt polecat stale myproject --cleanup --dry-run
+```
+
+---
+
+## gt polecat gc
+
+Garbage collect stale polecat branches in a rig.
+
+```bash
+gt polecat gc <rig> [flags]
+```
+
+Polecats use unique timestamped branches (`polecat/<name>-<timestamp>`) to prevent drift issues. Over time, these branches accumulate when stale polecats are repaired.
+
+This command removes orphaned branches:
+
+- Branches for polecats that no longer exist
+- Old timestamped branches (keeps only the current one per polecat)
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Show what would be deleted without deleting |
+
+**Examples:**
+
+```bash
+gt polecat gc myproject
+gt polecat gc myproject --dry-run
+```
+
+---
+
+## gt polecat check-recovery
+
+Check recovery status of a polecat.
+
+```bash
+gt polecat check-recovery <rig>/<polecat> [flags]
+```
+
+Used by the Witness to determine appropriate cleanup action based on `cleanup_status` in the agent bead:
+
+- **SAFE_TO_NUKE** -- `cleanup_status` is `clean`, no work at risk
+- **NEEDS_RECOVERY** -- unpushed/uncommitted work detected
+
+The Witness should escalate `NEEDS_RECOVERY` cases to the Mayor.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat check-recovery myproject/toast
+gt polecat check-recovery myproject/toast --json
+```
+
+---
+
+## gt polecat git-state
+
+Show git state for a polecat's worktree.
+
+```bash
+gt polecat git-state <rig>/<polecat> [flags]
+```
+
+Used by the Witness for pre-kill verification to ensure no work is lost. Returns whether the worktree is clean (safe to kill) or dirty (needs cleanup).
+
+Checks:
+
+- **Working tree** -- uncommitted changes
+- **Unpushed commits** -- commits ahead of origin/main
+- **Stashes** -- stashed changes
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Examples:**
+
+```bash
+gt polecat git-state myproject/toast
+gt polecat git-state myproject/toast --json
+```
+
+---
+
+## gt polecat identity
+
+Manage polecat identity beads in rigs.
+
+```bash
+gt polecat identity [command] [flags]
+```
+
+**Alias:** `gt polecat id`
+
+Identity beads track polecat metadata, CV history, and lifecycle state.
+
+**Subcommands:**
+
+| Command | Description |
+|---------|-------------|
+| `add` | Create an identity bead for a polecat |
+| `list` | List polecat identity beads in a rig |
+| `show` | Show polecat identity with CV summary |
+| `rename` | Rename a polecat identity (preserves CV) |
+| `remove` | Remove a polecat identity |
+
+**Examples:**
+
+```bash
+gt polecat identity list myproject
+gt polecat identity show myproject/toast
+gt polecat identity rename myproject/toast myproject/alpha
+```
+
+
+========================================================================
+# gt nudge
+# URL: /docs/cli-reference/nudge
+========================================================================
+
+# gt nudge
+
+Send a synchronous message to any Gas Town worker's Claude Code session.
+
+```bash
+gt nudge <target> [message] [flags]
+```
+
+## Description
+
+`gt nudge` delivers a message directly to a running Claude Code session: polecats, crew, witness, refinery, mayor, or deacon. Unlike `gt mail` (async mailbox), nudges interrupt the target immediately for real-time coordination.
+
+Uses a reliable delivery pattern:
+
+1. Sends text in literal mode (`-l` flag)
+2. Waits 500ms for paste to complete
+3. Sends Enter as a separate command
+
+This is the **only** recommended way to send messages to Claude sessions. Do not use raw `tmux send-keys` elsewhere.
+
+## Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Send even if target has DND enabled |
+| `--message <text>` | `-m` | Message to send (alternative to positional argument) |
+
+## Target Resolution
+
+### Role Shortcuts
+
+Role shortcuts expand to the appropriate session name:
+
+| Shortcut | Expands to |
+|----------|-----------|
+| `mayor` | `gt-mayor` |
+| `deacon` | `gt-deacon` |
+| `witness` | `gt-<rig>-witness` (uses current rig) |
+| `refinery` | `gt-<rig>-refinery` (uses current rig) |
+
+### Direct Targets
+
+Specify polecats and other agents by their full path:
+
+```bash
+gt nudge myproject/toast "Check your mail"
+gt nudge myproject/alpha "What's your status?"
+```
+
+### Channel Syntax
+
+Nudge all members of a named channel defined in `~/gt/config/messaging.json`:
+
+```bash
+gt nudge channel:workers "New priority work available"
+```
+
+Patterns like `myproject/polecats/*` in the channel definition are expanded to all matching agents.
+
+## DND (Do Not Disturb)
+
+If the target has DND enabled (`gt dnd on`), the nudge is skipped. Use `--force` to override DND and send anyway.
+
+```bash
+gt nudge myproject/toast "Urgent: check your mail" --force
+```
+
+## Examples
+
+```bash
+# Nudge a polecat
+gt nudge myproject/furiosa "Check your mail and start working"
+
+# Nudge with -m flag
+gt nudge myproject/alpha -m "What's your status?"
+
+# Nudge the mayor
+gt nudge mayor "Status update requested"
+
+# Nudge the current rig's witness
+gt nudge witness "Check polecat health"
+
+# Nudge the deacon
+gt nudge deacon session-started
+
+# Nudge a channel
+gt nudge channel:workers "New priority work available"
+
+# Force nudge past DND
+gt nudge myproject/toast "Urgent fix needed" --force
+```
+
+:::tip
+
+For non-urgent communication, use `gt mail send` instead. Nudges interrupt the target's current activity and should be reserved for time-sensitive coordination.
+
+:::
+
+:::note
+
+`gt nudge` is the preferred way to send messages to running sessions. The lower-level `gt session inject` exists but lacks the reliable delivery guarantees that `gt nudge` provides.
+
+:::
+
+
+========================================================================
+# gt session
+# URL: /docs/cli-reference/session-commands
+========================================================================
+
+# gt session
+
+Manage tmux sessions for polecats.
+
+```bash
+gt session [command] [flags]
+```
+
+**Alias:** `gt sess`
+
+## Description
+
+Sessions are tmux sessions running Claude for each polecat. Use the subcommands to start, stop, attach, and monitor sessions.
+
+:::tip
+
+To send messages to a running session, use `gt nudge` (not `gt session inject`). The nudge command uses reliable delivery that works correctly with Claude Code.
+
+:::
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`list`](#gt-session-list) | List all sessions |
+| [`start`](#gt-session-start) | Start a polecat session |
+| [`stop`](#gt-session-stop) | Stop a polecat session |
+| [`restart`](#gt-session-restart) | Restart a polecat session |
+| [`at`](#gt-session-at) | Attach to a running session |
+| [`status`](#gt-session-status) | Show session status details |
+| [`check`](#gt-session-check) | Check session health |
+| [`capture`](#gt-session-capture) | Capture recent session output |
+| [`inject`](#gt-session-inject) | Send message to session (prefer `gt nudge`) |
+
+---
+
+## gt session list
+
+List all running polecat sessions.
+
+```bash
+gt session list [flags]
+```
+
+Shows session status, rig, and polecat name.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+| `--rig <name>` | Filter by rig name |
+
+**Examples:**
+
+```bash
+gt session list
+gt session list --rig myproject
+gt session list --json
+```
+
+---
+
+## gt session start
+
+Start a new tmux session for a polecat.
+
+```bash
+gt session start <rig>/<polecat> [flags]
+```
+
+Creates a tmux session, navigates to the polecat's working directory, and launches Claude. Optionally inject an initial issue to work on.
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--issue <id>` | Issue ID to work on |
+
+**Examples:**
+
+```bash
+gt session start myproject/toast
+gt session start myproject/toast --issue gt-123
+```
+
+---
+
+## gt session stop
+
+Stop a running polecat session.
+
+```bash
+gt session stop <rig>/<polecat> [flags]
+```
+
+Attempts graceful shutdown first (Ctrl-C), then kills the tmux session. Use `--force` to skip graceful shutdown.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Force immediate shutdown |
+
+**Examples:**
+
+```bash
+gt session stop myproject/toast
+gt session stop myproject/toast --force
+```
+
+---
+
+## gt session restart
+
+Restart a polecat session (stop + start).
+
+```bash
+gt session restart <rig>/<polecat> [flags]
+```
+
+Gracefully stops the current session and starts a fresh one.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Force immediate shutdown before restart |
+
+**Examples:**
+
+```bash
+gt session restart myproject/toast
+gt session restart myproject/toast --force
+```
+
+---
+
+## gt session at
+
+Attach to a running polecat session.
+
+```bash
+gt session at <rig>/<polecat> [flags]
+```
+
+**Alias:** `gt session attach`
+
+Attaches the current terminal to the tmux session. Detach with `Ctrl-B D`.
+
+**Examples:**
+
+```bash
+gt session at myproject/toast
+```
+
+---
+
+## gt session status
+
+Show detailed status for a polecat session.
+
+```bash
+gt session status <rig>/<polecat> [flags]
+```
+
+Displays running state, uptime, session info, and activity.
+
+**Examples:**
+
+```bash
+gt session status myproject/toast
+```
+
+---
+
+## gt session check
+
+Check session health for polecats.
+
+```bash
+gt session check [rig] [flags]
+```
+
+Validates that:
+
+1. Polecats with work-on-hook have running tmux sessions
+2. Sessions are responsive
+
+Use this for manual health checks or debugging session issues.
+
+**Examples:**
+
+```bash
+gt session check              # Check all rigs
+gt session check myproject    # Check specific rig
+```
+
+---
+
+## gt session capture
+
+Capture recent output from a polecat session.
+
+```bash
+gt session capture <rig>/<polecat> [count] [flags]
+```
+
+Returns the last N lines of terminal output. Useful for checking progress without attaching to the session.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--lines <n>` | `-n` | Number of lines to capture (default: 100) |
+
+**Examples:**
+
+```bash
+gt session capture myproject/toast          # Last 100 lines (default)
+gt session capture myproject/toast 50       # Last 50 lines
+gt session capture myproject/toast -n 50    # Same as above
+```
+
+---
+
+## gt session inject
+
+Send a message to a polecat session (low-level).
+
+```bash
+gt session inject <rig>/<polecat> [flags]
+```
+
+:::warning
+
+For sending messages to Claude sessions, use `gt nudge` instead. It uses reliable delivery (literal mode + timing) that works correctly with Claude Code's input handling. This command is a low-level primitive for file-based injection or cases where you need raw tmux `send-keys` behavior.
+
+:::
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--file <path>` | `-f` | File to read message from |
+| `--message <text>` | `-m` | Message to inject |
+
+**Examples:**
+
+```bash
+# Preferred: use gt nudge
+gt nudge myproject/furiosa "Check your mail"
+
+# Low-level: file injection
+gt session inject myproject/toast -f prompt.txt
 ```
 
 
@@ -14289,6 +15756,12 @@ Launch a web-based dashboard for visual convoy and system tracking.
 gt dashboard
 ```
 
+:::note[Local-Only Service]
+
+`gt dashboard` runs a **local** web server on your machine. There is no hosted dashboard service. The dashboard is only accessible while the command is running and only from your local machine (or network, if configured).
+
+:::
+
 This opens a local web server (default: `http://localhost:8420`) with:
 
 - **Convoy overview** -- All active convoys with progress bars
@@ -15193,6 +16666,90 @@ gt peek polecat:toast --rig myproject
     # Re-sling to spawn a fresh polecat
     gt sling gt-a1b2c myproject
     ```
+
+---
+
+## Witness Not Patrolling
+
+**Symptom:** The Witness appears to be running (tmux session exists) but polecats are not being spawned automatically, and `gt status` shows the witness as offline (○) or repeatedly becoming a zombie.
+
+**Diagnosis:**
+
+```bash
+# Check if witness session exists but is zombie
+gt status
+
+# Look at what the witness is doing
+tmux capture-pane -t gt-<rig>-witness -p | tail -50
+
+# Check for zombie sessions
+gt doctor | grep zombie
+```
+
+**Common causes:**
+
+1. **Infinite search loop.** The witness gets stuck trying to understand its patrol formula during startup, repeatedly running grep/search operations without ever starting patrol execution.
+
+2. **Context loading stall.** The witness spends excessive time in the `gt prime` phase, reading documentation and searching for context instead of beginning patrol work.
+
+**Solutions:**
+
+1. **Restart the witness.** Use `gt up` which will detect the zombie and recreate it:
+
+    ```bash
+    # From the town root
+    cd ~/gt
+    gt up
+
+    # This will show: "⚠ Detected zombie session (tmux alive, agent dead). Recreating..."
+    ```
+
+2. **Nudge the witness to skip research.** If it's stuck in a search loop:
+
+    ```bash
+    gt nudge <rig>/witness "STOP SEARCHING. Execute patrol now: bd ready --mol-type=patrol --limit 5"
+    ```
+
+3. **Check for stuck patrol wisps.** The witness may have created patrol work but not progressed:
+
+    ```bash
+    bd list --type=wisp --status=in_progress
+
+    # If found, check how long they've been stuck
+    bd show <wisp-id>
+    ```
+
+4. **Verify witness can access patrol formulas:**
+
+    ```bash
+    # Check if patrol formula exists
+    ls -la ~/.beads/formulas/*witness*
+
+    # Verify formulas are loaded
+    gt formula list | grep witness
+    ```
+
+**Workaround:**
+
+If the witness remains stuck, polecats can be managed manually:
+
+```bash
+# Manually check for work that needs polecats
+bd list --status=hooked --limit 10
+
+# Assign work directly (bypasses witness)
+gt sling <bead-id> <rig>
+```
+
+**Prevention:**
+
+This issue often occurs when witness agents have complex role prompts that cause excessive research. The fix is to simplify the witness startup or provide pre-loaded context to reduce search operations.
+
+:::note
+
+The witness's job is to **patrol and monitor**, not to research and understand. If it's spending more time reading than acting, the role configuration may need adjustment.
+
+:::
 
 ---
 
@@ -16310,6 +17867,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 | [Cost Management](cost-management.md) | Monitoring and optimizing token spend |
 | [Background & Philosophy](philosophy.md) | Why Gas Town exists, its history, and design philosophy |
 | [Architecture Guide](architecture.md) | Comprehensive tour of Gas Town's multi-agent architecture |
+| [Troubleshooting](troubleshooting.md) | Solutions for common Gas Town problems and workarounds |
 | [Glossary](glossary.md) | Complete terminology reference for all Gas Town concepts |
 
 ## Who Are These Guides For?
@@ -19199,10 +20757,912 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | `gt mol status` | Show current molecule progress |
 | `gt formula run <name>` | Pour a formula into a molecule |
 | `gt may at` | Attach to Mayor (short for `gt mayor attach`) |
-| `gt crew at <rig> <name>` | Attach to a Crew workspace |
+| `gt crew at <name>` | Attach to a Crew workspace (use `--rig <rig>` if needed) |
 | `gt rig park <rig>` | Pause a rig (preserve state, stop agents) |
 | `gt rig unpark <rig>` | Resume a parked rig |
 | `gt escalate <msg>` | Create an escalation for problems agents cannot resolve |
 | `gt polecat list` | List active polecats across rigs |
 | `gt mail inbox` | Check your inbox |
 | `gt done` | Signal work ready for merge queue |
+
+
+========================================================================
+# Multi-Agent Git Workflow
+# URL: /docs/guides/git-workflow
+========================================================================
+
+# Multi-Agent Git Workflow
+
+Gas Town's multi-agent architecture creates unique git workflow challenges. Multiple agents (crew members, polecats, refinery) work simultaneously on the same repository, leading to frequent remote changes and potential merge conflicts. This guide provides strategies for managing git in this environment.
+
+---
+
+## The Challenge
+
+In a traditional single-developer workflow, you push code when you're done working. In Gas Town:
+
+- **Polecats** push completed work constantly (every few minutes)
+- **Crew workers** share the same repository
+- **Refinery** merges to main automatically
+- **Remote state** changes faster than you can type `git status`
+
+This creates race conditions where your local branch diverges from remote almost immediately.
+
+---
+
+## Golden Rules
+
+### 1. Pull Before Every Push
+
+**Always pull before pushing**, even if you just pulled 5 minutes ago:
+
+```bash
+# ❌ WRONG: Push without checking remote
+git commit -m "Add feature"
+git push  # Will fail if remote changed
+
+# ✅ CORRECT: Always pull first
+git commit -m "Add feature"
+git pull --rebase
+git push
+```
+
+**Why `--rebase`?** It keeps git history linear, which is essential when multiple agents are pushing simultaneously. Merge commits create noise and complicate the history.
+
+### 2. Commit Frequently, Push Immediately
+
+In multi-agent environments, **work that isn't pushed doesn't exist**. If your local branch has unpushed commits:
+
+- Other agents can't build on your work
+- You're accumulating merge conflicts
+- A session restart loses your context (but git preserves commits)
+
+**Best practice:**
+
+```bash
+# Every logical unit of work = commit + push
+git add <files>
+git commit -m "Implement X"
+git pull --rebase && git push
+
+# Don't accumulate multiple commits locally
+# Push each one immediately
+```
+
+### 3. Expect Merge Conflicts
+
+With agents working simultaneously, merge conflicts are normal, not exceptional. Don't be surprised when:
+
+```bash
+git push
+# ! [rejected] master -> master (fetch first)
+```
+
+This just means someone else pushed first. It's not a failure—it's the system working.
+
+---
+
+## Handling Frequent Remote Changes
+
+### Detecting When Remote Changed
+
+```bash
+# Check if remote has new commits
+git fetch
+git status
+
+# Output shows if you're behind:
+# Your branch is behind 'origin/master' by 3 commits
+```
+
+### Rebasing Onto Remote
+
+```bash
+# Safe rebase workflow
+git fetch origin
+git rebase origin/master
+
+# If conflicts occur (see below)
+```
+
+### When You're Too Far Behind
+
+If remote has diverged significantly (20+ commits):
+
+```bash
+# Check what you have locally that isn't pushed
+git log origin/master..HEAD
+
+# If it's important work, create a branch
+git branch backup/my-work
+
+# Then reset to remote and cherry-pick what you need
+git reset --hard origin/master
+git cherry-pick <commit-hash>
+```
+
+---
+
+## Conflict Resolution Strategies
+
+### Add/Add Conflicts
+
+**Symptom:** Multiple agents create the same file with different content.
+
+```
+Auto-merging docs/new-guide.md
+CONFLICT (add/add): Merge conflict in docs/new-guide.md
+```
+
+**Resolution:**
+
+```bash
+# Option 1: Keep both versions (manual merge)
+# Edit the file to combine content from both
+vim docs/new-guide.md
+git add docs/new-guide.md
+git rebase --continue
+
+# Option 2: Take remote version (if your version is obsolete)
+git checkout --theirs docs/new-guide.md
+git add docs/new-guide.md
+git rebase --continue
+
+# Option 3: Take your version (if remote is wrong)
+git checkout --ours docs/new-guide.md
+git add docs/new-guide.md
+git rebase --continue
+```
+
+**Prevention:** Before creating new files, check if they exist on remote:
+
+```bash
+git fetch
+git ls-tree origin/master | grep <filename>
+```
+
+### Content Conflicts
+
+**Symptom:** Same file modified by multiple agents.
+
+```
+Auto-merging src/main.go
+CONFLICT (content): Merge conflict in src/main.go
+```
+
+**Resolution:**
+
+```bash
+# View conflict markers
+cat src/main.go
+# <<<<<<< HEAD
+# Your changes
+# =======
+# Remote changes
+# >>>>>>> origin/master
+
+# Edit to resolve
+vim src/main.go
+
+# Mark as resolved
+git add src/main.go
+git rebase --continue
+```
+
+**Prevention:** Coordinate work through beads dependencies. If two tasks touch the same file, make one depend on the other:
+
+```bash
+bd dep add task-2 task-1  # task-2 depends on task-1
+```
+
+### Aborting and Retrying
+
+If a rebase goes wrong:
+
+```bash
+# Abort the rebase
+git rebase --abort
+
+# Start over with a fresh fetch
+git fetch
+git rebase origin/master
+```
+
+---
+
+## Crew Worker Workflow
+
+Crew workers push directly to main (no feature branches):
+
+```bash
+# Start of work session
+cd ~/gt/<rig>/crew/<name>
+git pull  # Get latest
+
+# Do work, commit, push frequently
+# ... edit files ...
+git add <files>
+git commit -m "Description"
+git pull --rebase && git push
+
+# Repeat for each logical unit of work
+```
+
+### When Push Fails
+
+```bash
+git push
+# ! [rejected]
+
+# Pull with rebase
+git pull --rebase
+
+# If conflicts occur, resolve them
+git status  # Shows conflicts
+vim <conflicted-file>
+git add <conflicted-file>
+git rebase --continue
+
+# Push again
+git push
+```
+
+### Keeping Your Branch Fresh
+
+```bash
+# Pull regularly, even when not pushing
+# Prevents accumulating drift
+
+# Every 10-15 minutes or before starting new work
+git fetch && git pull --rebase
+```
+
+---
+
+## Polecat Workflow
+
+Polecats work on branches and submit via the refinery:
+
+```bash
+# Polecats create feature branches
+git checkout -b polecat/<name>/<bead-id>
+
+# Work and commit
+git add -A
+git commit -m "Implement feature"
+
+# Push to their branch
+git push origin polecat/<name>/<bead-id>
+
+# When done, use gt done (refinery handles merge)
+gt done
+```
+
+Polecats don't merge to main themselves. The refinery:
+1. Rebases the polecat's branch onto latest main
+2. Runs tests
+3. Merges if tests pass
+4. Cleans up the branch
+
+---
+
+## Reducing Merge Conflicts
+
+### Strategy 1: File-Level Coordination
+
+Assign related work to the same agent:
+
+```bash
+# If tasks A and B both touch auth.go
+# Assign both to the same polecat or crew member
+
+gt sling task-a <rig> --agent alice
+gt sling task-b <rig> --agent alice
+```
+
+### Strategy 2: Serialization via Dependencies
+
+Make tasks sequential when they touch the same code:
+
+```bash
+# task-b waits for task-a to complete
+bd dep add task-b task-a
+```
+
+### Strategy 3: Small, Focused Changes
+
+Break large tasks into smaller beads:
+
+```bash
+# ❌ WRONG: One bead that touches 20 files
+bd create --title "Refactor authentication system"
+
+# ✅ CORRECT: Multiple focused beads
+bd create --title "Extract auth helpers"
+bd create --title "Add session validation"
+bd create --title "Update auth middleware"
+bd dep add auth-2 auth-1  # Sequential
+bd dep add auth-3 auth-2
+```
+
+---
+
+## Checking Git State
+
+### Before Starting Work
+
+```bash
+# Ensure you're up to date
+git fetch
+git status
+# Should show: "Your branch is up to date with 'origin/master'"
+
+# If behind:
+git pull --rebase
+```
+
+### During Work
+
+```bash
+# Check what you've changed
+git status
+
+# Check what you're about to commit
+git diff
+git diff --staged
+```
+
+### Before Pushing
+
+```bash
+# Check for new remote commits
+git fetch
+git log HEAD..origin/master  # Shows what's new on remote
+
+# If empty: safe to push
+# If not empty: pull first
+git pull --rebase
+```
+
+---
+
+## When to Use Branches
+
+**Crew workers:** Never. Push directly to main.
+
+**Polecats:** Always. Use `polecat/<name>/<bead-id>` format.
+
+**Cross-rig work (`gt worktree`):** Uses branches automatically. Submit via refinery when done.
+
+---
+
+## Emergency Recovery
+
+### Lost Work After Session Restart
+
+Commits are safe even if the session dies:
+
+```bash
+# View recent commits (even if detached)
+git reflog
+
+# Find your work
+git log --all --oneline | grep <keyword>
+
+# Recover a commit
+git cherry-pick <commit-hash>
+```
+
+### Diverged Completely from Remote
+
+```bash
+# Save your work first
+git branch backup/my-work
+
+# Reset to remote
+git fetch origin
+git reset --hard origin/master
+
+# Cherry-pick your commits if needed
+git cherry-pick <commit-hash>
+```
+
+### Rebase Gone Wrong
+
+```bash
+# Abort immediately
+git rebase --abort
+
+# Check reflog for pre-rebase state
+git reflog
+
+# Reset to before the rebase
+git reset --hard HEAD@{N}  # where N is the step before rebase started
+```
+
+---
+
+## Tools and Commands Reference
+
+| Command | Purpose |
+|---------|---------|
+| `git pull --rebase` | Get remote changes, replay yours on top |
+| `git fetch` | Download remote changes without merging |
+| `git status` | Check local vs remote state |
+| `git log origin/master..HEAD` | Show unpushed commits |
+| `git log HEAD..origin/master` | Show commits on remote you don't have |
+| `git reflog` | View history of HEAD changes (recovery tool) |
+| `git rebase --abort` | Cancel a rebase in progress |
+| `git rebase --continue` | Continue rebase after resolving conflicts |
+| `git cherry-pick <hash>` | Apply a specific commit to current branch |
+| `git branch backup/<name>` | Save current state before risky operations |
+
+---
+
+## Best Practices Summary
+
+1. **Always `git pull --rebase`** before pushing
+2. **Push immediately** after every commit (don't accumulate local commits)
+3. **Expect conflicts** as normal, not exceptional
+4. **Use dependencies** to serialize conflicting work
+5. **Keep changes small** to minimize conflict surface area
+6. **Check remote state** before starting work (`git fetch && git status`)
+7. **Commit frequently** (every logical unit of work)
+8. **Never force push** to main (for crew) or shared branches
+9. **Save state** before risky operations (`git branch backup/...`)
+10. **Use reflog** for recovery if things go wrong
+
+---
+
+## When to Ask for Help
+
+If you encounter:
+- Repeated merge conflicts on the same files (coordination issue)
+- Git commands failing with "unknown" errors (possible corruption)
+- Lost commits that reflog can't find (rare, but escalate)
+- Rebase loops (aborting and retrying doesn't help)
+
+Escalate to:
+```bash
+# For crew workers: ask the overseer
+gt mail send --human -s "Git issue" -m "Description"
+
+# For polecats: ask the witness
+gt mail send <rig>/witness -s "Git issue" -m "Description"
+```
+
+---
+
+## Philosophy: Git in Multi-Agent Systems
+
+Traditional git workflows assume:
+- One person controls when changes happen
+- You can "finish" before someone else starts
+- Remote changes are infrequent
+
+Gas Town inverts these assumptions:
+- **Many agents** push simultaneously
+- **No one controls** the global push schedule
+- **Remote changes** are constant
+
+The workflow adapts by:
+- Rebasing (not merging) to keep history linear
+- Pushing immediately (not batching)
+- Expecting conflicts (not avoiding them)
+- Using beads dependencies for coordination
+
+This requires more discipline but enables true parallel development.
+
+
+========================================================================
+# Troubleshooting
+# URL: /docs/guides/troubleshooting
+========================================================================
+
+# Troubleshooting
+
+This guide covers the most frequently encountered Gas Town problems and their solutions. For a comprehensive reference of all troubleshooting topics, see [Operations: Troubleshooting](../operations/troubleshooting.md).
+
+---
+
+## Dashboard URL `gt.villamarket.ai` Times Out
+
+**Symptom:** Attempting to access `https://gt.villamarket.ai` results in a timeout (curl exit code 28).
+
+**Cause:** There is no hosted dashboard at `gt.villamarket.ai`. The `gt dashboard` command starts a **local** web server on your machine, not a cloud service.
+
+**Solution:**
+
+Run the dashboard locally:
+
+```bash
+# Start the local dashboard
+gt dashboard
+
+# Or with a custom port
+gt dashboard --port 9000
+```
+
+Then access it at `http://localhost:8420` (or your custom port).
+
+:::note
+
+The dashboard is only available while the `gt dashboard` command is running. It is not a persistent hosted service.
+
+:::
+
+---
+
+## `gt done` Fails: "Not Inside a Rig Directory"
+
+**Symptom:** A polecat finishes its work, runs `gt done`, and gets:
+
+```
+Error: not inside a rig directory
+```
+
+This happens regardless of which directory you run the command from -- worktree, polecat root, rig root, or town root.
+
+**Cause:** `gt done` infers the rig from the current working directory. In some configurations (particularly polecat worktrees nested under `polecats/<name>/`), the directory detection fails to resolve to a valid rig path.
+
+**Workaround:**
+
+1. **Ensure your work is committed and pushed first:**
+
+    ```bash
+    git status              # Verify clean
+    git push origin HEAD    # Push the branch
+    ```
+
+2. **Notify the Witness manually:**
+
+    ```bash
+    gt mail send <rig>/witness -s "DONE: <bead-id>" -m "Work complete. Branch pushed. gt done fails (bug ga-w8vv)."
+    ```
+
+3. **Escalate if needed:**
+
+    ```bash
+    gt escalate "gt done fails: not inside rig directory" -s medium --related <bead-id>
+    ```
+
+The Witness will handle merge queue submission and polecat cleanup on your behalf.
+
+:::note
+
+This is a known issue tracked as **ga-w8vv**. Until it is fixed, the workaround above is the standard procedure for polecats that hit this error.
+
+:::
+
+---
+
+## Polecat Churn Cycle
+
+**Symptom:** A polecat spawns, crashes or fails quickly, gets cleaned up by the Witness, the work is re-slung to a new polecat, which also fails -- creating a loop of spawn-fail-respawn.
+
+**Cause:** Usually one of:
+
+- The bead describes work that is fundamentally impossible (missing dependency, invalid API, nonexistent file)
+- The test suite is broken on `main`, so every polecat fails preflight
+- The codebase has a configuration issue that prevents any agent from working
+- A merge conflict keeps reoccurring because the underlying problem is not resolved
+
+**Diagnosis:**
+
+```bash
+# Check recent polecat activity for a pattern
+gt trail --since 1h
+
+# Look at the bead's history -- has it been slung multiple times?
+bd show <bead-id>
+
+# Check if main is green
+cd <rig>/refinery/rig
+git checkout main && npm test   # or your project's test command
+```
+
+**Solutions:**
+
+1. **Break the cycle by releasing the bead:**
+
+    ```bash
+    gt release <bead-id>
+    ```
+
+    This unhooks the bead and stops it from being automatically re-slung.
+
+2. **Fix the root cause before re-slinging.** If `main` is broken, fix it first. If the bead is impossible, update or close it:
+
+    ```bash
+    bd update <bead-id> --description "Updated requirements: ..."
+    # or
+    bd close <bead-id> --reason "Not feasible: <explanation>"
+    ```
+
+3. **Check for a systemic issue:**
+
+    ```bash
+    gt doctor
+    bd list --status=in_progress   # Look for beads that keep cycling
+    ```
+
+:::tip
+
+If you see the same bead ID appearing repeatedly in `gt trail`, that is a churn cycle. The bead is the problem, not the polecats.
+
+:::
+
+---
+
+## `origin/main` vs `origin/master`
+
+**Symptom:** Git commands fail with errors like:
+
+```
+fatal: couldn't find remote ref main
+```
+
+or polecats push to the wrong branch.
+
+**Cause:** Some repositories use `main` as the default branch, others use `master`. Gas Town defaults to `main` but the remote repository may use `master`.
+
+**Diagnosis:**
+
+```bash
+# Check what the remote default branch is
+git remote show origin | grep "HEAD branch"
+
+# Check what branches exist
+git branch -r
+```
+
+**Solutions:**
+
+1. **Verify the remote default branch and use it consistently:**
+
+    ```bash
+    # If the remote uses master
+    git branch -r | grep origin/master
+    git branch -r | grep origin/main
+    ```
+
+2. **Set the rig's default branch in configuration** if it differs from `main`:
+
+    ```bash
+    # Check current rig configuration
+    gt rig show <rig>
+    ```
+
+3. **For polecats that encounter this mid-work:** adjust the target branch in your git commands:
+
+    ```bash
+    # If origin/master is the correct target
+    git rebase origin/master
+    git push origin HEAD
+    ```
+
+:::warning
+
+The Refinery merges to the repository's default branch. If there is a mismatch between what agents assume (`main`) and what the remote uses (`master`), merges will fail silently or target the wrong branch. Verify this during rig setup.
+
+:::
+
+---
+
+## Bead Routing: Town vs Rig
+
+**Symptom:** `bd show <id>` returns "not found" even though you know the bead exists, or `bd create` puts the bead in the wrong database.
+
+**Cause:** Beads exist at two levels with different prefixes:
+
+| Level | Location | Prefix | Example |
+|-------|----------|--------|---------|
+| **Town** | `~/gt/.beads/` | `hq-*` | `hq-abc123` |
+| **Rig** | `<rig>/.beads/` | Per-rig | `ga-xyz789` (gastowndocs) |
+
+The `bd` CLI routes based on the prefix in the bead ID. If you use the wrong prefix or are in the wrong directory, the command routes to the wrong database.
+
+**Diagnosis:**
+
+```bash
+# Check routing rules
+cat ~/gt/.beads/routes.jsonl
+
+# Debug routing for a specific bead
+BD_DEBUG_ROUTING=1 bd show <bead-id>
+```
+
+**Solutions:**
+
+1. **Use the correct prefix.** Every rig has a unique prefix. Check yours:
+
+    ```bash
+    bd list   # Shows beads in the current rig's database
+    ```
+
+2. **Route explicitly with `--rig`:**
+
+    ```bash
+    bd show <bead-id> --rig gastowndocs     # Force rig-level lookup
+    bd create --rig gastown --title "..."    # Create in a specific rig
+    ```
+
+3. **File in the right place.** The rule: file the bead in the rig that **owns the code** where the fix would be committed.
+
+    | Issue is about... | File in |
+    |-------------------|---------|
+    | This rig's code | Default (current rig) |
+    | `bd` CLI bugs | `beads` rig |
+    | `gt` CLI bugs | `gastown` rig |
+    | Cross-rig coordination | Town level (`hq-*`) |
+
+---
+
+## Hook Slot Failures
+
+**Symptom:** `gt sling` fails with an error about hooks, or a polecat starts but finds nothing on its hook.
+
+**Common errors:**
+
+```
+hook already attached
+```
+
+```
+no work on hook
+```
+
+**Cause:** Hooks are persistent pointers from an agent to its current bead. Hook conflicts happen when:
+
+- A previous polecat crashed without releasing its hook
+- A bead is already hooked to another agent
+- The hook file was corrupted during an unclean shutdown
+
+**Diagnosis:**
+
+```bash
+# Check what's on the hook
+gt hook
+
+# Check hooks across a rig
+gt hook --agent <polecat> --rig <rig>
+```
+
+**Solutions:**
+
+1. **"hook already attached"** -- Release the stale hook first:
+
+    ```bash
+    gt release <bead-id>
+
+    # Then re-sling
+    gt sling <bead-id> <rig>
+    ```
+
+2. **"no work on hook"** -- The polecat was spawned but work was not attached:
+
+    ```bash
+    # Check if mail contains the assignment
+    gt mail inbox
+
+    # If mail has the work, hook it manually
+    gt mol attach-from-mail <mail-id>
+
+    # If no mail either, escalate to Witness
+    gt mail send <rig>/witness -s "HELP: empty hook" -m "Polecat spawned with no work"
+    ```
+
+3. **Corrupted hook state** -- If the hook seems wrong or inconsistent:
+
+    ```bash
+    # Let the Witness clean up
+    gt mail send <rig>/witness -s "Hook state inconsistent" -m "Details..."
+
+    # Or if you have direct access, check the hook file
+    ls -la <rig>/polecats/<name>/.hook*
+    ```
+
+:::tip
+
+Hooks survive crashes -- that is their purpose. If a polecat crashes, the Witness detects the zombie, cleans up, and the hook persists for the next polecat. You should rarely need to manually manage hooks.
+
+:::
+
+---
+
+## Refinery Stuck Merges
+
+**Symptom:** The merge queue has items but nothing is being merged. `gt refinery queue` shows pending MRs but none are progressing.
+
+**Diagnosis:**
+
+```bash
+# Check Refinery status
+gt refinery status <rig>
+
+# Check the merge queue
+gt refinery queue <rig>
+
+# Check for blocked MRs
+gt refinery blocked <rig>
+
+# Check Refinery session health
+gt peek refinery --rig <rig>
+```
+
+**Common causes and solutions:**
+
+### 1. Refinery Session Crashed
+
+The Refinery agent may have crashed or lost context.
+
+```bash
+# Restart it
+gt refinery restart <rig>
+```
+
+### 2. Merge Conflict in the First MR
+
+The Refinery processes MRs strictly in order. If the first MR has an unresolvable conflict, it blocks everything behind it.
+
+```bash
+# Check what's at the head of the queue
+gt refinery queue <rig>
+
+# If the first MR is stuck on conflicts, skip it
+gt refinery release <mr-id>
+
+# Re-sling the problematic bead for a fresh attempt
+gt sling <bead-id> <rig>
+```
+
+### 3. Validation Failures
+
+Tests or linting fail during the Refinery's validation step.
+
+```bash
+# Attach to the Refinery to see what happened
+gt refinery attach <rig>
+
+# Check if main itself is broken
+cd <rig>/refinery/rig
+git pull origin main
+npm test   # or your project's test command
+```
+
+If `main` is broken, fix it first -- no MR can pass validation against a broken `main`.
+
+### 4. Stale Claim
+
+An MR was claimed by a Refinery worker that crashed before completing.
+
+```bash
+# Check for unclaimed MRs
+gt refinery unclaimed <rig>
+
+# Release the stale claim
+gt refinery release <mr-id>
+```
+
+:::note
+
+The Refinery merges MRs **one at a time**, rebasing each onto the latest `main`. This is intentional -- it prevents race conditions. If your queue is backing up, the bottleneck is usually validation speed (test suite runtime) or unresolved conflicts.
+
+:::
+
+---
+
+## Quick Diagnostic Reference
+
+| Problem | First Command |
+|---------|---------------|
+| General health check | `gt doctor` |
+| Something not running | `gt rig list` |
+| Work not progressing | `gt trail --since 1h` |
+| Polecat issues | `gt polecat list <rig>` |
+| Merge queue stuck | `gt refinery queue <rig>` |
+| Bead not found | `BD_DEBUG_ROUTING=1 bd show <id>` |
+| Agent unresponsive | `gt peek <agent>` |
+| Open escalations | `gt escalate list` |
+
+For the full troubleshooting reference, see [Operations: Troubleshooting](../operations/troubleshooting.md).
