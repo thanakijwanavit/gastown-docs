@@ -1222,6 +1222,30 @@ else
     fail_test "Found $BLOG_INTERLINK_ISSUES blog post(s) with fewer than 2 blog cross-links" "Add links to related blog posts in the Next Steps section"
 fi
 
+# Test 40: No orphaned blog slugs (every slug referenced by at least 1 doc page)
+echo ""
+echo "Test 40: Checking for orphaned blog slugs..."
+ORPHAN_ISSUES=0
+
+for blog_file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    slug=$(awk '/^---$/{if(++n==2)exit}n==1 && /^slug:/{print $2; exit}' "$blog_file" 2>/dev/null)
+    [ -z "$slug" ] && continue
+
+    # Check if any doc page references this slug
+    refs=$(grep -rl "/blog/$slug" "$ROOT_DIR/docs/" 2>/dev/null | wc -l)
+    if [ "$refs" -eq 0 ]; then
+        rel_file="${blog_file#$ROOT_DIR/}"
+        echo "  Orphaned blog slug '/blog/$slug' in $rel_file (not referenced by any doc page)"
+        ORPHAN_ISSUES=$((ORPHAN_ISSUES + 1))
+    fi
+done
+
+if [ "$ORPHAN_ISSUES" -eq 0 ]; then
+    pass_test "All blog slugs are referenced by at least one doc page"
+else
+    fail_test "Found $ORPHAN_ISSUES orphaned blog slug(s)" "Add a link to each orphaned blog post from a relevant doc page's Blog Posts section"
+fi
+
 # Summary
 echo ""
 echo "========================================"
