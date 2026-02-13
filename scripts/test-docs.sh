@@ -484,6 +484,71 @@ else
     fail_test "Found $BLOG_ISSUES blog quality issue(s)" "Ensure blog posts have title, description, tags, truncate marker, and 10+ lines"
 fi
 
+# Test 17: Validate anchor links point to existing headings
+echo ""
+echo "Test 17: Checking anchor links resolve to headings..."
+BROKEN_ANCHORS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract links with anchors: [text](path#anchor) or [text](#anchor)
+    while read -r link; do
+        # Skip external links
+        [[ "$link" =~ ^https?:// ]] && continue
+
+        # Must contain a # to be an anchor link
+        [[ "$link" != *"#"* ]] && continue
+
+        # Split into path and anchor
+        link_path="${link%%#*}"
+        anchor="${link#*#}"
+        [[ -z "$anchor" ]] && continue
+
+        # Determine target file
+        if [[ -z "$link_path" ]]; then
+            # Same-file anchor: #heading
+            target_file="$file"
+        else
+            # Cross-file anchor: path#heading
+            target_file="$(dirname "$file")/$link_path"
+            # Try with .md extension if not found
+            if [[ ! -f "$target_file" ]] && [[ ! "$target_file" =~ \.md$ ]]; then
+                target_file="${target_file}.md"
+            fi
+            # Also try as directory index
+            if [[ ! -f "$target_file" ]] && [[ -d "${target_file%.md}" ]]; then
+                target_file="${target_file%.md}/index.md"
+            fi
+        fi
+
+        [[ ! -f "$target_file" ]] && continue
+
+        # Convert anchor to expected heading text for comparison
+        # Markdown heading anchors are lowercase, spaces become hyphens, special chars removed
+        # Check if any heading in the target generates this anchor
+        found=false
+        while IFS= read -r heading; do
+            # Generate anchor from heading: lowercase, replace spaces with hyphens, strip non-alphanumeric (except hyphens)
+            generated=$(echo "$heading" | sed 's/^#\+ //' | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g' | sed 's/[^a-z0-9-]//g' | sed 's/--*/-/g' | sed 's/-$//')
+            if [[ "$generated" == "$anchor" ]]; then
+                found=true
+                break
+            fi
+        done < <(grep '^#' "$target_file" 2>/dev/null)
+
+        if [ "$found" = false ]; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Broken anchor in $rel_file: $link"
+            BROKEN_ANCHORS=$((BROKEN_ANCHORS + 1))
+        fi
+    done < <(grep -oP '\[.*?\]\(\K[^)]+' "$file" 2>/dev/null || true)
+done
+
+if [ "$BROKEN_ANCHORS" -eq 0 ]; then
+    pass_test "All anchor links resolve to valid headings"
+else
+    fail_test "Found $BROKEN_ANCHORS broken anchor link(s)" "Fix heading references to match actual heading text"
+fi
+
 # Summary
 echo ""
 echo "========================================"
