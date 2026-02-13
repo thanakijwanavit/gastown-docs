@@ -865,3 +865,9 @@ gt crew restart myproject dave
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Supervision tree and monitoring chain
 - [Polecats](../agents/polecats.md) -- Ephemeral worker lifecycle details
 - [Crew](../agents/crew.md) -- Persistent crew worker details
+
+### Blog Posts
+
+- [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness monitors polecat health and triggers recovery
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town and manages agent lifecycles
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for managing agents at scale

@@ -379,6 +379,11 @@ The Gas Town shell sets the `GT_ROLE` environment variable and configures the pr
 - [Rigs](../concepts/rigs.md) -- Project containers managed within the workspace
 - [Architecture Overview](../architecture/overview.md) -- How the workspace fits into the larger system
 
+### Blog Posts
+
+- [Why Git Worktrees? Gas Town's Isolation Strategy](/blog/git-worktrees) -- How Gas Town uses git worktrees to isolate parallel agent workspaces
+- [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
+
 ---
 
 ## `gt version`

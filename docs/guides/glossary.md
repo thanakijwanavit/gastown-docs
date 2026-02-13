@@ -166,3 +166,8 @@ bd <command> [options]
 - [System Overview](../architecture/overview.md) -- Five-layer reference breakdown of the Gas Town architecture
 - [The 8 Stages of AI Coding](eight-stages.md) -- Maturity model for AI-assisted development that Gas Town targets
 - [Background & Philosophy](philosophy.md) -- Why Gas Town exists and the design thinking behind it
+
+### Blog Posts
+
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog
+- [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How the Gas Town Universal Propulsion Principle makes multi-agent development crash-safe

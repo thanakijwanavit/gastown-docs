@@ -265,3 +265,7 @@ Boot is designed for rapid triage (seconds, not minutes). If Boot is slow:
 - [Deacon](deacon.md) -- The agent that Boot monitors and wakes
 - [Dogs](dogs.md) -- Boot is a specialized dog managed by the Deacon
 - [Molecules](../concepts/molecules.md) -- The `mol-boot-triage` formula defines Boot's triage cycle
+
+### Blog Posts
+
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, manages agent lifecycles, and coordinates recovery

@@ -251,3 +251,8 @@ gt deacon status             # Verify Deacon is processing mail
 - [Boot](boot.md) -- A special-purpose dog for system triage
 - [Polecats](polecats.md) -- Feature workers (contrast with infrastructure dogs)
 - [Rigs](../concepts/rigs.md) -- Dogs operate across rigs, unlike polecats
+
+### Blog Posts
+
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, manages agent lifecycles, and dispatches dogs
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for running at scale with dozens of concurrent agents

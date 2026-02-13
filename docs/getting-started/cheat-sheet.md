@@ -154,3 +154,8 @@ In Gas Town, unpushed commits are invisible to every other agent. Push after eve
 - [Quick Start](quickstart.md) -- Set up your first workspace end-to-end
 - [Glossary](../guides/glossary.md) -- Full terminology reference for all Gas Town terms
 - [CLI Reference](../cli-reference/index.md) -- Complete command documentation with all flags and options
+
+### Blog Posts
+
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new users make
+- [Your First Convoy in 5 Minutes](/blog/first-convoy) -- Quick walkthrough of creating beads, bundling a convoy, and watching polecats deliver

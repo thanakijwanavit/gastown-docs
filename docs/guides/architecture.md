@@ -630,3 +630,8 @@ Git is the ground truth. The Refinery's canonical clone is the single source of 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Detailed supervision tree and patrol cycles
 - [Work Distribution](../architecture/work-distribution.md) -- Sling, hook, and convoy mechanics
 - [Design Principles](../architecture/design-principles.md) -- The twelve principles behind the architecture
+
+### Blog Posts
+
+- [Gas Town's Security Model: Trust Boundaries for AI Agents](/blog/security-model) -- How Gas Town implements security through workspace isolation and trust boundaries
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running at scale

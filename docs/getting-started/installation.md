@@ -146,3 +146,7 @@ gt config agent set gemini "gemini"
 - [Multi-Runtime Support](../guides/multi-runtime.md) -- Configure and mix multiple AI coding agent runtimes
 - [System Overview](../architecture/overview.md) -- Understand the components you are installing
 - [The 8 Stages of AI Coding](../guides/eight-stages.md) -- Check if you are ready for Gas Town
+
+### Blog Posts
+
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog

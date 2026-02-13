@@ -744,3 +744,8 @@ gt thanks
 - [Troubleshooting](../operations/troubleshooting.md) -- Common issues and solutions
 - [Monitoring](../operations/monitoring.md) -- Health monitoring and observability
 - [gt compact](./compact.md) -- TTL-based compaction for ephemeral wisps
+
+### Blog Posts
+
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health and catching problems early
+- [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- Diagnosing and recovering from common failures

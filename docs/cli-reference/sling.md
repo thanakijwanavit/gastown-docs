@@ -149,3 +149,8 @@ The `--args` string is stored in the bead and shown via `gt prime`. Since the ex
 - [GUPP (Propulsion Principle)](../concepts/gupp.md) -- The hook-driven execution model that sling triggers
 - [Convoy & Tracking](./convoys.md) -- Managing batches of slung work
 - [Polecats](../agents/polecats.md) -- Ephemeral workers auto-spawned by sling
+
+### Blog Posts
+
+- [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- Deep dive into the persistence primitive that sling triggers
+- [The Mayor Workflow: Gas Town's Fully Automated Pipeline](/blog/mayor-workflow) -- How the MEOW workflow automates the journey from request to merged code
