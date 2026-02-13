@@ -86,6 +86,7 @@
 - Background & Philosophy: /docs/guides/philosophy
 - Architecture Guide: /docs/guides/architecture
 - Glossary: /docs/guides/glossary
+- AWS Deployment Guide: /docs/guides/aws-deployment
 - Troubleshooting: /docs/guides/troubleshooting
 
 ---
@@ -671,6 +672,15 @@ Gas Town is a multi-agent AI orchestration system where dozens of autonomous age
 Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions.
 
 A comprehensive reference for Gas Town terminology, drawn from the documentation and Steve Yegge's articles on multi-agent AI orchestration.
+
+---
+
+## AWS Deployment Guide
+> /docs/guides/aws-deployment
+
+Deploy Gas Town documentation site to AWS using S3, CloudFront, and Route 53 with the villaai profile.
+
+This guide covers deploying the Gas Town documentation site to AWS infrastructure using S3 for static hosting, CloudFront for CDN, and Route 53 for DNS.
 
 ---
 

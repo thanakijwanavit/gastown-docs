@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T07:52:52.930Z",
+  "generated": "2026-02-13T09:11:09.674Z",
   "sections": [
     {
       "id": "getting-started",
@@ -366,6 +366,11 @@
           "description": "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
         },
         {
+          "title": "AWS Deployment Guide",
+          "path": "/docs/guides/aws-deployment",
+          "description": "Deploy Gas Town documentation site to AWS using S3, CloudFront, and Route 53 with the villaai profile."
+        },
+        {
           "title": "Troubleshooting",
           "path": "/docs/guides/troubleshooting",
           "description": "Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries."
@@ -637,6 +642,12 @@
       "path": "/docs/guides/architecture",
       "section": "guides",
       "description": "A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Refinery, and Polecats work together as a self-healing multi-agent system built on Erlang-inspired supervision, git worktrees, and persistent hooks."
+    },
+    {
+      "title": "AWS Deployment Guide",
+      "path": "/docs/guides/aws-deployment",
+      "section": "guides",
+      "description": "Deploy Gas Town documentation site to AWS using S3, CloudFront, and Route 53 with the villaai profile."
     },
     {
       "title": "Cost Management",

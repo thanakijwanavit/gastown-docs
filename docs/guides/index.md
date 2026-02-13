@@ -22,6 +22,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 | [Architecture Guide](architecture.md) | Comprehensive tour of Gas Town's multi-agent architecture |
 | [Troubleshooting](troubleshooting.md) | Solutions for common Gas Town problems and workarounds |
 | [Glossary](glossary.md) | Complete terminology reference for all Gas Town concepts |
+| [AWS Deployment Guide](aws-deployment.md) | Deploy documentation site to AWS S3 + CloudFront with villaai profile |
 
 ## Who Are These Guides For?
 
