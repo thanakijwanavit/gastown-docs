@@ -142,3 +142,7 @@ Never create wisps directly with `bd create --type wisp`. Wisps are internal tra
 - **[Beads](beads.md)** -- Wisps are a specialized bead type (`type: wisp`) with ephemeral lifecycle
 - **[Gates](gates.md)** -- A wisp can be gated, pausing its molecule step until an external condition resolves
 - **[Hooks](hooks.md)** -- The parent molecule (containing wisps) is attached to an agent's hook
+
+### Blog Posts
+
+- [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating TOML formulas that define custom agent workflows for specialized tasks

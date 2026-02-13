@@ -278,3 +278,7 @@ If a merge conflict occurs during rebase, the Refinery can spawn a fresh polecat
 - [Refinery](../agents/refinery.md) -- The agent that processes the merge queue
 - [Git Workflow](../guides/git-workflow.md) -- How merges fit into Gas Town's git model
 - [Code Review](../workflows/code-review.md) -- Review workflow before merge
+
+### Blog Posts
+
+- [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into how the Refinery serializes parallel agent work into a clean linear history on main

@@ -473,3 +473,8 @@ gt rig settings myproject --unset "validation.timeout"
 - [Rigs Concept](../concepts/rigs.md) -- What rigs are and how they work
 - [Starting & Stopping](../operations/lifecycle.md) -- Rig lifecycle management
 - [Workspace Management](./workspace.md) -- Town-level workspace commands
+
+### Blog Posts
+
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale with dozens of concurrent agents
+- [Why Git Worktrees? Gas Town's Isolation Strategy](/blog/git-worktrees) -- How Gas Town uses git worktrees instead of containers to isolate parallel agent workspaces

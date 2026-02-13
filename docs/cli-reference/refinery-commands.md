@@ -318,3 +318,7 @@ All subcommands that accept `[rig]` infer the rig from the current directory whe
 - [gt mq](./merge-queue.md) -- Merge queue commands for submitting and managing MRs
 - [Git Workflow](../guides/git-workflow.md) -- Branch management and merge strategies
 - [Work Distribution](../architecture/work-distribution.md) -- End-to-end work flow through Gas Town
+
+### Blog Posts
+
+- [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into how the Refinery serializes parallel agent work into a clean linear history on main

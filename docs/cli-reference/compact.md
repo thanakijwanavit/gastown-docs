@@ -116,3 +116,7 @@ Compaction is irreversible for deletions. Use `--dry-run` first to verify what w
 
 - [Wisps](../concepts/wisps.md) -- The ephemeral beads that compaction manages
 - [Diagnostics](./diagnostics.md) -- Other maintenance and diagnostic commands
+
+### Blog Posts
+
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How Gas Town agents automatically hand off work when their context window fills up

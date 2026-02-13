@@ -372,3 +372,8 @@ Previously required when beads used file-based storage to ensure polecat bead st
 - [gt session](./session-commands.md) -- Managing tmux sessions for polecats
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Where polecats fit in the supervision tree
 - [Session Cycling](../concepts/session-cycling.md) -- How context cycling works for agents
+
+### Blog Posts
+
+- [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness agent monitors polecat health, detects stalls, and triggers recovery
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make, from vague beads to ignoring the Refinery queue

@@ -112,3 +112,7 @@ For non-urgent communication, use `gt mail send` instead. Nudges interrupt the t
 
 - [Communication](./communication.md) -- Full communication command reference (mail, escalations, broadcasts)
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The escalation path that nudge supports
+
+### Blog Posts
+
+- [Gas Town's Mail System: Async Agent Communication](/blog/mail-system) -- How Gas Town agents communicate through async mail, from simple notifications to handoff context that spans session boundaries

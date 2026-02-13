@@ -374,3 +374,8 @@ Merge status: 2 merged, 0 in queue
 - [Manual Convoy Workflow](../workflows/manual-convoy.md) -- Step-by-step guide for running convoys
 - [gt sling](./sling.md) -- Assigning work to agents (auto-creates convoys)
 - [Work Distribution](../architecture/work-distribution.md) -- How work flows through Gas Town
+
+### Blog Posts
+
+- [Your First Convoy in 5 Minutes](/blog/first-convoy) -- A quick walkthrough of creating beads, bundling a convoy, and watching polecats deliver code to main
+- [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- Go beyond basic convoys with cross-rig tracking, dependency chains, parallel fan-out, and monitoring strategies
