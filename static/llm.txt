@@ -157,7 +157,7 @@ Gas Town's architecture draws from Erlang's supervisor trees and mailbox pattern
 ## System Overview
 > /docs/architecture/overview
 
-Gas Town consists of five layers:
+Gas Town consists of five layers: the Town workspace, Rigs for each project, Agents that do the work, a Daemon scheduler, and a Communication layer connecting everything.
 
 Gas Town consists of five layers:
 

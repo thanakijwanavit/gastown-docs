@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T16:15:19.269Z",
+  "generated": "2026-02-13T16:28:11.541Z",
   "sections": [
     {
       "id": "getting-started",
@@ -42,7 +42,7 @@
         {
           "title": "System Overview",
           "path": "/docs/architecture/overview",
-          "description": "Gas Town consists of five layers:"
+          "description": "Gas Town consists of five layers: the Town workspace, Rigs for each project, Agents that do the work, a Daemon scheduler, and a Communication layer connecting everything."
         },
         {
           "title": "Agent Hierarchy",
@@ -500,7 +500,7 @@
       "title": "System Overview",
       "path": "/docs/architecture/overview",
       "section": "architecture",
-      "description": "Gas Town consists of five layers:"
+      "description": "Gas Town consists of five layers: the Town workspace, Rigs for each project, Agents that do the work, a Daemon scheduler, and a Communication layer connecting everything."
     },
     {
       "title": "Work Distribution",

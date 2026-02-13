@@ -8288,6 +8288,8 @@ Formulas are loaded from these locations (in priority order):
 2. `~/.beads/formulas/` — User-level formulas
 3. `$GT_ROOT/.beads/formulas/` — Orchestrator-level (shared across all rigs)
 
+When multiple formulas share the same name, the highest-priority path wins. This allows project-level overrides of shared formulas.
+
 ## Commands
 
 ### `gt formula list`
@@ -8295,34 +8297,93 @@ Formulas are loaded from these locations (in priority order):
 List all available formulas from all search paths.
 
 ```bash
-gt formula list
+gt formula list            # List all formulas
+gt formula list --json     # JSON output for scripting
 ```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
 
 ### `gt formula show <name>`
 
 Display formula details including steps, variables, and composition rules.
 
 ```bash
-gt formula show shiny
-gt formula show witness-patrol
+gt formula show shiny              # Show the canonical workflow
+gt formula show witness-patrol     # Show a patrol formula
+gt formula show shiny --json       # Machine-readable output
 ```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output as JSON |
+
+**Output includes:**
+
+- Formula metadata (name, type, description)
+- Variables with defaults and constraints
+- Steps with dependency relationships
+- Composition rules (extends, aspects)
 
 ### `gt formula run <name>`
 
 Execute a formula by pouring it into a new molecule and dispatching it. Variables can be passed as flags.
 
 ```bash
+# Run the canonical shiny workflow
+gt formula run shiny --var feature="Add notifications"
+
+# Run on a specific PR
 gt formula run shiny --pr=123
-gt formula run code-review --bead=gt-abc
+
+# Run in a specific rig
+gt formula run security-audit --rig=beads
+
+# Preview what would happen without executing
+gt formula run release --dry-run
+
+# Run default formula (from rig config)
+gt formula run
 ```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--pr <N>` | GitHub PR number to run the formula against |
+| `--rig <name>` | Target a specific rig (default: current or gastown) |
+| `--dry-run` | Preview execution without actually running |
+
+If no formula name is provided, uses the default formula configured in the rig's `settings/config.json` under `workflow.default_formula`.
 
 ### `gt formula create <name>`
 
 Create a new formula template in the project's `.beads/formulas/` directory.
 
 ```bash
-gt formula create my-workflow
+gt formula create my-task                    # Create task formula (default)
+gt formula create my-workflow --type=workflow # Multi-step workflow with dependencies
+gt formula create nightly-check --type=patrol # Repeating patrol cycle
 ```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--type <type>` | Formula type: `task`, `workflow`, or `patrol` (default: `task`) |
+
+## Formula Types
+
+| Type | Purpose | Example |
+|------|---------|---------|
+| `task` | Single-step, one-shot work | A quick bugfix or one-off task |
+| `workflow` | Multi-step sequence with dependencies | `shiny` — design, implement, review, test, submit |
+| `patrol` | Repeating cycle (used for wisps) | `mol-witness-patrol` — continuous health monitoring |
 
 ## How Formulas Relate to Molecules
 
@@ -8330,6 +8391,46 @@ gt formula create my-workflow
 - A **[molecule](../concepts/molecules.md)** is a live instance created from a formula
 - "Pouring" a formula creates a molecule with concrete variable bindings
 - Multiple molecules can be poured from the same formula simultaneously
+- "Wisping" creates an ephemeral patrol molecule that repeats its cycle
+
+## Example: The `shiny` Formula
+
+The canonical Gas Town workflow formula:
+
+```toml
+description = "Engineer in a Box - design before you code."
+formula = "shiny"
+type = "workflow"
+version = 1
+
+[[steps]]
+id = "design"
+title = "Design {{feature}}"
+
+[[steps]]
+id = "implement"
+needs = ["design"]
+title = "Implement {{feature}}"
+
+[[steps]]
+id = "review"
+needs = ["implement"]
+title = "Review implementation"
+
+[[steps]]
+id = "test"
+needs = ["review"]
+title = "Test {{feature}}"
+
+[[steps]]
+id = "submit"
+needs = ["test"]
+title = "Submit for merge"
+
+[vars.feature]
+description = "The feature being implemented"
+required = true
+```
 
 See [Formula Workflow](../workflows/formula-workflow.md) for a step-by-step guide to creating and using formulas.
 
@@ -8338,6 +8439,7 @@ See [Formula Workflow](../workflows/formula-workflow.md) for a step-by-step guid
 - [Molecules](../concepts/molecules.md) — Running workflow instances
 - [MEOW Stack](../concepts/meow-stack.md) — The layered workflow abstraction model
 - [Formula Workflow](../workflows/formula-workflow.md) — End-to-end formula usage guide
+- [Convoys](convoys.md) — Parallel multi-agent workflows (convoy-type formulas)
 
 
 ========================================================================
@@ -8413,17 +8515,68 @@ gt dolt recover        # Auto-detect and fix read-only state
 gt dolt status         # Verify recovery
 ```
 
+This typically happens when the Dolt server shuts down uncleanly or when multiple writers conflict. The `recover` command detects the issue and restarts the server with a clean lock state.
+
 ### Adding a New Rig
+
+When a new rig is created, it needs its own database:
 
 ```bash
 gt dolt init-rig       # Creates database for the new rig
-gt dolt list           # Verify it appears
+gt dolt list           # Verify it appears in the database list
 ```
+
+### Inspecting Data with SQL
+
+The `sql` subcommand opens an interactive SQL shell connected to the running Dolt server. Useful for debugging beads state:
+
+```bash
+gt dolt sql
+# Then in the SQL shell:
+# USE gastowndocs;
+# SELECT * FROM beads WHERE status = 'in_progress';
+# SHOW TABLES;
+```
+
+### Migration from Embedded Mode
+
+If upgrading from embedded Dolt (per-rig `.beads/` databases) to the centralized server:
+
+```bash
+gt dolt migrate        # Move databases to centralized .dolt-data/
+gt dolt start          # Start the server against the new location
+gt dolt fix-metadata   # Update rig metadata to point to the server
+```
+
+If migration goes wrong, roll back:
+
+```bash
+gt dolt rollback       # Restore from the pre-migration backup
+```
+
+## Architecture
+
+```
+$GT_ROOT/
+├── .dolt-data/              ← Centralized data directory
+│   ├── hq/                  ← HQ (town-level) database
+│   ├── gastowndocs/         ← Per-rig database
+│   ├── beads/               ← Per-rig database
+│   └── ...
+└── gt/
+    └── gastowndocs/
+        └── .beads/
+            └── metadata.json  ← Points to Dolt server on port 3307
+```
+
+All `bd` commands route through the Dolt server automatically when it's running. If the server is down, commands fall back to embedded mode (single-writer).
 
 ## See Also
 
 - [Beads](../concepts/beads.md) — The work tracking system backed by Dolt
 - [Configuration](configuration.md) — Town-level settings
+- [gt krc](krc.md) — TTL-based lifecycle for ephemeral data stored in Dolt
+- [Monitoring](../operations/monitoring.md) — Operational monitoring patterns
 
 
 ========================================================================
@@ -8684,25 +8837,58 @@ Operational data like patrol heartbeats, status checks, and health reports decay
 Show statistics about ephemeral data — counts by event type, age distribution, storage usage.
 
 ```bash
-gt krc stats
+gt krc stats              # Human-readable summary
+gt krc stats --json       # Machine-readable output
 ```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output in JSON format |
 
 ### `gt krc prune`
 
-Remove expired events based on configured TTLs.
+Remove expired events based on configured TTLs. Events are removed from both `.events.jsonl` and `.feed.jsonl`. The operation is atomic (uses temp files and rename).
 
 ```bash
 gt krc prune              # Remove expired events
 gt krc prune --dry-run    # Preview what would be pruned (no changes)
+gt krc prune --auto       # Daemon mode: only prune if PruneInterval has elapsed
 ```
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Preview changes without modifying files |
+| `--auto` | Daemon mode: only prune if PruneInterval has elapsed since last run |
 
 ### `gt krc decay`
 
 Show forensic value decay report — visualize how data value decreases over time.
 
 ```bash
-gt krc decay
+gt krc decay              # Human-readable decay report
+gt krc decay --json       # Machine-readable output
 ```
+
+Each event type follows one of four decay curves:
+
+| Curve | Behavior | Typical Events |
+|-------|----------|---------------|
+| `rapid` | Value drops quickly | Heartbeats, pings |
+| `steady` | Linear decay over time | Session events, patrol cycles |
+| `slow` | Value persists longer | Errors, escalations |
+| `flat` | Full value until near TTL | Audit events, death warrants |
+
+Events with low forensic scores are candidates for aggressive pruning.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--json` | Output in JSON format |
 
 ### `gt krc config`
 
@@ -8712,7 +8898,18 @@ View or modify TTL configuration for event types.
 gt krc config                      # Show current TTL settings
 gt krc config set patrol_* 12h     # Set TTL for patrol events to 12 hours
 gt krc config set heartbeat_* 6h   # Set TTL for heartbeat events to 6 hours
+gt krc config set default 3d       # Set default TTL to 3 days
+gt krc config reset                # Reset to default configuration
 ```
+
+**Subcommands:**
+
+| Subcommand | Description |
+|------------|-------------|
+| `set <pattern> <ttl>` | Set TTL for event type matching glob pattern |
+| `reset` | Reset all TTLs to default values |
+
+TTL durations use Go-style shorthand: `6h` (hours), `3d` (days), `1w` (weeks).
 
 ### `gt krc auto-prune-status`
 
@@ -8734,10 +8931,35 @@ KRC manages **Level 0** (ephemeral) data as defined in the Dolt storage design:
 
 KRC only manages Level 0. Higher levels are managed by Dolt directly.
 
+## How Auto-Pruning Works
+
+When configured, KRC can run pruning automatically at a set interval:
+
+1. **PruneInterval** defines how often pruning runs (e.g., every 6 hours)
+2. The Deacon's patrol cycle triggers `gt krc prune --auto`
+3. The `--auto` flag checks whether the interval has elapsed since the last prune
+4. If the interval has passed, expired events are pruned atomically
+5. Use `gt krc auto-prune-status` to verify the schedule is active
+
+This keeps the beads database lean without manual intervention.
+
+## Relationship to Patrol
+
+Patrol agents are the primary producers of Level 0 data. Each 5-minute patrol cycle generates heartbeats, status checks, and health reports. Without KRC pruning, this data accumulates rapidly — hundreds of events per day per rig.
+
+The typical flow:
+
+```
+Patrol agents → generate ephemeral events → KRC prunes expired → gt patrol digest aggregates
+```
+
+Use `gt krc stats` to monitor accumulation rates and tune TTLs accordingly.
+
 ## See Also
 
 - [gt patrol](patrol.md) — Patrol digest aggregation
 - [gt dolt](dolt.md) — Dolt SQL server management
+- [Patrol Cycles](../concepts/patrol-cycles.md) — The patrol monitoring pattern
 - [Monitoring](../operations/monitoring.md) — Operational monitoring patterns
 
 
@@ -9230,6 +9452,7 @@ gt rig start <rig>           # Start rig agents if needed
 - **[Polecats](polecats.md)** -- Workers the Mayor assigns tasks to
 - **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence used by all persistent agents
 - **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Session cycling protocol for long-running agents
+- **[Agent Commands](../cli-reference/agents.md)** -- CLI commands for Mayor lifecycle and operations
 
 
 ========================================================================
@@ -9831,6 +10054,7 @@ gt nudge <rig>/witness "context check"
 - **[GUPP](../concepts/gupp.md)** -- The principle that drives polecat execution
 - **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic monitoring cadence the Witness follows
 - **[Session Cycling](../concepts/session-cycling.md)** -- How the Witness manages context limits via handoff
+- **[Agent Commands](../cli-reference/agents.md)** -- CLI commands for Witness lifecycle and operations
 
 
 ========================================================================
@@ -10148,6 +10372,7 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 - **[Beads](../concepts/beads.md)** -- MR beads track each merge request through the queue
 - **[Merge Queue CLI](../cli-reference/merge-queue.md)** -- CLI commands for interacting with the merge queue
 - **[Patrol Cycles](../concepts/patrol-cycles.md)** -- Periodic processing cadence the Refinery follows
+- **[Refinery Commands](../cli-reference/refinery-commands.md)** -- CLI commands for Refinery management and queue operations
 
 
 ========================================================================
@@ -10521,6 +10746,7 @@ Next: <what remains>"
 - **[Beads](../concepts/beads.md)** -- Issue tracking system polecats use for task management
 - **[Session Cycling](../concepts/session-cycling.md)** -- How polecats hand off context when sessions fill up
 - **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Protocol for transferring work between sessions
+- **[Polecat Commands](../cli-reference/polecat-commands.md)** -- CLI commands for polecat lifecycle and management
 
 
 ========================================================================
@@ -13728,6 +13954,7 @@ gt mail inbox
 - **[Molecules](molecules.md)** -- Multi-step workflows track progress across session boundaries
 - **[Patrol Cycles](patrol-cycles.md)** -- Persistent agents use patrol molecules that squash-and-respawn across session boundaries
 - **[Handoff Ceremony](../workflows/handoff-ceremony.md)** -- Step-by-step guide for clean session transitions
+- **[Session Commands](../cli-reference/sessions.md)** -- CLI commands for session management and handoff
 
 
 ========================================================================
@@ -22666,3 +22893,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | `gt polecat list` | List active polecats across rigs |
 | `gt mail inbox` | Check your inbox |
 | `gt done` | Signal work ready for merge queue |
+
+## See Also
+
+- [System Overview](../architecture/overview.md) — High-level architecture summary
+- [Design Principles](../architecture/design-principles.md) — Core principles governing Gas Town
+- [CLI Reference](../cli-reference/index.md) — Full command documentation
+- [The 8 Stages](eight-stages.md) — Software Survival 3.0 maturity model
