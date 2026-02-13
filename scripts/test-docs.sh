@@ -268,6 +268,38 @@ else
 fi
 fi
 
+# Test 10: Check for bare code blocks (missing language specifiers)
+echo ""
+echo "Test 10: Checking for bare code blocks..."
+BARE_BLOCKS=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Track whether we're inside a code block
+    in_block=false
+    line_num=0
+    while IFS= read -r line; do
+        line_num=$((line_num + 1))
+        if [[ "$line" =~ ^'```' ]]; then
+            if [ "$in_block" = false ]; then
+                # Opening fence — check if it has a language tag
+                if [[ "$line" =~ ^'```'$ ]]; then
+                    echo "  Bare code block in $file:$line_num"
+                    BARE_BLOCKS=$((BARE_BLOCKS + 1))
+                fi
+                in_block=true
+            else
+                in_block=false
+            fi
+        fi
+    done < "$file"
+done
+
+if [ "$BARE_BLOCKS" -eq 0 ]; then
+    pass_test "All code blocks have language specifiers"
+else
+    fail_test "Found $BARE_BLOCKS bare code block(s)" "Add language tags (bash, text, json, etc.) to opening fences"
+fi
+
 # Summary
 echo ""
 echo "========================================"
