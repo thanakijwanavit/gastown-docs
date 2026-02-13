@@ -382,6 +382,7 @@ Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for d
 
 ### Blog Posts
 
+- [Molecules and Formulas: Gas Town's Workflow Engine](/blog/molecules-and-formulas) -- How molecules track multi-step workflows with crash-safe progress and how formulas define reusable templates
 - [Creating Custom Formulas](/blog/custom-formulas) -- Step-by-step guide to writing your own workflow formulas
 - [Formula Design Patterns](/blog/formula-design-patterns) -- Five TOML formula patterns from linear to gated multi-stage pipelines
 - [Refinery Deep Dive](/blog/refinery-deep-dive) -- How molecules drive the merge queue processing pipeline
