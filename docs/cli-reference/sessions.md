@@ -8,6 +8,19 @@ description: "Commands for managing agent sessions, handoffs between sessions, m
 
 Commands for managing agent sessions, handoffs between sessions, molecules (multi-step workflows), and formulas (reusable workflow templates).
 
+```mermaid
+flowchart LR
+    START[gt prime] --> WORK[Work on hook]
+    WORK --> CTX{Context full?}
+    CTX -->|yes| HO[gt handoff]
+    CTX -->|no| DONE{Work done?}
+    DONE -->|yes| FIN[gt done]
+    DONE -->|no| WORK
+    HO --> NEW[New session]
+    NEW --> START
+    FIN --> MQ[Submit to merge queue]
+```
+
 ---
 
 ## Session Management

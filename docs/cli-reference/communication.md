@@ -8,6 +8,18 @@ description: "Send mail, nudge agents, broadcast announcements, and manage prior
 
 Commands for inter-agent messaging, notifications, escalations, and broadcasts. Gas Town's communication layer is built on Erlang-inspired mailbox patterns with asynchronous message passing as the default.
 
+```mermaid
+flowchart TD
+    A[Agent A] -->|gt mail send| MB[Agent B Mailbox]
+    A -->|gt nudge| S[Agent B Session]
+    A -->|gt broadcast| ALL[All Agent Mailboxes]
+    A -->|gt escalate| ESC{Severity?}
+    ESC -->|P3| BEAD[Bead only]
+    ESC -->|P2| MAY[Mail → Mayor]
+    ESC -->|P1| HUM[Mail → Mayor → Email → Human]
+    ESC -->|P0| SMS[Mail → Mayor → Email → SMS → Human]
+```
+
 ---
 
 ## Mail

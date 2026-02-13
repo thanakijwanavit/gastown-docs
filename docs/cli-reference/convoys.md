@@ -8,6 +8,17 @@ description: "CLI reference for creating, tracking, and managing convoys that bu
 
 Convoys are Gas Town's primary mechanism for bundling and tracking batches of related work. A convoy groups multiple beads together, monitors their collective progress, and auto-closes when all tracked items complete.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Active: gt convoy create
+    Active --> Active: gt convoy add (add beads)
+    Active --> Completed: All beads closed (auto-close)
+    Active --> Completed: gt convoy close
+    Active --> Stalled: Beads stuck / stranded
+    Stalled --> Active: gt sling stranded beads
+    Completed --> [*]: gt convoy synthesis
+```
+
 ---
 
 ## `gt convoy create`

@@ -8,6 +8,17 @@ description: "Extend Gas Town with custom gate plugins, action hooks, and schedu
 
 Gas Town's plugin system extends the platform with custom automation, gates, and scheduled tasks. Plugins can operate at the town level (affecting all rigs) or at the rig level (scoped to a single project).
 
+```mermaid
+flowchart TD
+    TRIGGER{Trigger event}
+    TRIGGER -->|pre-merge| GATE[Gate Plugin: blocks until condition met]
+    TRIGGER -->|post-merge| ACTION[Action Plugin: side effects]
+    TRIGGER -->|on-spawn| HOOK[Hook Plugin: intercept lifecycle]
+    TRIGGER -->|cron schedule| SCHED[Schedule Plugin: periodic task]
+    GATE -->|pass| CONTINUE[Workflow continues]
+    GATE -->|fail| BLOCK[Workflow blocked]
+```
+
 ---
 
 ## Plugin Locations

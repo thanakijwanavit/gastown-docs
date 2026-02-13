@@ -8,6 +8,17 @@ description: "Monitor system health, audit agent activity, track costs, and clea
 
 Commands for monitoring, auditing, and troubleshooting Gas Town. These tools provide visibility into system health, agent activity, resource usage, and operational state.
 
+```mermaid
+flowchart LR
+    Q{What do you need?}
+    Q -->|Health check| DOC[gt doctor]
+    Q -->|Live monitoring| FEED[gt feed / gt status --watch]
+    Q -->|Historical data| ACT[gt activity / gt audit]
+    Q -->|Cost tracking| COST[gt costs]
+    Q -->|Debug a bead| TRAIL[gt trail bead-id]
+    Q -->|Find orphans| ORPH[gt orphans]
+```
+
 ---
 
 ## Town Status

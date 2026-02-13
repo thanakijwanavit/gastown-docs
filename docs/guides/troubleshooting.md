@@ -8,6 +8,16 @@ description: "Solutions for the most common Gas Town problems: gt done failures,
 
 This guide covers the most frequently encountered Gas Town problems and their solutions. For a comprehensive reference of all troubleshooting topics, see [Operations: Troubleshooting](../operations/troubleshooting.md).
 
+```mermaid
+flowchart LR
+    Q{Common issue?}
+    Q -->|gt done fails| A[Check git status, push manually]
+    Q -->|Polecat churn| B[Check Witness logs, increase stale threshold]
+    Q -->|Branch conflicts| C[gt mq retry --rebase]
+    Q -->|Bead routing wrong| D[Check bd routes, verify prefix]
+    Q -->|Refinery stuck| E[gt refinery restart]
+```
+
 ---
 
 ## Dashboard URL `gt.villamarket.ai` Times Out

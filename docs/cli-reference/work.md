@@ -8,6 +8,19 @@ description: "Reference for gt sling, gt hook, gt done, and bd commands that cre
 
 Commands for creating, assigning, tracking, and completing work items. This includes both `gt` commands for work orchestration and `bd` (Beads) commands for issue tracking.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Open: bd create
+    Open --> Hooked: gt sling / gt hook
+    Hooked --> InProgress: Agent starts work
+    InProgress --> Completed: gt done
+    InProgress --> Escalated: gt done --escalate
+    InProgress --> Deferred: gt done --defer
+    InProgress --> Open: gt release / gt unsling
+    Completed --> [*]: Merged to main
+    Escalated --> Open: Resolved, re-assigned
+```
+
 ---
 
 ## Work Orchestration

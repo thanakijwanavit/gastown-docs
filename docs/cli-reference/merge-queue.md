@@ -8,6 +8,19 @@ description: "Manage the Refinery merge queue with commands to list, submit, rej
 
 Commands for managing the Refinery's merge queue. The Refinery processes merge requests (MRs) submitted by polecats, rebasing them onto the latest main branch, running validation, and merging clean code.
 
+```mermaid
+flowchart LR
+    SUB[gt mq submit] --> Q[Queue: pending]
+    Q --> R[Rebase onto main]
+    R --> V[Validate: tests + checks]
+    V -->|pass| MRG[Merge to main]
+    V -->|fail| REJ[Rejected]
+    R -->|conflict| CONF[Conflict]
+    REJ -->|gt mq retry| Q
+    CONF -->|spawn polecat| FIX[Resolve conflict]
+    FIX --> Q
+```
+
 ---
 
 ## `gt mq list`

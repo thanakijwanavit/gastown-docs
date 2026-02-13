@@ -16,6 +16,17 @@ gt refinery [command] [flags]
 
 ## Description
 
+```mermaid
+flowchart LR
+    P[Polecat: gt done] -->|submit MR| Q[Merge Queue]
+    Q --> CL[gt refinery claim]
+    CL --> RB[Rebase onto main]
+    RB --> VAL[Run validation]
+    VAL -->|pass| MRG[Merge to main]
+    VAL -->|fail| REL[gt refinery release]
+    REL --> Q
+```
+
 The Refinery serializes all merges to main for a rig:
 
 1. Receives MRs submitted by polecats (via `gt done`)

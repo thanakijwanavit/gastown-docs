@@ -8,6 +8,15 @@ description: "How to effectively search the Gas Town documentation to find what 
 
 The Gas Town documentation includes a powerful local search feature that helps you find information quickly across all pages.
 
+```mermaid
+flowchart LR
+    USER[Press Ctrl+K] --> MODAL[Search modal opens]
+    MODAL --> TYPE[Type query]
+    TYPE --> INDEX[Local search index]
+    INDEX --> RESULTS[Ranked results by page]
+    RESULTS --> CLICK[Click to navigate]
+```
+
 ---
 
 ## Accessing Search

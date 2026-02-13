@@ -8,6 +8,18 @@ description: "Why Gas Town exists, its intellectual foundations, design evolutio
 
 Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
 
+```mermaid
+graph LR
+    S1[Stage 1: Completions] --> S2[Stage 2: Chat]
+    S2 --> S3[Stage 3: Inline Edit]
+    S3 --> S4[Stage 4: Agentic]
+    S4 --> S5[Stage 5: Multi-file]
+    S5 --> S6[Stage 6: Background]
+    S6 --> S7[Stage 7: Many Agents]
+    S7 --> S8[Stage 8: Orchestration]
+    style S8 fill:#f96,stroke:#333
+```
+
 ---
 
 ## Why Gas Town Exists: The Inevitability Argument

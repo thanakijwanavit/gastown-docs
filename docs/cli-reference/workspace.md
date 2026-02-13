@@ -8,6 +8,18 @@ description: "Install, initialize, and manage your Gas Town workspace with comma
 
 Commands for installing, initializing, and managing your Gas Town workspace (the "Town"). These commands handle the foundational setup that all other operations depend on.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Installed: gt install
+    Installed --> Running: gt start / gt up
+    Running --> Paused: gt down
+    Paused --> Running: gt start / gt up
+    Running --> Shutdown: gt shutdown
+    Shutdown --> Running: gt start
+    Running --> Running: gt stale → rebuild
+    Installed --> [*]: gt uninstall
+```
+
 ---
 
 ## `gt install`

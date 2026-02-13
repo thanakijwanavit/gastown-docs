@@ -8,6 +8,15 @@ description: "Configure agent runtimes, accounts, themes, Claude Code hooks, and
 
 Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and rig levels.
 
+```mermaid
+flowchart TD
+    TOWN[Town Config] -->|default agent, accounts, themes| RIG[Rig Config]
+    RIG -->|max_polecats, merge_strategy| AGENT[Agent Config]
+    AGENT -->|model, timeout, args| SESSION[Session]
+    RIG -.->|override| TOWN
+    SESSION -.->|--agent flag override| AGENT
+```
+
 ---
 
 ## Agent Configuration

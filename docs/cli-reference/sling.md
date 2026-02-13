@@ -14,6 +14,18 @@ gt sling <bead-or-formula> [target] [flags]
 
 ## Description
 
+```mermaid
+flowchart LR
+    A[gt sling bead target] --> B{Target type?}
+    B -->|Rig| C[Auto-spawn polecat]
+    B -->|Agent| D[Hook to existing agent]
+    B -->|Formula| E[Cook formula → molecule]
+    C --> F[Attach bead to hook]
+    D --> F
+    E --> F
+    F --> G[Agent starts work via GUPP]
+```
+
 `gt sling` handles the full lifecycle of work assignment:
 
 - **Existing agents** -- sling to mayor, crew, witness, or refinery

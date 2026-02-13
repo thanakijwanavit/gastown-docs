@@ -14,6 +14,16 @@ gt town [command]
 
 ## Description
 
+```mermaid
+flowchart TD
+    TOWN[gt town] -->|gt town next/prev| CYCLE[Cycle Mayor ↔ Deacon]
+    TOWN -->|gt town status| HEALTH[Town health summary]
+    TOWN -->|gt town shutdown| SD[Graceful shutdown all agents]
+    SD --> PARK[Park all rigs]
+    PARK --> DRAIN[Wait for in-flight work]
+    DRAIN --> STOP[Stop all agents]
+```
+
 The `gt town` commands manage **town-level infrastructure** -- the Mayor and Deacon sessions that run above individual rigs. The town is the top of the Gas Town hierarchy:
 
 ```text

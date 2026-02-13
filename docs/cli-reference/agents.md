@@ -8,6 +8,18 @@ description: "CLI reference for managing Mayor, Deacon, Witness, Refinery, Polec
 
 Commands for starting, stopping, monitoring, and managing the Gas Town agent hierarchy. Each agent role has dedicated lifecycle commands, plus there are cross-cutting commands for role management.
 
+```mermaid
+graph TD
+    M[Mayor] -->|coordinates| W[Witness per rig]
+    M -->|coordinates| R[Refinery per rig]
+    D[Deacon] -->|monitors| M
+    D -->|monitors| W
+    D -->|monitors| R
+    W -->|supervises| P[Polecats]
+    W -->|supervises| C[Crew]
+    D -->|manages| Dogs[Dogs / Boot]
+```
+
 ---
 
 ## General Agent Commands

@@ -8,6 +8,18 @@ description: "Diagnose and resolve common Gas Town problems including stuck agen
 
 This guide covers common Gas Town problems, their diagnosis, and resolution. Start with `gt doctor` for automated diagnostics, then consult the specific sections below for detailed troubleshooting steps.
 
+```mermaid
+flowchart TD
+    START[Problem detected] --> DOC[Run gt doctor]
+    DOC -->|Issues found| FIX[gt doctor --fix]
+    DOC -->|Clean| WHAT{What's wrong?}
+    WHAT -->|Agent stuck| PEEK[gt peek agent]
+    WHAT -->|Work stalled| TRAIL[gt trail bead-id]
+    WHAT -->|Merge stuck| MQ[gt mq list]
+    WHAT -->|Orphan procs| ORPH[gt orphans kill]
+    PEEK --> NUDGE[gt nudge or restart]
+```
+
 ---
 
 ## First Steps

@@ -6,6 +6,16 @@ description: "Frequently asked questions about Gas Town, covering setup, agent b
 
 # Frequently Asked Questions
 
+```mermaid
+graph TD
+    FAQ{Common questions}
+    FAQ --> WHAT[What is Gas Town?]
+    FAQ --> COST[How much does it cost?]
+    FAQ --> AGENTS[Which AI models work?]
+    FAQ --> SAFE[Is my code safe?]
+    FAQ --> SCALE[How many agents can it run?]
+```
+
 :::tip
 Use your browser's search (`Ctrl+K`) to find specific topics. For full command documentation, see the [CLI Reference](../cli-reference/index.md).
 :::

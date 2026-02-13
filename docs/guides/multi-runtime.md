@@ -8,6 +8,17 @@ description: "Configure and mix multiple AI coding agents including Claude Code,
 
 Gas Town is not locked to a single AI coding agent. While Claude Code is the default and most thoroughly supported runtime, Gas Town supports multiple agent runtimes -- allowing you to mix and match based on task requirements, cost, or preference.
 
+```mermaid
+flowchart TD
+    GT[Gas Town Orchestrator] -->|default| CLAUDE[Claude Code]
+    GT -->|--agent gemini| GEMINI[Gemini CLI]
+    GT -->|--agent codex| CODEX[Codex]
+    GT -->|--agent cursor| CURSOR[Cursor]
+    GT -->|--agent auggie| AUGGIE[Augment]
+    GT -->|--agent amp| AMP[Amp]
+    CLAUDE & GEMINI & CODEX & CURSOR & AUGGIE & AMP --> HOOK[gt hook / gt done / gt mail]
+```
+
 ---
 
 ## Supported Runtimes

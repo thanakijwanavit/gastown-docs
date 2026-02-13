@@ -18,6 +18,19 @@ gt session [command] [flags]
 
 Sessions are tmux sessions running Claude for each polecat. Use the subcommands to start, stop, attach, and monitor sessions.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Running: gt session start
+    Running --> Running: gt session restart
+    Running --> Stopped: gt session stop
+    Running --> Attached: gt session at
+    Attached --> Running: Ctrl-B D (detach)
+    Stopped --> Running: gt session start
+    Running --> Captured: gt session capture
+    Captured --> Running
+    Stopped --> [*]
+```
+
 :::tip
 
 To send messages to a running session, use `gt nudge` (not `gt session inject`). The nudge command uses reliable delivery that works correctly with Claude Code.

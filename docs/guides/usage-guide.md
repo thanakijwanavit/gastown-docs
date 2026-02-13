@@ -8,6 +8,16 @@ description: "Day-to-day Gas Town patterns: developer loops, Mayor and Crew work
 
 This guide covers practical day-to-day Gas Town usage patterns -- from working with the Mayor, to managing multiple rigs, to the mandatory session completion workflow. It assumes you have a working installation (see [Getting Started](../getting-started/index.md)) and are familiar with the basic concepts.
 
+```mermaid
+flowchart TD
+    HUMAN[Human overseer] -->|gt may at| MAYOR[Mayor session]
+    HUMAN -->|gt crew at| CREW[Crew workspace]
+    MAYOR -->|gt sling| WORK[Dispatch work to rigs]
+    CREW -->|direct coding| CODE[Write code alongside agents]
+    WORK --> MONITOR[gt status / gt activity]
+    CODE --> PUSH[git push / gt mq submit]
+```
+
 :::info[Source]
 
 Much of the operational advice in this guide comes from the [Gas Town Emergency User Manual](https://steve-yegge.medium.com/gas-town-emergency-user-manual-cf0e4556d74b) by Steve Yegge, written after the first two weeks of Gas Town's public release.

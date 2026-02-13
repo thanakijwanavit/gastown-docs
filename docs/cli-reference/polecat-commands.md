@@ -16,6 +16,19 @@ gt polecat [command] [flags]
 
 ## Description
 
+```mermaid
+stateDiagram-v2
+    [*] --> Working: gt sling (auto-spawn)
+    Working --> Done: gt done (push + submit MR)
+    Working --> Stalled: Session crash
+    Working --> Zombie: gt done failed
+    Done --> Nuked: Witness cleanup
+    Stalled --> Working: Witness recovery
+    Stalled --> Nuked: gt polecat nuke
+    Zombie --> Nuked: gt polecat nuke
+    Nuked --> [*]: Worktree + branch removed
+```
+
 Polecats are **ephemeral workers**: spawned for one task, nuked when done. There is no idle state. A polecat is either:
 
 - **Working** -- actively doing assigned work

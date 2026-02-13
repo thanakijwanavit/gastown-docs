@@ -8,6 +8,14 @@ description: "One-page quick reference for the most common Gas Town and Beads co
 
 A quick reference for the commands you'll use most often. Print this or keep it in a tab.
 
+```mermaid
+flowchart LR
+    SETUP[gt install → gt rig add] --> RUN[gt start → gt sling]
+    RUN --> MONITOR[gt status → gt activity]
+    MONITOR --> FIX[gt doctor → gt troubleshoot]
+    FIX --> SHUTDOWN[gt down → gt shutdown]
+```
+
 :::tip
 Commands prefixed with `gt` manage agents and workflows. Commands prefixed with `bd` manage issues (beads).
 :::

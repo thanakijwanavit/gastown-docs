@@ -8,6 +8,21 @@ description: "CLI reference for adding, starting, stopping, parking, docking, an
 
 Commands for adding, configuring, starting, stopping, and managing rigs. A rig is a project container that wraps a git repository with the full Gas Town agent infrastructure.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Added: gt rig add
+    Added --> Active: gt rig start
+    Active --> Stopped: gt rig stop
+    Active --> Parked: gt rig park
+    Active --> Docked: gt rig dock
+    Stopped --> Active: gt rig start
+    Parked --> Active: gt rig unpark
+    Docked --> Active: gt rig undock
+    Active --> Reset: gt rig reset
+    Reset --> Active: gt rig boot
+    Active --> Active: gt rig reboot
+```
+
 ---
 
 ## `gt rig list`
