@@ -18,6 +18,7 @@ Running Gas Town in production means managing a fleet of AI agents across multip
 | [Monitoring & Health](monitoring.md) | Real-time feeds, dashboards, patrols, and audits |
 | [Escalation System](escalations.md) | Priority-routed alerts with severity levels |
 | [Troubleshooting](troubleshooting.md) | Common issues, diagnostics, and recovery procedures |
+| [Error Recovery](error-recovery.md) | Agent failure patterns: loops, crashes, uncommitted work |
 | [Plugins](plugins.md) | Extend Gas Town with custom gates and automation |
 
 ## Operational Mindset
