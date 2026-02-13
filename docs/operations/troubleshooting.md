@@ -234,6 +234,90 @@ gt peek polecat:toast --rig myproject
 
 ---
 
+## Witness Not Patrolling
+
+**Symptom:** The Witness appears to be running (tmux session exists) but polecats are not being spawned automatically, and `gt status` shows the witness as offline (○) or repeatedly becoming a zombie.
+
+**Diagnosis:**
+
+```bash
+# Check if witness session exists but is zombie
+gt status
+
+# Look at what the witness is doing
+tmux capture-pane -t gt-<rig>-witness -p | tail -50
+
+# Check for zombie sessions
+gt doctor | grep zombie
+```
+
+**Common causes:**
+
+1. **Infinite search loop.** The witness gets stuck trying to understand its patrol formula during startup, repeatedly running grep/search operations without ever starting patrol execution.
+
+2. **Context loading stall.** The witness spends excessive time in the `gt prime` phase, reading documentation and searching for context instead of beginning patrol work.
+
+**Solutions:**
+
+1. **Restart the witness.** Use `gt up` which will detect the zombie and recreate it:
+
+    ```bash
+    # From the town root
+    cd ~/gt
+    gt up
+
+    # This will show: "⚠ Detected zombie session (tmux alive, agent dead). Recreating..."
+    ```
+
+2. **Nudge the witness to skip research.** If it's stuck in a search loop:
+
+    ```bash
+    gt nudge <rig>/witness "STOP SEARCHING. Execute patrol now: bd ready --mol-type=patrol --limit 5"
+    ```
+
+3. **Check for stuck patrol wisps.** The witness may have created patrol work but not progressed:
+
+    ```bash
+    bd list --type=wisp --status=in_progress
+
+    # If found, check how long they've been stuck
+    bd show <wisp-id>
+    ```
+
+4. **Verify witness can access patrol formulas:**
+
+    ```bash
+    # Check if patrol formula exists
+    ls -la ~/.beads/formulas/*witness*
+
+    # Verify formulas are loaded
+    gt formula list | grep witness
+    ```
+
+**Workaround:**
+
+If the witness remains stuck, polecats can be managed manually:
+
+```bash
+# Manually check for work that needs polecats
+bd list --status=hooked --limit 10
+
+# Assign work directly (bypasses witness)
+gt sling <bead-id> <rig>
+```
+
+**Prevention:**
+
+This issue often occurs when witness agents have complex role prompts that cause excessive research. The fix is to simplify the witness startup or provide pre-loaded context to reduce search operations.
+
+:::note
+
+The witness's job is to **patrol and monitor**, not to research and understand. If it's spending more time reading than acting, the role configuration may need adjustment.
+
+:::
+
+---
+
 ## Orphaned Processes
 
 **Symptom:** Resources consuming disk or compute that are not connected to any active agent or convoy.
