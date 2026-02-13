@@ -69,6 +69,7 @@
 - Manual Convoy Workflow: /docs/workflows/manual-convoy
 - Formula Workflow: /docs/workflows/formula-workflow
 - Code Review Workflow: /docs/workflows/code-review
+- Crew Collaboration: /docs/workflows/crew-collaboration
 
 ### Operations
 - Operations: /docs/operations
@@ -557,6 +558,15 @@ The **Formula Workflow** uses predefined TOML templates to orchestrate structure
 Gas Town provides a powerful parallel code review system using the code-review convoy formula. Instead of a single reviewer reading through a PR, Gas Town sp...
 
 Gas Town provides a powerful **parallel code review** system using the `code-review` convoy formula. Instead of a single reviewer reading through a PR, Gas Town spawns multiple specialized reviewer polecats -- each examining the code from a different perspective -- then synthesizes their findings into a unified, prioritized review.
+
+---
+
+## Crew Collaboration
+> /docs/workflows/crew-collaboration
+
+Patterns for humans working alongside AI agents in crew workspaces -- reviewing polecat output, feeding guzzoline, and maintaining code quality while the fleet runs.
+
+This workflow describes how human developers in [Crew workspaces](../agents/crew.md) work alongside AI polecats. The core pattern: humans produce **guzzoline** (specifications, designs, reviews) and polecats consume it (implementation, testing, fixes).
 
 ---
 

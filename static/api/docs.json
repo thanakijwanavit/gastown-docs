@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T14:23:03.756Z",
+  "generated": "2026-02-13T14:25:33.193Z",
   "sections": [
     {
       "id": "getting-started",
@@ -292,6 +292,11 @@
           "title": "Code Review Workflow",
           "path": "/docs/workflows/code-review",
           "description": "Gas Town provides a powerful parallel code review system using the code-review convoy formula. Instead of a single reviewer reading through a PR, Gas Town sp..."
+        },
+        {
+          "title": "Crew Collaboration",
+          "path": "/docs/workflows/crew-collaboration",
+          "description": "Patterns for humans working alongside AI agents in crew workspaces -- reviewing polecat output, feeding guzzoline, and maintaining code quality while the fleet runs."
         }
       ]
     },
@@ -755,6 +760,12 @@
       "path": "/docs/workflows/code-review",
       "section": "workflows",
       "description": "Gas Town provides a powerful parallel code review system using the code-review convoy formula. Instead of a single reviewer reading through a PR, Gas Town sp..."
+    },
+    {
+      "title": "Crew Collaboration",
+      "path": "/docs/workflows/crew-collaboration",
+      "section": "workflows",
+      "description": "Patterns for humans working alongside AI agents in crew workspaces -- reviewing polecat output, feeding guzzoline, and maintaining code quality while the fleet runs."
     },
     {
       "title": "Formula Workflow",

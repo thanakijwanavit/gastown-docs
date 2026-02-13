@@ -92,6 +92,7 @@ const sidebars: SidebarsConfig = {
         'workflows/manual-convoy',
         'workflows/formula-workflow',
         'workflows/code-review',
+        'workflows/crew-collaboration',
       ],
     },
     {
