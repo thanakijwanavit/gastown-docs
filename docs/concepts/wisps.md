@@ -1,7 +1,7 @@
 ---
 title: "Wisps (Ephemeral Sub-Beads)"
 sidebar_position: 9
-description: "Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database."
+description: "Lightweight ephemeral sub-beads that track individual molecule steps with granular progress visibility."
 ---
 
 # Wisps (Ephemeral Sub-Beads)

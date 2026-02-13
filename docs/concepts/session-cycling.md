@@ -1,7 +1,7 @@
 ---
 title: "Session Cycling"
 sidebar_position: 10
-description: "Session cycling is Gas Town's mechanism for refreshing an agent's context window without losing work. When an agent's context fills up, it hands off to a fresh session that resumes from where it left off."
+description: "How Gas Town refreshes agent context windows without losing work via handoff to fresh sessions."
 ---
 
 # Session Cycling

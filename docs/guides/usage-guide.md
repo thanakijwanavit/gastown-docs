@@ -1,7 +1,7 @@
 ---
 title: "Usage Guide"
 sidebar_position: 1
-description: "Practical day-to-day Gas Town usage patterns: entry points, the three developer loops, working with Mayor and Crew, the PR Sheriff pattern, 5 tips for effective use, and the mandatory landing checklist."
+description: "Day-to-day Gas Town patterns: developer loops, Mayor and Crew workflows, tips, and the landing checklist."
 ---
 
 # Usage Guide

@@ -1,7 +1,7 @@
 ---
 title: "Architecture Guide"
 sidebar_position: 6
-description: "A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Refinery, and Polecats work together as a self-healing multi-agent system built on Erlang-inspired supervision, git worktrees, and persistent hooks."
+description: "How Mayor, Deacon, Witness, Refinery, and Polecats form a self-healing multi-agent system."
 ---
 
 # Architecture Guide

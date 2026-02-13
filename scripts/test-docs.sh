@@ -784,6 +784,37 @@ else
     fail_test "Found $EMPTY_BLOCKS empty code block(s)" "Add content or remove empty code blocks"
 fi
 
+# Test 24: Validate meta description length (SEO best practice: 50-160 chars)
+echo ""
+echo "Test 24: Checking meta description lengths..."
+DESC_ISSUES=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract description from frontmatter
+    desc=$(awk '/^---$/{if(++n==2)exit}n==1 && /^description:/{
+        sub(/^description:[[:space:]]*"?/, ""); sub(/"[[:space:]]*$/, ""); print
+    }' "$file" 2>/dev/null)
+
+    [ -z "$desc" ] && continue
+
+    desc_len=${#desc}
+    rel_file="${file#$ROOT_DIR/}"
+
+    if [ "$desc_len" -lt 50 ]; then
+        echo "  Short description ($desc_len chars) in $rel_file"
+        DESC_ISSUES=$((DESC_ISSUES + 1))
+    elif [ "$desc_len" -gt 160 ]; then
+        echo "  Long description ($desc_len chars) in $rel_file"
+        DESC_ISSUES=$((DESC_ISSUES + 1))
+    fi
+done
+
+if [ "$DESC_ISSUES" -eq 0 ]; then
+    pass_test "All meta descriptions are within SEO range (50-160 chars)"
+else
+    fail_test "Found $DESC_ISSUES description(s) outside optimal length" "Aim for 50-160 character descriptions"
+fi
+
 # Summary
 echo ""
 echo "========================================"

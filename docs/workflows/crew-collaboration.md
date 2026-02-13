@@ -1,7 +1,7 @@
 ---
 title: "Crew Collaboration"
 sidebar_position: 6
-description: "Patterns for humans working alongside AI agents in crew workspaces -- reviewing polecat output, feeding guzzoline, and maintaining code quality while the fleet runs."
+description: "Patterns for humans working alongside AI agents: reviewing polecat output and maintaining code quality."
 ---
 
 # Crew Collaboration

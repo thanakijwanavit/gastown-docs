@@ -1,7 +1,7 @@
 ---
 title: "Background & Philosophy"
 sidebar_position: 5
-description: "Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas."
+description: "Why Gas Town exists, its intellectual foundations, design evolution, and the thesis on AI-driven development."
 ---
 
 # Background & Philosophy
