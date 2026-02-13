@@ -217,3 +217,4 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 - **[GUPP & NDI](gupp.md)** -- Hooks are the primary mechanism that makes GUPP possible: work state persists across every kind of disruption
 - **[Rigs](rigs.md)** -- Hooks are implemented as git worktrees within a rig's directory structure
 - **[Gates](gates.md)** -- When a molecule step is gated, the hook preserves the parked state until the gate closes
+- **[Session Cycling](session-cycling.md)** -- Hooks persist across session boundaries, enabling context refresh without losing work
