@@ -134,3 +134,10 @@ Avoid these common mistakes when running Gas Town:
 | Restarting everything when one thing breaks | Disrupts working agents unnecessarily | Use surgical restarts: `gt rig reboot` or per-agent commands |
 | Never running `gt cleanup` | Disk fills with orphaned worktrees | Schedule regular cleanup or add it to your weekly checklist |
 | Over-slinging work to one rig | Creates merge queue bottlenecks | Distribute work across rigs when possible |
+
+## Related
+
+- **[Architecture](../architecture/index.md)** — How the supervisor tree enables self-healing operations
+- **[Agents](../agents/index.md)** — Roles and responsibilities of each agent type
+- **[CLI Reference](../cli-reference/index.md)** — Full command reference for operational tasks
+- **[Guides](../guides/index.md)** — Usage patterns, troubleshooting, and cost management

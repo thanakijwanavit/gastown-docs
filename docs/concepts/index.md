@@ -70,6 +70,20 @@ Think of Gas Town as a shipping operation. **Beads** are packages, **Convoys** a
 
 :::
 
+## Suggested Reading Order
+
+Start with the three foundational concepts, then explore based on your role:
+
+1. **[Beads](beads.md)** — Everything starts with an issue. Understand beads first.
+2. **[Hooks](hooks.md)** — How work survives crashes. Essential for understanding agent reliability.
+3. **[GUPP & NDI](gupp.md)** — The design philosophy that ties everything together.
+
+Then expand based on need:
+
+- **Orchestrating parallel work?** → [Convoys](convoys.md) → [Molecules](molecules.md) → [Gates](gates.md)
+- **Setting up projects?** → [Rigs](rigs.md) → [MEOW Stack](meow-stack.md)
+- **Understanding agent sessions?** → [Session Cycling](session-cycling.md) → [Wisps](wisps.md)
+
 ## Design Principles
 
 These concepts share several common design principles, rooted in [GUPP & NDI](gupp.md):
@@ -80,3 +94,10 @@ These concepts share several common design principles, rooted in [GUPP & NDI](gu
 - **Forward-only progress** -- Operations move the system forward or leave it unchanged, never backward ([GUPP](gupp.md))
 - **Discovery over tracking** -- Agents observe reality each patrol cycle rather than maintaining fragile in-memory state
 - **Composable** -- Primitives combine to form complex workflows without a monolithic orchestration layer
+
+## Related
+
+- **[Architecture](../architecture/index.md)** — How concepts map to system components
+- **[Agents](../agents/index.md)** — The roles that use these primitives
+- **[Workflows](../workflows/index.md)** — How concepts combine into end-to-end workflows
+- **[Glossary](../guides/glossary.md)** — Definitions for all Gas Town terminology
