@@ -10,6 +10,34 @@ This guide covers the most frequently encountered Gas Town problems and their so
 
 ---
 
+## Dashboard URL `gt.villamarket.ai` Times Out
+
+**Symptom:** Attempting to access `https://gt.villamarket.ai` results in a timeout (curl exit code 28).
+
+**Cause:** There is no hosted dashboard at `gt.villamarket.ai`. The `gt dashboard` command starts a **local** web server on your machine, not a cloud service.
+
+**Solution:**
+
+Run the dashboard locally:
+
+```bash
+# Start the local dashboard
+gt dashboard
+
+# Or with a custom port
+gt dashboard --port 9000
+```
+
+Then access it at `http://localhost:8420` (or your custom port).
+
+:::note
+
+The dashboard is only available while the `gt dashboard` command is running. It is not a persistent hosted service.
+
+:::
+
+---
+
 ## `gt done` Fails: "Not Inside a Rig Directory"
 
 **Symptom:** A polecat finishes its work, runs `gt done`, and gets:
