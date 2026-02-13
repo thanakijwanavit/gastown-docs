@@ -394,6 +394,46 @@ else
     fail_test "Found $MERMAID_ERRORS invalid Mermaid diagram(s)" "Ensure first line of mermaid block is a valid diagram type (graph, flowchart, sequenceDiagram, etc.)"
 fi
 
+# Test 15: Verify frontmatter completeness
+echo ""
+echo "Test 15: Checking frontmatter completeness..."
+MISSING_FRONTMATTER=0
+
+for file in $(find "$ROOT_DIR/docs" -name "*.md"); do
+    # Extract frontmatter (between first --- and second ---)
+    frontmatter=$(awk '/^---$/{if(++n==2)exit}n==1' "$file" 2>/dev/null)
+
+    if [ -z "$frontmatter" ]; then
+        echo "  No frontmatter in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+        continue
+    fi
+
+    # Check for title
+    if ! echo "$frontmatter" | grep -q '^title:'; then
+        echo "  Missing title in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+    fi
+
+    # Check for description
+    if ! echo "$frontmatter" | grep -q '^description:'; then
+        echo "  Missing description in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+    fi
+
+    # Check for sidebar_position
+    if ! echo "$frontmatter" | grep -q '^sidebar_position:'; then
+        echo "  Missing sidebar_position in: $file"
+        MISSING_FRONTMATTER=$((MISSING_FRONTMATTER + 1))
+    fi
+done
+
+if [ "$MISSING_FRONTMATTER" -eq 0 ]; then
+    pass_test "All pages have complete frontmatter (title, description, sidebar_position)"
+else
+    fail_test "Found $MISSING_FRONTMATTER frontmatter issue(s)" "Ensure all pages have title, description, and sidebar_position"
+fi
+
 # Summary
 echo ""
 echo "========================================"
