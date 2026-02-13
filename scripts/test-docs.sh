@@ -975,6 +975,27 @@ else
     fail_test "Found $TAG_ISSUES blog post(s) with formatting issues in tags" "Use lowercase, hyphenated tags"
 fi
 
+# Test 31: Blog posts link back to docs (Next Steps sections with doc links)
+echo ""
+echo "Test 31: Checking blog posts link back to documentation..."
+BLOG_DOC_LINK_ISSUES=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    # Check if blog post has at least one link to /docs/
+    doc_links=$(grep -c '/docs/' "$file" 2>/dev/null) || doc_links=0
+    if [ "$doc_links" -lt 1 ]; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  No doc cross-links in $rel_file"
+        BLOG_DOC_LINK_ISSUES=$((BLOG_DOC_LINK_ISSUES + 1))
+    fi
+done
+
+if [ "$BLOG_DOC_LINK_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts link back to documentation"
+else
+    fail_test "Found $BLOG_DOC_LINK_ISSUES blog post(s) without doc cross-links" "Add at least one link to /docs/ in each blog post's Next Steps section"
+fi
+
 # Summary
 echo ""
 echo "========================================"
