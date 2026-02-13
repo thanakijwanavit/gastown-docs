@@ -178,3 +178,4 @@ Convoys auto-close when all tracked beads complete. You do not need to manually 
 
 - [Your First Convoy](/blog/first-convoy) -- Blog walkthrough with tips and real-world examples
 - [The Mayor Workflow](/blog/mayor-workflow) -- How to let the Mayor automate convoy creation and assignment
+- [Your Second Convoy](/blog/your-second-convoy) -- Dependencies, cross-rig work, and stuck polecat recovery

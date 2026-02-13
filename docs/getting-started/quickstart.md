@@ -160,3 +160,4 @@ Gas Town agents consume API tokens. Monitor usage with `gt cost` to avoid surpri
 
 - [Welcome to Gas Town](/blog/welcome) -- Introduction to Gas Town and its core philosophy
 - [Your First Convoy](/blog/first-convoy) -- Hands-on guide to getting your first batch of work running
+- [Your Second Convoy](/blog/your-second-convoy) -- Level up with dependencies, cross-rig work, and recovery patterns
