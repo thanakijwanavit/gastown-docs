@@ -45,10 +45,16 @@ Comprehensive reference for frequently used commands with all flags, subcommands
 | Command | Description |
 |---------|-------------|
 | [`gt sling`](sling.md) | Assign work to agents and rigs, with formula support and batch dispatch |
+| [`gt nudge`](nudge.md) | Send synchronous messages to running agent sessions |
 | [`gt refinery`](refinery-commands.md) | Manage the per-rig merge queue processor |
 | [`gt polecat`](polecat-commands.md) | Manage polecat lifecycle: list, nuke, stale detection, identities |
-| [`gt nudge`](nudge.md) | Send synchronous messages to running agent sessions |
 | [`gt session`](session-commands.md) | Manage tmux sessions: start, stop, attach, capture output |
+| [`gt seance`](seance.md) | Talk to predecessor sessions for context recovery |
+| [`gt orphans`](orphans.md) | Find and recover orphaned commits and processes |
+| [`gt warrant`](warrant.md) | Manage death warrants for agent termination |
+| [`gt compact`](compact.md) | TTL-based compaction of ephemeral wisps |
+| [`gt tap`](tap.md) | Claude Code hook handlers for policy enforcement |
+| [`gt town`](town.md) | Town-level session cycling operations |
 
 ## Related Tools
 
