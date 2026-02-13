@@ -141,3 +141,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | `gt polecat list` | List active polecats across rigs |
 | `gt mail inbox` | Check your inbox |
 | `gt done` | Signal work ready for merge queue |
+
+## Related
+
+- [Architecture Guide](architecture.md) -- Narrative walkthrough of how all the components work together
+- [System Overview](../architecture/overview.md) -- Five-layer reference breakdown of the Gas Town architecture
+- [The 8 Stages of AI Coding](eight-stages.md) -- Maturity model for AI-assisted development that Gas Town targets
+- [Background & Philosophy](philosophy.md) -- Why Gas Town exists and the design thinking behind it

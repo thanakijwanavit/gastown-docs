@@ -129,3 +129,10 @@ This principle prevents failure cascading through the system. One broken test, l
 Gas Town favors agents discovering what needs to happen over centralized tracking that tells them. The [Witness](../agents/witness.md) discovers stale polecats by inspecting them, not by reading a checklist. The [Deacon](../agents/deacon.md) discovers zombies by scanning processes, not by maintaining a process table.
 
 This makes the system resilient to state corruption: even if tracking data is lost, agents can recover by rediscovering the current state.
+
+## Related
+
+- [Agent Hierarchy](agent-hierarchy.md) -- How the Erlang-inspired supervision tree implements these principles
+- [GUPP](../concepts/gupp.md) -- The Gas Town Universal Propulsion Principle in detail
+- [Background & Philosophy](../guides/philosophy.md) -- Why Gas Town exists and the intellectual foundations behind its design
+- [System Overview](overview.md) -- The five-layer architecture these principles shaped

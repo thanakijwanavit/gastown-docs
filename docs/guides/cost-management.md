@@ -352,3 +352,10 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 5. **Park unused rigs aggressively.** Even idle Witnesses and Refineries consume tokens during patrol cycles.
 
 6. **Use `gt down` during breaks.** Do not leave the fleet running during lunch or meetings unless you have active work in progress.
+
+## Related
+
+- [Monitoring & Health](../operations/monitoring.md) -- The `gt costs` command and real-time cost tracking
+- [Starting & Stopping](../operations/lifecycle.md) -- `gt down` and `gt shutdown` for controlling agent runtime
+- [Minimal Mode](../workflows/minimal-mode.md) -- Reduced-overhead workflow for cost-sensitive workloads
+- [Plugins](../operations/plugins.md) -- Set up cost alert plugins with cron-scheduled budget checks

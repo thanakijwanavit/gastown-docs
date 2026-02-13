@@ -485,3 +485,10 @@ The workflow adapts by:
 - Using beads dependencies for coordination
 
 This requires more discipline but enables true parallel development.
+
+## Related
+
+- [Architecture Guide](architecture.md) -- How the Refinery merge pipeline processes code from polecats to main
+- [Operations: Troubleshooting](../operations/troubleshooting.md) -- Resolving merge conflicts, git worktree issues, and push failures
+- [Polecats](../agents/polecats.md) -- How ephemeral workers use feature branches and git worktrees
+- [Refinery](../agents/refinery.md) -- The merge queue agent that serializes all merges to main

@@ -350,3 +350,10 @@ You can create your own code review formula with custom legs tailored to your co
 
 
 :::
+
+## Related
+
+- [Formula Workflow](formula-workflow.md) -- How to run, create, and customize formula templates
+- [Molecules](../concepts/molecules.md) -- The underlying step-tracking system that powers convoy formulas
+- [Refinery](../agents/refinery.md) -- The merge queue agent that integrates with review gate presets
+- [Polecats](../agents/polecats.md) -- The ephemeral workers that execute each review leg in parallel

@@ -411,3 +411,10 @@ The Refinery merges MRs **one at a time**, rebasing each onto the latest `main`.
 | Open escalations | `gt escalate list` |
 
 For the full troubleshooting reference, see [Operations: Troubleshooting](../operations/troubleshooting.md).
+
+## Related
+
+- [Operations: Troubleshooting](../operations/troubleshooting.md) -- Comprehensive reference covering all troubleshooting topics
+- [Monitoring & Health](../operations/monitoring.md) -- Real-time feeds, health checks, and diagnostic commands
+- [Escalation System](../operations/escalations.md) -- How to create and manage priority-routed escalations
+- [Starting & Stopping](../operations/lifecycle.md) -- Lifecycle commands for recovering stuck agents and rigs

@@ -128,3 +128,10 @@ The Mayor handles convoy creation, issue tracking, and agent assignment automati
 Convoys auto-close when all tracked beads complete. You do not need to manually close them unless you want to cancel remaining work.
 
 :::
+
+## Related
+
+- [Convoys](../concepts/convoys.md) -- Full documentation of convoy tracking, dependencies, and auto-close
+- [Beads](../concepts/beads.md) -- The atomic work units that convoys track through the system
+- [Manual Convoy Workflow](../workflows/manual-convoy.md) -- Advanced convoy patterns with cross-rig coordination
+- [Mayor Workflow](../workflows/mayor-workflow.md) -- Let the Mayor handle convoy creation and assignment automatically

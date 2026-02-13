@@ -477,3 +477,10 @@ You can override escalation settings at the rig level by placing an `escalation.
 5. **Close with notes.** Future-you will appreciate knowing how past escalations were resolved. Use `--note` and `--commit` flags to leave a trail.
 
 6. **Let agents escalate.** Do not suppress agent escalations. If an agent is escalating too frequently, the root cause is usually a systemic issue (flaky tests, misconfigured rig, etc.) rather than the agent being too aggressive.
+
+## Related
+
+- [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that defines escalation paths between agents
+- [Monitoring & Health](monitoring.md) -- Detecting the problems that trigger escalations
+- [Troubleshooting](troubleshooting.md) -- Resolving the issues that escalations surface
+- [Deacon](../agents/deacon.md) -- The town-level health monitor that routes escalations

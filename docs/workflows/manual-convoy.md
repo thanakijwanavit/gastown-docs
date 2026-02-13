@@ -259,3 +259,10 @@ gt convoy stranded
 
 
 :::
+
+## Related
+
+- [Mayor Workflow](mayor-workflow.md) -- The fully automated alternative where the Mayor handles assignment
+- [Convoys](../concepts/convoys.md) -- How convoy tracking, dependencies, and auto-close work
+- [Beads](../concepts/beads.md) -- Creating and managing the work items that convoys track
+- [Sling Commands](../cli-reference/sling.md) -- Full CLI reference for `gt sling` and work assignment

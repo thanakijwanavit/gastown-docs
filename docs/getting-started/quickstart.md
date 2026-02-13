@@ -137,3 +137,10 @@ Gas Town agents consume API tokens. Monitor usage with `gt cost` to avoid surpri
 - [Your First Convoy](first-convoy.md) — Detailed walkthrough of the convoy workflow
 - [CLI Reference](../cli-reference/index.md) — Full command documentation
 - [Architecture](../architecture/index.md) — Understand the system design
+
+## Related
+
+- [Installation](installation.md) -- Detailed installation steps for Gas Town, Beads, and dependencies
+- [Your First Convoy](first-convoy.md) -- Step-by-step walkthrough of creating and monitoring a convoy
+- [Usage Guide](../guides/usage-guide.md) -- Practical day-to-day patterns once you are up and running
+- [Mayor Workflow](../workflows/mayor-workflow.md) -- The fully automated MEOW workflow for complex coordination

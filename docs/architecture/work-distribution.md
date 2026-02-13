@@ -160,3 +160,10 @@ gt dog list
 bd show gt-abc12            # Routes to gastown rig
 bd show hq-abc              # Routes to town-level beads
 ```
+
+## Related
+
+- [Beads](../concepts/beads.md) -- The atomic unit of tracked work that flows through the distribution pipeline
+- [Hooks](../concepts/hooks.md) -- Persistent work attachment that makes Gas Town crash-safe
+- [Convoys](../concepts/convoys.md) -- Batch tracking for related beads across rigs
+- [Molecules](../concepts/molecules.md) -- Multi-step structured workflows that guide agent execution

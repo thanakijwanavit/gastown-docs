@@ -428,3 +428,10 @@ Increment the `version` field when making breaking changes to a formula. Existin
 
 
 :::
+
+## Related
+
+- [Molecules](../concepts/molecules.md) -- How molecules track multi-step workflows and provide crash recovery
+- [Gates](../concepts/gates.md) -- Async coordination primitives used within formula steps
+- [Code Review Workflow](code-review.md) -- The convoy formula for parallel multi-perspective code review
+- [MEOW Stack](../concepts/meow-stack.md) -- The layered abstraction model from molecules to full orchestration

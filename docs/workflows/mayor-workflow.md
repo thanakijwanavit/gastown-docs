@@ -244,3 +244,10 @@ The Mayor maintains context across the session. You can refer back to earlier wo
 
 
 :::
+
+## Related
+
+- [Mayor](../agents/mayor.md) -- Full documentation of the Mayor agent's capabilities and commands
+- [MEOW Stack](../concepts/meow-stack.md) -- The Molecules, Epics, Orchestration, Workflows abstraction model
+- [Manual Convoy Workflow](manual-convoy.md) -- Alternative workflow with fine-grained control over work assignment
+- [Convoys](../concepts/convoys.md) -- How convoy tracking and auto-close work under the hood

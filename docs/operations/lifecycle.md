@@ -596,3 +596,10 @@ stateDiagram-v2
 | `gt rig reboot <name>` | Single rig | Stop + restart | **Recreated** | Reset |
 | `gt rig park <name>` | Single rig | Stop | Unchanged | Parked |
 | `gt rig dock <name>` | Single rig | Stop | **Removed** | Archived |
+
+## Related
+
+- [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that determines startup order and monitoring
+- [Troubleshooting](troubleshooting.md) -- Diagnosing agent boot failures, zombie processes, and stuck rigs
+- [Monitoring & Health](monitoring.md) -- Health checks, patrol digests, and real-time agent status
+- [Usage Guide](../guides/usage-guide.md) -- Day-to-day patterns for starting, monitoring, and stopping the fleet

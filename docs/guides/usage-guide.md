@@ -632,3 +632,10 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | `gt may at` | Attach to Mayor |
 | `gt crew at <name>` | Attach to a Crew workspace |
 | `gt session at <name>` | Attach to a polecat session |
+
+## Related
+
+- [Quick Start](../getting-started/quickstart.md) -- Initial setup and first steps with Gas Town
+- [Mayor Workflow](../workflows/mayor-workflow.md) -- The fully automated MEOW workflow for complex coordination
+- [Cost Management](cost-management.md) -- Monitor and optimize token costs during daily usage
+- [Crew Collaboration](../workflows/crew-collaboration.md) -- Patterns for humans working alongside AI agents in crew workspaces

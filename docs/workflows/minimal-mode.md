@@ -271,3 +271,10 @@ Without Witness and Deacon monitoring, stuck or crashed sessions will not be aut
 | Coordination (Mayor) | No | Yes |
 | Requires Tmux | No | Yes |
 | Resource usage | Low | Higher |
+
+## Related
+
+- [Mayor Workflow](mayor-workflow.md) -- The fully automated workflow that minimal mode scales up to
+- [Manual Convoy Workflow](manual-convoy.md) -- An intermediate approach with convoy tracking and manual assignment
+- [Quick Start](../getting-started/quickstart.md) -- Initial setup steps before using minimal mode
+- [Hooks](../concepts/hooks.md) -- How hook persistence works even without the full agent hierarchy

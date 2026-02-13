@@ -833,3 +833,10 @@ Before running `gt shutdown --all`, check if any polecats have uncommitted work:
 
 
 :::
+
+## Related
+
+- [Troubleshooting Guide](../guides/troubleshooting.md) -- Common problems with step-by-step solutions for new users
+- [Starting & Stopping](lifecycle.md) -- Lifecycle commands for restarting agents and recovering rigs
+- [Monitoring & Health](monitoring.md) -- Diagnostic commands including `gt doctor`, `gt feed`, and `gt trail`
+- [Escalation System](escalations.md) -- How to create and manage escalations when problems are detected

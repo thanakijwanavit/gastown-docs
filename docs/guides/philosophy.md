@@ -406,3 +406,10 @@ The following articles by Steve Yegge provide the foundational thinking behind G
 - [Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) -- The broader thesis on AI's impact on software development
 - [The 8 Stages of AI Coding](eight-stages.md) -- Maturity model for AI-assisted development
 - [GitHub Repository](https://github.com/steveyegge/gastown) -- Source code and issue tracker
+
+## Related
+
+- [The 8 Stages of AI Coding](eight-stages.md) -- The maturity model that defines Gas Town's target audience
+- [Design Principles](../architecture/design-principles.md) -- The twelve principles that implement the philosophy
+- [Architecture Guide](architecture.md) -- How the philosophy translates into system architecture
+- [Cost Management](cost-management.md) -- Practical cost implications of multi-agent orchestration

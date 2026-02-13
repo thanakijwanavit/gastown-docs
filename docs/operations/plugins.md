@@ -573,3 +573,10 @@ Scheduled plugins run on a cron schedule independently of workflow events.
 
 
 :::
+
+## Related
+
+- [Gates](../concepts/gates.md) -- Async coordination primitives that plugins use to control workflow execution
+- [Molecules](../concepts/molecules.md) -- Multi-step workflows that plugins can extend with custom gates and actions
+- [Refinery](../agents/refinery.md) -- The merge queue agent that invokes gate plugins during validation
+- [Cost Management](../guides/cost-management.md) -- Using cost alert plugins to monitor token spend

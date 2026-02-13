@@ -91,3 +91,10 @@ Severity levels control routing:
 | High | P1 | Bead → Mail:Mayor → Email:Human |
 | Medium | P2 | Bead → Mail:Mayor |
 | Low | P3 | Bead only |
+
+## Related
+
+- [System Overview](overview.md) -- Five-layer architecture including agents, rigs, and communication
+- [Escalation System](../operations/escalations.md) -- Full escalation routing, severity levels, and auto re-escalation
+- [Design Principles](design-principles.md) -- Erlang-inspired supervision and the let-it-crash philosophy
+- [Monitoring & Health](../operations/monitoring.md) -- Patrol digests, health checks, and real-time activity feeds

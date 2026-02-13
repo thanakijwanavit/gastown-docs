@@ -135,3 +135,10 @@ Configure the default runtime:
 gt config default-agent claude
 gt config agent set gemini "gemini"
 ```
+
+## Related
+
+- [Quick Start](quickstart.md) -- Set up your workspace and give the Mayor your first instructions
+- [Multi-Runtime Support](../guides/multi-runtime.md) -- Configure and mix multiple AI coding agent runtimes
+- [System Overview](../architecture/overview.md) -- Understand the components you are installing
+- [The 8 Stages of AI Coding](../guides/eight-stages.md) -- Check if you are ready for Gas Town

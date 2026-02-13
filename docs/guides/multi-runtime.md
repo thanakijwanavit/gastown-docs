@@ -338,3 +338,10 @@ The Refinery does not know or care which runtime produced the code. It validates
 4. **Monitor runtime-specific issues.** Different runtimes have different failure modes. Watch `gt feed` for patterns specific to a runtime.
 
 5. **Keep fallback procedures documented.** If you use hook-limited runtimes, document the startup sequence for your team so everyone knows the manual context injection steps.
+
+## Related
+
+- [Installation](../getting-started/installation.md) -- Supported runtimes and how to configure the default agent
+- [Hooks](../concepts/hooks.md) -- How hooks attach work to agents and vary by runtime capability
+- [Polecats](../agents/polecats.md) -- Ephemeral workers that can run on any supported runtime
+- [Configuration](../cli-reference/configuration.md) -- CLI commands for setting default agents and rig-level overrides

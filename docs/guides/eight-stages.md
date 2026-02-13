@@ -364,3 +364,10 @@ The pattern is consistent: what seems excessive today becomes standard practice 
 > "Gas Town has illuminated and kicked off the next wave for everyone."
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
+
+## Related
+
+- [Background & Philosophy](philosophy.md) -- The inevitability argument, Software Survival 3.0, and community reception
+- [Quick Start](../getting-started/quickstart.md) -- Get started with Gas Town if you are at Stage 7 or above
+- [Architecture Guide](architecture.md) -- How Gas Town implements Stage 8 orchestration
+- [Usage Guide](usage-guide.md) -- Practical day-to-day patterns for working at Stage 8
