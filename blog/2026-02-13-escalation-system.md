@@ -167,3 +167,4 @@ gt escalate close ESC-003 --note "Stopped runaway polecat, task needs re-scoping
 - [Monitoring & Observability](/docs/operations/monitoring) — Detecting problems before they escalate
 - [Incident Response with Gas Town](/blog/incident-response) — Broader incident management patterns
 - [Troubleshooting](/docs/operations/troubleshooting) — Resolving the issues escalations surface
+- [Death Warrants](/blog/death-warrants) — How warrants handle the problems escalations identify

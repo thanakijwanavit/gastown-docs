@@ -143,3 +143,5 @@ These principles scale. As your fleet grows from 5 to 30 agents, the daemon stay
 - [Design Principles](/docs/architecture/design-principles) -- The twelve principles that shaped Gas Town
 - [Deacon](/docs/agents/deacon) -- The agent that turns heartbeats into patrol cycles
 - [Starting & Stopping](/docs/operations/lifecycle) -- Lifecycle commands that interact with the daemon
+- [Boot Dogs](/blog/boot-dogs) -- How Boot observes system state on every daemon tick
+- [Lifecycle Management](/blog/lifecycle-management) -- Starting, stopping, and managing the daemon lifecycle

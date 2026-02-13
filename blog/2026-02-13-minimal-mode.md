@@ -140,3 +140,4 @@ Always **push your changes** before ending a session. Without the Refinery handl
 - [Quick Start](/docs/getting-started/quickstart) — Initial setup before using any workflow
 - [Mayor Workflow](/docs/workflows/mayor-workflow) — The fully automated workflow you'll graduate to
 - [Cost Optimization](/blog/cost-optimization) — Keep costs low while experimenting with Gas Town
+- [Your First Convoy](/blog/first-convoy) — Your first full convoy after graduating from minimal mode

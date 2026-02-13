@@ -102,3 +102,5 @@ As a Gas Town user, GUPP means:
 - **[Design Principles](/docs/architecture/design-principles)** — All twelve principles including GUPP
 - **[Agent Hierarchy](/docs/architecture/agent-hierarchy)** — The supervision tree that enforces recovery
 - **[Hooks](/docs/concepts/hooks)** — The persistence primitive that makes GUPP possible
+- **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks implement GUPP's crash-safety guarantee
+- **[Session Cycling Explained](/blog/session-cycling)** — How GUPP applies to context refresh and handoffs

@@ -150,3 +150,5 @@ Set up alerting when:
 - [Monitoring & Observability](/docs/operations/monitoring) -- Setting up monitoring dashboards
 - [The Refinery](/docs/agents/refinery) -- Understanding the merge queue processor
 - [Rigs](/docs/concepts/rigs) -- How to add and manage rigs
+- [Cost Optimization](/blog/cost-optimization) -- Cost tracking strategies for large deployments
+- [Lifecycle Management](/blog/lifecycle-management) -- Managing rig lifecycle at scale

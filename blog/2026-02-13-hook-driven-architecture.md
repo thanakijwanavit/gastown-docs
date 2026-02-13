@@ -149,3 +149,5 @@ This is why Gas Town agents check `gt hook` before doing anything else. The hook
 - [GUPP & NDI](/docs/concepts/gupp) -- The design principles that hooks implement
 - [Molecules & Formulas](/docs/concepts/molecules) -- How molecules track step-level progress on hooks
 - [Session Cycling](/docs/concepts/session-cycling) -- How hooks and handoff mail work together across sessions
+- [Hooks: The Persistence Primitive](/blog/hook-persistence) -- The crash-safe storage behind hook-driven architecture
+- [Understanding GUPP](/blog/understanding-gupp) -- Why GUPP relies on hook-driven execution

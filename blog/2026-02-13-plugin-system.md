@@ -160,3 +160,5 @@ If any plugin fails with `fail_action = "reject"`, subsequent plugins are skippe
 - [The Refinery](/docs/agents/refinery) -- How the Refinery processes merge requests
 - [Quality Gates](/docs/concepts/gates) -- Built-in gate types and custom gates
 - [Monitoring](/docs/operations/monitoring) -- Monitoring plugin execution and failures
+- [The Refinery Deep Dive](/blog/refinery-deep-dive) -- How plugins integrate with the merge queue
+- [Monitoring Your Fleet](/blog/monitoring-fleet) -- Monitoring plugin execution and failures

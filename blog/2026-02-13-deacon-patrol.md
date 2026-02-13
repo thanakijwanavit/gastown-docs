@@ -150,3 +150,5 @@ The Deacon never panics. It follows its patrol molecule step by step, handles wh
 - [Gates](/docs/concepts/gates) -- The async coordination system the Deacon evaluates
 - [Agent Hierarchy](/docs/architecture/agent-hierarchy) -- The supervision tree the Deacon participates in
 - [Monitoring & Observability](/docs/operations/monitoring) -- Watching Deacon patrol activity
+- [Infrastructure Dogs](/blog/infrastructure-dogs) -- How the Deacon dispatches dogs for cleanup work
+- [Death Warrants](/blog/death-warrants) -- The warrant system the Deacon uses for stuck agents

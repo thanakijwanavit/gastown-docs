@@ -261,3 +261,4 @@ gt formula show mol-polecat-work
 - [Wisps](/docs/concepts/wisps) -- How steps are tracked as ephemeral sub-beads
 - [Gates](/docs/concepts/gates) -- Async coordination points within formulas
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step tutorial for creating your first formula
+- [Molecules and Formulas](/blog/molecules-and-formulas) -- How the molecule engine powers formula execution

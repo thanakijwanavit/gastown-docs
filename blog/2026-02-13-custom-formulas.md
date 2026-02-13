@@ -241,3 +241,5 @@ This lets you verify that:
 - **[Gates](/docs/concepts/gates)** — Async coordination for pausing workflows
 - **[GUPP & NDI](/docs/concepts/gupp)** — Why molecule progress survives crashes
 - **[Polecat Lifecycle](/docs/agents/polecats)** — How polecats execute molecules
+- **[Formula Design Patterns](/blog/formula-design-patterns)** — Advanced patterns for composing multi-step workflows
+- **[Molecules and Formulas](/blog/molecules-and-formulas)** — How the molecule engine powers formula execution

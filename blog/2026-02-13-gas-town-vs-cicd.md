@@ -122,3 +122,5 @@ If your CI/CD pipeline works well, keep it. Gas Town will feed it better, faster
 - **[Refinery](/docs/agents/refinery)** — The merge queue that interfaces with your CI
 - **[Convoys](/docs/concepts/convoys)** — Batch tracking for parallel work
 - **[Quick Start](/docs/getting-started/quickstart)** — Get started in 10 minutes
+- **[The Refinery Deep Dive](/blog/refinery-deep-dive)** — How the Refinery merge queue replaces CI/CD
+- **[Work Distribution Patterns](/blog/work-distribution-patterns)** — Work distribution that goes beyond traditional CI/CD

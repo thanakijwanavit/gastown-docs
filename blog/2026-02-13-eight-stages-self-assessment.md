@@ -137,3 +137,4 @@ But for teams with well-tested codebases and a backlog of clearly-defined tasks,
 - **[Quick Start](/docs/getting-started/quickstart)** — Get Gas Town running in 10 minutes
 - **[Your First Convoy](/blog/first-convoy)** — Run your first parallel workflow
 - **[Philosophy](/docs/guides/philosophy)** — The design thinking behind Gas Town
+- **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the most frequent mistakes at every stage

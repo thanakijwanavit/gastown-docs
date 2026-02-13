@@ -165,3 +165,5 @@ Batching reduces Refinery overhead (fewer individual merge cycles) and gives the
 - **[Formulas](/docs/concepts/molecules)** — Configure molecule behavior including model selection
 - **[Operations Guide](/docs/operations/troubleshooting)** — Debug cost anomalies
 - **[Mayor Workflow](/docs/workflows/mayor-workflow)** — Automatic work decomposition
+- **[Scaling Beyond 30 Agents](/blog/scaling-beyond-30)** — Architectural patterns for cost-effective large deployments
+- **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Track spending and identify optimization opportunities

@@ -120,3 +120,5 @@ Once you internalize these principles, Gas Town becomes remarkably smooth.
 - **[Crew Collaboration](/docs/workflows/crew-collaboration)** — Best practices for working alongside polecats
 - **[Troubleshooting](/docs/operations/troubleshooting)** — Solutions when things go wrong
 - **[Design Principles](/docs/architecture/design-principles)** — The "why" behind Gas Town's constraints
+- **[Understanding GUPP](/blog/understanding-gupp)** — Why GUPP prevents the most common failure modes
+- **[Your Second Convoy](/blog/your-second-convoy)** — Real-world convoy patterns that avoid beginner mistakes

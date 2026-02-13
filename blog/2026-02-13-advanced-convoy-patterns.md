@@ -189,3 +189,5 @@ The backend beads run in parallel. When the API endpoint lands, the frontend bea
 - **[Mayor Workflow](/docs/workflows/mayor-workflow)** — Let the Mayor handle decomposition automatically
 - **[Hooks & Slinging](/docs/concepts/hooks)** — How work gets assigned to agents
 - **[GUPP & NDI](/docs/concepts/gupp)** — Why agent crashes don't lose convoy progress
+- **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
+- **[Your Second Convoy](/blog/your-second-convoy)** — Dependencies and cross-rig convoy patterns in practice

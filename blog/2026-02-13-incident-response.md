@@ -232,3 +232,5 @@ Gas Town is designed to be self-healing. Most incidents resolve themselves withi
 - **[GUPP & NDI](/docs/concepts/gupp)** — Why crashes don't lose work
 - **[Witness](/docs/agents/witness)** — How the Witness monitors and recovers agents
 - **[Refinery](/docs/agents/refinery)** — How the merge queue works
+- **[The Escalation System](/blog/escalation-system)** — How Gas Town surfaces problems before they snowball
+- **[Death Warrants](/blog/death-warrants)** — Structured agent termination during incidents

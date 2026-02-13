@@ -176,3 +176,4 @@ The new session sees "step-3 is in progress" and knows to continue testing, not 
 - **[GUPP & NDI](/docs/concepts/gupp/)** — The design principles behind crash-safe progress
 - **[Hooks](/docs/concepts/hooks/)** — The persistence primitive that makes cycling work
 - **[Understanding GUPP](/blog/understanding-gupp)** — Practical examples of crash-safe design
+- **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks make session cycling crash-safe

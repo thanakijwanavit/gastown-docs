@@ -161,3 +161,5 @@ The most effective Gas Town operators spend 80% of their time on specification a
 - [Git Workflow](/docs/guides/git-workflow) -- Multi-agent git workflow patterns
 - [Session Cycling](/docs/concepts/session-cycling) -- How context refresh works for crew
 - [Cost Management](/docs/guides/cost-management) -- Optimizing token spend across your team
+- [Session Cycling Explained](/blog/session-cycling) -- How crew members handle context limits with handoffs
+- [Agent Communication Patterns](/blog/agent-communication-patterns) -- Mail, nudges, and hooks for crew coordination
