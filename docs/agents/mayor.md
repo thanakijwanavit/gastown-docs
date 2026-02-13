@@ -280,3 +280,8 @@ gt rig start <rig>           # Start rig agents if needed
 - [Beads](../concepts/beads.md) -- Issue tracking system the Mayor uses
 - [Deacon](deacon.md) -- Receives strategic direction from the Mayor
 - [Polecats](polecats.md) -- Workers the Mayor assigns tasks to
+
+### Blog Posts
+
+- [The Mayor Workflow](/blog/mayor-workflow) -- End-to-end walkthrough of the Mayor's dispatch and coordination cycle
+- [Your First Convoy](/blog/first-convoy) -- How the Mayor creates and tracks convoys

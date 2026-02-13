@@ -122,6 +122,20 @@ If you need persistent tracking of sub-tasks, use regular beads with dependency 
 
 ---
 
+## When to Use Wisps
+
+Wisps are created automatically -- you almost never create them manually. Understanding when they appear helps you interpret molecule status:
+
+- **Standard polecat work** -- Every molecule step generates a wisp. When you run `gt mol status`, the step states you see are wisps.
+- **Cleanup tracking** -- When the Witness detects a dirty polecat exit, it creates a cleanup wisp to track recovery actions before nuking the sandbox.
+- **Progress monitoring** -- Wisps give you fine-grained visibility into where an agent is in its workflow.
+
+:::note[When NOT to Use Wisps]
+
+Never create wisps directly with `bd create --type wisp`. Wisps are internal tracking units managed by the molecule system. If you need persistent sub-task tracking, use regular beads with dependencies instead.
+
+:::
+
 ## Related Concepts
 
 - **[Molecules & Formulas](molecules.md)** -- Wisps are the per-step tracking units within molecules

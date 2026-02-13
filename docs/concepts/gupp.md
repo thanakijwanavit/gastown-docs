@@ -149,6 +149,28 @@ The two principles work in concert:
 
 Together, GUPP and NDI make Gas Town **resilient to the fundamental unpredictability of AI agents** while ensuring that work always progresses toward completion.
 
+## When to Apply GUPP & NDI
+
+These principles are not just theoretical -- they guide practical design decisions:
+
+### Apply GUPP When
+
+- **Designing molecule steps** -- Each step should be a checkpoint. Mark steps done only when their output is durable (committed, pushed, recorded in beads).
+- **Handling failures** -- Never roll back completed work. If a step fails, retry it forward or create a new bead for corrective action.
+- **Building plugins** -- Quality gate plugins should be idempotent. Running a lint check twice should produce the same result. If a plugin has side effects, make them additive, not destructive.
+
+### Apply NDI When
+
+- **Writing agent instructions** -- Describe the desired outcome, not the exact implementation. "Add input validation" is better than "Use Joi library version 17.3".
+- **Evaluating agent work** -- Judge by whether the tests pass and the feature works, not by whether the agent used your preferred coding style.
+- **Designing retries** -- Accept that a retried step may produce different code. The molecule only cares that the step reaches `done`.
+
+:::tip[GUPP Violation Test]
+
+If an operation could leave the system in a worse state than before it ran, it violates GUPP. Redesign it to be forward-only: either it succeeds and advances, or it fails and the system stays where it was.
+
+:::
+
 ## How GUPP & NDI Are Implemented
 
 These principles are not just abstract ideals -- they are enforced by specific Gas Town primitives:
@@ -168,3 +190,8 @@ These principles are not just abstract ideals -- they are enforced by specific G
 - **[Beads](beads.md)** -- Bead status progression is a direct expression of GUPP's forward-only rule
 - **[Gates](gates.md)** -- Gates enable GUPP-compliant async waits: the system pauses without losing state
 - **[The MEOW Stack](meow-stack.md)** -- GUPP and NDI apply at every layer of the MEOW abstraction model
+
+### Blog Posts
+
+- [Understanding GUPP](/blog/understanding-gupp) -- Practical examples of GUPP and NDI in real Gas Town workflows
+- [Common Pitfalls](/blog/common-pitfalls) -- Anti-patterns that violate GUPP and how to avoid them

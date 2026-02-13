@@ -312,3 +312,8 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 - [Witness](witness.md) -- Monitors the Refinery and receives `MERGED` signals
 - [Molecules](../concepts/molecules.md) -- The `mol-refinery-patrol` formula defines the merge workflow
 - [Beads](../concepts/beads.md) -- MR beads track each merge request through the queue
+
+### Blog Posts
+
+- [Refinery Deep Dive](/blog/refinery-deep-dive) -- How the merge queue processes branches, handles conflicts, and maintains main
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Scaling Refinery throughput for high-volume rigs

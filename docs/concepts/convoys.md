@@ -252,3 +252,9 @@ Run `gt convoy list` frequently to see the big picture. For live progress, use `
 - **[Rigs](rigs.md)** -- Convoys can span multiple rigs for cross-project coordination
 - **[The MEOW Stack](meow-stack.md)** -- Convoys represent Layer 2 (Epics) in the MEOW abstraction model
 - **[Gates](gates.md)** -- Individual beads within a convoy may be gated on external conditions
+
+### Blog Posts
+
+- [Your First Convoy](/blog/first-convoy) -- Step-by-step tutorial for creating and tracking your first convoy
+- [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Parallel dispatch, wave-based execution, and cross-rig convoys
+- [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor uses convoys to coordinate large work batches
