@@ -59,6 +59,30 @@ const config: Config = {
 
   themeConfig: {
     image: 'img/logo.svg',
+    metadata: [
+      {name: 'description', content: 'Gas Town is a multi-agent orchestration system for AI coding agents. Coordinate fleets of 20-30 concurrent workers through the gt CLI.'},
+      {name: 'keywords', content: 'AI agents, multi-agent orchestration, Claude Code, AI coding, agent coordination, Gas Town, gt CLI'},
+      {name: 'author', content: 'Steve Yegge'},
+      {name: 'robots', content: 'index, follow'},
+      {name: 'og:type', content: 'website'},
+      {name: 'og:site_name', content: 'Gas Town Documentation'},
+      {name: 'og:title', content: 'Gas Town - Multi-Agent Orchestration for AI Coding Agents'},
+      {name: 'og:description', content: 'Coordinate fleets of AI coding agents working on your projects simultaneously. Built on Claude Code, scales from 1 to 30 agents.'},
+      {name: 'og:image', content: 'https://docs.gt.villamarket.ai/img/logo.svg'},
+      {name: 'twitter:card', content: 'summary_large_image'},
+      {name: 'twitter:title', content: 'Gas Town - Multi-Agent Orchestration'},
+      {name: 'twitter:description', content: 'Coordinate fleets of AI coding agents. Scales from 1 to 30 concurrent workers.'},
+      {name: 'twitter:image', content: 'https://docs.gt.villamarket.ai/img/logo.svg'},
+    ],
+    headTags: [
+      {
+        tagName: 'link',
+        attributes: {
+          rel: 'canonical',
+          href: 'https://docs.gt.villamarket.ai/',
+        },
+      },
+    ],
     navbar: {
       title: 'Gas Town',
       logo: {

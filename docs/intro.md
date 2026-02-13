@@ -1,5 +1,6 @@
 ---
 title: Introduction
+description: "Introduction to Gas Town - a multi-agent orchestration system for AI coding agents that coordinates fleets of workers through the gt CLI."
 sidebar_label: Introduction
 slug: /intro
 ---
