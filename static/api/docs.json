@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-04T07:37:24.967Z",
+  "generated": "2026-02-13T08:15:54.216Z",
   "sections": [
     {
       "id": "getting-started",
@@ -119,6 +119,31 @@
           "title": "Configuration",
           "path": "/docs/cli-reference/configuration",
           "description": "Commands for configuring agent runtimes, account settings, themes, hooks, and issue integration. These settings control how Gas Town operates at the town and..."
+        },
+        {
+          "title": "gt sling",
+          "path": "/docs/cli-reference/sling",
+          "description": "Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch."
+        },
+        {
+          "title": "gt refinery",
+          "path": "/docs/cli-reference/refinery-commands",
+          "description": "Manage the Refinery, the per-rig merge queue processor that serializes all merges to main. Start, stop, monitor, and inspect merge requests."
+        },
+        {
+          "title": "gt polecat",
+          "path": "/docs/cli-reference/polecat-commands",
+          "description": "Manage polecat lifecycle: list, inspect, nuke, garbage collect, detect stale workers, check recovery state, and manage identities."
+        },
+        {
+          "title": "gt nudge",
+          "path": "/docs/cli-reference/nudge",
+          "description": "Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents."
+        },
+        {
+          "title": "gt session",
+          "path": "/docs/cli-reference/session-commands",
+          "description": "Manage tmux sessions for polecats: start, stop, restart, attach, monitor health, and capture output."
         }
       ]
     },
@@ -303,7 +328,7 @@
         {
           "title": "Guides",
           "path": "/docs/guides",
-          "description": "This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI develop..."
+          "description": "In-depth guides for using Gas Town effectively: usage patterns, architecture, cost management, multi-runtime support, and design philosophy."
         },
         {
           "title": "Usage Guide",
@@ -339,6 +364,11 @@
           "title": "Glossary",
           "path": "/docs/guides/glossary",
           "description": "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
+        },
+        {
+          "title": "Troubleshooting",
+          "path": "/docs/guides/troubleshooting",
+          "description": "Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries."
         }
       ]
     }
@@ -471,16 +501,46 @@
       "description": "Commands for managing the Refinery's merge queue. The Refinery processes merge requests (MRs) submitted by polecats, rebasing them onto the latest main branc..."
     },
     {
+      "title": "gt nudge",
+      "path": "/docs/cli-reference/nudge",
+      "section": "cli-reference",
+      "description": "Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents."
+    },
+    {
+      "title": "gt polecat",
+      "path": "/docs/cli-reference/polecat-commands",
+      "section": "cli-reference",
+      "description": "Manage polecat lifecycle: list, inspect, nuke, garbage collect, detect stale workers, check recovery state, and manage identities."
+    },
+    {
+      "title": "gt refinery",
+      "path": "/docs/cli-reference/refinery-commands",
+      "section": "cli-reference",
+      "description": "Manage the Refinery, the per-rig merge queue processor that serializes all merges to main. Start, stop, monitor, and inspect merge requests."
+    },
+    {
       "title": "Rig Management",
       "path": "/docs/cli-reference/rigs",
       "section": "cli-reference",
       "description": "Commands for adding, configuring, starting, stopping, and managing rigs. A rig is a project container that wraps a git repository with the full Gas Town agen..."
     },
     {
+      "title": "gt session",
+      "path": "/docs/cli-reference/session-commands",
+      "section": "cli-reference",
+      "description": "Manage tmux sessions for polecats: start, stop, restart, attach, monitor health, and capture output."
+    },
+    {
       "title": "Session & Handoff",
       "path": "/docs/cli-reference/sessions",
       "section": "cli-reference",
       "description": "Commands for managing agent sessions, handoffs between sessions, molecules (multi-step workflows), and formulas (reusable workflow templates)."
+    },
+    {
+      "title": "gt sling",
+      "path": "/docs/cli-reference/sling",
+      "section": "cli-reference",
+      "description": "Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch."
     },
     {
       "title": "Work Management",
@@ -600,7 +660,7 @@
       "title": "Guides",
       "path": "/docs/guides",
       "section": "guides",
-      "description": "This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI develop..."
+      "description": "In-depth guides for using Gas Town effectively: usage patterns, architecture, cost management, multi-runtime support, and design philosophy."
     },
     {
       "title": "Multi-Runtime Support",
@@ -613,6 +673,12 @@
       "path": "/docs/guides/philosophy",
       "section": "guides",
       "description": "Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas."
+    },
+    {
+      "title": "Troubleshooting",
+      "path": "/docs/guides/troubleshooting",
+      "section": "guides",
+      "description": "Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries."
     },
     {
       "title": "Usage Guide",
