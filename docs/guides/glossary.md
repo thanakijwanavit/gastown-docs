@@ -1,6 +1,6 @@
 ---
 title: "Glossary"
-sidebar_position: 6
+sidebar_position: 7
 description: "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
 ---
 
@@ -131,7 +131,7 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | `gt mol status` | Show current molecule progress |
 | `gt formula run <name>` | Pour a formula into a molecule |
 | `gt may at` | Attach to Mayor (short for `gt mayor attach`) |
-| `gt crew at <rig> <name>` | Attach to a Crew workspace |
+| `gt crew at <name>` | Attach to a Crew workspace (use `--rig <rig>` if needed) |
 | `gt rig park <rig>` | Pause a rig (preserve state, stop agents) |
 | `gt rig unpark <rig>` | Resume a parked rig |
 | `gt escalate <msg>` | Create an escalation for problems agents cannot resolve |

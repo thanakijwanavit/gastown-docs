@@ -1,7 +1,7 @@
 ---
 title: "Guides"
 sidebar_position: 0
-description: "This section provides in-depth guides for using Gas Town effectively, understanding its design philosophy, and getting the most out of multi-agent AI develop..."
+description: "In-depth guides for using Gas Town effectively: usage patterns, architecture, cost management, multi-runtime support, and design philosophy."
 ---
 
 # Guides
@@ -20,6 +20,7 @@ This section provides in-depth guides for using Gas Town effectively, understand
 | [Cost Management](cost-management.md) | Monitoring and optimizing token spend |
 | [Background & Philosophy](philosophy.md) | Why Gas Town exists, its history, and design philosophy |
 | [Architecture Guide](architecture.md) | Comprehensive tour of Gas Town's multi-agent architecture |
+| [Troubleshooting](troubleshooting.md) | Solutions for common Gas Town problems and workarounds |
 | [Glossary](glossary.md) | Complete terminology reference for all Gas Town concepts |
 
 ## Who Are These Guides For?
