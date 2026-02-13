@@ -2,8 +2,7 @@
 title: "Your First Convoy in 5 Minutes"
 description: "A quick walkthrough of creating beads, bundling a convoy, and watching polecats deliver code to main."
 slug: first-convoy
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [tutorial, getting-started]
 ---
 

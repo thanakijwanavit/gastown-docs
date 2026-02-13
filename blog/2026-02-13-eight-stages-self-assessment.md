@@ -2,8 +2,7 @@
 title: "What Stage Are You? A Self-Assessment for AI Coding Maturity"
 description: "Find out where you fall on the 8 Stages of AI Coding maturity model and get practical advice for leveling up to multi-agent orchestration."
 slug: eight-stages-self-assessment
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [getting-started, philosophy, ai-coding, maturity]
 ---
 

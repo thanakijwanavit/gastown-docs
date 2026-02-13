@@ -2,8 +2,7 @@
 title: "Multi-Runtime Workflows with Gas Town"
 description: "How Gas Town orchestrates work across Claude Code, Gemini CLI, Codex, Cursor, and other AI runtimes without vendor lock-in."
 slug: multi-runtime-workflows
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [architecture, runtimes, multi-agent, advanced]
 ---
 

@@ -2,8 +2,7 @@
 title: "5 Common Pitfalls When Starting with Gas Town"
 description: "Avoid the most frequent mistakes new Gas Town users make, from vague beads to ignoring the Refinery queue."
 slug: common-pitfalls
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [tips, getting-started]
 ---
 

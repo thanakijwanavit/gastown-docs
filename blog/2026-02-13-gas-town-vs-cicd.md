@@ -2,8 +2,7 @@
 title: "Gas Town vs Traditional CI/CD: What's Different?"
 description: "How Gas Town's agent-driven development model complements and extends traditional CI/CD pipelines rather than replacing them."
 slug: gas-town-vs-cicd
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [architecture, comparison, ci-cd, devops]
 ---
 

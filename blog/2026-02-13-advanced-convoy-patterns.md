@@ -2,8 +2,7 @@
 title: "Advanced Convoy Orchestration Patterns"
 description: "Go beyond basic convoys with cross-rig tracking, dependency chains, parallel fan-out, and monitoring strategies for complex multi-agent workflows."
 slug: advanced-convoy-patterns
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [convoys, advanced, workflows, orchestration]
 ---
 

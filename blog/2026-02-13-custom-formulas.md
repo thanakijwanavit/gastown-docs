@@ -2,8 +2,7 @@
 title: "Building Your First Custom Formula"
 description: "Step-by-step guide to creating TOML formulas that define custom agent workflows for specialized tasks in Gas Town."
 slug: custom-formulas
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [tutorial, formulas, molecules, customization]
 ---
 

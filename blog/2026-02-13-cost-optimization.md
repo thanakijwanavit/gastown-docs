@@ -2,8 +2,7 @@
 title: "Cost Tracking and Optimization in Gas Town"
 description: "Practical strategies for monitoring API costs, right-sizing agent work, and getting the most value from your multi-agent setup."
 slug: cost-optimization
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [operations, cost, optimization, best-practices]
 ---
 

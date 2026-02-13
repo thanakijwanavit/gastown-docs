@@ -2,8 +2,7 @@
 title: "Understanding GUPP: Why Crashes Don't Lose Work"
 description: "How the Gas Town Universal Propulsion Principle makes multi-agent AI development crash-safe by design."
 slug: understanding-gupp
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [concepts, architecture]
 ---
 

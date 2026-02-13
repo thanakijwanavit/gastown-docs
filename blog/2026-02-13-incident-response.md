@@ -2,8 +2,7 @@
 title: "Incident Response with Gas Town: When Things Go Wrong"
 description: "A practical guide to diagnosing and recovering from common Gas Town failures: stuck polecats, stalled convoys, merge conflicts, and agent crashes."
 slug: incident-response
-authors:
-  - name: Gas Town Team
+authors: [gastown]
 tags: [operations, troubleshooting, incident-response]
 ---
 
