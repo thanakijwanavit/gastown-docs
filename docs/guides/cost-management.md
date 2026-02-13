@@ -27,6 +27,17 @@ Every agent session consumes tokens. The breakdown varies by workload, but a typ
 
 Polecats dominate costs because they do the actual coding work -- reading files, reasoning about changes, running tests, and iterating until done.
 
+```mermaid
+pie title Token Spend by Agent Type (Typical)
+    "Polecats" : 65
+    "Witnesses" : 10
+    "Refineries" : 8
+    "Mayor" : 8
+    "Deacon" : 4
+    "Dogs/Boot" : 2
+    "Other" : 3
+```
+
 ### Cost Factors
 
 | Factor | Impact |

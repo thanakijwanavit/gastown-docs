@@ -87,16 +87,18 @@ Agents communicate through:
 
 ## Data Flow
 
-```text
-Human gives Mayor instructions
-    → Mayor creates beads + convoy
-    → Mayor slings work to rigs
-    → Polecats spawn and execute
-    → Polecats submit MRs via gt done
-    → Refinery processes merge queue
-    → Code lands on main branch
-    → Witness cleans up polecat sandbox
-    → Convoy auto-closes when all done
+```mermaid
+flowchart LR
+    H["Human"] -->|instructions| M["Mayor"]
+    M -->|creates beads + convoy| B["Beads DB"]
+    M -->|slings work| R["Rig"]
+    R -->|spawns| P["Polecat"]
+    P -->|codes & tests| P
+    P -->|gt done| MQ["Merge Queue"]
+    MQ -->|rebase + validate| Ref["Refinery"]
+    Ref -->|merge| Main["main branch"]
+    Main -->|nuke sandbox| W["Witness"]
+    W -->|all done| Conv["Convoy closes"]
 ```
 
 ## State Management

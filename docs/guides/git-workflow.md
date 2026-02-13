@@ -21,6 +21,22 @@ In a traditional single-developer workflow, you push code when you're done worki
 
 This creates race conditions where your local branch diverges from remote almost immediately.
 
+```mermaid
+sequenceDiagram
+    participant C as Crew (you)
+    participant P1 as Polecat A
+    participant P2 as Polecat B
+    participant M as main
+
+    C->>M: push commit 1
+    P1->>M: push commit 2
+    P2->>M: push commit 3
+    C->>C: git pull --rebase (gets 2,3)
+    C->>M: push commit 4
+    P1->>M: push commit 5
+    Note over C,M: Remote changes constantly.<br/>Always pull before push.
+```
+
 ---
 
 ## Golden Rules

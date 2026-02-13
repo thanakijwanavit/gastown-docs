@@ -35,6 +35,20 @@ The [molecule](molecules.md) tracks step completion in the [beads](beads.md) dat
 GUPP is the reason you can safely kill any Gas Town agent at any time. The system will always recover forward, never backward.
 :::
 
+### GUPP Recovery Flow
+
+```mermaid
+flowchart TD
+    A["Agent working on step 3 of 5"] -->|CRASH| B["Session dies"]
+    B --> C["Hook persists molecule state"]
+    C --> D["Fresh agent spawns"]
+    D --> E["Reads hook → finds molecule"]
+    E --> F["Steps 1-2: done ✓ → skip"]
+    F --> G["Step 3: in_progress → resume here"]
+    G --> H["Continues forward"]
+    H --> I["Steps 4-5: execute normally"]
+```
+
 ### Why GUPP Matters
 
 Without GUPP, multi-agent systems are fragile. A crash at the wrong moment could:

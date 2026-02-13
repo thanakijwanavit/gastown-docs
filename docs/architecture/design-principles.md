@@ -22,6 +22,23 @@ Work attached to an agent's hook drives that agent's behavior. The hook is the p
 
 Gas Town borrows heavily from Erlang/OTP patterns:
 
+```mermaid
+graph TD
+    D["Daemon (heartbeat)"] --> Deacon
+    Mayor -->|strategy| Deacon
+    Deacon -->|monitors| W1["Witness (rig A)"]
+    Deacon -->|monitors| W2["Witness (rig B)"]
+    W1 -->|supervises| P1["Polecats"]
+    W1 -->|supervises| R1["Refinery"]
+    W2 -->|supervises| P2["Polecats"]
+    W2 -->|supervises| R2["Refinery"]
+
+    style D fill:#f9f,stroke:#333
+    style Deacon fill:#bbf,stroke:#333
+    style W1 fill:#bfb,stroke:#333
+    style W2 fill:#bfb,stroke:#333
+```
+
 - **Supervisor trees** — Each level monitors the level below
 - **Mailboxes** — Agents communicate via async messages
 - **Let it crash** — Agents can crash; supervisors handle recovery
