@@ -38,6 +38,20 @@ sudo mv gt /usr/local/bin/
 </TabItem>
 </Tabs>
 
+## Dependency Map
+
+```mermaid
+graph LR
+    GT["gt CLI"] -->|requires| Git["Git 2.25+"]
+    GT -->|requires| BD["Beads (bd)"]
+    GT -->|recommends| Tmux["Tmux 3.0+"]
+    GT -->|requires| Agent["AI Agent Runtime"]
+    Agent --> Claude["Claude Code"]
+    Agent --> Gemini["Gemini CLI"]
+    Agent --> Codex["Codex"]
+    BD -->|uses| SQLite["SQLite3"]
+```
+
 ## Install Dependencies
 
 ### Git (Required)

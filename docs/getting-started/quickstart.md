@@ -104,6 +104,17 @@ You are now in an interactive Claude session inside tmux. Detach with `Ctrl-B D`
 
 The Mayor will:
 
+```mermaid
+flowchart LR
+    You["You give instructions"] --> Mayor["Mayor"]
+    Mayor -->|1| Beads["Create beads"]
+    Mayor -->|2| Convoy["Bundle convoy"]
+    Mayor -->|3| Polecats["Spawn polecats"]
+    Polecats -->|4| Work["Work in parallel"]
+    Work -->|5| Refinery["Merge via Refinery"]
+    Refinery --> Main["Code on main"]
+```
+
 1. Create beads (issues) for each task
 2. Bundle them into a convoy
 3. Spawn polecats to work on each task

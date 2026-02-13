@@ -1056,6 +1056,67 @@ else
     fail_test "Missing blog coverage for $COVERAGE_ISSUES topic area(s)" "Add blog posts tagged with the missing topics"
 fi
 
+# Test 34: Validate Mermaid diagram chart types
+echo ""
+echo "Test 34: Checking Mermaid diagram chart types..."
+MERMAID_TYPE_ISSUES=0
+VALID_MERMAID_TYPES="graph|flowchart|sequenceDiagram|classDiagram|stateDiagram|stateDiagram-v2|erDiagram|gantt|pie|gitgraph|journey|mindmap|timeline|quadrantChart|sankey|xychart|block|packet|architecture|kanban"
+
+for file in $(find "$ROOT_DIR/docs" "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    while IFS= read -r type_line; do
+        line_num="${type_line%%:*}"
+        chart_type="${type_line#*:}"
+        chart_type=$(echo "$chart_type" | sed 's/^[[:space:]]*//' | awk '{print $1}')
+        if ! echo "$chart_type" | grep -qE "^($VALID_MERMAID_TYPES)$"; then
+            rel_file="${file#$ROOT_DIR/}"
+            echo "  Invalid Mermaid type '$chart_type' in $rel_file:$line_num"
+            MERMAID_TYPE_ISSUES=$((MERMAID_TYPE_ISSUES + 1))
+        fi
+    done < <(awk '
+        /^```mermaid/ { in_mermaid=1; next }
+        in_mermaid && /^[a-zA-Z]/ { print NR ":" $0; in_mermaid=0 }
+        /^```$/ { in_mermaid=0 }
+    ' "$file")
+done
+
+if [ "$MERMAID_TYPE_ISSUES" -eq 0 ]; then
+    pass_test "All Mermaid diagrams use valid chart types"
+else
+    fail_test "Found $MERMAID_TYPE_ISSUES invalid Mermaid chart type(s)" "Use valid types: graph, flowchart, sequenceDiagram, pie, stateDiagram-v2, etc."
+fi
+
+# Test 35: Validate blog post authors are defined in authors.yml
+echo ""
+echo "Test 35: Checking blog post authors are defined..."
+AUTHOR_ISSUES=0
+AUTHORS_FILE="$ROOT_DIR/blog/authors.yml"
+
+if [ -f "$AUTHORS_FILE" ]; then
+    # Extract defined author keys from authors.yml (lines that start with a word and colon at root level)
+    DEFINED_AUTHORS=$(grep -E '^[a-z][a-z0-9_-]*:' "$AUTHORS_FILE" | sed 's/:.*//' | tr '\n' ' ')
+
+    for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+        authors_line=$(awk '/^---$/{if(++n==2)exit}n==1 && /^authors:/{print; exit}' "$file" 2>/dev/null)
+        [ -z "$authors_line" ] && continue
+
+        # Extract author names from [brackets]
+        authors=$(echo "$authors_line" | grep -oP '\[\K[^\]]+' | tr ',' '\n' | sed 's/^[[:space:]]*//' | sed 's/[[:space:]]*$//')
+        for author in $authors; do
+            if ! echo "$DEFINED_AUTHORS" | grep -qw "$author"; then
+                rel_file="${file#$ROOT_DIR/}"
+                echo "  Undefined author '$author' in $rel_file"
+                AUTHOR_ISSUES=$((AUTHOR_ISSUES + 1))
+            fi
+        done
+    done
+fi
+
+if [ "$AUTHOR_ISSUES" -eq 0 ]; then
+    pass_test "All blog post authors are defined in authors.yml"
+else
+    fail_test "Found $AUTHOR_ISSUES undefined blog author(s)" "Add missing authors to blog/authors.yml"
+fi
+
 # Summary
 echo ""
 echo "========================================"
