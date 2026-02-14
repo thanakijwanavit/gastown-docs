@@ -113,6 +113,33 @@ flowchart TD
     end
 ```
 
+## Bonus: The Debug Checklist
+
+When something goes wrong in Gas Town, run through this checklist before escalating:
+
+```bash
+# 1. Is the system healthy?
+gt doctor
+
+# 2. Are agents running?
+gt polecat list --rig <yourrig>
+
+# 3. Is the Refinery processing?
+gt mq list
+
+# 4. Any stuck work?
+bd list --status=in_progress
+
+# 5. What does the feed say?
+gt feed --last 20
+```
+
+:::warning Don't ignore Witness escalations
+The Witness is your early warning system. When it sends you mail about stalled polecats or Refinery issues, address them immediately. A stalled polecat burns tokens every minute it loops, and Refinery blockages prevent all other polecats from landing their work. See the [Witness Explained](/blog/witness-explained) post for details on what each escalation type means.
+:::
+
+Most issues trace back to one of the five pitfalls above. Once you've diagnosed which one, the fix is straightforward.
+
 ## The Meta-Lesson
 
 All five pitfalls share a common root: treating Gas Town like a single-developer tool. It's a **multi-agent system**, which means:
@@ -123,7 +150,7 @@ All five pitfalls share a common root: treating Gas Town like a single-developer
 - Work must be right-sized (agents have limits)
 - Monitoring matters (the supervision tree is there to help)
 
-Once you internalize these principles, Gas Town becomes remarkably smooth.
+Once you internalize these principles, Gas Town becomes remarkably smooth. The [Eight Stages of Gas Town Maturity](/blog/eight-stages-self-assessment) framework can help you assess where you are on this journey.
 
 ```mermaid
 flowchart LR
@@ -134,9 +161,20 @@ flowchart LR
     end
 ```
 
+## Quick Reference: Pitfall vs Fix
+
+| Pitfall | Symptom | One-Line Fix |
+|---------|---------|-------------|
+| Vague beads | Polecat implements wrong thing | Write beads like contractor briefs with file paths |
+| Not pushing | Work vanishes after session cycle | Always `git push` before `gt handoff` |
+| Fighting Refinery | Divergent state, broken merges | Let polecats use `gt done`, crew push to main |
+| Too-large beads | Polecat stalls mid-task | Split into 15-30 minute session-sized beads |
+| Ignoring Witness | Silent cascading failures | Check `gt feed` and `gt mail inbox` regularly |
+
 ## Further Reading
 
 - **[Quick Start](/docs/getting-started/quickstart)** — Set up your first workspace correctly
+- **[Beads](/docs/concepts/beads)** — Write effective beads that polecats can execute autonomously
 - **[Crew Collaboration](/docs/workflows/crew-collaboration)** — Best practices for working alongside polecats
 - **[Troubleshooting](/docs/operations/troubleshooting)** — Solutions when things go wrong
 - **[Design Principles](/docs/architecture/design-principles)** — The "why" behind Gas Town's constraints

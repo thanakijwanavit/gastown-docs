@@ -227,7 +227,8 @@ But molecules are the foundation. Without crash-safe step tracking, none of the 
 ## Next Steps
 
 - [Molecules & Formulas Reference](/docs/concepts/molecules) — Full reference with all step states, variables, and advanced features
+- [The MEOW Stack](/docs/concepts/meow-stack) — How molecules fit into Gas Town's layered workflow architecture
+- [Formula Workflow](/docs/workflows/formula-workflow) — Operational guide to running formula-based workflows
 - [Building Your First Custom Formula](/blog/custom-formulas) — Step-by-step guide to creating TOML formulas
 - [Formula Design Patterns](/blog/formula-design-patterns) — Advanced patterns for multi-step workflows
 - [Work Distribution Patterns](/blog/work-distribution-patterns) — How formulas fit into the broader work distribution strategy
-- [The MEOW Stack](/docs/concepts/meow-stack) — How molecules fit into Gas Town's layered workflow architecture

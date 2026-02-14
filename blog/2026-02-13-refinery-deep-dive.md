@@ -277,6 +277,7 @@ gt rig config myproject refinery.required_checks "ci/build,ci/test,ci/lint"
 
 - **[Refinery Agent](/docs/agents/refinery/)** — The agent that runs the merge queue
 - **[Merge Queue Commands](/docs/cli-reference/merge-queue/)** — Full CLI reference for `gt mq`
+- **[Git Workflow Guide](/docs/guides/git-workflow)** — Best practices for git in multi-agent environments
 - **[Gas Town vs CI/CD](/blog/gas-town-vs-cicd)** — How Gas Town complements your existing pipeline
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Dependency management for cleaner merges
 - **[Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent)** — Git patterns that the Refinery enforces

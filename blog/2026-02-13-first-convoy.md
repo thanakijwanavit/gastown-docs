@@ -117,12 +117,50 @@ In five minutes, you:
 
 This is the core Gas Town loop. The Mayor can automate steps 1-3 for you (just describe what you want in natural language), but understanding the manual flow helps you debug and fine-tune later.
 
+## Behind the Scenes
+
+When you sling a bead to a rig, several things happen automatically:
+
+1. **Polecat spawning** — The Deacon creates a new tmux session, clones the repo into a fresh workspace under `polecats/`, and starts a Claude Code session
+2. **Hook assignment** — The bead is placed on the polecat's hook via `gt mol attach`, so when the agent starts it immediately finds its work
+3. **Molecule execution** — The polecat follows its molecule (workflow state machine), progressing through steps like context loading, implementation, testing, and self-review
+4. **Merge request** — When done, `gt done` creates a merge request in the Refinery's queue
+5. **Serialized merge** — The Refinery rebases the MR onto latest `main`, runs validation, and fast-forward merges
+
+:::tip Understanding the pipeline
+The key insight is that polecats never push directly to `main`. The Refinery serializes all merges, which is what prevents the merge conflicts that plague naive multi-agent setups. See the [Refinery Deep Dive](/blog/refinery-deep-dive) for the full story.
+:::
+
+## Troubleshooting Your First Convoy
+
+A few things that might go wrong on your first run:
+
+| Symptom | Likely Cause | Fix |
+|---------|-------------|-----|
+| Polecat never starts | Rig not initialized | Run `gt rig init` first |
+| Polecat stalls at "loading context" | Missing `CLAUDE.md` or large repo | Add project instructions, check clone size |
+| Merge rejected by Refinery | Tests fail on rebase | Check `gt mq list`, read the failure log |
+| Convoy stuck at partial completion | One polecat errored | Check `gt feed`, re-sling the failed bead |
+
+For deeper troubleshooting, see the [Troubleshooting guide](/docs/operations/troubleshooting) and the [Common Pitfalls](/blog/common-pitfalls) blog post.
+
+## Scaling Beyond Your First Convoy
+
+Once you've run a manual convoy successfully, you're ready to let the Mayor take over. Instead of creating beads and slinging them yourself, just describe what you want:
+
+```bash
+gt mayor "Add user validation to the API with unit tests and docs"
+```
+
+The Mayor will decompose your request into right-sized beads, set up dependencies between them, bundle a convoy, and sling work to the appropriate rig — all automatically. This is where Gas Town starts to feel like a superpower.
+
 ## Next Steps
 
 - **[Mayor Workflow](/docs/workflows/mayor-workflow)** — Let the Mayor handle decomposition and assignment automatically
 - **[Crew Collaboration](/docs/workflows/crew-collaboration)** — Work alongside polecats in real-time
 - **[Convoys](/docs/concepts/convoys)** — Deep dive into batch tracking and cross-rig convoys
 - **[GUPP & NDI](/docs/concepts/gupp)** — Understand why crashes don't lose work
+- **[Session Cycling](/docs/concepts/session-cycling)** — How agents maintain continuity across restarts
 - **[Your Second Convoy](/blog/your-second-convoy)** — Level up with dependencies and cross-rig coordination
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the 5 most common mistakes with your first convoy
