@@ -122,6 +122,10 @@ bd show <failing-bead>
 # Fix the root cause, then re-sling
 ```
 
+:::warning Never Force-Clear Hooks During Active Incidents
+When a polecat is stuck, it is tempting to run `gt hook clear` to free the assignment. But if the polecat has uncommitted work on its branch, clearing the hook orphans that work. Always check `git status` in the polecat's worktree first, and prefer `gt polecat restart` over manual hook clearing — the restart preserves the hook and lets the fresh session recover the partial work.
+:::
+
 ## Scenario 3: Refinery Jam
 
 **Symptoms:** Work is submitted (polecats ran `gt done`) but nothing is merging to `main`.

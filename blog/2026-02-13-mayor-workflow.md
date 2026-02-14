@@ -228,6 +228,10 @@ MEOW is the highest-automation option. Choose it when you trust the system and w
 The Mayor is better at decomposing outcome-oriented requests like "add email validation" than implementation-specific ones like "create a validateEmail function in utils.go that uses regex." Describe the desired behavior and let the Mayor decide how to break the work down into beads.
 :::
 
+:::note MEOW Requires Good Test Coverage to Work Safely
+The Mayor workflow relies on automated validation at every stage — preflight tests, post-implementation tests, and Refinery CI checks. If your test suite has thin coverage, polecats may merge broken code that passes the existing tests. Invest in comprehensive test coverage before scaling to MEOW, or use the Manual Convoy workflow where you can review each bead before merging.
+:::
+
 ## Tips for Effective MEOW
 
 **Be specific about outcomes, not implementation.** The Mayor is better at decomposing "add email validation" than "create a validateEmail function in utils.go that uses regex." Tell it what you want, not how to build it.

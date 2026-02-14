@@ -184,6 +184,10 @@ sequenceDiagram
     R->>M: Fast-forward merge
 ```
 
+:::tip Keep Beads Small to Minimize Rebase Conflicts
+The single biggest factor in Refinery throughput is merge conflict rate, and the single biggest factor in conflict rate is MR size. Beads that touch 1-3 files and produce fewer than 100 changed lines rebase cleanly in the vast majority of cases. If your conflict rate climbs above 15%, decompose your beads into smaller, more focused units before slinging.
+:::
+
 ## Queue Ordering
 
 The default ordering is FIFO — first submitted, first processed. But the Refinery respects priority when configured:

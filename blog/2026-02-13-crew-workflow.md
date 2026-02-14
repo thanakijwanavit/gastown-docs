@@ -169,6 +169,10 @@ flowchart LR
 In a multi-agent environment, polecats are constantly merging code to main. If you hold uncommitted changes in your crew workspace for too long, you will face painful merge conflicts when you finally pull. Push after every logical chunk of work to stay in sync with the fleet.
 :::
 
+:::tip Use `gt handoff` to Preserve Context Across Sessions
+When your context window fills up or you finish a work chunk, always run `gt handoff` with descriptive notes before cycling. The handoff creates a mail to yourself and hooks it, so your next session automatically picks up exactly where you left off -- no manual ramp-up needed.
+:::
+
 ## Best Practices
 
 1. **Push frequently.** In a multi-agent environment, unpushed work diverges fast. Push after every logical chunk.

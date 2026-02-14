@@ -55,6 +55,10 @@ gt handoff -m "Context notes"
 - **Crew workers** push directly to `main` (this is fine — crew have push access)
 - **Never** manually merge polecat branches
 
+:::tip Include File Paths in Every Bead
+The single most effective way to help a polecat succeed is to include the exact file path and line number in the bead description. Instead of "fix the auth bug," write "fix the race condition in `src/auth/middleware.go` line 145." This eliminates the exploration phase and lets the polecat start coding immediately.
+:::
+
 ## 4. Creating Too-Large Beads
 
 **The mistake:** Creating a single bead for "Build the entire notification system" and assigning it to one polecat.

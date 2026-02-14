@@ -106,6 +106,10 @@ load-context ──┤─ implement-ui ───├── integrate
 
 **When to use:** Features with independent components that can be built in parallel. The agent may serialize execution, but the formula explicitly documents which steps are independent.
 
+:::warning Avoid Circular Dependencies in Step Graphs
+If step A `needs` step B and step B `needs` step A, the molecule will deadlock — no step can start because each is waiting on the other. Gas Town does not currently detect circular dependencies at pour time, so always verify your `needs` fields form a DAG (directed acyclic graph) before deploying a formula.
+:::
+
 ## Pattern 3: Gated Workflow
 
 Steps that pause and wait for an external condition:

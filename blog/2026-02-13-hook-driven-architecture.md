@@ -69,6 +69,10 @@ Hooks create a self-propelling work cycle. Every agent follows the same startup 
 
 This is the Gas Town Universal Propulsion Principle (GUPP) in action. The hook converts every session restart from "start over" to "continue forward." No central scheduler needs to tell agents what to do -- they discover it themselves.
 
+:::tip Always Check the Hook Before Checking the Inbox
+The startup protocol order matters: `gt hook` before `gt mail inbox`. If an agent checks mail first, it might pick up a new assignment while an existing hooked task is still in progress. The hook is the source of truth for current work — mail is supplementary context, not a replacement for the hook check.
+:::
+
 ## How Hooks Work Internally
 
 When `gt sling` assigns a bead to a polecat, here is what happens:

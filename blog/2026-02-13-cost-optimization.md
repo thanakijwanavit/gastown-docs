@@ -157,6 +157,10 @@ flowchart TD
     end
 ```
 
+:::warning Fix Flaky Tests Before Scaling Up
+A test that fails 20% of the time does not just cost 20% more -- it compounds. Each polecat retry is a full fresh session with all its startup overhead, and retries can cascade when the Refinery rejects merge requests. Fix any test with a flake rate above 5% before adding more polecats to a rig.
+:::
+
 ## Common Cost Traps
 
 **The "just one more polecat" trap.** It's tempting to throw more parallelism at a problem. But each polecat has startup costs, and if they touch overlapping files, the Refinery spends more time resolving conflicts — which triggers re-runs.

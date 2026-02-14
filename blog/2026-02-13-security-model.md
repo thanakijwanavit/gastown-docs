@@ -130,6 +130,10 @@ The security model's primary goal is limiting blast radius. Here is how differen
 
 The worst case -- a bug merged to main -- is handled by standard git practices (revert) and the beads system (P0 escalation). Gas Town does not add risk beyond what any CI/CD pipeline has.
 
+:::tip Use Gates for Any Production-Facing Operation
+For operations that touch production infrastructure — deployments, database migrations, secret rotations — always require a human-approval gate. Even well-tested agent code can have unintended production consequences. Gates add a few minutes of human review time but prevent the kind of irreversible mistakes that no amount of automated testing can catch.
+:::
+
 ## Best Practices
 
 1. **Never commit secrets.** Use `.gitignore` patterns for `.env`, `*.key`, `credentials.*`, and similar files.

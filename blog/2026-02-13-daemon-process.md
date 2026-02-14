@@ -154,6 +154,10 @@ flowchart TD
     FIX --> HB
 ```
 
+:::tip Park Idle Rigs to Save Resources
+The daemon sends heartbeats to every active rig on every tick. If you have rigs that sit idle during off-hours or weekends, use `gt rig park <rig>` to skip them. The Deacon ignores parked rigs entirely, which eliminates unnecessary Witness and patrol cycles and saves both API tokens and compute.
+:::
+
 ## Design Lessons
 
 The daemon embodies several Gas Town principles:

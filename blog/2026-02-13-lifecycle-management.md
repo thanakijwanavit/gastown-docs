@@ -109,6 +109,10 @@ gt rig undock myproject
 gt rig boot myproject
 ```
 
+:::tip Use Park for Overnight Breaks, Dock for Long-Term Shelving
+The most common mistake is using `gt rig stop` to pause a rig overnight — the daemon may restart it while you sleep. Use `gt rig park` instead: it preserves all worktrees and state while preventing auto-restart. Reserve `gt rig dock` for projects you are shelving indefinitely, since docking removes worktrees and requires a full `gt rig boot` to restore.
+:::
+
 ## Town-Level Lifecycle
 
 Beyond individual rigs, the entire town has lifecycle commands:

@@ -146,6 +146,10 @@ gt handoff -m "Instructions for next session..."
 
 When you find mail on your hook (instead of a molecule), the mail content IS your instructions. Read it and execute.
 
+:::warning Handoff Mail Without a Hook Is Useless
+A common mistake is sending handoff mail but forgetting to hook the work. The next session will find context notes in its inbox but no assignment to apply them to. Always ensure work is hooked via `gt sling` or `gt hook attach` before relying on handoff mail for continuity. The hook tells the agent WHAT to do; the mail tells it HOW.
+:::
+
 ## Mail Routing
 
 Mail uses the two-level beads architecture:

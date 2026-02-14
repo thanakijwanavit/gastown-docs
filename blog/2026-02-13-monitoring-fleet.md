@@ -168,6 +168,10 @@ gt costs --since 7d
 If `gt feed` shows a polecat being spawned and nuked repeatedly in quick succession, it usually means the agent is crashing on the same task. Don't wait for the Witness to escalate — check the bead description for ambiguity, inspect `gt trail` for the error, and consider re-decomposing the work into smaller pieces before re-slinging.
 :::
 
+:::note gt doctor --fix Is Safe to Run Regularly
+The `gt doctor --fix` command only addresses well-understood, non-destructive cleanups — removing orphaned worktrees, clearing stale lock files, and restarting dead daemon processes. It will never modify your branches, delete uncommitted work, or alter bead state. Running it as part of your daily routine is safe and recommended.
+:::
+
 ## Building a Monitoring Routine
 
 Here's a practical daily routine for monitoring a Gas Town fleet:

@@ -131,6 +131,10 @@ When you sling a bead to a rig, several things happen automatically:
 The key insight is that polecats never push directly to `main`. The Refinery serializes all merges, which is what prevents the merge conflicts that plague naive multi-agent setups. See the [Refinery Deep Dive](/blog/refinery-deep-dive) for the full story.
 :::
 
+:::note Polecats Never Push Directly to Main
+All polecat work goes through the Refinery's merge queue. This serialized merge process is what prevents the merge conflicts that would otherwise plague parallel agents. Even if a polecat finishes its work instantly, the code still passes through rebase, validation, and fast-forward merge before appearing on `main`.
+:::
+
 ## Troubleshooting Your First Convoy
 
 A few things that might go wrong on your first run:

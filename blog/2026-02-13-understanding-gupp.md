@@ -153,6 +153,10 @@ As a Gas Town user, GUPP means:
 GUPP isn't just for polecats. When you're a crew worker and your session crashes, your hook still has your molecule attached. Run `gt prime` in your next session and you'll pick up right where you left off. The principle is universal across all Gas Town agent types.
 :::
 
+:::warning Do Not Manually Revert Bead Status
+GUPP enforces forward-only state transitions for a reason: reverting a bead from `done` back to `open` can cause race conditions where multiple agents fight over the same work. If completed work needs revision, create a new bead that references the original. Never edit the beads database directly to change a bead's status backward — use `bd create` to file follow-up work instead.
+:::
+
 ## Further Reading
 
 - **[GUPP & NDI](/docs/concepts/gupp)** — Full technical reference

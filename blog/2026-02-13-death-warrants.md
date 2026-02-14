@@ -111,6 +111,10 @@ Gas Town handles this with **escalation counting**. After a configurable number 
 
 This prevents infinite warrant loops and surfaces genuinely hard problems to someone who can make a decision.
 
+:::tip Use `gt warrant list` to Audit Agent Terminations
+The warrant log provides a complete audit trail of every agent termination -- who filed it, why, and when it was executed. Run `gt warrant list --all` regularly to spot patterns like the same bead triggering repeated warrants or a specific rig producing more terminations than others. These patterns often reveal systemic issues worth fixing.
+:::
+
 ## Manual Warrant Operations
 
 Humans can participate in the warrant system directly:

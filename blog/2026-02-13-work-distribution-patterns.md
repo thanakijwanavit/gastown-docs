@@ -162,6 +162,10 @@ Use this matrix when choosing:
 If you are unsure which work distribution pattern to use, start with the Mayor workflow (MEOW). You can always inspect the beads and convoy it creates, then manually re-sling or override individual assignments. This gives you the speed of automation with a fallback to manual control if the decomposition does not match your intent.
 :::
 
+:::warning Avoid Using Formulas for One-Off Work
+Formulas are designed for repeatable processes — code review, release prep, security audits. Using a formula for one-off feature work adds template overhead without payoff, and the rigid step structure can actually slow agents down when the task does not follow a predictable pattern. Use a manual convoy or the Mayor for ad-hoc work, and reserve formulas for workflows you will run more than three times.
+:::
+
 ## Combining Patterns
 
 The patterns aren't mutually exclusive. Advanced operators often combine them:

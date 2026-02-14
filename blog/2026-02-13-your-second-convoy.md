@@ -197,6 +197,10 @@ The convoy's completion criteria automatically expands. It won't auto-close unti
 Small, focused beads finish faster, parallelize better, conflict less during merging, and are far easier to re-sling when a polecat gets stuck. If a bead description takes more than a short paragraph, it is probably too big. Split it before slinging.
 :::
 
+:::warning Do Not Sling Dependent Beads Before Their Blockers Complete
+Slinging a bead that still has unresolved dependencies will assign it to a polecat that cannot make progress — the agent will stall waiting for prerequisite code that has not landed on main yet. Always check `bd ready` before slinging to confirm a bead's dependencies have cleared. If you sling prematurely, the Witness will eventually detect the stall, but you will have wasted a polecat session and its token budget.
+:::
+
 ## Lessons from Second Convoys
 
 **Decompose aggressively.** Five small beads are better than two large ones. Small beads finish faster, parallelize better, and are easier to re-sling when something goes wrong.

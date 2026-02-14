@@ -180,6 +180,10 @@ bd list --status=open   # Check open beads
 Not sure what a sling will do? Run `gt sling <bead-id> <target> --dry-run` first. It resolves the target, checks for conflicts, and reports what would happen without actually doing anything. This is especially useful when working with cross-rig slinging or specific agent targets for the first time.
 :::
 
+:::warning Slinging to a Busy Agent Displaces Its Current Work
+If you sling a bead to an agent that already has work on its hook, the new bead replaces the existing assignment (with `--force`) or the sling fails. Either way, the current task is disrupted. Unless you have a specific reason to target a particular agent, always sling to the rig and let the Witness spawn a fresh polecat.
+:::
+
 ## Anti-Patterns
 
 **Don't sling to busy agents.** If an agent is mid-task, slinging more work forces a context switch. Sling to the rig and let a fresh polecat handle it.

@@ -264,6 +264,10 @@ flowchart TD
     end
 ```
 
+:::note Test Formulas Manually Before Deploying to Polecats
+Use `gt mol pour <formula> --hook` to pour a molecule onto your own hook and step through it manually with `gt mol step next` and `gt mol step done`. This lets you verify step ordering, dependency logic, and variable resolution before any polecat runs it. Catching a broken formula early saves significant time and tokens.
+:::
+
 ## Best Practices
 
 **Keep steps focused.** Each step should be one clear action. If a step description is more than a paragraph, consider splitting it into multiple steps.

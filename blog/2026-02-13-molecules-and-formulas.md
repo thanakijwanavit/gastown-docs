@@ -140,6 +140,10 @@ flowchart LR
 The molecule's killer feature is crash-safe step tracking. When a polecat crashes mid-workflow, the next session reads the molecule state and skips completed steps entirely — it does not re-run `load-context` or `branch-setup`. This means crashes, handoffs, and context compaction cost you only the in-progress step, not the entire workflow.
 :::
 
+:::tip Custom Formulas Live in .beads/formulas/
+You can create project-specific formulas by saving TOML files to `.beads/formulas/<name>.formula.toml`. These are available immediately via `gt formula run <name>` and can be poured alongside the built-in formulas. Start by copying an existing formula like `shiny` and customizing the steps for your project's workflow.
+:::
+
 ## Two Kinds of Molecules
 
 Gas Town uses molecules for two distinct purposes:

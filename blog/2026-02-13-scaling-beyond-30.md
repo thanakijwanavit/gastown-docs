@@ -159,6 +159,10 @@ flowchart LR
     end
 ```
 
+:::warning Monitor Your API Token Budget at Scale
+At 30+ concurrent agents, API token costs can escalate rapidly — especially if polecats are retrying broken tasks or patrol agents are cycling frequently. Set a daily budget alert with `gt costs --alert-threshold` and review `gt costs --by-agent` daily. A single misbehaving polecat stuck in a retry loop can consume more tokens in one hour than 10 healthy polecats use in a full day.
+:::
+
 ## Common Pitfalls at Scale
 
 1. **Not splitting rigs early enough.** By the time merge conflicts are constant, you should have split the rig already.

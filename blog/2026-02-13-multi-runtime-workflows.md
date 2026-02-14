@@ -151,6 +151,10 @@ sequenceDiagram
 Most teams get the best results by starting with Claude Code for all rigs and only introducing additional runtimes after they identify specific tasks that benefit from a different model's strengths. Premature multi-runtime setups add operational complexity without clear payoff.
 :::
 
+:::warning Verify the Hook-Commit-Done Contract Before Going Multi-Runtime
+Before adding a new runtime to your Gas Town setup, always test the basic contract: can the runtime read the hook, make git commits, and call `gt done`? A runtime that passes manual tests but fails any of these three steps under automation will silently drop work, leaving beads stranded on hooks with no progress. Test in a throwaway rig first.
+:::
+
 ## Practical Tips
 
 **Start with one runtime.** Most teams begin with Claude Code for everything, then specialize as they learn which tasks benefit from different runtimes.

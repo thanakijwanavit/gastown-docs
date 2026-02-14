@@ -102,6 +102,10 @@ When Gas Town itself updates, dogs handle the transition:
 | **Schema migration** | Update data formats when Gas Town itself upgrades | Migrate beads database schema; update config file formats; upgrade plugin manifests across all rigs | 5-15 minutes | Per Gas Town release (infrequent) |
 | **Warrant processing** | Execute death warrants for stuck agents (Boot only) | Read pending warrants; terminate stuck polecats or dogs; clean up their resources | 10-30 seconds per warrant | Every daemon tick (continuous) |
 
+:::tip Dogs Are Reusable Across Sequential Tasks
+Unlike polecats which are one-and-done (spawn, work, submit, die), dogs return to the idle pool after completing a task and can be reused for the next infrastructure job. This makes them more efficient for batch operations like cleaning orphaned worktrees across all rigs — a single dog handles the entire sweep rather than spawning a new agent for each rig.
+:::
+
 ## The Deacon-Dog Relationship
 
 Dogs don't operate independently. The [Deacon](/docs/agents/deacon) manages their entire lifecycle:

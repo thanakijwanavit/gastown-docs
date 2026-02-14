@@ -167,6 +167,10 @@ Each level adds context and makes higher-level decisions. The Witness provides r
 The default stall threshold (600 seconds without progress) works well for typical coding tasks, but if your agents handle long-running computations or large test suites, increase it to avoid false positives. Conversely, for time-sensitive hotfix rigs, lower the threshold so stalls are caught faster. Check `gt rig config <rig> witness.stall_threshold` to see your current setting.
 :::
 
+:::warning Do Not Lower the Stall Threshold Below 120 Seconds
+Setting the stall threshold too low causes the Witness to flag healthy polecats as stalled — especially agents that are reading large files, running test suites, or waiting for CI results. False-positive stall detections trigger unnecessary nudges and escalations, which waste tokens and can interrupt agents mid-work. Keep the threshold at 120 seconds or above to avoid this churn.
+:::
+
 ## Observing the Witness
 
 You can monitor the Witness's activity:

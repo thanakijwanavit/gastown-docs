@@ -191,6 +191,10 @@ The new session sees "step-3 is in progress" and knows to continue testing, not 
 Uncommitted code changes are the single biggest risk during session cycling. When context pressure hits 85%, commit your work-in-progress immediately — even if it is incomplete. A WIP commit on the branch is recoverable; uncommitted changes in a terminated session are gone forever.
 :::
 
+:::tip Include "What Didn't Work" in Handoff Mail
+The most valuable piece of context for a successor session is not what you accomplished — it can see that from the code and molecule state. What it cannot see is what you tried that failed, which approaches led to dead ends, and which files looked relevant but were not. Including these negative results in your handoff mail prevents the next session from repeating the same mistakes.
+:::
+
 ## Tips for Effective Cycling
 
 **Commit frequently.** Don't wait until context is full to commit. Small, frequent commits mean less risk of lost work when a session ends unexpectedly.

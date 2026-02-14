@@ -192,6 +192,10 @@ gt sling gt-backend-bead backend
 gt mail send backend/crew/admin -s "Dependency" -m "We need the /api/auth endpoint fixed before our frontend can proceed"
 ```
 
+:::note Mail Survives Everything -- Nudges Do Not
+Mail is stored as beads in `~/gt/.beads/` and persists through agent crashes, context compaction, and full session restarts. A nudge, by contrast, is just text injected into a tmux pane -- if the agent is not running, the nudge disappears permanently. When in doubt, always send mail first and follow up with a nudge to wake the recipient.
+:::
+
 ## Anti-Patterns
 
 **Don't use raw `tmux send-keys` for agent communication.** Always use `gt nudge`. Raw tmux commands are unreliable and bypass Gas Town's logging.

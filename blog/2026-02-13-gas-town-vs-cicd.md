@@ -44,6 +44,10 @@ CI/CD assumes a human authored the code. Gas Town's polecats are the authors. Th
 - **CI/CD:** Automated checks validate human intent
 - **Gas Town:** Automated checks validate agent output (the agent might have misunderstood the task)
 
+:::warning Merge Conflicts Scale with Parallelism
+Because Gas Town parallelizes across authorship — multiple agents writing code simultaneously — merge conflicts become more frequent than in human-paced development. The Refinery handles rebasing automatically, but if many polecats touch overlapping files, consider sequencing dependent beads with `bd dep add` rather than letting them run in parallel.
+:::
+
 ### 2. Parallelism Model
 
 CI/CD parallelizes across builds (multiple PRs building simultaneously). Gas Town parallelizes across *authorship* (multiple agents writing code simultaneously).

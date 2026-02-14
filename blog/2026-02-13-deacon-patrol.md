@@ -145,6 +145,10 @@ This auto-close mechanism means you never need to manually close convoys in norm
 You should never need to manually close convoys. The Deacon checks convoy completion on every patrol cycle and auto-closes convoys when all beads reach a terminal state. If a convoy is not closing, check whether a bead is stuck rather than trying to force-close the convoy itself.
 :::
 
+:::note The Deacon Uses a Patrol Molecule for Crash Recovery
+Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`). If the Deacon crashes mid-patrol, the next session picks up from the last completed step rather than re-running the entire cycle. This is the same molecule system that powers polecat workflows -- the Deacon eats its own dog food.
+:::
+
 ## Patrol Molecule: Squash and Respawn
 
 To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn pattern:

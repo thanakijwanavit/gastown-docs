@@ -156,6 +156,10 @@ sequenceDiagram
     RF->>WT: git worktree remove
 ```
 
+:::warning Worktrees Provide Code Isolation, Not Process Isolation
+Git worktrees share the same `.git` directory and run in the same OS process space. A misbehaving agent can theoretically access files outside its worktree. For security-sensitive workloads that run untrusted code, layer container-based isolation on top of the worktree system. For standard AI code generation, worktree-level isolation is sufficient.
+:::
+
 ## The Trade-Off
 
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).

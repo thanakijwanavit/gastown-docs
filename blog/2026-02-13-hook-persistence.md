@@ -113,6 +113,10 @@ flowchart LR
 - **Self-assignment** — An agent hooks work to itself (e.g., crew members picking up beads).
 - **Mail hookup** — Hooking a mail message for ad-hoc instructions.
 
+:::warning Pinned Hooks Never Auto-Clear
+Unlike standard hooks that clear on `gt done`, pinned hooks persist permanently across sessions. If you pin a hook (e.g., for the PR Sheriff pattern), it will run on every session start until you explicitly unpin it. Be deliberate about what you pin — an accidental pin can cause an agent to re-execute the same task every time it starts.
+:::
+
 ## Why Git Worktrees?
 
 Gas Town uses git worktrees as the isolation mechanism for agents. Each polecat gets its own worktree — a lightweight checked-out copy of the repository. This is where the hook lives.

@@ -59,6 +59,10 @@ bd ready
 
 The Witness and Mayor monitor the chain. If a dependency stalls, the Mayor can reassign or escalate.
 
+:::tip Use `bd blocked` and `bd ready` to Debug Chains
+When a dependency chain stalls, `bd blocked` shows you which beads are waiting and what they depend on. Pair it with `bd ready` to see what can run immediately. This is faster than manually tracing the chain and lets you identify the exact bottleneck bead.
+:::
+
 ## Pattern 2: Fan-Out / Fan-In
 
 The most common pattern in Gas Town: decompose a task into independent sub-tasks, run them all in parallel, and converge when they're done.
