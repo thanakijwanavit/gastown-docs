@@ -179,6 +179,7 @@ Overusing P0 severity for non-critical issues causes alert fatigue — the most 
 - [Monitoring & Observability](/docs/operations/monitoring) — Detecting problems before they escalate
 - [Incident Response with Gas Town](/blog/incident-response) — Broader incident management patterns
 - [Troubleshooting](/docs/operations/troubleshooting) — Resolving the issues escalations surface
+- [Witness Agent](/docs/agents/witness) — The per-rig monitor that detects stalls and triggers escalations
 - [Death Warrants](/blog/death-warrants) — How warrants handle the problems escalations identify
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects issues that trigger escalations
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — Proactive monitoring that catches problems before they become escalations

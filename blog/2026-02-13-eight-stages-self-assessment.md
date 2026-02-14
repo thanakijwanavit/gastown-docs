@@ -165,6 +165,7 @@ But for teams with well-tested codebases and a backlog of clearly-defined tasks,
 - **[Quick Start](/docs/getting-started/quickstart)** — Get Gas Town running in 10 minutes
 - **[Your First Convoy](/blog/first-convoy)** — Run your first parallel workflow
 - **[Philosophy](/docs/guides/philosophy)** — The design thinking behind Gas Town
+- **[Beads](/docs/concepts/beads)** — The AI-native task unit that powers agent work from Stage 7 onward
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the most frequent mistakes at every stage
 - **[Understanding GUPP](/blog/understanding-gupp)** — The core principle that defines Stage 4+ maturity
 - **[Why Beads?](/blog/why-beads)** — Understanding the task unit that powers every stage from 7 onward

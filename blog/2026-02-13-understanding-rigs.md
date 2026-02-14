@@ -164,6 +164,7 @@ stateDiagram-v2
 - [Rigs Reference](/docs/concepts/rigs) — Full reference with all commands and configuration options
 - [Rig Management CLI](/docs/cli-reference/rigs) — Commands for adding, starting, stopping, parking, and docking rigs
 - [Witness Agent](/docs/agents/witness) — The per-rig health monitor that watches polecats
+- [Refinery Agent](/docs/agents/refinery) — The per-rig merge queue that serializes polecat work to main
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) — How to partition rigs for large deployments
 - [Your First Convoy](/blog/first-convoy) — End-to-end walkthrough of creating work in a rig
 - [Gas Town's Security Model](/blog/security-model) — How rig isolation provides security boundaries
