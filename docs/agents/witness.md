@@ -269,7 +269,7 @@ The Witness handles several mail types during its inbox check:
 
 ### Swarm Tracking
 
-When the Mayor dispatches multiple polecats as a batch (swarm), the Witness tracks completion:
+When the Mayor dispatches multiple polecats as a batch (swarm), the Witness tracks completion. For more on batch dispatch patterns, see [Scaling Beyond 30 Agents](/blog/scaling-beyond-30):
 
 ```text
 Swarm started (4 polecats) → Monitor all 4

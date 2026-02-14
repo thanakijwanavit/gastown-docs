@@ -315,7 +315,7 @@ gt down
 
 ---
 
-The following diagram shows how a typical morning startup session flows through Gas Town's monitoring commands:
+The following diagram shows how a typical morning startup session flows through Gas Town's monitoring commands. For daily monitoring best practices, see [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet).
 
 ```mermaid
 sequenceDiagram

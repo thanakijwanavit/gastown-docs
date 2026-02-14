@@ -344,7 +344,7 @@ Gas Town Doctor
 
 :::tip
 
-Run `gt doctor` after installation, after upgrading Gas Town, or whenever something seems wrong. It catches most common configuration issues.
+Run `gt doctor` after installation, after upgrading Gas Town, or whenever something seems wrong. It catches most common configuration issues. For detailed troubleshooting workflows, see [Incident Response](/blog/incident-response).
 
 :::
 

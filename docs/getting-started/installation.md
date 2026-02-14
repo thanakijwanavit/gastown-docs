@@ -205,7 +205,7 @@ After completing all installation steps, create a test rig with `gt rig add test
 
 ## Supported Runtimes
 
-Gas Town supports multiple AI coding agent runtimes:
+Gas Town supports multiple AI coding agent runtimes. For detailed guidance on configuring and mixing different runtimes in one town, see [Multi-Runtime Workflows](/blog/multi-runtime-workflows).
 
 | Runtime | Command | Notes |
 |---------|---------|-------|

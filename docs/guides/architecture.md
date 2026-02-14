@@ -221,7 +221,7 @@ Polecats exist in exactly three states:
 
 ## The Polecat Lifecycle
 
-The polecat lifecycle is the core execution loop of Gas Town. Understanding it explains most of the system's behavior.
+The polecat lifecycle is the core execution loop of Gas Town. Understanding it explains most of the system's behavior. For details on the background coordinator that manages this lifecycle, see [Deacon Patrol](/blog/deacon-patrol).
 
 ```mermaid
 stateDiagram-v2

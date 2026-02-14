@@ -148,7 +148,7 @@ gt prime --role witness
 
 :::note
 
-`gt prime` should be run after compaction, clear, or new session. It is the canonical way to restore agent identity and context.
+`gt prime` should be run after compaction, clear, or new session. It is the canonical way to restore agent identity and context. For details on how priming integrates with session cycling, see [Session Cycling](/blog/session-cycling).
 
 :::
 

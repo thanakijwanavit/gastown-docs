@@ -278,7 +278,7 @@ gt polecat attach toast --rig myproject
 
 ## Death Warrants (Agent Cleanup)
 
-When an agent becomes unresponsive, exceeds its timeout, or turns into a zombie process, Gas Town uses **death warrants** to coordinate cleanup. A death warrant is not an immediate kill -- it's a structured cleanup request that ensures work is recovered before the agent is terminated.
+When an agent becomes unresponsive, exceeds its timeout, or turns into a zombie process, Gas Town uses **death warrants** to coordinate cleanup. A death warrant is not an immediate kill -- it's a structured cleanup request that ensures work is recovered before the agent is terminated. For details on the warrant system, see [Death Warrants: How Gas Town Terminates Stuck Agents](/blog/death-warrants).
 
 ### How Death Warrants Work
 

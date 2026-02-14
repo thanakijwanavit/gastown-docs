@@ -388,7 +388,7 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 ---
 
 :::caution
-Token costs scale nonlinearly with codebase size. A polecat working on a large monorepo may consume 3-5x more input tokens per session than one working on a focused microservice, because each file read and context reload ingests more content. Consider splitting monorepos into separate rigs to control per-polecat costs.
+Token costs scale nonlinearly with codebase size. A polecat working on a large monorepo may consume 3-5x more input tokens per session than one working on a focused microservice, because each file read and context reload ingests more content. Consider splitting monorepos into separate rigs to control per-polecat costs. For scaling considerations, see [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30).
 :::
 
 ## Cost Tracking Best Practices

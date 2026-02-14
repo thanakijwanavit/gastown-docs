@@ -134,7 +134,7 @@ Attempting to sling work to a docked or stopped rig will silently fail -- the be
 
 ## Using the Mayor Instead
 
-For a more automated experience, attach to the Mayor and describe the work:
+For a more automated experience, attach to the Mayor and describe the work. For complete details on the Mayor's strategic coordination capabilities, see [The Mayor Workflow](/blog/mayor-workflow).
 
 ```bash
 gt mayor attach

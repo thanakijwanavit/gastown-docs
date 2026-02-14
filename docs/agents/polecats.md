@@ -344,7 +344,7 @@ Polecat branches follow the convention:
 polecat/<name>/<issue-id>@<molecule-id>
 ```
 
-For example: `polecat/quartz/ga-h6g@ml4pgdku`
+For example: `polecat/quartz/ga-h6g@ml4pgdku`. For an overview of multi-agent git strategies, see [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent).
 
 ### The Pre-Submission Checklist
 

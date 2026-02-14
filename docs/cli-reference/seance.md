@@ -81,7 +81,7 @@ gt seance --talk sess-abc123
 ```
 
 :::tip
-Sessions are discovered from events emitted by SessionStart hooks. The `[GAS TOWN]` beacon in each session makes them searchable via `/resume`.
+Sessions are discovered from events emitted by SessionStart hooks. The `[GAS TOWN]` beacon in each session makes them searchable via `/resume`. For more on how session context is preserved, see [Understanding GUPP](/blog/understanding-gupp).
 :::
 
 ## Common Use Cases

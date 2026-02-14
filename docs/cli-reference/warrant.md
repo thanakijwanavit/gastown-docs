@@ -47,7 +47,7 @@ Warrants are filed automatically by the supervision chain:
 | **Human** | Manual intervention needed | Agent in bad state after infrastructure failure |
 
 :::note
-Warrants are a last resort. The supervision chain always tries nudging and escalation before filing a warrant. Most agent issues resolve without termination.
+Warrants are a last resort. The supervision chain always tries nudging and escalation before filing a warrant. Most agent issues resolve without termination. For a complete overview of the escalation system, see [Escalation System](/blog/escalation-system).
 :::
 
 ### Warrant Storage Format

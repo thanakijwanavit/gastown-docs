@@ -281,6 +281,8 @@ Never manually delete gate beads from the database. If a gate is blocking progre
 
 ## Use Cases
 
+Gates enable async coordination at critical points in your workflow. For comprehensive examples of gate-driven workflows including CI gates, approval gates, and timer-based retry patterns, see [Hook-Driven Architecture](/blog/hook-driven-architecture).
+
 ### Waiting for CI
 
 ```mermaid

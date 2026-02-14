@@ -85,7 +85,7 @@ The Witness will handle merge queue submission and polecat cleanup on your behal
 
 :::note
 
-This is a known issue tracked as **ga-w8vv**. Until it is fixed, the workaround above is the standard procedure for polecats that hit this error.
+This is a known issue tracked as **ga-w8vv**. Until it is fixed, the workaround above is the standard procedure for polecats that hit this error. For more troubleshooting patterns, see [Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls).
 
 :::
 

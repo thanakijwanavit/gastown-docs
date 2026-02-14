@@ -62,7 +62,7 @@ Seven agent roles form the hierarchy:
 | **Crew** | Per-rig | Managed | Human developer workspaces |
 | **Dogs** | Town | Reusable | Infrastructure tasks |
 
-Additionally, the **Boot** dog is a special triage agent spawned by the Deacon to assess new work or problems.
+Additionally, the **Boot** dog is a special triage agent spawned by the Deacon to assess new work or problems. For more on Boot's triage cycle, see [Boot Dogs](/blog/boot-dogs).
 
 ### 4. Daemon (Scheduler)
 

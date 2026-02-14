@@ -285,7 +285,7 @@ gt mail channel --create deployments
 ```
 
 :::tip
-Use channels for topic-based communication that spans multiple agents. Instead of sending individual messages to each agent interested in a topic (e.g., deployments, alerts), create a channel and let agents subscribe. This keeps conversations organized and avoids duplicate messages.
+Use channels for topic-based communication that spans multiple agents. Instead of sending individual messages to each agent interested in a topic (e.g., deployments, alerts), create a channel and let agents subscribe. This keeps conversations organized and avoids duplicate messages. For more on messaging patterns, see [The Mail System](/blog/mail-system).
 :::
 
 ---

@@ -238,7 +238,7 @@ If an agent seems to have lost its work assignment, run `gt hook` to inspect the
 
 ## Hook Lifecycle Across Sessions
 
-The following shows how a hook persists as agents cycle through multiple sessions.
+The following shows how a hook persists as agents cycle through multiple sessions. For a deep dive into work assignment and the sling command that creates these hooks, see [Mastering gt sling](/blog/mastering-gt-sling).
 
 ```mermaid
 sequenceDiagram

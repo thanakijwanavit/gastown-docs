@@ -398,7 +398,7 @@ gt completion powershell > gt.ps1
 
 :::tip
 
-After installing completions, restart your shell or source the completion file for immediate effect.
+After installing completions, restart your shell or source the completion file for immediate effect. For a comprehensive setup guide, see [Welcome to Gas Town](/blog/welcome).
 
 :::
 

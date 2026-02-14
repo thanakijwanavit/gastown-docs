@@ -98,7 +98,7 @@ flowchart TD
 
 ### 5. Boot Triage Process
 
-When the system starts up (or after a crash), the Deacon runs boot triage to assess and recover state:
+When the system starts up (or after a crash), the Deacon runs boot triage to assess and recover state. For background on how boot triage fits into multi-agent resilience patterns, see [Monitoring Your Fleet](/blog/monitoring-fleet):
 
 ```mermaid
 flowchart LR

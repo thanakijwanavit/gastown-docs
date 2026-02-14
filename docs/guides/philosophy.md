@@ -363,7 +363,7 @@ This tolerance for imperfection in exchange for throughput is a conscious design
 ---
 
 :::info
-The survival formula is not just theoretical -- Gas Town itself is designed around it. The system compresses orchestration insights (Lever 1), runs coordination on traditional compute (Lever 2), and applies to any git-backed software project (Lever 3). Understanding the formula helps you evaluate whether Gas Town fits your team's needs.
+The survival formula is not just theoretical -- Gas Town itself is designed around it. The system compresses orchestration insights (Lever 1), runs coordination on traditional compute (Lever 2), and applies to any git-backed software project (Lever 3). Understanding the formula helps you evaluate whether Gas Town fits your team's needs. For the practical implementation, see [Why Beads: Gas Town's Issue Tracking Philosophy](/blog/why-beads).
 :::
 
 ## Prediction Track Record

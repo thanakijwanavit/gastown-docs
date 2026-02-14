@@ -225,7 +225,7 @@ gt orphans kill --rig myproject
 
 :::tip
 
-Run `gt orphans` as part of your weekly maintenance routine. Orphaned commits are only recoverable until `git gc` prunes them (typically 2 weeks for unreachable objects).
+Run `gt orphans` as part of your weekly maintenance routine. Orphaned commits are only recoverable until `git gc` prunes them (typically 2 weeks for unreachable objects). For comprehensive lifecycle management strategies, see [Lifecycle Management](/blog/lifecycle-management).
 
 :::
 

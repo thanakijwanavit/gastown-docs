@@ -123,7 +123,7 @@ bd create --title "Minor UI glitch" --priority 3
 
 :::tip[Labeling Strategy]
 
-Use consistent label conventions across your team. For example, prefix labels with a category like `area:auth`, `area:ui`, or `severity:p1`. This makes filtering with `bd list --labels` far more powerful as your bead count grows.
+Use consistent label conventions across your team. For example, prefix labels with a category like `area:auth`, `area:ui`, or `severity:p1`. This makes filtering with `bd list --labels` far more powerful as your bead count grows. For patterns on organizing beads at scale, see [Work Distribution Patterns](/blog/work-distribution-patterns).
 
 :::
 

@@ -309,7 +309,7 @@ The patrol digest summarizes:
 
 ### `gt dashboard` -- Convoy Tracking Web Dashboard
 
-Launch a web-based dashboard for visual convoy and system tracking.
+Launch a web-based dashboard for visual convoy and system tracking. For monitoring at scale, see [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet).
 
 ```bash
 gt dashboard

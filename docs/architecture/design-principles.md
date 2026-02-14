@@ -171,7 +171,7 @@ stateDiagram-v2
     }
 ```
 
-This three-tier model optimizes resource usage while maintaining reliability.
+This three-tier model optimizes resource usage while maintaining reliability. For more on managing lifecycle states at scale, see [Lifecycle Management](/blog/lifecycle-management).
 
 ## 10. Human in the Loop
 

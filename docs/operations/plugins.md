@@ -255,7 +255,7 @@ exit $EXIT_CODE
 ```
 
 :::warning
-Keep plugins fast. Gate plugins block the merge pipeline, and a slow plugin can stall all polecats waiting for their MRs to merge. Aim for under 60 seconds of execution time, and always set a `timeout` in your `plugin.json` to prevent runaway processes.
+Keep plugins fast. Gate plugins block the merge pipeline, and a slow plugin can stall all polecats waiting for their MRs to merge. Aim for under 60 seconds of execution time, and always set a `timeout` in your `plugin.json` to prevent runaway processes. For plugin architecture details, see [Extending Gas Town with Plugins](/blog/plugin-system).
 :::
 
 ---

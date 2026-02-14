@@ -306,7 +306,7 @@ gt hooks install
 ```
 
 :::info
-Hooks run in the same process as Claude Code. Long-running hook commands can delay tool execution. Keep hooks lightweight — under 1 second per invocation.
+Hooks run in the same process as Claude Code. Long-running hook commands can delay tool execution. Keep hooks lightweight — under 1 second per invocation. For more on hook design patterns, see [Hook-Driven Architecture](/blog/hook-driven-architecture).
 :::
 
 ---

@@ -97,6 +97,8 @@ gt nudge polecat:toast --rig myproject "Focus on the API tests first"
 | **Merge path** | Push directly to main | Submit MR via Refinery |
 | **Monitoring** | Self-managed | Witness-supervised |
 
+For a complete walkthrough of crew workspaces and human-agent collaboration, see [The Crew Workflow](/blog/crew-workflow).
+
 ```mermaid
 flowchart LR
     Human -->|attaches to| Crew

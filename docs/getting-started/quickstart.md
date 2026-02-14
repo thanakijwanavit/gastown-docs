@@ -102,7 +102,7 @@ gt start --all
 
 ## Attach to the Mayor
 
-The Mayor is your primary interface for coordinating work.
+The Mayor is your primary interface for coordinating work. For those new to AI-driven development, consider reading [The 8 Stages of AI Coding Self-Assessment](/blog/eight-stages-self-assessment) to understand where you are in the journey.
 
 ```bash
 gt mayor attach

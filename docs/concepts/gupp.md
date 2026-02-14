@@ -235,7 +235,7 @@ GUPP's forward-only guarantee is enforced at the database level. Bead status upd
 
 ## GUPP Decision Tree
 
-When an operation encounters a failure, GUPP dictates the forward-only response.
+When an operation encounters a failure, GUPP dictates the forward-only response. For practical examples of how GUPP enables crash recovery in real workflows, see [Session Cycling Explained](/blog/session-cycling).
 
 ```mermaid
 graph TD

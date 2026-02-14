@@ -199,7 +199,7 @@ graph TD
 | `gt cleanup --rig <name>` | Clean orphaned resources |
 
 :::note
-When something seems wrong, `gt doctor` should be your first step. It checks agent health, session state, and common configuration issues — giving you a clear diagnosis before you start troubleshooting manually.
+When something seems wrong, `gt doctor` should be your first step. It checks agent health, session state, and common configuration issues — giving you a clear diagnosis before you start troubleshooting manually. For critical production issues, see the [Incident Response](/blog/incident-response) guide.
 :::
 
 ---

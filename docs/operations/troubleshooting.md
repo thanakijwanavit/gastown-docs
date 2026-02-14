@@ -248,7 +248,7 @@ gt peek polecat:toast --rig myproject
 
 ## Witness Not Patrolling
 
-**Symptom:** The Witness appears to be running (tmux session exists) but polecats are not being spawned automatically, and `gt status` shows the witness as offline (○) or repeatedly becoming a zombie.
+**Symptom:** The Witness appears to be running (tmux session exists) but polecats are not being spawned automatically, and `gt status` shows the witness as offline (○) or repeatedly becoming a zombie. For witness behavior details, see [Understanding the Witness](/blog/witness-explained).
 
 **Diagnosis:**
 

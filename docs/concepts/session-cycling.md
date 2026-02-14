@@ -81,7 +81,7 @@ sequenceDiagram
 
 ### Polecats
 
-Polecats cycle when context pressure builds. The [Witness](../agents/witness.md) monitors for signs of context exhaustion (sluggishness, repetition) and may nudge a polecat to cycle.
+Polecats cycle when context pressure builds. The [Witness](../agents/witness.md) monitors for signs of context exhaustion (sluggishness, repetition) and may nudge a polecat to cycle. For a detailed explanation of how the Witness monitors polecat health and triggers intervention, see [Witness Explained](/blog/witness-explained).
 
 ```bash
 # Polecat self-cycles

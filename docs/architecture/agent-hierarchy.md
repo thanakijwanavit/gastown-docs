@@ -66,7 +66,7 @@ flowchart TD
 ```
 
 :::tip
-Patrol intervals are tuned for balance: frequent enough to catch problems quickly, but not so frequent that agents spend all their time monitoring instead of working.
+Patrol intervals are tuned for balance: frequent enough to catch problems quickly, but not so frequent that agents spend all their time monitoring instead of working. For more on patrol optimization strategies, see [Monitoring Your Fleet](/blog/monitoring-fleet).
 :::
 
 Persistent agents run patrol cycles — periodic health checks:

@@ -12,7 +12,7 @@ description: "The Mayor receives human instructions, creates beads and convoys, 
 
 ## Overview
 
-The Mayor is the primary human-facing agent in Gas Town. When you run `gt mayor attach`, you are talking directly to the Mayor. It understands your goals, creates issues (beads), bundles them into convoys, assigns work to rigs, and tracks progress through completion. The Mayor is the only agent that bridges the gap between natural language instructions and the structured work system.
+The Mayor is the primary human-facing agent in Gas Town. When you run `gt mayor attach`, you are talking directly to the Mayor. It understands your goals, creates issues (beads), bundles them into convoys, assigns work to rigs, and tracks progress through completion. The Mayor is the only agent that bridges the gap between natural language instructions and the structured work system. For an in-depth look at the orchestration workflow, see [Work Distribution Patterns](/blog/work-distribution-patterns).
 
 ## Key Characteristics
 

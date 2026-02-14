@@ -38,7 +38,7 @@ The Refinery serializes all merges to main for a rig:
 One Refinery per rig. It is a persistent agent that processes work as it arrives. The polecat is already nuked by the time the Refinery processes its MR.
 
 :::tip
-The Refinery runs automatically as a persistent agent. You rarely need these commands in normal operation — they're primarily for debugging and manual intervention.
+The Refinery runs automatically as a persistent agent. You rarely need these commands in normal operation — they're primarily for debugging and manual intervention. For a comprehensive understanding of how the Refinery processes work, see [Refinery Deep Dive](/blog/refinery-deep-dive).
 :::
 
 **Role shortcuts:** `refinery` in mail/nudge addresses resolves to the current rig's Refinery.

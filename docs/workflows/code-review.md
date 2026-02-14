@@ -364,7 +364,7 @@ mindmap
 ```
 
 :::info[Synthesis Quality Depends on Leg Findings]
-The synthesis step that produces `review-summary.md` is only as good as the individual leg findings it combines. If a leg produces vague or superficial analysis, the synthesis will inherit that weakness. When creating custom review formulas, invest time in crafting clear, specific prompts for each leg to ensure high-quality synthesized output.
+The synthesis step that produces `review-summary.md` is only as good as the individual leg findings it combines. If a leg produces vague or superficial analysis, the synthesis will inherit that weakness. When creating custom review formulas, invest time in crafting clear, specific prompts for each leg to ensure high-quality synthesized output. For advanced convoy patterns, see [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns).
 :::
 
 ## Tips

@@ -159,7 +159,7 @@ sequenceDiagram
 
 :::danger
 
-Repeatedly nudging an agent that is stuck in a long-running operation can flood its input buffer with queued messages, making recovery harder once the operation completes. If an agent does not respond to the first 2-3 nudges, escalate to the Witness or file a warrant rather than sending additional nudges.
+Repeatedly nudging an agent that is stuck in a long-running operation can flood its input buffer with queued messages, making recovery harder once the operation completes. If an agent does not respond to the first 2-3 nudges, escalate to the Witness or file a warrant rather than sending additional nudges. For escalation procedures and recovery workflows, see [Incident Response](/blog/incident-response).
 
 :::
 

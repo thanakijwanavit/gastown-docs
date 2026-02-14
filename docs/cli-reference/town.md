@@ -227,7 +227,7 @@ Town-level navigation and management is useful when:
 - **Checking overall status** -- `gt town status` gives a single-pane view of the entire Gas Town deployment.
 
 :::tip
-If you need to interact with rig-level agents (Witness, Refinery, Polecats), use `gt rig next/prev` instead. `gt town` only cycles between Mayor and Deacon sessions.
+If you need to interact with rig-level agents (Witness, Refinery, Polecats), use `gt rig next/prev` instead. `gt town` only cycles between Mayor and Deacon sessions. For a deep dive into the Deacon's role, see [Deacon Patrol](/blog/deacon-patrol).
 :::
 
 :::note

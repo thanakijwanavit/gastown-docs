@@ -39,7 +39,7 @@ flowchart TD
 
 :::note
 
-Compaction only processes wisps -- lightweight ephemeral beads. Regular beads (bugs, features, tasks) are never deleted by compaction, even if they have been closed for a long time.
+Compaction only processes wisps -- lightweight ephemeral beads. Regular beads (bugs, features, tasks) are never deleted by compaction, even if they have been closed for a long time. For more on ephemeral vs. persistent tracking, see [Why Beads?](/blog/why-beads)
 
 :::
 

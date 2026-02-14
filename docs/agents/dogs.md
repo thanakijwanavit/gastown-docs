@@ -55,7 +55,7 @@ graph LR
     end
 ```
 
-**Rule of thumb**: If the work produces a feature branch and an MR, it is a Polecat. If the work maintains infrastructure, it is a Dog.
+**Rule of thumb**: If the work produces a feature branch and an MR, it is a Polecat. If the work maintains infrastructure, it is a Dog. For deeper insights on architectural decision-making, see [Gas Town vs CI/CD](/blog/gas-town-vs-cicd).
 
 ## Responsibilities
 

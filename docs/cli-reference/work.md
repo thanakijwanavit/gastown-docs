@@ -113,7 +113,7 @@ gt sling gt-abc12 myproject --no-spawn
 
 :::tip
 
-The Mayor typically handles slinging automatically. Use `gt sling` for manual assignment or when fine-grained control is needed.
+The Mayor typically handles slinging automatically. Use `gt sling` for manual assignment or when fine-grained control is needed. For understanding the full workflow from Mayor to merged code, see [Mayor Workflow](/blog/mayor-workflow).
 
 :::
 

@@ -400,6 +400,8 @@ When you encounter an error message with a code like `ERR_HOOK_MISSING` or `ERR_
 - **Roadmap**: GitHub project boards
 - **Support**: File an issue or ask in discussions
 
+For an introduction to the philosophy and terminology that makes search more effective, see [Welcome to Gas Town](/blog/welcome).
+
 ---
 
 ## Providing Feedback

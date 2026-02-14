@@ -110,7 +110,7 @@ flowchart LR
     Conflict --> Spawn --> Resolve --> Resubmit
 ```
 
-This separation of concerns keeps the Refinery focused on queue management while leveraging polecats for creative problem-solving.
+This separation of concerns keeps the Refinery focused on queue management while leveraging polecats for creative problem-solving. For more on multi-agent design patterns, see [Understanding Rigs](/blog/understanding-rigs).
 
 ### 5. Queue Management
 

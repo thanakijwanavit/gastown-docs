@@ -314,7 +314,7 @@ Each rig maintains multiple git clones (refinery, mayor, witness, plus one per a
 
 ## Rig Startup Sequence
 
-When a rig starts, its agents initialize in a specific order to ensure dependencies are ready.
+When a rig starts, its agents initialize in a specific order to ensure dependencies are ready. For details on how Git worktrees enable the multi-agent isolation described here, see [Git Worktrees for Multi-Agent Development](/blog/git-worktrees).
 
 ```mermaid
 flowchart TD

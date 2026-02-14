@@ -59,7 +59,7 @@ The tap system sits between Claude Code and tool execution. Each handler is a st
 Tap handlers check `GT_ROLE` and `GT_SESSION` environment variables to determine if they're running inside a Gas Town agent context. When these variables are absent (e.g., a human running Claude Code directly), all guards pass silently — the tap system never interferes with normal human usage.
 
 :::info
-The tap system is invisible to humans. When `GT_ROLE` is unset (normal human usage), all guards pass silently. You'll never be blocked by tap guards outside of Gas Town.
+The tap system is invisible to humans. When `GT_ROLE` is unset (normal human usage), all guards pass silently. You'll never be blocked by tap guards outside of Gas Town. For more on how guards integrate with the overall security model, see [Security Model](/blog/security-model).
 :::
 
 ## Subcommands

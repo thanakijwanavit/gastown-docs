@@ -232,6 +232,8 @@ This is useful for the Mayor to identify work that needs to be [slung](hooks.md)
 | `gt convoy check <convoy-id>` | Check if convoy can auto-close |
 | `gt convoy stranded` | Find convoys with unassigned work |
 
+For a complete overview of convoy-level coordination including parallel dispatch and wave-based execution, see the [Work Distribution Patterns](/blog/work-distribution-patterns) blog post.
+
 ## When to Use Convoys
 
 Convoys are the right tool when you have **related work items that should be tracked as a group**:

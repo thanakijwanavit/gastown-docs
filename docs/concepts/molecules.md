@@ -342,7 +342,7 @@ gt formula run my-deploy --var version="2.3.1"
 
 ## Molecule Step Execution States
 
-Each molecule step transitions through a well-defined set of states as the agent works through its workflow.
+Each molecule step transitions through a well-defined set of states as the agent works through its workflow. For advanced formula patterns including gated pipelines and multi-stage workflows, see [Formula Design Patterns](/blog/formula-design-patterns).
 
 ```mermaid
 stateDiagram-v2

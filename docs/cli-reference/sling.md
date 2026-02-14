@@ -49,7 +49,7 @@ The target argument is flexible and resolves based on context:
 | `deacon/dogs/<name>` | Specific dog |
 
 :::info
-When no target is specified, `gt sling` hooks the work to yourself (the current agent). This is useful for self-assigning work or attaching formulas to your current session.
+When no target is specified, `gt sling` hooks the work to yourself (the current agent). This is useful for self-assigning work or attaching formulas to your current session. For comprehensive assignment strategies, see [Mastering gt sling](/blog/mastering-gt-sling).
 :::
 
 ## Flags

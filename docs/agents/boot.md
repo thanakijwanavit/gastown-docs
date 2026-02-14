@@ -213,7 +213,7 @@ stateDiagram-v2
 
 ## The Decision Matrix
 
-Boot uses a precise decision matrix during the Decide phase:
+For a deeper exploration of triage strategies and escalation patterns, see [Incident Response](/blog/incident-response). Boot uses a precise decision matrix during the Decide phase:
 
 | Deacon State | Activity Level | Action |
 |--------------|----------------|--------|

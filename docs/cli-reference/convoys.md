@@ -274,7 +274,7 @@ flowchart TD
 
 :::note
 
-Run `gt convoy check` periodically as part of routine maintenance, especially for long-running convoys with many beads. Inconsistencies can arise when polecats are force-nuked or when the merge queue experiences failures, and catching these early prevents coordination issues later.
+Run `gt convoy check` periodically as part of routine maintenance, especially for long-running convoys with many beads. Inconsistencies can arise when polecats are force-nuked or when the merge queue experiences failures, and catching these early prevents coordination issues later. For more on convoy orchestration patterns, see [Advanced Convoy Patterns](/blog/advanced-convoy-patterns).
 
 :::
 

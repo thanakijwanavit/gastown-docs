@@ -223,7 +223,7 @@ Use this for manual health checks or debugging session issues.
 
 :::note
 
-Session health checks are useful for manual debugging, but you do not need to run them during normal operation. The Witness runs these checks automatically as part of its patrol cycle.
+Session health checks are useful for manual debugging, but you do not need to run them during normal operation. The Witness runs these checks automatically as part of its patrol cycle. For understanding how the Witness manages session health, see [Witness Explained](/blog/witness-explained).
 
 :::
 

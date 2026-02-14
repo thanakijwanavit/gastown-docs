@@ -104,7 +104,7 @@ This is Gas Town's core work scheduling rule. When an agent starts a session:
 2. If work found → execute it immediately
 3. If no work → check inbox → wait for instructions
 
-This creates automatic momentum — agents always know what to do.
+This creates automatic momentum — agents always know what to do. For a deeper dive into hook-driven execution, see [Understanding GUPP](/blog/understanding-gupp).
 
 :::warning
 If you use `gt unsling` to remove work from an agent's hook, the bead reverts to `open` status but any in-progress branch work remains on disk. Clean up the orphaned worktree manually or wait for the Witness patrol to detect and remove it.

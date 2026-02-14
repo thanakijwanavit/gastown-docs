@@ -41,7 +41,7 @@ Unlike polecats, which use git worktrees (lightweight branches off the canonical
 | Disk usage | Higher | Lower |
 | Branch flexibility | Full | Limited |
 
-Full clones give human developers complete independence -- they can rebase, force-push, switch branches, and perform any git operation without affecting other agents.
+Full clones give human developers complete independence -- they can rebase, force-push, switch branches, and perform any git operation without affecting other agents. For more on branch isolation strategies, see [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent).
 
 ## Named Members
 

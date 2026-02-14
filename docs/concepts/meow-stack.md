@@ -100,7 +100,7 @@ graph TD
 
 ### Layer 5: Formulas (Reusable Templates)
 
-**Formulas** are the TOML-defined templates from which molecules and protomolecules are created. They are the blueprints — reusable, parameterized, and version-controlled.
+**Formulas** are the TOML-defined templates from which molecules and protomolecules are created. They are the blueprints — reusable, parameterized, and version-controlled. For detailed guidance on creating custom workflow templates, see [Custom Formulas](/blog/custom-formulas).
 
 ```toml
 formula = "shiny"
