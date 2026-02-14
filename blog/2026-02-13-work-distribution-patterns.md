@@ -138,6 +138,10 @@ gt mol step done
 **Overhead**: Low (after formula creation). Running a formula is one command.
 **Control**: Medium. The template defines the process; the agent has freedom within each step.
 
+:::tip Version Control Your Custom Formulas in the Rig Repository
+Store rig-specific formulas in a `.gastown/formulas/` directory checked into version control alongside your code. This keeps formula definitions tied to the project they support, allows formula changes to be reviewed through pull requests, and ensures the formula evolves with the codebase it operates on. Generic cross-rig formulas belong in the town-level formulas directory instead.
+:::
+
 ## Decision Framework
 
 Use this matrix when choosing:

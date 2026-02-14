@@ -84,6 +84,10 @@ done
 
 The convoy auto-closes when all five complete. Since each table migration is independent, they run in true parallel — no sequencing needed.
 
+:::info Verify Independence Before Fanning Out
+Before creating a fan-out convoy, confirm that the tasks truly have no hidden dependencies. Two beads that both modify the same configuration file or database schema will race and create merge conflicts even if they appear logically independent. Check file overlap with `git diff --name-only` before slinging parallel work.
+:::
+
 **When to fan out:**
 - File-by-file migrations
 - Per-module test suites

@@ -95,6 +95,10 @@ Step 7: Check own context → cycle if needed
 
 Because the Witness uses a molecule, its patrol state survives crashes. If the Witness itself goes down mid-patrol, it picks up where it left off. For more on how molecules enable crash-safe workflows, see [molecules and formulas](/blog/molecules-and-formulas).
 
+:::note Witness Patrols Are Logged to the Beads Database for Forensic Analysis
+Every completed Witness patrol cycle writes a summary entry to the beads database, recording which agents were checked, what anomalies were detected, and what actions were taken. If you need to investigate why an agent was terminated or when a stall was first detected, query the patrol log with `bd list --type=patrol-log` to reconstruct the timeline.
+:::
+
 ## Witness Configuration
 
 Key configuration options for tuning Witness behavior:

@@ -107,6 +107,10 @@ Not all agents can execute formulas. Polecats and the Mayor support molecule-bas
 
 ## Cross-Rig Slinging
 
+:::note[Slinging Cross-Rig Work Requires No Special Syntax]
+The same `gt sling` command works whether the target rig is local or remote, parked or active. Gas Town resolves rig names, checks availability, and routes the bead to the correct Witness automatically. From your perspective, slinging to another rig is identical to slinging within your current rig.
+:::
+
 Work often needs to land in a different rig than where you're operating. Gas Town handles this seamlessly:
 
 ```mermaid

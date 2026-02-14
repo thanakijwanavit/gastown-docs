@@ -212,6 +212,10 @@ gt mol status
 
 The new session sees "step-3 is in progress" and knows to continue testing, not start over from step-1.
 
+:::danger Force-Terminating a Session Mid-Cycle Risks Uncommitted State Loss
+If you manually kill an agent session while it is cycling — using `tmux kill-session` or similar commands — any code changes committed to git survive, but molecule step progress recorded only in memory may be lost. Always let sessions complete their `gt handoff` cycle gracefully, or use `gt polecat nuke` which ensures proper cleanup and molecule state persistence before termination.
+:::
+
 :::warning Always Commit Before Cycling
 Uncommitted code changes are the single biggest risk during session cycling. When context pressure hits 85%, commit your work-in-progress immediately — even if it is incomplete. A WIP commit on the branch is recoverable; uncommitted changes in a terminated session are gone forever.
 :::

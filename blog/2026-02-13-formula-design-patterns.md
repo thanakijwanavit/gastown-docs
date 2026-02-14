@@ -56,6 +56,10 @@ needs = ["test"]
 
 The `needs` field creates dependencies between steps. A step won't start until all its dependencies are done. Understanding the [agent hierarchy](/docs/architecture/agent-hierarchy) helps you design formulas that align with how polecats, witnesses, and other agents interact.
 
+:::warning Test Formulas on Real Beads Before Production Use
+Formula syntax errors are easy to catch, but workflow logic errors — like missing dependencies or steps that are too coarse-grained — only reveal themselves during execution. Always pour a new formula onto a test bead in a sandbox rig and watch the agent execute it before deploying to production. A formula that looks correct on paper can cause agents to stall if steps are poorly scoped.
+:::
+
 ## Pattern 1: Linear Pipeline
 
 The simplest pattern -- steps execute one after another:

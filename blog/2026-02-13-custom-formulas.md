@@ -206,6 +206,11 @@ When you pour this formula, you provide the variable values:
 gt mol pour code-review --var pr_number=42 --var branch_name=feature/auth
 ```
 
+:::caution Variables Are Not Validated Until Step Execution
+The `gt mol pour` command accepts any variables you provide without checking if the formula actually uses them. Typos in variable names (like `--var prnumber=42` instead of `--var pr_number=42`) will only be caught when the agent reaches a step that references the undefined variable, wasting a session. Double-check variable names against the formula TOML before pouring.
+:::
+
+
 ```mermaid
 sequenceDiagram
     participant U as User

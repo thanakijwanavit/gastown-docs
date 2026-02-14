@@ -84,6 +84,10 @@ Hooks create a self-propelling work cycle. Every agent follows the same startup 
 
 This is the Gas Town Universal Propulsion Principle (GUPP) in action. The hook converts every session restart from "start over" to "continue forward." No central scheduler needs to tell agents what to do -- they discover it themselves. This self-propelling behavior is what makes [beads](/docs/concepts/beads) work as a task primitive -- the bead on the hook drives all agent activity. For more on lifecycle management, see [lifecycle management](/blog/lifecycle-management).
 
+:::danger Hooks Are the Authorization — Never Bypass Them
+A common mistake is starting work without checking the hook first, relying instead on context window instructions or manual notes. This breaks GUPP's security model. The hook is not just a reminder — it is the authorization to do the work. An agent should never execute a task that is not on its hook, even if the task seems obvious from context. This discipline prevents prompt injection and task hijacking.
+:::
+
 :::tip Always Check the Hook Before Checking the Inbox
 The startup protocol order matters: `gt hook` before `gt mail inbox`. If an agent checks mail first, it might pick up a new assignment while an existing hooked task is still in progress. The hook is the source of truth for current work — mail is supplementary context, not a replacement for the hook check.
 :::

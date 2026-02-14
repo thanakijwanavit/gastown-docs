@@ -25,6 +25,10 @@ Gas Town's answer is **priority-routed escalations** — a system inspired by on
 
 The key insight: **agents should not try to handle problems above their authority level**. A polecat that encounters a broken test suite shouldn't spend 40 minutes retrying — it should escalate, and a human or the Mayor should decide what to do. This follows the [agent hierarchy](/docs/architecture/agent-hierarchy) where each level has defined authority boundaries. For more on agent communication patterns, see [agent communication patterns](/blog/agent-communication-patterns).
 
+:::tip Escalations Reveal Systemic Issues That Need Fixing
+If you see the same escalation category appearing repeatedly — like "flaky test" or "missing dependency" — the problem is not the individual agents failing, but the underlying system state. Treat recurring escalations as bug reports about your infrastructure, not as agent misbehavior. Fix the root cause and watch the escalation rate drop.
+:::
+
 ## How Escalations Flow
 
 Every escalation travels upward through the supervision hierarchy until it reaches an agent (or human) authorized to handle it:

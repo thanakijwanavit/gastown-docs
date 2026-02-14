@@ -214,6 +214,10 @@ gt sling ga-fff myproject
 
 The convoy's completion criteria automatically expands. It won't auto-close until all beads (including the new one) are done.
 
+:::info Adding Beads Mid-Convoy Resets the Auto-Close Timer
+When you add a new bead to an existing convoy with `gt convoy add`, the convoy's auto-close logic recalculates based on the expanded scope. If the convoy was about to auto-close because its original beads were all done, adding a new bead pushes that auto-close event back until the new bead also completes. This prevents premature convoy closure when scope expands during execution.
+:::
+
 :::tip Decompose Aggressively — Five Small Beads Beat Two Large Ones
 Small, focused beads finish faster, parallelize better, conflict less during merging, and are far easier to re-sling when a polecat gets stuck. If a bead description takes more than a short paragraph, it is probably too big. Split it before slinging.
 :::

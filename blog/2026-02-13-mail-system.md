@@ -201,6 +201,10 @@ Mail uses the two-level beads architecture:
 | Agent-to-human | Town `.beads/` | Email/SMS gateway |
 | Handoff (self-addressed) | Town `.beads/` | Same agent, next session |
 
+:::tip[Cross-Rig Mail Is As Fast As Same-Rig Mail]
+Because all mail is stored in the town-level beads database rather than rig-specific databases, sending mail from a polecat in rig A to a crew member in rig B has the same latency and reliability as sending within a single rig. The prefix-based routing is purely logical — there is no network hop or synchronization delay.
+:::
+
 All mail goes through the town-level beads database, regardless of which rig the agents belong to. The `gt mail` command handles routing transparently. For the complete hierarchy of how messages flow through the system, see [Agent Hierarchy](/docs/architecture/agent-hierarchy).
 
 ```mermaid

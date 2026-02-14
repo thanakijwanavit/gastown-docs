@@ -155,6 +155,10 @@ Documentation → docs rig
 
 ## Monitoring Progress
 
+:::info[Convoy Progress Updates Are Real-Time]
+As each polecat completes work and calls `gt done`, the convoy tracking updates immediately — no polling, no caching delay. When you run `gt convoy status`, you see the exact current state of all beads in the batch. This real-time visibility is critical for deciding when to sling dependent work or adjust the decomposition mid-flight.
+:::
+
 While MEOW runs, you have several ways to check progress:
 
 ```mermaid

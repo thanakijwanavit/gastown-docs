@@ -57,6 +57,11 @@ A vague bead like "Fix the auth system" forces the polecat to spend tokens explo
 - Describe the expected behavior, not just the symptom
 - Set priority appropriately — P0/P1 beads get more powerful (expensive) models
 
+:::note Bead Quality Affects Cost More Than Model Selection
+A well-written bead executed by Haiku (the cheapest model) will often cost less in total than a vague bead executed by Sonnet that requires multiple retry sessions. Invest time in writing clear, specific bead descriptions before trying to optimize by switching to cheaper models.
+:::
+
+
 ## Strategy 2: Right-Size Your Convoys
 
 Don't fan out to 10 polecats when 3 would do. Each polecat session has fixed overhead (loading context, reading the hook, running preflight). Small tasks don't justify that overhead.

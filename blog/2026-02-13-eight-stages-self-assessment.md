@@ -103,6 +103,10 @@ sequenceDiagram
 
 **What changes:** You go from "one agent, one task, wait, review" to "five agents, five tasks, monitor, merge." Your throughput jumps dramatically.
 
+:::caution The Stage 6 to 7 Transition Requires a Complete Workflow Overhaul
+Moving from intent-level development to parallel orchestration is not just a tooling change — it requires restructuring your entire code review process, test infrastructure, and git workflow. Most teams underestimate this transition and try to run parallel agents with Stage 5 practices, resulting in merge conflicts and quality issues. Budget 2-4 weeks to establish the foundation before scaling up.
+:::
+
 **Prerequisites:**
 - Good test coverage (agents need automated validation)
 - Clean git workflow (parallel agents need clean merge paths)

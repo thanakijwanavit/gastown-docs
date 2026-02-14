@@ -152,6 +152,10 @@ When debugging a stuck polecat, open two terminals: one running `gt feed` to see
 The trail captures output from the agent's tmux session, which is destroyed when the polecat is nuked or its sandbox is cleaned up. If you suspect a polecat will be terminated soon, capture the trail immediately with `gt trail --agent <name> > trail-dump.txt` before the Witness or Deacon issues a death warrant.
 :::
 
+:::danger[A Spike in Token Costs Often Indicates a Systemic Problem]
+If `gt costs --since 1d` shows a sudden 3x increase compared to the previous day, it rarely means agents are just working harder. More often it signals an infinite retry loop, a flaky test causing repeated re-runs, or a polecat stuck in a cycle of failed attempts. Investigate cost spikes immediately rather than dismissing them as normal variance.
+:::
+
 ## gt costs: Token Spend
 
 ```mermaid

@@ -35,6 +35,10 @@ Both Gas Town and CI/CD share some concepts:
 
 The Refinery's merge queue is the closest analog to a CI pipeline — it takes submitted work, rebases it, runs validation, and merges clean code. But the validation step typically *calls your existing CI* rather than reimplementing it.
 
+:::note Gas Town Complements CI/CD — It Does Not Compete With It
+The most common misconception is that Gas Town replaces your existing CI/CD infrastructure. In reality, Gas Town generates code and your CI validates it. Keep your GitHub Actions, Jenkins pipelines, and deployment scripts exactly as they are. Gas Town simply becomes the code producer feeding into the validation pipeline you already trust.
+:::
+
 ## Where They Diverge
 
 ### 1. Authorship

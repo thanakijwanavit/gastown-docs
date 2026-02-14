@@ -112,6 +112,10 @@ Instead of one Deacon patrolling all rigs, partition rigs into tiers:
 
 The Deacon prioritizes hot rigs, ensuring that active work gets fast gate evaluation while idle rigs consume minimal patrol time.
 
+:::tip Scale API Concurrency Limits as You Add Agents
+When you reach 20+ concurrent agents, you may hit your API provider's rate limits or concurrency caps. Check your provider's dashboard for throttling errors and request a concurrency increase if needed. Running at scale without adequate API limits causes agents to stall waiting for rate-limit backoff, which looks like normal stalls but affects many agents simultaneously.
+:::
+
 ```mermaid
 gantt
     title Scaling Timeline: From 5 to 40+ Agents

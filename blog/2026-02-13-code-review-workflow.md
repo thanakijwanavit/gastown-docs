@@ -187,6 +187,11 @@ Recommend fixing P0 before merge.
 - Good test coverage for edge cases (429 responses, header values)
 ```
 
+:::danger Always Review Synthesis Output Before Acting
+While individual review legs can produce false positives, the synthesis step filters most of them out. However, the synthesis can also miss nuanced issues or misjudge severity. Always read the full synthesis report yourself before blocking merges based on P0 findings, especially in early deployments when the review formula is still being tuned.
+:::
+
+
 ## Integrating with the Merge Queue
 
 The code review formula integrates naturally with the Refinery:

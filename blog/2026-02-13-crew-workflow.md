@@ -114,6 +114,11 @@ git push
 bd close ga-abc --reason "Fixed in commit abc1234"
 ```
 
+:::warning Crew Direct Push Bypasses All Quality Gates
+Unlike polecats, whose work goes through the Refinery for validation and testing, crew workers push directly to main with no automated review. This is powerful but risky. Run your test suite locally with full coverage before pushing, especially when working alongside active polecats who assume main is always stable.
+:::
+
+
 ### Communicating with Agents
 
 ```bash

@@ -199,6 +199,10 @@ Tests 3 and 7 are the ones that catch it.
 "
 ```
 
+:::tip Include File Paths and Line Numbers in Handoff Mail
+The most effective handoff notes include exact file paths and line numbers, not just descriptions of the problem. Your next session (or another agent picking up the work) can jump straight to the relevant code instead of spending tokens re-discovering the location.
+:::
+
 This creates a mail to yourself and hooks it. Your next session starts, reads the hook, reads the mail, and continues from where you left off.
 
 ```mermaid

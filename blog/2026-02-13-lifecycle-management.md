@@ -134,6 +134,10 @@ The most common mistake is using `gt rig stop` to pause a rig overnight — the 
 
 Beyond individual rigs, the entire town has lifecycle commands:
 
+:::info[Town-Level Commands Coordinate Multiple Rigs Automatically]
+Commands like `gt start --all` and `gt shutdown` operate across every rig in your town, starting or stopping all Witnesses, Refineries, and polecats simultaneously. This coordination is handled by the Deacon, which tracks which rigs are parked or docked and skips them appropriately during town-level operations.
+:::
+
 ### Starting the Fleet
 
 ```bash

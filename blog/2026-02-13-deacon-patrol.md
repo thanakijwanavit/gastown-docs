@@ -99,6 +99,11 @@ graph TD
 
 Lifecycle changes are always graceful -- the Deacon waits for in-flight work to complete before stopping agents. This prevents work loss during administrative operations.
 
+:::tip Use Park Instead of Dock for Temporary Pauses
+Parking a rig (`gt rig park`) stops new polecats from spawning but leaves running agents alone to finish their work, then shuts down gracefully. Docking (`gt rig dock`) is more aggressive -- it stops all agents immediately, which is only needed for emergency situations or major infrastructure changes. For overnight or weekend pauses, always use park.
+:::
+
+
 ## Health Monitoring
 
 While the Witness monitors individual polecats within a rig, the Deacon monitors the Witnesses themselves. If a Witness becomes unresponsive:

@@ -85,6 +85,10 @@ gt sling <bead-id> myproject
 
 The key insight: killing a polecat doesn't lose work. The bead is still tracked, and any commits on the branch are preserved. GUPP (Gas Town Universal Propulsion Principle) ensures that the next agent picks up where the last one left off. For more on GUPP, see [understanding GUPP](/blog/understanding-gupp).
 
+:::info Polecats Are Ephemeral — Beads Are Permanent
+The most important mental model for incident response is understanding that polecats are disposable containers for work, while beads are the durable record of the work itself. When troubleshooting, focus on bead state first, then agent state second. A stuck polecat is an inconvenience; a lost bead is data loss. This priority ordering guides every recovery decision.
+:::
+
 ## Scenario 2: Stalled Convoy
 
 ```mermaid

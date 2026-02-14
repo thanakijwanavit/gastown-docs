@@ -55,6 +55,10 @@ gt sling ga-g5h6i myproject
 
 Each `sling` creates a polecat, assigns the bead to its hook, and starts execution. Within seconds, you'll have three polecats working in parallel.
 
+:::note The First Convoy Is Usually Slower Than Subsequent Ones
+Your first convoy will involve agents downloading dependencies, cloning repos, and building initial context. Subsequent convoys run faster because the rig infrastructure is already in place. Do not judge Gas Town's performance on the first convoy — evaluate after the third or fourth run when caches are warm and agents have built up context.
+:::
+
 ```mermaid
 sequenceDiagram
     participant Y as You

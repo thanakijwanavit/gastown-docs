@@ -87,6 +87,10 @@ The fresh agent doesn't redo steps 1-2. It reads the molecule state and picks up
 
 This prevents a class of bugs where agents fight over state: Agent A closes a bead, Agent B reopens it, Agent A closes it again, and so on.
 
+:::warning Create Follow-Up Beads Instead of Reopening Closed Work
+When you discover that a completed bead needs additional work — such as an edge case that was missed or a new requirement — create a fresh bead with `bd create` that references the original. Never attempt to reopen the closed bead by editing the database directly. This preserves GUPP's forward-only guarantee and maintains a clear audit trail of what was done when.
+:::
+
 ```mermaid
 sequenceDiagram
     participant P1 as Polecat (crashes)

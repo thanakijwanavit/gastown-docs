@@ -165,6 +165,10 @@ gt worktree beads    # Creates ~/gt/beads/crew/myproject-dave/
 # Submit when done — your identity is preserved
 ```
 
+:::caution Cross-Rig Worktrees Do Not Share Git Remotes by Default
+When you create a worktree in another rig with `gt worktree`, the worktree uses that rig's git configuration — not your current rig's settings. This means if the other rig has different remotes, branch protection rules, or authentication credentials, your pushes may fail unexpectedly. Always run `git remote -v` in the new worktree to verify you are pushing to the expected repository before submitting work.
+:::
+
 ```mermaid
 stateDiagram-v2
     [*] --> Active: gt rig start

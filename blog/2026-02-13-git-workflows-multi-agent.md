@@ -74,6 +74,10 @@ git push
 
 **Polecats use short-lived branches** that the Refinery merges within minutes. The branch exists only as long as the polecat is working — once `gt done` runs, the branch is submitted to the merge queue and the polecat is nuked.
 
+:::tip Branch Lifetimes in Multi-Agent Workflows Are Measured in Minutes, Not Days
+In a traditional workflow, feature branches might live for days or weeks. In Gas Town, a polecat branch exists for 5-30 minutes on average — the time it takes to implement, test, and submit. This fundamental shift in branch lifetime is what makes parallel development work. Branches do not have time to diverge because they merge before divergence accumulates.
+:::
+
 ## Principle 2: Always Rebase, Never Merge
 
 In a multi-agent repo, merge commits create noise. With 10 agents pushing independently, your git history becomes unreadable if every sync creates a merge commit.

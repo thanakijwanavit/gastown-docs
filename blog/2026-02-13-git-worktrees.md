@@ -80,6 +80,10 @@ myproject/
 
 Worktree creation is essentially instant -- it's just creating a directory and checking out files. No network calls, no image pulls, no history duplication.
 
+:::info Worktree Speed Enables Gas Town's Fast Agent Spawn Times
+The near-instant worktree creation is what makes spawning a new polecat take seconds instead of minutes. If Gas Town used full clones or containers, each agent spawn would involve network I/O and image management overhead. Worktrees allow Gas Town to maintain a pool of 10+ parallel agents without the infrastructure complexity of container orchestration.
+:::
+
 ```mermaid
 flowchart TD
     GIT[".git/ (shared history)"] --> WT1["polecats/toast/ (branch A)"]

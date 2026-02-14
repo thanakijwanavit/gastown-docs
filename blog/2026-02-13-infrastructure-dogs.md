@@ -81,6 +81,10 @@ Dog receives: "Clean orphaned worktrees across all rigs"
   → Return to idle pool
 ```
 
+:::tip[Dogs Scale Better Than Spawning Per-Rig Polecats]
+When cleaning resources across 10+ rigs, a single dog handles the entire sweep and returns to the pool. This is far more efficient than spawning one polecat per rig, each requiring its own context load and session setup. The Deacon leverages this reusability for batch operations that span the entire town.
+:::
+
 ### Configuration Syncing
 
 When a shared configuration changes, a dog propagates it:

@@ -28,6 +28,10 @@ gt formula run shiny --bead gt-abc12
 
 Multiple molecules can be poured from the same formula simultaneously. Three polecats can each be running their own instance of the `shiny` formula — each molecule tracks its own progress independently. For advanced multi-molecule coordination, see [Your Second Convoy](/blog/your-second-convoy).
 
+:::caution[Molecules Add Overhead — Use Them When You Need Step Tracking]
+Every molecule step creates a wisp bead in the database, adding storage and I/O overhead. For trivial tasks that complete in one session without risk of crashing mid-workflow, consider using ad-hoc instructions instead of pouring a formula. Reserve molecules for workflows with meaningful crash risk or multi-step dependencies that justify the tracking cost.
+:::
+
 ## Why Molecules Exist
 
 Without molecules, a polecat gets a bead and... does whatever it wants. Maybe it forgets to run tests. Maybe it pushes without self-reviewing. Maybe it crashes halfway through and the next session doesn't know which steps were already done.

@@ -118,6 +118,10 @@ pie title When Teams Use Minimal Mode
 
 ## Scaling Up Incrementally
 
+:::warning[Each Layer Adds Operational Complexity]
+While you can incrementally enable Tmux, Refinery, Witness, and Mayor layers, each addition introduces new monitoring surfaces and failure modes. Add layers only when the automation benefits outweigh the complexity cost. Many teams run productively in Minimal Mode with just hooks and beads for months before introducing the full stack.
+:::
+
 The beauty of Minimal Mode is that you can add automation one piece at a time:
 
 :::info[Hooks and Beads Work Without Any Agents Running]

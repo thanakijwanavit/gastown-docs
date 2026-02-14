@@ -132,6 +132,10 @@ gastowndocs/polecats/toast # Polecat toast in the gastowndocs rig
 
 This identity is recorded on every bead operation, git commit, and mail message. The beads database provides a complete audit trail: who created an issue, who worked on it, who closed it, and when.
 
+:::note Git Commit Attribution Mirrors BD_ACTOR for Compliance Traceability
+Every git commit created by a Gas Town agent includes the agent's BD_ACTOR identity in the commit author field, not a generic "bot" identity. This ensures that audit logs, code ownership tools, and compliance systems can trace every change back to the specific agent session that created it — critical for regulated environments where attribution cannot be ambiguous.
+:::
+
 ```mermaid
 timeline
     title Security Evolution in Gas Town

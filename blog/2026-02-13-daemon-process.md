@@ -61,6 +61,11 @@ This design has several advantages:
 2. **No stale state**: The daemon doesn't cache agent state. Each heartbeat triggers fresh discovery by the Deacon.
 3. **Simple recovery**: Restarting the daemon is trivial -- it has no state to recover.
 
+:::info The Daemon Restart Is Invisible to Running Agents
+Because all work state lives in hooks and beads (not in daemon memory), restarting the daemon mid-operation has zero impact on active polecats, witnesses, or the refinery. They continue executing their current tasks as if nothing happened. Only new spawns and heartbeat delivery pause briefly during the restart.
+:::
+
+
 ## The Heartbeat Loop
 
 The core of the daemon is a simple ticker:

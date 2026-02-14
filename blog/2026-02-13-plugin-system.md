@@ -193,6 +193,10 @@ plugins/pre-merge/
 └── 04-security-scan.sh
 ```
 
+:::note[Plugin Execution Order Affects Which Gate Fails First]
+If you run an expensive security scan before a fast linting check, polecats will waste tokens running the scan before discovering trivial lint failures. Order your plugins from fastest to slowest, and from most-likely-to-fail to least-likely-to-fail. This fails fast and saves both time and cost when multiple gates would reject the same merge.
+:::
+
 If any plugin fails with `fail_action = "reject"`, subsequent plugins are skipped and the merge is blocked.
 
 :::warning Always Set Timeouts on Pre-Merge Plugins

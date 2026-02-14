@@ -275,6 +275,10 @@ gt feed --rig myproject | grep -i refinery
 gt rig status myproject
 ```
 
+:::info Queue Depth Above 10 Suggests a Bottleneck
+If your merge queue consistently holds more than 10 pending MRs, it means polecats are submitting work faster than the Refinery can validate and merge it. This is a sign to either increase the Refinery's patrol frequency, split the rig into smaller focused rigs, or temporarily reduce the number of active polecats until the backlog clears.
+:::
+
 ## Throughput Considerations
 
 The Refinery is intentionally single-threaded per rig. Processing MRs one at a time guarantees a clean history but creates a throughput bottleneck. Here's how to manage it:

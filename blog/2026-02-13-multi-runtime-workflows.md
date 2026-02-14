@@ -137,6 +137,10 @@ When a convoy spans rigs with different runtimes, ensure all rigs share compatib
 
 ## Configuring a Rig's Runtime
 
+:::info[Runtime Configuration Persists in the Rig's Beads Database]
+When you set a rig's runtime with `gt rig config`, the setting is stored in the rig-level `.beads/` database and survives across daemon restarts, rig reboots, and even machine reboots. You only need to configure the runtime once per rig — it becomes part of the rig's permanent identity alongside its repository URL and crew roster.
+:::
+
 When creating a new rig, specify the runtime:
 
 ```bash
