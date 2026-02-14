@@ -348,6 +348,10 @@ graph TD
     F -->|auto-complete| B
 ```
 
+:::tip Parked Rigs Resume Faster Than Docked Rigs
+Because parked rigs keep their worktrees intact while docked rigs have them removed, unparking and restarting a rig takes seconds compared to the minutes required to undock and boot. If you frequently pause and resume work on a rig (e.g., daily cycling between projects), use park/unpark instead of dock/undock to minimize downtime and improve your workflow cadence.
+:::
+
 ## Next Steps
 
 - [Starting & Stopping](/docs/operations/lifecycle) — Full lifecycle command reference

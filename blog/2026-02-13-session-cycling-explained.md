@@ -283,6 +283,10 @@ graph LR
 
 **Trust the hook.** Your work assignment persists across sessions. You don't need to re-create beads, re-set-up branches, or re-attach molecules. The hook has it all.
 
+:::info Patrol Agents Cycle More Predictably Than Polecats
+The Witness and Refinery cycle on a fixed schedule — typically every N patrol rounds — because their work is repetitive and context accumulates in a predictable pattern. Polecats cycle unpredictably based on task complexity and context fill rate. When debugging patrol agent behavior, check the patrol count since the last cycle with `gt agent status <agent-name>` to verify cycling is happening as expected.
+:::
+
 :::caution Session Cycling Does Not Reduce Total Token Usage
 Cycling to a fresh session resets the context window, allowing the agent to continue working — but the total token count across both sessions is cumulative, not reset. If the first session consumed 50,000 tokens and the second session consumes 30,000 tokens, your bill reflects 80,000 tokens. Session cycling solves the context limit problem but does not reduce API costs; in fact, it may increase costs slightly due to context re-loading overhead.
 :::

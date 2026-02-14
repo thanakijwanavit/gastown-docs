@@ -364,6 +364,10 @@ Think of the Mayor as a project manager who happens to be an AI:
 
 The key insight: you operate at the level of intent, not implementation. The Mayor translates intent into executable work items that the rest of Gas Town processes mechanically.
 
+:::tip The Mayor Can Pause Mid-Convoy If You Need to Adjust
+If you realize mid-execution that the Mayor's decomposition is heading in the wrong direction, you can attach to the Mayor's session with `gt mayor attach` and tell it to pause the convoy. The Mayor will stop slinging new beads while allowing in-flight polecats to complete. This gives you a chance to review progress, cancel problematic beads, and adjust the plan before the convoy continues.
+:::
+
 ## Next Steps
 
 - **[Mayor Agent](/docs/agents/mayor/)** — Full reference for the Mayor role

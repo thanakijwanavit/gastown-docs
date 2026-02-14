@@ -290,6 +290,10 @@ flowchart LR
 Every mail message is a bead, which means it's permanently stored and searchable. When debugging why an agent did something unexpected, check its mail history with `gt mail inbox --agent <path>`. The handoff mails and dispatch notifications often reveal the context that led to the behavior.
 :::
 
+:::danger Mail Sent to Non-Existent Agents Goes into a Dead Letter Queue
+If you send mail to a typo'd agent path like `gastowndocs/polcats/toast` (note the typo: "polcats" instead of "polecats"), the mail is stored but never delivered. Gas Town does not validate recipient addresses at send time. Always double-check agent paths with `gt agent list` before sending critical handoff mail, or the next session will start without the context you intended to provide.
+:::
+
 ## Next Steps
 
 - [Communication CLI Reference](/docs/cli-reference/communication) -- Full mail command documentation

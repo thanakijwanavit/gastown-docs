@@ -272,6 +272,10 @@ graph LR
 
 6. **Review stale escalations daily.** Run `gt escalate stale` each morning. Stale escalations represent issues that fell through the cracks.
 
+:::info Escalation Patterns Reveal Systemic Issues Worth Tracking
+Run `gt escalate stats --by-category` monthly to analyze which escalation types fire most frequently. If "flaky test" appears repeatedly, your test suite needs stability work. If "merge conflict" dominates, your bead scoping is too coarse. Escalations are not just incident reports — they are data about your development bottlenecks.
+:::
+
 ## Next Steps
 
 - [Escalation System Reference](/docs/operations/escalations) — Full configuration reference

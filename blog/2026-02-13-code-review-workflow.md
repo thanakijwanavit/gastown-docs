@@ -163,6 +163,10 @@ Individual leg findings are useful, but the synthesis is where the real value em
 3. **Groups by theme** — Related issues are clustered for efficient fixing.
 4. **Provides an executive summary** — A one-paragraph assessment and merge recommendation.
 
+:::caution The Synthesis Is Only as Good as the Legs
+If individual review legs produce low-quality findings (too many false positives, vague descriptions, or missed issues), the synthesis step cannot fix that. Tuning your review formula means refining the leg instructions in the formula TOML, not tweaking the synthesis logic. Start by improving the weakest leg before scaling to full 10-leg reviews.
+:::
+
 The following state diagram illustrates the complete review lifecycle from PR submission to final merge.
 
 ```mermaid

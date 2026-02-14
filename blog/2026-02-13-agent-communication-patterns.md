@@ -20,6 +20,10 @@ Each primitive serves a distinct purpose. Using the wrong one is a common source
 | **Nudge** | Immediate (tmux) | None | Wake sleeping agents, send short alerts |
 | **Hook** | Immediate (filesystem) | Durable (survives restarts) | Work assignment |
 
+:::danger Never Use Nudges for Critical Information
+Because nudges are ephemeral text injected into tmux sessions, they vanish if the recipient is not running. Critical information like task assignments, bug reports, or escalations must use mail or hooks. Reserve nudges exclusively for wake-up calls after you have already sent durable messages via mail.
+:::
+
 ```mermaid
 graph TD
     A[Agent A] -->|"gt mail send"| MB[Mailbox B]

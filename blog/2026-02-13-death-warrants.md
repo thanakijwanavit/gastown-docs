@@ -208,6 +208,10 @@ gt warrant execute myproject/polecats/toast --force
 
 The `--force` flag bypasses the formal warrant flow. Use it for emergency situations where you need immediate termination — but prefer the normal flow for auditing and proper cleanup.
 
+:::caution Warrant Loops Signal Task Decomposition Failures
+If a bead requires more than 3 warrants before completing, the root cause is almost always poor task decomposition rather than agent malfunction. A well-scoped bead should be completable in a single polecat session. Multiple warrant cycles mean the bead's scope was too large, its instructions were too vague, or critical context was missing. Fix the bead definition before re-slinging.
+:::
+
 ## Why This Design Matters
 
 ```mermaid

@@ -31,6 +31,10 @@ The daemon is written in Go for practical reasons:
 - **Concurrency**: Goroutines handle lifecycle requests without blocking heartbeats.
 - **Crash recovery**: If the daemon crashes, `systemd` or `launchd` restarts it in seconds. Agents don't lose work because their state lives in hooks, not in the daemon.
 
+:::note The Daemon Is Designed for Unattended Operation
+Once configured with a process supervisor like systemd or launchd, the daemon requires no human intervention. It restarts automatically after crashes, reboots, or system updates. This makes Gas Town suitable for running overnight or on remote servers where manual intervention is impractical.
+:::
+
 ```mermaid
 flowchart TD
     D[Daemon Process] -->|every 3 min| HB[Heartbeat]

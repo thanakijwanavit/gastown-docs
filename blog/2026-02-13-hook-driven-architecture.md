@@ -275,6 +275,10 @@ Hooks also serve a security function. Because work assignment is stored in the f
 
 This is why Gas Town agents check `gt hook` before doing anything else. The hook is more authoritative than anything in the context window.
 
+:::note Hooks Enable Async Work Handoff Between Humans and Agents
+Because hooks persist in the filesystem independently of any session, you can manually hook work to yourself as a crew member, do part of the implementation, then un-hook it and re-sling to a polecat to finish. The hook state captures exactly where you left off, making human-to-agent and agent-to-human handoffs seamless. This is particularly useful for tasks that need initial human judgment before agent execution.
+:::
+
 ## Next Steps
 
 - [Hooks (Persistence)](/docs/concepts/hooks) -- Full reference for the hook system

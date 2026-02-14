@@ -307,6 +307,10 @@ Every step should be a checkpoint. If the agent crashes after completing a step,
 - Don't combine durable and non-durable operations in one step
 - Each step should be independently verifiable
 
+:::caution Formula Validation Requires Real Execution — Syntax Checks Are Not Enough
+A formula that parses correctly can still produce broken workflows if steps are mis-scoped or dependencies are wrong. The only reliable way to validate a new formula is pouring it onto a test bead in a sandbox rig and watching a real agent execute it. Syntax validation catches typos; execution reveals whether your workflow logic actually works.
+:::
+
 ### Test Formulas with Dry Runs
 
 Before deploying a formula to production:

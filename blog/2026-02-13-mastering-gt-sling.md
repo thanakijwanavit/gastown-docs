@@ -307,6 +307,10 @@ graph TD
     DIS --> ATT
 ```
 
+:::caution Slinging to a Parked Rig Appears to Succeed But Work Never Starts
+The `gt sling` command will report success when slinging to a parked rig, but no polecat will spawn because the rig's Witness is not running. The bead sits on a non-existent hook indefinitely. Before slinging work, always verify the target rig is active with `gt rig status <rig>` and unpark it if needed with `gt rig unpark <rig>` before the sling.
+:::
+
 ## Next Steps
 
 - [Work Distribution Architecture](/docs/architecture/work-distribution) — How work flows through Gas Town end-to-end

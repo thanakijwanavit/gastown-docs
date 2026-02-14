@@ -276,6 +276,10 @@ pie title Dog Task Resource Distribution
     "Warrant Processing" : 5
 ```
 
+:::info Dogs Don't Show Up in gt polecat list
+If you're looking for a dog you dispatched for cross-rig cleanup, remember that dogs are not polecats — they have their own lifecycle and listing commands. Use `gt dog list` to see active dogs and their assigned tasks. The Witness does not patrol dogs; the Deacon manages them entirely through town-level coordination.
+:::
+
 ## Next Steps
 
 - [Dogs Documentation](/docs/agents/dogs) — Full reference for dog types, commands, and patterns

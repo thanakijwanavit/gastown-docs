@@ -260,6 +260,10 @@ To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn p
 
 This keeps the beads database clean while maintaining full observability of what happened during each patrol.
 
+:::tip Audit Patrol History Through Digest Beads
+When investigating what happened during a specific time window, search for squashed patrol digest beads with timestamps matching the period of interest. Each digest bead contains a summary of all actions taken during that patrol cycle -- gates closed, health checks performed, escalations triggered -- without the noise of individual step beads.
+:::
+
 ## When Things Go Wrong
 
 The Deacon is the safety net for most operational problems:

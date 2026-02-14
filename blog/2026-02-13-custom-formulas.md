@@ -217,6 +217,10 @@ When you pour this formula, you provide the variable values:
 gt mol pour code-review --var pr_number=42 --var branch_name=feature/auth
 ```
 
+:::warning Variables Do Not Support Default Values
+If a formula step references `{{variable_name}}` but you forget to provide `--var variable_name=value` when pouring the molecule, the step will fail when an agent encounters the unresolved placeholder. Gas Town does not support default values or optional variables. Always check the formula with `bd formula show <id>` to see which variables are required before pouring.
+:::
+
 :::caution Variables Are Not Validated Until Step Execution
 The `gt mol pour` command accepts any variables you provide without checking if the formula actually uses them. Typos in variable names (like `--var prnumber=42` instead of `--var pr_number=42`) will only be caught when the agent reaches a step that references the undefined variable, wasting a session. Double-check variable names against the formula TOML before pouring.
 :::

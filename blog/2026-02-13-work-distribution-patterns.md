@@ -276,6 +276,10 @@ timeline
 
 The pattern you choose only affects who does the decomposition and routing. The execution engine is identical. See the [concepts overview of hooks](/docs/concepts/hooks) to understand how work attaches to agents regardless of the distribution pattern used.
 
+:::caution Switching Patterns Mid-Convoy Requires Careful Dependency Re-Verification
+When you switch from automated (Mayor) to manual work distribution mid-convoy, always re-check bead dependencies with `bd dep list` before re-slinging. The Mayor may have set up implicit dependency chains that are not obvious from the bead descriptions alone, and manually slinging a dependent bead before its blocker completes will stall the agent. Verify the dependency graph explicitly before taking manual control.
+:::
+
 :::note Patterns Can Be Mixed Within a Single Convoy
 You are not locked into one pattern per convoy. It is perfectly valid to let the Mayor create the initial convoy and decomposition, manually override a few bead assignments with `gt release` and `gt sling`, and then apply a formula to one or two beads that follow a structured review process. Gas Town treats all these operations as compatible — the convoy continues tracking completion regardless of how individual beads were dispatched or executed.
 :::

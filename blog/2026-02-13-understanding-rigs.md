@@ -202,6 +202,10 @@ gt worktree beads    # Creates ~/gt/beads/crew/myproject-dave/
 # Submit when done — your identity is preserved
 ```
 
+:::warning Verify the Target Rig Is Active Before Creating a Cross-Rig Worktree
+Running `gt worktree <rig-name>` on a docked or parked rig creates the worktree directory, but the rig's Refinery will not process merge requests until the rig is reactivated. Check `gt rig status <rig-name>` before creating the worktree to confirm the target rig is active. Otherwise, your completed work will sit in the merge queue indefinitely until someone notices and undocks or unparks the rig.
+:::
+
 :::caution Cross-Rig Worktrees Do Not Share Git Remotes by Default
 When you create a worktree in another rig with `gt worktree`, the worktree uses that rig's git configuration — not your current rig's settings. This means if the other rig has different remotes, branch protection rules, or authentication credentials, your pushes may fail unexpectedly. Always run `git remote -v` in the new worktree to verify you are pushing to the expected repository before submitting work.
 :::

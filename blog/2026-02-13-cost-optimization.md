@@ -47,6 +47,10 @@ bd create --title "Fix token refresh race condition in auth/middleware.go:145" \
 
 The second bead gives the polecat a clear target. It doesn't need to explore the codebase to understand the problem — it goes straight to the fix.
 
+:::info Measure Bead Quality by Session Count
+If your beads regularly require 2+ polecat sessions (visible in `gt feed` as restart events), that is a clear signal that your bead descriptions are too vague. Well-written beads complete in one session 90% of the time. Track this metric before and after improving your bead-writing discipline to quantify the cost impact.
+:::
+
 :::tip The Cheapest Optimization Is a Better Bead Description
 A vague bead like "Fix the auth system" forces the polecat to spend tokens exploring the codebase before it can even begin work. A precise bead with file paths, line numbers, and expected behavior goes straight to the fix. This single practice can cut per-bead token cost by 50% or more.
 :::

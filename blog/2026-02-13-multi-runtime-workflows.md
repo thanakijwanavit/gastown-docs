@@ -291,6 +291,10 @@ graph LR
     T4 -.->|GCP Native| R4
 ```
 
+:::caution Different Runtimes May Interpret the Same Bead Description Differently
+A bead description like "refactor the auth middleware" will be interpreted through each runtime's strengths and limitations. Claude Code might produce a comprehensive multi-file refactoring; Codex might focus narrowly on Python code patterns; Cursor might prioritize UI-visible changes. When running cross-runtime convoys, write bead descriptions that are explicit about expected outcomes rather than relying on implicit assumptions about how the runtime will approach the work.
+:::
+
 ## Next Steps
 
 - **[Rigs](/docs/concepts/rigs)** — How rigs are configured and managed

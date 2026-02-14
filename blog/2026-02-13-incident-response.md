@@ -374,6 +374,10 @@ When in doubt, remember: **beads are the source of truth**. Agents come and go, 
 
 Gas Town is designed to be self-healing. Most incidents resolve themselves within a Witness patrol cycle (a few minutes). Save the manual intervention for when automated recovery has clearly failed.
 
+:::tip Most Incidents Resolve Faster If You Do Nothing
+The hardest lesson in Gas Town incident response is learning when not to intervene. The Witness patrol runs every 3 minutes, Boot processes warrants automatically, and the Refinery retries transient failures. If you jump in too quickly with manual fixes, you can conflict with automated recovery already in progress. Wait 10 minutes, re-run `gt status`, and verify the issue still exists before taking manual action.
+:::
+
 ## Next Steps
 
 - **[Troubleshooting Guide](/docs/operations/troubleshooting)** — Comprehensive troubleshooting reference

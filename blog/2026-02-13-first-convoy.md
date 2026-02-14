@@ -258,6 +258,10 @@ flowchart LR
     style Automated fill:#d4edda
 ```
 
+:::danger First Convoy Failures Are Learning Opportunities — Not Production Blockers
+If your first convoy fails completely — polecats crash, tests break, nothing merges — resist the temptation to abandon Gas Town. First-run failures almost always stem from missing project context (incomplete CLAUDE.md), flaky tests, or overly broad bead scope. These are fixable configuration issues, not fundamental tool problems. Treat your first convoy as a diagnostic run that reveals what needs tuning.
+:::
+
 Once you've run a manual convoy successfully, you're ready to let the Mayor take over. Instead of creating beads and slinging them yourself, just describe what you want:
 
 ```bash

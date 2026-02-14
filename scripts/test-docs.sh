@@ -1438,20 +1438,20 @@ else
     fail_test "Found $BLOG_TABLE_ISSUES blog post(s) without markdown tables" "Add a comparison or reference table to each blog post"
 fi
 
-# Test 51: All blog posts have at least 5 admonitions
+# Test 51: All blog posts have at least 7 admonitions
 BLOG_ADMONITION_ISSUES=0
-echo "Test 51: Checking all blog posts have 6+ admonitions..."
+echo "Test 51: Checking all blog posts have 7+ admonitions..."
 for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
     admonition_count=$(grep -cE '^:::(tip|note|warning|info|danger|caution)' "$file" 2>/dev/null) || admonition_count=0
-    if [ "$admonition_count" -lt 6 ]; then
+    if [ "$admonition_count" -lt 7 ]; then
         echo "  WARNING: $(basename "$file") has only $admonition_count admonition(s)"
         BLOG_ADMONITION_ISSUES=$((BLOG_ADMONITION_ISSUES + 1))
     fi
 done
 if [ "$BLOG_ADMONITION_ISSUES" -eq 0 ]; then
-    pass_test "All blog posts have 6+ admonitions"
+    pass_test "All blog posts have 7+ admonitions"
 else
-    fail_test "Found $BLOG_ADMONITION_ISSUES blog post(s) with fewer than 6 admonitions" "Add :::tip, :::note, or :::warning admonitions to blog posts"
+    fail_test "Found $BLOG_ADMONITION_ISSUES blog post(s) with fewer than 7 admonitions" "Add :::tip, :::note, or :::warning admonitions to blog posts"
 fi
 
 # Summary

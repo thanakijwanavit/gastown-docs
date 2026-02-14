@@ -51,6 +51,10 @@ gt convoy create "API v2 Implementation" ga-schema ga-endpoints ga-tests
 
 When you sling `ga-schema`, a polecat picks it up immediately. The other two beads show up as **blocked** in `bd ready` until their dependencies resolve. As each bead completes, the next in the chain becomes available automatically.
 
+:::info Dependency Chains Create Natural Checkpoints
+When you structure work as a dependency chain rather than one large bead, each completed step provides a natural checkpoint where you can review progress and adjust the next steps if needed. This is especially valuable when requirements are evolving -- you can update downstream beads based on how upstream work actually landed.
+:::
+
 ```bash
 # See what's blocked vs ready
 bd blocked

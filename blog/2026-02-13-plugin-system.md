@@ -322,6 +322,10 @@ sequenceDiagram
     end
 ```
 
+:::caution Plugins Inherit the Refinery's Environment and Permissions
+Pre-merge and post-merge plugins execute in the Refinery's shell environment with the Refinery's filesystem and network access. If the Refinery has SSH keys, AWS credentials, or database passwords in its environment, plugins can access them. Never install untrusted third-party plugins without auditing their code, and always run the Refinery with minimal permissions rather than root or admin privileges.
+:::
+
 ## Next Steps
 
 - [Operations: Plugins](/docs/operations/plugins) -- Detailed plugin operations guide

@@ -44,6 +44,10 @@ git pull --rebase && git push   # Push BEFORE handoff
 gt handoff -m "Context notes"
 ```
 
+:::tip Make Pushing Muscle Memory
+Treat `git push` like saving a file -- do it reflexively after every logical chunk of work. In a multi-agent environment where polecats are constantly merging code, waiting even an hour to push creates painful merge conflicts. The more frequently you push, the smaller and easier those conflicts become.
+:::
+
 :::danger Uncommitted Work Vanishes on Workspace Cleanup
 Polecat workspaces are ephemeral and get deleted after the session ends. Crew workspaces persist, but any uncommitted changes in your working directory are invisible to other agents and will be lost if the workspace is accidentally removed or you switch machines. Always commit and push completed work immediately.
 :::

@@ -262,6 +262,10 @@ flowchart TD
     style PUSH fill:#ccffcc
 ```
 
+:::info Rebase Conflicts Are Cheaper to Fix Than Merge Conflicts
+When `git pull --rebase` reveals a conflict, you are resolving it on your local branch before pushing. When `git pull` creates a merge commit and then you push, the conflict gets recorded in history permanently. In multi-agent environments where history volume is already high, keeping the commit graph linear through rebasing makes it far easier to understand what happened when debugging issues later.
+:::
+
 :::tip
 Configure `git config pull.rebase true` in every Gas Town workspace. This should be the first thing you do after `gt rig add`.
 :::

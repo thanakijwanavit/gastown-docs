@@ -149,6 +149,10 @@ gantt
     Stage 8: Agents Managing Agents   :2026-03, 3M
 ```
 
+:::tip Most Teams Plateau at Stage 6 — And That's Fine
+Not every codebase or team needs to reach Stage 8. If your throughput bottleneck is design decisions rather than coding speed, adding more parallel agents won't help. Stage 6 — where a single agent executes intent-level features end-to-end — already delivers 5-10x productivity gains over manual coding. Only pursue Stage 7-8 if you have a backlog of well-defined tasks that exceed your current agent capacity.
+:::
+
 :::danger Stage 7 Without Test Coverage Is a Recipe for Chaos
 Running multiple agents in parallel without comprehensive test coverage means you won't catch bad code until it is already on main and breaking downstream work. The automation that makes Stage 7 powerful — agents merging code with minimal review — becomes your biggest liability when tests are missing. If your codebase does not have 70%+ test coverage, stay at Stage 6 until you can build that foundation.
 :::

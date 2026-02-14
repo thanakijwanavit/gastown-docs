@@ -338,6 +338,10 @@ graph BT
     style W fill:#65cbff
 ```
 
+:::warning Editing a Formula Does Not Update Running Molecules
+If you modify a formula's TOML file (e.g., adding a new step or changing dependencies), molecules that are already poured from the old version continue using the old definition. Changes only apply to new molecules poured after the edit. To apply formula changes to in-flight work, you must reset the molecule with `gt mol reset` and restart from the beginning.
+:::
+
 ## Next Steps
 
 - [Molecules & Formulas Reference](/docs/concepts/molecules) — Full reference with all step states, variables, and advanced features

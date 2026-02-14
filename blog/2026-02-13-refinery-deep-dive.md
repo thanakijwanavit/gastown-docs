@@ -382,6 +382,10 @@ Pushing commits directly to main bypasses the Refinery's rebase-and-validate pip
 
 **Configure CI integration.** The Refinery's built-in checks are lightweight. For production codebases, always enable `require_ci` to run your full test suite.
 
+:::caution Fast-Forward Failures Indicate Someone Pushed to Main Out of Band
+If the Refinery reports a fast-forward merge failure, it means a commit landed on main that was not processed through the queue — likely a direct push or a manual merge. This forces the Refinery to re-queue all pending MRs for fresh rebases. Identify who pushed directly to main and remind them to route all changes through the Refinery or crew workspaces to avoid this disruption.
+:::
+
 ## Next Steps
 
 - **[Refinery Agent](/docs/agents/refinery/)** — The agent that runs the merge queue

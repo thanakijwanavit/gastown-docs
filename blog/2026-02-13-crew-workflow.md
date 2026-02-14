@@ -208,6 +208,10 @@ gt worktree remove beads
 
 This is better than using `gt sling` (which dispatches work to a polecat) because you maintain human judgment over the fix.
 
+:::caution Worktrees Bypass the Refinery Queue
+When you use a worktree to work in another rig, you push directly to that rig's main branch, bypassing its Refinery merge queue. This is powerful but means no automated testing or conflict resolution happens. Only use worktrees for fixes you are confident about, and always run the full test suite locally before pushing.
+:::
+
 :::danger Always Remove Worktrees When Done
 Worktrees are full git clones that persist on disk even after you finish the work. Forgetting to run `gt worktree remove` after completing cross-rig work leaves stale clones that consume disk space and can cause confusion later when you accidentally edit files in the wrong workspace. Make `gt worktree remove` the final step of any cross-rig fix.
 :::

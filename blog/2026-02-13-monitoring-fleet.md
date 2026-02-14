@@ -347,6 +347,10 @@ graph TD
     COSTS --> U6[Budget Management]
 ```
 
+:::tip Set Up gt feed in a Dedicated Terminal Window from Day One
+The single best monitoring habit is keeping `gt feed` running in a persistent terminal window from the moment you start Gas Town. Unlike polling-based dashboards, the feed shows events as they happen in real time, letting you catch spawn/nuke cycles, escalation bursts, and merge queue stalls the instant they occur rather than discovering them minutes or hours later during manual checks.
+:::
+
 ## Next Steps
 
 - **[Operations Guide](/docs/operations/)** — Full operational reference

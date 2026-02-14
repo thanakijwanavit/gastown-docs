@@ -280,6 +280,10 @@ Hooks do NOT clear when:
 
 This asymmetry is deliberate. Work stays hooked until it's explicitly done or released. This prevents work from falling through the cracks.
 
+:::warning Hook State Can Outlive the Worktree
+If a worktree is manually deleted without properly clearing the hook first, the hook metadata persists in the beads database but points to a non-existent workspace. This creates orphaned hooks that confuse the system. Always use `gt hook clear` before manually removing worktrees, or rely on Gas Town's cleanup commands like `gt worktree remove` which handle both operations atomically.
+:::
+
 ## Next Steps
 
 - [Hooks Reference](/docs/concepts/hooks) — Full reference with all hook types, states, and commands

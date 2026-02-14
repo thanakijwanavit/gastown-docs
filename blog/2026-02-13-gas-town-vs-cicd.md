@@ -140,6 +140,10 @@ flowchart TD
     style "Traditional CI/CD Scope" fill:#fff3cd
 ```
 
+:::tip Start With CI Integration On Day One
+The biggest mistake teams make is running Gas Town agents without connecting to their existing CI. Configure `refinery.require_ci` from the first convoy so your established quality gates remain in control. Running agents without CI validation creates a false sense of productivity — lots of code landing on main, but no guarantee it actually works. Your CI is your safety net; use it.
+:::
+
 :::tip Keep Your Existing CI Pipeline as the Quality Gate
 Rather than duplicating test logic in Gas Town, configure the Refinery to call your existing CI system with `refinery.require_ci`. This way, your established quality gates remain the single source of truth for what merges to main, and Gas Town simply feeds work into the pipeline you already trust.
 :::

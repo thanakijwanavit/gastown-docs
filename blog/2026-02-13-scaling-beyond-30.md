@@ -242,6 +242,10 @@ Adding more polecats to a rig without adjusting the Witness patrol interval crea
 3. **Ignoring Refinery backlog.** A growing merge queue means polecats are producing faster than you can merge. Either add Refinery workers or reduce polecat count.
 4. **Skipping monitoring.** At scale, problems compound quickly. What is a minor hiccup with 5 agents becomes a cascade with 30.
 
+:::tip Set Up Queue Depth Alerts Before Reaching 20 Agents
+Configure automated alerts when your merge queue depth exceeds 5 items for more than 10 minutes. This gives you early warning that throughput is becoming a bottleneck — before polecats start stalling and conflicts cascade. Use `gt mq list --json | jq '.pending | length'` in a cron job or monitoring script to track queue depth over time.
+:::
+
 :::info Conflict Rate Is the Most Reliable Early Warning Signal for Scaling Issues
 When your rig's conflict rate climbs above 20%, it signals that agents are stepping on each other's changes faster than the Refinery can serialize them. This happens before queue depth becomes critical and before agents start visibly stalling — making it the earliest indicator that you need to split the rig, stagger dispatches, or reduce concurrent polecats. Monitor `gt refinery stats --json | jq '.conflict_rate'` as your primary scaling health metric.
 :::

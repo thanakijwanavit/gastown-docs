@@ -247,6 +247,10 @@ graph TD
     V5 -.->|+ Mayor| C5
 ```
 
+:::note Minimal Mode Works Without Installing Tmux at All
+If you cannot install Tmux on your machine (e.g., corporate restrictions or embedded environments), Minimal Mode still works completely — you manually spawn agents in regular terminal sessions instead of tmux panes. The hook system, beads database, and convoy tracking are all filesystem-based and have zero dependency on Tmux. You lose auto-spawning convenience but retain all coordination features.
+:::
+
 ## Next Steps
 
 - [Minimal Mode Reference](/docs/workflows/minimal-mode) — Full step-by-step walkthrough
