@@ -1422,6 +1422,22 @@ else
     fail_test "Found $ORPHANED_DOC_ISSUES orphaned doc page(s) with no inbound references" "Add cross-links from related docs or blog posts"
 fi
 
+# Test 50: All blog posts have at least one markdown table
+BLOG_TABLE_ISSUES=0
+echo "Test 50: Checking all blog posts have at least one markdown table..."
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    table_rows=$(grep -c '|.*|.*|' "$file" 2>/dev/null) || table_rows=0
+    if [ "$table_rows" -lt 2 ]; then
+        echo "  WARNING: $(basename "$file") has no markdown table"
+        BLOG_TABLE_ISSUES=$((BLOG_TABLE_ISSUES + 1))
+    fi
+done
+if [ "$BLOG_TABLE_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts have at least one markdown table"
+else
+    fail_test "Found $BLOG_TABLE_ISSUES blog post(s) without markdown tables" "Add a comparison or reference table to each blog post"
+fi
+
 # Summary
 echo ""
 echo "========================================"
