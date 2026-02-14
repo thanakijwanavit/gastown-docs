@@ -216,6 +216,12 @@ The Deacon handles **operational health** (is everything running?). The Mayor ha
 
 :::
 
+:::note[The Deacon Never Sleeps]
+
+Even when the town is idle with no active work, the Deacon continues its patrol cycle. This ensures it can respond immediately when new work arrives or when health issues emerge, rather than needing to be woken up first.
+
+:::
+
 ## Common Patterns
 
 ### Idle Town Protocol

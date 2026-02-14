@@ -382,6 +382,12 @@ gt dashboard --open
 
 ---
 
+:::warning
+
+Running `gt cleanup --all --force` across all rigs will delete temporary files and stale worktrees without confirmation. Always run with `--dry-run` first to preview what will be removed, especially if you have crew workspaces with uncommitted experimental work.
+
+:::
+
 ### `gt costs`
 
 Show resource usage and cost metrics.

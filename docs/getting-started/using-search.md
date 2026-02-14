@@ -376,6 +376,12 @@ pie title When to Use Each Approach
 If search returns outdated results after a documentation update, perform a hard refresh (`Ctrl+Shift+R` or `Cmd+Shift+R`) to clear the cached search index. The browser caches the index aggressively, so stale results can persist until the cache is invalidated.
 :::
 
+:::tip[Search for Error Codes]
+
+When you encounter an error message with a code like `ERR_HOOK_MISSING` or `ERR_GATE_TIMEOUT`, search for the exact code in the documentation. Error codes are cross-referenced throughout the troubleshooting guides to help you find solutions quickly.
+
+:::
+
 ## Search Limitations
 
 ### What Search Can't Do

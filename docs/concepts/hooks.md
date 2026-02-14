@@ -258,6 +258,12 @@ sequenceDiagram
     S3->>H: gt done → clear hook
 ```
 
+:::note[Hook Inspection for Debugging]
+
+When an agent seems to have lost its work, inspect the hook directly with `cat .git/GT_HOOK` from the worktree directory. The hook file contains the bead ID and molecule state in plain text, making it easy to verify hook persistence without relying on higher-level commands.
+
+:::
+
 ## Hook and Molecule Integration
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:

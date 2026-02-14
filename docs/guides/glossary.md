@@ -185,6 +185,10 @@ Some terms in the glossary have evolved across Gas Town versions. If you encount
 
 :::
 
+:::tip[Learning the Terminology]
+When learning Gas Town, focus on understanding five core terms first: bead (unit of work), hook (persistent work assignment), convoy (batch tracker), polecat (ephemeral worker), and sling (work assignment). These five concepts form the foundation -- all other terminology builds on them.
+:::
+
 ## CLI Quick Reference
 
 ```mermaid

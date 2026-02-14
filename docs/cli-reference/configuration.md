@@ -317,6 +317,12 @@ Claude Code hooks run synchronously in the tool execution pipeline, so avoid pla
 
 :::
 
+:::caution[Hook Execution Performance]
+
+Claude Code hooks run synchronously in the tool execution pipeline. If a PreToolUse hook takes more than 1 second, it will noticeably slow down every tool call throughout the agent's session. Keep hooks lightweight and move expensive operations to background processes.
+
+:::
+
 ## Configuration Inheritance
 
 Settings cascade from town level down to individual sessions, with each level able to override its parent.

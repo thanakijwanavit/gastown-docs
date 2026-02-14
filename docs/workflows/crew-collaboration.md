@@ -150,6 +150,10 @@ The PR Sheriff hooks this work to their session, creating a permanent review cad
 
 ---
 
+:::caution[The Review Backlog Problem]
+In a high-velocity crew-polecat workflow, the review backlog can grow faster than crew members can process it. If you find yourself perpetually behind on reviewing merged polecat output, reduce the number of active polecats or increase crew review capacity. An unreviewed backlog creates compounding technical debt that becomes expensive to fix later.
+:::
+
 ## Quality Gates
 
 :::warning

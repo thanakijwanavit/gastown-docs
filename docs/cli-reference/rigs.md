@@ -516,6 +516,12 @@ gt rig config myproject --reset
 
 ---
 
+:::caution
+
+Changing the `max_polecats` setting on a rig that already has active polecats will not terminate running polecats if the new limit is lower. The new limit only applies to future polecat spawns. If you need to reduce the active count immediately, use `gt polecat list` and `gt polecat nuke` to manually remove excess polecats.
+
+:::
+
 ## `gt rig settings`
 
 Manage advanced rig settings.

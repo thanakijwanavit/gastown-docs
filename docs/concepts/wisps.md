@@ -83,6 +83,12 @@ graph LR
 
 ---
 
+:::caution[Wisp Count Growth]
+
+Patrol molecules create hundreds of wisps per day. Without regular compaction, the beads database can grow to millions of rows, slowing queries and increasing sync time. Schedule `gt compact` to run daily (e.g., via cron) to keep the database performant.
+
+:::
+
 ## Compaction: Wisp Garbage Collection
 
 ```mermaid

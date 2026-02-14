@@ -163,6 +163,10 @@ You can add custom channels like Discord or Slack webhooks by adding entries to 
 
 ---
 
+:::tip[Escalation Hygiene]
+Review and close resolved escalations daily. Stale escalations clutter the system and reduce signal-to-noise ratio for new issues. A clean escalation inbox makes critical problems stand out immediately, while a backlog of old unacknowledged escalations creates alert fatigue.
+:::
+
 ## Managing Escalations
 
 ### `gt escalate list`

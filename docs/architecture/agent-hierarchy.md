@@ -143,6 +143,12 @@ Severity levels control routing:
 Avoid manually restarting agents outside the supervision tree. The Deacon and Witness handle restarts with proper state recovery — bypassing them can leave orphaned worktrees, duplicate work, or hooks that never get picked up.
 :::
 
+:::tip[The Supervision Tree Is Self-Healing]
+
+When any agent crashes, its supervisor detects the failure and restarts it. This Erlang-inspired pattern means the system recovers automatically from most failures. The only manual intervention needed is for persistent configuration issues or corrupted state.
+
+:::
+
 ## Agent Lifecycle States
 
 Each agent type follows a distinct lifecycle pattern within the supervision tree.

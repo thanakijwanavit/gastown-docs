@@ -186,6 +186,12 @@ Batch slinging with `--force` bypasses the unread mail check on every target pol
 
 :::
 
+:::info
+
+When slinging formulas with `--var` to set variables, the variable values are stored in the molecule and accessible to all steps. Use consistent naming conventions for formula variables (e.g., `target`, `scope`, `version`) to make formulas composable and easier to reason about across different instantiations.
+
+:::
+
 ## Auto-Convoy
 
 When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.

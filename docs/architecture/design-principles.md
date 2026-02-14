@@ -194,6 +194,12 @@ Ignoring a failing test to "deal with later" is the single most expensive mistak
 
 Named after the Star Trek engineer: Gas Town agents never proceed past failures. The [Refinery](../agents/refinery.md) does not merge code that fails validation. Polecats run [preflight tests](../agents/polecats.md) before starting implementation to ensure `main` is clean. If something is broken, you fix it or file it -- you don't skip past it.
 
+:::info[Why "Erlang-Inspired" Not "Erlang-Based"]
+
+Gas Town borrows supervision patterns and mailboxes from Erlang/OTP, but it runs on Claude Code sessions and Go processes, not the Erlang VM. The principles transfer beautifully -- let-it-crash, supervision trees, message passing -- but the implementation is pure filesystem and git.
+
+:::
+
 ## Design Principle Relationships
 
 The twelve design principles form an interconnected system where each principle reinforces the others.

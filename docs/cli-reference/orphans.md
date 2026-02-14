@@ -229,6 +229,12 @@ Run `gt orphans` as part of your weekly maintenance routine. Orphaned commits ar
 
 :::
 
+:::danger
+
+Never use `git gc --aggressive --prune=now` manually on a rig's repository without first running `gt orphans` to check for valuable unreachable commits. Aggressive pruning can permanently delete orphaned work that could have been recovered, especially work from recent session crashes.
+
+:::
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)

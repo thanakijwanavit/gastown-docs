@@ -120,6 +120,12 @@ gt compact report --dry-run    # Preview the report without sending
 gt compact report --weekly     # Send weekly rollup to mayor/
 ```
 
+:::warning[Promoted Wisps Indicate Stuck Work]
+
+When compaction promotes wisps instead of deleting them, it means something expected to complete quickly did not. Check the promoted bead for context -- common causes are stalled heartbeats, unresolved patrol findings, or zombie processes that were never cleaned up.
+
+:::
+
 ## When to Run Compaction
 
 :::tip

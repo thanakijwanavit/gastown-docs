@@ -224,6 +224,12 @@ Gas Town supports exactly one Mayor per town. Running multiple Mayor sessions wi
 
 :::
 
+:::warning[Vague Instructions Lead to Vague Beads]
+
+The Mayor's decomposition quality directly depends on the clarity of your instructions. If you say "fix the login stuff", the Mayor will create vague beads that confuse polecats. Be specific: "Fix the login timeout issue on the auth endpoint when sessions exceed 24 hours."
+
+:::
+
 ## Typical Mayor Time Allocation
 
 The Mayor distributes its processing time across several core activities during normal operation.

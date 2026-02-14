@@ -94,6 +94,10 @@ Issues:
 Shall I proceed with assigning these to polecats?
 ```
 
+:::info[Mayor Decomposition Quality]
+The Mayor's ability to decompose complex requests into well-scoped beads improves with practice and feedback. If the Mayor consistently creates beads that are too large, too small, or miss dependencies, provide explicit feedback in the session. Over time, the Mayor learns your project's patterns and produces better decompositions with less correction needed.
+:::
+
 :::warning
 Review the Mayor's decomposition before approving. The Mayor may sometimes create too many or too few beads, or miss dependencies between tasks. Verify that the breakdown matches your intent and that dependent work is ordered correctly.
 :::

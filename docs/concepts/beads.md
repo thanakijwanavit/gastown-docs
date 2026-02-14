@@ -137,6 +137,12 @@ bd create --title "Deploy to prod" --depends-on gt-a1b2c
 bd blocked
 ```
 
+:::caution[Bead ID Stability]
+
+Never manually change a bead's ID after creation. Bead IDs are referenced across hooks, molecules, convoy tracking, and git commit messages. Changing an ID orphans all these references and can break workflow recovery after crashes.
+
+:::
+
 ## Cross-Project Tracking
 
 Beads supports **cross-prefix tracking**, allowing issues in different rigs to reference each other. Each rig has its own bead prefix (configured in `config.json`):

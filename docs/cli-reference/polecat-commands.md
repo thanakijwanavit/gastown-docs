@@ -283,6 +283,12 @@ flowchart TD
     J -->|No| I
 ```
 
+:::caution
+
+When running `gt polecat nuke --all` on a rig with active work, always check `gt mq list` first to ensure no merge requests are pending. Nuking a polecat whose MR is still in the queue will orphan the MR and prevent it from merging, requiring manual cleanup with `gt mq reject`.
+
+:::
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

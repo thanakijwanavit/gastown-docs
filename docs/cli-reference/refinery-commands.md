@@ -216,6 +216,12 @@ Stopping and restarting the Refinery while it has a claimed MR in progress can l
 
 :::
 
+:::tip
+
+If the Refinery appears stuck processing an MR for more than 15-20 minutes, check for long-running test suites or validation scripts. You can attach to the Refinery session with `gt refinery attach` to inspect the current state and see if the validation is progressing or genuinely stuck.
+
+:::
+
 ## gt refinery ready
 
 ```mermaid

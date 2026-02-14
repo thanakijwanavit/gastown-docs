@@ -118,6 +118,12 @@ flowchart LR
     W -->|all done| Conv["Convoy closes"]
 ```
 
+:::warning[Filesystem Dependencies]
+
+Gas Town's five-layer architecture depends on the `~/gt/` directory structure. Moving or deleting this directory while agents are running breaks the supervision tree, mailboxes, hooks, and beads databases. Always stop the daemon with `gt daemon stop` before any structural changes.
+
+:::
+
 ## End-to-End Work Flow
 
 The following sequence shows how a single unit of work flows through all five architectural layers from human instruction to merged code.

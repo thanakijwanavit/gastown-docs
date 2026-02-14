@@ -197,6 +197,12 @@ gantt
     check — validate output      :crit, 15, 18
 ```
 
+:::danger
+
+When testing custom guards, always verify the exit code behavior with `echo $?` immediately after running the guard script. An exit code of 1 (syntax error or uncaught exception) is treated differently from exit code 2 (policy block), and accidentally returning 1 will allow the tool call to proceed while generating confusing error messages.
+
+:::
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

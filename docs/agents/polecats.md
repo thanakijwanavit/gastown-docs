@@ -285,6 +285,12 @@ sequenceDiagram
     end
 ```
 
+:::info[Polecats Are Stateless Between Spawns]
+
+Each polecat is a fresh spawn with no memory of previous polecats that worked on the same rig. This is by design -- polecats discover state from git, beads, and their hook, not from inherited memory. This makes them resilient to crashes and context loss.
+
+:::
+
 ## The Polecat Work Formula
 
 Every polecat follows the `mol-polecat-work` formula, which defines these steps:

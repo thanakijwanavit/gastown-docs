@@ -286,6 +286,12 @@ When attaching to a polecat session with `gt session at`, avoid typing into the 
 
 :::
 
+:::info
+
+When using `gt session restart` to recover from a suspected hang, first capture the session output with `gt session capture` before restarting. This preserves the terminal state for debugging and helps identify whether the hang was due to a stalled tool call, an infinite loop, or an external dependency timeout.
+
+:::
+
 ## gt session capture
 
 Capture recent output from a polecat session.

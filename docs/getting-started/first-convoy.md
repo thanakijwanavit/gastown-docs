@@ -193,6 +193,12 @@ graph TD
     style D3 fill:#5a2d2d
 ```
 
+:::caution[Convoy Creation Timing]
+
+Create the convoy before slinging work, not after. If you sling beads first and then create a convoy, the convoy cannot track work that is already in progress. The recommended order is: create beads, create convoy, then sling beads.
+
+:::
+
 ## Common First-Convoy Issues
 
 | Problem | Cause | Fix |

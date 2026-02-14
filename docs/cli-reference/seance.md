@@ -190,6 +190,12 @@ The fork creates a separate conversation branch. The predecessor's session is ne
 The events file `~/gt/.events.jsonl` is required for session discovery. If SessionStart hooks are not configured in your agent's CLAUDE.md or hook files, sessions will not emit `session_start` events and will not appear in `gt seance` discovery. Verify your hooks are in place with `gt hook show` if sessions are missing.
 :::
 
+:::tip
+
+When debugging a failed polecat session, combine `gt seance --talk <session-id>` with `gt trail <bead-id>` to get both the agent's internal reasoning (from seance) and the external lifecycle events (from trail). This dual perspective often reveals why work stalled or where decisions went wrong.
+
+:::
+
 ### Session Events
 
 Sessions are tracked in `~/gt/.events.jsonl`. Each Gas Town session emits a `session_start` event containing:

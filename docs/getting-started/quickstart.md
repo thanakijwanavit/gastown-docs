@@ -202,6 +202,12 @@ Gas Town agents consume API tokens. Monitor usage with `gt cost` to avoid surpri
 You can detach from and reattach to the Mayor at any time without losing state. The Mayor's hook and beads persist across sessions, so your work continues even if you disconnect or the session cycles.
 :::
 
+:::caution[First-Time Setup Duration]
+
+The first `gt rig add` for a large repository can take 10-20 minutes as it clones the repo multiple times (refinery, mayor, witness). Subsequent rigs add faster since the git object cache is already populated. Plan your initial setup time accordingly.
+
+:::
+
 ## Next Steps
 
 - [Your First Convoy](first-convoy.md) — Detailed walkthrough of the convoy workflow

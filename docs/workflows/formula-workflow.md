@@ -382,6 +382,10 @@ gantt
     Submit           :s, 13, 14
 ```
 
+:::note[Formula Reusability Across Rigs]
+Well-designed formulas are rig-agnostic and can be reused across multiple projects. When creating custom formulas, avoid hardcoding rig-specific paths or assumptions. Use variables for rig names, file paths, and configuration values to maximize reusability. A formula that works for one rig should work for any rig with minimal parameter changes.
+:::
+
 ## Variables and Templating
 
 Formulas use Go `text/template` syntax for variable interpolation:

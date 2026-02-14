@@ -197,6 +197,12 @@ stateDiagram-v2
     Ready --> [*]
 ```
 
+:::tip[Verify Installation]
+
+After completing all installation steps, create a test rig with `gt rig add test-rig /tmp/test-repo` (after creating a dummy git repo) and run `gt start` to verify the full installation. If agents spawn successfully, your environment is ready.
+
+:::
+
 ## Supported Runtimes
 
 Gas Town supports multiple AI coding agent runtimes:

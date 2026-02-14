@@ -233,6 +233,12 @@ graph TD
     REHOOK -->|No| CLEAN[Cleanup complete]
 ```
 
+:::note
+
+Executed warrants are not automatically cleaned up from `~/gt/warrants/`. The Deacon maintains a history of executed warrants for forensic analysis and pattern detection. If the warrants directory grows large (>1000 files), use the Deacon's built-in pruning during patrol cycles or manually archive old executed warrants to a separate directory.
+
+:::
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

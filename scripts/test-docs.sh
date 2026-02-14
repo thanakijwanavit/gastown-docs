@@ -1326,26 +1326,26 @@ else
     fail_test "Found $BLOG_DOCS_LINK_ISSUES blog post(s) with fewer than 5 /docs/ links" "Add /docs/ cross-links to blog posts for better navigation"
 fi
 
-# Test 45: All non-index doc pages have 5+ admonitions
+# Test 45: All non-index doc pages have 6+ admonitions
 echo ""
-echo "Test 45: Checking all non-index doc pages have 5+ admonitions..."
+echo "Test 45: Checking all non-index doc pages have 6+ admonitions..."
 DOC_ADMONITION_ISSUES=0
 
 for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md" 2>/dev/null); do
     # Count opening admonition tags (:::tip, :::note, :::warning, :::info, :::danger, :::caution)
     admonition_count=$(grep -cE '^:::(tip|note|warning|info|danger|caution)' "$file" 2>/dev/null) || admonition_count=0
 
-    if [ "$admonition_count" -lt 5 ]; then
+    if [ "$admonition_count" -lt 6 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $admonition_count admonition(s) in $rel_file (need 5+)"
+        echo "  Only $admonition_count admonition(s) in $rel_file (need 6+)"
         DOC_ADMONITION_ISSUES=$((DOC_ADMONITION_ISSUES + 1))
     fi
 done
 
 if [ "$DOC_ADMONITION_ISSUES" -eq 0 ]; then
-    pass_test "All non-index doc pages have 5+ admonitions"
+    pass_test "All non-index doc pages have 6+ admonitions"
 else
-    fail_test "Found $DOC_ADMONITION_ISSUES doc page(s) with fewer than 5 admonitions" "Add admonitions (:::tip, :::note, :::warning) to doc pages"
+    fail_test "Found $DOC_ADMONITION_ISSUES doc page(s) with fewer than 6 admonitions" "Add admonitions (:::tip, :::note, :::warning) to doc pages"
 fi
 
 # Test 46: All blog posts have 1000+ total words

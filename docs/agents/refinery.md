@@ -214,6 +214,12 @@ Each rig has exactly one Refinery. Cross-rig merges are coordinated by Dogs and 
 
 :::
 
+:::note[The Refinery Processes One MR at a Time]
+
+Even if 10 polecats submit MRs simultaneously, the Refinery processes them strictly in order, one at a time. This serialization prevents race conditions but means queue processing throughput is limited. Tune validation speed to optimize merge throughput.
+
+:::
+
 ## Common Patterns
 
 ### The MERGED Mail Contract

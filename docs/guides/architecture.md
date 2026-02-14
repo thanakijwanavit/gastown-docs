@@ -498,6 +498,10 @@ Do not manually delete polecat directories under `polecats/`. Always use the Wit
 
 :::
 
+:::info[Agent State Independence]
+Each agent's git worktree, session, and local state are completely isolated from other agents. This isolation is what enables true parallel development -- a crash in one polecat cannot corrupt another's work, and merge conflicts are resolved serially by the Refinery rather than creating race conditions.
+:::
+
 ## Git Worktree Management
 
 Gas Town uses git worktrees to enable concurrent work on the same repository. Each polecat gets its own worktree -- an independent working directory linked to the same git repository.

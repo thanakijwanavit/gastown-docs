@@ -339,6 +339,10 @@ timeline
          : Single binary distribution
 ```
 
+:::note[The H Factor in Practice]
+The Human Coefficient (H) in the survival formula is not just theoretical. In domains where human craftsmanship matters -- artisanal software, developer tools, educational content -- teams can deliberately lean into H as a competitive advantage. Gas Town itself benefits from H: orchestration tools with strong human-authored documentation and examples survive better than purely AI-synthesized alternatives.
+:::
+
 ### The Vibe Coding Commitment
 
 Gas Town embraces what Yegge calls "vibe coding" -- the practice of letting AI do the work while you focus on direction and review. As he writes in [Welcome to Gas Town](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04):

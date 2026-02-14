@@ -346,6 +346,12 @@ Mail is delivered by writing to the recipient's mailbox directory on the filesys
 
 :::
 
+:::tip[Mail Survives Session Restarts]
+
+All mail is stored as JSONL files on disk, not in memory. If an agent crashes or cycles its session, unread mail persists and will be available when the next session starts. This makes mail the preferred method for async communication that needs to survive failures.
+
+:::
+
 ### `gt mail archive`
 
 Archive messages.

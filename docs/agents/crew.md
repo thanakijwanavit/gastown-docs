@@ -213,6 +213,12 @@ Crew workspaces are full clones on the local filesystem. Uncommitted work exists
 
 :::
 
+:::caution[Uncommitted Work in Crew Workspaces]
+
+Because crew workspaces are full git clones on the local filesystem, uncommitted work exists only in your workspace. If your disk fails or workspace is deleted, uncommitted work is lost. Commit and push regularly, especially before long breaks.
+
+:::
+
 ## Crew Refresh Flow
 
 The following diagram shows how a crew workspace stays synchronized with the main branch through the refresh process.

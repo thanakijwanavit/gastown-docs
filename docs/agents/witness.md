@@ -212,6 +212,12 @@ Stopping a Witness leaves polecats in that rig unsupervised. If you must stop a 
 
 :::
 
+:::caution[Witness Coverage Is Per-Rig]
+
+Each Witness only monitors polecats in its own rig -- it has no visibility into other rigs. If you have polecats running in multiple rigs, each rig needs its own running Witness. Check `gt rig status` to verify Witnesses are active.
+
+:::
+
 ## Witness Nudge Protocol
 
 When the Witness detects a stalled polecat, it follows a structured nudge protocol before escalating.

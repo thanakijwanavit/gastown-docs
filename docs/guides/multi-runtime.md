@@ -271,6 +271,10 @@ For Claude Code and Gemini, this manual process is not necessary -- hooks handle
 
 ---
 
+:::warning[Runtime Switching Mid-Task]
+Avoid switching runtimes for the same bead mid-implementation. If a polecat running on Claude Code gets stuck and you release the bead to re-sling with Gemini, the new polecat may interpret the existing partial work differently, leading to inconsistent implementation or duplicated effort. When switching runtimes mid-task, add detailed handoff notes to the bead explaining what the previous attempt accomplished.
+:::
+
 ## Runtime Selection Decision Tree
 
 ```mermaid

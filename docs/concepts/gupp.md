@@ -227,6 +227,12 @@ When reviewing agent-produced code, keep NDI in mind: two agents solving the sam
 
 :::
 
+:::info[GUPP and Database Transactions]
+
+GUPP's forward-only guarantee is enforced at the database level. Bead status updates are transactional: either the full state transition commits, or the entire operation rolls back leaving the bead unchanged. This prevents partial updates that could violate forward-only progression.
+
+:::
+
 ## GUPP Decision Tree
 
 When an operation encounters a failure, GUPP dictates the forward-only response.

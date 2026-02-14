@@ -201,6 +201,12 @@ graph TD
 
 ---
 
+:::danger[Emergency Session Termination]
+
+If you must forcibly terminate a session (e.g., via `killall` or tmux crash), always run `gt doctor` afterward to verify hook and bead state. Emergency termination can leave molecules in ambiguous states that need cleanup before resuming work.
+
+:::
+
 ## Session Context Health
 
 A session's effectiveness degrades as context fills, making timely cycling critical.

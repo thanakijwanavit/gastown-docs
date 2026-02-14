@@ -210,6 +210,12 @@ Running `gt town shutdown --force` terminates all agents immediately without wai
 
 :::
 
+:::info
+
+The `gt town shutdown` graceful shutdown sequence can take several minutes if polecats have significant in-flight work. During this time, no new work will be accepted but running polecats continue until they reach a checkpoint. Plan for 5-10 minutes of shutdown time in production environments with active workloads.
+
+:::
+
 ## When to Use
 
 Town-level navigation and management is useful when:

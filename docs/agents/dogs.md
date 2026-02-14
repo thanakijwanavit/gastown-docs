@@ -193,6 +193,12 @@ The [Boot](boot.md) agent is a specialized Dog with its own lifecycle (runs fres
 
 :::
 
+:::tip[Dog Naming Convention]
+
+Dogs are typically named after their purpose (boot, fetch, lint) rather than using the NATO phonetic alphabet like polecats. This makes it easier to understand what a dog does just from seeing its name in logs or status output.
+
+:::
+
 ## Dog Lifecycle States
 
 A dog transitions between idle and active states as the Deacon assigns and completes tasks.

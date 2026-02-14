@@ -179,6 +179,12 @@ Molecules provide crash recovery — if an agent restarts, `bd ready` shows the 
 Do not skip molecule steps or close them out of order. The step sequence is designed so that each step's preconditions are satisfied by the previous step — jumping ahead can result in missing context, failed tests, or merge conflicts that are harder to debug.
 :::
 
+:::danger[gt unsling Leaves Orphaned Worktrees]
+
+Using `gt unsling` to remove work from an agent's hook reverts the bead to `open` status but any in-progress branch work remains on disk. The orphaned worktree must be cleaned up manually or it will persist until the next Witness patrol detects and removes it.
+
+:::
+
 ## Typical Work Timeline
 
 A representative timeline showing how a bead progresses from creation through merge.

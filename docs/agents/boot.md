@@ -224,6 +224,12 @@ Boot uses a precise decision matrix during the Decide phase:
 | Idle > 15 min | N/A | **WAKE** (restart session) |
 | Errors/stuck | N/A | **INTERRUPT** (force intervention) |
 
+:::danger[Boot Is Not a Debugger]
+
+If Boot repeatedly reports the same issue but the Deacon is not responding, the problem is with the Deacon, not with Boot. Boot only observes and reports -- it does not fix problems itself. Check the Deacon's session state and logs.
+
+:::
+
 ## Common Patterns
 
 ### Normal Healthy Tick

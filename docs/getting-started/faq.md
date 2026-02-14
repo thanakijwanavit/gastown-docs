@@ -188,6 +188,12 @@ Gas Town itself is free and open-source. Costs come from the AI runtime (Claude 
 Do not run multiple Gas Town installations against the same git repository. Each town expects exclusive ownership of its rigs' canonical clones. Sharing a repo between towns can cause data corruption and merge queue conflicts.
 :::
 
+:::tip[Read Error Messages Carefully]
+
+Gas Town error messages include specific diagnostic codes (e.g., `ERR_HOOK_MISSING`, `ERR_GATE_EXPIRED`) that directly reference sections in the troubleshooting guide. Copy the error code and search the docs with `Ctrl+K` to find the exact resolution steps.
+
+:::
+
 ## Troubleshooting
 
 ```mermaid

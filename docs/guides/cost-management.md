@@ -197,6 +197,10 @@ Minimal mode trades monitoring responsiveness for lower costs. Problems may take
 
 :::
 
+:::tip[Track Cost Per Bead]
+The most revealing cost metric is not total daily spend but cost per completed bead. Track `total_daily_cost / beads_closed_today` over time to measure whether you are getting more efficient at translating tokens into shipped features. A rising cost-per-bead suggests workflow inefficiencies worth investigating.
+:::
+
 ### Strategy 4: Park Idle Rigs
 
 Rigs you are not actively developing on still consume tokens through their Witnesses and Refineries:

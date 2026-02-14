@@ -166,6 +166,12 @@ In Gas Town, unpushed commits are invisible to every other agent. Push after eve
 
 ---
 
+:::danger[Force Commands]
+
+Avoid using `--force` flags unless absolutely necessary. Commands like `gt shutdown --force` bypass safety checks and can corrupt active worktrees or lose uncommitted work. Always try the graceful version first and only escalate to `--force` if the system is truly wedged.
+
+:::
+
 ## Troubleshooting Decision Tree
 
 When something goes wrong, follow this decision tree to find the right command.

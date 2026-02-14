@@ -272,6 +272,12 @@ flowchart TD
     REPAIR --> PASS
 ```
 
+:::note
+
+Run `gt convoy check` periodically as part of routine maintenance, especially for long-running convoys with many beads. Inconsistencies can arise when polecats are force-nuked or when the merge queue experiences failures, and catching these early prevents coordination issues later.
+
+:::
+
 Check convoy health and consistency.
 
 ```bash

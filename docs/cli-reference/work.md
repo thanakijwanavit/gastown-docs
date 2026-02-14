@@ -247,6 +247,12 @@ Running `gt done --escalate` marks the bead as escalated and exits the polecat s
 
 :::
 
+:::tip
+
+When a polecat escalates with `gt done --escalate`, the bead remains hooked to that polecat until explicitly unslung or reassigned. Use `gt unsling --release` to free the bead back to the ready pool after addressing the escalated issue, rather than leaving it indefinitely hooked to a terminated polecat.
+
+:::
+
 ### `gt close`
 
 Close a bead without going through the done workflow.

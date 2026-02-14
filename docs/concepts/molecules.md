@@ -388,6 +388,12 @@ Formulas include a `version` field that should be incremented when making breaki
 
 :::
 
+:::note[Molecule Reuse]
+
+A formula can be poured multiple times to create independent molecule instances. Each instance tracks its own progress independently, even if they are working on similar tasks. Use this pattern for parallel exploration where multiple agents try different approaches to the same problem.
+
+:::
+
 ## Molecule + Hook Integration
 
 Molecules are stored on an agent's [Hook](hooks.md), creating the crash-safe execution model:

@@ -119,6 +119,10 @@ You: "Looks good, apply it"
 
 ---
 
+:::danger[The Context Switch Penalty]
+Moving between stages is not reversible without a productivity penalty. Developers who adopt Stage 6 (3-5 parallel agents) often find Stage 5 (single agent) feels painfully slow afterward, even though Stage 5 was a revelation when they first adopted it. Plan your stage transitions knowing that each one resets your baseline expectations.
+:::
+
 ### Stage 5: CLI Single Agent, YOLO
 
 You move from the IDE to a dedicated CLI agent running in your terminal. The agent has full access to your project, runs commands, edits files, and operates with minimal supervision.

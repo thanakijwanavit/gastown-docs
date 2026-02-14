@@ -51,6 +51,10 @@ sequenceDiagram
 In Gas Town, unpushed work is invisible to every other agent. The longer you wait to push, the more merge conflicts you accumulate and the more work you risk losing.
 :::
 
+:::danger[Force Push is Never Safe]
+Never use `git push --force` or `git push --force-with-lease` on main or any shared branch in a multi-agent environment. Force pushing rewrites history that other agents may have already based their work on, creating unrecoverable divergence and potentially losing committed work from other polecats.
+:::
+
 ### 1. Pull Before Every Push
 
 **Always pull before pushing**, even if you just pulled 5 minutes ago:

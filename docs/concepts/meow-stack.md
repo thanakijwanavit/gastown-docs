@@ -195,6 +195,12 @@ Protomolecules (Layer 4) coordinate multiple agents working in parallel and are 
 
 :::
 
+:::danger[Skipping MEOW Layers]
+
+Do not bypass the MEOW abstraction by directly manipulating lower layers. For example, manually editing molecule step beads in the database instead of using `gt mol step done` can corrupt dependency tracking and break workflow resume. Always use the layer-appropriate commands.
+
+:::
+
 ## Formula-to-Completion Flow
 
 A formula flows through the MEOW layers from template to completed work.

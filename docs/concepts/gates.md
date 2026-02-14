@@ -273,6 +273,12 @@ gt gate wake <gate-id>
 | `bd gate approve <id>` | Approve a human gate |
 | `gt gate wake <id>` | Wake agents waiting on a gate |
 
+:::danger[Manual Gate Deletion]
+
+Never manually delete gate beads from the database. If a gate is blocking progress incorrectly, use `bd gate close <id>` to close it gracefully. Manual deletion orphans the waiting molecules and can cause agents to park indefinitely waiting for a gate that no longer exists.
+
+:::
+
 ## Use Cases
 
 ### Waiting for CI

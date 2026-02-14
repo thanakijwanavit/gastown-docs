@@ -349,6 +349,10 @@ Plugin: integration-tests (last 5 runs)
 
 ---
 
+:::danger[Plugin Execution Context]
+Plugins run with the same filesystem permissions as the Gas Town daemon and have write access to the entire rig directory. A buggy plugin can corrupt the Refinery's canonical clone, delete worktrees, or modify committed history. Always test plugins thoroughly with `--dry-run` and manual runs before allowing them to trigger automatically in the merge pipeline.
+:::
+
 ## Creating Custom Plugins
 
 ```mermaid

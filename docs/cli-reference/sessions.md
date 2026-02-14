@@ -475,6 +475,12 @@ gt mol detach
 
 ---
 
+:::caution
+
+Molecules that involve parallel steps across multiple polecats should not be burned while those polecats are actively working. Always check `gt polecat list` and verify no agents are executing molecule steps before burning, or you may leave polecats in an inconsistent state with half-completed work.
+
+:::
+
 ### `gt mol burn`
 
 Abort and discard a molecule.

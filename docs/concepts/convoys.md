@@ -273,6 +273,12 @@ sequenceDiagram
     O-->>M: Acknowledged
 ```
 
+:::info[Convoy Lifecycle Events]
+
+Convoys emit lifecycle events (created, bead_added, bead_completed, convoy_completed) that can be consumed by the activity feed, mail notifications, and external integrations. Use `gt feed --type convoy` to monitor convoy events in real time.
+
+:::
+
 ## Convoy + Mayor Workflow
 
 In the recommended [Mayor Workflow](../workflows/mayor-workflow.md), convoys are created automatically:

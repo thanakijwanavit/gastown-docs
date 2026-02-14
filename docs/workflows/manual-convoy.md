@@ -195,6 +195,10 @@ gt convoy list
 # hq-cv-007  API Security Hardening  [COMPLETED]  4/4 done
 ```
 
+:::warning[Convoy Scope Creep]
+Manual convoys make it tempting to keep adding beads as new ideas emerge during implementation. While Gas Town supports adding beads to active convoys, doing so excessively creates sprawling, unfocused convoys that are hard to track and never complete. If a convoy grows beyond 10 beads, consider splitting it into multiple focused convoys with clear completion criteria.
+:::
+
 ## Handling Dependencies
 
 For work that must happen in sequence, use bead dependencies. The dependency system ensures blocked beads are not slung until their prerequisites complete.

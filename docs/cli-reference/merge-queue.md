@@ -187,6 +187,12 @@ The merge queue processes items sequentially to maintain a clean linear history 
 
 :::
 
+:::tip
+
+If you notice the merge queue depth climbing beyond 10 items, consider pausing new work assignments with `gt rig park` temporarily on lower-priority rigs. This allows the Refinery to drain the queue before new work arrives, preventing a backlog that slows down overall throughput.
+
+:::
+
 ## `gt mq reject`
 
 ```mermaid

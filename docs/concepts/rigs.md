@@ -306,6 +306,12 @@ The `gt rig reset` command clears all rig state including polecat worktrees, cac
 
 :::
 
+:::caution[Rig Disk Space]
+
+Each rig maintains multiple git clones (refinery, mayor, witness, plus one per active polecat). A large repository with 5 active polecats can consume 7x the repository size. Monitor disk usage with `gt rig status --disk` and clean up stale polecats if space becomes constrained.
+
+:::
+
 ## Rig Startup Sequence
 
 When a rig starts, its agents initialize in a specific order to ensure dependencies are ready.

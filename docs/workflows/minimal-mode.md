@@ -193,6 +193,10 @@ $ gt convoy show hq-cv-005
 # COMPLETED: 2/2 done
 ```
 
+:::tip[Minimal Mode for Learning]
+Minimal mode is the best way to learn Gas Town's core concepts because you manually perform each step that the full system automates. Starting in minimal mode builds intuition for hooks, beads, and convoys before adding the complexity of Tmux sessions, Witness monitoring, and Mayor coordination. Consider spending at least a week in minimal mode before scaling up.
+:::
+
 ## Scaling Up from Minimal Mode
 
 Once you are comfortable with Minimal Mode, you can incrementally add automation. Each layer builds on the previous one, adding capabilities without breaking your existing workflow.

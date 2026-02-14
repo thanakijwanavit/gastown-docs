@@ -130,6 +130,12 @@ gt mayor start --attach
 gt mayor start --agent claude
 ```
 
+:::note[Start Agents in Dependency Order]
+
+When starting a rig's agents from scratch, start the Witness and Refinery before slinging work. Otherwise, beads will be assigned but no polecats will spawn until the Witness is running to manage them. Use `gt rig start <rig>` to start all rig agents together.
+
+:::
+
 ---
 
 ### `gt mayor stop`
