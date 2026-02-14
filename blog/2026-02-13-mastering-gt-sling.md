@@ -195,6 +195,23 @@ gt sling gt-abc12 myproject --dry-run
 
 This resolves the target, checks for conflicts, and reports what *would* happen without actually doing anything. Use this liberally when learning.
 
+The following diagram shows how dry-run mode validates before execution:
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant S as gt sling --dry-run
+    participant T as Target Resolution
+    participant H as Hook Check
+    U->>S: gt sling bead-id target --dry-run
+    S->>T: Resolve target rig/agent
+    T-->>S: Target found or error
+    S->>H: Check hook occupation
+    H-->>S: Hook free or occupied
+    S-->>U: Report what would happen (no changes)
+```
+
+
 ## Common Failure Modes
 
 ### "Target not found"

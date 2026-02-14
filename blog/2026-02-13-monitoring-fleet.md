@@ -287,6 +287,21 @@ Gas Town's [escalation system](/docs/operations/escalations/) routes problems au
 - **P1 (High):** Immediate notification via nudge. Check now.
 - **P0 (Critical):** Routes to SMS. Drop everything.
 
+The following diagram shows how escalation priorities route through different channels:
+
+```mermaid
+graph TD
+    E[Escalation Fired] --> P{Priority Level}
+    P -->|P3| LOG[Log to File]
+    P -->|P2| MAIL[Mail to Inbox]
+    P -->|P1| NUDGE[Nudge + Mail]
+    P -->|P0| SMS[SMS + Nudge + Mail]
+    LOG --> RV[Review During Patrol]
+    MAIL --> RV
+    NUDGE --> ACT[Immediate Action]
+    SMS --> ACT
+```
+
 Most day-to-day monitoring is about catching patterns before they become P0 escalations. The tools above give you early warning. For a deep dive on how escalations route through the system, see [The Escalation System](/blog/escalation-system).
 
 ```mermaid

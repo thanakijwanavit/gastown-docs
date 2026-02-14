@@ -94,6 +94,26 @@ sequenceDiagram
 
 Some convoys span multiple projects. A frontend change might depend on a backend API update:
 
+The following diagram shows how cross-rig dependencies flow through a multi-repo convoy.
+
+```mermaid
+flowchart TD
+    subgraph Backend["Backend Rig"]
+        API[ga-ddd: Add /api/notifications]
+    end
+    subgraph Frontend["Frontend Rig"]
+        UI[ga-eee: Notification bell component]
+    end
+    subgraph Convoy["Convoy: Notifications"]
+        CV[hq-cv-042]
+    end
+    API -->|dependency| UI
+    API -.->|tracked by| CV
+    UI -.->|tracked by| CV
+    CV -->|auto-close when both done| DONE[Complete]
+```
+
+
 ```bash
 # Create beads for different rigs
 bd create --title "Add /api/notifications endpoint" --type task
@@ -267,7 +287,7 @@ mindmap
       Decompose small
       Monitor actively
       Use Mayor for 5+ beads
-
+```
 
 **Set dependencies explicitly.** Don't rely on polecats to figure out ordering. Use `bd dep add` to make the dependency graph explicit.
 

@@ -284,6 +284,21 @@ load-context → implement → validate → submit
 The most common formula design mistake is combining durable and non-durable operations in a single step. If an agent crashes mid-step, the entire step must be re-executed. Keep each step independently verifiable — mark it done only when its output is committed to git or written to beads.
 :::
 
+The following diagram illustrates the lifecycle of formula steps during execution.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Defined: Formula poured
+    Defined --> Ready: Dependencies met
+    Ready --> Executing: Agent starts step
+    Executing --> Completed: Step output committed
+    Executing --> Failed: Error encountered
+    Failed --> Ready: Retry (if optional)
+    Failed --> Escalated: Max retries exceeded
+    Completed --> [*]
+    Escalated --> [*]
+```
+
 ### Design for GUPP
 
 Every step should be a checkpoint. If the agent crashes after completing a step, a fresh agent should be able to resume without redoing that step. For more on this principle, see [understanding GUPP](/blog/understanding-gupp). This means:

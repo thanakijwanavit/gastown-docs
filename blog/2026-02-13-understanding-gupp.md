@@ -145,6 +145,28 @@ Both produce:                   Valid input validation with passing tests ✓
 
 Let's trace a real failure-recovery sequence to see GUPP in action:
 
+The following timeline shows how GUPP enables automatic recovery from an agent crash.
+
+```mermaid
+timeline
+    title GUPP Recovery Timeline
+    section Agent Crash
+        10:00 : Polecat toast starts work
+        10:15 : Network issue kills session
+    section Persistence
+        10:15 : Hook persists on disk
+        10:15 : Molecule state in DB intact
+    section Recovery
+        10:20 : Witness detects dead session
+        10:20 : Warrant filed, bead re-slung
+        10:21 : New polecat alpha spawns
+        10:21 : Skips completed steps, resumes
+    section Completion
+        10:35 : Alpha completes work
+        10:36 : Refinery merges to main
+```
+
+
 ```text
 10:00  Polecat "toast" starts working on ga-xyz (molecule step: implement)
 10:15  Network issue kills the tmux session
@@ -221,7 +243,7 @@ mindmap
       Context Fills
         Cycle Session
         Resume From Step
-
+```
 
 :::danger NDI Does Not Mean "Anything Goes"
 Nondeterministic Idempotence allows different agents to solve the same step differently — but the end state must still satisfy the acceptance criteria. If two agents produce conflicting implementations that both pass local tests but break when integrated, NDI has not been violated; your task decomposition or test coverage has. NDI is about tolerating implementation variance, not excusing sloppy task definitions or missing validation steps.

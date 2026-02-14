@@ -209,6 +209,19 @@ stateDiagram-v2
 
 ## Anti-Patterns
 
+The following diagram illustrates the decision process for routing work between dogs and polecats:
+
+```mermaid
+graph LR
+    W[Work Request] --> Q{Produces MR?}
+    Q -->|Yes| PC[Route to Polecat]
+    Q -->|No| D{Crosses Rigs?}
+    D -->|Yes| DOG[Route to Dog]
+    D -->|No| CHK{Cleanup/Infra?}
+    CHK -->|Yes| DOG
+    CHK -->|No| PC
+```
+
 **Don't use dogs for feature work.** Dogs bypass the merge queue and code review process. If you need a feature implemented, sling it to a polecat via `gt sling`.
 
 **Don't manually spawn dogs for routine work.** The Deacon handles dog lifecycle automatically. Manual dog creation (`gt dog add`) should be reserved for emergencies.

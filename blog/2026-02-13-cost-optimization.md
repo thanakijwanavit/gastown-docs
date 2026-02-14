@@ -83,6 +83,32 @@ bd create --title "Fix typos across README, CONTRIBUTING, and CHANGELOG" \
   --description "README: line 12 (teh→the), line 45 (recieve→receive), line 78 (occured→occurred). CONTRIBUTING: line 3 (submiting→submitting). CHANGELOG: line 8 (relaesed→released)."
 ```
 
+The following sequence diagram shows how costs accumulate across a polecat's lifecycle.
+
+```mermaid
+sequenceDiagram
+    participant B as Bead
+    participant P as Polecat
+    participant C as Codebase
+    participant T as Tests
+    participant R as Refinery
+
+    B->>P: Sling bead (startup cost)
+    P->>C: Load context (tokens)
+    P->>C: Read hook (tokens)
+    P->>C: Explore codebase (tokens)
+    P->>C: Write code (tokens)
+    P->>T: Run tests (tokens)
+    T-->>P: Pass/Fail
+    alt Tests fail
+        P->>C: Debug (tokens)
+        P->>C: Fix (tokens)
+        P->>T: Retry tests (tokens)
+    end
+    P->>R: Submit work (tokens)
+    Note over P,R: Total cost = all accumulated tokens
+```
+
 :::info Session Restarts After Crashes Are Full-Cost Operations
 When a polecat crashes mid-task and restarts, the new session starts from scratch -- re-reading all context, re-loading the hook, and re-evaluating what was already done. This means a task that crashes once costs roughly 2x the tokens of one that completes on the first try. Reducing crash rates (through better beads, stable tests, and smaller tasks) has an outsized impact on total cost.
 :::

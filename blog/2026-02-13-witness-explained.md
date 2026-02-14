@@ -83,6 +83,22 @@ If the Refinery is stuck, the Witness nudges it. If that doesn't work, it escala
 
 The Witness itself runs a molecule — `mol-witness-patrol`. This formula defines the steps of each patrol:
 
+The following state diagram shows how polecats transition through health states during Witness monitoring.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Working: Polecat starts task
+    Working --> Healthy: Making progress
+    Healthy --> Working: Continue work
+    Working --> Stalled: No progress detected
+    Stalled --> Nudged: Witness sends nudge
+    Nudged --> Healthy: Polecat responds
+    Nudged --> Escalated: No response after 2 nudges
+    Escalated --> Terminated: Warrant filed
+    Terminated --> [*]: Work re-slung
+```
+
+
 ```text
 Step 1: Process inbox (check for mail from Deacon, polecats)
 Step 2: Check all polecat sessions
@@ -170,7 +186,7 @@ pie title Witness Patrol Time Distribution
     "Check Convoys" : 15
     "Report to Deacon" : 10
     "Self-Context Check" : 5
-
+```
 
 ```text
 Witness → Deacon: "Polecat alpha in rig myproject is stalled.

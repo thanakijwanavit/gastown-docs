@@ -80,6 +80,25 @@ Agents create escalations automatically when they detect problems they can't res
 When creating escalations manually with `gt escalate`, use the `--bead` flag to link the escalation to the relevant task. Unattached escalations lack context, making it harder for the Mayor or other responders to understand what went wrong and where. A bead reference provides the full history of the problem including agent logs, prior attempts, and related commits.
 :::
 
+The following diagram illustrates how different severity levels map to notification channels.
+
+```mermaid
+flowchart TD
+    ESC[Escalation Created] --> SEV{Severity Level}
+    SEV -->|P0 Critical| P0C[SMS + Email + Mail + Bead]
+    SEV -->|P1 High| P1C[Email + Mail + Bead]
+    SEV -->|P2 Medium| P2C[Mail + Bead]
+    SEV -->|P3 Low| P3C[Bead Only]
+    P0C --> HUM[Human Notified]
+    P1C --> HUM
+    P2C --> MAY[Mayor Handles]
+    P3C --> LOG[Tracked Only]
+    style P0C fill:#ff9999
+    style P1C fill:#ffcc99
+    style P2C fill:#ffffcc
+    style P3C fill:#ccffcc
+```
+
 ```mermaid
 graph TD
     subgraph Hierarchy["Supervision Chain"]

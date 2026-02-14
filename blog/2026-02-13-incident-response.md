@@ -326,6 +326,28 @@ Before diving into any fix, always run `gt status`, `gt convoy stranded`, and `g
 If you encounter the same failure scenario more than twice, create a project-specific runbook entry with the exact diagnosis steps and fix. Gas Town's self-healing covers the common cases, but project-specific issues — like a flaky integration test that causes Refinery rejections — need documented workarounds so any operator can resolve them quickly.
 :::
 
+The following diagram shows the decision tree for incident response based on triage output.
+
+```mermaid
+graph TD
+    TRIAGE[90-Second Triage] --> STATUS[gt status]
+    STATUS --> HEALTH{System Health?}
+    HEALTH -->|All Green| FALSE[False Alarm - Monitor]
+    HEALTH -->|Degraded| CHECK[Check Specific Issue]
+    CHECK --> TYPE{Issue Type?}
+    TYPE -->|Stuck Polecat| PC[Witness Auto-Recovery]
+    TYPE -->|Stalled Convoy| CV[Re-sling Unassigned]
+    TYPE -->|Refinery Jam| RF[Check MQ + Restart]
+    TYPE -->|Git Corruption| GIT[Kill Agent + Re-sling]
+    PC --> WAIT[Wait 10 min for Auto-Fix]
+    WAIT --> VERIFY{Fixed?}
+    VERIFY -->|Yes| RESOLVED[Resolved]
+    VERIFY -->|No| MANUAL[Manual Intervention]
+    style FALSE fill:#99ff99
+    style RESOLVED fill:#99ff99
+    style MANUAL fill:#ffcc99
+```
+
 ## The Golden Rule
 
 When in doubt, remember: **beads are the source of truth**. Agents come and go, sessions crash and restart, git branches get created and deleted. But the bead tracking state persists. As long as the bead is open, someone (or some new agent) will eventually pick it up. For more on the work distribution philosophy, see [Work Distribution](/docs/architecture/work-distribution).

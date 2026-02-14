@@ -19,6 +19,27 @@ The relationship between formulas and molecules is like classes and objects:
 | **Formula** | A TOML template defining steps, dependencies, and variables | `.beads/formulas/*.formula.toml` |
 | **Molecule** | A running instance of a formula, tracking real progress | Bead in the beads database |
 
+The following diagram illustrates the class-instance relationship:
+
+```mermaid
+graph LR
+    subgraph Templates["Formulas (Classes)"]
+        F1[shiny.formula.toml]
+        F2[release.formula.toml]
+        F3[patrol.formula.toml]
+    end
+    subgraph Instances["Molecules (Objects)"]
+        M1[mol-shiny-abc1]
+        M2[mol-shiny-abc2]
+        M3[mol-release-v2]
+        M4[mol-patrol-001]
+    end
+    F1 -->|pour| M1
+    F1 -->|pour| M2
+    F2 -->|pour| M3
+    F3 -->|pour| M4
+```
+
 You **pour** a formula to create a molecule:
 
 ```bash

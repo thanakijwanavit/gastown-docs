@@ -62,6 +62,17 @@ This step runs after step-1 completes.
 """
 ```
 
+The following chart breaks down the typical components of a production formula by complexity.
+
+```mermaid
+pie title Formula Component Breakdown
+    "Step Descriptions" : 50
+    "Dependencies (needs)" : 20
+    "Variables" : 15
+    "Gates" : 10
+    "Metadata" : 5
+```
+
 The following table summarizes all the configuration fields available in a formula TOML file:
 
 | Field | Section | Required | Purpose |

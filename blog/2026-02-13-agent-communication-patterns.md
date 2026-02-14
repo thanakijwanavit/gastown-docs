@@ -205,6 +205,19 @@ The most effective handoff notes include exact file paths and line numbers, not 
 
 This creates a mail to yourself and hooks it. Your next session starts, reads the hook, reads the mail, and continues from where you left off.
 
+The following timeline illustrates how mail delivery works asynchronously compared to immediate nudges.
+
+```mermaid
+timeline
+    title Mail Delivery Flow Timeline
+    00:00 : Sender composes : gt mail send
+    00:01 : Mail queued : Stored in beads
+    00:05 : Recipient checks : gt mail inbox
+    00:06 : Mail delivered : Agent reads
+    00:07 : Action taken : Agent processes
+    00:10 : Optional nudge : Wake recipient
+```
+
 ```mermaid
 flowchart TD
     subgraph Primitives["Choosing the Right Primitive"]

@@ -163,6 +163,24 @@ Individual leg findings are useful, but the synthesis is where the real value em
 3. **Groups by theme** — Related issues are clustered for efficient fixing.
 4. **Provides an executive summary** — A one-paragraph assessment and merge recommendation.
 
+The following state diagram illustrates the complete review lifecycle from PR submission to final merge.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Submitted: PR opened
+    Submitted --> Reviewing: Formula launched
+    Reviewing --> LegsRunning: 10 polecats spawn
+    LegsRunning --> Synthesis: All legs complete
+    Synthesis --> Findings: Report generated
+    Findings --> P0Found: Critical issues
+    Findings --> Clean: No P0 issues
+    P0Found --> Blocked: Merge blocked
+    Blocked --> Fixed: Developer fixes
+    Fixed --> Submitted: Resubmit
+    Clean --> Merged: Refinery merges
+    Merged --> [*]
+```
+
 The output looks like:
 
 ```text

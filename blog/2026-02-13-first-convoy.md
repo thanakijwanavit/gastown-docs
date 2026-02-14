@@ -195,6 +195,33 @@ All polecat work goes through the Refinery's merge queue. This serialized merge 
 If a bead's scope is too large, the polecat may exhaust its context window before finishing the implementation. A good rule of thumb is that each bead should be completable in a single agent session — if you find yourself writing more than two sentences to describe it, consider splitting it into multiple beads with explicit dependencies.
 :::
 
+The following diagram shows a typical convoy execution timeline with three parallel polecats.
+
+```mermaid
+gantt
+    title First Convoy Timeline (3 Beads in Parallel)
+    dateFormat mm:ss
+    section Polecat A
+    Context Load    :00:00, 30s
+    Implementation  :00:30, 2m
+    Testing         :02:30, 1m
+    Submit MR       :03:30, 30s
+    section Polecat B
+    Context Load    :00:00, 30s
+    Implementation  :00:30, 3m
+    Testing         :03:30, 1m
+    Submit MR       :04:30, 30s
+    section Polecat C
+    Context Load    :00:00, 30s
+    Implementation  :00:30, 1m
+    Testing         :01:30, 1m
+    Submit MR       :02:30, 30s
+    section Refinery
+    Merge C         :03:00, 1m
+    Merge A         :04:00, 1m
+    Merge B         :05:00, 1m
+```
+
 ## Troubleshooting Your First Convoy
 
 A few things that might go wrong on your first run:

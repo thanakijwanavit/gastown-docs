@@ -109,6 +109,23 @@ graph TD
 
 This hierarchy prevents circular problems. The Witness can't file a warrant against itself, and the Deacon can't file a warrant against itself. If the Deacon is stuck, only the daemon (or a human) can intervene.
 
+The following diagram illustrates the supervision relationship and warrant execution workflow.
+
+```mermaid
+sequenceDiagram
+    participant W as Witness
+    participant PC as Stuck Polecat
+    participant BT as Boot
+    participant WI2 as Witness (Recovery)
+    W->>W: Detects zombie (idle >10m)
+    W->>BT: File warrant
+    BT->>BT: Triage (every 3 min)
+    BT->>PC: Terminate tmux session
+    BT->>BT: Update warrant as executed
+    WI2->>WI2: Detects terminated polecat
+    WI2->>PC: Respawn fresh polecat or escalate
+```
+
 :::info The Supervision Hierarchy Is a Safety Net for Self-Healing Systems
 The authority hierarchy ensures that every agent has someone who can terminate it if needed, preventing stuck agents from blocking indefinitely. This design mirrors production incident response systems where escalation paths are clearly defined — no agent should be immune to termination, but termination authority must be carefully scoped to prevent cascade failures.
 :::

@@ -43,6 +43,17 @@ graph TD
 
 Manual convoys are the right choice when:
 
+The following pie chart shows the typical time distribution across different work distribution patterns.
+
+```mermaid
+pie title Time Distribution by Work Pattern
+    "Manual Convoy: Planning" : 40
+    "Manual Convoy: Execution" : 30
+    "Mayor: Execution" : 20
+    "Formula: Execution" : 10
+```
+
+
 - **You know exactly what the tasks are** and how to decompose them
 - **Dependencies matter** — you need precise control over which task blocks which
 - **Cross-rig coordination** requires human judgment about which rig handles what
@@ -240,7 +251,7 @@ timeline
         Formulas : Template-driven : Repeatable process : Molecule tracking
     section Full Orchestration
         Hybrid : Combine all patterns : Mayor + Formula : Auto-sling dependencies
-
+```
 
 1. **Beads** track the work
 2. **Hooks** attach work to agents

@@ -223,6 +223,27 @@ graph LR
 If you sling a new bead to an agent that already has work on its hook, the existing assignment is overwritten — the previous bead becomes orphaned and falls through the cracks unless you manually recover it. Always run `gt hook --target <agent>` before slinging to confirm the hook is empty. This simple check prevents the most common source of lost work in Gas Town environments.
 :::
 
+The following diagram illustrates the complete hook assignment and execution lifecycle.
+
+```mermaid
+flowchart TD
+    SL[gt sling bead] --> CHK{Hook Empty?}
+    CHK -->|Yes| CR[Create Worktree]
+    CHK -->|No| ERR[Error: Hook Occupied]
+    CR --> WR[Write .gt-hook Metadata]
+    WR --> ST[Agent Starts]
+    ST --> RD[Read Hook]
+    RD --> EX[Execute Molecule]
+    EX --> UP[Update Hook Progress]
+    UP --> CMP{Complete?}
+    CMP -->|No| EX
+    CMP -->|Yes| DN[gt done]
+    DN --> CLR[Clear Hook]
+    CLR --> RM[Remove Worktree]
+    style ERR fill:#ff9999
+    style CLR fill:#99ff99
+```
+
 ## When Hooks Clear
 
 Hooks clear when:

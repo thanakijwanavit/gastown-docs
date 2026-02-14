@@ -131,6 +131,21 @@ sequenceDiagram
 Once the Mayor has created beads and slung them to polecats, changing the decomposition requires manual intervention. You cannot simply tell the Mayor "split that bead into two" after work has already started — you need to cancel the in-flight bead, create new beads manually with `bd create`, and re-sling. Always review the Mayor's decomposition plan before it starts executing to catch issues early.
 :::
 
+The following state diagram shows how beads progress through dependency chains:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Created: Mayor Creates Bead
+    Created --> Blocked: Has Dependencies
+    Created --> Ready: No Dependencies
+    Blocked --> Ready: Dependencies Merged
+    Ready --> Slung: Mayor Slings to Polecat
+    Slung --> InProgress: Polecat Working
+    InProgress --> InRefinery: gt done
+    InRefinery --> Merged: Refinery Lands
+    Merged --> [*]
+```
+
 The Mayor sets dependencies between beads when needed:
 
 ```text

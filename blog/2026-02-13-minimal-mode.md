@@ -73,6 +73,22 @@ gt sling gt-d3e4f myproject
 
 That's it. No daemon, no Witness, no Refinery. Just you, beads, and hooks.
 
+The following flowchart illustrates the minimal mode workflow cycle:
+
+```mermaid
+flowchart TD
+    CR[bd create] --> CV[gt convoy create]
+    CV --> SL[gt sling bead rig]
+    SL --> MAN[Manually start agent]
+    MAN --> WK[Agent works on hook]
+    WK --> DN[Agent: gt done]
+    DN --> CK[gt convoy show]
+    CK --> Q{More beads?}
+    Q -->|Yes| SL
+    Q -->|No| END[Convoy complete]
+```
+
+
 ## What's Different from Full Mode
 
 The differences are exactly what you'd expect — you're doing manually what the full hierarchy automates:

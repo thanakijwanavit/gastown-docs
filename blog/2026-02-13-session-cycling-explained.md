@@ -194,6 +194,18 @@ pie title What Survives Session Cycling
 
 Molecules are what make session cycling work for multi-step tasks. For a detailed technical reference on molecule concepts, see the [molecules documentation](/docs/concepts/molecules). Each molecule tracks:
 
+The following diagram illustrates how molecule state enables seamless resumption after session cycling.
+
+```mermaid
+graph TD
+    S1[Session 1: Steps 1-3 Done] --> CYC[Context Full: Cycle]
+    CYC --> MOL[Molecule: Persist Step State]
+    MOL --> S2[Session 2: Reads Molecule]
+    S2 --> SKIP[Skip Steps 1-3]
+    SKIP --> RES[Resume at Step 4]
+```
+
+
 - Which steps are complete
 - Which step is currently active
 - What the next step is
@@ -244,7 +256,7 @@ graph LR
         N2 --> N3[gt mail inbox]
         N3 --> N4[Resume Work]
     end
-
+```
 
 **Write useful handoff mails.** The next session has zero context about your decisions. Include:
 - What you tried that didn't work

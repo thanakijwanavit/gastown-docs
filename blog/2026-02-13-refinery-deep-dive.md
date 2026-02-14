@@ -283,6 +283,19 @@ If your merge queue consistently holds more than 10 pending MRs, it means poleca
 
 The Refinery is intentionally single-threaded per rig. Processing MRs one at a time guarantees a clean history but creates a throughput bottleneck. Here's how to manage it:
 
+The following diagram illustrates the relationship between queue depth and processing bottlenecks as more polecats submit work.
+
+```mermaid
+graph LR
+    P1[5 Polecats] -->|Low Load| Q1[Queue: 2-3 MRs]
+    P2[15 Polecats] -->|Medium Load| Q2[Queue: 5-7 MRs]
+    P3[30 Polecats] -->|High Load| Q3[Queue: 10+ MRs]
+    Q1 --> R1[Refinery: Keeping Up]
+    Q2 --> R2[Refinery: Near Capacity]
+    Q3 --> R3[Refinery: Bottleneck]
+```
+
+
 ### Queue Depth
 
 If your queue depth regularly exceeds 10 MRs, consider:

@@ -208,6 +208,23 @@ flowchart LR
 
 ## Emergency Recovery
 
+The following timeline shows a typical recovery sequence:
+
+```mermaid
+timeline
+    title Emergency Recovery Timeline
+    Detect : System unresponsive
+           : gt commands hang
+    Diagnose : Check daemon status
+             : Inspect tmux sessions
+    Isolate : Identify affected components
+            : Surgical vs nuclear required
+    Recover : Restart minimal components
+            : Verify restoration
+    Resume : Rigs back online
+           : Work continues
+```
+
 ### Full System Unresponsive
 
 When nothing responds to `gt` commands:

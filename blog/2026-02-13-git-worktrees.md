@@ -220,6 +220,23 @@ pie title Disk Usage Comparison (10 Agents, 100MB Repo)
 Over time, failed slings or interrupted agent sessions can leave orphaned worktrees consuming disk space and blocking branch checkouts. Run `git worktree prune` weekly in each rig to clean up stale references, and use `gt doctor` to detect worktrees that should have been removed but were not. This prevents the "branch already checked out" errors that confuse agents trying to spawn new worktrees.
 :::
 
+The following diagram shows the space efficiency of worktrees versus alternatives.
+
+```mermaid
+graph LR
+    subgraph "Storage Breakdown (10 Agents, 100MB Repo)"
+        FC[Full Clones<br/>1000MB Total]
+        CT[Containers<br/>500MB Total]
+        WT[Worktrees<br/>110MB Total]
+    end
+    FC -->|100MB × 10| COST[10x Overhead]
+    CT -->|~50MB × 10| COST2[5x Overhead]
+    WT -->|100MB + 10MB| EFF[Minimal Overhead]
+    style EFF fill:#99ff99
+    style COST fill:#ff9999
+    style COST2 fill:#ffcc99
+```
+
 ## The Trade-Off
 
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).

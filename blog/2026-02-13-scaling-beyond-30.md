@@ -145,6 +145,25 @@ Each polecat session consumes an API call budget and local disk space (git workt
 
 At 30+ agents, monitoring becomes essential rather than optional. Key metrics to track:
 
+The following diagram shows the monitoring workflow for tracking agent health at scale.
+
+```mermaid
+sequenceDiagram
+    participant M as Monitoring System
+    participant MQ as Merge Queue
+    participant D as Deacon
+    participant W as Witness
+    participant A as Alerts
+    M->>MQ: Check queue depth
+    M->>D: Check patrol latency
+    M->>W: Check polecat health
+    MQ-->>M: Depth: 8 items
+    D-->>M: Latency: 180s
+    W-->>M: 2 stalled polecats
+    M->>A: Trigger alert (queue > 5)
+```
+
+
 ```bash
 # Merge queue depth (should stay under 5)
 gt mq list --json | jq '.pending | length'

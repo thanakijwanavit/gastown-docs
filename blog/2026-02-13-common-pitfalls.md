@@ -113,6 +113,38 @@ gt mail inbox
 gt doctor
 ```
 
+The following mindmap categorizes the five major pitfall areas and their common symptoms.
+
+```mermaid
+mindmap
+    root((Common<br/>Pitfalls))
+        Vague Beads
+            No file paths
+            Unclear scope
+            Missing context
+            Ambiguous goals
+        Not Pushing
+            Lost work
+            Invisible progress
+            Merge conflicts
+            Workspace cleanup
+        Fighting Refinery
+            Divergent state
+            Manual merges
+            Race conditions
+            Broken pipeline
+        Too-Large Beads
+            Context exhaustion
+            Session crashes
+            Incomplete work
+            Retries
+        Ignoring Witness
+            Silent failures
+            Zombie sessions
+            Stalled polecats
+            Compounding issues
+```
+
 ```mermaid
 stateDiagram-v2
     [*] --> Normal: Witness monitoring

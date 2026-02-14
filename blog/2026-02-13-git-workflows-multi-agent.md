@@ -221,6 +221,27 @@ graph TD
 In a multi-agent environment, `git push --force` is nearly always a mistake. Other agents may have based work on commits you are about to overwrite, and force-push destroys that shared history. If you need to rewrite history, coordinate with all active agents first using `gt polecat list`, or work on a personal branch that only you control. The Refinery never force-pushes to main — your crew workspace should follow the same rule.
 :::
 
+The following diagram illustrates the timeline of parallel git activity in a multi-agent environment.
+
+```mermaid
+gantt
+    title Git Activity: 3 Agents Working Simultaneously
+    dateFormat HH:mm:ss
+    section Polecat A
+    Branch + Code   :14:00:00, 2m
+    Commit + Push   :14:02:00, 30s
+    section Polecat B
+    Branch + Code   :14:00:30, 3m
+    Commit + Push   :14:03:30, 30s
+    section Crew Worker
+    Code on Main    :14:01:00, 1m
+    Pull + Push     :14:02:00, 30s
+    section Refinery
+    Merge A         :14:02:30, 1m
+    Merge Crew      :14:02:30, 30s
+    Merge B (rebase):14:04:00, 1m
+```
+
 ## Practical Tips
 
 :::tip

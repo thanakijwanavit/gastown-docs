@@ -26,6 +26,38 @@ Deacon Patrol Cycle:
 
 Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`), so if the Deacon crashes mid-patrol, the next session picks up from the last completed step. The Deacon's coordination with the Mayor follows the [mayor workflow](/docs/workflows/mayor-workflow) patterns for strategic decision-making and escalation.
 
+The following mindmap illustrates the full scope of Deacon responsibilities across the system.
+
+```mermaid
+mindmap
+    root((Deacon<br/>Patrol))
+        Health Monitoring
+            Check Witnesses
+            Restart unresponsive
+            Boot dog triage
+            Mayor notification
+        Gate Evaluation
+            Timer gates
+            GitHub Actions
+            Human approvals
+            Dispatch on close
+        Lifecycle Management
+            Park rigs
+            Unpark rigs
+            Dock rigs
+            Undock rigs
+        Convoy Completion
+            Check terminal states
+            Auto-close convoys
+            Notify stakeholders
+            Update status
+        Reporting
+            Town health summary
+            Escalate issues
+            Activity digest
+            Mayor briefing
+```
+
 ```mermaid
 flowchart TD
     D[Deacon Patrol] --> W[Check Witnesses]

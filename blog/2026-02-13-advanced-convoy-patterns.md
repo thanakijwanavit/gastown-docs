@@ -223,6 +223,17 @@ flowchart TD
 | **Rolling Convoy** | Ongoing work where scope grows over time (e.g., a sprint) | Medium | Mixed — beads added and executed as discovered | `gt convoy add <convoy> <bead>` |
 | **Convoy Monitoring** | Large convoys needing real-time visibility and escalation | Low | N/A — observability layer, not an execution pattern | `gt convoy status`, `gt feed`, `gt convoy stranded` |
 
+The following chart shows the typical distribution of convoy patterns across successful Gas Town deployments.
+
+```mermaid
+pie title Convoy Pattern Usage Distribution
+    "Fan-Out / Fan-In" : 45
+    "Dependency Chain" : 25
+    "Cross-Rig Convoy" : 15
+    "Rolling Convoy" : 10
+    "Custom Patterns" : 5
+```
+
 These patterns become even more powerful when combined with [custom formulas](/blog/custom-formulas) that define specialized workflows for each convoy bead, and work seamlessly with the [work distribution](/docs/architecture/work-distribution) strategies that route beads to the right polecats.
 
 :::warning Keep Convoys Focused (3-10 Beads)

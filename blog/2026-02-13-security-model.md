@@ -125,6 +125,20 @@ Crew workers operate in persistent clones with full write access to their worksp
 
 Every action in Gas Town is attributable. The `BD_ACTOR` environment variable identifies each agent:
 
+The following diagram illustrates how actions flow through the audit trail system.
+
+```mermaid
+flowchart LR
+    PC[Polecat Action] -->|BD_ACTOR: gastowndocs/polecats/toast| GC[Git Commit]
+    PC -->|BD_ACTOR: gastowndocs/polecats/toast| BD[Bead Update]
+    PC -->|BD_ACTOR: gastowndocs/polecats/toast| ML[Mail Message]
+    GC --> AT[Audit Trail]
+    BD --> AT
+    ML --> AT
+    AT --> LOG[Complete Attribution Log]
+```
+
+
 ```text
 gastowndocs/crew/nic       # Crew worker nic in the gastowndocs rig
 gastowndocs/polecats/toast # Polecat toast in the gastowndocs rig
@@ -149,7 +163,7 @@ timeline
         Branch Protection : CI/CD integration gates
         Audit Trail : BD_ACTOR identity tracking
         Gates : Human approval for production ops
-
+```
 
 | Failure Mode | Blast Radius | Recovery |
 |-------------|-------------|----------|

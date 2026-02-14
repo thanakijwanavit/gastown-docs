@@ -165,6 +165,16 @@ A common misconception is that Gas Town handles deployment. It does not. Gas Tow
 Because agents work faster and in parallel, your CI system will see 5-10x the number of builds it is used to handling. If your CI has capacity limits or per-build costs, budget accordingly. The Refinery can be configured to batch merges or throttle submission rate, but the default behavior is to push every completed polecat branch through CI immediately, which can overwhelm under-provisioned build infrastructure.
 :::
 
+The following diagram shows how build volume scales with parallel agents.
+
+```mermaid
+pie title CI Build Volume Comparison
+    "Human Dev (1-2 PRs/day)" : 2
+    "Stage 6 (Single Agent, 5-8 PRs/day)" : 8
+    "Stage 7 (3 Parallel Agents, 15-24 PRs/day)" : 24
+    "Stage 8 (10 Parallel Agents, 50-80 PRs/day)" : 80
+```
+
 ## When to Use What
 
 | Scenario | Tool |

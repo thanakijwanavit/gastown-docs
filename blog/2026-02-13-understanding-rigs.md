@@ -90,6 +90,20 @@ The distinction between parked and docked is important. **Parked** means the Dae
 
 **Create a rig when:** The project has its own git repository and would benefit from its own agent infrastructure.
 
+The following diagram shows the decision flow for creating a new rig.
+
+```mermaid
+flowchart TD
+    START[New Project?] --> OWN{Own Git Repo?}
+    OWN -->|Yes| IND{Independent Deploy?}
+    OWN -->|No| MONO[Part of Monorepo:<br/>Use Existing Rig]
+    IND -->|Yes| CREATE[Create New Rig]
+    IND -->|No| COUPLED{Tightly Coupled<br/>to Existing Rig?}
+    COUPLED -->|Yes| MONO
+    COUPLED -->|No| CREATE
+```
+
+
 Good rig candidates:
 - A web application with its own CI/CD pipeline
 - A library that other projects depend on

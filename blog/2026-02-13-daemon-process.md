@@ -139,6 +139,24 @@ Because all agent state lives in hooks and beads (not in the daemon), a daemon c
 
 The key insight: the daemon is a convenience, not a dependency. A crashed daemon doesn't lose work, corrupt state, or kill agents. It just stops creating new sessions and sending heartbeats.
 
+The following state diagram shows the daemon lifecycle and recovery paths.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Stopped: System boot
+    Stopped --> Starting: gt daemon start
+    Starting --> Running: Init complete
+    Running --> Heartbeat: Tick every 3 min
+    Heartbeat --> Running: Continue
+    Running --> Lifecycle: Handle request
+    Lifecycle --> Running: Complete
+    Running --> Crashed: Process died
+    Crashed --> Starting: Auto-restart
+    Running --> Stopping: gt daemon stop
+    Stopping --> Stopped: Cleanup
+    Stopped --> [*]
+```
+
 Recovery is trivial:
 
 ```bash

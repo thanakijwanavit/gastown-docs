@@ -44,6 +44,31 @@ flowchart LR
 
 ## Plugin Types
 
+The following diagram shows the different plugin types and their hook points:
+
+```mermaid
+graph TD
+    subgraph Lifecycle["Plugin Hook Points"]
+        SP[on-spawn]
+        PM[pre-merge]
+        POM[post-merge]
+        OS[on-stall]
+        ON[on-nuke]
+        OC[on-cycle]
+    end
+    subgraph Types["Plugin Types"]
+        QG[Quality Gates]
+        NT[Notifications]
+        LC[Lifecycle Hooks]
+    end
+    QG --> PM
+    NT --> POM
+    LC --> SP
+    LC --> OS
+    LC --> ON
+    LC --> OC
+```
+
 ### Quality Gate Plugins
 
 The most common plugin type adds **custom quality gates** to the Refinery merge process. Out of the box, the Refinery runs tests and checks for clean rebasing. Quality gate plugins add additional checks:

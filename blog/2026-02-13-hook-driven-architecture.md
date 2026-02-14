@@ -232,6 +232,25 @@ The hook metadata files are managed by Gas Town's internal tooling (`gt sling`, 
 Because hooks are stored as metadata files in the worktree, they persist through most git operations including branch switches, rebases, and even git resets. This durability is what makes hook-driven architecture reliable — even if an agent runs a destructive git command that loses uncommitted changes, the hook still points to the correct bead and molecule state, allowing a fresh session to retry the work from the last committed checkpoint.
 :::
 
+The following timeline shows how hooks preserve work across multiple failure scenarios.
+
+```mermaid
+timeline
+    title Hook Persistence Across Failure Modes
+    section Session 1
+        Working on Bead : Hook Active
+        Context Fills 80% : Hook Persists
+        Agent Crashes : Hook Still There
+    section Session 2
+        Agent Restarts : Reads Hook
+        Resumes Work : Same Bead + Molecule
+        Git Reset --hard : Hook Survives
+    section Session 3
+        Machine Reboots : Hook in Filesystem
+        Agent Respawns : Reads Hook Again
+        Completes Work : Hook Clears on gt done
+```
+
 ## The Security Angle
 
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.

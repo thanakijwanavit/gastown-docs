@@ -197,6 +197,24 @@ flowchart TD
 Each stage builds skills and trust that the next stage depends on. Jumping from Stage 4 directly to Stage 8 typically results in expensive failures -- agents produce low-quality code because you haven't developed the instinct for writing precise task descriptions, and you lack the monitoring habits to catch problems early. Progress through each stage deliberately, even if it feels slow. For more on measuring your readiness, see the [FAQ](/docs/getting-started/faq).
 :::
 
+The following diagram shows typical adoption timelines for each stage transition.
+
+```mermaid
+graph LR
+    subgraph Trust["Trust Building Stages"]
+        S1[Stage 1-3<br/>Manual to Chat<br/>~6 months] --> S2[Stage 4-5<br/>Agent Edits<br/>~6 months]
+    end
+    subgraph Intent["Intent-Level Stages"]
+        S2 --> S3[Stage 6<br/>Intent-Based<br/>~4 months]
+    end
+    subgraph Orchestration["Orchestration Stages"]
+        S3 --> S4[Stage 7<br/>Parallel<br/>~3 months]
+        S4 --> S5[Stage 8<br/>Agents Managing Agents<br/>~3 months]
+    end
+    style S4 fill:#ffcc99
+    style S5 fill:#99ff99
+```
+
 :::info Stage 7 Is the Real Turning Point
 The jump from Stage 6 to Stage 7 is the most impactful transition in the entire maturity model. Running even two agents in parallel fundamentally changes how you think about development -- you shift from "what should I build next" to "what should I assign next." This mental model shift is harder than any tooling change, and it is what separates casual AI users from orchestrators.
 :::

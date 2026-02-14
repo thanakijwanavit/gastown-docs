@@ -232,6 +232,19 @@ stateDiagram-v2
 
 ## Mail vs. Nudge: When to Use Which
 
+The following diagram illustrates the decision tree for choosing between mail and nudge:
+
+```mermaid
+graph TD
+    C[Need to Communicate] --> T{Time Sensitive?}
+    T -->|Yes| R{Recipient Running?}
+    T -->|No| MAIL[Use Mail]
+    R -->|Yes| NUDGE[Use Nudge]
+    R -->|Unknown| BOTH[Mail + Nudge]
+    R -->|No| MAIL
+    BOTH --> ACK[Wake + Deliver Payload]
+```
+
 | Scenario | Use Mail | Use Nudge |
 |----------|----------|-----------|
 | Recipient may not be running | Mail | - |
