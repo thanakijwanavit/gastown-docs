@@ -302,3 +302,4 @@ graph TD
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the cost traps and anti-patterns that burn through API budgets
 - **[Understanding GUPP](/blog/understanding-gupp)** — How GUPP's persistence reduces expensive retry costs
 - **[Cost Management Guide](/docs/guides/cost-management)** — Comprehensive guide to monitoring and reducing API costs
+- **[Multi-Runtime Workflows](/blog/multi-runtime-workflows)** — Using cheaper alternative runtimes for low-complexity work

@@ -302,3 +302,4 @@ pie title Communication Primitive Usage
 - [Nudge CLI Reference](/docs/cli-reference/nudge) — Commands for sending nudges to wake agents
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — How hook-based communication enables autonomous agent workflows
 - [Session Commands](/docs/cli-reference/session-commands) — CLI reference for managing agent sessions and communication channels
+- [Work Distribution Patterns](/blog/work-distribution-patterns) — Communication strategies for coordinating work across multiple agents

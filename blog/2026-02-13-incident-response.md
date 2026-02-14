@@ -391,3 +391,4 @@ The hardest lesson in Gas Town incident response is learning when not to interve
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Proactive monitoring that prevents incidents
 - **[The Witness Explained](/blog/witness-explained)** — How the Witness detects and recovers from agent failures
 - **[Multi-Runtime Workflows](/blog/multi-runtime-workflows)** — Managing incidents across polyglot codebases with language-specific recovery patterns
+- **[The Deacon Patrol](/blog/deacon-patrol)** — How the Deacon automates town-level incident detection and response

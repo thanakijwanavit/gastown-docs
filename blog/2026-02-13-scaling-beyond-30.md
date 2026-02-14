@@ -263,4 +263,5 @@ Understanding the [work distribution architecture](/docs/architecture/work-distr
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- Fleet monitoring becomes critical at scale
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- Choosing the right dispatch pattern when scaling across many agents
 - [Session Cycling Explained](/blog/session-cycling) -- Managing context windows effectively at scale
+- [Refinery Deep Dive](/blog/refinery-deep-dive) -- Understanding merge queue bottlenecks and throughput optimization at scale
 - [Troubleshooting Guide](/docs/operations/troubleshooting) -- Diagnosing and resolving scaling bottlenecks

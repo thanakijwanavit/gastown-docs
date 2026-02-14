@@ -256,3 +256,4 @@ In practice, most Gas Town users never think about warrants. The Witness files t
 - [Escalation System](/blog/escalation-system) — How warrant failures escalate through the supervision hierarchy
 - [Troubleshooting Guide](/docs/guides/troubleshooting) — Common issues and their solutions
 - [Operations Lifecycle](/docs/operations/lifecycle) — Understanding the complete lifecycle of agent operations and termination
+- [Lifecycle Management](/blog/lifecycle-management) — How warrants fit into the broader agent lifecycle from spawn to termination

@@ -362,4 +362,5 @@ The single best monitoring habit is keeping `gt feed` running in a persistent te
 - **[The Witness Explained](/blog/witness-explained)** — How the Witness provides automated health monitoring
 - **[Deacon Patrol](/blog/deacon-patrol)** — How the Deacon patrols all rigs and complements your monitoring routine
 - **[Daemon Process](/blog/daemon-process)** — Understanding the daemon heartbeat that underlies all monitoring
+- **[Lifecycle Management](/blog/lifecycle-management)** — How lifecycle state affects monitoring and health checks
 - [Diagnostics CLI Reference](/docs/cli-reference/diagnostics) — Commands for health checks and system diagnostics

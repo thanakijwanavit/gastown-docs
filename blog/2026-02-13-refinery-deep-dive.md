@@ -395,5 +395,6 @@ If the Refinery reports a fast-forward merge failure, it means a commit landed o
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Dependency management for cleaner merges
 - **[Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent)** — Git patterns that the Refinery enforces
 - **[Code Review Workflow](/blog/code-review-workflow)** — How code review integrates with the Refinery merge pipeline
+- **[Work Distribution Patterns](/blog/work-distribution-patterns)** — Choosing the right dispatch pattern affects Refinery queue depth and merge throughput
 - [Refinery CLI Reference](/docs/cli-reference/refinery-commands) — Commands for managing the merge queue and Refinery
 - [Lifecycle Management](/docs/operations/lifecycle) — Managing Refinery lifecycle and patrol cycles

@@ -290,5 +290,6 @@ If you're looking for a dog you dispatched for cross-rig cleanup, remember that 
 - [Boot Dogs: The Triage Engine](/blog/boot-dogs) — How Boot performs initial triage before dispatching infrastructure dogs
 - [Lifecycle Management](/blog/lifecycle-management) — How rig lifecycle states affect dog operations and infrastructure maintenance
 - [Agent Communication Patterns](/blog/agent-communication-patterns) — How dogs report results to the Deacon through mail and nudges
+- [Work Distribution Patterns](/blog/work-distribution-patterns) — When to use dogs vs polecats for different types of infrastructure work
 - [Agent CLI Reference](/docs/cli-reference/agents) — Commands for listing, inspecting, and managing all agent types
 - [Orphan CLI Reference](/docs/cli-reference/orphans) — Commands for finding and cleaning orphaned resources

@@ -290,3 +290,4 @@ If you're a crew worker and keep hitting conflicts, check if a polecat is workin
 - [Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) — Coordinating work to minimize conflicts
 - [Your First Convoy](/blog/first-convoy) — Hands-on tutorial for convoy-based coordination that prevents git conflicts
 - [Code Review Workflow](/blog/code-review-workflow) — How to review code when multiple agents are committing in parallel
+- [Understanding Rigs](/blog/understanding-rigs) — How rig infrastructure enables multi-agent git workflows

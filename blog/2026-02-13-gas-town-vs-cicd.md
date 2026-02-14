@@ -279,3 +279,4 @@ Gas Town was designed from day one to complement existing CI/CD, not replace it.
 - [Architecture Guide](/docs/guides/architecture) — Comprehensive visual guide to Gas Town's architecture
 - [Design Principles](/docs/architecture/design-principles) — Core principles that differentiate Gas Town from traditional CI/CD
 - **[Cost Optimization Strategies](/blog/cost-optimization)** — Managing token costs when running parallel agents at CI/CD scale
+- **[Hook-Driven Architecture](/blog/hook-driven-architecture)** — The persistence primitive that differentiates Gas Town from stateless CI/CD pipelines

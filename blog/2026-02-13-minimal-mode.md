@@ -263,3 +263,4 @@ If you cannot install Tmux on your machine (e.g., corporate restrictions or embe
 - [Common Pitfalls](/blog/common-pitfalls) — Avoid the 5 most common mistakes when scaling from minimal mode
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — The crash-safe hook system that makes minimal mode viable
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) — When and how to transition from minimal mode to full automation
+- [Understanding Rigs](/blog/understanding-rigs) — How rigs provide the workspace structure for minimal mode operation

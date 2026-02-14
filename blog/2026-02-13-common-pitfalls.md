@@ -294,3 +294,4 @@ timeline
 - [FAQ](/docs/getting-started/faq) — Frequently asked questions about Gas Town setup and operations
 - [Tap CLI Reference](/docs/cli-reference/tap) — Commands for safety guards and agent permission management
 - [The Refinery Deep Dive](/blog/refinery-deep-dive) — Understand the merge pipeline to avoid fighting the Refinery
+- [First Convoy](/blog/first-convoy) — Avoid common beginner mistakes by following the step-by-step first convoy tutorial

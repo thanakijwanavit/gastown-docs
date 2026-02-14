@@ -282,3 +282,4 @@ The Mayor will decompose your request into right-sized beads, set up dependencie
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the 5 most common mistakes with your first convoy
 - [First Convoy Tutorial](/docs/getting-started/first-convoy) — Step-by-step guide to running your first convoy
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Sophisticated orchestration patterns for coordinating complex multi-bead workflows
+- **[Eight Stages Self-Assessment](/blog/eight-stages-self-assessment)** — Understand your AI coding maturity before starting your first convoy

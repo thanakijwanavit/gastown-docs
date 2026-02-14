@@ -307,3 +307,4 @@ A bead description like "refactor the auth middleware" will be interpreted throu
 - **[Plugin System](/blog/plugin-system)** — Extending Gas Town with plugins for different runtime environments
 - **[Hook-Driven Architecture](/blog/hook-driven-architecture)** — How hooks provide the universal contract between Gas Town and any runtime
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Coordinating cross-runtime convoys for complex multi-agent workflows
+- **[Git Workflows Multi-Agent](/blog/git-workflows-multi-agent)** — How multi-runtime teams coordinate git operations across different agent types

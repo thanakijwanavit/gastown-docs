@@ -279,3 +279,4 @@ These principles scale. As your fleet grows from 5 to 30 agents, the daemon stay
 - [Hook Persistence](/blog/hook-persistence) -- Why agent hooks survive daemon crashes and restarts
 - [Incident Response](/blog/incident-response) -- Emergency procedures when the daemon fails during critical operations
 - [Troubleshooting Guide](/docs/operations/troubleshooting) -- Diagnosing and fixing daemon-related issues
+- [Understanding Rigs](/blog/understanding-rigs) -- How the daemon manages rig lifecycle across multiple projects

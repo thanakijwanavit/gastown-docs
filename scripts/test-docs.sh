@@ -1196,7 +1196,7 @@ else
     fail_test "Found $BLOG_DESC_ISSUES blog description(s) outside optimal length" "Aim for 50-160 character blog descriptions"
 fi
 
-# Test 39: Blog posts link to at least 7 other blog posts
+# Test 39: Blog posts link to at least 8 other blog posts
 echo ""
 echo "Test 39: Checking blog-to-blog cross-linking..."
 BLOG_INTERLINK_ISSUES=0
@@ -1205,17 +1205,17 @@ for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
     # Count links to other blog posts
     blog_link_count=$(grep -coP '/blog/[a-z0-9-]+' "$file" 2>/dev/null) || blog_link_count=0
 
-    if [ "$blog_link_count" -lt 7 ]; then
+    if [ "$blog_link_count" -lt 8 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $blog_link_count blog link(s) in $rel_file (need 7+)"
+        echo "  Only $blog_link_count blog link(s) in $rel_file (need 8+)"
         BLOG_INTERLINK_ISSUES=$((BLOG_INTERLINK_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_INTERLINK_ISSUES" -eq 0 ]; then
-    pass_test "All blog posts link to 7+ other blog posts"
+    pass_test "All blog posts link to 8+ other blog posts"
 else
-    fail_test "Found $BLOG_INTERLINK_ISSUES blog post(s) with fewer than 7 blog cross-links" "Add links to related blog posts in the Next Steps section"
+    fail_test "Found $BLOG_INTERLINK_ISSUES blog post(s) with fewer than 8 blog cross-links" "Add links to related blog posts in the Next Steps section"
 fi
 
 # Test 40: No orphaned blog slugs (every slug referenced by at least 1 doc page)

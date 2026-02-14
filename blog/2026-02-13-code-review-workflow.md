@@ -304,3 +304,4 @@ This is the exact pattern Gas Town is built for — independent parallel work wi
 - [Molecules and Formulas](/blog/molecules-and-formulas) — How the molecule engine orchestrates the parallel review legs
 - [Cost Optimization](/blog/cost-optimization) — Strategies for managing token costs when running multi-leg review formulas
 - [Polecat Commands](/docs/cli-reference/polecat-commands) — CLI reference for spawning and managing review polecats
+- [Git Workflows for Multi-Agent Teams](/blog/git-workflows-multi-agent) — How review workflows integrate with multi-agent git collaboration

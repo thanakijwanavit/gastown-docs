@@ -380,4 +380,5 @@ If you realize mid-execution that the Mayor's decomposition is heading in the wr
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Advanced patterns the Mayor uses for complex orchestration
 - **[Cost Optimization](/blog/cost-optimization)** — Managing token costs when the Mayor spawns many polecats in parallel
 - **[Understanding GUPP](/blog/understanding-gupp)** — How the GUPP propulsion principle enables the Mayor's automated work distribution
+- **[Mastering gt sling](/blog/mastering-gt-sling)** — Deep dive into the sling command the Mayor uses for work assignment
 - [Town CLI Reference](/docs/cli-reference/town) — Commands for town-level navigation and management

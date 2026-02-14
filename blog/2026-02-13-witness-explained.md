@@ -280,5 +280,6 @@ Killing the Witness session directly with `tmux kill-session` or `kill` bypasses
 - **[Incident Response](/blog/incident-response)** — What to do when the Witness escalates to you
 - **[The Escalation System](/blog/escalation-system)** — How escalations from the Witness get routed and resolved
 - **[Death Warrants](/blog/death-warrants)** — How the Witness files warrants to safely terminate unresponsive agents
+- **[Security Model](/blog/security-model)** — How the Witness enforces workspace isolation and trust boundaries
 - [Polecat CLI Reference](/docs/cli-reference/polecat-commands) — Commands for managing polecat lifecycle and worktrees
 - [Deacon Agent Reference](/docs/agents/deacon) — Town-level coordination that receives Witness escalations

@@ -378,3 +378,4 @@ graph LR
 - **[Hook-Driven Architecture](/blog/hook-driven-architecture)** — How hooks trigger formula execution when work lands on an agent
 - **[The Security Model](/blog/security-model)** — Security considerations when formulas execute external commands and API calls
 - **[Rigs Overview](/docs/concepts/rigs)** — Understanding rigs helps scope formulas to the right execution context
+- **[Work Distribution Patterns](/blog/work-distribution-patterns)** — How formulas integrate with broader work distribution strategies

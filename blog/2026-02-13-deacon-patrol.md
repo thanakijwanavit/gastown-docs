@@ -290,3 +290,4 @@ The Deacon never panics. It follows its patrol molecule step by step, handles wh
 - [The Escalation System](/blog/escalation-system) -- How the Deacon routes problems through severity-based escalation
 - [Minimal Mode](/blog/minimal-mode) -- Running Gas Town with only essential patrol functions when the Deacon must conserve resources
 - [Escalations Reference](/docs/operations/escalations) -- Complete guide to Deacon's escalation paths and severity levels
+- [Witness Explained](/blog/witness-explained) -- The per-rig supervisors that the Deacon monitors and coordinates

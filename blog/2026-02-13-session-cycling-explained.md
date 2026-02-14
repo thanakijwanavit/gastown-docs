@@ -300,6 +300,7 @@ Cycling to a fresh session resets the context window, allowing the agent to cont
 - **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks make session cycling crash-safe
 - **[The Mail System](/blog/mail-system)** — How handoff mail preserves context across session cycles
 - **[Molecules and Formulas](/blog/molecules-and-formulas)** — How molecules track multi-step progress across session boundaries
+- **[Refinery Deep Dive](/blog/refinery-deep-dive)** — How the Refinery's patrol cycle interacts with session cycling
 - [Compact CLI Reference](/docs/cli-reference/compact) — Commands for manual and automatic context compaction
 - [Session Commands CLI Reference](/docs/cli-reference/session-commands) — Commands for session health checks and management
 - [Communication CLI Reference](/docs/cli-reference/communication) — Managing handoff mail and agent-to-agent messaging

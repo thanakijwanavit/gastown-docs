@@ -354,3 +354,4 @@ If you modify a formula's TOML file (e.g., adding a new step or changing depende
 - [Work Distribution Patterns](/blog/work-distribution-patterns) — How formulas fit into the broader work distribution strategy
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — How molecules track step-level progress through the hook system
 - [Code Review Workflow](/blog/code-review-workflow) — How the code review formula leverages molecules for multi-perspective review
+- [Refinery Deep Dive](/blog/refinery-deep-dive) — How the Refinery processes molecules submitted through gt done

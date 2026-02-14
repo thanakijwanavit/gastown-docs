@@ -296,3 +296,4 @@ If a worktree is manually deleted without properly clearing the hook first, the 
 - [Session Cycling](/blog/session-cycling) — How hooks preserve work across context window refreshes
 - [Molecules and Formulas](/blog/molecules-and-formulas) — How molecules track step-level progress on hooks
 - [Mayor Workflow Automation](/blog/mayor-workflow) — How the Mayor uses hooks to assign decomposed tasks to polecats automatically
+- [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) — How hook persistence enables safe parallel git operations

@@ -395,3 +395,4 @@ gt formula show mol-polecat-work
 - [Code Review with Polecats](/blog/code-review-workflow) -- Formulas in action: parallel code review workflow
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How hooks connect formula execution to the agent lifecycle
 - [Lifecycle Management](/blog/lifecycle-management) -- Understanding how formula steps integrate with the full bead lifecycle from creation to completion
+- [Multi-Runtime Workflows](/blog/multi-runtime-workflows) -- Designing formulas that coordinate work across multiple language runtimes

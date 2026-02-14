@@ -280,4 +280,5 @@ Nondeterministic Idempotence allows different agents to solve the same step diff
 - **[Session Cycling Explained](/blog/session-cycling)** — How GUPP applies to context refresh and handoffs
 - **[Common Pitfalls](/blog/common-pitfalls)** — Mistakes that happen when teams skip GUPP principles
 - **[Why Beads?](/blog/why-beads)** — How beads enforce forward-only state transitions, a key GUPP mechanism
+- **[Lifecycle Management](/blog/lifecycle-management)** — How GUPP guarantees apply to rig lifecycle transitions
 - [Sessions CLI Reference](/docs/cli-reference/sessions) — Commands for session lifecycle and molecule management

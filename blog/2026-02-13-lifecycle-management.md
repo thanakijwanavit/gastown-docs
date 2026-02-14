@@ -365,3 +365,4 @@ Because parked rigs keep their worktrees intact while docked rigs have them remo
 - [Understanding Rigs](/blog/understanding-rigs) — How rigs provide the lifecycle context for parking and docking
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — How to monitor fleet health across rig lifecycle transitions
 - [Session Cycling](/blog/session-cycling) — How context refresh and handoff work during rig restart and recovery
+- [Escalation System](/blog/escalation-system) — How lifecycle failures trigger escalations for human intervention

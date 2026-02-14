@@ -288,3 +288,4 @@ Run `gt escalate stats --by-category` monthly to analyze which escalation types 
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects issues that trigger escalations
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — Proactive monitoring that catches problems before they become escalations
 - [Gas Town's Mail System](/blog/mail-system) — How escalations are delivered through the mail infrastructure to reach the right responders
+- [The Deacon Patrol](/blog/deacon-patrol) — How the Deacon uses escalations to coordinate town-level supervision

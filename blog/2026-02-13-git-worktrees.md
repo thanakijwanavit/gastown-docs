@@ -280,3 +280,4 @@ You don't need to manage worktrees manually. The Deacon creates them when spawni
 - [Understanding Rigs](/blog/understanding-rigs) -- How rigs use worktrees to isolate agent workspaces
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) -- How hooks store work state inside git worktrees
 - [Infrastructure Dogs](/blog/infrastructure-dogs) -- How Boot and other infrastructure agents use worktrees for health checks and cleanup operations
+- [Daemon Process Management](/blog/daemon-process) -- How the daemon manages worktree lifecycles for all agents in the town

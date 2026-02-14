@@ -338,4 +338,5 @@ Pre-merge and post-merge plugins execute in the Refinery's shell environment wit
 - [Custom Formulas](/blog/custom-formulas) -- Building custom formulas that leverage plugins
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How lifecycle hooks power the plugin system
 - [Security Model](/blog/security-model) -- Security considerations when adding external scripts as plugins
+- [Formula Design Patterns](/blog/formula-design-patterns) -- Building formulas that integrate with plugin-based quality gates
 - [Configuration CLI Reference](/docs/cli-reference/configuration) — Commands for managing Gas Town configuration

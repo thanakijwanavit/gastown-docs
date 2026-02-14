@@ -306,3 +306,4 @@ If you send mail to a typo'd agent path like `gastowndocs/polcats/toast` (note t
 - [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor uses mail for convoy coordination
 - [The Escalation System](/blog/escalation-system) -- How escalation notifications route through the mail system
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- How mail complements hooks for distributing work across agents
+- [Lifecycle Management](/blog/lifecycle-management) -- How mail survives rig lifecycle transitions and state changes

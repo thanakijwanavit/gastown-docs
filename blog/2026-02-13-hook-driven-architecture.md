@@ -291,3 +291,4 @@ Because hooks persist in the filesystem independently of any session, you can ma
 - [Mastering gt sling](/blog/mastering-gt-sling) -- How sling uses hooks to assign work to agents
 - [Session Cycling Explained](/blog/session-cycling) -- How hooks and handoff mail preserve continuity across sessions
 - [Plugin System Architecture](/blog/plugin-system) -- How hook-driven architecture enables extensible plugin development without breaking core workflows
+- [Daemon Process Management](/blog/daemon-process) -- How the daemon maintains hook state across agent lifecycles and system restarts
