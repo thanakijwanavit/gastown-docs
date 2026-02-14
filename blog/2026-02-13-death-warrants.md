@@ -210,6 +210,25 @@ The `--force` flag bypasses the formal warrant flow. Use it for emergency situat
 
 ## Why This Design Matters
 
+```mermaid
+graph TD
+    subgraph "Warrant System Components"
+        FIL[File Warrant] --> STOR[Warrant Storage]
+        STOR --> TRIAGE[Boot Triage]
+        TRIAGE --> EXEC[Execute Warrant]
+        EXEC --> TERM[Terminate Session]
+        TERM --> REC[Witness Recovery]
+        REC --> RESP[Respawn Polecat]
+    end
+    subgraph "Alternative Paths"
+        FIL --> SELF[Agent Self-Recovers]
+        SELF --> EXP[Warrant Expires]
+    end
+    style FIL fill:#ffcccc
+    style EXEC fill:#ffaaaa
+    style RESP fill:#ccffcc
+```
+
 Death warrants embody Gas Town's "Let It Crash" philosophy — borrowed from Erlang. Rather than building elaborate error-prevention systems, Gas Town assumes agents will fail and builds robust recovery around that assumption.
 
 The warrant system provides:

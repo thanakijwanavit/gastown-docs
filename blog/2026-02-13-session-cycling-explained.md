@@ -194,6 +194,22 @@ pie title What Survives Session Cycling
 
 Molecules are what make session cycling work for multi-step tasks. For a detailed technical reference on molecule concepts, see the [molecules documentation](/docs/concepts/molecules). Each molecule tracks:
 
+```mermaid
+flowchart LR
+    subgraph Molecule["Molecule Tracking State"]
+        S1[Step 1: Done]
+        S2[Step 2: Done]
+        S3[Step 3: In Progress]
+        S4[Step 4: Pending]
+        S5[Step 5: Pending]
+    end
+    S1 --> S2
+    S2 --> S3
+    S3 -.->|after cycle| S3
+    S3 --> S4
+    S4 --> S5
+```
+
 The following diagram illustrates how molecule state enables seamless resumption after session cycling.
 
 ```mermaid

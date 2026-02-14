@@ -258,6 +258,30 @@ pie title Review Issue Priority Distribution
     "P2 - Nice to Fix" : 60
 ```
 
+```mermaid
+gantt
+    title Code Review Formula Execution Timeline
+    dateFormat ss
+    axisFormat %S
+
+    section Parallel Analysis
+    Correctness   :00, 45s
+    Security      :00, 45s
+    Performance   :00, 45s
+    Elegance      :00, 45s
+    Resilience    :00, 45s
+
+    section Parallel Verification
+    Style         :00, 30s
+    Code Smells   :00, 30s
+    Wiring        :00, 30s
+    Commit Disc   :00, 30s
+    Test Quality  :00, 30s
+
+    section Synthesis
+    Combine       :45, 15s
+```
+
 ## Why This Approach Works
 
 The parallel review model works because each perspective is genuinely independent. A security reviewer doesn't need to wait for the performance reviewer. A style reviewer doesn't need the correctness reviewer's findings. The only dependency is at the end: synthesis needs all leg outputs. This mirrors the fan-out pattern described in [advanced convoy patterns](/blog/advanced-convoy-patterns).

@@ -350,6 +350,22 @@ The best way to validate a new formula is pouring it onto a real bead in a non-c
 
 ## Built-In Formulas
 
+```mermaid
+graph TD
+    subgraph "Built-In Formula Catalog"
+        PC[mol-polecat-work] -->|Standard| LOAD[load → implement → test → submit]
+        WI[mol-witness-patrol] -->|Health Check| PATROL[mail → refinery → polecats → gates]
+        RF[mol-refinery-process] -->|Merge| MERGE[fetch → rebase → test → merge]
+    end
+    subgraph "Custom Formulas"
+        CUST[Your Formulas] -.->|inherit patterns from| PC
+        CUST -.->|extend| WI
+    end
+    style PC fill:#d4edda
+    style WI fill:#cfe2ff
+    style RF fill:#fff3cd
+```
+
 Gas Town ships with several built-in formulas:
 
 | Formula | Steps | Use Case |

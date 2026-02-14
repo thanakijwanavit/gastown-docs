@@ -253,6 +253,24 @@ timeline
 
 ## The Security Angle
 
+```mermaid
+graph LR
+    subgraph "Security Model"
+        HOOK[Hook in Filesystem] -->|Source of Truth| AUTH[Authorization]
+        CTX[Context Window] -->|Can Be Manipulated| UNTRUSTED[Untrusted Input]
+        AUTH --> SAFE[✓ Cannot be injected<br/>✓ Survives crashes<br/>✓ Auditable]
+        UNTRUSTED --> RISK[✗ Prompt injection<br/>✗ Context manipulation<br/>✗ Ephemeral]
+    end
+    subgraph "Agent Startup Protocol"
+        START[Session Start] --> READ[Read Hook]
+        READ --> EXEC[Execute Assignment]
+    end
+    HOOK -.->|Feeds| READ
+    style HOOK fill:#99ff99
+    style AUTH fill:#ccffcc
+    style UNTRUSTED fill:#ffcccc
+```
+
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.
 
 This is why Gas Town agents check `gt hook` before doing anything else. The hook is more authoritative than anything in the context window.

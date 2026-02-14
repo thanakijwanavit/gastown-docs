@@ -270,6 +270,13 @@ stateDiagram-v2
     Nudged --> Delivered: Agent wakes
 ```
 
+```mermaid
+pie title Communication Primitive Usage
+    "Mail (Information Transfer)" : 55
+    "Hooks (Work Assignment)" : 35
+    "Nudges (Wake-up Calls)" : 10
+```
+
 ## Anti-Patterns
 
 **Don't use raw `tmux send-keys` for agent communication.** Always use `gt nudge`. Raw tmux commands are unreliable and bypass Gas Town's logging.

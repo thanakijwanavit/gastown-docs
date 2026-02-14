@@ -263,6 +263,19 @@ gt rig status <rig>        # Is any rig parked or docked?
 
 Parked or docked rigs block dog operations. Unpark them first with `gt rig unpark <rig>` before retrying the infrastructure task.
 
+## Dog Resource Management
+
+Dogs manage resources across the entire town, handling different types of cleanup and synchronization tasks with varying resource requirements:
+
+```mermaid
+pie title Dog Task Resource Distribution
+    "Cross-Rig Cleanup" : 35
+    "Configuration Sync" : 25
+    "Schema Migration" : 20
+    "System Rebuild" : 15
+    "Warrant Processing" : 5
+```
+
 ## Next Steps
 
 - [Dogs Documentation](/docs/agents/dogs) — Full reference for dog types, commands, and patterns

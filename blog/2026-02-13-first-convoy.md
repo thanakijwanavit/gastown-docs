@@ -241,6 +241,23 @@ Do not run your first convoy on your production codebase or anything mission-cri
 
 ## Scaling Beyond Your First Convoy
 
+```mermaid
+flowchart LR
+    subgraph Manual["Manual Convoy (First Time)"]
+        M1[Create Beads] --> M2[Bundle Convoy]
+        M2 --> M3[Sling to Rig]
+        M3 --> M4[Monitor Progress]
+    end
+    subgraph Automated["Mayor-Driven (Scaled)"]
+        A1[Describe Intent] --> A2[Mayor Decomposes]
+        A2 --> A3[Auto-Sling]
+        A3 --> A4[Auto-Monitor]
+    end
+    M4 -.->|Level Up| A1
+    style Manual fill:#fff3cd
+    style Automated fill:#d4edda
+```
+
 Once you've run a manual convoy successfully, you're ready to let the Mayor take over. Instead of creating beads and slinging them yourself, just describe what you want:
 
 ```bash

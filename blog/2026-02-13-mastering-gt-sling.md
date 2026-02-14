@@ -282,6 +282,31 @@ graph TD
 
 **Don't sling dependent beads simultaneously.** If bead B depends on bead A's output, set up the dependency with `bd dep add` first. The Mayor will wait for A to merge before slinging B, preventing merge conflicts from overlapping work.
 
+## Sling Decision Tree
+
+Use this flowchart to determine the best slinging strategy for your work:
+
+```mermaid
+graph TD
+    START[Have Work to Sling] --> Q1{Know Specific Agent?}
+    Q1 -->|Yes| Q2{Agent Available?}
+    Q1 -->|No| RIG[Sling to Rig]
+    Q2 -->|Yes| AGENT[Sling to Agent]
+    Q2 -->|No| RIG
+    RIG --> Q3{Cross-Rig?}
+    Q3 -->|Yes| CHK[Check Rig Active]
+    Q3 -->|No| AUTO[Auto-Spawn Polecat]
+    CHK -->|Active| AUTO
+    CHK -->|Parked/Docked| UNPARK[Unpark/Undock First]
+    UNPARK --> AUTO
+    AGENT --> Q4{Hook Occupied?}
+    Q4 -->|No| ATT[Attach & Execute]
+    Q4 -->|Yes| FORCE{Use --force?}
+    FORCE -->|Yes| DIS[Displace Current Work]
+    FORCE -->|No| WAIT[Wait or Choose Different Agent]
+    DIS --> ATT
+```
+
 ## Next Steps
 
 - [Work Distribution Architecture](/docs/architecture/work-distribution) — How work flows through Gas Town end-to-end

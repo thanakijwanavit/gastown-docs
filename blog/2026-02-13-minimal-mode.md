@@ -222,6 +222,31 @@ Always **push your changes** before ending a session. Without the Refinery handl
 Many production Gas Town setups run certain rigs in Minimal Mode permanently. Low-activity rigs that process one or two beads per week don't need a Witness patrolling every 5 minutes. Minimal Mode is a first-class operating mode, not just a stepping stone to full automation.
 :::
 
+## Automation Complexity Trade-offs
+
+Each automation layer adds value but also increases operational complexity:
+
+```mermaid
+graph TD
+    subgraph Value["Automation Value"]
+        V1[Manual Control] --> V2[Auto-Spawn]
+        V2 --> V3[Auto-Merge]
+        V3 --> V4[Auto-Monitor]
+        V4 --> V5[Full Orchestration]
+    end
+    subgraph Complexity["Operational Complexity"]
+        C1[Low] --> C2[Medium-Low]
+        C2 --> C3[Medium]
+        C3 --> C4[Medium-High]
+        C4 --> C5[High]
+    end
+    V1 -.->|Minimal Mode| C1
+    V2 -.->|+ Tmux| C2
+    V3 -.->|+ Refinery| C3
+    V4 -.->|+ Witness| C4
+    V5 -.->|+ Mayor| C5
+```
+
 ## Next Steps
 
 - [Minimal Mode Reference](/docs/workflows/minimal-mode) — Full step-by-step walkthrough

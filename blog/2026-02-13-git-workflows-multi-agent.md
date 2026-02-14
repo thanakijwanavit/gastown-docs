@@ -244,6 +244,24 @@ gantt
 
 ## Practical Tips
 
+```mermaid
+flowchart TD
+    subgraph "Git Setup Checklist"
+        INIT[New Rig Created] --> CFG1[git config pull.rebase true]
+        CFG1 --> CFG2[git config push.default current]
+        CFG2 --> CFG3[Set up .gitignore]
+        CFG3 --> VERIFY[Verify Config]
+    end
+    subgraph "Daily Workflow"
+        PULL[git pull --rebase] --> COMMIT[git commit]
+        COMMIT --> PUSH[git push immediately]
+        PUSH --> REPEAT[Repeat Frequently]
+    end
+    VERIFY -.->|Ready for| PULL
+    style CFG1 fill:#ffcccc
+    style PUSH fill:#ccffcc
+```
+
 :::tip
 Configure `git config pull.rebase true` in every Gas Town workspace. This should be the first thing you do after `gt rig add`.
 :::

@@ -94,6 +94,22 @@ sequenceDiagram
 
 Some convoys span multiple projects. A frontend change might depend on a backend API update:
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant B as Backend Rig
+    participant F as Frontend Rig
+    participant C as Convoy Tracker
+    H->>B: gt sling ga-ddd (API endpoint)
+    B->>B: Polecat implements API
+    B->>C: bd close ga-ddd
+    Note over C: Dependency clears
+    H->>F: gt sling ga-eee (UI component)
+    F->>F: Polecat builds UI
+    F->>C: bd close ga-eee
+    C-->>H: Convoy auto-closes
+```
+
 The following diagram shows how cross-rig dependencies flow through a multi-repo convoy.
 
 ```mermaid

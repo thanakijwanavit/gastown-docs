@@ -329,6 +329,25 @@ Gas Town continues operating even when components fail. Understanding what keeps
 
 Each component operates independently with its own state. A failed Witness in one rig has zero impact on polecats in another rig. For how quality gates influence lifecycle transitions and recovery, see [Gates](/docs/concepts/gates).
 
+## Rig State Transitions at a Glance
+
+The following diagram shows all valid state transitions and the commands that trigger them:
+
+```mermaid
+graph TD
+    A[Added] -->|gt rig boot| B[Active]
+    B -->|gt rig stop| C[Stopped]
+    C -->|daemon restarts| B
+    C -->|gt rig start| B
+    B -->|gt rig park| D[Parked]
+    D -->|gt rig unpark| A
+    B -->|gt rig dock| E[Docked]
+    E -->|gt rig undock| A
+    A -->|gt rig boot| B
+    B -->|gt rig reboot| F[Rebooting]
+    F -->|auto-complete| B
+```
+
 ## Next Steps
 
 - [Starting & Stopping](/docs/operations/lifecycle) — Full lifecycle command reference

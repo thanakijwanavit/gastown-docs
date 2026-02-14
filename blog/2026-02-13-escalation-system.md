@@ -246,6 +246,20 @@ If you find yourself wanting to disable escalations because they fire too often,
 
 ## Best Practices
 
+```mermaid
+graph LR
+    subgraph "Escalation Best Practices"
+        ACK[Acknowledge Promptly] --> STOP[Stops Re-Escalation]
+        SEV[Use Severity Correctly] --> AVOID[Avoids Alert Fatigue]
+        QH[Configure Quiet Hours] --> BATCH[Batches Non-Critical]
+        NOTE[Close with Notes] --> TRAIL[Creates Audit Trail]
+        STALE[Review Stale Daily] --> CATCH[Catches Gaps]
+    end
+    style ACK fill:#99ccff
+    style SEV fill:#ffcc99
+    style STALE fill:#ccffcc
+```
+
 1. **Acknowledge promptly.** Even if you can't fix it yet, acknowledging stops re-escalation and tells the system a human is aware.
 
 2. **Don't suppress agent escalations.** If an agent escalates too often, the root cause is usually systemic (flaky tests, misconfigured rig) rather than the agent being noisy.

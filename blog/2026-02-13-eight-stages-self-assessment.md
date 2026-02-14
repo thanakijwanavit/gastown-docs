@@ -231,6 +231,33 @@ pie title Developer Distribution by Stage (Estimated)
 
 ## The Honest Truth About Stage 8
 
+```mermaid
+mindmap
+  root((Stage 8 Requirements))
+    Technical Foundation
+      High Test Coverage
+        70%+ Coverage
+        Fast Test Suite
+        Automated Validation
+      Clean Architecture
+        Modular Design
+        Clear Boundaries
+        Well-Documented APIs
+    Organizational Readiness
+      Trust in System
+        Let Go of Control
+        Accept Imperfection
+        Monitor Outcomes
+      Workflow Changes
+        Parallel Thinking
+        Async Review
+        Batch Processing
+    Infrastructure
+      Rig Management
+      Agent Monitoring
+      Cost Tracking
+```
+
 Stage 8 is not for everyone. It requires:
 
 - **High test coverage** — Agents need automated gates to validate their work

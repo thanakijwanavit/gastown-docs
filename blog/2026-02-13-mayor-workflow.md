@@ -333,6 +333,24 @@ pie title Mayor Time Allocation
     "Handling Failures" : 20
 ```
 
+## Dependency Resolution Process
+
+The Mayor automatically resolves dependencies when decomposing work, ensuring beads execute in the correct order:
+
+```mermaid
+graph LR
+    R[Request] --> D[Decompose]
+    D --> B1[Bead 1: Foundation]
+    D --> B2[Bead 2: Build on 1]
+    D --> B3[Bead 3: Build on 1]
+    D --> B4[Bead 4: Build on 2,3]
+    B1 -->|merged| B2
+    B1 -->|merged| B3
+    B2 -->|merged| B4
+    B3 -->|merged| B4
+    B4 --> C[Convoy Complete]
+```
+
 ## The MEOW Mental Model
 
 Think of the Mayor as a project manager who happens to be an AI:

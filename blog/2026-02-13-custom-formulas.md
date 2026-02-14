@@ -339,6 +339,16 @@ stateDiagram-v2
     Complete --> [*]
 ```
 
+```mermaid
+graph LR
+    subgraph FormulaTypes["Formula Pattern Types"]
+        SEQ[Sequential Steps<br/>Build Pipeline] --> USES1[Strict Order]
+        PAR[Parallel Branches<br/>Code Review] --> USES2[Independent Legs]
+        GATED[Gated Workflow<br/>Deploy Process] --> USES3[External Wait]
+        HYBRID[Hybrid<br/>Feature Deploy] --> USES4[Mixed Pattern]
+    end
+```
+
 ## Best Practices
 
 **Keep steps focused.** Each step should be one clear action. If a step description is more than a paragraph, consider splitting it into multiple steps.

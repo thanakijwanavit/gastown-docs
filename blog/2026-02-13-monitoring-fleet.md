@@ -326,6 +326,27 @@ Even when you're not watching, Gas Town monitors itself:
 
 Your monitoring tools complement this automated layer — they give you visibility into what the automated monitoring is doing, and help you catch issues that fall outside the automated checks.
 
+## Monitoring Tool Selection Matrix
+
+Choose the right monitoring tool based on your immediate needs:
+
+```mermaid
+graph TD
+    Q1[Need Information] --> T1{What Type?}
+    T1 -->|Real-time Activity| FEED[gt feed]
+    T1 -->|Quick Health Check| STATUS[gt status]
+    T1 -->|Rich Dashboard| DASH[gt dashboard]
+    T1 -->|Diagnostics| DOCTOR[gt doctor]
+    T1 -->|Agent Output| TRAIL[gt trail]
+    T1 -->|Cost Tracking| COSTS[gt costs]
+    FEED --> U1[Watch for Patterns]
+    STATUS --> U2[Morning Sanity Check]
+    DASH --> U3[Active Development]
+    DOCTOR --> U4[Troubleshooting]
+    TRAIL --> U5[Debug Stuck Agent]
+    COSTS --> U6[Budget Management]
+```
+
 ## Next Steps
 
 - **[Operations Guide](/docs/operations/)** — Full operational reference

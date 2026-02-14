@@ -267,6 +267,30 @@ If those three work, the runtime is Gas Town compatible.
 
 **Monitor cross-runtime convoys carefully.** Different runtimes have different failure modes. Claude Code polecats might hit context limits; Codex agents might have different tool availability. The Witness monitors all runtimes equally, but error patterns vary. See the [Convoys reference](/docs/concepts/convoys) for how convoy tracking works uniformly across runtimes. For managing complexity at scale, see [Scaling Beyond 30 Agents](/blog/scaling-beyond-30).
 
+## Runtime Capability Matrix
+
+Different runtimes excel at different types of work:
+
+```mermaid
+graph LR
+    subgraph Tasks["Task Types"]
+        T1[Complex Refactoring]
+        T2[UI Development]
+        T3[Python/Data Science]
+        T4[GCP Infrastructure]
+    end
+    subgraph Runtimes["Best Runtime"]
+        R1[Claude Code]
+        R2[Cursor]
+        R3[Codex]
+        R4[Gemini CLI]
+    end
+    T1 -.->|Deep Reasoning| R1
+    T2 -.->|Visual Feedback| R2
+    T3 -.->|OpenAI Ecosystem| R3
+    T4 -.->|GCP Native| R4
+```
+
 ## Next Steps
 
 - **[Rigs](/docs/concepts/rigs)** — How rigs are configured and managed

@@ -238,6 +238,17 @@ sequenceDiagram
 The default 5-minute patrol cycle works well for most deployments, but you can adjust it with `gt config set deacon.patrol_interval <minutes>`. Shorter intervals catch problems faster but increase token usage. Longer intervals save tokens but delay gate evaluations and health checks.
 :::
 
+```mermaid
+timeline
+    title Deacon Patrol Cycle Timeline
+    00:00 : Patrol starts : Check Witnesses
+    01:00 : Evaluate gates : Timer/CI/Human
+    02:00 : Process lifecycle : Park/Unpark/Dock
+    03:00 : Check convoys : Auto-close complete
+    04:00 : Report to Mayor : Health summary
+    05:00 : Squash and respawn : Next cycle begins
+```
+
 ## Patrol Molecule: Squash and Respawn
 
 To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn pattern:

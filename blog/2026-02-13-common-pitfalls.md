@@ -254,6 +254,19 @@ sequenceDiagram
     RF-->>Dev: Work landed
 ```
 
+```mermaid
+timeline
+    title The Cost of Vague Beads Over Time
+    00:00 : Vague bead created
+    00:05 : Polecat spawns : Context loading
+    00:10 : Exploration phase : Searching codebase
+    00:30 : Confused : Tries wrong approach
+    00:45 : Context exhausted : Session crash
+    01:00 : Retry session : Fresh polecat
+    01:30 : Still unclear : Divergent implementation
+    02:00 : Work submitted : Wrong solution merged
+```
+
 ## Quick Reference: Pitfall vs Fix
 
 | Pitfall | Symptom | One-Line Fix |

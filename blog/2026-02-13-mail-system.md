@@ -262,6 +262,30 @@ gt mail send gastowndocs/polecats/toast -s "Priority change" -m "Drop current wo
 gt nudge gastowndocs/polecats/toast "Check your mail - priority change"
 ```
 
+## Mail Message Priority Flow
+
+Different message types route through the system with varying urgency levels:
+
+```mermaid
+flowchart LR
+    subgraph Priority["Message Priority Levels"]
+        P0[P0: Critical SMS]
+        P1[P1: High Nudge+Mail]
+        P2[P2: Medium Mail]
+        P3[P3: Low Log]
+    end
+    subgraph Actions["Agent Response Time"]
+        I[Immediate]
+        H[Hours]
+        D[Days]
+        W[Weekly Review]
+    end
+    P0 --> I
+    P1 --> H
+    P2 --> D
+    P3 --> W
+```
+
 :::tip Mail is your audit trail
 Every mail message is a bead, which means it's permanently stored and searchable. When debugging why an agent did something unexpected, check its mail history with `gt mail inbox --agent <path>`. The handoff mails and dispatch notifications often reveal the context that led to the behavior.
 :::

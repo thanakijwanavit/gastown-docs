@@ -290,6 +290,26 @@ The Witness runs automated health checks every few minutes, detecting stuck pole
 
 ## Prevention Checklist
 
+```mermaid
+timeline
+    title Incident Prevention Schedule
+    section Daily
+        Morning Check : gt status
+                      : gt convoy list
+                      : gt feed --errors
+        End of Day : gt convoy stranded
+                   : bd blocked
+    section Weekly
+        Monday : gt doctor
+               : bd stats
+        Friday : gt rig info
+               : gt cleanup
+    section Monthly
+        Month End : Review escalations
+                  : Analyze patterns
+                  : Update runbook
+```
+
 The best incident response is prevention. Run these checks regularly:
 
 ```bash

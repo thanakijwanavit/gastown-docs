@@ -246,6 +246,26 @@ flowchart TD
 
 ## When Hooks Clear
 
+```mermaid
+stateDiagram-v2
+    [*] --> Hooked: Work Assigned
+    Hooked --> Cleared: gt done
+    Hooked --> Cleared: gt hook clear
+    Hooked --> Cleared: Warrant + Witness cleanup
+    Hooked --> Hooked: Session crash (persists)
+    Hooked --> Hooked: Context compact (persists)
+    Hooked --> Hooked: Machine reboot (persists)
+    Cleared --> [*]
+    note right of Hooked
+        Hook survives:
+        - Crashes
+        - Restarts
+        - Compaction
+        Only clears on
+        explicit completion
+    end note
+```
+
 Hooks clear when:
 
 1. **Work completes** — `gt done` submits to merge queue and clears the hook

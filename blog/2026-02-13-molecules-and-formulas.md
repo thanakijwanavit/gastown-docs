@@ -321,6 +321,23 @@ Molecules are one layer in the MEOW Stack (**M**olecules, **E**pics, **O**rchest
 
 But molecules are the foundation. Without crash-safe step tracking, none of the higher layers would work — a single agent crash would cascade into convoy failures and orchestration breakdowns.
 
+## The MEOW Stack Hierarchy
+
+Molecules form the base layer of Gas Town's workflow architecture, supporting increasingly complex orchestration patterns:
+
+```mermaid
+graph BT
+    M[Molecules: Single-Agent Workflows] --> E[Episodes: Multi-Agent Sequences]
+    E --> C[Convoys: Batch Coordination]
+    C --> P[Protomolecules: Complex Orchestration]
+    P --> W[MEOW: Full Automation]
+    style M fill:#e1f5ff
+    style E fill:#c2ebff
+    style C fill:#a3e0ff
+    style P fill:#84d5ff
+    style W fill:#65cbff
+```
+
 ## Next Steps
 
 - [Molecules & Formulas Reference](/docs/concepts/molecules) — Full reference with all step states, variables, and advanced features

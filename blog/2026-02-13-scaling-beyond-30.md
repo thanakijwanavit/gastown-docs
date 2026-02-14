@@ -112,6 +112,15 @@ Instead of one Deacon patrolling all rigs, partition rigs into tiers:
 
 The Deacon prioritizes hot rigs, ensuring that active work gets fast gate evaluation while idle rigs consume minimal patrol time.
 
+```mermaid
+graph LR
+    subgraph Tiers["Tiered Patrol Strategy"]
+        D[Deacon] -->|30s cycle| HOT[Hot: 5 Rigs<br/>Active Work]
+        D -->|2m cycle| WARM[Warm: 8 Rigs<br/>No Active Work]
+        D -->|10m cycle| COLD[Cold: 7 Rigs<br/>Parked]
+    end
+```
+
 :::tip Scale API Concurrency Limits as You Add Agents
 When you reach 20+ concurrent agents, you may hit your API provider's rate limits or concurrency caps. Check your provider's dashboard for throttling errors and request a concurrency increase if needed. Running at scale without adequate API limits causes agents to stall waiting for rate-limit backoff, which looks like normal stalls but affects many agents simultaneously.
 :::

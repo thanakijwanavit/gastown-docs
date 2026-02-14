@@ -338,6 +338,22 @@ Polecat pushes branch
             → If fail: reject MR
 ```
 
+```mermaid
+graph TD
+    subgraph CI["External CI Integration"]
+        PC[Polecat Push] --> RB[Refinery Rebase]
+        RB --> RP[Push Rebased Branch]
+        RP --> CI1[GitHub Actions]
+        RP --> CI2[Jenkins]
+        RP --> CI3[CircleCI]
+        CI1 --> CS[Commit Status API]
+        CI2 --> CS
+        CI3 --> CS
+        CS -->|Pass| MG[Merge to Main]
+        CS -->|Fail| RJ[Reject MR]
+    end
+```
+
 Configure this with:
 
 ```bash

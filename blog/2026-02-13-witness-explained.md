@@ -83,6 +83,19 @@ If the Refinery is stuck, the Witness nudges it. If that doesn't work, it escala
 
 The Witness itself runs a molecule — `mol-witness-patrol`. This formula defines the steps of each patrol:
 
+```mermaid
+flowchart LR
+    subgraph Patrol["Witness Patrol Steps"]
+        direction TB
+        P1[1: Process Inbox] --> P2[2: Check Polecats]
+        P2 --> P3[3: Check Refinery]
+        P3 --> P4[4: Check Merge Queue]
+        P4 --> P5[5: Check Convoys]
+        P5 --> P6[6: Report to Deacon]
+        P6 --> P7[7: Self-Context Check]
+    end
+```
+
 The following state diagram shows how polecats transition through health states during Witness monitoring.
 
 ```mermaid

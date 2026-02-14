@@ -43,6 +43,21 @@ graph TD
 
 Manual convoys are the right choice when:
 
+```mermaid
+graph TD
+    START[Need to Distribute Work] --> Q1{Process<br/>repeatable?}
+    Q1 -->|Yes| FORM[Use Formula]
+    Q1 -->|No| Q2{Can describe<br/>in 1 paragraph?}
+    Q2 -->|Yes| MAYOR[Use Mayor MEOW]
+    Q2 -->|No| Q3{Need precise<br/>control?}
+    Q3 -->|Yes| MANUAL[Manual Convoy]
+    Q3 -->|No| DEFAULT[Default: Mayor MEOW]
+
+    style FORM fill:#4CAF50,color:white
+    style MAYOR fill:#2196F3,color:white
+    style MANUAL fill:#FF9800,color:white
+```
+
 The following pie chart shows the typical time distribution across different work distribution patterns.
 
 ```mermaid

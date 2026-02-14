@@ -276,6 +276,52 @@ graph LR
 5. **Set timeouts.** A plugin that hangs blocks the Refinery. Always set reasonable timeouts.
 6. **Log results.** Write plugin output to a log file alongside exit codes. This makes debugging failed merges much easier when reviewing Refinery history.
 
+## Plugin Execution Flow
+
+Pre-merge plugins execute in sequence, with early failures preventing later plugins from running:
+
+```mermaid
+sequenceDiagram
+    participant PC as Polecat
+    participant RF as Refinery
+    participant P1 as 01-lint.sh
+    participant P2 as 02-type-check.sh
+    participant P3 as 03-coverage.sh
+    participant P4 as 04-security.sh
+    participant MN as Main Branch
+
+    PC->>RF: gt done (submit MR)
+    RF->>P1: Execute
+    alt P1 Passes
+        P1-->>RF: Exit 0
+        RF->>P2: Execute
+        alt P2 Passes
+            P2-->>RF: Exit 0
+            RF->>P3: Execute
+            alt P3 Passes
+                P3-->>RF: Exit 0
+                RF->>P4: Execute
+                alt P4 Passes
+                    P4-->>RF: Exit 0
+                    RF->>MN: Merge
+                else P4 Fails
+                    P4-->>RF: Exit 1
+                    RF-->>PC: Reject (Security)
+                end
+            else P3 Fails
+                P3-->>RF: Exit 1
+                RF-->>PC: Reject (Coverage)
+            end
+        else P2 Fails
+            P2-->>RF: Exit 1
+            RF-->>PC: Reject (Type)
+        end
+    else P1 Fails
+        P1-->>RF: Exit 1
+        RF-->>PC: Reject (Lint)
+    end
+```
+
 ## Next Steps
 
 - [Operations: Plugins](/docs/operations/plugins) -- Detailed plugin operations guide

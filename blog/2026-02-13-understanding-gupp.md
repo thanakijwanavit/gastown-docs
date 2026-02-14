@@ -145,6 +145,23 @@ Both produce:                   Valid input validation with passing tests ✓
 
 Let's trace a real failure-recovery sequence to see GUPP in action:
 
+```mermaid
+sequenceDiagram
+    participant T as Polecat Toast
+    participant H as Hook/Molecule State
+    participant W as Witness
+    participant A as Polecat Alpha
+    T->>H: Steps 1-3 done, working on step 4
+    Note over T: Network issue at 10:15
+    T--xH: Session dies
+    Note over H: Hook + molecule persist
+    W->>H: Patrol at 10:20 detects dead session
+    W->>H: File warrant, re-sling bead
+    A->>H: New session reads state
+    A->>H: Skip steps 1-3, resume step 4
+    A->>H: Complete all steps
+```
+
 The following timeline shows how GUPP enables automatic recovery from an agent crash.
 
 ```mermaid

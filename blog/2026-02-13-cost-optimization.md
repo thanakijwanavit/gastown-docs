@@ -253,6 +253,17 @@ flowchart LR
     Idle -->|Morning| Active
 ```
 
+```mermaid
+graph TD
+    subgraph Strategies["Cost Optimization Impact"]
+        B[Better Beads<br/>50% reduction] --> HIGH[High Impact]
+        R[Right-Size Convoys<br/>30% reduction] --> MED[Medium Impact]
+        P[Park During Idle<br/>20% reduction] --> MED
+        M[Model Selection<br/>15% reduction] --> LOW[Low Impact]
+        C[Control Patrol Freq<br/>10% reduction] --> LOW
+    end
+```
+
 ## Common Cost Traps
 
 **The "just one more polecat" trap.** It's tempting to throw more parallelism at a problem. But each polecat has startup costs, and if they touch overlapping files, the Refinery spends more time resolving conflicts — which triggers re-runs.

@@ -239,6 +239,23 @@ graph LR
 
 ## The Trade-Off
 
+```mermaid
+graph TD
+    subgraph "Isolation Trade-offs"
+        WT[Worktrees] -->|Provides| CODE[Code Isolation]
+        WT -->|Does NOT Provide| PROC[Process Isolation]
+        CODE --> GOOD[✓ Separate Files<br/>✓ Separate Branches<br/>✓ Independent Workspaces]
+        PROC --> LIMIT[✗ Shared .git Directory<br/>✗ Same OS Process Space<br/>✗ No Network Isolation]
+    end
+    subgraph "When to Layer Containers"
+        LIMIT -.->|For Security-Sensitive| CONT[Add Container Layer]
+        CONT --> STRONG[Stronger Isolation]
+    end
+    style CODE fill:#ccffcc
+    style LIMIT fill:#fff3cd
+    style STRONG fill:#cfe2ff
+```
+
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).
 
 If you need stronger isolation for security-sensitive workloads (running untrusted code, network-restricted environments), you can layer containers on top of Gas Town's worktree system. But for the common case of AI agents writing and testing code, worktrees provide the right balance of isolation, speed, and simplicity.

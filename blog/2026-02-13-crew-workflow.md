@@ -260,6 +260,12 @@ sequenceDiagram
     CW->>CW: git push (land own work)
 ```
 
+```mermaid
+pie title Crew Worker vs Polecat Merge Paths
+    "Crew Direct Push (40%)" : 40
+    "Polecat via Refinery (60%)" : 60
+```
+
 ## Best Practices
 
 1. **Push frequently.** In a multi-agent environment, unpushed work diverges fast. Push after every logical chunk.

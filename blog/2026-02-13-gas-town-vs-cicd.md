@@ -177,6 +177,40 @@ pie title CI Build Volume Comparison
 
 ## When to Use What
 
+```mermaid
+mindmap
+  root((Development Pipeline))
+    Code Generation
+      Gas Town Polecats
+        Write Features
+        Fix Bugs
+        Update Docs
+    Code Validation
+      Your Existing CI
+        Run Tests
+        Build Artifacts
+        Quality Gates
+    Orchestration
+      Gas Town Convoys
+        Parallel Development
+        Dependency Tracking
+        Batch Coordination
+    Deployment
+      Your Existing CD
+        Deploy to Staging
+        Deploy to Production
+        Rollback Support
+    Monitoring
+      Gas Town Witness
+        Agent Health
+        Work Progress
+        Escalations
+      Your Existing Observability
+        Production Metrics
+        Error Tracking
+        Performance
+```
+
 | Scenario | Tool |
 |----------|------|
 | Validate code quality | Your CI (unchanged) |

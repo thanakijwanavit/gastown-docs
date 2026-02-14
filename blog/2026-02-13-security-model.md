@@ -111,6 +111,25 @@ Gas Town follows a strict rule: **secrets never enter agent context**.
 - **Beads** -- The beads database stores work metadata, not secrets. If a bead description inadvertently contains a secret, it is flagged during review.
 - **Handoff mail** -- Mail content is stored in the beads database. Never include secrets in handoff notes.
 
+```mermaid
+graph TD
+    subgraph Safe["Secrets: Safe Storage"]
+        ENV[CI Environment Variables]
+        VAULT[Secret Vault]
+        CREDS[Credentials Store]
+    end
+    subgraph Unsafe["Never Expose To"]
+        AGENT[Agent Context]
+        BEADS[Beads Database]
+        MAIL[Handoff Mail]
+        GIT[Git Commits]
+    end
+    Safe -.->|blocked| AGENT
+    Safe -.->|blocked| BEADS
+    Safe -.->|blocked| MAIL
+    Safe -.->|blocked| GIT
+```
+
 :::warning[API Keys]
 
 If your CI needs API keys, configure them in your CI provider's secrets management (GitHub Secrets, etc.), not in the Gas Town workspace. Agents should never have direct access to production credentials.

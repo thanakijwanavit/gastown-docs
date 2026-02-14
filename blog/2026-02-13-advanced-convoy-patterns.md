@@ -263,6 +263,25 @@ stateDiagram-v2
 If you add dependencies between beads using `bd dep add`, verify the chain resolves correctly with `bd blocked` and `bd ready` before slinging all the work. A circular dependency or mistyped bead ID will block the entire convoy, and debugging dependency issues after 10 polecats are already running is far more expensive than catching it at definition time.
 :::
 
+```mermaid
+gantt
+    title Convoy Pattern Execution Timeline
+    dateFormat mm:ss
+    axisFormat %M:%S
+
+    section Chain
+    Schema        :00:00, 5m
+    Endpoints     :05:00, 5m
+    Tests         :10:00, 5m
+
+    section Fan-Out
+    Migration 1   :00:00, 5m
+    Migration 2   :00:00, 5m
+    Migration 3   :00:00, 5m
+    Migration 4   :00:00, 5m
+    Migration 5   :00:00, 5m
+```
+
 ## Anti-Patterns to Avoid
 
 **Mega-convoys**: Don't put 50 beads in one convoy. If a single bead stalls, you can't close the convoy. Keep convoys focused (3-10 beads).

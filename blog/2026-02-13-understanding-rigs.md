@@ -90,6 +90,27 @@ The distinction between parked and docked is important. **Parked** means the Dae
 
 **Create a rig when:** The project has its own git repository and would benefit from its own agent infrastructure.
 
+```mermaid
+gantt
+    title Rig Lifecycle: From Creation to Production
+    dateFormat X
+    axisFormat %s
+    section Setup
+    Add Rig :0, 10
+    Configure Agents :10, 30
+    section Active
+    Start Witness :30, 40
+    Start Refinery :30, 40
+    Sling First Beads :40, 50
+    section Operations
+    Daily Work :50, 200
+    section Pause
+    Park Rig :200, 210
+    Unpark Resume :210, 220
+    section Shutdown
+    Dock for Long-Term :220, 230
+```
+
 The following diagram shows the decision flow for creating a new rig.
 
 ```mermaid
