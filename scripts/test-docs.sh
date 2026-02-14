@@ -1370,6 +1370,38 @@ else
     fail_test "Found $BLOG_TOTAL_LENGTH_ISSUES blog post(s) with fewer than 1000 words" "Expand blog posts to at least 1000 words for substantive content"
 fi
 
+# Test 47: All non-index doc pages have 2+ Mermaid diagrams
+DOC_MERMAID2_ISSUES=0
+echo "Test 47: Checking all non-index doc pages have 2+ Mermaid diagrams..."
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md" 2>/dev/null); do
+    mermaid_count=$(grep -c '```mermaid' "$file" 2>/dev/null) || mermaid_count=0
+    if [ "$mermaid_count" -lt 2 ]; then
+        echo "  WARNING: $(basename "$file") has only $mermaid_count Mermaid diagram(s)"
+        DOC_MERMAID2_ISSUES=$((DOC_MERMAID2_ISSUES + 1))
+    fi
+done
+if [ "$DOC_MERMAID2_ISSUES" -eq 0 ]; then
+    pass_test "All non-index doc pages have 2+ Mermaid diagrams"
+else
+    fail_test "Found $DOC_MERMAID2_ISSUES non-index doc page(s) with fewer than 2 Mermaid diagrams" "Add Mermaid diagrams to doc pages for visual explanations"
+fi
+
+# Test 48: All non-index doc pages have 500+ total words
+DOC_WORD_COUNT_ISSUES=0
+echo "Test 48: Checking all non-index doc pages have 500+ total words..."
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md" 2>/dev/null); do
+    word_count=$(wc -w < "$file" 2>/dev/null)
+    if [ "$word_count" -lt 500 ]; then
+        echo "  WARNING: $(basename "$file") has only $word_count words"
+        DOC_WORD_COUNT_ISSUES=$((DOC_WORD_COUNT_ISSUES + 1))
+    fi
+done
+if [ "$DOC_WORD_COUNT_ISSUES" -eq 0 ]; then
+    pass_test "All non-index doc pages have 500+ total words"
+else
+    fail_test "Found $DOC_WORD_COUNT_ISSUES non-index doc page(s) with fewer than 500 words" "Expand doc pages to at least 500 words for substantive content"
+fi
+
 # Summary
 echo ""
 echo "========================================"
