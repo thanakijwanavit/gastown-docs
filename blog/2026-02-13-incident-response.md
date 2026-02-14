@@ -324,7 +324,7 @@ If you encounter the same failure scenario more than twice, create a project-spe
 
 ## The Golden Rule
 
-When in doubt, remember: **beads are the source of truth**. Agents come and go, sessions crash and restart, git branches get created and deleted. But the bead tracking state persists. As long as the bead is open, someone (or some new agent) will eventually pick it up.
+When in doubt, remember: **beads are the source of truth**. Agents come and go, sessions crash and restart, git branches get created and deleted. But the bead tracking state persists. As long as the bead is open, someone (or some new agent) will eventually pick it up. For more on the work distribution philosophy, see [Work Distribution](/docs/architecture/work-distribution).
 
 Gas Town is designed to be self-healing. Most incidents resolve themselves within a Witness patrol cycle (a few minutes). Save the manual intervention for when automated recovery has clearly failed.
 

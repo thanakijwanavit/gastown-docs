@@ -24,7 +24,7 @@ Deacon Patrol Cycle:
   6. Report to Mayor                → summary of town health
 ```
 
-Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`), so if the Deacon crashes mid-patrol, the next session picks up from the last completed step.
+Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`), so if the Deacon crashes mid-patrol, the next session picks up from the last completed step. The Deacon's coordination with the Mayor follows the [mayor workflow](/docs/workflows/mayor-workflow) patterns for strategic decision-making and escalation.
 
 ```mermaid
 flowchart TD

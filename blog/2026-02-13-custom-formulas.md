@@ -264,7 +264,7 @@ bd formula list
 gt mol pour my-custom-workflow --var key=value
 ```
 
-For complex multi-rig deployments, you can combine formulas with [advanced convoy patterns](/blog/advanced-convoy-patterns) to orchestrate work across multiple repositories simultaneously.
+For complex multi-rig deployments, you can combine formulas with [advanced convoy patterns](/blog/advanced-convoy-patterns) to orchestrate work across multiple repositories simultaneously. The [formula workflow guide](/docs/workflows/formula-workflow) provides operational best practices for running formulas in production.
 
 ## Testing Your Formula
 

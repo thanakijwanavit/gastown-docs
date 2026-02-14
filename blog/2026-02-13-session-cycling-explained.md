@@ -78,7 +78,7 @@ gt mail inbox     # Read the handoff mail for context
 # Resume work immediately
 ```
 
-The hook persists because it's stored in the filesystem, not in the agent's context. The molecule tracks which step the agent was on. The handoff mail provides context that the previous session had accumulated.
+The hook persists because it's stored in the filesystem, not in the agent's context. The molecule tracks which step the agent was on. The handoff mail provides context that the previous session had accumulated. For a deeper look at how [crew members](/blog/crew-workflow) use this pattern in long-lived workspaces, see the crew workflow guide.
 
 ```mermaid
 sequenceDiagram
@@ -192,7 +192,7 @@ pie title What Survives Session Cycling
 
 ## The Role of Molecules
 
-Molecules are what make session cycling work for multi-step tasks. For a deeper dive into how molecules enable structured workflows, see [molecules and formulas](/blog/molecules-and-formulas). Each molecule tracks:
+Molecules are what make session cycling work for multi-step tasks. For a detailed technical reference on molecule concepts, see the [molecules documentation](/docs/concepts/molecules). Each molecule tracks:
 
 - Which steps are complete
 - Which step is currently active

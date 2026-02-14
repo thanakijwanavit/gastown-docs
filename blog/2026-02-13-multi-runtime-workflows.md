@@ -172,7 +172,7 @@ The seance ensures that regardless of runtime, the agent starts with:
 3. Beads database access
 4. Git repository state
 
-This is what makes runtime-swapping possible without losing coordination state.
+This is what makes runtime-swapping possible without losing coordination state. For the full seance reference, see [Seance](/docs/cli-reference/seance) for all bootstrapping options.
 
 ```mermaid
 sequenceDiagram

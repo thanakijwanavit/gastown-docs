@@ -89,7 +89,7 @@ curl -X POST "$SLACK_WEBHOOK_URL" \
   -d "{\"text\": \"Merged: $1 ($2)\"}"
 ```
 
-Common notification targets include Slack, Discord, PagerDuty, and email. The plugin receives context about the event (branch name, bead ID, agent identity) as environment variables or arguments.
+Common notification targets include Slack, Discord, PagerDuty, and email. The plugin receives context about the event (branch name, bead ID, agent identity) as environment variables or arguments. For managing plugin configuration across rigs, see [Configuration](/docs/cli-reference/configuration).
 
 ### Lifecycle Plugins
 

@@ -85,7 +85,7 @@ The differences are exactly what you'd expect — you're doing manually what the
 | Coordinating work | Mayor dispatches | You sling beads yourself |
 | Crash recovery | Automatic via hooks | Hooks survive, but you restart manually |
 
-The hook system is the critical piece that makes Minimal Mode viable. When your agent crashes mid-work, the hook still has the bead ID attached. The next time you start a session in that workspace, `gt prime` finds the hook and picks up where the last session left off. You don't lose work — you just need to restart the session yourself.
+The hook system is the critical piece that makes Minimal Mode viable. When your agent crashes mid-work, the hook still has the bead ID attached. The next time you start a session in that workspace, `gt prime` finds the hook and picks up where the last session left off. For guidance on starting and managing sessions, see [Sessions](/docs/cli-reference/sessions). You don't lose work — you just need to restart the session yourself.
 
 ```mermaid
 flowchart LR

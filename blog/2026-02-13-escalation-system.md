@@ -135,7 +135,7 @@ The default routing works well out of the box, but you can customize it in `sett
 }
 ```
 
-**Quiet hours** are essential if you run Gas Town overnight. With quiet hours enabled, only P0 critical escalations will wake you up. Everything else queues until morning.
+**Quiet hours** are essential if you run Gas Town overnight. With quiet hours enabled, only P0 critical escalations will wake you up. Everything else queues until morning. For more details on configuring quiet hours and notification channels, see the [diagnostics reference](/docs/cli-reference/diagnostics).
 
 **Per-rig overrides** let you tighten thresholds for production-critical rigs while keeping them relaxed for experimental work. Place an `escalation.json` in `<rig>/settings/` to override town-level defaults.
 

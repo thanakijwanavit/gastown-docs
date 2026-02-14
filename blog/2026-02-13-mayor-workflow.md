@@ -227,7 +227,7 @@ The Refinery rejects the MR. The system can re-sling the bead to a new polecat t
 
 ### Bad Decomposition
 
-If the Mayor's decomposition doesn't make sense, you can intervene:
+If the Mayor's decomposition doesn't make sense, you can intervene. Understanding the architecture helps you recognize when decomposition goes wrong — see [Architecture Overview](/docs/architecture/overview) for how decomposition fits into the system design:
 
 ```bash
 # Attach to the Mayor

@@ -81,7 +81,7 @@ This shows:
 - Whether patrol agents (Witness, Refinery, Deacon) are alive
 - Merge queue depth
 
-**When to use it:** First thing in the morning, or anytime you want a quick sanity check before slinging new work.
+**When to use it:** First thing in the morning, or anytime you want a quick sanity check before slinging new work. For details on the slinging process, see [Sling](/docs/cli-reference/sling).
 
 ## gt dashboard: The Full Picture
 

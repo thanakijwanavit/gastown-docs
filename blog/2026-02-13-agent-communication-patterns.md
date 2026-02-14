@@ -227,7 +227,7 @@ gt sling gt-backend-bead backend
 gt mail send backend/crew/admin -s "Dependency" -m "We need the /api/auth endpoint fixed before our frontend can proceed"
 ```
 
-For large cross-rig efforts involving multiple dependencies, consider using [advanced convoy patterns](/blog/advanced-convoy-patterns) to track progress across all repositories.
+For large cross-rig efforts involving multiple dependencies, consider using [advanced convoy patterns](/blog/advanced-convoy-patterns) to track progress across all repositories. The [communication CLI reference](/docs/cli-reference/communication) provides complete details on all mail, nudge, and hook commands.
 
 :::info Hooks Are the Only Reliable Work Persistence Mechanism
 When an agent's tmux session crashes or gets killed, any work assignment stored only in the agent's memory is lost. Hooks persist assignments to the filesystem, which means work survives crashes, restarts, and even full system reboots. This is why `gt sling` (which uses hooks) is the canonical way to assign work in Gas Town.

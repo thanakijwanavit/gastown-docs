@@ -194,7 +194,7 @@ Death warrants embody Gas Town's "Let It Crash" philosophy — borrowed from Erl
 The warrant system provides:
 
 - **Auditability.** Every termination has a reason, a filer, and a timestamp. You can review what happened and why.
-- **Structured cleanup.** Work isn't lost — the hook preserves the assignment across the termination.
+- **Structured cleanup.** Work isn't lost — the hook preserves the assignment across the termination, following the [design principles](/docs/architecture/design-principles) of crash-safe operation.
 - **Escalation paths.** Repeated failures surface to higher authorities rather than looping forever.
 - **Human override.** When automation can't handle it, humans can step in using the same system.
 

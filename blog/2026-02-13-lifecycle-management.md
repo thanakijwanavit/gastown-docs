@@ -175,7 +175,7 @@ Running `gt rig dock` removes all worktrees, which destroys any uncommitted pole
 
 ## Startup Order Dependencies
 
-Gas Town components must start in a specific order. `gt start --all` handles this automatically, but understanding the dependency chain helps when troubleshooting:
+Gas Town components must start in a specific order. `gt start --all` handles this automatically, but understanding the dependency chain helps when troubleshooting. The full startup sequence is documented in [Session Commands](/docs/cli-reference/session-commands):
 
 ```mermaid
 graph TD

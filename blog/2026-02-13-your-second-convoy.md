@@ -23,7 +23,7 @@ These are the patterns that separate a Gas Town beginner from a productive opera
 
 ## Pattern 1: Dependencies Between Beads
 
-Real work has ordering constraints. You can't write tests before the feature exists. You can't update docs before the API is finalized.
+Real work has ordering constraints. You can't write tests before the feature exists. You can't update docs before the API is finalized. Understanding how [convoys](/docs/concepts/convoys) track multi-bead workflows is essential for managing these dependencies.
 
 ```bash
 # Create beads with an implicit dependency

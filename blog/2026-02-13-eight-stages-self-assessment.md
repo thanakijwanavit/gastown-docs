@@ -190,7 +190,7 @@ flowchart TD
 ```
 
 :::warning Don't Skip Stages
-Each stage builds skills and trust that the next stage depends on. Jumping from Stage 4 directly to Stage 8 typically results in expensive failures -- agents produce low-quality code because you haven't developed the instinct for writing precise task descriptions, and you lack the monitoring habits to catch problems early. Progress through each stage deliberately, even if it feels slow.
+Each stage builds skills and trust that the next stage depends on. Jumping from Stage 4 directly to Stage 8 typically results in expensive failures -- agents produce low-quality code because you haven't developed the instinct for writing precise task descriptions, and you lack the monitoring habits to catch problems early. Progress through each stage deliberately, even if it feels slow. For more on measuring your readiness, see the [FAQ](/docs/getting-started/faq).
 :::
 
 :::info Stage 7 Is the Real Turning Point

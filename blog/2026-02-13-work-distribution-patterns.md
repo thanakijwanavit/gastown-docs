@@ -20,6 +20,8 @@ Before diving into when to use each, here's what they are:
 
 **Formula Workflow** — You apply a pre-built TOML template that defines the steps. The formula becomes a live molecule that guides execution. Repeatable, structured, consistent.
 
+All three patterns use the same underlying [convoy system](/docs/concepts/convoys) to track related beads and detect completion.
+
 ```mermaid
 graph TD
     W[Work Needed] --> Q{How much<br/>control?}

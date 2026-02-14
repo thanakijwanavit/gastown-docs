@@ -25,7 +25,7 @@ Without persistence, every crash means starting over. Worse, the second session 
 
 ## The Solution: Hooks
 
-A hook is a persistent attachment point that stores work state in the filesystem -- outside the agent's context window. When work is "hooked" to an agent, three things are recorded:
+A hook is a persistent attachment point that stores work state in the filesystem -- outside the agent's context window. This design follows Gas Town's core [design principles](/docs/architecture/design-principles) of durability and crash-safety. When work is "hooked" to an agent, three things are recorded:
 
 1. **The assigned bead** -- Which issue this agent is working on
 2. **The molecule state** -- Which step of the workflow the agent has reached

@@ -78,7 +78,7 @@ Gas Town ships with 30+ built-in formulas:
 | `mol-refinery-patrol` | Refinery merge cycle |
 | `fix-and-verify` | Fix + automated verification |
 
-Each formula encodes best practices for its workflow. The `shiny` formula ensures polecats always run preflight tests, self-review their code, and run the test suite before submitting. These steps aren't suggestions — they're enforced by the molecule.
+Each formula encodes best practices for its workflow. The `shiny` formula ensures polecats always run preflight tests, self-review their code, and run the test suite before submitting. These steps aren't suggestions — they're enforced by the molecule. For more on enforcing quality standards, see [Design Principles](/docs/architecture/design-principles).
 
 ## Inside a Formula
 

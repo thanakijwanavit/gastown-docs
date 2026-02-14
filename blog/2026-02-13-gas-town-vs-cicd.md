@@ -112,7 +112,7 @@ gt rig config myproject refinery.require_ci true
 
 **Batch orchestration.** CI/CD processes individual PRs. Gas Town manages batches of related work (convoys) with dependency tracking and auto-close.
 
-**Agent lifecycle management.** CI/CD doesn't manage the workers that produce code. Gas Town's Witness monitors polecat health, restarts stuck agents, and escalates failures. For details on agent monitoring, see [monitoring fleet](/blog/monitoring-fleet).
+**Agent lifecycle management.** CI/CD doesn't manage the workers that produce code. Gas Town's Witness monitors polecat health, restarts stuck agents, and escalates failures. For details on agent monitoring, see [monitoring fleet](/blog/monitoring-fleet). The [work distribution patterns](/docs/architecture/work-distribution) explain how Gas Town orchestrates agents upstream of CI.
 
 **Intent-level tracking.** CI/CD tracks commits and builds. Gas Town tracks beads (intent) through the entire lifecycle from idea to merged code.
 

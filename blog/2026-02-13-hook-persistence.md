@@ -50,7 +50,7 @@ Hooks enable Gas Town's most important behavioral rule: **GUPP** (Gas Town Unive
 
 > If it's on your hook, YOU RUN IT.
 
-When an agent starts a session, it checks its hook. If work is there, the agent begins immediately — no confirmation, no waiting for human approval, no announcing itself and pausing. The hook is the assignment. The assignment is the authorization. This connects to broader [daemon process](/blog/daemon-process) patterns.
+When an agent starts a session, it checks its hook. If work is there, the agent begins immediately — no confirmation, no waiting for human approval, no announcing itself and pausing. The hook is the assignment. The assignment is the authorization. This connects to broader [daemon process](/blog/daemon-process) patterns and is core to the [minimal mode workflow](/docs/workflows/minimal-mode).
 
 This is critical for autonomous operation. In a system with 10+ agents, you can't have each one waiting for a human to say "yes, go ahead." The hook having work IS the go-ahead. The human (or Mayor, or Witness) placed work on the hook deliberately. The agent trusts that intent and acts.
 

@@ -135,7 +135,7 @@ gantt
 | Large | 20-40 | 5-15 | Two machines, load-balanced rigs |
 | XL | 40+ | 15+ | Distributed setup, dedicated machines per rig cluster |
 
-Each polecat session consumes an API call budget and local disk space (git worktree). The primary cost scaling factor is **API calls**, not local compute. Monitor your API usage and budget accordingly.
+Each polecat session consumes an API call budget and local disk space (git worktree). The primary cost scaling factor is **API calls**, not local compute. Monitor your API usage and budget accordingly. For comprehensive strategies on tracking and optimizing costs, see [cost management](/docs/guides/cost-management).
 
 ## Monitoring at Scale
 

@@ -50,7 +50,7 @@ If all three try to merge at once, you get conflicts, broken builds, and a non-l
 
 ## The Refinery's Approach
 
-The Refinery processes merge requests (MRs) one at a time, in FIFO order. Each MR gets rebased onto the current tip of main, tested, and merged. If it fails, it gets rejected.
+The Refinery processes merge requests (MRs) one at a time, in FIFO order. Each MR gets rebased onto the current tip of main, tested, and merged. If it fails, it gets rejected. For details on how the Refinery handles transient state during this process, see [wisps](/docs/concepts/wisps).
 
 ```text
 Step 1: Rebase polecat3's work onto main

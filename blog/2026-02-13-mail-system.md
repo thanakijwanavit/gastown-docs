@@ -201,7 +201,7 @@ Mail uses the two-level beads architecture:
 | Agent-to-human | Town `.beads/` | Email/SMS gateway |
 | Handoff (self-addressed) | Town `.beads/` | Same agent, next session |
 
-All mail goes through the town-level beads database, regardless of which rig the agents belong to. The `gt mail` command handles routing transparently.
+All mail goes through the town-level beads database, regardless of which rig the agents belong to. The `gt mail` command handles routing transparently. For the complete hierarchy of how messages flow through the system, see [Agent Hierarchy](/docs/architecture/agent-hierarchy).
 
 ```mermaid
 sequenceDiagram

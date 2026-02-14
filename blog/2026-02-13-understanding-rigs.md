@@ -82,6 +82,8 @@ gt rig dock myproject
 gt rig undock myproject      # Bring it back later
 ```
 
+For a comprehensive list of rig configuration options, see the [configuration CLI reference](/docs/cli-reference/configuration).
+
 The distinction between parked and docked is important. **Parked** means the Daemon knows the rig exists and will include it in status reports — it's just temporarily inactive. **Docked** means the Daemon pretends the rig doesn't exist. Use parking for hours or days; use docking for weeks or longer.
 
 ## When to Create a New Rig

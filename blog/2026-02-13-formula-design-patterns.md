@@ -27,7 +27,7 @@ flowchart TD
 
 ## Formula Basics
 
-A formula is a TOML file that defines a sequence of steps. Each step becomes a [wisp](/docs/concepts/wisps) when the formula is poured into a [molecule](/docs/concepts/molecules):
+A formula is a TOML file that defines a sequence of steps. Each step becomes a [wisp](/docs/concepts/wisps) when the formula is poured into a [molecule](/docs/concepts/molecules). For detailed guidance on designing and deploying formulas in production, see the [formula workflow](/docs/workflows/formula-workflow) documentation.
 
 ```toml
 [meta]
@@ -54,7 +54,7 @@ description = "Commit, push, and submit MR"
 needs = ["test"]
 ```
 
-The `needs` field creates dependencies between steps. A step won't start until all its dependencies are done.
+The `needs` field creates dependencies between steps. A step won't start until all its dependencies are done. Understanding the [agent hierarchy](/docs/architecture/agent-hierarchy) helps you design formulas that align with how polecats, witnesses, and other agents interact.
 
 ## Pattern 1: Linear Pipeline
 

@@ -67,7 +67,7 @@ When a stall is detected, the Witness follows a graduated response:
    → Work gets re-slung to a new polecat
 ```
 
-The Witness always tries the least disruptive action first. A nudge often works — the agent was just confused, and the nudge reorients it.
+The Witness always tries the least disruptive action first. A nudge often works — the agent was just confused, and the nudge reorients it. For details on nudge commands and their options, see the [nudge CLI reference](/docs/cli-reference/nudge).
 
 ## Monitoring the Refinery
 
