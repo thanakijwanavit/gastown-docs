@@ -283,7 +283,7 @@ Gas Town's [escalation system](/docs/operations/escalations/) routes problems au
 - **P1 (High):** Immediate notification via nudge. Check now.
 - **P0 (Critical):** Routes to SMS. Drop everything.
 
-Most day-to-day monitoring is about catching patterns before they become P0 escalations. The tools above give you early warning.
+Most day-to-day monitoring is about catching patterns before they become P0 escalations. The tools above give you early warning. For a deep dive on how escalations route through the system, see [The Escalation System](/blog/escalation-system).
 
 ```mermaid
 flowchart TD

@@ -196,7 +196,7 @@ Gas Town embraces "vibe coding" -- letting AI do the heavy lifting while you foc
 - **Handle the hard stuff** -- Take on complex refactoring, architecture decisions, and sensitive operations that benefit from human judgment
 - **Stay in the loop** -- Use `gt feed` and `gt convoy list` to monitor progress
 
-The most effective Gas Town operators spend 80% of their time on specification and review, and 20% on direct coding in their crew workspace.
+The most effective Gas Town operators spend 80% of their time on specification and review, and 20% on direct coding in their crew workspace. For strategies on maximizing the value you get from AI work while minimizing wasted tokens, see [cost optimization](/blog/cost-optimization).
 
 ```mermaid
 flowchart LR

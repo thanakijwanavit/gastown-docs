@@ -192,7 +192,7 @@ pie title What Survives Session Cycling
 
 ## The Role of Molecules
 
-Molecules are what make session cycling work for multi-step tasks. Each molecule tracks:
+Molecules are what make session cycling work for multi-step tasks. For a deeper dive into how molecules enable structured workflows, see [molecules and formulas](/blog/molecules-and-formulas). Each molecule tracks:
 
 - Which steps are complete
 - Which step is currently active

@@ -44,7 +44,7 @@ Manual convoys are the right choice when:
 - **You know exactly what the tasks are** and how to decompose them
 - **Dependencies matter** — you need precise control over which task blocks which
 - **Cross-rig coordination** requires human judgment about which rig handles what
-- **Security-sensitive work** where you want to review each assignment before it happens
+- **Security-sensitive work** where you want to review each assignment before it happens. For security considerations in multi-agent workflows, see [security model](/blog/security-model).
 - **Learning Gas Town** — manual mode teaches you how the system works
 
 ### The Workflow

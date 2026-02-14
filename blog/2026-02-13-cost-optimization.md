@@ -136,6 +136,8 @@ gt convoy list
 - **Time to merge** — Long merge times in the Refinery suggest frequent conflicts, meaning beads are touching overlapping files
 - **Stranded work** — Beads sitting unassigned waste convoy overhead without producing value
 
+For comprehensive visibility into your fleet's behavior, combine these metrics with the techniques described in [monitoring your fleet](/blog/monitoring-fleet).
+
 ## Strategy 5: Use the Right Model Tier
 
 Gas Town supports multiple model tiers. Match the model to the task:

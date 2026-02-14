@@ -26,7 +26,7 @@ gt formula run shiny --bead gt-abc12
 # Creates a molecule instance with steps tracking progress
 ```
 
-Multiple molecules can be poured from the same formula simultaneously. Three polecats can each be running their own instance of the `shiny` formula — each molecule tracks its own progress independently.
+Multiple molecules can be poured from the same formula simultaneously. Three polecats can each be running their own instance of the `shiny` formula — each molecule tracks its own progress independently. For advanced multi-molecule coordination, see [Your Second Convoy](/blog/your-second-convoy).
 
 ## Why Molecules Exist
 

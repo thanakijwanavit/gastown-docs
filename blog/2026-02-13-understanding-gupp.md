@@ -174,7 +174,7 @@ graph TD
 As a Gas Town user, GUPP means:
 
 - **Don't worry about crashes.** They're handled automatically.
-- **Don't manually restart failed work.** The Witness detects zombies and the system re-slings the work.
+- **Don't manually restart failed work.** The Witness detects zombies and the system re-slings the work. For more on how work is distributed and recovered, see [work distribution patterns](/blog/work-distribution-patterns).
 - **Don't babysit polecats.** The supervision tree (Witness → Deacon → Mayor) handles recovery at every level.
 - **Trust the hook.** If work is on a hook, it will get done — eventually.
 

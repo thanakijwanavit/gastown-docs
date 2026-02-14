@@ -244,7 +244,7 @@ gt done
 
 If those three work, the runtime is Gas Town compatible.
 
-**Monitor cross-runtime convoys carefully.** Different runtimes have different failure modes. Claude Code polecats might hit context limits; Codex agents might have different tool availability. The Witness monitors all runtimes equally, but error patterns vary. See the [Convoys reference](/docs/concepts/convoys) for how convoy tracking works uniformly across runtimes.
+**Monitor cross-runtime convoys carefully.** Different runtimes have different failure modes. Claude Code polecats might hit context limits; Codex agents might have different tool availability. The Witness monitors all runtimes equally, but error patterns vary. See the [Convoys reference](/docs/concepts/convoys) for how convoy tracking works uniformly across runtimes. For managing complexity at scale, see [Scaling Beyond 30 Agents](/blog/scaling-beyond-30).
 
 ## Next Steps
 

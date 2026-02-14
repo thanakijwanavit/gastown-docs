@@ -239,7 +239,7 @@ gt rig boot myproject
 ```
 
 :::danger Avoid tmux kill-server Unless Absolutely Necessary
-Running `tmux kill-server` destroys all tmux sessions across every rig, including crew member sessions with unsaved work. Only use it when the daemon and all `gt` commands are completely unresponsive. Try `gt daemon restart` and `gt rig stop <rig>` first to surgically address the issue without collateral damage.
+Running `tmux kill-server` destroys all tmux sessions across every rig, including crew member sessions with unsaved work. Only use it when the daemon and all `gt` commands are completely unresponsive. Try `gt daemon restart` and `gt rig stop <rig>` first to surgically address the issue without collateral damage. For comprehensive recovery strategies, see [Incident Response](/blog/incident-response).
 :::
 
 ### Polecats Spawning and Dying

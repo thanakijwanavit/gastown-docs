@@ -165,7 +165,7 @@ gt sling gt-b2 frontend
 gt sling gt-c3 api-gateway
 ```
 
-Each bead lands on a separate polecat. The Witnesses monitor all three in parallel, and the convoy tracks overall completion.
+Each bead lands on a separate polecat. The Witnesses monitor all three in parallel, and the convoy tracks overall completion. For a complete walkthrough of this pattern, see [Your First Convoy](/blog/first-convoy).
 
 ```mermaid
 stateDiagram-v2

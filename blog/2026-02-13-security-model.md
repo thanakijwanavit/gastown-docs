@@ -185,7 +185,7 @@ sequenceDiagram
 
 1. **Never commit secrets.** Use `.gitignore` patterns for `.env`, `*.key`, `credentials.*`, and similar files.
 2. **Review Refinery merges.** Enable branch protection and required reviews for production repositories.
-3. **Monitor the audit trail.** Use `bd list` and `gt feed` to watch for unexpected activity.
+3. **Monitor the audit trail.** Use `bd list` and `gt feed` to watch for unexpected activity. For comprehensive monitoring strategies, see [monitoring your fleet](/blog/monitoring-fleet).
 4. **Scope agent permissions.** Crew workers need write access; the Witness does not. Keep permissions minimal.
 5. **Use gates for sensitive operations.** Production deploys and infrastructure changes should require human approval via [gates](/docs/concepts/gates).
 

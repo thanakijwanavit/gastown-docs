@@ -296,7 +296,7 @@ The Refinery processes one MR per patrol cycle (default: 5 minutes). For higher 
 gt rig config myproject witness.patrol_interval 120  # 2 minutes
 ```
 
-Be careful — faster patrols mean more token usage for patrol agents.
+Be careful — faster patrols mean more token usage for patrol agents. For strategies on optimizing throughput at scale, see [Scaling Beyond 30 Agents](/blog/scaling-beyond-30).
 
 ### Conflict Rate
 

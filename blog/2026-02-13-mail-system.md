@@ -237,7 +237,7 @@ stateDiagram-v2
 | Waking a sleeping agent | Mail + Nudge | Nudge alone |
 | Cross-session communication | Mail | - |
 
-The most common pattern for urgent work: send mail (carries the payload), then nudge (wakes the recipient to check their mail).
+The most common pattern for urgent work: send mail (carries the payload), then nudge (wakes the recipient to check their mail). This coordination is part of the broader [GUPP](/blog/understanding-gupp) propulsion pattern.
 
 ```bash
 # The one-two punch: mail then nudge

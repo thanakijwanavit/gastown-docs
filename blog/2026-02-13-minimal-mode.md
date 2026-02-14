@@ -187,7 +187,7 @@ graph TD
 ## Tips
 
 :::tip
-Use **crew workspaces** (`gt crew add myproject yourname`) instead of polecat directories. Crew workspaces persist between sessions. Polecat directories are ephemeral — they get cleaned up after work completes.
+Use **crew workspaces** (`gt crew add myproject yourname`) instead of polecat directories. Crew workspaces persist between sessions. Polecat directories are ephemeral — they get cleaned up after work completes. For details on crew workspace management, see [Crew Workflow](/blog/crew-workflow).
 :::
 
 :::warning

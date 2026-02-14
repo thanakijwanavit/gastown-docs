@@ -282,7 +282,7 @@ The most common formula design mistake is combining durable and non-durable oper
 
 ### Design for GUPP
 
-Every step should be a checkpoint. If the agent crashes after completing a step, a fresh agent should be able to resume without redoing that step. This means:
+Every step should be a checkpoint. If the agent crashes after completing a step, a fresh agent should be able to resume without redoing that step. For more on this principle, see [understanding GUPP](/blog/understanding-gupp). This means:
 
 - Mark steps done only when their output is durable (committed to git, written to beads)
 - Don't combine durable and non-durable operations in one step

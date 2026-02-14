@@ -198,7 +198,7 @@ The warrant system provides:
 - **Escalation paths.** Repeated failures surface to higher authorities rather than looping forever.
 - **Human override.** When automation can't handle it, humans can step in using the same system.
 
-In practice, most Gas Town users never think about warrants. The Witness files them, Boot executes them, and polecats respawn transparently. But when something does go wrong, the warrant log is invaluable for understanding what happened and why.
+In practice, most Gas Town users never think about warrants. The Witness files them, Boot executes them, and polecats respawn transparently. But when something does go wrong, the warrant log is invaluable for understanding what happened and why. This approach is part of Gas Town's broader [incident response](/blog/incident-response) strategy that prioritizes fast recovery over perfect prevention.
 
 ## Next Steps
 

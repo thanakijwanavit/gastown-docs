@@ -141,6 +141,8 @@ gt daemon start    # Restart the daemon
 # All existing agents continue; heartbeats resume
 ```
 
+This resilient design complements Gas Town's [incident response](/blog/incident-response) procedures, ensuring that infrastructure failures don't cascade into data loss or workflow disruption.
+
 ## Monitoring the Daemon
 
 ```bash

@@ -219,6 +219,8 @@ flowchart TD
 | **Rolling Convoy** | Ongoing work where scope grows over time (e.g., a sprint) | Medium | Mixed — beads added and executed as discovered | `gt convoy add <convoy> <bead>` |
 | **Convoy Monitoring** | Large convoys needing real-time visibility and escalation | Low | N/A — observability layer, not an execution pattern | `gt convoy status`, `gt feed`, `gt convoy stranded` |
 
+These patterns become even more powerful when combined with [custom formulas](/blog/custom-formulas) that define specialized workflows for each convoy bead.
+
 :::warning Keep Convoys Focused (3-10 Beads)
 A single stalled bead prevents the entire convoy from auto-closing. If you bundle 50 beads into one convoy, one stuck task blocks the completion signal for all 49 others. Decompose large efforts into multiple smaller convoys rather than one mega-convoy.
 :::

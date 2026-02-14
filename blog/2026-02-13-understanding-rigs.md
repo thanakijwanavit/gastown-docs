@@ -28,7 +28,7 @@ When you run `gt rig add myproject git@github.com:you/repo.git`, Gas Town create
 └── plugins/           # Rig-level plugins
 ```
 
-The key insight: **each agent gets its own git worktree**. Polecats never share a working directory with each other or with crew. This eliminates the class of bugs where two agents edit the same file simultaneously — each agent operates on its own copy of the codebase. This design reflects the broader [design principles](/docs/architecture/design-principles) that guide Gas Town's architecture.
+The key insight: **each agent gets its own git worktree**. Polecats never share a working directory with each other or with crew. This eliminates the class of bugs where two agents edit the same file simultaneously — each agent operates on its own copy of the codebase. This design reflects the broader [design principles](/docs/architecture/design-principles) that guide Gas Town's architecture. For a deep dive into the worktree isolation model, see [git worktrees](/blog/git-worktrees).
 
 ## The Rig's Two Persistent Agents
 

@@ -165,7 +165,7 @@ The new polecat starts fresh on the latest main, reads the original bead, and re
 
 The best conflict resolution is prevention:
 
-- **Use convoys to coordinate related work.** If two beads touch the same files, put them in the same convoy so they're worked sequentially rather than in parallel.
+- **Use convoys to coordinate related work.** If two beads touch the same files, put them in the same convoy so they're worked sequentially rather than in parallel. See [advanced convoy patterns](/blog/advanced-convoy-patterns) for coordination strategies.
 - **Scope beads narrowly.** A bead that touches 20 files across 5 modules will conflict with everything. Break it into focused beads.
 - **Push frequently.** The faster changes land on main, the less time there is for divergence.
 

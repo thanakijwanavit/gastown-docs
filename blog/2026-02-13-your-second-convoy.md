@@ -71,7 +71,7 @@ graph TD
     style C fill:#FFC107,color:black
 ```
 
-The [Witness](/docs/agents/witness) can also auto-sling unblocked beads if configured to do so.
+The [Witness](/docs/agents/witness) can also auto-sling unblocked beads if configured to do so. For more on how the Witness monitors agent health and triggers recovery, see [witness explained](/blog/witness-explained).
 
 ```mermaid
 sequenceDiagram

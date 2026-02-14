@@ -214,7 +214,7 @@ Adding more polecats to a rig without adjusting the Witness patrol interval crea
 When your rig's conflict rate climbs above 20%, it signals that agents are stepping on each other's changes faster than the Refinery can serialize them. This happens before queue depth becomes critical and before agents start visibly stalling — making it the earliest indicator that you need to split the rig, stagger dispatches, or reduce concurrent polecats. Monitor `gt refinery stats --json | jq '.conflict_rate'` as your primary scaling health metric.
 :::
 
-Understanding the [work distribution architecture](/docs/architecture/work-distribution) helps you choose the right dispatch pattern when scaling across many rigs.
+Understanding the [work distribution architecture](/docs/architecture/work-distribution) helps you choose the right dispatch pattern when scaling across many rigs. For insights on creating effective task decomposition, see the [formula design patterns](/blog/formula-design-patterns) guide.
 
 ## Next Steps
 

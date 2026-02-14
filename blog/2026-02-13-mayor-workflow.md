@@ -223,7 +223,7 @@ The Witness detects the stall during patrol, nudges the polecat, and if it remai
 
 ### Merge Conflict
 
-The Refinery rejects the MR. The system can re-sling the bead to a new polecat that works against the updated main branch.
+The Refinery rejects the MR. The system can re-sling the bead to a new polecat that works against the updated main branch. For detailed recovery procedures, see [Incident Response](/blog/incident-response).
 
 ### Bad Decomposition
 

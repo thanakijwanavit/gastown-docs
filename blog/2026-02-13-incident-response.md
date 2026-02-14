@@ -83,7 +83,7 @@ gt polecat kill <polecat-name> --rig myproject
 gt sling <bead-id> myproject
 ```
 
-The key insight: killing a polecat doesn't lose work. The bead is still tracked, and any commits on the branch are preserved. GUPP (Gas Town Universal Propulsion Principle) ensures that the next agent picks up where the last one left off.
+The key insight: killing a polecat doesn't lose work. The bead is still tracked, and any commits on the branch are preserved. GUPP (Gas Town Universal Propulsion Principle) ensures that the next agent picks up where the last one left off. For more on GUPP, see [understanding GUPP](/blog/understanding-gupp).
 
 ## Scenario 2: Stalled Convoy
 

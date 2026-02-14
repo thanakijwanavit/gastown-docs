@@ -20,7 +20,7 @@ In a system with 10+ agents running across multiple rigs, infrastructure problem
 - Corrupted beads databases from interrupted writes
 - Temp files from build processes nobody cleaned up
 
-These problems don't belong to any single rig or feature. They span the entire town. Polecats can't handle them — they're scoped to one rig and one task. The [Witness](/docs/agents/witness) monitors health but doesn't do manual labor. The [Deacon](/docs/agents/deacon) coordinates but needs workers.
+These problems don't belong to any single rig or feature. They span the entire town. Polecats can't handle them — they're scoped to one rig and one task. The [Witness](/docs/agents/witness) monitors health but doesn't do manual labor. The [Deacon](/docs/agents/deacon) coordinates but needs workers. For more on the Deacon's role, see [deacon patrol](/blog/deacon-patrol).
 
 Enter Dogs. They're the infrastructure specialists that handle the messy cross-cutting work that doesn't belong to any single feature or rig.
 

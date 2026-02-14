@@ -93,7 +93,7 @@ Step 6: Report status to Deacon
 Step 7: Check own context → cycle if needed
 ```
 
-Because the Witness uses a molecule, its patrol state survives crashes. If the Witness itself goes down mid-patrol, it picks up where it left off.
+Because the Witness uses a molecule, its patrol state survives crashes. If the Witness itself goes down mid-patrol, it picks up where it left off. For more on how molecules enable crash-safe workflows, see [molecules and formulas](/blog/molecules-and-formulas).
 
 ## Witness Configuration
 
