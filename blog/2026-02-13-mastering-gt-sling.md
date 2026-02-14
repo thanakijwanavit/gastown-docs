@@ -47,6 +47,15 @@ flowchart TD
     HK --> EX[Agent Executes]
 ```
 
+## Sling Target Types
+
+| Target Type | Syntax Example | Behavior | Best Use Case |
+|---|---|---|---|
+| **Rig** | `gt sling gt-abc myproject` | Witness auto-spawns a fresh polecat and attaches the bead to its hook | Default for most work — lets Gas Town handle agent selection and load balancing |
+| **Agent** | `gt sling gt-abc myproject/polecats/toast` | Directly attaches the bead to the named agent's hook | Re-assigning failed work or stacking sequential tasks on an agent with relevant context |
+| **Crew** | `gt sling gt-abc frontend/crew/alice` | Routes the bead to a specific crew member in any rig | Cross-rig collaboration where a human crew member needs to handle the work personally |
+| **Mayor** | `gt sling mol-release mayor/` | Attaches a formula or molecule to the Mayor for orchestration | Structured multi-step workflows driven by TOML formulas |
+
 ## Basic Patterns
 
 ### Sling to a Rig (Auto-Spawn)

@@ -97,6 +97,16 @@ git add <files> && git commit -m "description" && git pull --rebase && git push
 
 This feels aggressive compared to normal development, where you might batch up commits and push once a day. But in Gas Town, the cost of a merge conflict (another agent redoing work, or a human resolving it manually) far outweighs the cost of frequent pushes.
 
+## Git Strategy Comparison
+
+| Strategy | Who Uses It | Pros | Cons | When to Use |
+|---|---|---|---|---|
+| Direct push to main | Crew workers | Immediate visibility; no stale branches; simplest workflow | Risk of push rejection if remote diverged; requires manual conflict resolution | Day-to-day crew work where you are a maintainer on the repo |
+| Short-lived branch + merge queue | Polecats | Isolated work; Refinery validates before merge; automatic rebase | Branch can go stale if polecat is slow; conflict respawn adds latency | All polecat-driven feature and fix work |
+| Long-lived feature branch | Not recommended | Familiar to traditional teams | Diverges quickly at agent speed; merge conflicts compound exponentially; invisible to other agents | Avoid in Gas Town; use convoys for coordinated multi-bead work instead |
+| Fork-based pull requests | External contributors | Standard open-source workflow; full code review | Too slow for agent speed; adds review bottleneck; branches go stale in minutes | Only for external or untrusted contributors, never for internal agents |
+| Convoy-sequenced commits | Coordinated multi-agent work | Prevents conflicts on shared files; ordered execution; clean dependency graph | Serializes work that could otherwise parallelize; requires upfront planning | When multiple beads must touch the same files or modules |
+
 ## Handling Conflicts
 
 Even with these principles, conflicts happen. Multiple agents sometimes touch the same file. Here's how Gas Town handles each scenario:

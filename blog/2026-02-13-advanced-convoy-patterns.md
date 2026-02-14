@@ -170,6 +170,16 @@ flowchart TD
     end
 ```
 
+## Pattern Comparison
+
+| Pattern | When to Use | Complexity | Parallelism | Key Command |
+|---------|------------|------------|-------------|-------------|
+| **Dependency Chain** | Steps must execute in strict order (e.g., schema before endpoints before tests) | Low | Sequential — one bead at a time | `bd dep add <child> <parent>` |
+| **Fan-Out / Fan-In** | Many independent sub-tasks that can all run simultaneously (e.g., per-table migrations) | Low | Fully parallel — all beads at once | `gt sling <bead> <rig>` in a loop |
+| **Cross-Rig Convoy** | Feature spans multiple repositories (backend, frontend, docs) | Medium | Parallel across rigs, each rig independent | `gt convoy create` with beads from multiple rigs |
+| **Rolling Convoy** | Ongoing work where scope grows over time (e.g., a sprint) | Medium | Mixed — beads added and executed as discovered | `gt convoy add <convoy> <bead>` |
+| **Convoy Monitoring** | Large convoys needing real-time visibility and escalation | Low | N/A — observability layer, not an execution pattern | `gt convoy status`, `gt feed`, `gt convoy stranded` |
+
 ## Anti-Patterns to Avoid
 
 **Mega-convoys**: Don't put 50 beads in one convoy. If a single bead stalls, you can't close the convoy. Keep convoys focused (3-10 beads).

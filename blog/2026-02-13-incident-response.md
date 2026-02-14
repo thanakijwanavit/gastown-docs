@@ -40,6 +40,15 @@ flowchart TD
     D -->|git corruption| GC[Reset + Re-sling]
 ```
 
+## Severity Levels and Response Actions
+
+| Severity | Description | Example Scenarios | Initial Response | Escalation Timeframe |
+|---|---|---|---|---|
+| **SEV-1: Critical** | Town-wide outage; no agents can operate | Beads database corruption; daemon crash; all rigs offline | Stop all slings; run `gt status` and `gt feed --errors`; notify operator immediately | Immediate — manual intervention required within 5 minutes |
+| **SEV-2: Major** | One rig or core agent is down; work is blocked | Refinery jam blocking all merges; Deacon down so no dogs spawn; rig git corruption | Run 90-second triage; restart affected agent with `gt rig restart`; check merge queue | 10 minutes — if automated recovery (Witness patrol) has not resolved |
+| **SEV-3: Moderate** | Single agent stuck or convoy stalled; other work continues | Stuck polecat; stalled convoy with unassigned beads; hook delivery failure | Check agent logs; nudge Witness; re-sling if needed | 30 minutes — allow 2-3 Witness patrol cycles before manual intervention |
+| **SEV-4: Low** | Minor issue; cosmetic or non-blocking | Orphaned worktrees consuming disk; stale branches; temp file buildup | Log for next Deacon patrol; no immediate action needed | Next scheduled maintenance window or daily health check |
+
 ## Scenario 1: Stuck Polecat
 
 **Symptoms:** A bead shows `in_progress` but no commits are appearing. The polecat's session might be unresponsive.

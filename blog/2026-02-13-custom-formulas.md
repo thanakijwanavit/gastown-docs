@@ -58,6 +58,21 @@ This step runs after step-1 completes.
 """
 ```
 
+The following table summarizes all the configuration fields available in a formula TOML file:
+
+| Field | Section | Required | Purpose |
+|-------|---------|----------|---------|
+| `id` | `[formula]` | Yes | Unique identifier used to reference the formula when pouring molecules (e.g., `code-review`) |
+| `name` | `[formula]` | Yes | Human-readable display name shown in listings and status output |
+| `description` | `[formula]` | No | Explains what the formula does; helps users choose the right formula |
+| `version` | `[formula]` | No | Tracks which formula revision produced a given molecule; bump on changes |
+| `id` | `[[steps]]` | Yes | Unique step identifier that appears in logs, status, and dependency declarations |
+| `title` | `[[steps]]` | Yes | Short summary of what the step does, displayed in `gt mol status` |
+| `description` | `[[steps]]` | Yes | Detailed instructions the agent reads to execute the step; supports markdown and code blocks |
+| `needs` | `[[steps]]` | No | Array of step IDs that must complete before this step starts (e.g., `["step-1"]`) |
+| `gate` | `[[steps]]` | No | Set to `true` to pause the workflow at this step until an external condition is met |
+| `gate_type` | `[[steps]]` | No | Specifies the type of external gate (e.g., `gh:run` for GitHub Actions); used with `gate = true` |
+
 The `needs` field creates dependencies — step-2 won't start until step-1 is done.
 
 ## Example: Code Review Formula

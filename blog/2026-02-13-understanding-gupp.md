@@ -99,6 +99,16 @@ sequenceDiagram
     P2->>H: Steps 3-4 done
 ```
 
+## Agent States and GUPP Behavior
+
+| Agent State | How Detected | GUPP Behavior | Recovery Action |
+|---|---|---|---|
+| **Idle** | No bead on hook; agent session is alive | No forward progress needed — agent is available for new work | Witness may assign queued beads via `gt sling`, or the agent waits for the next assignment |
+| **Working** | Bead on hook; molecule steps advancing; session alive | Forward progress is actively happening — completed steps are checkpointed to the database | None required; the supervision tree monitors progress passively |
+| **Stalled** | Bead on hook; no molecule step progress for multiple patrol cycles; session alive | GUPP guarantees completed steps are preserved even though the agent is stuck | Witness files a warrant, terminates the stalled session, and re-slings the bead so a fresh polecat resumes from the last checkpoint |
+| **Cycling** | Agent context window fills up; agent initiates a voluntary session handoff | GUPP ensures all completed molecule steps survive the context refresh; new session reads hook and resumes | Agent writes a handoff summary, session ends, fresh session starts and picks up from the current in-progress step automatically |
+| **Dead** | Bead on hook; tmux session no longer exists (crash, timeout, or machine restart) | Hook and molecule state persist on disk and in the database — no work is lost | Witness detects the missing session on its next patrol, files a warrant, and re-slings the bead to a new polecat |
+
 ## NDI: The Practical Companion
 
 GUPP has a companion principle: **Nondeterministic Idempotence (NDI)**. It acknowledges that AI agents are nondeterministic — ask Claude to implement the same feature twice and you'll get different code.

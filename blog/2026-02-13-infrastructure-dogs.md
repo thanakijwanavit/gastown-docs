@@ -92,6 +92,16 @@ When Gas Town itself updates, dogs handle the transition:
 - Configuration format updates across all rigs
 - Plugin upgrades that need cross-rig coordination
 
+## Dog Task Types at a Glance
+
+| Task Type | Description | Example Commands / Actions | Typical Duration | Frequency |
+|---|---|---|---|---|
+| **Cross-rig cleanup** | Remove orphaned worktrees, stale branches, and temp files across all rigs | `gt cleanup --all-rigs`; scan each rig for orphaned directories; report totals to Deacon | 1-3 minutes | Multiple times daily (triggered by Deacon patrol) |
+| **Configuration sync** | Propagate shared config changes to every rig | Read canonical template; apply `.editorconfig`, linter configs, or shared settings to each rig; verify consistency | 30 seconds - 2 minutes | On config change (event-driven) |
+| **System rebuild** | Recreate corrupted infrastructure components | Rebuild worktrees, re-initialize beads databases, restore agent context files from backups | 2-10 minutes | Rare (after crashes or corruption) |
+| **Schema migration** | Update data formats when Gas Town itself upgrades | Migrate beads database schema; update config file formats; upgrade plugin manifests across all rigs | 5-15 minutes | Per Gas Town release (infrequent) |
+| **Warrant processing** | Execute death warrants for stuck agents (Boot only) | Read pending warrants; terminate stuck polecats or dogs; clean up their resources | 10-30 seconds per warrant | Every daemon tick (continuous) |
+
 ## The Deacon-Dog Relationship
 
 Dogs don't operate independently. The [Deacon](/docs/agents/deacon) manages their entire lifecycle:

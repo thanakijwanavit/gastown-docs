@@ -117,6 +117,16 @@ After a successful merge:
 - The associated bead is updated
 - Convoy progress is recalculated (may trigger auto-close)
 
+## Pipeline Stages at a Glance
+
+| Stage | Purpose | Failure Behavior | Typical Duration |
+|---|---|---|---|
+| **Queue** | Hold MRs in FIFO order until the Refinery is ready to process them | No failure possible at this stage; MRs wait indefinitely until processed | Seconds to minutes depending on queue depth |
+| **Rebase** | Replay the MR's commits onto the current tip of main to produce a linear history | Rejects the MR with `CONFLICT` status; the bead stays open for re-slinging or manual resolution | Seconds (fast-forward git operations) |
+| **Validation** | Run built-in checks and external CI to verify the rebased code compiles and passes tests | Rejects the MR with `VALIDATION_FAILED` status; a new polecat can be spawned with error context | Minutes (depends on CI pipeline speed) |
+| **Merge** | Fast-forward merge the validated, rebased branch into main and push | Extremely rare — typically a transient git push failure; Refinery retries automatically | Seconds |
+| **Cleanup** | Delete the feature branch, clean up the polecat worktree, update bead status, recalculate convoy progress | Non-critical — failures are logged but do not block the queue from advancing | Seconds |
+
 ## What Happens When Merges Fail
 
 Not every MR makes it through. Here's what happens at each failure point:
