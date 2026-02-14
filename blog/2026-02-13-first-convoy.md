@@ -164,3 +164,4 @@ The Mayor will decompose your request into right-sized beads, set up dependencie
 - **[Your Second Convoy](/blog/your-second-convoy)** — Level up with dependencies and cross-rig coordination
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the 5 most common mistakes with your first convoy
+- [First Convoy Tutorial](/docs/getting-started/first-convoy) — Step-by-step guide to running your first convoy

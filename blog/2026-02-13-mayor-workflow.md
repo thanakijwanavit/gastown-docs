@@ -262,3 +262,4 @@ The key insight: you operate at the level of intent, not implementation. The May
 - **[Your First Convoy](/blog/first-convoy)** — Step-by-step tutorial
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use Mayor vs manual convoys vs formulas
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Advanced patterns the Mayor uses for complex orchestration
+- [Town CLI Reference](/docs/cli-reference/town) — Commands for town-level navigation and management

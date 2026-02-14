@@ -185,3 +185,4 @@ bd list --status=open   # Check open beads
 - [Understanding GUPP](/blog/understanding-gupp) — Why the propulsion principle makes slinging work
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — How hooks make slung work crash-safe
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex convoy orchestration that builds on sling mastery
+- [Sling CLI Reference](/docs/cli-reference/sling) — Full command reference for gt sling and its flags

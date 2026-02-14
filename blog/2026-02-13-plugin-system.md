@@ -190,3 +190,4 @@ If any plugin fails with `fail_action = "reject"`, subsequent plugins are skippe
 - [The Refinery Deep Dive](/blog/refinery-deep-dive) -- How plugins integrate with the merge queue
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- Monitoring plugin execution and failures
 - [Custom Formulas](/blog/custom-formulas) -- Building custom formulas that leverage plugins
+- [Configuration CLI Reference](/docs/cli-reference/configuration) — Commands for managing Gas Town configuration

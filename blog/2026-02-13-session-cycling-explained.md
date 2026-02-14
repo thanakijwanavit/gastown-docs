@@ -208,3 +208,5 @@ The new session sees "step-3 is in progress" and knows to continue testing, not 
 - **[Understanding GUPP](/blog/understanding-gupp)** — Practical examples of crash-safe design
 - **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks make session cycling crash-safe
 - **[The Mail System](/blog/mail-system)** — How handoff mail preserves context across session cycles
+- [Compact CLI Reference](/docs/cli-reference/compact) — Commands for manual and automatic context compaction
+- [Session Commands CLI Reference](/docs/cli-reference/session-commands) — Commands for session health checks and management

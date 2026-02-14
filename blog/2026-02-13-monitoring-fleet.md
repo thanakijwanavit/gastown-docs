@@ -242,3 +242,4 @@ Your monitoring tools complement this automated layer — they give you visibili
 - **[Cost Optimization](/blog/cost-optimization)** — Strategies for reducing token spend
 - **[Incident Response](/blog/incident-response)** — What to do when things go wrong
 - **[The Witness Explained](/blog/witness-explained)** — How the Witness provides automated health monitoring
+- [Diagnostics CLI Reference](/docs/cli-reference/diagnostics) — Commands for health checks and system diagnostics
