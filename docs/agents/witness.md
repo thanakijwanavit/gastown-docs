@@ -368,3 +368,4 @@ gantt
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- How to observe Witness activity across rigs
 - [Death Warrants](/blog/death-warrants) -- How the Witness issues death warrants for zombie polecats and coordinates cleanup
 - [Incident Response](/blog/incident-response) -- How the Witness escalation chain feeds into Gas Town's incident response process
+- [Lifecycle Management: Parking, Docking, and Maintaining Your Rigs](/blog/lifecycle-management) -- How the Witness monitors agent lifecycles and triggers recovery

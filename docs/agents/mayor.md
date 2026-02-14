@@ -363,3 +363,4 @@ graph TD
 - [Your First Convoy](/blog/first-convoy) -- How the Mayor creates and tracks convoys
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- Strategies for how the Mayor distributes work across rigs and agents
 - [Mastering gt sling](/blog/mastering-gt-sling) -- How the Mayor uses gt sling to dispatch work to rigs and spawn polecats
+- [Agent-to-Agent Communication: Mail, Nudges, and Hooks](/blog/agent-communication-patterns) -- How the Mayor coordinates agent work through communication primitives

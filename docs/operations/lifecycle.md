@@ -645,3 +645,4 @@ gantt
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale
 - [Lifecycle Management](/blog/lifecycle-management) -- Practical guide to parking, docking, and maintaining rigs
+- [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness monitors lifecycle transitions and triggers recovery

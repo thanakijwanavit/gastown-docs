@@ -507,3 +507,4 @@ When you resolve a recurring issue, add a note to the rig's CLAUDE.md explaining
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
 - [Understanding the Witness](/blog/witness-explained) -- How the Witness detects and recovers from the polecat issues covered in this guide
 - [Hook Persistence: Why Work Survives Crashes](/blog/hook-persistence) -- How hooks preserve work state through crashes and restarts, preventing the data loss scenarios covered here
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- How fleet monitoring helps identify and troubleshoot issues

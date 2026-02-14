@@ -282,3 +282,4 @@ Seance spawns a read-only fork of the predecessor session. It cannot modify the 
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How hooks preserve context across sessions, making seance useful for recovering lost context
 - [Agent Communication Patterns in Gas Town](/blog/agent-communication-patterns) -- Communication patterns between agents, including how seance enables cross-session knowledge transfer
 - [Why Beads? AI-Native Issue Tracking](/blog/why-beads) -- How bead context persists across sessions, complementing seance for recovering decisions and progress
+- [Hooks: The Persistence Primitive That Makes Gas Town Crash-Safe](/blog/hook-persistence) -- How hooks enable seance to restore agent context after crashes

@@ -383,3 +383,4 @@ See the [Quick Start](../getting-started/quickstart.md) guide for a step-by-step
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- How to partition and scale rigs for large deployments
 - [Gas Town's Security Model](/blog/security-model) -- How rig isolation provides security boundaries
 - [Git Worktrees for Multi-Agent Development](/blog/git-worktrees) -- How rigs use git worktrees to give each polecat an isolated sandbox
+- [Multi-Runtime Workflows with Gas Town](/blog/multi-runtime-workflows) -- How rigs support multiple runtime environments

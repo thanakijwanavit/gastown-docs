@@ -353,3 +353,4 @@ gantt
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Cross-rig coordination and dependency management techniques
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- When to use manual convoys vs. Mayor vs. formula workflows
 - [Mastering gt sling: Precise Work Assignment](/blog/mastering-gt-sling) -- Advanced techniques for slinging work to specific rigs and agents in manual convoy workflows
+- [Your Second Convoy: Beyond Hello World](/blog/your-second-convoy) -- Next steps after completing your first manual convoy

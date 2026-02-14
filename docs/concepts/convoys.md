@@ -335,3 +335,4 @@ Run `gt convoy list` frequently to see the big picture. For live progress, use `
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Parallel dispatch, wave-based execution, and cross-rig convoys
 - [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor uses convoys to coordinate large work batches
 - [Work Distribution Patterns in Gas Town](/blog/work-distribution-patterns) -- How convoys feed into the work distribution pipeline for parallel dispatch across rigs
+- [Your Second Convoy: Beyond Hello World](/blog/your-second-convoy) -- Taking your convoy skills beyond the basics

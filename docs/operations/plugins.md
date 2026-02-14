@@ -700,3 +700,4 @@ gantt
 - [Gas Town's Security Model](/blog/security-model) -- How plugins fit into the security architecture
 - [Hook-Driven Architecture in Gas Town](/blog/hook-driven-architecture) -- How hook plugins intercept agent lifecycle events within the hook-driven system
 - [Formula Design Patterns for Gas Town](/blog/formula-design-patterns) -- Patterns for combining plugins with TOML formulas to build repeatable automated workflows
+- [Building Your First Custom Formula](/blog/custom-formulas) -- How custom formulas extend the plugin system

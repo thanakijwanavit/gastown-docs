@@ -262,3 +262,4 @@ Polecats run preflight tests before implementing. If main is broken, they'll det
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
 - [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical cost guidance for the "How much does it cost?" question
 - [Gas Town vs CI/CD: What's the Difference?](/blog/gas-town-vs-cicd) -- Answers the common question of how Gas Town compares to traditional CI/CD pipelines
+- [Your First Convoy in 5 Minutes](/blog/first-convoy) -- Quick start guide for running your first convoy

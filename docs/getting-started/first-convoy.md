@@ -253,3 +253,4 @@ Convoys auto-close when all tracked beads complete. You do not need to manually 
 - [The Mayor Workflow](/blog/mayor-workflow) -- How to let the Mayor automate convoy creation and assignment
 - [Your Second Convoy](/blog/your-second-convoy) -- Dependencies, cross-rig work, and stuck polecat recovery
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Parallel dispatch, wave-based execution, and cross-rig convoys for when you're ready to level up
+- [Work Distribution Patterns: Manual Convoy vs. Mayor vs. Formula](/blog/work-distribution-patterns) -- Understanding how convoys fit into the larger work distribution landscape

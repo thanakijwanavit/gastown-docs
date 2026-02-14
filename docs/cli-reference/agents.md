@@ -976,3 +976,4 @@ gt crew restart myproject dave
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for managing agents at scale
 - [Lifecycle Management](/blog/lifecycle-management) -- How agent start, stop, and restart operations interact with Gas Town's lifecycle system
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- How to monitor agent status and health using CLI commands

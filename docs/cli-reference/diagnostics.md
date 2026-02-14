@@ -838,3 +838,4 @@ gt thanks
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- Diagnosing and recovering from common failures
 - [Cost Optimization](/blog/cost-optimization) -- Strategies for tracking and reducing token usage and API costs across your fleet
 - [Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new users make, including overlooking diagnostic tools and system health checks
+- [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness helps diagnose and recover from agent failures

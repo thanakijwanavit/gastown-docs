@@ -377,3 +377,4 @@ gt session inject myproject/toast -f prompt.txt
 - [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent session health, tracking activity, and catching unresponsive sessions
 - [Hook Persistence: How Gas Town Survives Crashes](/blog/hook-persistence) -- How hooks preserve work state across session restarts and crashes
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Common session management mistakes and how to avoid them

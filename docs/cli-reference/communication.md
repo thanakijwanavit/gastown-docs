@@ -880,3 +880,4 @@ graph TD
 - [Gas Town's Mail System](/blog/mail-system) -- Async communication patterns between agents
 - [Session Cycling](/blog/session-cycling) -- How handoff mail preserves context across sessions
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- Patterns for mail, nudge, and broadcast in multi-agent workflows
+- [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How crew members use communication commands in their daily workflow

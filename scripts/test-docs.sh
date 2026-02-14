@@ -1142,7 +1142,7 @@ fi
 
 # Test 37: All doc pages have 5+ blog post cross-links
 echo ""
-echo "Test 37: Checking all doc pages have 5+ blog post cross-links..."
+echo "Test 37: Checking all doc pages have 6+ blog post cross-links..."
 BLOG_CROSSLINK_ISSUES=0
 
 for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
@@ -1153,17 +1153,17 @@ for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
     # Count links to /blog/ in the file
     blog_link_count=$(grep -coP '/blog/[a-z0-9-]+' "$file" 2>/dev/null) || blog_link_count=0
 
-    if [ "$blog_link_count" -lt 5 ]; then
+    if [ "$blog_link_count" -lt 6 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $blog_link_count blog link(s) in $rel_file (need 5+)"
+        echo "  Only $blog_link_count blog link(s) in $rel_file (need 6+)"
         BLOG_CROSSLINK_ISSUES=$((BLOG_CROSSLINK_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_CROSSLINK_ISSUES" -eq 0 ]; then
-    pass_test "All doc pages have 5+ blog post cross-links"
+    pass_test "All doc pages have 6+ blog post cross-links"
 else
-    fail_test "Found $BLOG_CROSSLINK_ISSUES doc page(s) with fewer than 5 blog cross-links" "Add at least 5 /blog/ links to each doc page's Related section"
+    fail_test "Found $BLOG_CROSSLINK_ISSUES doc page(s) with fewer than 6 blog cross-links" "Add at least 6 /blog/ links to each doc page's Related section"
 fi
 
 # Test 38: Blog post meta description lengths within SEO range (50-160 chars)

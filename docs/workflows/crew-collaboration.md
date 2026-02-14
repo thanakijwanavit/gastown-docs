@@ -302,3 +302,4 @@ stateDiagram-v2
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents automatically hand off work when their context window fills up
 - [Code Review Workflow in Gas Town](/blog/code-review-workflow) -- How crew members review polecat output and maintain code quality across the fleet
 - [Work Distribution Patterns in Gas Town](/blog/work-distribution-patterns) -- Decision framework for distributing work between crew members and polecats
+- [Agent-to-Agent Communication: Mail, Nudges, and Hooks](/blog/agent-communication-patterns) -- How communication primitives enable crew collaboration

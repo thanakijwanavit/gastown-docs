@@ -421,3 +421,4 @@ If you notice the Refinery repeatedly rejecting MRs from the same rig due to tes
 - [Code Review with Gas Town Polecats](/blog/code-review-workflow) -- How the code-review formula integrates with the Refinery's merge gate
 - [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- Branch management strategies when multiple agents push work through the Refinery
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- How the Refinery handles increased merge throughput as your fleet grows
+- [Work Distribution Patterns: Manual Convoy vs. Mayor vs. Formula](/blog/work-distribution-patterns) -- How Refinery commands fit into the overall work distribution pipeline

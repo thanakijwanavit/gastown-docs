@@ -477,3 +477,4 @@ Previously required when beads used file-based storage to ensure polecat bead st
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make, from vague beads to ignoring the Refinery queue
 - [Lifecycle Management in Gas Town](/blog/lifecycle-management) -- Managing the full polecat lifecycle from spawn to nuke, including stale detection and garbage collection
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How polecat sessions cycle to maintain fresh context without losing work
+- [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How GUPP ensures polecats resume work after unexpected termination

@@ -588,3 +588,4 @@ gt rig settings myproject --unset "validation.timeout"
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale with dozens of concurrent agents
 - [Why Git Worktrees? Gas Town's Isolation Strategy](/blog/git-worktrees) -- How Gas Town uses git worktrees instead of containers to isolate parallel agent workspaces
 - [Your Second Convoy](/blog/your-second-convoy) -- Practical walkthrough of managing multiple rigs and coordinating work across projects
+- [Multi-Runtime Workflows with Gas Town](/blog/multi-runtime-workflows) -- Managing rigs across different runtime environments

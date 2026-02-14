@@ -272,3 +272,4 @@ Compaction is irreversible for deletions. Use `--dry-run` first to verify what w
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon runs compaction as part of its automated patrol cycle
 - [Lifecycle Management](/blog/lifecycle-management) -- Managing agent and resource lifecycles including wisp TTLs and compaction policies
 - [Cost Optimization](/blog/cost-optimization) -- How compaction and wisp cleanup contribute to reducing resource usage and costs
+- [Hooks: The Persistence Primitive That Makes Gas Town Crash-Safe](/blog/hook-persistence) -- How hooks ensure work state survives context compaction

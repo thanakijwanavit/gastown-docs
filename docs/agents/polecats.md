@@ -444,3 +444,4 @@ pie title Polecat Session Activity
 - [Common Pitfalls](/blog/common-pitfalls) -- Mistakes to avoid when working with ephemeral workers
 - [The Witness Explained](/blog/witness-explained) -- How the Witness monitors and recovers polecats
 - [Session Cycling](/blog/session-cycling) -- How polecats hand off context when their session fills up mid-task
+- [Lifecycle Management: Parking, Docking, and Maintaining Your Rigs](/blog/lifecycle-management) -- Managing polecat lifecycles including spawn, cycling, and cleanup

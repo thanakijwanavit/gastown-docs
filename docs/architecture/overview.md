@@ -229,3 +229,4 @@ graph TD
 - [Gas Town's Security Model](/blog/security-model) -- Trust boundaries and workspace isolation in the architecture
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for large-scale deployments
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How hooks serve as the persistence primitive connecting all five architectural layers
+- [Understanding Rigs: Gas Town's Project Containers](/blog/understanding-rigs) -- How rigs organize the architectural components of a Gas Town deployment

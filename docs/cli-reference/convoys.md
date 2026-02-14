@@ -483,3 +483,4 @@ Merge status: 2 merged, 0 in queue
 - [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- Go beyond basic convoys with cross-rig tracking, dependency chains, parallel fan-out, and monitoring strategies
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- How convoy-driven work flows from the Mayor to rigs and polecats for parallel execution
 - [Mastering gt sling](/blog/mastering-gt-sling) -- How gt sling auto-creates convoys and dispatches work to rigs
+- [Your Second Convoy: Beyond Hello World](/blog/your-second-convoy) -- Taking convoy orchestration to the next level with advanced patterns

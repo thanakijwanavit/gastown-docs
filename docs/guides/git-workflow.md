@@ -606,3 +606,4 @@ This requires more discipline but enables true parallel development.
 - [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into how the Refinery serializes parallel agent work into clean history
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid frequent mistakes including git workflow anti-patterns
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for managing git at scale with dozens of concurrent agents
+- [Code Review with Gas Town Polecats: 10 Perspectives in Parallel](/blog/code-review-workflow) -- How code review integrates with Git workflows in multi-agent development

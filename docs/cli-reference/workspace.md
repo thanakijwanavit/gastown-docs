@@ -450,6 +450,7 @@ The Gas Town shell sets the `GT_ROLE` environment variable and configures the pr
 - [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
 - [Welcome to Gas Town](/blog/welcome) -- Getting started with your Gas Town workspace, from installation to your first running town
 - [Gas Town vs CI/CD](/blog/gas-town-vs-cicd) -- How Gas Town's workspace model differs from traditional CI/CD pipelines and when to use each
+- [Multi-Runtime Workflows with Gas Town](/blog/multi-runtime-workflows) -- How workspaces support multi-runtime configurations
 
 ---
 

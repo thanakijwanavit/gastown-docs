@@ -323,3 +323,4 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 - [Understanding GUPP](/blog/understanding-gupp) -- How hooks implement the propulsion principle
 - [Session Cycling Explained](/blog/session-cycling) -- Hooks and handoff mail working together across sessions
 - [Mastering gt sling](/blog/mastering-gt-sling) -- Complete guide to the sling command, the primary way work gets hooked to agents
+- [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- The architectural principles behind hook-based persistence

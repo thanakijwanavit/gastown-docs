@@ -357,3 +357,4 @@ gantt
 - [Your First Convoy](/blog/first-convoy) -- Getting started with convoy-based work coordination
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) -- Cross-rig dependencies and phased execution strategies
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- When to use Mayor orchestration vs. manual convoys vs. formula workflows
+- [Mastering gt sling: Work Assignment Patterns in Gas Town](/blog/mastering-gt-sling) -- How gt sling commands power the Mayor's work assignment pipeline

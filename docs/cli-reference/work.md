@@ -765,3 +765,4 @@ Moving a hooked bead without `--force` will fail. Unsling it first, or use `--fo
 - [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- A deep dive into the hook system that makes crash-safe, self-propelling agent workflows possible
 - [Mastering gt sling: Work Assignment in Gas Town](/blog/mastering-gt-sling) -- Advanced patterns for assigning work to rigs and agents with gt sling
 - [Work Distribution Patterns in Gas Town](/blog/work-distribution-patterns) -- End-to-end patterns for routing, prioritizing, and tracking work across your fleet
+- [Your First Convoy in 5 Minutes](/blog/first-convoy) -- Getting started with work commands through your first convoy

@@ -276,3 +276,4 @@ If you find orphaned commits from a recent polecat session, check the Witness lo
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon detects and recovers orphaned work during patrol cycles
 - [Death Warrants](/blog/death-warrants) -- How Gas Town identifies and terminates zombie processes and orphaned sessions
 - [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- How orphaned branches and commits arise in multi-agent git workflows and strategies for prevention
+- [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- How orphan detection ties into the broader incident response workflow

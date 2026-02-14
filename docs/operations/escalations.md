@@ -543,3 +543,4 @@ gantt
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking progress, and catching problems early
 - [The Deacon's Patrol: Keeping Gas Town Healthy](/blog/deacon-patrol) -- How the Deacon detects problems and routes escalations through the supervision hierarchy
+- [Death Warrants: How Gas Town Terminates Stuck Agents](/blog/death-warrants) -- How death warrants serve as the final escalation mechanism

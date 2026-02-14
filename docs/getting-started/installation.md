@@ -252,3 +252,4 @@ pie title Supported AI Runtimes
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid frequent mistakes during installation and initial setup
 - [Multi-Runtime Workflows with Gas Town](/blog/multi-runtime-workflows) -- How to configure and use the supported runtimes listed on this page
 - [Gas Town Minimal Mode](/blog/minimal-mode) -- Running Gas Town without tmux for simpler setups when full multi-agent orchestration is not needed
+- [What Stage Are You? A Self-Assessment for AI Coding Maturity](/blog/eight-stages-self-assessment) -- Assess your readiness before installing Gas Town

@@ -335,3 +335,4 @@ pie title Deacon Patrol Time Distribution
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- How to observe Deacon activity across the town
 - [Infrastructure Dogs](/blog/infrastructure-dogs) -- How Dogs work as reusable infrastructure workers managed by the Deacon
 - [Lifecycle Management](/blog/lifecycle-management) -- Agent lifecycle patterns including patrol cycles, restarts, and health recovery
+- [Understanding the Gas Town Daemon Process](/blog/daemon-process) -- How the daemon launches and manages the Deacon's patrol cycle

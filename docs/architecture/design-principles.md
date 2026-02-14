@@ -287,3 +287,4 @@ flowchart LR
 - [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- A deep dive into the hook system and the persistence primitive behind self-propelling agent workflows
 - [Why Beads?](/blog/why-beads) -- The design rationale behind Gas Town's issue tracking primitive and how it fits the broader architecture
 - [Gas Town vs CI/CD](/blog/gas-town-vs-cicd) -- How Gas Town's design principles differ from traditional CI/CD pipelines
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How session cycling embodies the design principle of crash-safe operation

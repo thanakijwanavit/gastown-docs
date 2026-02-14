@@ -482,3 +482,4 @@ gt plugin list --json
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Configuration patterns for running Gas Town at scale with dozens of concurrent agents
 - [Multi-Runtime Workflows](/blog/multi-runtime-workflows) -- How to configure and run multiple AI agent runtimes side by side in Gas Town
 - [Hook Persistence](/blog/hook-persistence) -- How Claude Code hooks and Gas Town hooks interact with agent configuration
+- [Building Your First Custom Formula](/blog/custom-formulas) -- How configuration affects formula execution and agent behavior

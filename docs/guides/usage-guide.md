@@ -715,3 +715,4 @@ stateDiagram-v2
 - [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents hand off work when context fills, and why frequent handoffs improve productivity
+- [Your Second Convoy: Beyond Hello World](/blog/your-second-convoy) -- Next steps after mastering the basics of Gas Town usage

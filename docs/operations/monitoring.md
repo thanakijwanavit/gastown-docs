@@ -587,3 +587,4 @@ stateDiagram-v2
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Monitoring strategies for large-scale deployments
 - [The Witness Explained](/blog/witness-explained) -- Deep dive into the per-rig health monitor
 - [Incident Response with Gas Town](/blog/incident-response) -- How to diagnose and recover from failures surfaced by the monitoring tools described here
+- [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon provides background monitoring and coordination

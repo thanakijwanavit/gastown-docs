@@ -434,3 +434,4 @@ pie title Runtime Usage Distribution (Example Multi-Runtime Fleet)
 - [Gas Town vs Traditional CI/CD: What's Different?](/blog/gas-town-vs-cicd) -- How Gas Town's agent-driven model complements traditional CI/CD pipelines
 - [Hook-Driven Architecture in Gas Town](/blog/hook-driven-architecture) -- How hooks vary by runtime and why full hook support matters for agent autonomy
 - [Agent Communication Patterns in Gas Town](/blog/agent-communication-patterns) -- How mail and nudge channels work across different runtimes with varying integration depths
+- [Building Your First Custom Formula](/blog/custom-formulas) -- How custom formulas enable multi-runtime workflow orchestration

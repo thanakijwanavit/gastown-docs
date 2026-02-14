@@ -280,3 +280,4 @@ pie title Nudge Delivery Success Patterns
 - [The Witness Explained](/blog/witness-explained) -- How the Witness uses nudges to wake stalled polecats during patrol cycles
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- Patterns for combining nudges, mail, and escalations for effective inter-agent coordination
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How session cycling interacts with nudge delivery when agents restart mid-conversation
+- [The Escalation System: How Gas Town Surfaces Problems Before They Snowball](/blog/escalation-system) -- How nudges integrate with the escalation system for urgent communication

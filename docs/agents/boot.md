@@ -330,3 +330,4 @@ The triage log at `~/gt/deacon/dogs/boot/triage-log.jsonl` preserves Boot's deci
 - [Understanding the Gas Town Daemon Process](/blog/daemon-process) -- How the background daemon manages agent lifecycles including Boot's watchdog cycle
 - [Boot Dogs: The Daemon's Triage Engine](/blog/boot-dogs) -- How Boot runs fresh every tick to observe, triage, and wake the Deacon
 - [Lifecycle Management](/blog/lifecycle-management) -- Managing agent lifecycles including Boot's per-tick spawn and exit cycle
+- [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- How Boot's hook-based design ensures triage state persists across restarts

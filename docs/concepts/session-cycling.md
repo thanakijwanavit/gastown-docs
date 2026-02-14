@@ -268,3 +268,4 @@ pie title Why Sessions Cycle
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How hooks and session cycling work together to make Gas Town crash-safe
 - [Hook Persistence: Why Agent State Survives Restarts](/blog/hook-persistence) -- How hooks persist work assignments across session boundaries, enabling seamless cycling
 - [Agent-to-Agent Communication Patterns](/blog/agent-communication-patterns) -- How handoff mail and inter-agent messaging coordinate context transfer during session cycles
+- [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- How session cycling impacts cost management and optimization

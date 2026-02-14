@@ -449,3 +449,4 @@ flowchart TD
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Cost implications and optimization strategies when running at scale
 - [Running Gas Town in Minimal Mode](/blog/minimal-mode) -- Reduced-overhead mode that cuts monitoring costs for budget-conscious workflows
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- Frequent handoffs reduce per-session token consumption and keep costs predictable
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- How fleet monitoring supports cost tracking and optimization

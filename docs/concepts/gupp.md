@@ -306,3 +306,4 @@ mindmap
 - [Common Pitfalls](/blog/common-pitfalls) -- Anti-patterns that violate GUPP and how to avoid them
 - [Agent-to-Agent Communication Patterns](/blog/agent-communication-patterns) -- How mail, nudges, and hooks implement GUPP-driven coordination
 - [Hook Persistence: Why Agent State Survives Restarts](/blog/hook-persistence) -- The primary mechanism that makes GUPP possible by persisting work state across every session boundary
+- [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- How GUPP relies on hook-driven architecture for crash safety

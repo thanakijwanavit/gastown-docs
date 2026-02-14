@@ -917,3 +917,4 @@ pie title Common Troubleshooting Issues by Category
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
 - [The Deacon's Patrol: Keeping Gas Town Healthy](/blog/deacon-patrol) -- How the Deacon detects and recovers from the agent failures covered in this guide
 - [Hook Persistence: Why Work Survives Crashes](/blog/hook-persistence) -- How hooks ensure no work is lost during the crashes and restarts this guide helps diagnose
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- How fleet monitoring helps identify root causes of operational issues

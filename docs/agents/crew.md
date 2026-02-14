@@ -348,3 +348,4 @@ gt crew restart myproject dave
 - [Common Pitfalls](/blog/common-pitfalls) -- Mistakes to avoid when working alongside AI agents
 - [Crew Workflow](/blog/crew-workflow) -- End-to-end guide to setting up and using crew workspaces effectively
 - [Git Worktrees](/blog/git-worktrees) -- How Gas Town uses git worktrees and full clones for workspace isolation
+- [Hooks: The Persistence Primitive That Makes Gas Town Crash-Safe](/blog/hook-persistence) -- How crew workspace state persists through session cycling

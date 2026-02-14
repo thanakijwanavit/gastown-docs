@@ -724,3 +724,4 @@ gt formula create api-migration --from-molecule mol-auth-001 --description "API 
 - [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- A deep dive into the hook system that makes crash-safe, self-propelling agent workflows possible
 - [Molecules and Formulas: Multi-Step Workflows](/blog/molecules-and-formulas) -- How molecules and formulas orchestrate multi-step workflows across session boundaries
 - [Formula Design Patterns](/blog/formula-design-patterns) -- Reusable patterns for designing formulas that handle handoffs, gates, and multi-agent coordination
+- [Hooks: The Persistence Primitive That Makes Gas Town Crash-Safe](/blog/hook-persistence) -- How hooks preserve session state through cycling and restarts

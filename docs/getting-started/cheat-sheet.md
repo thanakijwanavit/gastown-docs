@@ -263,3 +263,4 @@ If you are working with multiple rigs, most commands accept a `--rig <name>` fla
 - [Your First Convoy in 5 Minutes](/blog/first-convoy) -- Quick walkthrough of creating beads, bundling a convoy, and watching polecats deliver
 - [Mastering gt sling](/blog/mastering-gt-sling) -- Complete guide to the sling command for assigning work to rigs and polecats
 - [The Crew Workflow](/blog/crew-workflow) -- How human developers use crew workspaces alongside the commands in this cheat sheet
+- [Welcome to the Gas Town Blog](/blog/welcome) -- Start here for an overview of the Gas Town platform

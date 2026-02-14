@@ -259,3 +259,4 @@ The `--args` string is stored in the bead and shown via `gt prime`. Since the ex
 - [The Mayor Workflow: Gas Town's Fully Automated Pipeline](/blog/mayor-workflow) -- How the MEOW workflow automates the journey from request to merged code
 - [Mastering gt sling](/blog/mastering-gt-sling) -- Practical guide to assignment patterns, cross-rig slinging, and troubleshooting
 - [Work Distribution Patterns in Gas Town](/blog/work-distribution-patterns) -- End-to-end patterns for distributing work across rigs and agents using sling
+- [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- How sling integrates with convoy orchestration for complex workflows

@@ -252,3 +252,4 @@ Run `gt doctor` after completing this quick start to verify all components are h
 - [Your First Convoy](/blog/first-convoy) -- Hands-on guide to getting your first batch of work running
 - [Your Second Convoy](/blog/your-second-convoy) -- Level up with dependencies, cross-rig work, and recovery patterns
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new users make during initial setup and first workflows
+- [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How crew members work within the Gas Town environment

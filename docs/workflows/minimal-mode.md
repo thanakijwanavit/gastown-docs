@@ -373,3 +373,4 @@ gantt
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog and getting started resources
 - [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical strategies for monitoring costs in reduced-overhead workflows
 - [Hook Persistence: Why Work Survives Crashes](/blog/hook-persistence) -- How hooks preserve work state even without the full agent hierarchy running
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How session cycling works in minimal mode deployments

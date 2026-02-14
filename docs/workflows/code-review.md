@@ -439,3 +439,4 @@ gantt
 - [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into the merge queue that integrates with review gate presets
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating custom TOML formulas for specialized workflows
 - [Formula Design Patterns for Gas Town](/blog/formula-design-patterns) -- Advanced patterns for designing convoy formulas like the code-review workflow
+- [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- How Git workflows support multi-agent code review processes

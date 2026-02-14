@@ -515,3 +515,4 @@ mindmap
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How the Gas Town Universal Propulsion Principle makes multi-agent development crash-safe by design
 - [Gas Town vs Traditional CI/CD: What's Different?](/blog/gas-town-vs-cicd) -- How Gas Town's agent-driven model complements and extends traditional CI/CD pipelines
 - [The Eight Stages of AI Coding: A Self-Assessment](/blog/eight-stages-self-assessment) -- Evaluate where you fall on the AI coding maturity curve that underpins Gas Town's philosophy
+- [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- The architectural philosophy behind hook-driven agent persistence

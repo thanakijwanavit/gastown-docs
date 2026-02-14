@@ -211,3 +211,4 @@ stateDiagram-v2
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale
 - [The Escalation System](/blog/escalation-system) -- How escalations flow through the supervision tree from polecats to the human overseer
+- [Agent-to-Agent Communication: Mail, Nudges, and Hooks](/blog/agent-communication-patterns) -- How agents at different hierarchy levels communicate

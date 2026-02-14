@@ -323,3 +323,4 @@ gt deacon status             # Verify Deacon is processing mail
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for running at scale with dozens of concurrent agents
 - [Infrastructure Dogs: The Cleanup Crew Behind Gas Town](/blog/infrastructure-dogs) -- How dogs handle cross-rig cleanup, syncing, migrations, and rebuilding
 - [Death Warrants](/blog/death-warrants) -- How stuck dogs receive death warrants and get cleaned up by the system
+- [Boot Dogs: The Daemon's Triage Engine](/blog/boot-dogs) -- How Boot runs as a specialized dog for daemon-level triage

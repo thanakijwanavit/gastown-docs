@@ -477,3 +477,4 @@ pie title Formula Usage by Type (Typical Deployment)
 - [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) -- Cross-rig tracking, dependency chains, and parallel fan-out for convoy formulas
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- Decision framework comparing formula workflows with manual convoys and Mayor orchestration
 - [Formula Design Patterns for Gas Town](/blog/formula-design-patterns) -- Reusable patterns for structuring TOML formulas with steps, gates, and variable templating
+- [Molecules and Formulas: Gas Town's Workflow Engine](/blog/molecules-and-formulas) -- How molecules power the formula workflow engine

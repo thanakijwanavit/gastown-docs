@@ -278,3 +278,4 @@ See the [Operations Guide](../operations/troubleshooting.md) and [Lifecycle Mana
 - [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Using tap and feed data to monitor costs and optimize agent spending
 - [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- How the hook system integrates with tap guards to enforce policy at the tool execution layer
 - [Gas Town's Security Model](/blog/security-model) -- How tap guards fit into the broader security architecture of trust boundaries and permission scoping
+- [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- How tap monitoring scales with fleet size

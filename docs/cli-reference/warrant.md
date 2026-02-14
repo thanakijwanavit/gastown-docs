@@ -290,3 +290,4 @@ If an agent is terminated but respawns immediately:
 - [Gas Town's Security Model: Trust Boundaries for AI Agents](/blog/security-model) -- How Gas Town implements security through workspace isolation, permission scoping, and trust boundaries
 - [Incident Response in Gas Town](/blog/incident-response) -- How to respond when agents get stuck, including warrant filing, escalation, and recovery procedures
 - [The Witness Explained](/blog/witness-explained) -- How the Witness detects stuck agents and files warrants as part of its patrol cycle
+- [Lifecycle Management: Parking, Docking, and Maintaining Your Rigs](/blog/lifecycle-management) -- How warrants integrate with lifecycle management for graceful termination

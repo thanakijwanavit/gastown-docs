@@ -297,3 +297,4 @@ gt town shutdown
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale
 - [The Mayor Workflow: Strategic Coordination in Gas Town](/blog/mayor-workflow) -- How the Mayor coordinates work distribution and convoy management at the town level
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring town health, tracking agent activity, and catching problems early
+- [Understanding Rigs: Gas Town's Project Containers](/blog/understanding-rigs) -- How town-level commands manage the rig infrastructure
