@@ -255,6 +255,26 @@ Two concepts cut across all MEOW layers rather than living in a single layer:
 - **[Gates](gates.md)** -- Gates can pause execution at any layer. A molecule step can be gated, a convoy can be blocked on gated beads, and formulas can define gate conditions in their step definitions.
 - **[GUPP & NDI](gupp.md)** -- The forward-only progress guarantee applies at every layer: beads move forward, molecules checkpoint steps, convoys auto-close when complete, and formulas produce idempotent molecules.
 
+### MEOW Stack Layer Summary
+
+Each layer of the MEOW stack builds on the one below, from atomic beads to reusable formula templates.
+
+```mermaid
+graph TD
+    L5["Layer 5: Formulas<br/>Reusable TOML templates"]
+    L4["Layer 4: Protomolecules<br/>Multi-agent orchestration"]
+    L3["Layer 3: Molecules<br/>Multi-step workflows"]
+    L2["Layer 2: Convoys<br/>Batched work tracking"]
+    L1["Layer 1: Beads<br/>Atomic work units"]
+    L5 --> L4
+    L4 --> L3
+    L3 --> L2
+    L2 --> L1
+    HC["Hooks & Gates<br/>Cross-cutting"] -.-> L5
+    HC -.-> L3
+    HC -.-> L1
+```
+
 ## Related Concepts
 
 - **[Beads](beads.md)** -- Layer 1: the atomic work units that form the foundation

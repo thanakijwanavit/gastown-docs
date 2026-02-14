@@ -367,6 +367,22 @@ See the [Quick Start](../getting-started/quickstart.md) guide for a step-by-step
 
 :::
 
+### Rig Directory Structure Overview
+
+Each rig contains a self-contained set of directories for agents, workers, and infrastructure.
+
+```mermaid
+graph TD
+    RIG["Rig Directory"] --> BD[".beads/<br/>Issue DB + Formulas"]
+    RIG --> CFG["config.json"]
+    RIG --> REF["refinery/rig/<br/>Merge queue clone"]
+    RIG --> MAY["mayor/rig/<br/>Mayor working copy"]
+    RIG --> CRW["crew/<br/>Human workspaces"]
+    RIG --> WIT["witness/<br/>Health monitor"]
+    RIG --> POL["polecats/<br/>Worker sandboxes"]
+    RIG --> PLG["plugins/<br/>Rig plugins"]
+```
+
 ## Related Concepts
 
 - **[Beads](beads.md)** -- Each rig has its own `.beads/` database with a unique prefix for issue identification

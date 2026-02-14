@@ -408,6 +408,20 @@ If you notice the Refinery repeatedly rejecting MRs from the same rig due to tes
 
 :::
 
+### Refinery Command Flow
+
+```mermaid
+graph TD
+    A[gt refinery start] --> B[Monitor queue]
+    B --> C[gt refinery ready]
+    C --> D[gt refinery claim MR]
+    D --> E[Rebase + validate]
+    E -->|pass| F[Merge to main]
+    E -->|fail| G[gt refinery release]
+    G --> B
+    F --> B
+```
+
 ## Related
 
 - [Refinery](../agents/refinery.md) -- How the Refinery agent processes merge requests

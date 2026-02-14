@@ -964,6 +964,19 @@ gt crew restart <rig> <member> [options]
 gt crew restart myproject dave
 ```
 
+### Agent Command Categories
+
+Agent CLI commands fall into several categories based on their purpose.
+
+```mermaid
+graph TD
+    Commands["Agent Commands"] --> Lifecycle["Lifecycle<br/>start / stop / restart"]
+    Commands --> Status["Status<br/>status / list / agents"]
+    Commands --> Session["Session<br/>attach / at"]
+    Commands --> Cleanup["Cleanup<br/>nuke / gc / stale"]
+    Commands --> Config["Config<br/>role / add / remove"]
+```
+
 ## Related
 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Supervision tree and monitoring chain

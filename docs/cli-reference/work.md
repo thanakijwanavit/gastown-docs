@@ -753,6 +753,20 @@ Moving a hooked bead without `--force` will fail. Unsling it first, or use `--fo
 
 
 :::
+### Work Command Flow
+
+```mermaid
+graph LR
+    A[bd create] --> B[gt ready]
+    B --> C[gt sling]
+    C --> D[gt hook]
+    D --> E[Agent works]
+    E --> F{Outcome}
+    F -->|Success| G[gt done]
+    F -->|Blocked| H[gt done --escalate]
+    F -->|Paused| I[gt done --defer]
+```
+
 ## Related
 
 - [Work Distribution](../architecture/work-distribution.md) -- How work flows through Gas Town

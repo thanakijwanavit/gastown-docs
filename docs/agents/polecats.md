@@ -429,6 +429,22 @@ pie title Polecat Session Activity
 ```
 
 
+### Polecat Lifecycle States
+
+A polecat transitions through a fixed set of states from spawn to cleanup, with no idle state.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Spawned: gt sling
+    Spawned --> Working: Hook loaded
+    Working --> Done: gt done
+    Done --> Nuked: Witness cleanup
+    Nuked --> [*]
+    Working --> Stalled: No progress
+    Stalled --> Zombie: Unrecoverable
+    Zombie --> Nuked: Witness cleanup
+```
+
 ## Related
 
 - [GUPP](../concepts/gupp.md) -- The propulsion principle that drives polecat execution

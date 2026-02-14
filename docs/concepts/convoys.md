@@ -320,6 +320,22 @@ Run `gt convoy list` frequently to see the big picture. For live progress, use `
 
 :::
 
+### Convoy Composition Overview
+
+A convoy combines beads from one or more rigs, tracked by the Deacon, and reported to the Mayor for oversight.
+
+```mermaid
+graph TD
+    Mayor["Mayor"] -->|creates| CV["Convoy"]
+    CV -->|contains| B1["Bead 1"]
+    CV -->|contains| B2["Bead 2"]
+    CV -->|contains| B3["Bead 3"]
+    B1 -->|assigned to| P1["Polecat"]
+    B2 -->|assigned to| P2["Polecat"]
+    B3 -->|assigned to| P3["Polecat"]
+    Deacon["Deacon"] -->|monitors| CV
+```
+
 ## Related Concepts
 
 - **[Beads](beads.md)** -- Convoys track collections of beads; each tracked item is a bead with its own status and lifecycle

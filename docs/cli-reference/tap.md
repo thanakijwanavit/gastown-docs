@@ -267,6 +267,20 @@ See the [Operations Guide](../operations/troubleshooting.md) and [Lifecycle Mana
 
 :::
 
+### Tap Monitoring Flow
+
+```mermaid
+graph TD
+    A[Tool call initiated] --> B[PreToolUse hook]
+    B --> C[gt tap guard]
+    C -->|Exit 0| D[Tool executes]
+    C -->|Exit 2| E[Tool blocked]
+    D --> F[PostToolUse hook]
+    F --> G[gt tap audit]
+    G --> H[Result returned]
+    E --> I[Agent notified]
+```
+
 ## Related
 
 - [Git Workflow Guide](../guides/git-workflow.md) -- Why Gas Town uses direct-to-main instead of PRs

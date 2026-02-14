@@ -261,6 +261,22 @@ bd show <promoted-bead-id>
 Compaction is irreversible for deletions. Use `--dry-run` first to verify what will be removed. Dolt's `AS OF` feature preserves historical data, but direct recovery is not straightforward.
 :::
 
+### Compaction Workflow
+
+The compaction process runs as part of the Deacon patrol cycle, scanning wisps and applying TTL policies.
+
+```mermaid
+graph TD
+    Patrol["Deacon Patrol"] --> Scan["Scan Wisps"]
+    Scan --> Check["Check TTL & Status"]
+    Check --> Delete["Delete expired closed"]
+    Check --> Promote["Promote expired open"]
+    Check --> Skip["Skip within TTL"]
+    Delete --> Report["Generate Digest"]
+    Promote --> Report
+    Skip --> Report
+```
+
 ## Related
 
 - [Wisps](../concepts/wisps.md) -- The ephemeral beads that compaction manages

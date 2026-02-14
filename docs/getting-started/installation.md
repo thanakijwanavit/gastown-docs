@@ -239,6 +239,25 @@ pie title Supported AI Runtimes
     "Amp" : 10
 ```
 
+### Installation Steps Overview
+
+The installation process progresses from choosing an install method through dependency setup to verification.
+
+```mermaid
+graph TD
+    A["Choose install method"] --> B["Homebrew / npm / Source"]
+    B --> C["Install gt CLI"]
+    C --> D["Install Git 2.25+"]
+    C --> E["Install Beads bd"]
+    C --> F["Install tmux"]
+    C --> G["Install AI Runtime"]
+    D --> H["Run gt doctor"]
+    E --> H
+    F --> H
+    G --> H
+    H --> I["Setup complete"]
+```
+
 ## Related
 
 - [Quick Start](quickstart.md) -- Set up your workspace and give the Mayor your first instructions

@@ -450,6 +450,23 @@ The pattern is consistent: what seems excessive today becomes standard practice 
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
 
+### Stage Progression Overview
+
+Each stage builds on the previous, progressing from zero AI to full multi-agent orchestration.
+
+```mermaid
+graph TD
+    S1["Stage 1: Zero AI"] --> S2["Stage 2: Completions"]
+    S2 --> S3["Stage 3: Chat in IDE"]
+    S3 --> S4["Stage 4: Agent in IDE"]
+    S4 --> S5["Stage 5: CLI Single Agent"]
+    S5 --> S6["Stage 6: Multi-Agent 3-5"]
+    S6 --> S7["Stage 7: 10+ Hand-Managed"]
+    S7 --> S8["Stage 8: Orchestration<br/>Gas Town"]
+    style S7 fill:#ff9,stroke:#333
+    style S8 fill:#9f9,stroke:#333
+```
+
 ## Related
 
 - [Background & Philosophy](philosophy.md) -- The inevitability argument, Software Survival 3.0, and community reception

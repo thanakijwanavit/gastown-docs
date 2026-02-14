@@ -464,6 +464,25 @@ gt polecat sync <rig>/<polecat> [flags]
 
 Previously required when beads used file-based storage to ensure polecat bead state was consistent with the rig's beads directory. With the Dolt backend, all beads operations go through the database directly, making this command unnecessary.
 
+### Polecat Command Categories
+
+```mermaid
+graph TD
+    A[gt polecat] --> B[Lifecycle]
+    A --> C[Health]
+    A --> D[Cleanup]
+    A --> E[Identity]
+    B --> B1[list]
+    B --> B2[status]
+    B --> B3[nuke]
+    C --> C1[stale]
+    C --> C2[check-recovery]
+    C --> C3[git-state]
+    D --> D1[gc]
+    D --> D2[remove]
+    E --> E1[identity add/show/rename]
+```
+
 ## Related
 
 - [Polecats](../agents/polecats.md) -- Ephemeral worker lifecycle and design philosophy

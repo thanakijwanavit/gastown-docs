@@ -904,6 +904,22 @@ pie title Common Troubleshooting Issues by Category
     "Git worktree problems" : 5
 ```
 
+### Debug Workflow
+
+```mermaid
+flowchart TD
+    ISSUE[Problem Detected] --> DOCTOR[gt doctor]
+    DOCTOR -->|Failures found| FIX[gt doctor --fix]
+    DOCTOR -->|All pass| DIG[Dig deeper]
+    DIG --> PEEK[gt peek agent]
+    DIG --> TRAIL[gt trail --since 1h]
+    DIG --> ORPHANS[gt orphans]
+    PEEK --> NUDGE[gt nudge agent]
+    NUDGE -->|No response| RESTART[Restart agent]
+    FIX --> VERIFY[gt doctor again]
+    RESTART --> VERIFY
+```
+
 ## Related
 
 - [Troubleshooting Guide](../guides/troubleshooting.md) -- Common problems with step-by-step solutions for new users

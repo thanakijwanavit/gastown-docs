@@ -470,6 +470,21 @@ Blockers: none
 Merge status: 2 merged, 0 in queue
 ```
 
+### Convoy Lifecycle
+
+A convoy progresses from creation through dispatch, execution, and completion to synthesis.
+
+```mermaid
+graph LR
+    Create["Create"] --> Add["Add Beads"]
+    Add --> Sling["Sling to Rigs"]
+    Sling --> Active["Polecats Working"]
+    Active --> Complete["All Beads Done"]
+    Complete --> Synthesis["Synthesis Report"]
+    Active --> Stalled["Stranded"]
+    Stalled --> Sling
+```
+
 ## Related
 
 - [Convoys (Concept)](../concepts/convoys.md) -- What convoys are and how they track work

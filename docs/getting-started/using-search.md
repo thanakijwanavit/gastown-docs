@@ -454,6 +454,22 @@ Happy searching! If you can't find what you need, consider filing a [documentati
 The search index is rebuilt on every documentation deployment. If you're running the docs locally with `npm start`, the search index updates automatically when you save changes.
 :::
 
+### Search Strategy Decision Tree
+
+Choose the right search approach based on what you need to find.
+
+```mermaid
+graph TD
+    START["Need information"] --> KNOW{"Know the<br/>exact term?"}
+    KNOW -->|Yes| EXACT["Search exact term<br/>e.g. gt sling"]
+    KNOW -->|No| BROAD["Try broad concept<br/>e.g. agent, workflow"]
+    EXACT --> FOUND{"Results?"}
+    BROAD --> FOUND
+    FOUND -->|Yes| DONE["Navigate to result"]
+    FOUND -->|No| ALT["Try related terms<br/>or browse sidebar"]
+    ALT --> DONE
+```
+
 ## Related
 
 - [Glossary](../guides/glossary.md) -- Complete terminology reference for Gas Town agents, concepts, and commands

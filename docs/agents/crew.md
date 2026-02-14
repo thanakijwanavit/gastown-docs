@@ -335,6 +335,18 @@ gt crew at myproject dave            # Re-attach to existing session
 gt crew restart myproject dave
 ```
 
+### Crew Workspace Structure
+
+How a human developer connects to the Gas Town workspace hierarchy through a crew workspace.
+
+```mermaid
+graph LR
+    Human["Human Developer"] --> Crew["Crew Workspace"]
+    Crew --> Workspace["~/gt/rig/crew/name/"]
+    Workspace --> Git["Full Git Clone"]
+    Git --> Remote["Remote Repository"]
+```
+
 ## Related
 
 - [Polecats](polecats.md) -- AI workers that crew members work alongside

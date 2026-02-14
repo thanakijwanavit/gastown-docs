@@ -292,6 +292,23 @@ mindmap
         State equivalence
 ```
 
+### GUPP Crash Recovery Sequence
+
+When an agent crashes, GUPP ensures forward-only recovery through the hook and molecule system.
+
+```mermaid
+graph TD
+    A["Agent Crash"] --> B["Hook persists in worktree"]
+    B --> C["Fresh agent spawns"]
+    C --> D["Reads hook bead ID"]
+    D --> E["Loads molecule state"]
+    E --> F{"Step already done?"}
+    F -->|Yes| G["Skip step"]
+    F -->|No| H["Resume step"]
+    G --> I["Continue forward"]
+    H --> I
+```
+
 ## Related Concepts
 
 - **[Hooks](hooks.md)** -- The primary mechanism that makes GUPP possible: hooks persist across all session boundaries

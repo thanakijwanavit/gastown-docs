@@ -250,6 +250,22 @@ If you are working with multiple rigs, most commands accept a `--rig <name>` fla
 | `↑` / `↓` | Navigate search results |
 | `Enter` | Go to selected result |
 
+### Command Categories Overview
+
+Gas Town commands fall into distinct categories based on what they manage.
+
+```mermaid
+graph TD
+    CMD["Gas Town Commands"] --> GT["gt (Agents & Workflows)"]
+    CMD --> BD["bd (Beads & Issues)"]
+    GT --> LIFE["Lifecycle<br/>start, down, shutdown"]
+    GT --> MON["Monitoring<br/>feed, doctor, costs"]
+    GT --> WORK["Work<br/>sling, convoy, hook"]
+    GT --> COMM["Communication<br/>mail, nudge, escalate"]
+    BD --> ISSUE["Issues<br/>create, list, close"]
+    BD --> DEPS["Dependencies<br/>dep add, ready"]
+```
+
 ## Related
 
 - [Installation](installation.md) -- Install Gas Town and its dependencies

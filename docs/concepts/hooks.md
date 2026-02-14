@@ -308,6 +308,26 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 
 :::
 
+### Hook Types and Triggers
+
+Hooks can be set through several mechanisms, each serving a different workflow need.
+
+```mermaid
+graph TD
+    HK["Hook"] --> AUTO["Automatic"]
+    HK --> MANUAL["Manual"]
+    AUTO --> SL["gt sling<br/>Work assignment"]
+    AUTO --> HO["gt handoff<br/>Session cycling"]
+    AUTO --> MA["gt mol attach<br/>Molecule binding"]
+    MANUAL --> GH["gt hook bead-id<br/>Self-assign"]
+    MANUAL --> MH["gt mail hook<br/>Hook mail as work"]
+    SL --> EXEC["Agent executes work"]
+    HO --> EXEC
+    MA --> EXEC
+    GH --> EXEC
+    MH --> EXEC
+```
+
 ## Related Concepts
 
 - **[Beads](beads.md)** -- The hook stores the bead ID of the assigned work; the bead's status transitions to `hooked` when slung

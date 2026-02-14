@@ -702,6 +702,22 @@ stateDiagram-v2
     Land --> [*]: gt down or continue overnight
 ```
 
+### Daily Usage Patterns
+
+```mermaid
+graph TD
+    START[Morning Startup] --> FLEET[gt start --all]
+    FLEET --> CHECK[gt trail --since 12h]
+    CHECK --> ESC[gt escalate list]
+    ESC --> MAYOR[gt may at]
+    MAYOR --> DELEGATE[Sling work to rigs]
+    DELEGATE --> MONITOR[gt feed / gt trail]
+    MONITOR --> CREW[gt crew at name]
+    CREW --> REVIEW[Review output]
+    REVIEW --> LAND[Landing checklist]
+    LAND --> END[gt down or overnight]
+```
+
 ## Related
 
 - [Quick Start](../getting-started/quickstart.md) -- Initial setup and first steps with Gas Town

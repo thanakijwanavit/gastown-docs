@@ -494,6 +494,21 @@ gantt
 When you resolve a recurring issue, add a note to the rig's CLAUDE.md explaining the failure pattern and solution. Future polecats can reference this documentation instead of re-discovering the same fix. Over time, this builds institutional knowledge that reduces troubleshooting time for similar problems.
 :::
 
+### Troubleshooting Decision Flow
+
+```mermaid
+flowchart TD
+    START[Issue detected] --> CHECK{What type?}
+    CHECK -->|Agent not working| PEEK[gt peek agent]
+    CHECK -->|Work not moving| TRAIL[gt trail --since 1h]
+    CHECK -->|Merge stuck| MQ[gt refinery queue]
+    CHECK -->|System health| DOC[gt doctor]
+    PEEK --> NUDGE{Responds?}
+    NUDGE -->|No| RESTART[Restart agent]
+    NUDGE -->|Yes| GUIDE[Provide guidance]
+    DOC --> AUTOFIX[gt doctor --fix]
+```
+
 ## Related
 
 - [Operations: Troubleshooting](../operations/troubleshooting.md) -- Comprehensive reference covering all troubleshooting topics

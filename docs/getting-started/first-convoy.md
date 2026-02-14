@@ -240,6 +240,19 @@ Convoys auto-close when all tracked beads complete. You do not need to manually 
 
 :::
 
+### First Convoy Step-by-Step
+
+The six steps to creating and completing your first convoy follow a clear progression.
+
+```mermaid
+graph LR
+    S1["Step 1<br/>Create Issues"] --> S2["Step 2<br/>Create Convoy"]
+    S2 --> S3["Step 3<br/>Sling Work"]
+    S3 --> S4["Step 4<br/>Monitor Progress"]
+    S4 --> S5["Step 5<br/>Merge Queue"]
+    S5 --> S6["Step 6<br/>Convoy Completes"]
+```
+
 ## Related
 
 - [Convoys](../concepts/convoys.md) -- Full documentation of convoy tracking, dependencies, and auto-close

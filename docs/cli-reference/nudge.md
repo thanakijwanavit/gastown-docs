@@ -269,6 +269,20 @@ pie title Nudge Delivery Success Patterns
     "Session not found, failed" : 5
 ```
 
+### Nudge Delivery Path
+
+```mermaid
+graph LR
+    A[Sender] --> B[gt nudge]
+    B --> C{Target Type}
+    C -->|Agent| D[tmux session]
+    C -->|Channel| E[All members]
+    C -->|Role shortcut| F[Resolve name]
+    F --> D
+    D --> G[Message delivered]
+    E --> G
+```
+
 ## Related
 
 - [Communication](./communication.md) -- Full communication command reference (mail, escalations, broadcasts)

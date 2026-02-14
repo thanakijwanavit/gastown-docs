@@ -443,6 +443,21 @@ Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for d
 
 :::
 
+### Molecule Lifecycle Overview
+
+A molecule progresses from formula template through execution to completion or archival.
+
+```mermaid
+graph LR
+    F["Formula<br/>TOML template"] -->|pour| M["Molecule<br/>Live instance"]
+    M -->|execute| S["Steps run<br/>in sequence"]
+    S -->|all done| C["Molecule<br/>complete"]
+    C -->|archive| B["gt mol burn"]
+    C -->|compress| Q["gt mol squash<br/>Digest bead"]
+    S -->|crash| R["Resume from<br/>last checkpoint"]
+    R --> S
+```
+
 ## Related Concepts
 
 - **[Hooks](hooks.md)** -- Molecules are stored on an agent's hook, enabling crash-safe workflow resume across sessions

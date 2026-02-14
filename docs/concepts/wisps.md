@@ -249,6 +249,22 @@ sequenceDiagram
     D->>D: Evaluate: promote wisp or nuke polecat
 ```
 
+### Wisp Lifecycle Summary
+
+Wisps progress from creation through execution to cleanup, with promotion as the exception path for stuck steps.
+
+```mermaid
+graph TD
+    P["Pour formula"] --> W["Wisp created<br/>pending"]
+    W --> IP["in_progress"]
+    IP --> D["done"]
+    IP --> F["failed"]
+    F -->|retry| IP
+    D --> CL["Cleanup with<br/>parent molecule"]
+    IP -->|TTL exceeded| PR["Promoted to<br/>permanent bead"]
+    PR --> INV["Investigate<br/>stuck workflow"]
+```
+
 ## Related Concepts
 
 - **[Molecules & Formulas](molecules.md)** -- Wisps are the per-step tracking units within molecules

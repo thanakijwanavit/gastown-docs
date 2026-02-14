@@ -574,6 +574,21 @@ stateDiagram-v2
     HumanAction --> Fix
 ```
 
+### Monitoring Stack Layers
+
+```mermaid
+graph TD
+    RT[Real-Time Layer] --> FEED[gt feed]
+    RT --> DASH[gt dashboard]
+    HIST[Historical Layer] --> TRAIL[gt trail]
+    HIST --> AUDIT[gt audit]
+    HIST --> LOG[gt log]
+    DIAG[Diagnostic Layer] --> DOC[gt doctor]
+    DIAG --> PATROL[gt patrol digest]
+    COST[Cost Layer] --> COSTS[gt costs]
+    FEED & TRAIL & DOC & COSTS --> HUMAN[Human Operator]
+```
+
 ## Related
 
 - [Troubleshooting](troubleshooting.md) -- Detailed diagnosis and resolution for problems surfaced by monitoring

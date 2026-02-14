@@ -382,6 +382,20 @@ gantt
     Update bead status           :05:30, 06:00
     Notify polecat               :06:00, 06:10
 ```
+### MQ State Transitions
+
+```mermaid
+graph LR
+    A[Submitted] --> B[Pending]
+    B --> C[Processing]
+    C -->|pass| D[Validated]
+    D --> E[Merged]
+    C -->|fail| F[Rejected]
+    C -->|conflict| G[Conflict]
+    F -->|retry| B
+    G -->|resolved| B
+```
+
 ## Related
 
 - [Refinery](../agents/refinery.md) -- The agent that processes the merge queue

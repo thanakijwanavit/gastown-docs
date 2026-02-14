@@ -365,6 +365,19 @@ timeline
                : Bead closed automatically
 ```
 
+### Bead Lifecycle States
+
+```mermaid
+stateDiagram-v2
+    [*] --> pending: bd create
+    pending --> hooked: gt sling
+    hooked --> in_progress: Agent starts
+    in_progress --> done: gt done + merge
+    in_progress --> escalated: gt done --escalate
+    escalated --> pending: Re-assigned
+    done --> [*]
+```
+
 ## Related Concepts
 
 - **[Hooks](hooks.md)** -- Hooks attach beads to agents, creating the `hooked` status and enabling crash-safe work assignment

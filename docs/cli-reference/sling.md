@@ -246,6 +246,23 @@ The `--args` string is stored in the bead and shown via `gt prime`. Since the ex
 
 :::
 
+### Sling Routing
+
+```mermaid
+graph TD
+    A[gt sling bead target] --> B{Target?}
+    B -->|Rig name| C[Auto-spawn polecat]
+    B -->|rig/polecat| D[Existing polecat]
+    B -->|mayor| E[Mayor agent]
+    B -->|deacon/dogs| F[Dog dispatch]
+    B -->|none| G[Self-assign]
+    C --> H[Bead on hook]
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+```
+
 ## Related
 
 - [Work Distribution](../architecture/work-distribution.md) -- How work flows from beads to agents

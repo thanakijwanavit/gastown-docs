@@ -868,6 +868,23 @@ graph TD
     style Async fill:#afa
 ```
 
+### Communication Flow Between Agents
+
+Messages flow through the filesystem-based communication layer using different mechanisms depending on urgency.
+
+```mermaid
+graph LR
+    Sender["Sender"] --> Mail["gt mail send<br/>(Async)"]
+    Sender --> Nudge["gt nudge<br/>(Sync)"]
+    Sender --> Broadcast["gt broadcast<br/>(All agents)"]
+    Mail --> Mailbox["Recipient Mailbox"]
+    Nudge --> Session["Active Session"]
+    Broadcast --> AllBoxes["All Mailboxes"]
+    Mailbox --> Recipient["Recipient"]
+    Session --> Recipient
+    AllBoxes --> Recipient
+```
+
 ## Related
 
 - [gt nudge](./nudge.md) -- Synchronous message delivery to running sessions

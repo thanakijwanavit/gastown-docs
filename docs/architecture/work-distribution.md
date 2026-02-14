@@ -277,6 +277,19 @@ bd show gt-abc12            # Routes to gastown rig
 bd show hq-abc              # Routes to town-level beads
 ```
 
+### Distribution Method Usage
+
+Work in Gas Town is distributed through several methods, with Mayor-driven assignment being the most common.
+
+```mermaid
+pie title Work Distribution Methods
+    "Mayor gt sling" : 45
+    "Manual convoy" : 20
+    "Formula-driven" : 15
+    "Cross-rig (Dogs)" : 10
+    "Direct assignment" : 10
+```
+
 ## Related
 
 - [Beads](../concepts/beads.md) -- The atomic unit of tracked work that flows through the distribution pipeline

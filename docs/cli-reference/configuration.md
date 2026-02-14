@@ -469,6 +469,20 @@ gt plugin run my-plugin
 gt plugin list --json
 ```
 
+### Configuration Hierarchy
+
+Settings cascade from town level through rig and agent levels down to individual sessions, with each level able to override its parent.
+
+```mermaid
+graph TD
+    Town["Town Config<br/>~/gt/config.yaml"] --> Rig["Rig Config<br/>metadata.json"]
+    Rig --> Agent["Agent Config<br/>per-role settings"]
+    Agent --> Session["Session<br/>--agent flag"]
+    Town -.->|overrides| Rig
+    Rig -.->|overrides| Agent
+    Agent -.->|overrides| Session
+```
+
 ## Related
 
 - [Multi-Runtime Guide](../guides/multi-runtime.md) -- Using multiple AI coding agents with Gas Town

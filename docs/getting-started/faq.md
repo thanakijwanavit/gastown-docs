@@ -249,6 +249,22 @@ Polecats run preflight tests before implementing. If main is broken, they'll det
 - **GitHub Issues**: [steveyegge/gastown](https://github.com/steveyegge/gastown/issues)
 - **`gt doctor`**: Built-in diagnostics
 
+### FAQ Topic Areas
+
+The frequently asked questions span several key areas of Gas Town usage.
+
+```mermaid
+graph TD
+    FAQ["FAQ Topics"] --> GEN["General<br/>What is Gas Town?"]
+    FAQ --> SETUP["Setup<br/>Requirements & Install"]
+    FAQ --> AGENTS["Agents<br/>Behavior & Roles"]
+    FAQ --> WM["Work Management<br/>Beads & Convoys"]
+    FAQ --> COST["Costs<br/>Tokens & Budget"]
+    FAQ --> TROUBLE["Troubleshooting<br/>Recovery & Fixes"]
+    GEN --> START["Getting Started"]
+    TROUBLE --> DOC["gt doctor"]
+```
+
 ## Related
 
 - [Quick Start](quickstart.md) -- Get started with Gas Town from scratch

@@ -274,6 +274,17 @@ flowchart LR
 ```
 
 
+### Principle Categories
+
+The twelve design principles fall into three broad categories: foundation, agent behavior, and system coordination.
+
+```mermaid
+pie title Design Principle Categories
+    "Foundation (Propulsion, Supervision, Git Truth)" : 3
+    "Agent Behavior (Self-clean, Roles, Discovery)" : 4
+    "System Coordination (Scheduler, Communication, Human, Scotty)" : 5
+```
+
 ## Related
 
 - [Agent Hierarchy](agent-hierarchy.md) -- How the Erlang-inspired supervision tree implements these principles

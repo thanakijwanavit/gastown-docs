@@ -437,6 +437,22 @@ The Gas Town shell sets the `GT_ROLE` environment variable and configures the pr
 
 :::
 
+### Workspace Structure
+
+```mermaid
+graph TD
+    A["~/gt/ (Town)"] --> B[".beads/"]
+    A --> C["mayor/"]
+    A --> D["deacon/"]
+    A --> E["settings/"]
+    A --> F["Rig A"]
+    A --> G["Rig B"]
+    F --> F1["polecats/"]
+    F --> F2["refinery/"]
+    F --> F3["crew/"]
+    F --> F4["witness/"]
+```
+
 ## Related
 
 - [Installation](../getting-started/installation.md) -- Step-by-step setup guide for new users

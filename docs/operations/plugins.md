@@ -687,6 +687,23 @@ gantt
     Post-Merge Actions  :23, 25
 ```
 
+### Plugin Architecture Overview
+
+```mermaid
+graph TD
+    EVENT[Trigger Event] --> TYPE{Plugin Type}
+    TYPE -->|Gate| GATE[Gate Plugin]
+    TYPE -->|Action| ACTION[Action Plugin]
+    TYPE -->|Hook| HOOK[Hook Plugin]
+    TYPE -->|Schedule| SCHED[Schedule Plugin]
+    GATE --> PIPELINE[Merge Pipeline]
+    ACTION --> NOTIFY[Notifications]
+    HOOK --> LIFECYCLE[Agent Lifecycle]
+    SCHED --> MAINT[Maintenance Tasks]
+    GATE --> MANIFEST[plugin.json]
+    MANIFEST --> ENTRY[run.sh]
+```
+
 ## Related
 
 - [Gates](../concepts/gates.md) -- Async coordination primitives that plugins use to control workflow execution

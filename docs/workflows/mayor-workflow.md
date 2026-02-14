@@ -344,6 +344,22 @@ gantt
     Report to human     :41, 42
 ```
 
+### Mayor Request Routing
+
+```mermaid
+graph TD
+    INPUT[Human Request] --> ANALYZE[Mayor Analyzes]
+    ANALYZE --> BEADS[Create Beads]
+    BEADS --> CONVOY[Bundle into Convoy]
+    CONVOY --> DEPS{Dependencies?}
+    DEPS -->|Yes| ORDER[Sequence by dependency]
+    DEPS -->|No| PARALLEL[Assign in parallel]
+    ORDER --> SLING[gt sling to rigs]
+    PARALLEL --> SLING
+    SLING --> MONITOR[Monitor progress]
+    MONITOR --> REPORT[Report to human]
+```
+
 ## Related
 
 - [Mayor](../agents/mayor.md) -- Full documentation of the Mayor agent's capabilities and commands

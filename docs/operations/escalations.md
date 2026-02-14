@@ -530,6 +530,21 @@ gantt
     Stale               :12, 13
 ```
 
+### Escalation Levels Overview
+
+```mermaid
+graph TD
+    A[Agent Issue] --> B{Severity}
+    B -->|P3 Low| C[Bead Only]
+    B -->|P2 Medium| D[Bead + Mayor Mail]
+    B -->|P1 High| E[Bead + Mayor + Email]
+    B -->|P0 Critical| F[Bead + Mayor + Email + SMS]
+    C --> G[Best Effort]
+    D --> H[4h Response]
+    E --> I[1h Response]
+    F --> J[Immediate Response]
+```
+
 ## Related
 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that defines escalation paths between agents

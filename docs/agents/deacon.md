@@ -320,6 +320,27 @@ pie title Deacon Patrol Time Distribution
 ```
 
 
+### Deacon Patrol Phases
+
+The Deacon's patrol cycle progresses through distinct phases over each 5-minute interval.
+
+```mermaid
+timeline
+    title Deacon Patrol Cycle Phases
+    Heartbeat Received : Daemon sends heartbeat
+                       : Deacon acknowledges
+    Health Scan : Check all Witnesses
+               : Detect stale or dead agents
+    Gate Evaluation : Check timer gates
+                   : Close expired gates
+                   : Dispatch unblocked molecules
+    Cleanup : Orphan process removal
+            : Zombie detection
+            : Stale hook cleanup
+    Reporting : Send patrol digest
+             : Process mail queue
+```
+
 ## Related
 
 - [Boot](boot.md) -- The Daemon's watchdog that wakes the Deacon

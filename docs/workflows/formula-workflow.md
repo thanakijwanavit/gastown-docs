@@ -464,6 +464,22 @@ pie title Formula Usage by Type (Typical Deployment)
     "custom formulas" : 7
 ```
 
+### Formula Execution Pipeline
+
+```mermaid
+flowchart TD
+    SELECT[Select Formula] --> VARS[Provide Variables]
+    VARS --> POUR[gt formula run]
+    POUR --> MOL[Molecule Created]
+    MOL --> STEPS{Formula Type?}
+    STEPS -->|Workflow| SEQ[Sequential Steps]
+    STEPS -->|Convoy| PAR[Parallel Legs]
+    SEQ --> DONE[All Steps Complete]
+    PAR --> SYNTH[Synthesis Step]
+    SYNTH --> DONE
+    DONE --> OUTPUT[Final Output]
+```
+
 ## Related
 
 - [Molecules](../concepts/molecules.md) -- How molecules track multi-step workflows and provide crash recovery

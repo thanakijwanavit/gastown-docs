@@ -345,6 +345,20 @@ gantt
 ```
 
 
+### Merge Queue Processing Flow
+
+The Refinery processes each MR through a strict pipeline from submission to merge.
+
+```mermaid
+graph LR
+    Submit["MR Submitted"] --> Queue["Enter Queue"]
+    Queue --> Dequeue["Dequeue"]
+    Dequeue --> Rebase["Rebase onto main"]
+    Rebase --> Validate["Run Validation"]
+    Validate --> Merge["Merge to main"]
+    Merge --> Signal["Send MERGED"]
+```
+
 ## Related
 
 - [Polecats](polecats.md) -- Submit MRs that the Refinery processes

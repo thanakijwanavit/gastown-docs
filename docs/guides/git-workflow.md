@@ -593,6 +593,23 @@ The workflow adapts by:
 
 This requires more discipline but enables true parallel development.
 
+### Git Workflow Decision Steps
+
+```mermaid
+graph TD
+    A[Start: Ready to push?] --> B{Local changes?}
+    B -->|Yes| C[git add + commit]
+    B -->|No| G[Nothing to push]
+    C --> D[git fetch origin]
+    D --> E{Remote ahead?}
+    E -->|Yes| F[git rebase origin/master]
+    E -->|No| H[git push]
+    F --> I{Conflicts?}
+    I -->|Yes| J[Resolve + git rebase --continue]
+    I -->|No| H
+    J --> H
+```
+
 ## Related
 
 - [Architecture Guide](architecture.md) -- How the Refinery merge pipeline processes code from polecats to main

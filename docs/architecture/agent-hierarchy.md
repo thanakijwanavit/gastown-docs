@@ -198,6 +198,22 @@ stateDiagram-v2
     }
 ```
 
+### Supervision Tree Depth
+
+Each level of the hierarchy monitors the level below, forming a tree of increasing depth from the Daemon to ephemeral workers.
+
+```mermaid
+graph TD
+    L0["Level 0: Daemon<br/>(Go process)"]
+    L1["Level 1: Deacon<br/>(Town supervisor)"]
+    L2["Level 2: Witness<br/>(Rig supervisor)"]
+    L3["Level 3: Polecats<br/>(Ephemeral workers)"]
+
+    L0 --> L1
+    L1 --> L2
+    L2 --> L3
+```
+
 ## Related
 
 - [System Overview](overview.md) -- Five-layer architecture including agents, rigs, and communication

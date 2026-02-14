@@ -277,6 +277,21 @@ If an agent is terminated but respawns immediately:
 - Clear the hook first: `gt hook clear --target <agent>`, then re-file the warrant
 - Consider parking the rig temporarily: `gt rig park <rig>`
 
+### Warrant Execution Flow
+
+```mermaid
+graph TD
+    A[Agent unresponsive] --> B[Nudge attempts fail]
+    B --> C[gt warrant file]
+    C --> D[Warrant saved]
+    D --> E[Boot triage cycle]
+    E --> F[gt warrant execute]
+    F --> G[Session terminated]
+    G --> H{Work on hook?}
+    H -->|Yes| I[Release bead]
+    H -->|No| J[Cleanup done]
+```
+
 ## Related
 
 - [Boot](../agents/boot.md) -- Infrastructure helper that executes warrants during triage

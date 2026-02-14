@@ -239,6 +239,20 @@ Run `gt doctor` after completing this quick start to verify all components are h
 - [CLI Reference](../cli-reference/index.md) — Full command documentation
 - [Architecture](../architecture/index.md) — Understand the system design
 
+### Quickstart Flow
+
+The quickstart takes you from workspace creation through rig setup to giving the Mayor your first instructions.
+
+```mermaid
+graph LR
+    A["gt install ~/gt"] --> B["gt rig add"]
+    B --> C["gt crew add"]
+    C --> D["gt start"]
+    D --> E["gt mayor attach"]
+    E --> F["Give instructions"]
+    F --> G["Monitor with gt feed"]
+```
+
 ## Related
 
 - [Installation](installation.md) -- Detailed installation steps for Gas Town, Beads, and dependencies

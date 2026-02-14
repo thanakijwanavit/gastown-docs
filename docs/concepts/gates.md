@@ -331,6 +331,24 @@ Use gates whenever your workflow needs to wait for something external. Prefer ga
 
 :::
 
+### Gate Types at a Glance
+
+The following shows the five gate types and who is responsible for closing each one.
+
+```mermaid
+graph TD
+    G["Gates"] --> T["Timer Gate"]
+    G --> GH["GitHub Actions Gate"]
+    G --> PR["GitHub PR Gate"]
+    G --> H["Human Approval Gate"]
+    G --> M["Mail Gate"]
+    T --> D1["Deacon closes automatically"]
+    GH --> D2["Deacon polls GitHub"]
+    PR --> D3["Deacon polls GitHub"]
+    H --> HU["Human runs bd gate approve"]
+    M --> MS["Mail system closes automatically"]
+```
+
 ## Related Concepts
 
 - **[Molecules & Formulas](molecules.md)** -- Gates are embedded within molecule steps, pausing the workflow at the gated step

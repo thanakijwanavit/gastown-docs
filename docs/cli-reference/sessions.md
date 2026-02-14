@@ -712,6 +712,20 @@ gt formula create my-workflow --from workflow.yaml
 gt formula create api-migration --from-molecule mol-auth-001 --description "API version migration workflow"
 ```
 
+### Session Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> Primed: gt prime
+    Primed --> Working: Read hook
+    Working --> HandingOff: Context full
+    HandingOff --> [*]: gt handoff
+    Working --> Done: gt done
+    Done --> [*]: MR submitted
+    Working --> Parked: gt park
+    Parked --> Primed: gt resume
+```
+
 ## Related
 
 - [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes

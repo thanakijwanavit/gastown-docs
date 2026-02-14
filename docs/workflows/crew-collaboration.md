@@ -289,6 +289,23 @@ stateDiagram-v2
     FollowUp --> CreateBeads: bd create follow-up bead
 ```
 
+### Crew-Polecat Collaboration Flow
+
+```mermaid
+sequenceDiagram
+    participant Crew as Crew Member
+    participant BD as Beads
+    participant Polecat as Polecat
+    participant Main as main branch
+
+    Crew->>BD: Design spec (bd create)
+    BD->>Polecat: gt sling (assign work)
+    Polecat->>Polecat: Implement from spec
+    Polecat->>Main: gt done (merge)
+    Main->>Crew: git pull (review)
+    Crew->>BD: Follow-up bead (if needed)
+```
+
 ## Related
 
 - **[Crew Workspaces](../agents/crew.md)** -- Full documentation of crew workspace setup and capabilities

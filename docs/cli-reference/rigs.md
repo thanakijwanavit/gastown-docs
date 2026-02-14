@@ -576,6 +576,25 @@ gt rig settings myproject --set "validation.timeout=300"
 gt rig settings myproject --unset "validation.timeout"
 ```
 
+### Rig Command Categories
+
+```mermaid
+graph TD
+    A[gt rig] --> B[Setup]
+    A --> C[Lifecycle]
+    A --> D[State]
+    A --> E[Config]
+    B --> B1[add]
+    B --> B2[boot]
+    C --> C1[start / stop]
+    C --> C2[shutdown / reboot]
+    D --> D1[park / unpark]
+    D --> D2[dock / undock]
+    D --> D3[reset]
+    E --> E1[config]
+    E --> E2[settings]
+```
+
 ## Related
 
 - [Rigs Concept](../concepts/rigs.md) -- What rigs are and how they work

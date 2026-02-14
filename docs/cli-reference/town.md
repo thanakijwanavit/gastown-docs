@@ -282,6 +282,20 @@ gt town next          # Switch to Mayor
 gt town shutdown
 ```
 
+### Town Command Categories
+
+```mermaid
+graph LR
+    A[gt town] --> B[Navigation]
+    A --> C[Status]
+    A --> D[Lifecycle]
+    B --> B1[next]
+    B --> B2[prev]
+    C --> C1[status]
+    D --> D1[shutdown]
+    D --> D2[shutdown --force]
+```
+
 ## Related
 
 - [Starting & Stopping](../operations/lifecycle.md) -- Full lifecycle management for town and rig agents

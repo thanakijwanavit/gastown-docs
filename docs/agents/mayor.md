@@ -349,6 +349,19 @@ graph TD
 ```
 
 
+### Mayor Time Allocation
+
+The Mayor balances its processing time across core coordination activities.
+
+```mermaid
+pie title Mayor Processing Time
+    "Work Decomposition" : 30
+    "Convoy Monitoring" : 25
+    "Escalation Handling" : 20
+    "Mail Processing" : 15
+    "Strategic Direction" : 10
+```
+
 ## Related
 
 - [MEOW Stack](../concepts/meow-stack.md) -- The Mayor's orchestration workflow

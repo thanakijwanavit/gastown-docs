@@ -340,6 +340,21 @@ gantt
     Convoy auto-closes  :35, 36
 ```
 
+### Manual Convoy Steps
+
+```mermaid
+flowchart TD
+    CREATE[bd create issues] --> BUNDLE[gt convoy create]
+    BUNDLE --> SLING[gt sling per bead]
+    SLING --> SPAWN[Polecats spawned]
+    SPAWN --> WORK[Polecats implement]
+    WORK --> DONE[gt done per polecat]
+    DONE --> MERGE[Refinery merges]
+    MERGE --> CHECK{All done?}
+    CHECK -->|No| SLING
+    CHECK -->|Yes| COMPLETE[Convoy auto-closes]
+```
+
 ## Related
 
 - [Mayor Workflow](mayor-workflow.md) -- The fully automated alternative where the Mayor handles assignment

@@ -318,6 +318,17 @@ The triage log at `~/gt/deacon/dogs/boot/triage-log.jsonl` preserves Boot's deci
 
 :::
 
+### Boot Time Distribution
+
+Boot allocates its brief lifecycle across three phases, with observation consuming the most time.
+
+```mermaid
+pie title Boot Phase Time Allocation
+    "Observe" : 40
+    "Decide" : 35
+    "Act" : 25
+```
+
 ## Related
 
 - [Deacon](deacon.md) -- The agent that Boot monitors and wakes

@@ -421,6 +421,24 @@ pie title Runtime Usage Distribution (Example Multi-Runtime Fleet)
     "Cursor (IDE-integrated)" : 10
 ```
 
+### Runtime Capability Comparison
+
+```mermaid
+graph LR
+    Full["Full Hook Support"] --> Claude[Claude Code]
+    Partial["Partial Hook Support"] --> Gemini[Gemini CLI]
+    Partial --> Codex[Codex]
+    Limited["No Hook Support"] --> Cursor[Cursor]
+    Limited --> Auggie[Augment]
+    Limited --> Amp[Amp]
+    Claude -->|Auto context| Ready[Agent Ready]
+    Gemini -->|Adapter file| Ready
+    Codex -->|Adapter file| Ready
+    Cursor -->|gt prime| Ready
+    Auggie -->|gt prime| Ready
+    Amp -->|gt prime| Ready
+```
+
 ## Related
 
 - [Installation](../getting-started/installation.md) -- Supported runtimes and how to configure the default agent

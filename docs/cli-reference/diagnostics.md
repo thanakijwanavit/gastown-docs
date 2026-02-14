@@ -826,6 +826,23 @@ gt thanks
 
 **Description:** Shows the humans who have contributed to the Gas Town project.
 
+### Diagnostic Command Flow
+
+```mermaid
+graph TD
+    A[System Issue] --> B{Severity?}
+    B -->|Critical| C[gt doctor --fix]
+    B -->|Monitoring| D[gt feed --type work]
+    B -->|Investigation| E[gt trail bead-id]
+    C --> F[Review output]
+    D --> F
+    E --> F
+    F --> G{Resolved?}
+    G -->|No| H[gt orphans + gt cleanup]
+    G -->|Yes| I[System healthy]
+    H --> I
+```
+
 ## Related
 
 - [Troubleshooting](../operations/troubleshooting.md) -- Common issues and solutions

@@ -263,6 +263,22 @@ If you find orphaned commits from a recent polecat session, check the Witness lo
 
 :::
 
+### Orphan Detection Flow
+
+```mermaid
+flowchart TD
+    A[gt orphans] --> B[git fsck --unreachable]
+    B --> C{Orphan type?}
+    C -->|Commits| D[Dangling commits found]
+    C -->|Branches| E[Unmerged branches found]
+    C -->|Processes| F[gt orphans procs]
+    D --> G{Valuable?}
+    G -->|Yes| H[git cherry-pick]
+    G -->|No| I[gt orphans kill]
+    E --> I
+    F --> I
+```
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)

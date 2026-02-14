@@ -502,6 +502,21 @@ mindmap
         Error Handling
 ```
 
+### Philosophy Pillars
+
+```mermaid
+graph TD
+    GT[Gas Town Philosophy] --> IC[Inevitability of AI Orchestration]
+    GT --> LC[Let It Crash]
+    GT --> GUPP[GUPP: Always Move Forward]
+    GT --> VC[Vibe Coding Commitment]
+    GT --> SS[Software Survival 3.0]
+    IC --> S8[Stage 8: Full Orchestration]
+    LC --> Recovery[Crash-Safe Recovery]
+    GUPP --> Hooks[Hook Persistence]
+    SS --> Fitness[Survival Formula]
+```
+
 ## Related
 
 - [The 8 Stages of AI Coding](eight-stages.md) -- The maturity model that defines Gas Town's target audience

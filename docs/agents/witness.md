@@ -352,6 +352,19 @@ gantt
 ```
 
 
+### Witness Check Categories
+
+The Witness distributes its patrol attention across several check categories.
+
+```mermaid
+pie title Witness Patrol Check Distribution
+    "Polecat health" : 40
+    "Zombie detection" : 20
+    "Refinery health" : 15
+    "Mail processing" : 15
+    "Stall detection" : 10
+```
+
 ## Related
 
 - [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it

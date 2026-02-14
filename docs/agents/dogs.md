@@ -310,6 +310,19 @@ gt mail inbox                # Check Deacon's mailbox for DOG_DONE messages
 gt deacon status             # Verify Deacon is processing mail
 ```
 
+### Dog Types and Roles
+
+Dogs are specialized by purpose, with Boot being a unique triage-only dog and others handling general infrastructure.
+
+```mermaid
+graph TD
+    Deacon["Deacon<br/>(Dog Manager)"] --> Boot["Boot<br/>Triage Only"]
+    Deacon --> Fetch["Fetch<br/>Sync & Pull"]
+    Deacon --> Lint["Lint<br/>Code Quality"]
+    Deacon --> Cleanup["Cleanup<br/>Orphan Removal"]
+    Deacon --> Migrate["Migrate<br/>Schema Updates"]
+```
+
 ## Related
 
 - [Deacon](deacon.md) -- Manages the dog pool and dispatches tasks

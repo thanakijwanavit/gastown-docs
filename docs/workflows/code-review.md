@@ -426,6 +426,21 @@ gantt
     Generate Summary    :12, 14
 ```
 
+### Review Stage Progression
+
+```mermaid
+flowchart TD
+    PR[PR Submitted] --> LAUNCH[Launch Review]
+    LAUNCH --> LEGS[Parallel Legs Execute]
+    LEGS --> SYNTH[Synthesis Step]
+    SYNTH --> ASSESS{Critical Issues?}
+    ASSESS -->|P0 Found| BLOCK[Block Merge]
+    ASSESS -->|P1 Only| FLAG[Flag for Author]
+    ASSESS -->|Clean| APPROVE[Approve for Merge]
+    BLOCK --> AUTHFIX[Author Fixes]
+    AUTHFIX --> PR
+```
+
 ## Related
 
 - [Formula Workflow](formula-workflow.md) -- How to run, create, and customize formula templates

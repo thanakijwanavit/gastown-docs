@@ -364,6 +364,21 @@ gt nudge myproject/furiosa "Check your mail"
 gt session inject myproject/toast -f prompt.txt
 ```
 
+### Session Command Flow
+
+```mermaid
+graph TD
+    A[gt session start] --> B[tmux session running]
+    B --> C{Action needed?}
+    C -->|Monitor| D[gt session capture]
+    C -->|Debug| E[gt session at]
+    C -->|Health| F[gt session check]
+    C -->|Fix| G[gt session restart]
+    C -->|End| H[gt session stop]
+    E -->|Ctrl-B D| B
+    G --> B
+```
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (list, nuke, stale)

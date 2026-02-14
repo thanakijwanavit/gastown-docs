@@ -256,6 +256,25 @@ pie title Why Sessions Cycle
 
 ---
 
+### Session Cycling Triggers
+
+Different conditions trigger a session cycle, each with its own urgency level.
+
+```mermaid
+graph TD
+    T["Cycling Triggers"] --> CF["Context Full<br/>70%+ capacity"]
+    T --> LB["Logical Breakpoint<br/>Task chunk done"]
+    T --> HR["Human Request<br/>Manual cycle"]
+    T --> AC["Agent Confusion<br/>Repetition detected"]
+    T --> WN["Witness Nudge<br/>Health concern"]
+    CF --> HO["gt handoff"]
+    LB --> HO
+    HR --> HO
+    AC --> HO
+    WN --> HO
+    HO --> NS["New session resumes"]
+```
+
 ## Related Concepts
 
 - **[GUPP](gupp.md)** -- The propulsion principle ensures the new session immediately executes hooked work

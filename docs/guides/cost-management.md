@@ -436,6 +436,20 @@ flowchart TD
 
 6. **Use `gt down` during breaks.** Do not leave the fleet running during lunch or meetings unless you have active work in progress.
 
+### Cost Distribution by Category
+
+Token spend across a typical Gas Town deployment breaks down into agent work, monitoring, and coordination.
+
+```mermaid
+pie title Cost Categories (Typical Deployment)
+    "Polecat coding work" : 65
+    "Witness monitoring" : 10
+    "Refinery merges" : 8
+    "Mayor coordination" : 8
+    "Deacon oversight" : 5
+    "Infrastructure" : 4
+```
+
 ## Related
 
 - [Monitoring & Health](../operations/monitoring.md) -- The `gt costs` command and real-time cost tracking

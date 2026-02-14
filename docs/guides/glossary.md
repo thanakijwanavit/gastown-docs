@@ -261,6 +261,22 @@ stateDiagram-v2
     closed --> [*]
 ```
 
+### Term Relationships Across Layers
+
+```mermaid
+graph TD
+    Town[Town] --> Rig1[Rig]
+    Town --> Rig2[Rig]
+    Rig1 --> Witness[Witness]
+    Rig1 --> Refinery[Refinery]
+    Rig1 --> Polecat1[Polecat]
+    Polecat1 --> Hook[Hook]
+    Hook --> Bead[Bead]
+    Bead --> Convoy[Convoy]
+    Bead --> Molecule[Molecule]
+    Molecule --> Formula[Formula]
+```
+
 ## Related
 
 - [Architecture Guide](architecture.md) -- Narrative walkthrough of how all the components work together

@@ -632,6 +632,21 @@ gantt
     All Systems Ready   :17, 18
 ```
 
+### Rig Lifecycle Transitions
+
+```mermaid
+stateDiagram-v2
+    [*] --> Added: gt rig add
+    Added --> Booted: gt rig boot
+    Booted --> Running: Agents started
+    Running --> Paused: gt down
+    Paused --> Running: gt start
+    Running --> Parked: gt rig park
+    Parked --> Running: gt rig unpark
+    Running --> Docked: gt rig dock
+    Docked --> Added: gt rig undock
+```
+
 ## Related
 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that determines startup order and monitoring

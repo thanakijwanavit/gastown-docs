@@ -270,6 +270,20 @@ When using `gt seance --talk` with one-shot queries (`-p`), craft specific quest
 Seance spawns a read-only fork of the predecessor session. It cannot modify the original session's state or history.
 :::
 
+### Seance Recovery Flow
+
+```mermaid
+graph TD
+    A[Context lost] --> B[gt seance --recent 5]
+    B --> C[Select session ID]
+    C --> D{Query type?}
+    D -->|Quick| E["gt seance --talk id -p 'question'"]
+    D -->|Deep| F[gt seance --talk id]
+    E --> G[Answer returned]
+    F --> G
+    G --> H[Resume work]
+```
+
 ## Related
 
 - [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes across agent sessions

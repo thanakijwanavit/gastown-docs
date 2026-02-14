@@ -360,6 +360,22 @@ gantt
     Convoy completes    :55, 56
 ```
 
+### Minimal Mode Components
+
+```mermaid
+graph TD
+    CORE[Minimal Mode Core] --> BD[Beads Tracking]
+    CORE --> CV[Convoy Tracking]
+    CORE --> HK[Hook Persistence]
+    CORE --> GT[gt CLI]
+    BD --> CREATE[bd create]
+    CV --> CONVOY[gt convoy create]
+    HK --> SLING[gt sling]
+    GT --> DONE[gt done]
+    SLING --> AGENT[Manual Agent Start]
+    AGENT --> DONE
+```
+
 ## Related
 
 - [Mayor Workflow](mayor-workflow.md) -- The fully automated workflow that minimal mode scales up to

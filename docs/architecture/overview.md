@@ -216,6 +216,25 @@ graph TD
 | Agent context | CLAUDE.md files | Everything |
 | Activity log | `.events.jsonl` | Everything |
 
+### Gas Town Architecture Evolution
+
+The five-layer architecture emerged through iterative design phases.
+
+```mermaid
+timeline
+    title Gas Town Architecture Evolution
+    Foundation : Daemon process
+              : Git-based state
+    Agent Layer : Mayor coordinator
+               : Deacon health monitor
+    Rig System : Witness per-rig supervision
+              : Refinery merge queues
+    Worker Model : Ephemeral polecats
+               : Reusable dogs
+    Communication : Mail and nudge system
+                 : Escalation routing
+```
+
 ## Related
 
 - [Agent Hierarchy](agent-hierarchy.md) -- Supervision tree, monitoring chain, and escalation paths between agents
