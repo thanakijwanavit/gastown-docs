@@ -200,6 +200,17 @@ gt worktree remove beads
 
 ---
 
+## Crew vs. Polecat Responsibilities
+
+| Responsibility | Crew (Human) | Polecat (AI) |
+|---------------|-------------|-------------|
+| Architecture decisions | Designs and specifies | Implements as instructed |
+| Code review | Reviews merged output | Runs tests before submitting |
+| Bead creation | Writes detailed specs | Picks up and executes |
+| Quality gates | Final backstop | Automated checks only |
+| Context management | `gt handoff` when full | Auto-cycles via Witness |
+| Git workflow | Push directly to main | Submit MRs through Refinery |
+
 ## Tips
 
 :::tip

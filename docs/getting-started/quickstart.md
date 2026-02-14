@@ -123,6 +123,14 @@ flowchart LR
 
 ## Check Status
 
+| Command | Purpose | When to Use |
+|---------|---------|-------------|
+| `gt rig list` | List all rigs and their status | See which projects are active |
+| `gt convoy list` | Show convoy progress | Track batch work completion |
+| `gt feed` | View real-time activity feed | Monitor agent actions as they happen |
+| `gt ready` | Show beads ready for work | Find unblocked tasks to assign |
+| `gt cost` | Check API token usage | Monitor spending before it surprises you |
+
 ```bash
 # List all rigs
 gt rig list
