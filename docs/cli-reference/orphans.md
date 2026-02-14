@@ -279,6 +279,12 @@ flowchart TD
     F --> I
 ```
 
+:::danger[Orphan Prevention]
+
+The best way to prevent orphaned commits is to ensure polecats always run `gt done` successfully before termination. If you need to stop a polecat mid-work, use `gt handoff` to save progress to the hook and allow a successor session to pick up cleanly, rather than killing the session and risking orphaned commits.
+
+:::
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)

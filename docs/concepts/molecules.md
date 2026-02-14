@@ -346,6 +346,12 @@ When debugging a stuck molecule, use `gt mol status` to see which step is blocki
 
 :::
 
+:::warning[Molecule Step Atomicity]
+
+Each step in a molecule should be atomic -- either fully complete or not started. Avoid steps that are partially completable, as crashes during partial completion can leave the system in ambiguous states. If a step seems too large to be atomic, split it into multiple smaller steps with clear completion criteria.
+
+:::
+
 ## Molecule Step Execution States
 
 Each molecule step transitions through a well-defined set of states as the agent works through its workflow. For advanced formula patterns including gated pipelines and multi-stage workflows, see [Formula Design Patterns](/blog/formula-design-patterns).

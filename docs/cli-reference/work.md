@@ -767,6 +767,12 @@ graph LR
     F -->|Paused| I[gt done --defer]
 ```
 
+:::note[Work Release Timing]
+
+When releasing a bead with `gt release`, the bead returns to the ready pool immediately but any active polecat with that bead previously on its hook does not automatically stop working. If the polecat completes its work and runs `gt done`, the done operation will fail with a hook mismatch error. Always verify the polecat has stopped or been nuked before releasing its work to avoid conflicting state.
+
+:::
+
 ## Related
 
 - [Work Distribution](../architecture/work-distribution.md) -- How work flows through Gas Town

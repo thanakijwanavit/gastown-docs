@@ -281,6 +281,12 @@ graph TD
     E --> I[Agent notified]
 ```
 
+:::info[Guard Development Workflow]
+
+When developing custom tap guards, place them in `~/.local/bin/` and add that directory to your PATH. This allows guards to be invoked from `.claude/settings.local.json` without requiring absolute paths, making guard configurations portable across machines and simplifying rig-level customization.
+
+:::
+
 ## Related
 
 - [Git Workflow Guide](../guides/git-workflow.md) -- Why Gas Town uses direct-to-main instead of PRs

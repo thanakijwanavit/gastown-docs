@@ -595,6 +595,12 @@ graph TD
     E --> E2[settings]
 ```
 
+:::caution[Rig Configuration Changes]
+
+When changing rig configuration keys like `max_polecats` or `merge_strategy`, existing agents do not reload the config automatically. Restart the Witness and Refinery for the rig with `gt rig reboot` to ensure new settings take effect. Active polecats will continue using the config they loaded at spawn time until they terminate and respawn.
+
+:::
+
 ## Related
 
 - [Rigs Concept](../concepts/rigs.md) -- What rigs are and how they work

@@ -239,6 +239,12 @@ If you find yourself tempted to manually roll back a bead status, force-push to 
 
 :::
 
+:::caution[Testing GUPP Compliance]
+
+To verify that a new workflow respects GUPP, simulate a crash mid-execution by killing the agent process with `kill -9`. On restart, the workflow should resume from its last checkpoint without redoing completed steps or corrupting state. If it does not, the workflow violates GUPP and needs redesign.
+
+:::
+
 ## GUPP Decision Tree
 
 When an operation encounters a failure, GUPP dictates the forward-only response. For practical examples of how GUPP enables crash recovery in real workflows, see [Session Cycling Explained](/blog/session-cycling).

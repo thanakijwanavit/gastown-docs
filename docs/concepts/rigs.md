@@ -332,6 +332,12 @@ Never rename a rig directory after creation. The rig name is embedded in beads d
 
 :::
 
+:::tip[Rig Health Baseline]
+
+After adding a new rig, let it run for 24 hours to establish a health baseline. Check `gt rig status` and `gt doctor` to verify normal operation before assigning production work. This baseline helps distinguish genuine issues from expected startup behavior when problems occur later.
+
+:::
+
 ## Rig Startup Sequence
 
 When a rig starts, its agents initialize in a specific order to ensure dependencies are ready. For details on how Git worktrees enable the multi-agent isolation described here, see [Git Worktrees for Multi-Agent Development](/blog/git-worktrees).

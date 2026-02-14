@@ -485,6 +485,12 @@ graph LR
     Stalled --> Sling
 ```
 
+:::info[Convoy Auto-Close Depends on Terminal Bead States]
+
+A convoy only auto-closes when all tracked beads reach terminal states (completed, closed, won't-fix, or cancelled). If even one bead remains in an intermediate state (open, in_progress, hooked), the convoy stays active. Use `gt convoy show` to identify which beads are preventing auto-close.
+
+:::
+
 ## Related
 
 - [Convoys (Concept)](../concepts/convoys.md) -- What convoys are and how they track work

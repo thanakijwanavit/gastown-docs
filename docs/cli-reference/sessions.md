@@ -726,6 +726,12 @@ stateDiagram-v2
     Parked --> Primed: gt resume
 ```
 
+:::danger[Molecule Burn Safety]
+
+Never burn a molecule while its steps are actively executing across multiple polecats without first verifying those polecats have reached a safe checkpoint. Use `gt mol status` to check which steps are in progress, then wait for those steps to complete or hand off cleanly before running `gt mol burn` to avoid leaving polecats in an inconsistent state.
+
+:::
+
 ## Related
 
 - [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes

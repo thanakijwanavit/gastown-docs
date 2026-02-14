@@ -151,6 +151,12 @@ If you see the same bead ID appearing repeatedly in `gt trail`, that is a churn 
 
 ## `origin/main` vs `origin/master`
 
+:::caution[Branch Name Mismatch Detection]
+
+The `main` vs `master` branch mismatch is one of the most common silent failures in new Gas Town installations. Polecats will work for hours, commit changes to local branches, and attempt to push—but the push fails silently or targets a non-existent remote branch. Always verify the remote default branch name during rig setup and configure Gas Town to match it. Five minutes of verification prevents hours of lost polecat work.
+
+:::
+
 **Symptom:** Git commands fail with errors like:
 
 ```text

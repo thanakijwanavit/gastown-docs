@@ -278,6 +278,12 @@ Merge conflicts spawn additional polecats for resolution. Reduce conflicts by:
 
 ---
 
+:::info[Weekly Cost Review Ritual]
+
+Every Monday morning, review the previous week's cost data with `gt costs --week --by-rig`. Identify rigs with disproportionately high costs relative to work completed. Investigating cost outliers weekly prevents budget surprises and identifies inefficient workflows before they become expensive habits.
+
+:::
+
 ## Budget-Conscious Workflows
 
 ### The "$50/day" Workflow

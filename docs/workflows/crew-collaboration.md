@@ -262,6 +262,12 @@ graph TD
 The highest-leverage crew activity is creating clear, detailed beads. A 10-minute spec saves a polecat 30 minutes of exploring the wrong approach.
 :::
 
+:::danger[The Specification Death Spiral]
+
+When crew members write vague or incomplete beads, polecats implement the wrong thing, crew members create follow-up correction beads, polecats implement those incorrectly too, and the cycle compounds. Three rounds of this wastes more time and money than writing a comprehensive 30-minute spec up front. If you notice the same polecat repeatedly misunderstanding requirements across multiple beads, the root cause is insufficient specification detail, not polecat capability. Break the spiral by investing more time in spec quality rather than relying on iterative correction.
+
+:::
+
 1. **Write specs, not code.** Your highest-leverage activity is creating well-specified beads. A 10-minute spec saves a polecat from spending 30 minutes exploring the wrong approach.
 
 2. **Review before designing.** Pull merged work and review it before starting new design work. Polecat output often reveals issues or patterns that inform your next spec.

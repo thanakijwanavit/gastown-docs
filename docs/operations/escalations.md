@@ -173,6 +173,12 @@ When the same agent or rig generates escalations repeatedly with a consistent pa
 
 ## Managing Escalations
 
+:::warning[Escalation Fatigue and Signal Degradation]
+
+When escalations are created faster than they can be acknowledged and resolved, the system experiences escalation fatigue—open escalation count grows unbounded, P1 alerts become normalized, and genuinely critical P0 issues get buried in noise. Treat a growing escalation backlog as a systemic signal requiring workflow changes, not just individual triage. If you have more than 5 open escalations at any time, stop creating new ones and focus on root cause fixes that prevent recurring issues.
+
+:::
+
 ### `gt escalate list`
 
 View all open escalations.

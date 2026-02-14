@@ -207,6 +207,12 @@ New users should start at Layers 1-2 (Beads and Convoys) and let the built-in fo
 
 :::
 
+:::note[Learning the MEOW Stack]
+
+New users should start at Layer 1 (Beads) and Layer 2 (Convoys) exclusively. Only after successfully running 3-5 convoys should you explore Layer 3 (Molecules) and Layer 5 (Formulas). Jumping directly to custom formulas without understanding beads and convoys leads to over-engineered solutions that are hard to debug.
+
+:::
+
 ## Formula-to-Completion Flow
 
 A formula flows through the MEOW layers from template to completed work.

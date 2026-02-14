@@ -285,6 +285,12 @@ Before deploying a gate-dependent workflow to production, test the gate creation
 
 :::
 
+:::info[Gate Monitoring Dashboard]
+
+Use `bd list --type gate --status open` to see all active gates across your town. This provides a single view of all async coordination points, helping you identify workflows that are blocked waiting for external conditions. Check this dashboard daily to prevent silent stalls.
+
+:::
+
 ## Use Cases
 
 Gates enable async coordination at critical points in your workflow. For comprehensive examples of gate-driven workflows including CI gates, approval gates, and timer-based retry patterns, see [Hook-Driven Architecture](/blog/hook-driven-architecture).

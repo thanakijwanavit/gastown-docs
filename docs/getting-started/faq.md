@@ -88,6 +88,12 @@ Yes, using `gt nudge`:
 gt nudge polecat:toast --rig myproject "Focus on the API tests first"
 ```
 
+:::caution[New User Checklist]
+
+Before asking for help, verify you have completed these five steps: installed Git 2.25+, installed Beads, run `gt doctor`, added at least one rig, and started the core agents with `gt start`. Most FAQ questions come from skipping one of these setup steps.
+
+:::
+
 ### What's the difference between Crew and Polecats?
 
 | | Crew | Polecats |

@@ -276,6 +276,11 @@ flowchart TD
     style Polecat fill:#fbb
 ```
 
+:::tip[Dog Reuse Builds Specialized Knowledge]
+
+Because dogs persist across multiple tasks, they can accumulate specialized knowledge about recurring patterns in infrastructure work. A dog that handles syncing operations across rigs will become more efficient on the 10th sync task than it was on the first, as it recognizes common failure modes and optimization opportunities.
+
+:::
 
 ## Troubleshooting
 

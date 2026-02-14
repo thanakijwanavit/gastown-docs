@@ -205,6 +205,12 @@ For your very first convoy, choose 2-3 small, independent tasks that touch diffe
 
 :::
 
+:::note[Your First Convoy Will Take Longer]
+
+Your first convoy will likely take 2-3x longer than later convoys as you learn the workflow, debug setup issues, and refine your bead descriptions. Do not judge Gas Town's effectiveness by your first convoy. By convoy 3-5, you will have found your rhythm and polecats will complete work much faster.
+
+:::
+
 ## Common First-Convoy Issues
 
 | Problem | Cause | Fix |

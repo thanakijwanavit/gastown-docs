@@ -285,6 +285,12 @@ pie title Design Principle Categories
     "System Coordination (Scheduler, Communication, Human, Scotty)" : 5
 ```
 
+:::warning[Violating Design Principles Creates Maintenance Debt]
+
+These principles were chosen deliberately to make Gas Town resilient, crash-safe, and maintainable. Bypassing them for short-term convenience — such as skipping the Refinery, storing state in memory instead of git, or having agents share responsibilities — creates technical debt that compounds over time and makes the system harder to debug and recover when failures occur.
+
+:::
+
 ## Related
 
 - [Agent Hierarchy](agent-hierarchy.md) -- How the Erlang-inspired supervision tree implements these principles

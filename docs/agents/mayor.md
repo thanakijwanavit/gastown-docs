@@ -362,6 +362,12 @@ pie title Mayor Processing Time
     "Strategic Direction" : 10
 ```
 
+:::caution[Mayor Context Limits Affect Convoy Tracking]
+
+The Mayor tracks all active convoys and their beads in session context. For deployments with more than 20 concurrent convoys, the Mayor may need more frequent session cycling to avoid context bloat. If convoy status queries become slow or incomplete, consider reducing the number of active convoys or archiving completed ones.
+
+:::
+
 ## Related
 
 - [MEOW Stack](../concepts/meow-stack.md) -- The Mayor's orchestration workflow

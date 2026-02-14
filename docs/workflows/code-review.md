@@ -60,6 +60,12 @@ Each polecat works in parallel, examining the code from its specialized perspect
 
 ## Review Dimensions
 
+:::note[Review Dimension Overlap and Synthesis Quality]
+
+The 10 review dimensions intentionally overlap—security and correctness both catch injection vulnerabilities; elegance and smells both flag over-complex abstractions. This redundancy is deliberate: multiple perspectives increase the chance that subtle issues are caught by at least one leg. However, it also means the synthesis step must deduplicate findings intelligently. When creating custom review formulas, design legs with complementary but overlapping focus areas rather than trying to achieve perfect separation of concerns.
+
+:::
+
 The `code-review` formula examines code from 10 different perspectives:
 
 ### Analysis Legs (Read and Analyze Code)

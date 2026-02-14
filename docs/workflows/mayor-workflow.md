@@ -108,6 +108,12 @@ The Mayor workflow works best when you provide outcome-focused requests rather t
 
 ### Step 4: Mayor Assigns Work
 
+:::info[Mayor Assignment Strategy]
+
+The Mayor's rig assignment decisions are based on several heuristics: which rig owns the code being changed, which rigs have available polecat capacity, which rigs have successfully completed similar work recently, and explicit hints in your request. If the Mayor consistently assigns work to the wrong rig, provide explicit rig names in your requests or adjust the rig's CLAUDE.md to clarify its scope. The Mayor learns from feedback within a session but does not persist assignment preferences across restarts.
+
+:::
+
 Once confirmed, the Mayor slings each bead to the appropriate rig:
 
 ```bash

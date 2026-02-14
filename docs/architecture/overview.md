@@ -235,6 +235,12 @@ timeline
                  : Escalation routing
 ```
 
+:::tip[The Five Layers Enable Incremental Adoption]
+
+You don't need to deploy all five layers at once. Start with just the Town layer (Mayor and Deacon) for coordination, add Rigs (Witness and Refinery) for a single project, then scale to multiple rigs and polecats. Each layer provides value independently while integrating seamlessly with the others.
+
+:::
+
 ## Related
 
 - [Agent Hierarchy](agent-hierarchy.md) -- Supervision tree, monitoring chain, and escalation paths between agents

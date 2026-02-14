@@ -44,6 +44,12 @@ The documentation uses **local search** powered by [@easyops-cn/docusaurus-searc
 - **Offline capable**: Works even without internet connection
 - **Privacy-friendly**: No search queries are sent to external servers
 
+:::caution[Search Index Refresh]
+
+The search index updates on every documentation deployment, but your browser aggressively caches it. If you are reading recently updated docs and search is not finding new content, do a hard refresh with `Ctrl+Shift+R` (Windows/Linux) or `Cmd+Shift+R` (Mac) to force a fresh index download.
+
+:::
+
 ### What Gets Indexed
 
 The search indexes:

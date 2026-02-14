@@ -466,6 +466,12 @@ As of early 2026:
 - Active development with regular releases
 - Growing community of contributors
 
+:::info[Survival Formula Applies to Gas Town Itself]
+
+Gas Town's own survival depends on the same formula it documents. The system must save enough cognition (orchestration overhead) relative to its learning cost (awareness + friction) to justify adoption. Early Gas Town has high awareness costs (unfamiliar concepts, Mad Max terminology) and high friction (installation complexity, tmux proficiency required). As the community builds better onboarding, clearer documentation, and automated setup, the denominator shrinks while the numerator (orchestration value) grows with each feature release. Gas Town's survival ratio improves over time.
+
+:::
+
 ---
 
 ## Further Reading

@@ -341,6 +341,12 @@ timeline
              : Process mail queue
 ```
 
+:::info[Deacon Patrol Is Independent of Work Load]
+
+The Deacon's patrol cycle runs every 5 minutes regardless of how much work is active in the system. An idle town with zero polecats receives the same patrol attention as a busy town with 30 concurrent workers. This ensures health monitoring remains consistent and recovery times are predictable.
+
+:::
+
 ## Related
 
 - [Boot](boot.md) -- The Daemon's watchdog that wakes the Deacon

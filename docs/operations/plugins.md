@@ -422,6 +422,12 @@ Create `plugin.json`:
 
 ### Step 3: Write the Entry Point
 
+:::caution[Plugin Error Handling and Exit Codes]
+
+Plugin exit code handling is critical for merge pipeline reliability. A plugin that exits 0 on error (or exits non-zero on success) will create confusing failures where valid MRs are rejected or invalid ones are merged. Always explicitly verify your plugin's exit code behavior with both passing and failing test cases before deploying it as a pre-merge gate. One misconfigured exit code can block dozens of valid merges before the pattern is discovered.
+
+:::
+
 Create `run.sh`:
 
 ```bash

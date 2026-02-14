@@ -379,6 +379,12 @@ graph TD
     G --> B
 ```
 
+:::note[Session vs Polecat Lifecycle]
+
+A polecat's git worktree persists across multiple session restarts via handoffs and cycling. The tmux session is ephemeral and may be stopped and restarted many times, but the polecat's hook state and git branch survive until `gt polecat nuke` destroys the worktree. Use `gt session restart` for session-level recovery and `gt polecat nuke` only when the entire polecat needs to be removed.
+
+:::
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (list, nuke, stale)

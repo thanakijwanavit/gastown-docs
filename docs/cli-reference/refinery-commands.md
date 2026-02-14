@@ -422,6 +422,12 @@ graph TD
     F --> B
 ```
 
+:::info[Refinery Restart Safety]
+
+Restarting the Refinery with `gt refinery restart` while it is processing an MR is safe as long as the MR is not yet merged. The Refinery uses atomic state transitions and marks MRs as claimed before starting work, so a restarted Refinery will detect the incomplete claim, wait for the timeout to expire, and re-claim the MR to complete the merge.
+
+:::
+
 ## Related
 
 - [Refinery](../agents/refinery.md) -- How the Refinery agent processes merge requests

@@ -210,6 +210,12 @@ Runtimes without full hook support (Cursor, Auggie, Amp) require a startup fallb
 
 ### `gt prime` -- Manual Context Injection
 
+:::tip[Prime-First Discipline for Limited Runtimes]
+
+When working with hook-limited runtimes like Cursor, Auggie, or Amp, establish a habit of running `gt prime` immediately after attaching to any session—even if you think the agent already has context. Manual context injection is cheap compared to the cost of an agent working with stale or incomplete information. Make `gt prime` the first command you run in every limited-runtime session without exception.
+
+:::
+
 After spawning an agent with a hook-limited runtime, manually inject context:
 
 ```bash

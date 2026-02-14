@@ -263,6 +263,12 @@ graph TD
     G --> H
 ```
 
+:::caution[Sling Target Validation]
+
+When slinging with explicit targets like `myproject/alpha`, verify the target polecat exists with `gt polecat list` before slinging, as `gt sling` does not auto-create polecats unless the target is a bare rig name. Slinging to a non-existent polecat path will fail with an error, leaving the bead in an unhooked state that requires manual cleanup.
+
+:::
+
 ## Related
 
 - [Work Distribution](../architecture/work-distribution.md) -- How work flows from beads to agents

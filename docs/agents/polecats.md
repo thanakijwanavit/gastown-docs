@@ -445,6 +445,12 @@ stateDiagram-v2
     Zombie --> Nuked: Witness cleanup
 ```
 
+:::danger[Interrupting a Polecat Mid-Commit Causes Corrupt State]
+
+If you manually kill a polecat process while it is creating a git commit, the repository worktree may be left in a partially committed state with lock files that prevent future commits. Always use `gt polecat nuke` instead of killing processes directly, as it waits for git operations to complete before cleanup.
+
+:::
+
 ## Related
 
 - [GUPP](../concepts/gupp.md) -- The propulsion principle that drives polecat execution

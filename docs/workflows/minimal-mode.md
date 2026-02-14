@@ -318,6 +318,12 @@ graph TD
 
 ## Comparison with Full Workflow
 
+:::tip[Minimal Mode as Staging Environment]
+
+Minimal mode is not just for learning or resource-constrained setups—it is also valuable as a staging environment for testing changes before deploying them to a full Gas Town fleet. When debugging formula changes, testing new plugins, or validating rig configuration changes, running the workflow manually in minimal mode lets you catch issues without risking coordination failures across 10+ automated polecats. Use minimal mode as a safe sandbox before scaling changes to the full workflow.
+
+:::
+
 | Feature | Minimal Mode | Full Workflow |
 |---------|:------------:|:------------:|
 | Bead tracking | Yes | Yes |

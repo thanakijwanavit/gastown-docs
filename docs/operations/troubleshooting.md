@@ -248,6 +248,12 @@ gt peek polecat:toast --rig myproject
 
 ## Witness Not Patrolling
 
+:::info[Witness Research Loop Prevention]
+
+The Witness not patrolling issue is almost always caused by the Witness getting stuck in an endless research loop during startup, repeatedly running grep/search commands trying to understand its role instead of executing patrol work. This happens when the Witness's role prompt is too complex or when it receives conflicting instructions about whether to research or act. The fix is to nudge the Witness with explicit execution commands rather than letting it explore indefinitely. Prevention: keep Witness role prompts minimal and action-focused.
+
+:::
+
 **Symptom:** The Witness appears to be running (tmux session exists) but polecats are not being spawned automatically, and `gt status` shows the witness as offline (○) or repeatedly becoming a zombie. For witness behavior details, see [Understanding the Witness](/blog/witness-explained).
 
 **Diagnosis:**

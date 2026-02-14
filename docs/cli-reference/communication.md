@@ -885,6 +885,12 @@ graph LR
     AllBoxes --> Recipient
 ```
 
+:::caution[Mail Delivery Requires Filesystem Access]
+
+Because mail is delivered via JSONL files on disk, agents running in containers or sandboxed environments need shared filesystem access to communicate. If you're running Gas Town agents across isolated environments, you'll need to mount the `~/gt/` directory or implement a mail forwarding mechanism.
+
+:::
+
 ## Related
 
 - [gt nudge](./nudge.md) -- Synchronous message delivery to running sessions

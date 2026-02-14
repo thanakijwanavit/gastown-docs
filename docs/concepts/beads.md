@@ -378,6 +378,12 @@ stateDiagram-v2
     done --> [*]
 ```
 
+:::caution[Bead Sync Frequency]
+
+Running `bd sync` after every single bead operation creates unnecessary git commits and slows down workflows. Instead, batch your bead operations and sync once at the end of a work session or after completing a milestone. The SQLite database ensures local consistency, and syncing is only required to share state with remote collaborators or back up to git.
+
+:::
+
 ## Related Concepts
 
 - **[Hooks](hooks.md)** -- Hooks attach beads to agents, creating the `hooked` status and enabling crash-safe work assignment

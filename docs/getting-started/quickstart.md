@@ -137,6 +137,12 @@ flowchart LR
 4. Monitor progress
 5. Route completed work through the refinery for merging
 
+:::tip[Start with Simple Instructions]
+
+For your first Mayor interaction, give a simple, single-feature request like "Add input validation to the login form." Save complex multi-feature requests until you have seen at least one complete convoy cycle from instruction to merged code. Simple first requests help you understand the flow without overwhelming complexity.
+
+:::
+
 ## What the Mayor Does Behind the Scenes
 
 When you give the Mayor instructions, it orchestrates a coordinated sequence of actions across the system.

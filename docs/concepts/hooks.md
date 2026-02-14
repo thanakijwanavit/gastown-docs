@@ -27,7 +27,7 @@ Agent starts -> Does half the work -> Context fills up -> Session ends -> **All 
 
 :::
 
-:::success[With Hooks]
+:::tip[With Hooks]
 
 Agent starts -> Does half the work -> Context fills up -> Session ends -> New session checks hook -> **Finds work + molecule progress** -> Resumes seamlessly
 

@@ -483,6 +483,12 @@ graph TD
     Agent -.->|overrides| Session
 ```
 
+:::tip[Test Configuration Changes on a Single Rig First]
+
+Before changing town-level configuration that affects all rigs, test the change on a single rig using rig-level overrides. This allows you to validate behavior without risking disruption to other rigs. Once validated, promote the setting to town level for global application.
+
+:::
+
 ## Related
 
 - [Multi-Runtime Guide](../guides/multi-runtime.md) -- Using multiple AI coding agents with Gas Town

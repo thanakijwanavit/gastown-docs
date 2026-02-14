@@ -365,6 +365,12 @@ pie title Witness Patrol Check Distribution
     "Stall detection" : 10
 ```
 
+:::tip[Witness Patrol Frequency Affects Recovery Time]
+
+The default 5-minute patrol interval means a crashed polecat may go undetected for up to 5 minutes before the Witness triggers recovery. For high-priority rigs where faster recovery is critical, consider reducing the patrol interval to 2-3 minutes, though this increases resource usage slightly.
+
+:::
+
 ## Related
 
 - [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it

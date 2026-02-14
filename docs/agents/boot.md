@@ -329,6 +329,12 @@ pie title Boot Phase Time Allocation
     "Act" : 25
 ```
 
+:::note[Boot's Observations Are Stateless]
+
+Each Boot run observes the system from scratch with no memory of previous runs. This means Boot cannot detect trends or patterns — it only sees the current snapshot. If you need historical analysis of system health, check the triage log which preserves Boot's observations across runs.
+
+:::
+
 ## Related
 
 - [Deacon](deacon.md) -- The agent that Boot monitors and wakes

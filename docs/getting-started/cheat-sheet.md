@@ -221,6 +221,12 @@ mindmap
         bd close
 ```
 
+:::tip[Print This Page]
+
+Print this cheat sheet and keep it next to your monitor for the first two weeks of using Gas Town. After about 10 days of regular use, the commands become muscle memory and you will not need the reference anymore.
+
+:::
+
 ## Emergency Commands
 
 | Command | What it does |

@@ -172,6 +172,12 @@ gt nudge backend/polecats/alpha "Status update? Need help?"
 
 ### Step 6: Add More Work
 
+:::tip[Adding Work Mid-Convoy]
+
+Adding beads to an active convoy is operationally safe but requires coordination awareness. Before adding a new bead, check what files the existing in-progress beads are touching to avoid merge conflicts. Use `gt polecat list` to see which polecats are active, then `git diff` their branches to understand the conflict surface. If the new bead will touch the same files, either wait for the current batch to merge or add explicit coordination notes to the bead description warning the polecat about potential conflicts.
+
+:::
+
 You can add issues to the convoy at any time:
 
 ```bash

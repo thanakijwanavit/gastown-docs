@@ -483,6 +483,12 @@ graph TD
     E --> E1[identity add/show/rename]
 ```
 
+:::warning[Stale Detection Threshold]
+
+The default stale threshold of 20 commits behind main works well for most workflows, but if your rig has frequent automated commits (like daily dependency updates), consider raising it to 50-100 to avoid false positives. Use `gt polecat stale --threshold` to experiment with different values before enabling automatic cleanup with `--cleanup`.
+
+:::
+
 ## Related
 
 - [Polecats](../agents/polecats.md) -- Ephemeral worker lifecycle and design philosophy

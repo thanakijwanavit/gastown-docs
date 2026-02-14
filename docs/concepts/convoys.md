@@ -320,7 +320,13 @@ Run `gt convoy list` frequently to see the big picture. For live progress, use `
 
 :::
 
-### Convoy Composition Overview
+:::tip[Convoy Performance Metrics]
+
+Track convoy velocity by measuring average completion time per bead. A convoy of 5 beads that completes in 2 hours has a velocity of 2.4 beads/hour. Compare velocities across convoys to identify bottlenecks and optimize work distribution patterns.
+
+:::
+
+## Convoy Composition Overview
 
 A convoy combines beads from one or more rigs, tracked by the Deacon, and reported to the Mayor for oversight.
 

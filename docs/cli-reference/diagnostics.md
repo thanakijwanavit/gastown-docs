@@ -843,6 +843,12 @@ graph TD
     H --> I
 ```
 
+:::tip[Performance Tuning]
+
+If `gt activity` queries become slow as `.events.jsonl` files grow beyond 100,000 lines, consider enabling KRC auto-pruning with shorter TTLs for operational events. This keeps event logs manageable without losing forensically valuable data, as the pruning algorithm preserves milestone events while removing routine heartbeats and status checks.
+
+:::
+
 ## Related
 
 - [Troubleshooting](../operations/troubleshooting.md) -- Common issues and solutions

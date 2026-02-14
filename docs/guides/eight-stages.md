@@ -411,6 +411,12 @@ Be solidly at **Stage 7** before adopting Gas Town. Spend time at Stage 6 (3-5 a
 
 :::
 
+:::caution[The Stage 5 to Stage 8 Jump]
+
+Jumping directly from Stage 5 (single CLI agent) to Stage 8 (Gas Town orchestration) without hands-on multi-agent experience is the fastest path to frustration and wasted money. The coordination challenges Gas Town solves—merge conflicts, lost work, agent monitoring—only make sense once you have encountered them firsthand. Spend at least two weeks at Stage 6 or 7 before investing time in Gas Town installation and learning.
+
+:::
+
 ---
 
 :::info

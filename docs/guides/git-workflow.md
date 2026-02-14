@@ -107,6 +107,12 @@ This just means someone else pushed first. It's not a failure—it's the system 
 
 ## Handling Frequent Remote Changes
 
+:::info[Pull Frequency in Multi-Agent Environments]
+
+In a Gas Town rig with 5+ active polecats, the remote main branch can advance 10-20 commits per hour during peak productivity. This means your local branch can fall behind within minutes of checking out. Adjust your mental model from "pull occasionally when needed" to "pull before every push without exception" to avoid constant rebase conflicts.
+
+:::
+
 ### Detecting When Remote Changed
 
 ```bash

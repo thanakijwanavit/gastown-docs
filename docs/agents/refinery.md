@@ -359,6 +359,12 @@ graph LR
     Merge --> Signal["Send MERGED"]
 ```
 
+:::danger[Never Bypass the Refinery for Production Merges]
+
+Pushing directly to main bypasses validation, rebase ordering, and the MERGED signal that triggers polecat cleanup. This can result in untested code on main, orphaned worktrees, and merge conflicts for queued MRs. Reserve direct pushes to main for emergency hotfixes only, and run `gt polecat gc` afterward to clean up any orphaned state.
+
+:::
+
 ## Related
 
 - [Polecats](polecats.md) -- Submit MRs that the Refinery processes

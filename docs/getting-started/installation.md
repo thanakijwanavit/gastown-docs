@@ -209,6 +209,12 @@ After completing all installation steps, create a test rig with `gt rig add test
 
 :::
 
+:::warning[Runtime Compatibility]
+
+While Gas Town supports multiple AI runtimes, mixing runtimes within a single rig is not recommended. Each rig should use a consistent runtime to prevent merge style conflicts when polecats using different models produce code with different formatting or idiom preferences. Mixing runtimes across different rigs is fine.
+
+:::
+
 ## Supported Runtimes
 
 Gas Town supports multiple AI coding agent runtimes. For detailed guidance on configuring and mixing different runtimes in one town, see [Multi-Runtime Workflows](/blog/multi-runtime-workflows).

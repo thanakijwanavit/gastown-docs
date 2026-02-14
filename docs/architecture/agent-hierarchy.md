@@ -214,6 +214,12 @@ graph TD
     L2 --> L3
 ```
 
+:::note[Supervision Depth Determines Recovery Latency]
+
+The deeper an agent sits in the supervision tree, the longer its potential recovery time. A crashed polecat (Level 3) is detected within 5 minutes by the Witness. A crashed Witness (Level 2) is detected within 5 minutes by the Deacon. A crashed Deacon (Level 1) is detected within 3 minutes by the Daemon via Boot. This cascading detection means worst-case recovery for a polecat is ~13 minutes if both its Witness and Deacon have crashed.
+
+:::
+
 ## Related
 
 - [System Overview](overview.md) -- Five-layer architecture including agents, rigs, and communication

@@ -352,6 +352,12 @@ The dashboard auto-refreshes. Keep it open on a second monitor for at-a-glance f
 
 ### `gt costs` -- Claude Session Costs
 
+:::tip[Cost Monitoring as Early Warning System]
+
+Token cost spikes often precede other visible problems by 10-30 minutes. A polecat stuck in an infinite loop will burn tokens long before the Witness flags it as stale. An agent researching documentation endlessly will show cost growth before producing any output. Check `gt costs --by-agent` every hour during active development—not just to track budget, but as an early warning system for agents behaving incorrectly. Unexpected cost patterns are often the first signal of configuration issues or poorly scoped beads.
+
+:::
+
 Track token consumption and estimated costs across all agent sessions.
 
 ```bash

@@ -12,6 +12,12 @@ If you want reference-style documentation, see the [Architecture](../architectur
 
 ---
 
+:::note[Architecture Learning Path]
+
+This guide is comprehensive and dense. If you are new to Gas Town, read sections 1-4 (Town through Agent Hierarchy) first, then pause and run your first convoy. Return to sections 5-9 after you have hands-on experience with the basic workflow. The architecture makes more sense once you have seen it in action.
+
+:::
+
 ## The Mental Model: A Steam Engine
 
 Gas Town is a steam engine. Work enters as fuel. Agents are pistons. Code on `main` is the output.

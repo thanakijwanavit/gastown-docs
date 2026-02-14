@@ -977,6 +977,12 @@ graph TD
     Commands --> Config["Config<br/>role / add / remove"]
 ```
 
+:::warning[Agent Start Order Matters for Dependencies]
+
+Starting agents in the wrong order can cause coordination failures. Always start the Daemon first, then the Deacon and Mayor, then Witnesses and Refineries, and finally sling work to spawn polecats. Starting a Witness before the Deacon means the Witness has no supervisor to report health issues to.
+
+:::
+
 ## Related
 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- Supervision tree and monitoring chain

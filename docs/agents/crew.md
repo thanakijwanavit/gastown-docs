@@ -245,6 +245,12 @@ sequenceDiagram
     H->>C: Continue development
 ```
 
+:::tip[Crew Workspaces Enable Local Experimentation]
+
+Because crew workspaces are full git clones, you can create experimental branches, test risky changes, or prototype features without affecting polecats or the canonical repository. This makes them ideal for exploratory work that may not result in a merge request.
+
+:::
+
 ## Common Patterns
 
 ### Setting Up a New Crew Workspace

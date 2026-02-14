@@ -193,6 +193,12 @@ When learning Gas Town, focus on understanding five core terms first: bead (unit
 Gas Town's terminology has evolved through four major versions, and some older blog posts or GitHub issues use deprecated terms. If you encounter unfamiliar terms in older materials, check this glossary for the current meaning. The canonical definitions here reflect the latest stable release.
 :::
 
+:::danger[Mad Max Metaphor Consistency]
+
+Gas Town's Mad Max naming is not just colorful theming—it creates a consistent mental model for how the system works. When learning the system, resist the urge to translate terms into traditional equivalents (e.g., calling beads "tickets" or convoys "sprints"). The Mad Max vocabulary encodes important distinctions that generic terms obscure. A convoy is not a sprint; polecats are not microservices. Using the original terms helps you understand the system's actual behavior rather than mapping it onto familiar but incorrect patterns.
+
+:::
+
 ## CLI Quick Reference
 
 ```mermaid

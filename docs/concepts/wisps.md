@@ -202,6 +202,12 @@ Wisps are implementation details of the molecule system and their schema can cha
 
 :::
 
+:::info[Wisp Compaction Scheduling]
+
+Schedule `gt compact` to run daily during off-hours (e.g., 3 AM via cron) to prevent wisp accumulation from degrading database performance. A patrol-heavy rig can generate 1000+ wisps per day, and without regular compaction, query times degrade noticeably after a few weeks.
+
+:::
+
 ## Wisp TTL and Promotion
 
 When a wisp exceeds its time-to-live while still open, it is promoted to a permanent bead for investigation. For more on compaction, TTLs, and the lifecycle events that affect wisps, see [Lifecycle Management in Gas Town](/blog/lifecycle-management).

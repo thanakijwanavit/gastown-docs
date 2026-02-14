@@ -450,6 +450,11 @@ If a step needs to wait for CI, human approval, or a timer, use a [Gate](../conc
 
 Increment the `version` field when making breaking changes to a formula. Existing molecules poured from the old version will continue using the old step definitions.
 
+:::
+
+:::caution[Formula Debugging Without Version Control]
+
+When iterating on a custom formula during development, you may be tempted to edit the TOML file repeatedly and re-run `gt formula run` to test changes. This works, but creates a debugging trap: if a molecule poured from an earlier version exhibits unexpected behavior, you have no record of which formula version produced it unless you explicitly version every iteration. During formula development, increment the version number on every significant edit and keep the old TOML files in a `formulas/archive/` directory. This makes it possible to correlate molecule behavior with the exact formula definition that created it.
 
 :::
 

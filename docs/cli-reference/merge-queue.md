@@ -396,6 +396,12 @@ graph LR
     G -->|resolved| B
 ```
 
+:::info[Queue Prioritization]
+
+The merge queue processes items in FIFO order by default, but polecats can submit with `--priority` to jump ahead. Use priority merges sparingly and only for hotfixes or critical blockers, as reordering the queue can extend overall merge time if validation steps must rerun after rebasing onto newly-merged changes.
+
+:::
+
 ## Related
 
 - [Refinery](../agents/refinery.md) -- The agent that processes the merge queue

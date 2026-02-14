@@ -290,6 +290,12 @@ pie title Work Distribution Methods
     "Direct assignment" : 10
 ```
 
+:::info[Work Distribution Is Fully Auditable]
+
+Every work assignment, hook attachment, and bead state transition is logged in the beads database and activity feed. This means you can reconstruct the complete history of how work flowed through the system, which agents handled what, and where bottlenecks occurred. This audit trail is invaluable for debugging coordination issues.
+
+:::
+
 ## Related
 
 - [Beads](../concepts/beads.md) -- The atomic unit of tracked work that flows through the distribution pipeline

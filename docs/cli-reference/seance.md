@@ -284,6 +284,12 @@ graph TD
     G --> H[Resume work]
 ```
 
+:::tip[Seance for Debugging]
+
+When investigating why a polecat made an unexpected decision, use `gt seance --talk <session-id> -p "Why did you choose this approach?"` to query the predecessor's reasoning directly. This is often faster than reading through logs or commit messages, as the session retains full context about alternatives considered and trade-offs made.
+
+:::
+
 ## Related
 
 - [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes across agent sessions

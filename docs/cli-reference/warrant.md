@@ -292,6 +292,12 @@ graph TD
     H -->|No| J[Cleanup done]
 ```
 
+:::tip[Warrant Filing Criteria]
+
+Before filing a manual warrant, verify the agent has been unresponsive for at least 5-10 minutes and has not responded to 2-3 nudge attempts. Warrants are a strong signal to Boot that the agent needs termination, so premature warrant filing can interrupt agents that are simply waiting on slow external dependencies like network requests or large test suites.
+
+:::
+
 ## Related
 
 - [Boot](../agents/boot.md) -- Infrastructure helper that executes warrants during triage

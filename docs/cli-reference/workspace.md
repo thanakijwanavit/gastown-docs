@@ -453,6 +453,12 @@ graph TD
     F --> F4["witness/"]
 ```
 
+:::info[Workspace Portability]
+
+A Gas Town workspace at `~/gt/` is fully portable across machines if you commit and push all `.beads/` directories, rig configurations, and town settings. However, tmux sessions and running agents are local to each host. After cloning a workspace to a new machine, run `gt up --restore` to recreate sessions and restore crew workspaces from the committed state.
+
+:::
+
 ## Related
 
 - [Installation](../getting-started/installation.md) -- Step-by-step setup guide for new users

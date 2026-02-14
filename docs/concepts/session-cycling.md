@@ -137,6 +137,12 @@ Establish a habit of writing detailed handoff notes even when you think the sess
 
 :::
 
+:::danger[Never Rely on Compacted Context]
+
+After automatic context compaction, always trigger a manual handoff with `gt handoff` rather than continuing in the compacted session. Compaction loses nuance and can cause subtle behavioral drift where the agent forgets important constraints or decisions. Fresh sessions with explicit handoff notes are more reliable than compressed context.
+
+:::
+
 ## Context Recovery
 
 When a new session starts (or after compaction), the agent rebuilds its working context through a well-defined recovery sequence.

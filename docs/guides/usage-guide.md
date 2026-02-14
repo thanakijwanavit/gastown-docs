@@ -617,6 +617,12 @@ The difference between a productive Gas Town session and a frustrating one often
 
 Your Crew are the bridge between your intent and the fleet's execution. Invest time in them.
 
+:::danger[The Empty Crew Trap]
+
+New Gas Town users often spend 90% of their time talking to the Mayor and watching polecats, leaving their Crew workspaces sitting idle. This inverts the intended workflow: Crew should produce the bulk of specifications and design work while the Mayor coordinates execution. If you find yourself constantly redirecting polecats because they misunderstood requirements, the root cause is usually insufficient Crew-authored guzzoline. Shift more of your time to Crew sessions and less to Mayor supervision.
+
+:::
+
 ---
 
 ## Quick Reference Commands

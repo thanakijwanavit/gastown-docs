@@ -283,6 +283,12 @@ graph LR
     E --> G
 ```
 
+:::note[Nudge Delivery Timing]
+
+Nudges are delivered synchronously but not guaranteed to be processed immediately. If the target agent is in the middle of a long-running tool call, the nudge text enters the tmux input queue and will be processed once the tool call completes. For time-critical communication, pair a nudge with a high-priority mail message to ensure the context persists even if the agent misses the nudge during a session restart.
+
+:::
+
 ## Related
 
 - [Communication](./communication.md) -- Full communication command reference (mail, escalations, broadcasts)

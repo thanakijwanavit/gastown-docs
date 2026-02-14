@@ -277,6 +277,12 @@ graph TD
     Skip --> Report
 ```
 
+:::note[Compaction Performance Scales with Wisp Volume]
+
+For rigs with high polecat activity, wisps accumulate rapidly. On a rig with 20 concurrent polecats, expect 400-500 wisps per day (heartbeats, patrol reports, lifecycle events). Compaction scans all wisps each run, so performance degrades if wisps accumulate faster than the TTL can expire them. Monitor compaction run time in the Deacon patrol digest.
+
+:::
+
 ## Related
 
 - [Wisps](../concepts/wisps.md) -- The ephemeral beads that compaction manages

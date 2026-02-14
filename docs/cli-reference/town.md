@@ -296,6 +296,12 @@ graph LR
     D --> D2[shutdown --force]
 ```
 
+:::warning[Shutdown vs Down]
+
+Always prefer `gt town shutdown` over `gt down` when ending work for the day. While `gt down` only stops agents, `gt town shutdown` also cleans up polecat worktrees, prunes stale branches, and ensures all in-flight work is either merged or safely parked. Running `gt down` followed by a system reboot can leave orphaned worktrees and uncommitted changes that require manual recovery.
+
+:::
+
 ## Related
 
 - [Starting & Stopping](../operations/lifecycle.md) -- Full lifecycle management for town and rig agents
