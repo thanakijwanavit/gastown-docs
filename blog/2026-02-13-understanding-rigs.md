@@ -167,3 +167,4 @@ stateDiagram-v2
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) — How to partition rigs for large deployments
 - [Your First Convoy](/blog/first-convoy) — End-to-end walkthrough of creating work in a rig
 - [Gas Town's Security Model](/blog/security-model) — How rig isolation provides security boundaries
+- [Lifecycle Management](/blog/lifecycle-management) — Managing rig lifecycle states and transitions at scale

@@ -147,3 +147,4 @@ The worst case -- a bug merged to main -- is handled by standard git practices (
 - [Git Worktrees](/blog/git-worktrees) -- Worktree isolation as a security boundary
 - [Death Warrants](/blog/death-warrants) -- How the warrant system enforces safe termination
 - [Understanding Rigs](/blog/understanding-rigs) -- How rigs enforce the security boundaries described here
+- [Incident Response](/blog/incident-response) -- What to do when a security boundary is breached or an agent misbehaves

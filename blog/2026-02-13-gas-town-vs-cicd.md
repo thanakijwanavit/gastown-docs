@@ -157,4 +157,5 @@ Gas Town was designed from day one to complement existing CI/CD, not replace it.
 - **[The Refinery Deep Dive](/blog/refinery-deep-dive)** — How the Refinery merge queue replaces CI/CD
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — Work distribution that goes beyond traditional CI/CD
 - **[Understanding GUPP](/blog/understanding-gupp)** — The crash-recovery model that makes Gas Town different from CI/CD
+- **[Molecules and Formulas](/blog/molecules-and-formulas)** — How Gas Town's workflow engine replaces traditional CI/CD pipeline definitions
 - [Architecture Guide](/docs/guides/architecture) — Comprehensive visual guide to Gas Town's architecture

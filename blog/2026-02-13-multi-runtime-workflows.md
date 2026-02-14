@@ -182,3 +182,4 @@ If those three work, the runtime is Gas Town compatible.
 - **[Understanding Rigs](/blog/understanding-rigs)** — How rigs organize different runtime environments
 - **[Mastering gt sling](/blog/mastering-gt-sling)** — Slinging work across rigs with different runtimes
 - **[Plugin System](/blog/plugin-system)** — Extending Gas Town with plugins for different runtime environments
+- **[Hook-Driven Architecture](/blog/hook-driven-architecture)** — How hooks provide the universal contract between Gas Town and any runtime

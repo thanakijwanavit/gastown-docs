@@ -273,3 +273,4 @@ Gas Town is designed to be self-healing. Most incidents resolve themselves withi
 - **[The Escalation System](/blog/escalation-system)** — How Gas Town surfaces problems before they snowball
 - **[Death Warrants](/blog/death-warrants)** — Structured agent termination during incidents
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Proactive monitoring that prevents incidents
+- **[The Witness Explained](/blog/witness-explained)** — How the Witness detects and recovers from agent failures

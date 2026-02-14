@@ -188,3 +188,4 @@ flowchart TD
 - **[Scaling Beyond 30 Agents](/blog/scaling-beyond-30)** — Architectural patterns for cost-effective large deployments
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Track spending and identify optimization opportunities
 - **[Session Cycling Explained](/blog/session-cycling)** — Context management strategies that reduce wasted tokens
+- **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the cost traps and anti-patterns that burn through API budgets

@@ -174,3 +174,4 @@ You don't need to manage worktrees manually. The Deacon creates them when spawni
 - [Git Workflow](/docs/guides/git-workflow) -- Multi-agent git patterns with worktrees
 - [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- Git patterns for multi-agent development with worktrees
 - [Understanding Rigs](/blog/understanding-rigs) -- How rigs use worktrees to isolate agent workspaces
+- [Hooks: The Persistence Primitive](/blog/hook-persistence) -- How hooks store work state inside git worktrees

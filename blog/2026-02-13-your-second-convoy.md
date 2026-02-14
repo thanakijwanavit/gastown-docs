@@ -216,3 +216,4 @@ Small, focused beads finish faster, parallelize better, conflict less during mer
 - [Troubleshooting](/docs/operations/troubleshooting) — Common polecat issues and recovery procedures
 - [Your First Convoy](/blog/first-convoy) — Review the basics if needed
 - [Work Distribution Patterns](/blog/work-distribution-patterns) — When to use manual convoys vs. Mayor vs. formulas
+- [Monitoring Your Fleet](/blog/monitoring-fleet) — Practical monitoring techniques for running convoys

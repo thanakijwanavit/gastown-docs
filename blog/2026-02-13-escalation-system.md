@@ -181,3 +181,4 @@ Overusing P0 severity for non-critical issues causes alert fatigue — the most 
 - [Troubleshooting](/docs/operations/troubleshooting) — Resolving the issues escalations surface
 - [Death Warrants](/blog/death-warrants) — How warrants handle the problems escalations identify
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects issues that trigger escalations
+- [Monitoring Your Fleet](/blog/monitoring-fleet) — Proactive monitoring that catches problems before they become escalations

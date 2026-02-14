@@ -185,3 +185,4 @@ This asymmetry is deliberate. Work stays hooked until it's explicitly done or re
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) — The propulsion principle that hooks enable
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — Design patterns for hook-based agent coordination
 - [Session Cycling](/blog/session-cycling) — How hooks preserve work across context window refreshes
+- [Molecules and Formulas](/blog/molecules-and-formulas) — How molecules track step-level progress on hooks

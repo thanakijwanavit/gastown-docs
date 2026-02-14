@@ -156,4 +156,5 @@ In practice, most Gas Town users never think about warrants. The Witness files t
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) — How the Deacon supervises agents and files warrants
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) — The crash-recovery philosophy that warrants support
 - [Gas Town's Security Model](/blog/security-model) — Trust boundaries and permission scoping for agent termination
+- [The Witness Explained](/blog/witness-explained) — How the Witness detects stuck polecats and files warrants
 - [Troubleshooting Guide](/docs/guides/troubleshooting) — Common issues and their solutions

@@ -192,4 +192,5 @@ The Witness logs its patrol findings, so you can review what it detected during 
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Practical monitoring guide
 - **[Incident Response](/blog/incident-response)** — What to do when the Witness escalates to you
 - **[The Escalation System](/blog/escalation-system)** — How escalations from the Witness get routed and resolved
+- **[Death Warrants](/blog/death-warrants)** — How the Witness files warrants to safely terminate unresponsive agents
 - [Polecat CLI Reference](/docs/cli-reference/polecat-commands) — Commands for managing polecat lifecycle and worktrees

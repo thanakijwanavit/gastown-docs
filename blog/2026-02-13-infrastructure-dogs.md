@@ -193,5 +193,6 @@ Parked or docked rigs block dog operations. Unpark them first with `gt rig unpar
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) — Deep dive into the Deacon's patrol cycle
 - [Death Warrants: Structured Agent Termination](/blog/death-warrants) — How warrants handle stuck dogs and polecats
 - [Boot Dogs: The Triage Engine](/blog/boot-dogs) — How Boot performs initial triage before dispatching infrastructure dogs
+- [Lifecycle Management](/blog/lifecycle-management) — How rig lifecycle states affect dog operations and infrastructure maintenance
 - [Agent CLI Reference](/docs/cli-reference/agents) — Commands for listing, inspecting, and managing all agent types
 - [Orphan CLI Reference](/docs/cli-reference/orphans) — Commands for finding and cleaning orphaned resources

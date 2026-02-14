@@ -198,4 +198,5 @@ Not sure what a sling will do? Run `gt sling <bead-id> <target> --dry-run` first
 - [Understanding GUPP](/blog/understanding-gupp) — Why the propulsion principle makes slinging work
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — How hooks make slung work crash-safe
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex convoy orchestration that builds on sling mastery
+- [Work Distribution Patterns](/blog/work-distribution-patterns) — How sling fits into Gas Town's broader work distribution strategy
 - [Sling CLI Reference](/docs/cli-reference/sling) — Full command reference for gt sling and its flags

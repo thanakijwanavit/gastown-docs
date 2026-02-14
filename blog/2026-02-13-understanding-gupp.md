@@ -162,4 +162,5 @@ GUPP isn't just for polecats. When you're a crew worker and your session crashes
 - **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks implement GUPP's crash-safety guarantee
 - **[Session Cycling Explained](/blog/session-cycling)** — How GUPP applies to context refresh and handoffs
 - **[Common Pitfalls](/blog/common-pitfalls)** — Mistakes that happen when teams skip GUPP principles
+- **[Why Beads?](/blog/why-beads)** — How beads enforce forward-only state transitions, a key GUPP mechanism
 - [Sessions CLI Reference](/docs/cli-reference/sessions) — Commands for session lifecycle and molecule management

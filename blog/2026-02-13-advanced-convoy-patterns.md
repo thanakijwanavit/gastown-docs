@@ -232,4 +232,5 @@ The backend beads run in parallel. When the API endpoint lands, the frontend bea
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
 - **[Your Second Convoy](/blog/your-second-convoy)** — Dependencies and cross-rig convoy patterns in practice
 - [Mastering gt sling](/blog/mastering-gt-sling) — Work assignment patterns that power advanced convoy execution
+- [Your First Convoy](/blog/first-convoy) — Start here if you haven't run a basic convoy before tackling advanced patterns
 - [Convoy CLI Reference](/docs/cli-reference/convoys) — Commands for creating, tracking, and managing convoys

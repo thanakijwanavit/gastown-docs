@@ -175,3 +175,4 @@ flowchart LR
 - [Cost Optimization](/blog/cost-optimization) -- Cost tracking strategies for large deployments
 - [Lifecycle Management](/blog/lifecycle-management) -- Managing rig lifecycle at scale
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- Fleet monitoring becomes critical at scale
+- [Work Distribution Patterns](/blog/work-distribution-patterns) -- Choosing the right dispatch pattern when scaling across many agents

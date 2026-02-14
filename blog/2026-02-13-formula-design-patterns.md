@@ -291,3 +291,4 @@ gt formula show mol-polecat-work
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step tutorial for creating your first formula
 - [Molecules and Formulas](/blog/molecules-and-formulas) -- How the molecule engine powers formula execution
 - [Code Review with Polecats](/blog/code-review-workflow) -- Formulas in action: parallel code review workflow
+- [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How hooks connect formula execution to the agent lifecycle

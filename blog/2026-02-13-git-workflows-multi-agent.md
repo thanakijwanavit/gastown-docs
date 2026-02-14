@@ -188,3 +188,4 @@ If you're a crew worker and keep hitting conflicts, check if a polecat is workin
 - [The Refinery: How Merges Actually Work](/blog/refinery-deep-dive) — How the Refinery serializes parallel work
 - [Why Git Worktrees?](/blog/git-worktrees) — How Gas Town uses worktrees for agent isolation
 - [Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) — Coordinating work to minimize conflicts
+- [Your First Convoy](/blog/first-convoy) — Hands-on tutorial for convoy-based coordination that prevents git conflicts

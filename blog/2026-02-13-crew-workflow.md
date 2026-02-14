@@ -186,3 +186,4 @@ In a multi-agent environment, polecats are constantly merging code to main. If y
 - [Session Cycling Explained](/blog/session-cycling) -- How crew members handle context limits with handoffs
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- Mail, nudges, and hooks for crew coordination
 - [The Mayor Workflow](/blog/mayor-workflow) -- How crew members interact with Mayor-driven automation
+- [Git Workflows for Multi-Agent Teams](/blog/git-workflows-multi-agent) -- Git strategies for crew members working alongside parallel agents

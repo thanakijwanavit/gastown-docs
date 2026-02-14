@@ -285,3 +285,4 @@ flowchart TD
 - **[Formula Design Patterns](/blog/formula-design-patterns)** — Advanced patterns for composing multi-step workflows
 - **[Molecules and Formulas](/blog/molecules-and-formulas)** — How the molecule engine powers formula execution
 - **[Code Review with Polecats](/blog/code-review-workflow)** — See formulas in action with parallel code review
+- **[Hook-Driven Architecture](/blog/hook-driven-architecture)** — How hooks trigger formula execution when work lands on an agent

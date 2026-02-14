@@ -295,4 +295,5 @@ Pushing commits directly to main bypasses the Refinery's rebase-and-validate pip
 - **[Gas Town vs CI/CD](/blog/gas-town-vs-cicd)** — How Gas Town complements your existing pipeline
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Dependency management for cleaner merges
 - **[Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent)** — Git patterns that the Refinery enforces
+- **[Code Review Workflow](/blog/code-review-workflow)** — How code review integrates with the Refinery merge pipeline
 - [Refinery CLI Reference](/docs/cli-reference/refinery-commands) — Commands for managing the merge queue and Refinery

@@ -167,3 +167,4 @@ Many production Gas Town setups run certain rigs in Minimal Mode permanently. Lo
 - [Cost Optimization](/blog/cost-optimization) — Keep costs low while experimenting with Gas Town
 - [Your First Convoy](/blog/first-convoy) — Your first full convoy after graduating from minimal mode
 - [Common Pitfalls](/blog/common-pitfalls) — Avoid the 5 most common mistakes when scaling from minimal mode
+- [Hooks: The Persistence Primitive](/blog/hook-persistence) — The crash-safe hook system that makes minimal mode viable

@@ -209,4 +209,5 @@ gt mail send backend/crew/admin -s "Dependency" -m "We need the /api/auth endpoi
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — Deep dive into hook durability
 - [Understanding GUPP](/blog/understanding-gupp) — The behavioral rule that makes hooks powerful
 - [Session Cycling Explained](/blog/session-cycling) — How handoff mail preserves context across sessions
+- [The Mail System](/blog/mail-system) — Deep dive into Gas Town's durable async messaging infrastructure
 - [Nudge CLI Reference](/docs/cli-reference/nudge) — Commands for sending nudges to wake agents

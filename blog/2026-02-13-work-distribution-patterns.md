@@ -200,3 +200,4 @@ The pattern you choose only affects who does the decomposition and routing. The 
 - [Mastering gt sling](/blog/mastering-gt-sling) — The command that powers all work assignment
 - [Understanding Rigs](/blog/understanding-rigs) — How rigs organize the agents that receive work
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex orchestration patterns for manual convoys
+- [The Mayor Workflow](/blog/mayor-workflow) — Deep dive into the Mayor's automated decomposition and dispatch
