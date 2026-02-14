@@ -428,6 +428,12 @@ gt rig undock backend
 
 ---
 
+:::note
+
+After undocking a rig, the restore process recreates worktrees and agent directories from scratch. Any local-only modifications to agent workspaces that were not committed to git will have been lost during the dock operation. Always ensure all work is committed before docking a rig.
+
+:::
+
 ## `gt rig config`
 
 View or modify rig configuration.

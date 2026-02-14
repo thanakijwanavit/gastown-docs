@@ -184,6 +184,12 @@ Town-level navigation and management is useful when:
 If you need to interact with rig-level agents (Witness, Refinery, Polecats), use `gt rig next/prev` instead. `gt town` only cycles between Mayor and Deacon sessions.
 :::
 
+:::note
+
+The `gt town status` command queries live tmux sessions and agent state files, so it reflects the real-time state of the town at the moment it runs. If you need historical status data or trend analysis, use the Deacon's patrol reports and compaction digests instead, as `gt town status` does not store historical snapshots.
+
+:::
+
 ## Command Reference
 
 | Command | Description |

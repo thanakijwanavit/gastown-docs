@@ -341,6 +341,10 @@ If search results seem outdated:
 
 ---
 
+:::warning
+If search returns outdated results after a documentation update, perform a hard refresh (`Ctrl+Shift+R` or `Cmd+Shift+R`) to clear the cached search index. The browser caches the index aggressively, so stale results can persist until the cache is invalidated.
+:::
+
 ## Search Limitations
 
 ### What Search Can't Do

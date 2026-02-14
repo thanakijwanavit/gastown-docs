@@ -150,6 +150,12 @@ gt compact --verbose
 Promoted wisps are worth investigating — they indicate something that was expected to complete quickly but didn't. Check the bead for stuck work or failed processes.
 :::
 
+:::caution
+
+If compaction promotes a large number of wisps in a single run, it may indicate a systemic issue such as a stalled Witness or a rig with zombie polecats. Investigate the root cause rather than simply re-running compaction, as the underlying problem will continue generating stuck wisps.
+
+:::
+
 ## Understanding the Output
 
 A typical compaction run produces output like:

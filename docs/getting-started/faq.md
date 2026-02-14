@@ -160,6 +160,10 @@ Gas Town itself is free and open-source. Costs come from the AI runtime (Claude 
 
 ---
 
+:::caution
+Do not run multiple Gas Town installations against the same git repository. Each town expects exclusive ownership of its rigs' canonical clones. Sharing a repo between towns can cause data corruption and merge queue conflicts.
+:::
+
 ## Troubleshooting
 
 ### Everything is stuck. What do I do?

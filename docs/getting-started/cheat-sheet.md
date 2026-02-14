@@ -165,6 +165,10 @@ When something seems wrong, `gt doctor` should be your first step. It checks age
 
 ---
 
+:::info
+If you are working with multiple rigs, most commands accept a `--rig <name>` flag to target a specific project. Without it, commands default to the current rig based on your working directory.
+:::
+
 ## Keyboard Shortcuts (Docs Site)
 
 | Shortcut | Action |

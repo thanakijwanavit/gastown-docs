@@ -225,6 +225,12 @@ Convoys auto-close when all tracked beads reach a terminal state (completed, clo
 
 ---
 
+:::info
+
+Convoy synthesis reports are especially valuable for retrospectives and status updates. Running `gt convoy synthesis --format markdown --verbose` after a convoy completes produces a detailed breakdown of time spent, agents used, and blockers encountered that can be shared with stakeholders.
+
+:::
+
 ## `gt convoy check`
 
 Check convoy health and consistency.

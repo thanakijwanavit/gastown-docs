@@ -294,6 +294,12 @@ Create a new rig when you have a **distinct codebase that needs its own agent in
 | Project on hold, indefinite pause | `gt rig dock` (Docked) |
 | Project abandoned, cleanup | Remove the rig directory |
 
+:::note[Rig Naming Conventions]
+
+Choose short, descriptive rig names that match or closely resemble the repository name. Rig names are used as directory names, bead prefixes, and in agent mail addresses, so they should be concise and free of special characters. A good convention is to use the repository name in lowercase with hyphens, such as `api-server` or `frontend-app`.
+
+:::
+
 ## Rig in the Bigger Picture
 
 Rigs are the physical foundation on which all other concepts operate:

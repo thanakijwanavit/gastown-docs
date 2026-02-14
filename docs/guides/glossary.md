@@ -157,6 +157,10 @@ These principles are not just theory — they are enforced by specific Gas Town 
 | **Vibe Coding** | A development approach where you let the AI do the work while focusing on direction and review. Gas Town embraces vibe coding as a core philosophy -- tolerating some work loss in exchange for throughput. |
 | **Guzzoline** | Slang for the specifications, plans, and design work that Crew members produce. Polecats consume this guzzoline to execute well-specified tasks. From the Mad Max fuel terminology. |
 
+:::warning
+Gas Town terminology is intentionally distinct from generic software terms. When searching documentation or asking agents for help, use the Gas Town-specific terms (e.g., "bead" instead of "ticket," "sling" instead of "assign," "convoy" instead of "sprint") for more precise results.
+:::
+
 ## CLI Quick Reference
 
 The two primary CLIs for interacting with Gas Town:

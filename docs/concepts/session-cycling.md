@@ -125,6 +125,12 @@ Always commit and push your changes before cycling a session. In a multi-agent e
 
 ---
 
+:::info[Cycle Frequency]
+
+There is no fixed rule for how often to cycle sessions. A polecat working on a complex implementation may cycle every 20-30 minutes as context fills rapidly, while a crew member doing light review work might go hours between cycles. Watch for signs of context degradation -- repeated file reads, forgotten instructions, or circular reasoning -- and cycle proactively before quality drops.
+
+:::
+
 ## Context Recovery
 
 When a new session starts (or after compaction), the agent rebuilds its working context through a well-defined recovery sequence.

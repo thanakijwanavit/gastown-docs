@@ -213,6 +213,12 @@ Persistent agents use hooks to track their patrol molecules:
 
 The Mayor's hook typically holds a coordination molecule or convoy management task. The Mayor checks its hook on each session start to resume strategic planning.
 
+:::info[Multiple Hooks]
+
+An agent can only have one active hook at a time. If new work arrives while a hook is already set, it must be queued in the agent's mailbox or slung to a different agent. This single-hook constraint ensures each agent has a clear, unambiguous priority and prevents work from being silently dropped during crashes.
+
+:::
+
 ## Hook and Molecule Integration
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:

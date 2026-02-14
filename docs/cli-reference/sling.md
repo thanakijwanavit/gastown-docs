@@ -166,6 +166,12 @@ gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
 Avoid slinging more than 5-7 beads simultaneously to a single rig. Too many parallel polecats create resource contention and slower completion times.
 :::
 
+:::note
+
+When batch-slinging multiple beads to a rig, each bead gets its own polecat with an independent worktree and session. The polecats work in parallel but share the same merge queue, so completion order depends on both task complexity and Refinery processing speed.
+
+:::
+
 ## Comparison with Related Commands
 
 | Command | Behavior |

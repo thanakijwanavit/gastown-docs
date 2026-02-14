@@ -171,6 +171,10 @@ The standard polecat workflow molecule (`mol-polecat-work`) includes steps like:
 
 Molecules provide crash recovery — if an agent restarts, `bd ready` shows the next incomplete step, so work resumes from where it left off.
 
+:::caution
+Do not skip molecule steps or close them out of order. The step sequence is designed so that each step's preconditions are satisfied by the previous step — jumping ahead can result in missing context, failed tests, or merge conflicts that are harder to debug.
+:::
+
 ## Cross-Rig Work
 
 For work spanning multiple projects:

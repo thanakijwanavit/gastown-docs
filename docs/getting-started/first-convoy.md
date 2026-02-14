@@ -113,6 +113,10 @@ gt convoy list
 # hq-cv-xyz  Auth System Fixes  [COMPLETED]  3/3 done
 ```
 
+:::info
+You can check which polecats are available in a rig before slinging work with `gt polecat list`. If all polecat slots are occupied, new sling commands will queue until a slot opens up.
+:::
+
 ## Using the Mayor Instead
 
 For a more automated experience, attach to the Mayor and describe the work:

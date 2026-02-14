@@ -186,6 +186,12 @@ flowchart TD
     HOOK -->|No| DONE[Cleanup complete]
 ```
 
+:::danger
+
+Never manually delete warrant JSON files from `~/gt/warrants/` to "clean up" executed warrants. The Deacon uses executed warrant records to track termination history and detect agents that repeatedly fail. Deleting these records can cause the Deacon to lose context about recurring problems.
+
+:::
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

@@ -181,6 +181,12 @@ Merge Queue Status: myproject
 
 ---
 
+:::info
+
+The merge queue processes items sequentially to maintain a clean linear history on main. If the queue depth grows beyond 5-10 items, consider whether your rig's `max_polecats` setting is too high relative to the Refinery's processing speed, as a backlog indicates polecats are producing work faster than the Refinery can merge it.
+
+:::
+
 ## `gt mq reject`
 
 Reject a merge request.

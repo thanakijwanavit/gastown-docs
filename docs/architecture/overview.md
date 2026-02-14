@@ -85,6 +85,10 @@ Agents communicate through:
 - **Hooks** — Persistent work state attachment
 - **Beads** — Shared issue tracking state
 
+:::warning
+Never modify the `.beads/beads.db` SQLite database directly. All state mutations should go through `bd` commands or the agent APIs — direct edits can corrupt the JSONL export sync and cause agents to act on stale or inconsistent data.
+:::
+
 ## Data Flow
 
 ```mermaid

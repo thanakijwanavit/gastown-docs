@@ -245,6 +245,10 @@ gt release gt-a1b2c
 gt convoy add hq-cv-015 gt-newbead
 ```
 
+:::note
+For best results, give the Mayor outcome-oriented instructions rather than implementation details. Instead of "edit auth.go line 42 to add a nil check," say "fix the nil pointer crash in the login handler." The Mayor and polecats are more effective when they can choose their own implementation approach.
+:::
+
 ## Troubleshooting
 
 | Problem | Solution |

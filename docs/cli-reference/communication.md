@@ -394,6 +394,12 @@ gt mail clear
 
 ---
 
+:::note
+
+Messages persist across session restarts because they are stored as JSONL files on disk, not in memory. If an agent crashes or cycles its session, all unread mail will still be available when the next session starts.
+
+:::
+
 ### `gt mail hook`
 
 Attach a mail message to your hook.

@@ -236,6 +236,12 @@ gt session check myproject    # Check specific rig
 
 ---
 
+:::info
+
+Session restarts (`gt session restart`) preserve the polecat's git worktree and hook state, but the new Claude session starts with a fresh context window. The agent relies on `gt prime` and the GUPP cycle to recover its working context, so any in-memory reasoning from the previous session is lost.
+
+:::
+
 ## gt session capture
 
 Capture recent output from a polecat session.

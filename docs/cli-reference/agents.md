@@ -705,6 +705,12 @@ Callbacks are typically processed automatically during Deacon patrol cycles. Man
 
 :::
 
+:::info
+
+Dogs persist between tasks and can be reused for multiple assignments, unlike polecats which are destroyed after completing a single task. If your workload involves recurring infrastructure operations such as syncing upstream repos or running periodic lints, prefer dogs over polecats.
+
+:::
+
 ---
 
 ## Crew

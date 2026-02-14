@@ -161,6 +161,10 @@ Gas Town agents consume API tokens. Monitor usage with `gt cost` to avoid surpri
 
 :::
 
+:::info
+You can detach from and reattach to the Mayor at any time without losing state. The Mayor's hook and beads persist across sessions, so your work continues even if you disconnect or the session cycles.
+:::
+
 ## Next Steps
 
 - [Your First Convoy](first-convoy.md) — Detailed walkthrough of the convoy workflow

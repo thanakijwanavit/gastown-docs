@@ -342,6 +342,10 @@ The bead is the unit of work that travels through the entire pipeline. It starts
 
 ---
 
+:::note
+The two-level beads architecture means you can query town-level and rig-level issues independently. Use `bd list --scope town` for cross-rig coordination beads and `bd list --scope rig` for project-specific work items.
+:::
+
 ## Convoys: Batch Tracking
 
 A [convoy](../concepts/convoys.md) bundles related beads together for coordinated progress tracking. When you ask the Mayor to "add dark mode support," it might create five beads (CSS variables, toggle component, persistence, tests, docs) and bundle them into one convoy.

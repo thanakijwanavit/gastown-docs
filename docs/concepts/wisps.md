@@ -156,6 +156,12 @@ Never create wisps directly with `bd create --type wisp`. Wisps are internal tra
 
 :::
 
+:::warning[Wisp Promotion Signals]
+
+When a wisp is promoted from ephemeral to permanent (because it exceeded its TTL while still open), treat it as an operational alert. Promoted wisps indicate that something in the workflow is stuck or broken -- a polecat may have crashed without cleanup, a gate may never have closed, or a dependency may be unresolvable. Investigate promoted wisps promptly to prevent cascading delays.
+
+:::
+
 ## Wisps in the Supervision Chain
 
 Wisps provide granular observability for the supervision hierarchy:

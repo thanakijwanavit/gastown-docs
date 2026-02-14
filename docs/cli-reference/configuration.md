@@ -295,6 +295,12 @@ Hooks run in the same process as Claude Code. Long-running hook commands can del
 
 ---
 
+:::note
+
+Claude Code hooks run synchronously in the tool execution pipeline, so avoid placing expensive operations in PreToolUse hooks. If a hook takes more than 1 second, it will noticeably slow down every tool call the agent makes throughout its session.
+
+:::
+
 ## Status Line
 
 ### `gt issue`

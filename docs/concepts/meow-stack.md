@@ -164,6 +164,12 @@ gt formula list         # Layer 5: available templates
 bd list --convoy cv-01  # Layer 1: individual beads
 ```
 
+:::caution[Layer Violations]
+
+Avoid reaching across MEOW layers in your workflows. For example, a convoy (Layer 2) should not directly manipulate molecule steps (Layer 3) -- instead, it should track bead-level completion and let the molecule manage its own internal progress. Respecting layer boundaries keeps the system composable and prevents tight coupling between abstraction levels.
+
+:::
+
 ## Cross-Cutting Concerns
 
 Two concepts cut across all MEOW layers rather than living in a single layer:

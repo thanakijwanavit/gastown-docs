@@ -352,6 +352,12 @@ Create a custom formula when you have a **repeatable multi-step process** that a
 
 If a workflow is one-off or experimental, guide the agent with a bead description instead. Formulas are for patterns you want to encode permanently.
 
+:::info[Formula Versioning]
+
+Formulas include a `version` field that should be incremented when making breaking changes to step definitions. When a molecule is poured from a formula, it captures the formula version at pour time. This ensures that in-flight molecules continue using their original step definitions even if the formula is updated, preventing mid-execution disruption.
+
+:::
+
 ## Molecule + Hook Integration
 
 Molecules are stored on an agent's [Hook](hooks.md), creating the crash-safe execution model:

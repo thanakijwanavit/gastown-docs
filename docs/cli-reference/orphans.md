@@ -153,6 +153,12 @@ gt orphans procs --aggressive # List ALL orphaned processes
 gt orphans procs kill         # Kill orphaned processes
 ```
 
+:::info
+
+The `--aggressive` flag on `gt orphans procs` cross-references all running Claude processes against active tmux sessions. This catches orphaned processes that were reparented to a non-init PID, which the default PPID=1 check would miss. Use it when you suspect resource consumption from processes not visible in the standard output.
+
+:::
+
 ## Recovery Workflow
 
 ```mermaid

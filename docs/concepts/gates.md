@@ -186,6 +186,12 @@ This step cannot proceed until a human runs `bd gate approve`.
 """
 ```
 
+:::caution[Gate Timeouts]
+
+Gates do not have a default timeout. If you create a `gh:run` or `mail` gate without an explicit timeout, it will remain open indefinitely if the expected condition never occurs. Always pair non-timer gates with a fallback timer gate to avoid workflows that block forever.
+
+:::
+
 ## Gate Evaluation by the Deacon
 
 The Deacon is responsible for evaluating gates during its patrol cycle. The `gate-evaluation` step in the `mol-deacon-patrol` formula handles this:

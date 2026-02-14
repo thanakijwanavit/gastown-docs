@@ -204,6 +204,12 @@ gt refinery queue --json
 
 ---
 
+:::info
+
+When attaching to a Refinery session for debugging, remember to detach with `Ctrl-B D` rather than closing the terminal. Closing the terminal window can kill the tmux session and stop the Refinery, leaving the merge queue unprocessed until it is restarted.
+
+:::
+
 ## gt refinery ready
 
 List MRs ready for processing.

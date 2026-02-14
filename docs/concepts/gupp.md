@@ -203,6 +203,12 @@ If an operation could leave the system in a worse state than before it ran, it v
 
 :::
 
+:::note[NDI and Code Reviews]
+
+When reviewing agent-produced code, keep NDI in mind: two agents solving the same problem will write different code. Focus your review on correctness and test coverage rather than stylistic preferences. As long as the implementation passes tests and meets requirements, different approaches are equally valid under NDI.
+
+:::
+
 ## How GUPP & NDI Are Implemented
 
 These principles are not just abstract ideals -- they are enforced by specific Gas Town primitives:

@@ -395,6 +395,10 @@ git pull --rebase
 
 ---
 
+:::note
+When resolving merge conflicts during a rebase, always run your tests before completing the rebase with `git rebase --continue`. A conflict resolution that compiles but breaks tests will propagate the failure to every subsequent polecat that rebases onto your commit.
+:::
+
 ## When to Use Branches
 
 **Crew workers:** Never. Push directly to main.

@@ -224,6 +224,12 @@ Don't wrap a single bead in a convoy. If there is only one work item, the bead i
 
 :::
 
+:::warning[Stalled Convoy Detection]
+
+If no beads in a convoy make progress for an extended period, the Deacon marks the convoy as stalled. Stalled convoys appear in the Mayor's dashboard with a warning indicator, prompting either a nudge to stuck polecats or reassignment of blocked work to available agents.
+
+:::
+
 ## Convoy + Mayor Workflow
 
 In the recommended [Mayor Workflow](../workflows/mayor-workflow.md), convoys are created automatically:

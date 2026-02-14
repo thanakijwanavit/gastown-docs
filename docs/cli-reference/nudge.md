@@ -167,6 +167,12 @@ For non-urgent communication, use `gt mail send` instead. Nudges interrupt the t
 
 :::
 
+:::caution
+
+Nudging an agent while it is in the middle of a long-running tool call (such as a large file write or test suite execution) will queue the message until the tool call completes. The agent will not see the nudge immediately in this case, so do not assume instant delivery if the target is actively executing tools.
+
+:::
+
 ## Troubleshooting
 
 ### Nudge Not Delivered

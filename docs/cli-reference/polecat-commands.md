@@ -254,6 +254,12 @@ flowchart TD
     NUKE --> GC[gt polecat gc — clean branches]
 ```
 
+:::note
+
+The `check-recovery` command is primarily intended for the Witness agent to call programmatically during patrol cycles. If you are manually investigating a stuck polecat, start with `gt polecat git-state` to see whether unpushed commits exist, then use `gt polecat status` for the full lifecycle picture before deciding whether to nuke or recover.
+
+:::
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

@@ -228,6 +228,10 @@ bd show gt-c1l2i
 gt sling gt-c1l2i frontend
 ```
 
+:::warning
+When adding beads to a convoy after polecats have already started working, verify that the new beads do not conflict with in-progress work. Two polecats editing the same files will trigger merge conflicts that the Refinery must resolve, adding time and token cost to the convoy.
+:::
+
 ## Cross-Rig Coordination
 
 Manual convoys are particularly useful for cross-rig work:

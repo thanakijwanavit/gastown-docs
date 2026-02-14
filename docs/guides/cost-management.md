@@ -362,6 +362,10 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 
 ---
 
+:::caution
+Token costs scale nonlinearly with codebase size. A polecat working on a large monorepo may consume 3-5x more input tokens per session than one working on a focused microservice, because each file read and context reload ingests more content. Consider splitting monorepos into separate rigs to control per-polecat costs.
+:::
+
 ## Cost Tracking Best Practices
 
 1. **Check `gt costs --today` at least twice per day** -- once in the morning and once before ending your session.

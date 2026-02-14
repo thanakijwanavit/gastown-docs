@@ -118,6 +118,10 @@ Gas Town builds on Claude Code as its primary runtime. Install it following the 
 claude --version
 ```
 
+:::info
+After installing all dependencies, run `gt doctor` to verify your environment is correctly configured. It checks Git version, Beads availability, tmux presence, and runtime connectivity in one command.
+:::
+
 ## Shell Completions
 
 Install tab completions for better CLI experience:

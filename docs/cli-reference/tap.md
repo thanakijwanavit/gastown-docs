@@ -151,6 +151,12 @@ flowchart TD
     BLOCK --> DENY[Tool call rejected, agent notified]
 ```
 
+:::caution
+
+When writing custom guards, always test them outside Gas Town first by running them manually with sample JSON input on stdin. A guard that exits with a non-zero code other than 2 (such as a syntax error producing exit code 1) will not block the tool call but may produce confusing error messages in the agent's output.
+
+:::
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

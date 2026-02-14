@@ -280,6 +280,12 @@ sequenceDiagram
     S2->>S2: Continue work from where S1 left off
 ```
 
+:::warning
+
+Checkpoints are stored in `.polecat-checkpoint.json` within the polecat directory and are not synced across machines. If you are running Gas Town on multiple hosts, checkpoint data is local to the host where the session ran. Rely on bead state and handoff files for cross-host recovery instead.
+
+:::
+
 ## Molecules
 
 Molecules are multi-step workflow execution units. They break complex work into a directed acyclic graph (DAG) of steps that can be executed sequentially, in parallel, or with dependencies.

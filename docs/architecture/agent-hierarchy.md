@@ -125,6 +125,10 @@ Severity levels control routing:
 | Medium | P2 | Bead → Mail:Mayor |
 | Low | P3 | Bead only |
 
+:::caution
+Avoid manually restarting agents outside the supervision tree. The Deacon and Witness handle restarts with proper state recovery — bypassing them can leave orphaned worktrees, duplicate work, or hooks that never get picked up.
+:::
+
 ## Related
 
 - [System Overview](overview.md) -- Five-layer architecture including agents, rigs, and communication

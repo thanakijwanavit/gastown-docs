@@ -188,6 +188,12 @@ Predecessors respond best to specific questions:
 | "What happened?" | Too vague |
 | "Tell me everything" | No focus, wastes tokens |
 
+:::warning
+
+Seance forks create a separate Claude Code subprocess, which consumes API tokens. Running many seance sessions in quick succession (especially interactive ones) can generate significant token usage. Prefer one-shot queries with `-p` for quick lookups, and reserve interactive seance sessions for in-depth investigations.
+
+:::
+
 ### One-Shot vs Interactive
 
 Use **one-shot** (`-p`) when you have a specific question and want a quick answer. Use **interactive** (no `-p`) when you need to explore and follow up on answers.
