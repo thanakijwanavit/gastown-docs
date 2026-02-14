@@ -1402,6 +1402,26 @@ else
     fail_test "Found $DOC_WORD_COUNT_ISSUES non-index doc page(s) with fewer than 500 words" "Expand doc pages to at least 500 words for substantive content"
 fi
 
+# Test 49: No orphaned doc pages (every non-index doc page referenced by at least 1 other page)
+ORPHANED_DOC_ISSUES=0
+echo "Test 49: Checking for orphaned doc pages..."
+for file in $(find "$ROOT_DIR/docs" -name "*.md" ! -name "index.md" 2>/dev/null); do
+    # Extract the doc URL path (e.g., /docs/cli-reference/agents)
+    rel_path="${file#$ROOT_DIR/}"
+    doc_url="/${rel_path%.md}"
+    # Search for this URL in all other md files
+    ref_count=$(grep -rl "$doc_url" "$ROOT_DIR/docs" "$ROOT_DIR/blog" 2>/dev/null | grep -v "$file" | wc -l)
+    if [ "$ref_count" -eq 0 ]; then
+        echo "  WARNING: $doc_url is not referenced by any other page"
+        ORPHANED_DOC_ISSUES=$((ORPHANED_DOC_ISSUES + 1))
+    fi
+done
+if [ "$ORPHANED_DOC_ISSUES" -eq 0 ]; then
+    pass_test "All non-index doc pages are referenced by at least one other page"
+else
+    fail_test "Found $ORPHANED_DOC_ISSUES orphaned doc page(s) with no inbound references" "Add cross-links from related docs or blog posts"
+fi
+
 # Summary
 echo ""
 echo "========================================"
