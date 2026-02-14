@@ -421,6 +421,23 @@ git pull --rebase
 When resolving merge conflicts during a rebase, always run your tests before completing the rebase with `git rebase --continue`. A conflict resolution that compiles but breaks tests will propagate the failure to every subsequent polecat that rebases onto your commit.
 :::
 
+## The Commit-Push-Pull Cycle
+
+In a multi-agent environment, every agent follows this tight loop to minimize divergence from remote.
+
+```mermaid
+flowchart TD
+    EDIT["Edit files"] --> ADD["git add files"]
+    ADD --> COMMIT["git commit -m 'msg'"]
+    COMMIT --> PULL["git pull --rebase"]
+    PULL --> CONFLICT{Conflict?}
+    CONFLICT -->|No| PUSH["git push"]
+    CONFLICT -->|Yes| RESOLVE["Resolve conflicts"]
+    RESOLVE --> CONTINUE["git rebase --continue"]
+    CONTINUE --> PUSH
+    PUSH --> EDIT
+```
+
 ## When to Use Branches
 
 **Crew workers:** Never. Push directly to main.

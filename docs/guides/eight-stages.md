@@ -317,6 +317,24 @@ graph LR
 
 ---
 
+## Adoption Timeline
+
+The following timeline shows when each stage of AI coding became mainstream across the developer community.
+
+```mermaid
+gantt
+    title AI Coding Stage Adoption Timeline
+    dateFormat YYYY
+    axisFormat %Y
+    section Stages
+    Stage 1-2 Completions       :done, 2023, 2024
+    Stage 3-4 Chat and IDE Agent :done, 2024, 2025
+    Stage 5 CLI Single Agent     :done, 2024, 2025
+    Stage 6 Multi-Agent 3-5      :active, 2025, 2026
+    Stage 7 Hand-Managed 10+     :active, 2025, 2026
+    Stage 8 Orchestration        : 2025, 2027
+```
+
 ## Where Gas Town Fits
 
 Gas Town is a **Stage 8** orchestration system. It provides the infrastructure that Stage 7 users end up building by hand:

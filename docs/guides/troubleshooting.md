@@ -433,6 +433,21 @@ The Refinery merges MRs **one at a time**, rebasing each onto the latest `main`.
 
 ---
 
+The following diagram illustrates the diagnostic decision process for the most common Gas Town failure scenarios:
+
+```mermaid
+graph TD
+    START{What is failing?}
+    START -->|Agent| AGENT_TYPE{Which agent?}
+    START -->|Merge queue| MQ["gt refinery queue / restart"]
+    START -->|Bead not found| ROUTE["Check prefix + bd routes"]
+    START -->|Hook error| HOOK["gt release + re-sling"]
+    AGENT_TYPE -->|Polecat| PC["gt trail + gt release + re-sling"]
+    AGENT_TYPE -->|Refinery| REF["gt refinery status + restart"]
+    AGENT_TYPE -->|Mayor| MAY["gt mayor restart"]
+    AGENT_TYPE -->|Witness| WIT["gt peek witness + restart"]
+```
+
 ## Quick Diagnostic Reference
 
 | Problem | First Command |

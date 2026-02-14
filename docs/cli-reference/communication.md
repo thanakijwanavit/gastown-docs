@@ -406,6 +406,17 @@ Messages persist across session restarts because they are stored as JSONL files 
 
 :::
 
+The following diagram shows how a mail message travels from sender to recipient through the filesystem-based delivery system.
+
+```mermaid
+graph LR
+    Sender["Sender Agent"] -->|gt mail send| FS["Recipient Mailbox<br/>(JSONL on disk)"]
+    FS -->|gt mail inbox| Recipient["Recipient Agent"]
+    FS -->|gt mail peek| Recipient
+    Recipient -->|gt mail reply| FS2["Sender Mailbox"]
+    FS2 --> Sender
+```
+
 ### `gt mail hook`
 
 Attach a mail message to your hook.

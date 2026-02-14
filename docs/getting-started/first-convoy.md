@@ -175,6 +175,24 @@ Each polecat:
 3. Executes a molecule (workflow template) that guides its work
 4. Submits to the Refinery when done, which merges to main serially
 
+## Convoy Progress Overview
+
+A convoy tracks the aggregate state of all its beads, providing a single dashboard view.
+
+```mermaid
+graph TD
+    CV["Convoy: hq-cv-xyz<br/>Auth System Fixes"]
+    CV --> B1["gt-a1b2c<br/>Fix login bug"]
+    CV --> B2["gt-d3e4f<br/>Email validation"]
+    CV --> B3["gt-g5h6i<br/>Update README"]
+    B1 --> D1["DONE"]
+    B2 --> D2["IN PROGRESS"]
+    B3 --> D3["PENDING"]
+    style D1 fill:#2d5a2d
+    style D2 fill:#5a5a2d
+    style D3 fill:#5a2d2d
+```
+
 ## Common First-Convoy Issues
 
 | Problem | Cause | Fix |

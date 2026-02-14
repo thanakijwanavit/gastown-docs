@@ -193,6 +193,23 @@ The [Boot](boot.md) agent is a specialized Dog with its own lifecycle (runs fres
 
 :::
 
+## Dog Lifecycle States
+
+A dog transitions between idle and active states as the Deacon assigns and completes tasks.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: Deacon spawns dog
+    Idle --> Assigned: Deacon assigns task
+    Assigned --> Working: Dog begins execution
+    Working --> Reporting: Task complete
+    Reporting --> Idle: Results delivered
+    Working --> Stuck: Timeout exceeded
+    Stuck --> DeathWarrant: Deacon issues warrant
+    DeathWarrant --> [*]: Cleanup
+    Idle --> [*]: Deacon releases dog
+```
+
 ## Common Patterns
 
 ### Auto-Dispatch via gt sling

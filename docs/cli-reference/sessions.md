@@ -280,6 +280,26 @@ sequenceDiagram
     S2->>S2: Continue work from where S1 left off
 ```
 
+The following diagram shows how session groups are organized for the `gt cycle` navigation command.
+
+```mermaid
+mindmap
+  root((Session Groups))
+    Town
+      Mayor
+      Deacon
+    Rig Infrastructure
+      Witness
+      Refinery
+    Polecats
+      toast
+      alpha
+      bravo
+    Crew
+      dave
+      nic
+```
+
 :::warning
 
 Checkpoints are stored in `.polecat-checkpoint.json` within the polecat directory and are not synced across machines. If you are running Gas Town on multiple hosts, checkpoint data is local to the host where the session ran. Rely on bead state and handoff files for cross-host recovery instead.

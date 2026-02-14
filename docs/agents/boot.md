@@ -196,6 +196,21 @@ You do not start or stop Boot manually. The Daemon spawns it automatically on ev
 
 :::
 
+## Boot State Transitions
+
+Each Boot instance transitions through a fixed set of states during its brief lifecycle.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Spawned: Daemon tick fires
+    Spawned --> Observing: Read system state
+    Observing --> Deciding: Snapshot complete
+    Deciding --> Acting: Action determined
+    Deciding --> Exiting: No action needed
+    Acting --> Exiting: Action dispatched
+    Exiting --> [*]: Process exits
+```
+
 ## The Decision Matrix
 
 Boot uses a precise decision matrix during the Decide phase:

@@ -201,6 +201,22 @@ graph TD
 
 ---
 
+## Session Context Health
+
+A session's effectiveness degrades as context fills, making timely cycling critical.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Fresh: gt prime
+    Fresh --> Productive: Working normally
+    Productive --> Degrading: Context 70%+ full
+    Degrading --> Exhausted: Context 90%+ full
+    Degrading --> Fresh: gt handoff (proactive)
+    Exhausted --> Fresh: gt handoff (reactive)
+    Exhausted --> Lost: Session crashes
+    Lost --> Fresh: New session + hook recovery
+```
+
 ## Best Practices
 
 :::tip

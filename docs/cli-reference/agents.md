@@ -681,6 +681,24 @@ gt boot status [options]
 
 ---
 
+## Agent Lifecycle Commands Summary
+
+The following diagram maps the primary lifecycle commands for each persistent agent type.
+
+```mermaid
+flowchart LR
+    subgraph "All Persistent Agents"
+        START[start] --> STATUS[status]
+        START --> ATTACH[attach]
+        STATUS --> STOP[stop]
+        STOP --> START
+        STOP --> RESTART[restart]
+        RESTART --> START
+    end
+```
+
+---
+
 ## Callbacks
 
 ### `gt callbacks`

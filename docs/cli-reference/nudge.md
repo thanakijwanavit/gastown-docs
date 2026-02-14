@@ -179,6 +179,31 @@ Nudging an agent while it is in the middle of a long-running tool call (such as 
 
 :::
 
+The following diagram illustrates the decision process for choosing the right communication method.
+
+```mermaid
+mindmap
+  root((Agent Communication))
+    Synchronous
+      gt nudge
+        Wake sleeping agent
+        Status check
+        Time-sensitive alert
+    Asynchronous
+      gt mail send
+        Task assignment
+        Handoff context
+        Detailed instructions
+    Broadcast
+      channel nudge
+        All workers
+        Named channels
+    Escalation
+      gt done --escalate
+        Blocked work
+        Needs human input
+```
+
 ## Troubleshooting
 
 ```mermaid

@@ -177,6 +177,22 @@ Use `gt mol status` rather than `bd list` to inspect wisp states. Since wisps ar
 
 :::
 
+## Wisp TTL and Promotion
+
+When a wisp exceeds its time-to-live while still open, it is promoted to a permanent bead for investigation.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Active: Wisp created
+    Active --> Closed: Step completes normally
+    Active --> Expired: TTL exceeded
+    Closed --> Deleted: Compaction cleanup
+    Expired --> Promoted: Still open past TTL
+    Promoted --> Investigated: Operator reviews
+    Deleted --> [*]
+    Investigated --> [*]
+```
+
 ## Wisps in the Supervision Chain
 
 Wisps provide granular observability for the supervision hierarchy:

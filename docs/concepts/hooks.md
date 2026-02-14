@@ -236,6 +236,28 @@ If an agent seems to have lost its work assignment, run `gt hook` to inspect the
 
 :::
 
+## Hook Lifecycle Across Sessions
+
+The following shows how a hook persists as agents cycle through multiple sessions.
+
+```mermaid
+sequenceDiagram
+    participant S1 as Session 1
+    participant H as Hook (filesystem)
+    participant S2 as Session 2
+    participant S3 as Session 3
+
+    S1->>H: gt sling gt-a1b2c (set hook)
+    S1->>H: Work steps 1-2 done
+    S1--xS1: Context full, session ends
+    S2->>H: gt prime → read hook
+    S2->>H: Work step 3 done
+    S2--xS2: Crash
+    S3->>H: gt prime → read hook
+    S3->>H: Work steps 4-5 done
+    S3->>H: gt done → clear hook
+```
+
 ## Hook and Molecule Integration
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:

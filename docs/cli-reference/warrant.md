@@ -217,6 +217,22 @@ Warrants are idempotent: filing a second warrant for a target that already has a
 
 :::
 
+The following diagram shows how the supervision chain escalates before resorting to a death warrant.
+
+```mermaid
+graph TD
+    DETECT[Agent unresponsive detected] --> N1[Nudge attempt 1]
+    N1 -->|No response| N2[Nudge attempt 2]
+    N2 -->|No response| N3[Nudge attempt 3]
+    N3 -->|No response| ESC[Escalate to Deacon]
+    ESC --> FILE[gt warrant file target]
+    FILE --> BOOT[Boot triage picks up]
+    BOOT --> KILL[Session terminated]
+    KILL --> REHOOK{Work on hook?}
+    REHOOK -->|Yes| REASSIGN[Release bead for reassignment]
+    REHOOK -->|No| CLEAN[Cleanup complete]
+```
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

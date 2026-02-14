@@ -438,6 +438,21 @@ By role:
 
 ---
 
+## Typical Cost Breakdown
+
+Resource costs in Gas Town are dominated by polecat sessions, which do the bulk of code generation and testing.
+
+```mermaid
+pie title Cost Distribution by Agent Role
+    "Polecats" : 65
+    "Refinery" : 15
+    "Mayor" : 8
+    "Witnesses" : 7
+    "Deacon & Dogs" : 5
+```
+
+---
+
 ### `gt cleanup`
 
 Clean up temporary files and stale resources.

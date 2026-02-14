@@ -224,6 +224,19 @@ Gas Town supports exactly one Mayor per town. Running multiple Mayor sessions wi
 
 :::
 
+## Typical Mayor Time Allocation
+
+The Mayor distributes its processing time across several core activities during normal operation.
+
+```mermaid
+pie title Mayor Activity Distribution
+    "Work decomposition" : 30
+    "Convoy monitoring" : 25
+    "Escalation handling" : 20
+    "Mail processing" : 15
+    "Strategic direction" : 10
+```
+
 ## Common Patterns
 
 ### Assigning a Batch of Related Work

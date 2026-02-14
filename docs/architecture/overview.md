@@ -118,6 +118,29 @@ flowchart LR
     W -->|all done| Conv["Convoy closes"]
 ```
 
+## End-to-End Work Flow
+
+The following sequence shows how a single unit of work flows through all five architectural layers from human instruction to merged code.
+
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant M as Mayor
+    participant W as Witness
+    participant P as Polecat
+    participant R as Refinery
+
+    H->>M: Describe work
+    M->>M: Create bead + convoy
+    M->>W: gt sling (assign to rig)
+    W->>P: Spawn polecat
+    P->>P: Implement + test
+    P->>R: gt done (submit MR)
+    R->>R: Rebase + validate + merge
+    R-->>W: MERGED signal
+    W->>W: Nuke polecat sandbox
+```
+
 ## State Management
 
 :::tip

@@ -611,6 +611,22 @@ Scheduled plugins run on a cron schedule independently of workflow events.
 Schedule plugins run independently of the merge pipeline and are ideal for maintenance tasks like log rotation, stale branch cleanup, or periodic health reports. Unlike gate plugins, they never block polecat work, making them safe to experiment with in production.
 :::
 
+The following diagram shows the lifecycle of a gate plugin from installation through pipeline integration:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Created: mkdir + plugin.json
+    Created --> Executable: chmod +x run.sh
+    Executable --> Tested: gt plugin run --dry-run
+    Tested --> Active: Pipeline auto-triggers
+    Active --> Passing: Exit code 0
+    Active --> Failing: Exit code non-zero
+    Passing --> Active: Next trigger event
+    Failing --> Retrying: retry_on_failure=true
+    Retrying --> Active: Retry attempt
+    Failing --> Blocked: max_retries exceeded
+```
+
 ## Plugin Best Practices
 
 1. **Keep plugins fast.** Plugins that run as gates block the merge pipeline. Aim for under 60 seconds; use the `timeout` config to prevent runaway executions.

@@ -738,6 +738,21 @@ git log --oneline origin/main..HEAD
 
 ---
 
+The following diagram shows a typical merge conflict resolution flow when the Refinery encounters conflicting changes from parallel polecats:
+
+```mermaid
+graph TD
+    MR1[Polecat A MR] --> REF[Refinery]
+    MR2[Polecat B MR] --> REF
+    REF --> REBASE{Rebase onto main}
+    REBASE -->|Success| TEST[Run tests]
+    REBASE -->|Conflict| SPAWN[Spawn conflict-resolver polecat]
+    TEST -->|Pass| MERGE[Merge to main]
+    TEST -->|Fail| REJECT[Reject MR back to queue]
+    SPAWN --> RESOLVE[Resolve conflicts]
+    RESOLVE --> TEST
+```
+
 ## Mail Delivery Problems
 
 **Symptom:** Messages sent via `gt mail send` are not appearing in the recipient's inbox, or agents are not responding to mail they should have received.

@@ -112,6 +112,18 @@ flowchart TD
     CREW --> READY
 ```
 
+The following diagram summarizes the key differences between parking and docking a rig.
+
+```mermaid
+graph TD
+    RIG[Active Rig] -->|gt rig park| PARK[Parked]
+    RIG -->|gt rig dock| DOCK[Docked]
+    PARK -->|gt rig unpark| RIG
+    DOCK -->|gt rig undock| RIG
+    PARK --- P_DESC["Worktrees preserved<br/>Quick resume<br/>No resource usage<br/>Daemon skips patrol"]
+    DOCK --- D_DESC["Worktrees removed<br/>Disk minimized<br/>Longer restore time<br/>Config + beads preserved"]
+```
+
 **Created structure:**
 
 ```text

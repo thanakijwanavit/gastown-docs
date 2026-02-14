@@ -426,6 +426,16 @@ Do not set `auto_escalate_after` to less than 5 minutes for any severity level. 
 
 :::
 
+The following diagram shows the relative urgency and notification breadth of each severity level:
+
+```mermaid
+pie title Escalation Severity Distribution (Typical Fleet)
+    "P3 Low (best effort)" : 45
+    "P2 Medium (4h response)" : 30
+    "P1 High (1h response)" : 20
+    "P0 Critical (immediate)" : 5
+```
+
 ## Tuning Escalation Thresholds
 
 The default thresholds work well for most setups, but you may want to adjust them based on your operational pattern.

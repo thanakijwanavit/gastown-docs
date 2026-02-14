@@ -137,6 +137,27 @@ flowchart LR
 4. Monitor progress
 5. Route completed work through the refinery for merging
 
+## What the Mayor Does Behind the Scenes
+
+When you give the Mayor instructions, it orchestrates a coordinated sequence of actions across the system.
+
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant M as Mayor
+    participant BD as Beads DB
+    participant R as Rig
+    participant P as Polecats
+
+    H->>M: "Fix auth and add validation"
+    M->>BD: bd create (2 beads)
+    M->>BD: gt convoy create
+    M->>R: gt sling bead-1
+    M->>R: gt sling bead-2
+    R->>P: Spawn polecat per bead
+    P->>P: Execute molecule steps
+```
+
 ## Check Status
 
 | Command | Purpose | When to Use |

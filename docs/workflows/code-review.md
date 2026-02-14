@@ -339,6 +339,30 @@ $ cat .reviews/review-abc123/review-summary.md
 # ...
 ```
 
+The following diagram shows how the four presets compare in terms of which review legs they include:
+
+```mermaid
+mindmap
+  root((Code Review Presets))
+    Gate (4 legs)
+      wiring
+      security
+      smells
+      test-quality
+    Full (10 legs)
+      all dimensions
+    Security-Focused (4 legs)
+      security
+      resilience
+      correctness
+      wiring
+    Refactor (4 legs)
+      elegance
+      smells
+      style
+      commit-discipline
+```
+
 ## Tips
 
 :::tip[Start with Gate Preset]

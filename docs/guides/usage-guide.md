@@ -315,6 +315,27 @@ gt down
 
 ---
 
+The following diagram shows how a typical morning startup session flows through Gas Town's monitoring commands:
+
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant GT as gt CLI
+    participant Mayor as Mayor
+
+    H->>GT: gt start --all
+    GT-->>H: Fleet started
+    H->>GT: gt trail --since 12h
+    GT-->>H: Overnight activity summary
+    H->>GT: gt escalate list
+    GT-->>H: Open escalations (if any)
+    H->>GT: gt convoy list
+    GT-->>H: Active convoy progress
+    H->>Mayor: gt mayor attach
+    H->>Mayor: Give today's instructions
+    Mayor-->>H: Plan created, polecats spawned
+```
+
 ## Working with Crew
 
 Crew workspaces are your most powerful tool for sustained, hands-on development within Gas Town. While polecats handle well-specified tasks autonomously, your Crew members are where design work, code review, and complex decision-making happen. See the [Crew agent docs](../agents/crew.md) for setup and commands.

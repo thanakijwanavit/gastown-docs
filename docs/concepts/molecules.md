@@ -340,6 +340,22 @@ Then run it:
 gt formula run my-deploy --var version="2.3.1"
 ```
 
+## Molecule Step Execution States
+
+Each molecule step transitions through a well-defined set of states as the agent works through its workflow.
+
+```mermaid
+stateDiagram-v2
+    [*] --> pending: Step created
+    pending --> in_progress: Dependencies met
+    in_progress --> done: Step succeeds
+    in_progress --> failed: Step fails
+    in_progress --> gated: Waiting on gate
+    failed --> in_progress: Retry
+    gated --> in_progress: Gate closes
+    done --> [*]
+```
+
 ## When to Use Molecules and Formulas
 
 ### When to Use Molecules

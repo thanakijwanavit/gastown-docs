@@ -195,6 +195,20 @@ Protomolecules (Layer 4) coordinate multiple agents working in parallel and are 
 
 :::
 
+## Formula-to-Completion Flow
+
+A formula flows through the MEOW layers from template to completed work.
+
+```mermaid
+flowchart LR
+    F["Formula (L5)<br/>TOML template"] --> POUR["Pour"]
+    POUR --> MOL["Molecule (L3)<br/>Live workflow"]
+    MOL --> STEPS["Steps execute<br/>via Polecat"]
+    STEPS --> BEAD["Bead (L1)<br/>marked done"]
+    BEAD --> CV["Convoy (L2)<br/>tracks progress"]
+    CV --> CLOSE["Auto-close<br/>all beads done"]
+```
+
 ## Cross-Cutting Concerns
 
 Two concepts cut across all MEOW layers rather than living in a single layer:

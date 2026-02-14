@@ -106,6 +106,24 @@ flowchart LR
     Refinery -->|merges to| Main
 ```
 
+The following illustrates how a polecat's work differs from a crew member's merge path.
+
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant C as Crew Workspace
+    participant P as Polecat
+    participant R as Refinery
+    participant M as main
+
+    H->>C: Edit code directly
+    C->>M: git push (direct to main)
+    H->>P: gt sling bead
+    P->>P: Work in isolated worktree
+    P->>R: gt done (submit MR)
+    R->>M: Rebase + merge to main
+```
+
 ### What does the Mayor actually do?
 
 The Mayor decomposes natural language instructions into discrete, implementable beads, bundles them into convoys, assigns work to rigs, and monitors progress. It does **not** monitor health (that's the Deacon's job). See [Mayor](../agents/mayor.md).

@@ -179,6 +179,31 @@ Molecules provide crash recovery — if an agent restarts, `bd ready` shows the 
 Do not skip molecule steps or close them out of order. The step sequence is designed so that each step's preconditions are satisfied by the previous step — jumping ahead can result in missing context, failed tests, or merge conflicts that are harder to debug.
 :::
 
+## Typical Work Timeline
+
+A representative timeline showing how a bead progresses from creation through merge.
+
+```mermaid
+gantt
+    title Bead Lifecycle Timeline
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Mayor
+    Create bead & convoy     :a1, 00:00, 5min
+    Sling to rig             :a2, after a1, 2min
+
+    section Polecat
+    Spawn & load context     :b1, after a2, 3min
+    Implement solution       :b2, after b1, 30min
+    Self-review & test       :b3, after b2, 10min
+    Submit via gt done       :b4, after b3, 2min
+
+    section Refinery
+    Rebase & validate        :c1, after b4, 5min
+    Merge to main            :c2, after c1, 2min
+```
+
 ## Cross-Rig Work
 
 ```mermaid

@@ -366,6 +366,22 @@ gt formula run <name> --var key=value
 gt formula run <name> --preset=<preset-name>
 ```
 
+The following diagram shows the step dependencies in a typical workflow formula where each step must complete before the next begins:
+
+```mermaid
+gantt
+    title Shiny Formula Step Execution
+    dateFormat X
+    axisFormat %s
+
+    section Workflow
+    Design           :done, d, 0, 3
+    Implement        :active, i, 3, 8
+    Review           :r, 8, 10
+    Test             :t, 10, 13
+    Submit           :s, 13, 14
+```
+
 ## Variables and Templating
 
 Formulas use Go `text/template` syntax for variable interpolation:

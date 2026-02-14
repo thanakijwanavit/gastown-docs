@@ -177,6 +177,26 @@ stateDiagram-v2
     PassThrough --> [*]
 ```
 
+The following diagram shows the planned tap handler pipeline and which hook types each handler uses.
+
+```mermaid
+gantt
+    title Tap Handler Pipeline
+    dateFormat X
+    axisFormat %s
+
+    section PreToolUse
+    guard — block forbidden ops  :active, 0, 3
+    inject — modify tool inputs  :crit, 3, 6
+
+    section Tool Execution
+    Tool runs                    :done, 6, 12
+
+    section PostToolUse
+    audit — log execution        :active, 12, 15
+    check — validate output      :crit, 15, 18
+```
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

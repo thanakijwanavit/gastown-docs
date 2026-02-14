@@ -266,6 +266,23 @@ The `stale` command only considers polecats without active tmux sessions. If a p
 
 :::
 
+The following diagram shows the decision process used when determining how to handle a polecat that may need cleanup.
+
+```mermaid
+flowchart TD
+    A[Investigate polecat] --> B{tmux session alive?}
+    B -->|Yes| C{Session responsive?}
+    B -->|No| D[gt polecat stale]
+    C -->|Yes| E[Leave running]
+    C -->|No| F[gt session restart]
+    D --> G{Unpushed commits?}
+    G -->|Yes| H[gt polecat check-recovery]
+    G -->|No| I[gt polecat nuke — safe]
+    H --> J{Recovery needed?}
+    J -->|Yes| K[Escalate to Mayor]
+    J -->|No| I
+```
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

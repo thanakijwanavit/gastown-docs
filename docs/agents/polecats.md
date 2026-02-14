@@ -261,6 +261,30 @@ Polecats build features within a single rig and are ephemeral. Dogs handle infra
 
 :::
 
+## Polecat Escalation Flow
+
+When a polecat encounters a blocker it cannot resolve, the escalation travels up through the supervision tree.
+
+```mermaid
+sequenceDiagram
+    participant P as Polecat
+    participant W as Witness
+    participant D as Deacon
+    participant M as Mayor
+
+    P->>P: Hit blocker
+    P->>W: gt escalate (HELP mail)
+    W->>W: Assess severity
+    alt Can resolve locally
+        W->>P: Guidance via nudge
+        P->>P: Resume work
+    else Cannot resolve
+        W->>D: Escalate to Deacon
+        D->>M: Forward to Mayor
+        M-->>P: Resolution or reassignment
+    end
+```
+
 ## The Polecat Work Formula
 
 Every polecat follows the `mol-polecat-work` formula, which defines these steps:

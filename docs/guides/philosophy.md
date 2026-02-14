@@ -320,6 +320,25 @@ pie title Survival Formula Components
     "Friction cost (denominator)" : 15
 ```
 
+The following timeline shows how Gas Town evolved through four major architectural revisions, each driven by hard-won operational lessons:
+
+```mermaid
+timeline
+    title Gas Town Development History
+    Aug 2025 : v1 Prototype
+             : Bash scripts + tmux
+             : Proved multi-agent concept
+    Late 2025 : v2 Beads
+              : Git-backed issue tracking
+              : Shared coordination primitive
+    Late 2025 : v3 Python
+              : Agent hierarchy added
+              : Refinery merge queue
+    2026 : v4 Go (Current)
+         : Fast daemon process
+         : Single binary distribution
+```
+
 ### The Vibe Coding Commitment
 
 Gas Town embraces what Yegge calls "vibe coding" -- the practice of letting AI do the work while you focus on direction and review. As he writes in [Welcome to Gas Town](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04):

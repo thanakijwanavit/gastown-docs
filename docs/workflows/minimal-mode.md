@@ -285,6 +285,29 @@ Without Witness and Deacon monitoring, stuck or crashed sessions will not be aut
 
 :::
 
+The following diagram shows which Gas Town components are available at each stage as you scale up from minimal mode to the full workflow:
+
+```mermaid
+graph TD
+    subgraph Minimal["Minimal Mode"]
+        BD[Beads tracking]
+        CV[Convoy tracking]
+        HK[Hook persistence]
+    end
+    subgraph Tmux["+ Tmux"]
+        AS[Auto-spawn polecats]
+    end
+    subgraph Monitor["+ Witness"]
+        HM[Health monitoring]
+        NG[Nudge stale agents]
+    end
+    subgraph Full["+ Refinery + Mayor"]
+        AM[Auto-merge pipeline]
+        CO[Mayor coordination]
+    end
+    Minimal --> Tmux --> Monitor --> Full
+```
+
 ## Comparison with Full Workflow
 
 | Feature | Minimal Mode | Full Workflow |

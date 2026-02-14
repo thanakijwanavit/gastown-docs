@@ -704,6 +704,16 @@ gt bead move gt-abc12 docs
 gt bead move gt-def34 myproject --force
 ```
 
+The following diagram shows the priority-based escalation routing for different bead priority levels.
+
+```mermaid
+pie title Bead Exit States in Typical Workflow
+    "COMPLETED — merged to main" : 75
+    "ESCALATED — needs human input" : 10
+    "DEFERRED — paused for later" : 10
+    "PHASE_COMPLETE — gate point" : 5
+```
+
 :::note
 
 Moving a hooked bead without `--force` will fail. Unsling it first, or use `--force` to automatically unsling before moving.

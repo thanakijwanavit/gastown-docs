@@ -162,6 +162,24 @@ pie title Target Resolution Distribution
     "Self-assign" : 10
 ```
 
+The following diagram shows how `gt sling` compares to related work assignment commands.
+
+```mermaid
+graph LR
+    subgraph "Attach Only"
+        HOOK[gt hook bead]
+        HOOK --> H_DESC["Bead on hook<br/>No action taken<br/>Agent picks up on next cycle"]
+    end
+    subgraph "Attach + Start Now"
+        SLING[gt sling bead target]
+        SLING --> S_DESC["Bead on hook<br/>Polecat spawned<br/>Work begins via GUPP"]
+    end
+    subgraph "Attach + Fresh Session"
+        HANDOFF[gt handoff bead]
+        HANDOFF --> HO_DESC["Bead on hook<br/>Session restarts<br/>Fresh context loaded"]
+    end
+```
+
 :::danger
 
 Batch slinging with `--force` bypasses the unread mail check on every target polecat. If a polecat has pending mail containing important handoff context or instructions, forcing a new sling will overwrite its hook and the mail may never be processed. Only use `--force` when you are certain no critical mail is pending.

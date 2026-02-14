@@ -317,6 +317,20 @@ Claude Code hooks run synchronously in the tool execution pipeline, so avoid pla
 
 :::
 
+## Configuration Inheritance
+
+Settings cascade from town level down to individual sessions, with each level able to override its parent.
+
+```mermaid
+graph LR
+    Town["Town Config<br/>(~/gt/config.yaml)"] -->|inherits| Rig["Rig Config<br/>(metadata.json)"]
+    Rig -->|inherits| Agent["Agent Config<br/>(per-role settings)"]
+    Agent -->|inherits| Session["Session<br/>(--agent flag)"]
+    Town -.->|override| Rig
+    Rig -.->|override| Agent
+    Agent -.->|override| Session
+```
+
 ## Status Line
 
 ### `gt issue`

@@ -254,6 +254,25 @@ If no beads in a convoy make progress for an extended period, the Deacon marks t
 
 :::
 
+## Convoy Notification Flow
+
+When a convoy completes, the notification chain ensures all stakeholders are informed.
+
+```mermaid
+sequenceDiagram
+    participant D as Deacon
+    participant CV as Convoy
+    participant M as Mayor
+    participant O as Overseer (Human)
+
+    D->>CV: check-convoy-completion
+    CV-->>D: All beads done
+    D->>CV: Mark COMPLETED
+    D->>M: Notify: convoy closed
+    M->>O: gt mail send --human "Convoy landed"
+    O-->>M: Acknowledged
+```
+
 ## Convoy + Mayor Workflow
 
 In the recommended [Mayor Workflow](../workflows/mayor-workflow.md), convoys are created automatically:

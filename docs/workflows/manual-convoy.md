@@ -270,6 +270,19 @@ gt sling gt-g5h6i shared-lib
 gt convoy show hq-cv-007
 ```
 
+The following diagram shows how manual convoy work items transition through each stage as you manage them directly:
+
+```mermaid
+graph LR
+    CREATE["bd create<br/>(pending)"] --> BUNDLE["gt convoy create<br/>(bundled)"]
+    BUNDLE --> SLING["gt sling<br/>(hooked)"]
+    SLING --> WORK["Polecat working<br/>(in_progress)"]
+    WORK --> DONE["gt done<br/>(submitted)"]
+    DONE --> MERGE["Refinery merges<br/>(merged)"]
+    WORK -->|stuck?| RELEASE["gt release<br/>(back to pending)"]
+    RELEASE --> SLING
+```
+
 ## Comparison with Other Workflows
 
 | Aspect | Manual Convoy | Mayor Workflow | Minimal Mode |

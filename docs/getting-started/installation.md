@@ -181,6 +181,22 @@ flowchart TD
     VERIFY --> READY[Ready for gt install]
 ```
 
+## Installation State Machine
+
+The installation process follows a clear sequence from download to verified setup.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Download: brew install gastown
+    Download --> InstallDeps: Install Git, Beads, tmux
+    InstallDeps --> Configure: gt completion, shell setup
+    Configure --> Verify: gt doctor
+    Verify --> Ready: All checks pass
+    Verify --> Fix: Issues detected
+    Fix --> Verify: Retry after fix
+    Ready --> [*]
+```
+
 ## Supported Runtimes
 
 Gas Town supports multiple AI coding agent runtimes:

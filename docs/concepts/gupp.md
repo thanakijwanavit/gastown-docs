@@ -227,6 +227,22 @@ When reviewing agent-produced code, keep NDI in mind: two agents solving the sam
 
 :::
 
+## GUPP Decision Tree
+
+When an operation encounters a failure, GUPP dictates the forward-only response.
+
+```mermaid
+graph TD
+    OP["Operation Attempted"] --> OK{Success?}
+    OK -->|Yes| ADV["Advance state forward"]
+    OK -->|No| CHECK{Completed steps exist?}
+    CHECK -->|Yes| KEEP["Keep completed steps, retry current"]
+    CHECK -->|No| NOOP["Leave system unchanged"]
+    KEEP --> RETRY["Fresh agent resumes from checkpoint"]
+    NOOP --> SAFE["No state corruption"]
+    ADV --> DONE["Progress recorded in beads"]
+```
+
 ## How GUPP & NDI Are Implemented
 
 These principles are not just abstract ideals -- they are enforced by specific Gas Town primitives:

@@ -217,6 +217,25 @@ hook format
 
 ---
 
+## Documentation Coverage Map
+
+The search index covers all major sections of the Gas Town documentation.
+
+```mermaid
+graph TD
+    DOCS["Gas Town Docs"]
+    DOCS --> GS["Getting Started"]
+    DOCS --> CONCEPTS["Concepts"]
+    DOCS --> GUIDES["Guides"]
+    DOCS --> ARCH["Architecture"]
+    DOCS --> CLI["CLI Reference"]
+    DOCS --> OPS["Operations"]
+    DOCS --> AGENTS["Agents"]
+    GS --> GS1["Install, Quickstart, FAQ"]
+    CONCEPTS --> C1["Beads, Hooks, Convoys"]
+    GUIDES --> G1["Git, Costs, Stages"]
+```
+
 ## Search Scope
 
 ### Included in Search

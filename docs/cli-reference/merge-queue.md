@@ -321,6 +321,22 @@ sequenceDiagram
     end
 ```
 
+The following timeline shows the typical lifecycle of a merge request as it moves through the queue.
+
+```mermaid
+timeline
+    title Merge Request Lifecycle
+    Submitted : Polecat runs gt done
+             : MR enters queue as pending
+    Claimed : Refinery picks up MR
+            : Rebase onto latest main
+    Validated : Build checks run
+              : Test suite executes
+    Merged : Fast-forward merge to main
+           : Bead status updated
+           : Polecat notified
+```
+
 :::note[Merge Process]
 
 The Refinery processes each MR through these steps:

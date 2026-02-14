@@ -212,6 +212,32 @@ Stopping a Witness leaves polecats in that rig unsupervised. If you must stop a 
 
 :::
 
+## Witness Nudge Protocol
+
+When the Witness detects a stalled polecat, it follows a structured nudge protocol before escalating.
+
+```mermaid
+sequenceDiagram
+    participant W as Witness
+    participant P as Stalled Polecat
+    participant D as Deacon
+
+    W->>W: Patrol detects stall
+    W->>P: Nudge 1: "Status check"
+    alt Responds
+        P-->>W: Resumes work
+    else No response
+        W->>W: Wait nudge timeout (5m)
+        W->>P: Nudge 2: "Final warning"
+        alt Responds
+            P-->>W: Resumes work
+        else Still unresponsive
+            W->>D: Escalate unresponsive polecat
+            W->>W: Mark for cleanup
+        end
+    end
+```
+
 ## Common Patterns
 
 ### The Ephemeral Polecat Model

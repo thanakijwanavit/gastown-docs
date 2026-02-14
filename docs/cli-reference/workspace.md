@@ -203,6 +203,23 @@ sequenceDiagram
     DC->>DC: Begin patrol cycles
 ```
 
+The following diagram shows the comparison between `gt down` (reversible pause) and `gt shutdown` (permanent cleanup).
+
+```mermaid
+graph LR
+    subgraph "gt down (Pause)"
+        DOWN[gt down] --> D1[Stops agents]
+        D1 --> D2[Preserves worktrees]
+        D2 --> D3[gt start resumes]
+    end
+    subgraph "gt shutdown (Cleanup)"
+        SHUT[gt shutdown] --> S1[Stops agents]
+        S1 --> S2[Removes worktrees]
+        S2 --> S3[Cleans branches]
+        S3 --> S4[Requires full restart]
+    end
+```
+
 ## `gt enable`
 
 Enable Gas Town for all agentic coding tools.

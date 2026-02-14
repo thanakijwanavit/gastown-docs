@@ -143,6 +143,30 @@ Severity levels control routing:
 Avoid manually restarting agents outside the supervision tree. The Deacon and Witness handle restarts with proper state recovery — bypassing them can leave orphaned worktrees, duplicate work, or hooks that never get picked up.
 :::
 
+## Agent Lifecycle States
+
+Each agent type follows a distinct lifecycle pattern within the supervision tree.
+
+```mermaid
+stateDiagram-v2
+    state "Daemon" as daemon {
+        [*] --> Running
+        Running --> Running: heartbeat tick
+    }
+    state "Persistent Agent" as persistent {
+        [*] --> Active
+        Active --> Active: patrol cycle
+        Active --> Crashed: failure
+        Crashed --> Active: supervisor restarts
+    }
+    state "Ephemeral Agent" as ephemeral {
+        [*] --> Spawned
+        Spawned --> Working: hook loaded
+        Working --> Done: gt done
+        Done --> [*]: nuked
+    }
+```
+
 ## Related
 
 - [System Overview](overview.md) -- Five-layer architecture including agents, rigs, and communication

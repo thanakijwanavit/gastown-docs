@@ -190,6 +190,27 @@ gt-g5h6i   pending        -               Update auth docs
 
 ---
 
+## Convoy Progress Tracking
+
+The Mayor monitors convoy progress as individual beads move through their lifecycle and reach completion.
+
+```mermaid
+sequenceDiagram
+    participant M as Mayor
+    participant CV as Convoy
+    participant P1 as Polecat A
+    participant P2 as Polecat B
+
+    M->>CV: gt convoy create (3 beads)
+    M->>P1: gt sling bead-1
+    M->>P2: gt sling bead-2
+    P1-->>CV: bead-1 completed
+    P2-->>CV: bead-2 completed
+    M->>P1: gt sling bead-3
+    P1-->>CV: bead-3 completed
+    CV-->>M: Convoy auto-closed (3/3)
+```
+
 ## `gt convoy close`
 
 Manually close a convoy.

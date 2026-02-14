@@ -256,6 +256,30 @@ graph TD
     RESTART --> RUN
 ```
 
+The following diagram shows how a session persists work through the polecat sandbox even as Claude sessions cycle.
+
+```mermaid
+gantt
+    title Session Lifecycle vs Sandbox Persistence
+    dateFormat X
+    axisFormat %s
+
+    section Sandbox
+    Git worktree persists       :active, 0, 60
+
+    section Session 1
+    gt prime + work             :done, 0, 20
+    Context full - handoff      :crit, 20, 22
+
+    section Session 2
+    gt prime + resume           :done, 22, 42
+    Context full - handoff      :crit, 42, 44
+
+    section Session 3
+    gt prime + resume + gt done :done, 44, 55
+    Nuke polecat                :crit, 55, 60
+```
+
 :::caution
 
 When attaching to a polecat session with `gt session at`, avoid typing into the terminal unless you intend to interact with the Claude session directly. Any accidental keystrokes are sent to the running Claude instance and may disrupt its current work or cause unexpected tool calls.

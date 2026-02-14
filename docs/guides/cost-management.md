@@ -353,6 +353,21 @@ fi
 
 ---
 
+## Cost Scaling by Agent Count
+
+Token costs scale with the number of active agents across all rigs.
+
+```mermaid
+graph LR
+    MIN["Minimal<br/>1-2 polecats<br/>$10-20/hr"] --> NORM["Normal<br/>3-5 polecats<br/>$30-50/hr"]
+    NORM --> HEAVY["Heavy<br/>6-10 polecats<br/>$50-100/hr"]
+    HEAVY --> PEAK["Peak<br/>10-20+ polecats<br/>$100-200+/hr"]
+    style MIN fill:#2d5a2d
+    style NORM fill:#3d6a3d
+    style HEAVY fill:#5a5a2d
+    style PEAK fill:#5a2d2d
+```
+
 ## Cost Comparison
 
 To put Gas Town costs in perspective:

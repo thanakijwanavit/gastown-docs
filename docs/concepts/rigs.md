@@ -306,6 +306,22 @@ The `gt rig reset` command clears all rig state including polecat worktrees, cac
 
 :::
 
+## Rig Startup Sequence
+
+When a rig starts, its agents initialize in a specific order to ensure dependencies are ready.
+
+```mermaid
+flowchart TD
+    START["gt rig start"] --> CLONE["Verify git clone health"]
+    CLONE --> BEADS["Load .beads/ database"]
+    BEADS --> WIT["Start Witness agent"]
+    BEADS --> REF["Start Refinery agent"]
+    WIT --> PATROL["Witness begins patrol"]
+    REF --> MQ["Refinery monitors merge queue"]
+    PATROL --> READY["Rig Active: ready for polecats"]
+    MQ --> READY
+```
+
 ## Rig in the Bigger Picture
 
 Rigs are the physical foundation on which all other concepts operate:

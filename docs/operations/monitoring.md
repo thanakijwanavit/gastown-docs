@@ -522,6 +522,17 @@ gt activity --type polecat --since 1h --json
 
 ---
 
+The following diagram shows the relative token cost distribution across agent types in a typical Gas Town deployment:
+
+```mermaid
+pie title Typical Token Cost Distribution by Agent Type
+    "Polecats (workers)" : 67
+    "Witnesses (monitors)" : 11
+    "Mayor (coordination)" : 9
+    "Deacon (health)" : 6
+    "Refineries (merge)" : 7
+```
+
 ## Monitoring Best Practices
 
 1. **Always keep `gt feed` running** in a dedicated terminal. It is the fastest way to notice problems.

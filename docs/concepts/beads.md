@@ -180,6 +180,27 @@ flowchart TD
     SLING --> WORK[Agent executes]
 ```
 
+The following diagram shows how beads integrate with Gas Town's agent workflow from creation to completion.
+
+```mermaid
+sequenceDiagram
+    participant H as Human / Mayor
+    participant BD as bd CLI
+    participant GT as gt CLI
+    participant P as Polecat
+    participant R as Refinery
+
+    H->>BD: bd create --title "Fix bug"
+    BD-->>H: Created gt-abc12
+    H->>GT: gt sling gt-abc12 myproject
+    GT->>P: Spawn polecat + hook bead
+    P->>P: Work on fix
+    P->>GT: gt done --message "Fixed"
+    GT->>R: Submit MR to merge queue
+    R->>R: Rebase + validate
+    R->>BD: bd close gt-abc12
+```
+
 ## Essential Commands
 
 ### Creating Beads

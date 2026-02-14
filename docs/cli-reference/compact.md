@@ -173,6 +173,17 @@ If compaction promotes a large number of wisps in a single run, it may indicate 
 
 :::
 
+## Wisp Outcome Distribution
+
+In a typical compaction run, the majority of wisps are either skipped (still within TTL) or deleted (closed and expired). Promotions are the exception.
+
+```mermaid
+pie title Typical Compaction Outcomes
+    "Skipped (within TTL)" : 60
+    "Deleted (closed + expired)" : 30
+    "Promoted (open + expired)" : 10
+```
+
 ## Understanding the Output
 
 A typical compaction run produces output like:

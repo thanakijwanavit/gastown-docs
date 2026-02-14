@@ -213,6 +213,26 @@ Crew workspaces are full clones on the local filesystem. Uncommitted work exists
 
 :::
 
+## Crew Refresh Flow
+
+The following diagram shows how a crew workspace stays synchronized with the main branch through the refresh process.
+
+```mermaid
+sequenceDiagram
+    participant H as Human Developer
+    participant C as Crew Workspace
+    participant R as Remote Repo
+    participant M as Main Branch
+
+    H->>C: gt crew refresh
+    C->>R: git fetch origin
+    R-->>C: Latest commits
+    C->>M: git rebase origin/main
+    M-->>C: Updated working copy
+    C-->>H: Workspace refreshed
+    H->>C: Continue development
+```
+
 ## Common Patterns
 
 ### Setting Up a New Crew Workspace

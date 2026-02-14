@@ -150,6 +150,23 @@ graph TD
     H --> I
 ```
 
+The following timeline shows how seance fits into a typical session recovery workflow.
+
+```mermaid
+timeline
+    title Session Recovery with Seance
+    Context Lost : Session compacted or crashed
+                 : Agent needs prior decisions
+    Discovery : gt seance lists recent sessions
+              : Filter by --rig or --role
+    Query : gt seance --talk session-id
+          : Fork loads predecessor context
+    Recovery : Ask specific questions
+             : Recover files, decisions, progress
+    Resume : Continue work with restored context
+           : No predecessor session modified
+```
+
 :::danger
 
 Do not run `gt seance --talk` on a session that is still actively running unless you understand that the fork is read-only. While the original session is unmodified, the forked subprocess may consume significant memory if the predecessor's context window is large. Avoid running multiple concurrent seance sessions against the same predecessor.

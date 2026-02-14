@@ -194,6 +194,33 @@ Ignoring a failing test to "deal with later" is the single most expensive mistak
 
 Named after the Star Trek engineer: Gas Town agents never proceed past failures. The [Refinery](../agents/refinery.md) does not merge code that fails validation. Polecats run [preflight tests](../agents/polecats.md) before starting implementation to ensure `main` is clean. If something is broken, you fix it or file it -- you don't skip past it.
 
+## Design Principle Relationships
+
+The twelve design principles form an interconnected system where each principle reinforces the others.
+
+```mermaid
+mindmap
+  root((Design Principles))
+    Propulsion
+      Hook-driven execution
+      Self-propelled agents
+    Supervision
+      Erlang-inspired trees
+      Let it crash
+    State
+      Git as ground truth
+      Discovery over tracking
+    Workers
+      Self-cleaning polecats
+      Nondeterministic idempotence
+    Structure
+      Role separation
+      Dumb scheduler, smart agents
+    Communication
+      Messages over shared state
+      Human in the loop
+```
+
 ## 12. Discovery Over Tracking
 
 Gas Town favors agents discovering what needs to happen over centralized tracking that tells them. The [Witness](../agents/witness.md) discovers stale polecats by inspecting them, not by reading a checklist. The [Deacon](../agents/deacon.md) discovers zombies by scanning processes, not by maintaining a process table.

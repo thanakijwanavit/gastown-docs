@@ -166,6 +166,22 @@ In Gas Town, unpushed commits are invisible to every other agent. Push after eve
 
 ---
 
+## Troubleshooting Decision Tree
+
+When something goes wrong, follow this decision tree to find the right command.
+
+```mermaid
+graph TD
+    PROBLEM["Something wrong?"]
+    PROBLEM --> HEALTH["gt doctor"]
+    HEALTH -->|Issues found| FIX["gt doctor --fix"]
+    HEALTH -->|All clear| ACTIVITY["gt feed"]
+    ACTIVITY -->|No activity| REBOOT["gt rig reboot"]
+    ACTIVITY -->|Errors| POLECAT["gt polecat list"]
+    POLECAT -->|Stuck polecat| NUDGE["gt nudge polecat 'msg'"]
+    POLECAT -->|Zombie| SHUTDOWN["gt shutdown --polecats-only"]
+```
+
 ## Emergency Commands
 
 | Command | What it does |

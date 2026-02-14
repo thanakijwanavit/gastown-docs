@@ -223,6 +223,20 @@ gt worktree remove beads
 
 ---
 
+The following diagram illustrates the typical daily cycle of a crew member rotating between design, review, and delegation:
+
+```mermaid
+graph TD
+    DESIGN["Design feature spec"] --> CREATE["bd create (detailed bead)"]
+    CREATE --> SLING["gt sling to polecat"]
+    SLING --> NEXT["Move to next crew task"]
+    NEXT --> PULL["git pull (review merged work)"]
+    PULL --> FOLLOWUP{Quality OK?}
+    FOLLOWUP -->|Yes| DESIGN
+    FOLLOWUP -->|No| FIX["bd create follow-up bead"]
+    FIX --> SLING
+```
+
 ## Crew vs. Polecat Responsibilities
 
 | Responsibility | Crew (Human) | Polecat (AI) |

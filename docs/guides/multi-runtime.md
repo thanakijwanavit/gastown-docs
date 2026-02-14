@@ -287,6 +287,21 @@ flowchart TD
     SLING & SLING2 & SLING3 & SLING4 --> REFINERY[Refinery merges<br/>runtime-agnostic]
 ```
 
+The following diagram shows how hook support degrades across runtimes and what fallback mechanisms are needed:
+
+```mermaid
+stateDiagram-v2
+    [*] --> FullHooks: Claude Code
+    [*] --> PartialHooks: Gemini / Codex
+    [*] --> NoHooks: Cursor / Auggie / Amp
+    FullHooks --> AutoContext: CLAUDE.md read on startup
+    PartialHooks --> AdapterContext: Adapter file generated
+    NoHooks --> ManualContext: gt prime required
+    AutoContext --> Working: Agent begins work
+    AdapterContext --> Working
+    ManualContext --> Working
+```
+
 ## Mixing Runtimes in a Single Rig
 
 You can have polecats running different runtimes in the same rig simultaneously:

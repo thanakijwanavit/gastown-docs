@@ -322,6 +322,25 @@ stateDiagram-v2
     Merged --> [*]
 ```
 
+The following timeline shows the typical operational lifecycle of a Refinery agent within a rig.
+
+```mermaid
+timeline
+    title Refinery Operational Lifecycle
+    Startup : gt refinery start
+            : Connects to merge queue
+    Idle : Waits for MR submissions
+         : Monitors queue depth
+    Processing : Claims next MR
+               : Rebases onto main
+               : Runs validation checks
+    Resolution : Merges on pass
+               : Releases on failure
+               : Spawns polecat on conflict
+    Shutdown : gt refinery stop
+             : Completes in-progress merge first
+```
+
 ## gt refinery claim
 
 Claim an MR for processing.

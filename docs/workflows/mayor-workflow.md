@@ -273,6 +273,21 @@ graph TD
     MONITOR --> COMPLETE["Report completion to human"]
 ```
 
+The following diagram shows the lifecycle of a convoy as it progresses through the Mayor workflow from creation to completion:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Planned: Human describes work
+    Planned --> Created: Mayor creates beads + convoy
+    Created --> InFlight: Mayor slings to rigs
+    InFlight --> Monitoring: Mayor tracks progress
+    Monitoring --> InFlight: More work to assign
+    Monitoring --> Completed: All beads merged
+    InFlight --> Intervention: Polecat stuck
+    Intervention --> InFlight: Nudge or re-sling
+    Completed --> [*]: Mayor notifies human
+```
+
 ## Troubleshooting
 
 | Problem | Solution |

@@ -176,6 +176,21 @@ Running `gt orphans procs kill` without `--aggressive` may leave behind processe
 
 :::
 
+The following timeline shows the typical sequence of events leading to orphan creation and recovery.
+
+```mermaid
+timeline
+    title Orphan Detection and Recovery
+    Work Phase : Polecat commits code
+              : Session crashes unexpectedly
+    Discovery : gt orphans finds dangling commits
+             : Commits inspected with git show
+    Recovery : Valuable commits cherry-picked
+            : Recovered work pushed to main
+    Cleanup : gt orphans kill prunes remaining
+            : gt orphans procs kills zombie processes
+```
+
 ## Recovery Workflow
 
 ```mermaid

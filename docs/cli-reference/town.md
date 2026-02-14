@@ -190,6 +190,20 @@ graph TD
     WIT -->|monitors| P2
 ```
 
+The following diagram shows the shutdown sequence and the order in which agents are stopped.
+
+```mermaid
+flowchart TD
+    SHUTDOWN[gt town shutdown] --> SIGNAL[Signal all rigs to park]
+    SIGNAL --> WAIT[Wait for in-flight polecats]
+    WAIT --> STOP_P[Stop all polecats]
+    STOP_P --> STOP_W[Stop Witnesses per rig]
+    STOP_W --> STOP_R[Stop Refineries per rig]
+    STOP_R --> STOP_D[Stop Deacon]
+    STOP_D --> STOP_M[Stop Mayor]
+    STOP_M --> DONE[Town fully stopped]
+```
+
 :::caution
 
 Running `gt town shutdown --force` terminates all agents immediately without waiting for in-flight polecats to complete. Any uncommitted work in active polecats will be lost. Always prefer the graceful `gt town shutdown` unless you are responding to an urgent infrastructure issue.

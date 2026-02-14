@@ -80,6 +80,24 @@ stateDiagram-v2
 | **DND** | Do Not Disturb mode. When enabled, an agent suppresses non-critical notifications and nudges. Toggle with `gt dnd`. |
 | **Seance** | A command (`gt seance`) that lets you query predecessor sessions for context, useful when picking up work from a crashed or cycled agent. |
 
+The following diagram shows how a typical work item flows through Gas Town's key agents during its lifecycle:
+
+```mermaid
+timeline
+    title Bead Lifecycle Through Gas Town Agents
+    Filing : Human describes work
+          : Mayor creates bead
+    Assignment : Mayor slings to rig
+              : Polecat hooks bead
+    Execution : Polecat implements
+             : Polecat runs tests
+    Merge : Refinery rebases
+          : Refinery validates
+          : Refinery merges to main
+    Completion : Witness confirms
+              : Convoy checks progress
+```
+
 ## The MEOW Stack
 
 | Term | Definition |

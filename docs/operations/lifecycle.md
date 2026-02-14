@@ -541,6 +541,18 @@ gt orphans --recover <commit-hash>
 
 ---
 
+The following diagram illustrates the difference between pause and shutdown and how each preserves or removes resources:
+
+```mermaid
+flowchart LR
+    RUNNING[Running Fleet] -->|gt down| PAUSE[Paused]
+    RUNNING -->|gt shutdown| STOP[Stopped]
+    PAUSE -->|gt start --all| RUNNING
+    STOP -->|gt start --all| RUNNING
+    PAUSE --- KEEPS["Keeps: worktrees, hooks,<br/>bead state, mail queues"]
+    STOP --- REMOVES["Removes: polecat worktrees<br/>Keeps: beads, config, hooks"]
+```
+
 ## Graceful Degradation
 
 Gas Town is designed to continue operating even when some components fail. Understanding what keeps working and what stops helps you prioritize recovery.
