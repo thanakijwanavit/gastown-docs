@@ -121,6 +121,12 @@ bd create --title "Minor UI glitch" --priority 3
 
 ### Dependencies
 
+:::tip[Labeling Strategy]
+
+Use consistent label conventions across your team. For example, prefix labels with a category like `area:auth`, `area:ui`, or `severity:p1`. This makes filtering with `bd list --labels` far more powerful as your bead count grows.
+
+:::
+
 Beads can declare dependencies on other beads, enabling automatic unblocking when prerequisites complete:
 
 ```bash

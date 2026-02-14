@@ -83,6 +83,12 @@ You almost never need to close a convoy manually. The auto-close mechanism handl
 
 :::
 
+:::caution[Convoy Size Limits]
+
+Keep convoys to a manageable size -- typically 10 or fewer beads. Very large convoys become difficult to monitor and debug when individual beads stall. If your project requires more than 10 tasks, consider splitting it into multiple convoys with clear boundaries.
+
+:::
+
 ## Cross-Project Tracking
 
 ```mermaid

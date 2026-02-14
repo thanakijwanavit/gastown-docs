@@ -211,6 +211,12 @@ sequenceDiagram
     B->>B: Mark warrant executed
 ```
 
+:::info
+
+Warrants are idempotent: filing a second warrant for a target that already has a pending warrant will not create a duplicate. The existing warrant is returned instead. This prevents accidental double-termination when multiple supervisors detect the same stuck agent.
+
+:::
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

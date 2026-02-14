@@ -170,6 +170,12 @@ The `--aggressive` flag on `gt orphans procs` cross-references all running Claud
 
 :::
 
+:::caution
+
+Running `gt orphans procs kill` without `--aggressive` may leave behind processes that were reparented to a non-init PID. If you notice elevated resource consumption after cleanup, re-run with `--aggressive` to catch processes missed by the default PPID=1 check.
+
+:::
+
 ## Recovery Workflow
 
 ```mermaid

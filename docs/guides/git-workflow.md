@@ -229,6 +229,12 @@ git rebase origin/master
 
 ---
 
+:::info
+
+If you are working in a crew workspace and see unexpected files in `git status`, another agent may have pushed changes to shared configuration files. Always run `git diff` before staging to avoid accidentally committing someone else's in-progress work.
+
+:::
+
 ## Crew Worker Workflow
 
 Crew workers push directly to main (no feature branches):

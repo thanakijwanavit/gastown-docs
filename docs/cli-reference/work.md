@@ -241,6 +241,12 @@ gt done --escalate --message "Blocked: need API credentials for staging"
 
 ---
 
+:::warning
+
+Running `gt done --escalate` marks the bead as escalated and exits the polecat session immediately. Make sure to commit and push all work before escalating, as the polecat will not get another chance to save changes after the escalation exit.
+
+:::
+
 ### `gt close`
 
 Close a bead without going through the done workflow.

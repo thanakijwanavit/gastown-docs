@@ -39,6 +39,10 @@ graph TD
     Refinery -->|merge| Main[main branch]
 ```
 
+:::info
+The supervision tree is designed so that no single agent failure can bring down the entire system. Even if the Deacon crashes, Boot will detect the failure on the next daemon tick and restart it automatically.
+:::
+
 ## Monitoring Chain
 
 | Monitor | Watches | Detects | Action |

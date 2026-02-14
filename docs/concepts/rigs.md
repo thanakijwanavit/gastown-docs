@@ -300,6 +300,12 @@ Choose short, descriptive rig names that match or closely resemble the repositor
 
 :::
 
+:::danger[Rig Reset Warning]
+
+The `gt rig reset` command clears all rig state including polecat worktrees, cached data, and in-flight molecule progress. Only use it as a last resort when `gt doctor --fix` cannot resolve the problem. Any unmerged polecat work will be lost permanently.
+
+:::
+
 ## Rig in the Bigger Picture
 
 Rigs are the physical foundation on which all other concepts operate:

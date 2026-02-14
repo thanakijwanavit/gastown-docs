@@ -58,6 +58,12 @@ This creates the rig structure:
 └── plugins/         # Rig-level plugins
 ```
 
+:::caution
+
+The `gt rig add` command clones the repository into the refinery directory. For large repositories, this may take several minutes and consume significant disk space. Ensure you have at least 2x the repository size available before adding a rig.
+
+:::
+
 ## Create a Crew Workspace
 
 ```mermaid

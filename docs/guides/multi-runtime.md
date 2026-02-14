@@ -370,6 +370,12 @@ The Refinery does not know or care which runtime produced the code. It validates
 
 ---
 
+:::danger
+
+Switching a rig's default runtime while polecats are actively working can cause hook deserialization failures. Always run `gt down` on the rig before changing the `default_agent` setting, then restart with `gt start --all`.
+
+:::
+
 ## Multi-Runtime Best Practices
 
 1. **Start with Claude Code.** It has the deepest integration and is the most thoroughly tested. Add other runtimes once you are comfortable with the basics.

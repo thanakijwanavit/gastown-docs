@@ -286,6 +286,12 @@ Checkpoints are stored in `.polecat-checkpoint.json` within the polecat director
 
 :::
 
+:::info
+
+The `gt cycle` command only cycles within sessions of the same group type. It will not jump between town-level and rig-level sessions. Use `gt town next` for Mayor/Deacon cycling and `gt cycle next` for within-group navigation.
+
+:::
+
 ## Molecules
 
 ```mermaid

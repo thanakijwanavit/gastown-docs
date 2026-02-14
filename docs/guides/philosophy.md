@@ -165,6 +165,12 @@ Rather than writing defensive code to prevent every possible failure, Gas Town f
 - Work persists on hooks -- nothing is lost
 - A fresh polecat can pick up where the crashed one left off
 
+:::caution
+
+The "Let It Crash" philosophy does not mean ignoring crashes. Every crash is logged and tracked. If you see the same agent crashing repeatedly on the same task, it usually indicates a systemic issue (bad test, missing dependency, or ambiguous bead) rather than random failure. Investigate repeated crashes rather than relying on automatic recovery alone.
+
+:::
+
 ### Process Isolation
 
 Each agent runs in its own session with its own state. A crash in one agent cannot corrupt another agent's state. This isolation is what makes Gas Town reliable at scale.

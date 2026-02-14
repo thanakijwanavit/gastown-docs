@@ -192,6 +192,12 @@ Gates do not have a default timeout. If you create a `gh:run` or `mail` gate wit
 
 :::
 
+:::info[Gate Visibility]
+
+All open gates are visible via `bd gate list`. If you suspect a workflow is stuck, check whether it is parked on an unresolved gate. This is the most common cause of stalled molecules in production environments.
+
+:::
+
 ## Gate Evaluation by the Deacon
 
 The Deacon is responsible for evaluating gates during its patrol cycle. The `gate-evaluation` step in the `mol-deacon-patrol` formula handles this:

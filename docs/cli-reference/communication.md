@@ -340,6 +340,12 @@ gt mail announces --since 24h
 
 ---
 
+:::info
+
+Mail is delivered by writing to the recipient's mailbox directory on the filesystem, not through a network protocol. This means mail delivery is instant and zero-latency for agents on the same machine, but does not work across different hosts.
+
+:::
+
 ### `gt mail archive`
 
 Archive messages.

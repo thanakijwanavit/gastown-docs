@@ -288,6 +288,12 @@ gt formula run code-review --pr=123
 gt formula create my-workflow
 ```
 
+:::caution[Step Naming Conventions]
+
+Use descriptive, lowercase, hyphenated step IDs in your formulas (e.g., `run-integration-tests` rather than `step3`). Step IDs appear in molecule status output, audit trails, and escalation messages, so clear names save significant debugging time when investigating stalled workflows.
+
+:::
+
 ### Creating Custom Formulas
 
 You can create your own formulas by adding TOML files to `.beads/formulas/`:

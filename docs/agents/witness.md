@@ -148,6 +148,12 @@ The following commands interact with Witness-monitored resources:
 
 ## Configuration
 
+:::note
+
+The Witness only monitors polecats that have sent a `POLECAT_STARTED` mail message. If a polecat is spawned but crashes before sending this message, the Witness will not know about it. Use `gt orphans procs` to detect these invisible zombies.
+
+:::
+
 Witness behavior is configured per-rig:
 
 | Setting | Default | Description |

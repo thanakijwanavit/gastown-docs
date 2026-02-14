@@ -189,6 +189,12 @@ Avoid reaching across MEOW layers in your workflows. For example, a convoy (Laye
 
 :::
 
+:::warning[Protomolecule Complexity]
+
+Protomolecules (Layer 4) coordinate multiple agents working in parallel and are significantly harder to debug than single-agent molecules. Start with simple workflow formulas and only introduce protomolecules when you have a proven need for multi-agent orchestration within a single convoy.
+
+:::
+
 ## Cross-Cutting Concerns
 
 Two concepts cut across all MEOW layers rather than living in a single layer:

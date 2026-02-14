@@ -225,6 +225,12 @@ You scale to 10 or more agents running simultaneously. You develop ad-hoc script
 
 ---
 
+:::caution
+
+Jumping straight from Stage 5 to Gas Town without multi-agent experience is the most common cause of frustration for new users. The coordination challenges at Stage 6-7 (merge conflicts, lost work, agent monitoring) are exactly what Gas Town solves, but understanding those problems firsthand makes the system far easier to learn.
+
+:::
+
 ### Stage 8: Building Your Own Orchestrator
 
 You formalize the ad-hoc scripts from Stage 7 into a proper orchestration system. You build or adopt a framework that handles agent lifecycle, work distribution, merge coordination, health monitoring, and escalations.

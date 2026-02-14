@@ -129,6 +129,12 @@ gt sling <bead-id> <rig>
 
 This is the [Manual Convoy](../workflows/manual-convoy.md) workflow.
 
+:::note[Bead Descriptions Matter]
+
+The quality of polecat output is directly proportional to the quality of bead descriptions. Include specific file paths, expected behavior, and acceptance criteria in your bead descriptions. A well-written bead saves the polecat from wasting context on exploration.
+
+:::
+
 ### What happens if two polecats edit the same file?
 
 The [Refinery](../agents/refinery.md) processes merges one at a time. The first MR merges cleanly. The second MR is rebased onto the updated `main`. If there's a conflict, the Refinery spawns a conflict-resolution polecat. See [Multi-Agent Git Workflow](../guides/git-workflow.md).

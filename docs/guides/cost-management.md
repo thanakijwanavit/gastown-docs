@@ -116,6 +116,12 @@ Gas Town Costs (today)
   Hourly rate (last 3h avg): $32.40/hr
 ```
 
+:::info
+
+The `gt costs` command reads from the daemon's token tracking log. If the daemon is not running, cost data may be stale or unavailable. Always ensure the daemon is active with `gt status` before relying on cost figures.
+
+:::
+
 ### Real-Time Cost Monitoring
 
 Keep a cost watch running alongside your feed:

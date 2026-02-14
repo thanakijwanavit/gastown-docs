@@ -371,6 +371,12 @@ sequenceDiagram
     Pipeline->>Dir: Auto-trigger on events
 ```
 
+:::caution
+
+Plugin scripts run with the same filesystem permissions as the Gas Town daemon. Avoid writing plugins that modify files outside the rig directory or the plugin's own output path. A misbehaving plugin can corrupt the Refinery's canonical clone if it writes to the wrong location.
+
+:::
+
 ### Step 1: Create the Plugin Directory
 
 ```bash

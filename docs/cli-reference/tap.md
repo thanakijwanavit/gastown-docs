@@ -115,6 +115,12 @@ Gas Town workers push directly to main. PRs add friction that breaks the autonom
 - `git checkout -b` — Feature branch creation
 - `git switch -c` — Feature branch creation
 
+:::note
+
+The `pr-workflow` guard is specific to Gas Town's direct-to-main model. If your rig uses a PR-based workflow (for example, an open-source project with external contributors), you will need to disable or customize this guard in your rig's `.claude/settings.local.json` to avoid blocking legitimate PR creation.
+
+:::
+
 ### Hook Configuration
 
 Configure in `.claude/settings.local.json`:

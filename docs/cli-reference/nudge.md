@@ -60,6 +60,12 @@ Role shortcuts expand to the appropriate session name:
 | `witness` | `gt-<rig>-witness` (uses current rig) |
 | `refinery` | `gt-<rig>-refinery` (uses current rig) |
 
+:::info
+
+Role shortcuts like `mayor` and `witness` resolve relative to the current rig context. If you are working across multiple rigs, always verify which rig is active or use the full session name (e.g., `gt-myproject-witness`) to avoid sending nudges to the wrong agent.
+
+:::
+
 ### Direct Targets
 
 Specify polecats and other agents by their full path:

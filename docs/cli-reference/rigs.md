@@ -452,6 +452,12 @@ After undocking a rig, the restore process recreates worktrees and agent directo
 
 :::
 
+:::info
+
+After rebooting a rig with `gt rig reboot`, agent state is preserved but all polecats will re-read their hooks and restart work from their last checkpoint. If a polecat was mid-task without a recent checkpoint, it may repeat some work. Use `gt checkpoint write` before triggering a rig reboot to minimize duplicate effort.
+
+:::
+
 ## `gt rig config`
 
 View or modify rig configuration.

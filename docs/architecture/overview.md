@@ -44,6 +44,10 @@ myproject/
 └── plugins/          # Rig-level plugins
 ```
 
+:::danger
+Never delete or move the `~/gt/` directory while agents are running. The entire supervision tree, all hooks, mailboxes, and beads databases depend on this directory structure. Stopping all agents first with `gt daemon stop` is required before any structural changes.
+:::
+
 ### 3. Agents (Workers)
 
 Seven agent roles form the hierarchy:

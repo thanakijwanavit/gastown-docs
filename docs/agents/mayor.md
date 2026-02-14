@@ -141,6 +141,12 @@ flowchart TD
 | `gt feed` | View the activity feed |
 | `gt broadcast` | Send message to all agents |
 
+:::info
+
+The Mayor's decomposition quality directly affects downstream performance. Vague or overly broad beads lead to polecats that spend excessive time on clarification or produce partial work that requires re-sling. Invest time in clear, specific bead descriptions with acceptance criteria.
+
+:::
+
 ## Context Files
 
 ```mermaid

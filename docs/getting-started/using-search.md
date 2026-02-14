@@ -167,6 +167,12 @@ gt mail send
 
 Returns all references to the mail sending command across guides and references.
 
+:::caution
+
+Search results link to headings within pages. If a page has been recently restructured, clicking a search result may land you at the top of the page instead of the specific section. Perform a hard refresh to update the index if this happens frequently.
+
+:::
+
 ### Troubleshooting Searches
 
 Looking for solutions to problems:

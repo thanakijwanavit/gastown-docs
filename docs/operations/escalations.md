@@ -420,6 +420,12 @@ gt escalate close ESC-003 --note "Stopped runaway polecat, reviewing task scopin
 
 ---
 
+:::danger
+
+Do not set `auto_escalate_after` to less than 5 minutes for any severity level. Very short re-escalation windows can create notification storms that flood your inbox and the Mayor's mailbox, degrading system performance and making it harder to identify genuine critical issues.
+
+:::
+
 ## Tuning Escalation Thresholds
 
 The default thresholds work well for most setups, but you may want to adjust them based on your operational pattern.

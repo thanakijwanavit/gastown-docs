@@ -122,6 +122,12 @@ claude --version
 After installing all dependencies, run `gt doctor` to verify your environment is correctly configured. It checks Git version, Beads availability, tmux presence, and runtime connectivity in one command.
 :::
 
+:::note[Version Compatibility]
+
+Gas Town, Beads, and your AI runtime should all be kept up to date. Running mismatched versions can cause subtle issues with hook persistence and molecule state tracking. Use `gt doctor` after any upgrade to verify component compatibility.
+
+:::
+
 ## Shell Completions
 
 ```mermaid

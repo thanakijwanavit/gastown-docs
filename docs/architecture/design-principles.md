@@ -91,6 +91,10 @@ When a polecat finishes, it runs `gt done` to submit its MR and exit. The Witnes
 
 ## 6. Nondeterministic Idempotence
 
+:::caution
+When a polecat crashes and another picks up the same bead, the new polecat starts fresh on a new branch. Any uncommitted work from the crashed polecat is lost. This is by design -- partial work that was never committed is considered unreliable and is not carried forward.
+:::
+
 Work can be safely retried:
 
 - If a polecat crashes, another can pick up the same bead

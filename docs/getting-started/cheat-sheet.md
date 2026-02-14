@@ -90,6 +90,12 @@ sequenceDiagram
 
 ---
 
+:::caution[Push Before Handoff]
+
+Always run `git push` before executing `gt handoff` or ending a session. In a multi-agent environment, unpushed commits exist only in your local worktree and can be overwritten by other polecats merging to main.
+
+:::
+
 ## Communication
 
 | Command | What it does |

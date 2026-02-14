@@ -59,6 +59,12 @@ graph LR
 
 ## Responsibilities
 
+:::caution
+
+Dogs operate across rigs and can modify shared infrastructure. If a dog task fails mid-execution, it may leave inconsistent state between rigs. Always check `gt dog status <id>` after errors and run `gt deacon cleanup-orphans` if needed.
+
+:::
+
 ### 1. Cross-Rig Infrastructure
 
 Dogs handle tasks that touch multiple rigs:

@@ -231,6 +231,12 @@ Convoy synthesis reports are especially valuable for retrospectives and status u
 
 :::
 
+:::caution
+
+Closing a convoy with `--force` while beads are still in progress does not cancel the running polecats. Those polecats will continue working and submit MRs, but the convoy will no longer track their completion. Use `gt unsling` on individual beads first if you want to fully cancel the work.
+
+:::
+
 ## `gt convoy check`
 
 ```mermaid

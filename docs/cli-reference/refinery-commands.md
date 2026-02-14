@@ -210,6 +210,12 @@ When attaching to a Refinery session for debugging, remember to detach with `Ctr
 
 :::
 
+:::caution
+
+Stopping and restarting the Refinery while it has a claimed MR in progress can leave that MR in a stale-claimed state. After restarting, check `gt refinery unclaimed` to verify no MRs are stuck with expired claims that need to be manually released with `gt refinery release`.
+
+:::
+
 ## gt refinery ready
 
 ```mermaid

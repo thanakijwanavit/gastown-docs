@@ -107,6 +107,12 @@ Think of Boot as the alarm clock and the Deacon as the person who gets up and ha
 
 ## Fresh Start Advantage
 
+:::note
+
+If you see Boot repeatedly waking the Deacon on consecutive ticks, it likely means the Deacon session is crashing immediately after startup. Check the Deacon's CLAUDE.md and session logs for errors rather than investigating Boot itself.
+
+:::
+
 Because Boot starts clean every time, it has unique advantages:
 
 1. **No stale state** -- Boot never carries over corrupted state from a previous run

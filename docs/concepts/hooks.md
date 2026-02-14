@@ -230,6 +230,12 @@ An agent can only have one active hook at a time. If new work arrives while a ho
 
 :::
 
+:::caution[Hook Debugging]
+
+If an agent seems to have lost its work assignment, run `gt hook` to inspect the hook state directly. A missing or corrupt hook file in the worktree is the most common cause of agents idling when they should be working. Use `gt doctor` to detect and repair hook issues automatically.
+
+:::
+
 ## Hook and Molecule Integration
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:

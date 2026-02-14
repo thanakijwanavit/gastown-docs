@@ -256,6 +256,12 @@ graph TD
     RESTART --> RUN
 ```
 
+:::caution
+
+When attaching to a polecat session with `gt session at`, avoid typing into the terminal unless you intend to interact with the Claude session directly. Any accidental keystrokes are sent to the running Claude instance and may disrupt its current work or cause unexpected tool calls.
+
+:::
+
 ## gt session capture
 
 Capture recent output from a polecat session.

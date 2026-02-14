@@ -37,6 +37,12 @@ flowchart TD
 - **Closed wisps past TTL** are deleted (Dolt `AS OF` preserves history)
 - **Wisps with comments, references, or `keep` labels** are always promoted
 
+:::note
+
+Compaction only processes wisps -- lightweight ephemeral beads. Regular beads (bugs, features, tasks) are never deleted by compaction, even if they have been closed for a long time.
+
+:::
+
 ### TTLs by Wisp Type
 
 ```mermaid

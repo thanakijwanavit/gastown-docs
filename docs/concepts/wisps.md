@@ -171,6 +171,12 @@ When a wisp is promoted from ephemeral to permanent (because it exceeded its TTL
 
 :::
 
+:::tip[Monitoring Wisp Progress]
+
+Use `gt mol status` rather than `bd list` to inspect wisp states. Since wisps are deliberately excluded from normal bead listings, `gt mol status` is the only command that shows the real-time progress of each molecule step.
+
+:::
+
 ## Wisps in the Supervision Chain
 
 Wisps provide granular observability for the supervision hierarchy:

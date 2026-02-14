@@ -190,6 +190,12 @@ Active convoys: 2
 
 ---
 
+:::tip
+
+Use `gt agents --running` as a quick sanity check before dispatching work. If the Witness or Refinery for a target rig is not running, `gt sling` will still assign the bead but no polecat will be spawned until the rig agents are started.
+
+:::
+
 ## Deacon
 
 The Deacon is the health monitoring supervisor for the town. It runs patrol cycles, monitors all Witnesses, and handles lifecycle requests.

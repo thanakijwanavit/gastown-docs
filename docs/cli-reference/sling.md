@@ -162,6 +162,12 @@ pie title Target Resolution Distribution
     "Self-assign" : 10
 ```
 
+:::danger
+
+Batch slinging with `--force` bypasses the unread mail check on every target polecat. If a polecat has pending mail containing important handoff context or instructions, forcing a new sling will overwrite its hook and the mail may never be processed. Only use `--force` when you are certain no critical mail is pending.
+
+:::
+
 ## Auto-Convoy
 
 When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.

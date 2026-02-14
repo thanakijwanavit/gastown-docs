@@ -171,6 +171,12 @@ gt mail inbox
 
 ---
 
+:::caution[Compaction Is Not Cycling]
+
+Automatic context compaction (where the model compresses older messages) is not the same as a session cycle. Compaction preserves the session but loses nuance. If an agent behaves oddly after compaction, trigger a full cycle with `gt handoff` to get a clean context window rather than relying on degraded compressed context.
+
+:::
+
 ## Handoff vs Park
 
 ```mermaid

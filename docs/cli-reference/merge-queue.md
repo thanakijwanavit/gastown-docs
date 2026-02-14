@@ -224,6 +224,12 @@ gt mq reject mr-002 --reason "Fails integration tests, needs rework"
 gt mq reject mr-003 --reason "Superseded by mr-005" --reassign
 ```
 
+:::caution
+
+Rejecting a merge request does not automatically clean up its associated branch or worktree. If the polecat has already been nuked, the branch remains until the next `gt polecat gc` cycle. Run `gt polecat gc <rig>` periodically to prune stale branches left by rejected MRs.
+
+:::
+
 ---
 
 ## `gt mq retry`

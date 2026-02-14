@@ -161,6 +161,12 @@ These principles are not just theory — they are enforced by specific Gas Town 
 Gas Town terminology is intentionally distinct from generic software terms. When searching documentation or asking agents for help, use the Gas Town-specific terms (e.g., "bead" instead of "ticket," "sling" instead of "assign," "convoy" instead of "sprint") for more precise results.
 :::
 
+:::caution
+
+Some terms in the glossary have evolved across Gas Town versions. If you encounter a term in an older blog post or GitHub issue that does not match a definition here, the glossary reflects the current meaning. When in doubt, check the linked concept page for full context.
+
+:::
+
 ## CLI Quick Reference
 
 ```mermaid

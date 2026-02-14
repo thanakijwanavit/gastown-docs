@@ -260,6 +260,12 @@ The `check-recovery` command is primarily intended for the Witness agent to call
 
 :::
 
+:::info
+
+The `stale` command only considers polecats without active tmux sessions. If a polecat's session is alive but idle (for example, waiting on a long-running external process), it will not appear in stale detection. Use `gt polecat status` to investigate polecats that appear stuck but are not flagged as stale.
+
+:::
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

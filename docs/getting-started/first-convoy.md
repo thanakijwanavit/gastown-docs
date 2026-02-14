@@ -126,6 +126,12 @@ gt convoy list
 You can check which polecats are available in a rig before slinging work with `gt polecat list`. If all polecat slots are occupied, new sling commands will queue until a slot opens up.
 :::
 
+:::danger[Do Not Sling to Docked Rigs]
+
+Attempting to sling work to a docked or stopped rig will silently fail -- the bead will be marked as hooked but no polecat will spawn to execute it. Always verify the rig is active with `gt rig list` before slinging work.
+
+:::
+
 ## Using the Mayor Instead
 
 For a more automated experience, attach to the Mayor and describe the work:

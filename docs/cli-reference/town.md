@@ -190,6 +190,12 @@ graph TD
     WIT -->|monitors| P2
 ```
 
+:::caution
+
+Running `gt town shutdown --force` terminates all agents immediately without waiting for in-flight polecats to complete. Any uncommitted work in active polecats will be lost. Always prefer the graceful `gt town shutdown` unless you are responding to an urgent infrastructure issue.
+
+:::
+
 ## When to Use
 
 Town-level navigation and management is useful when:

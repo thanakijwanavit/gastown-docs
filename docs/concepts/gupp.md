@@ -51,6 +51,12 @@ flowchart TD
 
 ### Why GUPP Matters
 
+:::danger[Never Roll Back Bead Status]
+
+Manually reverting a bead from `done` back to `in_progress` violates GUPP and can corrupt molecule state. If completed work needs correction, create a new bead for the fix instead of reopening the old one.
+
+:::
+
 Without GUPP, multi-agent systems are fragile. A crash at the wrong moment could:
 - Leave the git worktree in an inconsistent state
 - Lose track of what was already done

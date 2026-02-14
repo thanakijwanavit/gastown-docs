@@ -127,6 +127,12 @@ TIME       TYPE        AGENT           EVENT
 
 ---
 
+:::note
+
+The `gt activity` output is derived from `.events.jsonl` files which grow over time. If activity queries become slow, use `gt krc prune` to clean up expired operational events and keep the log files manageable.
+
+:::
+
 ### `gt audit`
 
 Generate an audit report.

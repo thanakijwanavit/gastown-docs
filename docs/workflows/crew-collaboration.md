@@ -183,6 +183,12 @@ golangci-lint run ./...    # Check style and quality
 
 ---
 
+:::note
+
+If you are reviewing polecat output and find a pattern of similar issues across multiple MRs, consider updating the rig's CLAUDE.md with explicit guidance rather than filing individual follow-up beads. This prevents the same mistake from recurring in future polecat sessions.
+
+:::
+
 ## Working Across Rigs
 
 ```mermaid

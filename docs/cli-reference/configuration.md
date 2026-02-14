@@ -200,6 +200,12 @@ Account credentials are stored locally. Never share your Claude Code account han
 
 ---
 
+:::danger
+
+Switching accounts with `gt account switch` while agents are running can cause active sessions to lose API access or hit rate limits under the wrong account. Stop all agents before switching accounts.
+
+:::
+
 ## Appearance
 
 ### `gt theme`

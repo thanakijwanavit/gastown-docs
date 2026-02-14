@@ -232,6 +232,12 @@ gt sling gt-c1l2i frontend
 When adding beads to a convoy after polecats have already started working, verify that the new beads do not conflict with in-progress work. Two polecats editing the same files will trigger merge conflicts that the Refinery must resolve, adding time and token cost to the convoy.
 :::
 
+:::note
+
+When using `gt release` to return a bead to the pool, the polecat's partial work remains on its feature branch. If the polecat made useful progress, note the branch name in the bead before re-slinging so the next polecat can build on it rather than starting from scratch.
+
+:::
+
 ## Cross-Rig Coordination
 
 ```mermaid

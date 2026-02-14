@@ -150,6 +150,12 @@ graph TD
     H --> I
 ```
 
+:::danger
+
+Do not run `gt seance --talk` on a session that is still actively running unless you understand that the fork is read-only. While the original session is unmodified, the forked subprocess may consume significant memory if the predecessor's context window is large. Avoid running multiple concurrent seance sessions against the same predecessor.
+
+:::
+
 ## How It Works Under the Hood
 
 Seance leverages Claude Code's `--fork-session` and `--resume` flags:

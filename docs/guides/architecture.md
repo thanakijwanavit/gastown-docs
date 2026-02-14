@@ -492,6 +492,12 @@ Persistent agents (Witness, Refinery, Deacon) use **patrol molecules** that foll
 
 ---
 
+:::caution
+
+Do not manually delete polecat directories under `polecats/`. Always use the Witness's nuke process or `gt polecat nuke` to remove a polecat, as this properly cleans up the git worktree linkage and reclaims the polecat name for reuse.
+
+:::
+
 ## Git Worktree Management
 
 Gas Town uses git worktrees to enable concurrent work on the same repository. Each polecat gets its own worktree -- an independent working directory linked to the same git repository.

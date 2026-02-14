@@ -139,6 +139,12 @@ When a Witness encounters a problem it cannot resolve (e.g., a rig-level failure
 
 ## Configuration
 
+:::caution
+
+Changing patrol interval or heartbeat timeout values while the Deacon is running requires a Deacon restart to take effect. Modifying these settings on a live system without restarting can cause missed health checks or false positive zombie detections.
+
+:::
+
 The Deacon's behavior is configured through town-level settings:
 
 | Setting | Default | Description |

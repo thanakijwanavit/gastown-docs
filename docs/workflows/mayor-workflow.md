@@ -249,6 +249,12 @@ gt convoy add hq-cv-015 gt-newbead
 For best results, give the Mayor outcome-oriented instructions rather than implementation details. Instead of "edit auth.go line 42 to add a nil check," say "fix the nil pointer crash in the login handler." The Mayor and polecats are more effective when they can choose their own implementation approach.
 :::
 
+:::danger
+
+Avoid giving the Mayor multiple unrelated requests in a single message. The Mayor may combine them into one convoy, creating false dependencies and making it harder to track progress. Give one coherent batch of related work per message, then wait for the convoy to be created before issuing the next request.
+
+:::
+
 ## Mayor Decision Flow
 
 ```mermaid

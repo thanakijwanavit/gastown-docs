@@ -106,6 +106,10 @@ This is Gas Town's core work scheduling rule. When an agent starts a session:
 
 This creates automatic momentum — agents always know what to do.
 
+:::warning
+If you use `gt unsling` to remove work from an agent's hook, the bead reverts to `open` status but any in-progress branch work remains on disk. Clean up the orphaned worktree manually or wait for the Witness patrol to detect and remove it.
+:::
+
 ## Convoy Tracking
 
 Convoys bundle related work for tracking:
