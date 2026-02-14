@@ -37,6 +37,10 @@ The Refinery serializes all merges to main for a rig:
 
 One Refinery per rig. It is a persistent agent that processes work as it arrives. The polecat is already nuked by the time the Refinery processes its MR.
 
+:::tip
+The Refinery runs automatically as a persistent agent. You rarely need these commands in normal operation — they're primarily for debugging and manual intervention.
+:::
+
 **Role shortcuts:** `refinery` in mail/nudge addresses resolves to the current rig's Refinery.
 
 ## Subcommands
@@ -298,6 +302,10 @@ The worker ID is automatically determined from the `GT_REFINERY_WORKER` environm
 gt refinery claim gt-abc123
 GT_REFINERY_WORKER=refinery-2 gt refinery claim gt-abc123
 ```
+
+:::warning
+Claims expire after 10 minutes. If your processing takes longer, the MR may be claimed by another worker. Monitor long-running merges closely.
+:::
 
 ---
 

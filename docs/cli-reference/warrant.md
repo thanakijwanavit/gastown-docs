@@ -46,6 +46,10 @@ Warrants are filed automatically by the supervision chain:
 | **Deacon** | Patrol agent (Witness/Refinery) stuck | Witness hasn't patrolled in 3+ cycles |
 | **Human** | Manual intervention needed | Agent in bad state after infrastructure failure |
 
+:::note
+Warrants are a last resort. The supervision chain always tries nudging and escalation before filing a warrant. Most agent issues resolve without termination.
+:::
+
 ### Warrant Storage Format
 
 Each warrant is a JSON file in `~/gt/warrants/`:
@@ -154,6 +158,10 @@ Using `--force` bypasses the warrant system entirely. Only use this for emergenc
 :::
 
 ## Troubleshooting
+
+:::tip
+Before filing a manual warrant, try `gt nudge <agent> "status?"` first. Many "stuck" agents are simply waiting for a slow operation to complete.
+:::
 
 ### Warrant Not Being Executed
 

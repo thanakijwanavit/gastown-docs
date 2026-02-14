@@ -36,6 +36,10 @@ The naming is inspired by Mad Max: Fury Road. Gas Town is the fuel-producing cit
 
 Gas Town is runtime-agnostic. It supports Claude Code (default and recommended), Gemini CLI, Codex, Cursor, Augment, and Amp. You can mix runtimes within a single town. See [Multi-Runtime Support](../guides/multi-runtime.md).
 
+:::info
+Claude Code is the recommended and most-tested runtime. Other runtimes work but may have limited support for advanced features like session cycling and hook-driven propulsion.
+:::
+
 ### Do I need to be a programmer to use Gas Town?
 
 Gas Town is designed for software developers and teams. You interact with the Mayor using natural language, but understanding software development concepts (git, testing, code review) is essential for effective use.
@@ -51,6 +55,10 @@ Gas Town is designed for software developers and teams. You interact with the Ma
 - **tmux** (recommended for full workflow, optional for Minimal Mode)
 - **Claude Code** or another supported AI coding runtime
 - A **git repository** to work with
+
+:::warning
+Gas Town requires Git 2.25+ for worktree support. Older Git versions will fail silently during rig creation. Check your version with `git --version`.
+:::
 
 ### Can I use Gas Town without tmux?
 

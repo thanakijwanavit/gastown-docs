@@ -184,6 +184,10 @@ gt account status
 gt account switch personal
 ```
 
+:::warning
+Account credentials are stored locally. Never share your Claude Code account handles or tokens. Each team member should use their own account.
+:::
+
 ---
 
 ## Appearance
@@ -284,6 +288,10 @@ gt hooks --json
 # Install from registry
 gt hooks install
 ```
+
+:::info
+Hooks run in the same process as Claude Code. Long-running hook commands can delay tool execution. Keep hooks lightweight — under 1 second per invocation.
+:::
 
 ---
 

@@ -105,6 +105,10 @@ gt compact report --weekly     # Send weekly rollup to mayor/
 
 ## When to Run Compaction
 
+:::tip
+For most deployments, you never need to run compaction manually. The Deacon handles it automatically as part of its patrol cycle.
+:::
+
 ### Automated (Recommended)
 
 The Deacon runs compaction automatically as part of its patrol cycle. The daily digest goes to the Deacon, and the weekly rollup goes to the Mayor. No manual intervention is needed for normal operations.
@@ -128,6 +132,10 @@ gt compact --dry-run --verbose
 # Then compact
 gt compact --verbose
 ```
+
+:::info
+Promoted wisps are worth investigating — they indicate something that was expected to complete quickly but didn't. Check the bead for stuck work or failed processes.
+:::
 
 ## Understanding the Output
 

@@ -58,6 +58,10 @@ The tap system sits between Claude Code and tool execution. Each handler is a st
 
 Tap handlers check `GT_ROLE` and `GT_SESSION` environment variables to determine if they're running inside a Gas Town agent context. When these variables are absent (e.g., a human running Claude Code directly), all guards pass silently — the tap system never interferes with normal human usage.
 
+:::info
+The tap system is invisible to humans. When `GT_ROLE` is unset (normal human usage), all guards pass silently. You'll never be blocked by tap guards outside of Gas Town.
+:::
+
 ## Subcommands
 
 | Command | Description |
@@ -84,6 +88,10 @@ Guard commands exit with code 2 to BLOCK tool execution when a policy is violate
 | `2` | Operation **BLOCKED** (policy violation in agent context) |
 
 Guards only activate when running as a Gas Town agent (crew, polecat, witness, etc.). Humans running outside Gas Town are unaffected.
+
+:::warning
+Guards that return exit code 2 will **completely block** the tool call. Use guards judiciously — an overly aggressive guard can prevent agents from completing their work.
+:::
 
 ### Available Guards
 

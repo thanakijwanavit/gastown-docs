@@ -38,6 +38,10 @@ sudo mv gt /usr/local/bin/
 </TabItem>
 </Tabs>
 
+:::tip
+Homebrew is the recommended installation method. It handles dependencies automatically and makes updates simple with `brew upgrade gastown`.
+:::
+
 ## Dependency Map
 
 ```mermaid
@@ -87,6 +91,10 @@ bd --version
 ```
 
 ### Tmux (Recommended)
+
+:::warning
+Gas Town requires tmux 3.0+ for multi-agent session management. Without tmux, you can still use Gas Town in [Minimal Mode](../workflows/minimal-mode.md) but won't have parallel agents.
+:::
 
 Tmux enables Gas Town to manage multiple agent sessions in split panes.
 

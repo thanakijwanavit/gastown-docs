@@ -52,6 +52,10 @@ The search indexes:
 - **Body content**: Full-text search of all documentation content
 - **Code blocks**: Searches code examples and commands
 
+:::info
+Search works best with specific terms. Instead of searching "how do agents work", try "polecat", "witness", or "convoy" — Gas Town uses distinctive terminology that makes search very precise.
+:::
+
 ### What Doesn't Get Indexed
 
 - Comments in code blocks
@@ -370,6 +374,10 @@ The documentation site does not collect search analytics to protect privacy. Sea
 - **Privacy-friendly**: No external requests or tracking
 
 Happy searching! If you can't find what you need, consider filing a [documentation issue](https://github.com/steveyegge/gastown/issues) to help improve the docs for everyone.
+
+:::note
+The search index is rebuilt on every documentation deployment. If you're running the docs locally with `npm start`, the search index updates automatically when you save changes.
+:::
 
 ## Related
 

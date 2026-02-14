@@ -48,6 +48,10 @@ The target argument is flexible and resolves based on context:
 | `deacon/dogs` | Auto-dispatch to idle dog |
 | `deacon/dogs/<name>` | Specific dog |
 
+:::info
+When no target is specified, `gt sling` hooks the work to yourself (the current agent). This is useful for self-assigning work or attaching formulas to your current session.
+:::
+
 ## Flags
 
 | Flag | Short | Description |
@@ -140,6 +144,10 @@ When slinging a single issue (not a formula), `gt sling` automatically creates a
 gt sling gt-abc myproject              # Creates "Work: <issue-title>" convoy
 gt sling gt-abc myproject --no-convoy  # Skip auto-convoy creation
 ```
+
+:::warning
+Avoid slinging more than 5-7 beads simultaneously to a single rig. Too many parallel polecats create resource contention and slower completion times.
+:::
 
 ## Comparison with Related Commands
 
