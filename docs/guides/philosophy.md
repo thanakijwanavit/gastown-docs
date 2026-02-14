@@ -137,6 +137,19 @@ Gas Town's architecture borrows directly from Erlang/OTP, the telecommunications
         Polecat  Polecat   Polecat
 ```
 
+```mermaid
+flowchart TD
+    DAEMON[Daemon] --> DEACON[Deacon]
+    DEACON --> WA[Witness A]
+    DEACON --> WB[Witness B]
+    WA --> PA1[Polecat]
+    WA --> PA2[Polecat]
+    WB --> PB1[Polecat]
+    PA1 -.->|crash detected| WA
+    WA -.->|escalates| DEACON
+    DEACON -.->|escalates| DAEMON
+```
+
 Each level monitors the level below it. When a child crashes, its supervisor decides what to do (restart, escalate, or ignore). This creates a self-healing system where individual agent failures do not cascade.
 
 ### Mailbox Pattern

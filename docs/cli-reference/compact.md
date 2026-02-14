@@ -111,6 +111,19 @@ For most deployments, you never need to run compaction manually. The Deacon hand
 
 ### Automated (Recommended)
 
+```mermaid
+sequenceDiagram
+    participant D as Deacon
+    participant C as gt compact
+    participant R as gt compact report
+    participant M as Mayor
+    D->>C: Patrol cycle triggers compaction
+    C->>C: Scan wisps, apply TTL policy
+    C->>R: Generate daily digest
+    R-->>D: Daily digest delivered
+    R-->>M: Weekly rollup (on schedule)
+```
+
 The Deacon runs compaction automatically as part of its patrol cycle. The daily digest goes to the Deacon, and the weekly rollup goes to the Mayor. No manual intervention is needed for normal operations.
 
 ```text

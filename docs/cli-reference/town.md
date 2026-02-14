@@ -150,6 +150,26 @@ gt town shutdown
 gt town shutdown --force
 ```
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant M as Mayor (tmux)
+    participant D as Deacon (tmux)
+
+    H->>M: gt town next
+    Note over H,M: Terminal switches to Deacon
+    H->>D: Inspect patrol state
+    H->>D: gt town next
+    Note over H,D: Terminal switches back to Mayor
+    H->>M: Check coordination status
+    H->>M: gt town shutdown
+    M->>D: Signal: park all rigs
+    D->>D: Wait for in-flight work
+    D->>D: Stop Witnesses + Refineries
+    M->>D: Stop Deacon
+    M->>M: Stop Mayor
+```
+
 ## When to Use
 
 Town-level navigation and management is useful when:

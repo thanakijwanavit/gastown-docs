@@ -86,6 +86,21 @@ Sessions are discovered from events emitted by SessionStart hooks. The `[GAS TOW
 
 ## Common Use Cases
 
+```mermaid
+sequenceDiagram
+    participant A as Current Agent
+    participant E as ~/.gt/.events.jsonl
+    participant S as Predecessor Session
+
+    A->>E: gt seance (discovery)
+    E-->>A: List of recent sessions
+    A->>A: Pick session ID
+    A->>S: gt seance --talk sess-id -p "question"
+    Note over S: claude --fork-session --resume
+    S-->>A: Answer from predecessor context
+    Note over S: Session unchanged (read-only fork)
+```
+
 ### Recovering Lost Context After Compaction
 
 When your context window compacts and you lose details about earlier work:

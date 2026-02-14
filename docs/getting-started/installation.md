@@ -142,6 +142,20 @@ gt help
 
 You should see the Gas Town help output listing all available commands.
 
+```mermaid
+flowchart TD
+    INSTALL[Install gt CLI] --> DEPS[Install dependencies]
+    DEPS --> GIT[Git 2.25+]
+    DEPS --> BD[Beads bd CLI]
+    DEPS --> TMUX[tmux 3.0+]
+    DEPS --> CLAUDE[Claude Code CLI]
+    GIT --> VERIFY[Run gt --version]
+    BD --> VERIFY
+    TMUX --> VERIFY
+    CLAUDE --> VERIFY
+    VERIFY --> READY[Ready for gt install]
+```
+
 ## Supported Runtimes
 
 Gas Town supports multiple AI coding agent runtimes:

@@ -137,6 +137,16 @@ gt feed
 gt ready
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Install: gt install ~/gt
+    Install --> AddRig: gt rig add
+    AddRig --> Start: gt start
+    Start --> Attach: gt mayor attach
+    Attach --> Monitor: gt feed / gt convoy list
+    Monitor --> Attach: Give more instructions
+```
+
 :::warning
 
 Gas Town agents consume API tokens. Monitor usage with `gt cost` to avoid surprise bills. See [Cost Management](../guides/cost-management.md) for details.

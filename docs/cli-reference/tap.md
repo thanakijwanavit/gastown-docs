@@ -138,6 +138,19 @@ gt tap guard pr-workflow
 # Hook intercepts: gt tap guard pr-workflow → exits 2 → tool call BLOCKED
 ```
 
+```mermaid
+flowchart TD
+    CALL[Agent invokes tool] --> HOOK[Claude Code PreToolUse hook fires]
+    HOOK --> ROLE{GT_ROLE set?}
+    ROLE -->|No: human| PASS[Exit 0 — allow silently]
+    ROLE -->|Yes: agent| GUARD[gt tap guard evaluates policy]
+    GUARD --> MATCH{Pattern matches forbidden op?}
+    MATCH -->|No| ALLOW[Exit 0 — allow]
+    MATCH -->|Yes| BLOCK[Exit 2 — BLOCKED]
+    ALLOW --> EXEC[Tool executes normally]
+    BLOCK --> DENY[Tool call rejected, agent notified]
+```
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

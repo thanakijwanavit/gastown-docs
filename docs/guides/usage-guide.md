@@ -86,6 +86,15 @@ The inner loop is the moment-to-moment operational cadence:
 
 The inner loop is where execution happens. Speed here comes from clear instructions and fast feedback cycles.
 
+```mermaid
+graph TD
+    OUTER["Outer Loop (Days-Weeks)<br/>Strategic planning, upgrades, capacity"] --> MIDDLE
+    MIDDLE["Middle Loop (Hours-Days)<br/>Spawn agents, create convoys, rig cycling"] --> INNER
+    INNER["Inner Loop (Minutes)<br/>Task delegation, output review, handoffs"]
+    INNER -->|feedback| MIDDLE
+    MIDDLE -->|feedback| OUTER
+```
+
 ```text
 Outer Loop (Days-Weeks)
 │  Strategic planning, upgrades, capacity decisions

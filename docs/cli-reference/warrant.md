@@ -171,6 +171,21 @@ If a warrant sits in `pending` state:
 2. **Is the Deacon alive?** Boot is triggered by Deacon triage. Check: `gt deacon status`
 3. **Manual execution**: If Boot is unavailable, execute directly: `gt warrant execute <target>`
 
+```mermaid
+flowchart TD
+    STUCK[Agent stuck or unresponsive] --> NUDGE[Supervisor tries gt nudge]
+    NUDGE --> RESP{Agent responds?}
+    RESP -->|Yes| RESOLVED[Issue resolved]
+    RESP -->|No| FILE[gt warrant file target --reason ...]
+    FILE --> STORE[Warrant saved to ~/gt/warrants/]
+    STORE --> TRIAGE[Boot triage cycle picks up warrant]
+    TRIAGE --> KILL[Terminate tmux session]
+    KILL --> MARK[Mark warrant as executed]
+    MARK --> HOOK{Work on hook?}
+    HOOK -->|Yes| RELEASE[Release bead for reassignment]
+    HOOK -->|No| DONE[Cleanup complete]
+```
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

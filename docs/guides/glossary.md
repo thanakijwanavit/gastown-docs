@@ -50,6 +50,17 @@ flowchart TD
 Use your browser's search (Ctrl+F) to quickly find terms. For deeper explanations, follow the links in the Related section at the bottom.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: Bead created
+    Pending --> Hooked: gt sling
+    Hooked --> InProgress: Polecat picks up
+    InProgress --> Submitted: gt done
+    Submitted --> Merged: Refinery merges
+    Merged --> [*]: Convoy checks completion
+    InProgress --> Pending: Crash recovery
+```
+
 ## Core Concepts
 
 | Term | Definition |

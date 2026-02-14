@@ -97,6 +97,15 @@ gt nudge polecat:toast --rig myproject "Focus on the API tests first"
 | **Merge path** | Push directly to main | Submit MR via Refinery |
 | **Monitoring** | Self-managed | Witness-supervised |
 
+```mermaid
+flowchart LR
+    Human -->|attaches to| Crew
+    Mayor -->|slings bead| Polecat
+    Crew -->|pushes to| Main[main branch]
+    Polecat -->|submits MR| Refinery
+    Refinery -->|merges to| Main
+```
+
 ### What does the Mayor actually do?
 
 The Mayor decomposes natural language instructions into discrete, implementable beads, bundles them into convoys, assigns work to rigs, and monitors progress. It does **not** monitor health (that's the Deacon's job). See [Mayor](../agents/mayor.md).

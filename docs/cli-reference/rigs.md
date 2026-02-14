@@ -93,6 +93,25 @@ gt rig add backend git@github.com:you/backend.git --branch develop
 gt rig add docs https://github.com/you/docs.git --no-start
 ```
 
+```mermaid
+flowchart TD
+    ADD[gt rig add name url] --> CLONE[Clone repository]
+    CLONE --> STRUCT[Create directory structure]
+    STRUCT --> BEADS[Initialize .beads/]
+    STRUCT --> CONFIG[Write config.json]
+    STRUCT --> AGENTS[Set up agent workspaces]
+    AGENTS --> REF[refinery/rig/]
+    AGENTS --> MAY[mayor/rig/]
+    AGENTS --> WIT[witness/]
+    AGENTS --> CREW[crew/]
+    BEADS --> READY[Rig ready]
+    CONFIG --> READY
+    REF --> READY
+    MAY --> READY
+    WIT --> READY
+    CREW --> READY
+```
+
 **Created structure:**
 
 ```text

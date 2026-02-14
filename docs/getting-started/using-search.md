@@ -136,6 +136,19 @@ Results are ranked by relevance:
 3. **Body content**: Full-text matches in page content
 4. **Recency**: More recently updated pages rank higher
 
+```mermaid
+flowchart TD
+    QUERY[Search query entered] --> TITLE[Match page titles]
+    QUERY --> HEADING[Match headings]
+    QUERY --> BODY[Match body content]
+    TITLE --> RANK[Rank by relevance]
+    HEADING --> RANK
+    BODY --> RANK
+    RANK --> DISPLAY[Display ranked results]
+    DISPLAY --> CLICK[User clicks result]
+    CLICK --> HIGHLIGHT[Terms highlighted on page]
+```
+
 ### Highlighted Terms
 
 When you click a search result, the matching terms are **highlighted in yellow** on the destination page, making it easy to find the relevant content.

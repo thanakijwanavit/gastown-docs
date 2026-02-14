@@ -186,6 +186,17 @@ gt unsling gt-abc12 --release
 
 ---
 
+```mermaid
+flowchart LR
+    DONE[gt done] --> COMMIT[Commit remaining changes]
+    COMMIT --> PUSH[Push branch]
+    PUSH --> MR[Create merge request]
+    MR --> STATUS[Update bead status → completed]
+    STATUS --> EXIT[Exit polecat session]
+    MR --> REF[Refinery picks up MR]
+    REF --> REVIEW[Automated review + merge to main]
+```
+
 ### `gt done`
 
 Mark work as complete and submit a merge request.

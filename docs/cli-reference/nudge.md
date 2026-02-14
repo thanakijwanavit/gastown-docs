@@ -140,6 +140,17 @@ Use **mail** when:
 
 ### Combining Both
 
+```mermaid
+sequenceDiagram
+    participant S as Supervisor
+    participant MB as Target Mailbox
+    participant T as Target Session
+    S->>MB: gt mail send (detailed instructions)
+    S->>T: gt nudge (wake up and check mail)
+    T->>MB: Reads mail on next cycle
+    T->>T: Processes instructions
+```
+
 The most common pattern is sending mail first, then nudging:
 
 ```bash

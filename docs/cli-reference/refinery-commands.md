@@ -284,6 +284,19 @@ gt refinery unclaimed --json
 
 ---
 
+```mermaid
+stateDiagram-v2
+    [*] --> Unclaimed: MR submitted
+    Unclaimed --> Claimed: gt refinery claim
+    Claimed --> Processing: Rebase + validate
+    Processing --> Merged: Checks pass
+    Processing --> Released: Checks fail
+    Released --> Unclaimed: gt refinery release
+    Claimed --> Expired: 10min timeout
+    Expired --> Unclaimed: Auto-release
+    Merged --> [*]
+```
+
 ## gt refinery claim
 
 Claim an MR for processing.

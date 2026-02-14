@@ -827,6 +827,22 @@ Is anything running at all?
 
 ---
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant DOC as gt doctor
+    participant FIX as gt doctor --fix
+    participant AGENT as Agent
+
+    H->>DOC: Run diagnostics
+    DOC->>H: Report issues
+    H->>FIX: Attempt auto-repair
+    FIX->>AGENT: Restart failed agents
+    FIX->>AGENT: Clean orphaned worktrees
+    FIX->>H: Report repair results
+    H->>AGENT: Verify recovery with gt peek
+```
+
 ## When to Reboot
 
 If multiple systems are failing simultaneously and individual fixes are not resolving the problem, a full restart is often the fastest path to recovery:

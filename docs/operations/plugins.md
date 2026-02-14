@@ -510,6 +510,24 @@ gt plugin run my-plugin --rig myproject --input branch=feature/untested
 
 ## Plugin Types Beyond Gates
 
+```mermaid
+flowchart LR
+    subgraph Triggers
+        PRE[pre-merge]
+        POST[post-merge]
+        SPAWN[on-spawn]
+        CRON[cron schedule]
+    end
+    PRE --> GATE[Gate Plugin]
+    POST --> ACTION[Action Plugin]
+    SPAWN --> HOOK[Hook Plugin]
+    CRON --> SCHED[Schedule Plugin]
+    GATE -->|blocks until pass| PIPELINE[Merge Pipeline]
+    ACTION -->|side effects| NOTIFY[Notifications / Logging]
+    HOOK -->|modifies behavior| LIFECYCLE[Agent Lifecycle]
+    SCHED -->|runs periodically| TASK[Maintenance Task]
+```
+
 While gates are the most common plugin type, Gas Town supports four plugin types:
 
 ### Action Plugins

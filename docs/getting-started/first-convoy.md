@@ -73,6 +73,17 @@ gt feed
 gt polecat list
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: bd create
+    Pending --> Hooked: gt sling
+    Hooked --> InProgress: Polecat starts work
+    InProgress --> Done: gt done
+    Done --> Merged: Refinery merges
+    Merged --> [*]
+    InProgress --> Pending: Polecat crashes (auto-recovery)
+```
+
 ## Step 5: Watch the Merge Queue
 
 As polecats complete work, they submit merge requests to the Refinery:

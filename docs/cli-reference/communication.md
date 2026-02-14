@@ -621,6 +621,18 @@ gt notify --discord https://discord.com/api/webhooks/...
 
 Escalations are priority-routed alerts for issues that need human intervention or higher-authority decisions.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Open: gt escalate (agent raises issue)
+    Open --> Acked: gt escalate ack (someone investigating)
+    Open --> Routed: Auto-route by severity
+    Routed --> Open: Reaches next level
+    Acked --> Closed: gt escalate close (resolved)
+    Open --> Stale: No ack within threshold
+    Stale --> Routed: Escalate to next level
+    Closed --> [*]
+```
+
 ### `gt escalate`
 
 Create a new escalation.

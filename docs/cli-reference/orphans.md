@@ -155,6 +155,17 @@ gt orphans procs kill         # Kill orphaned processes
 
 ## Recovery Workflow
 
+```mermaid
+flowchart TD
+    FIND[gt orphans --rig myproject] --> INSPECT{Valuable commits?}
+    INSPECT -->|Yes| SHOW[git show commit-hash]
+    INSPECT -->|No| KILL[gt orphans kill]
+    SHOW --> CHERRY[git cherry-pick commit-hash]
+    CHERRY --> PUSH[git push]
+    PUSH --> KILL
+    KILL --> CLEAN[Orphans pruned]
+```
+
 When `gt orphans` finds valuable commits, recover them before they're garbage collected:
 
 ```bash

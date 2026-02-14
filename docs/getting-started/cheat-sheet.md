@@ -74,6 +74,20 @@ Commands prefixed with `gt` manage agents and workflows. Commands prefixed with 
 | `gt convoy list` | List active convoys |
 | `gt convoy status <id>` | Check convoy progress |
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant CLI as gt CLI
+    participant Rig as Rig
+    participant PC as Polecat
+
+    H->>CLI: gt sling bead-id rig
+    CLI->>Rig: Hook bead to rig
+    Rig->>PC: Spawn polecat in worktree
+    PC->>PC: gt prime, read hook, execute
+    PC-->>Rig: gt done (submit MR)
+```
+
 ---
 
 ## Communication

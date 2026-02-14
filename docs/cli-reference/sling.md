@@ -136,6 +136,23 @@ gt sling gt-abc myproject --account work
 gt sling gt-abc myproject --dry-run
 ```
 
+```mermaid
+sequenceDiagram
+    participant U as User / Mayor
+    participant S as gt sling
+    participant R as Rig
+    participant P as Polecat
+    participant H as Hook
+
+    U->>S: gt sling gt-abc myproject
+    S->>R: Resolve target → auto-spawn polecat
+    R->>P: Create polecat worktree + tmux session
+    S->>H: Attach bead gt-abc to polecat hook
+    P->>P: SessionStart hook → gt prime
+    P->>H: Read hook → find bead gt-abc
+    P->>P: Begin work via GUPP
+```
+
 ## Auto-Convoy
 
 When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.

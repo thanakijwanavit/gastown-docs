@@ -332,6 +332,20 @@ gt issue clear
 
 ## Plugin Management
 
+```mermaid
+sequenceDiagram
+    participant D as Deacon
+    participant P as Plugin System
+    participant G as Gate Check
+    D->>P: Patrol cycle: run plugins
+    P->>G: Check gate (cooldown/cron/condition)
+    G-->>P: Gate open
+    P->>P: Execute plugin command
+    P-->>D: Report result
+    G-->>P: Gate closed
+    P-->>D: Skip (not due)
+```
+
 ### `gt plugin`
 
 Manage plugins that run during Deacon patrol cycles.

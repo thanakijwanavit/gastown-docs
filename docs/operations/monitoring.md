@@ -421,6 +421,20 @@ Gas Town at peak usage with 10+ polecats can burn approximately $100/hour in API
 
 Knowing what the tools show you is only half the story. Knowing which signals matter is the other half.
 
+```mermaid
+sequenceDiagram
+    participant W as Witness
+    participant F as gt feed
+    participant H as Human
+    participant D as gt doctor
+
+    W->>F: Emit STALE event
+    F->>H: Display alert in feed
+    H->>D: Run gt doctor
+    D->>H: Report failures and warnings
+    H->>W: gt nudge or restart agent
+```
+
 ### Red Flags (Investigate Immediately)
 
 | Signal | Where to See It | What It Means |

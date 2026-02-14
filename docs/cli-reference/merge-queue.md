@@ -277,6 +277,25 @@ Integration Checks: myproject
   [enabled]   typecheck npx tsc --noEmit
 ```
 
+```mermaid
+sequenceDiagram
+    participant P as Polecat
+    participant MQ as Merge Queue
+    participant R as Refinery
+    participant M as Main Branch
+    P->>MQ: gt mq submit (or gt done)
+    MQ->>R: Next MR ready
+    R->>R: Rebase onto latest main
+    R->>R: Run integration checks
+    alt Checks pass
+        R->>M: Fast-forward merge
+        R-->>P: Notify: merged
+    else Checks fail
+        R->>MQ: Release MR (rejected)
+        R-->>P: Notify: failed
+    end
+```
+
 :::note[Merge Process]
 
 The Refinery processes each MR through these steps:

@@ -244,6 +244,16 @@ gt polecat stale myproject --cleanup --dry-run
 
 ---
 
+```mermaid
+flowchart TD
+    W[Witness detects stale polecat] --> CR[gt polecat check-recovery]
+    CR -->|SAFE_TO_NUKE| NUKE[gt polecat nuke]
+    CR -->|NEEDS_RECOVERY| ESC[Escalate to Mayor]
+    ESC --> RECOVER[Mayor assigns recovery]
+    RECOVER --> NUKE
+    NUKE --> GC[gt polecat gc — clean branches]
+```
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

@@ -229,6 +229,24 @@ You scale to 10 or more agents running simultaneously. You develop ad-hoc script
 
 You formalize the ad-hoc scripts from Stage 7 into a proper orchestration system. You build or adopt a framework that handles agent lifecycle, work distribution, merge coordination, health monitoring, and escalations.
 
+```mermaid
+flowchart TD
+    HUMAN[Human Overseer] -->|natural language| MAYOR[Mayor]
+    MAYOR -->|creates| BEADS[Beads]
+    MAYOR -->|bundles| CONVOY[Convoy]
+    MAYOR -->|slings to| RIG[Rig]
+    RIG -->|spawns| PC1[Polecat 1]
+    RIG -->|spawns| PC2[Polecat 2]
+    RIG -->|spawns| PC3[Polecat 3]
+    PC1 -->|submits MR| REF[Refinery]
+    PC2 -->|submits MR| REF
+    PC3 -->|submits MR| REF
+    REF -->|merges| MAIN[main branch]
+    WITNESS[Witness] -->|monitors| PC1
+    WITNESS -->|monitors| PC2
+    WITNESS -->|monitors| PC3
+```
+
 ```bash
 # A proper orchestration system
 gt start --all

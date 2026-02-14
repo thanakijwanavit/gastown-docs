@@ -303,6 +303,17 @@ gt synthesis <subcommand> <convoy-id>
 
 **Description:** Synthesis is the final step in a convoy workflow that combines outputs from all parallel legs into a unified deliverable. This is a top-level command separate from `gt convoy synthesis` (which generates reports).
 
+```mermaid
+flowchart TD
+    CV[Convoy with parallel legs] --> CHK[gt synthesis status]
+    CHK -->|All legs complete| START[gt synthesis start]
+    CHK -->|Legs still open| WAIT[Wait for completion]
+    WAIT --> CHK
+    START --> COMBINE[Combine outputs into deliverable]
+    COMBINE --> CLOSE[gt synthesis close]
+    CLOSE --> REPORT[gt convoy synthesis — generate report]
+```
+
 **Aliases:** `synth`
 
 **Subcommands:**

@@ -263,6 +263,23 @@ gt cycle prev
 
 ---
 
+```mermaid
+sequenceDiagram
+    participant S1 as Session 1
+    participant FS as File System
+    participant S2 as Session 2
+
+    S1->>S1: Work on hook
+    S1->>FS: gt handoff --message "progress notes"
+    Note over FS: Saves hook state, context, progress
+    S1->>S1: Exit
+
+    S2->>S2: gt prime (load identity)
+    S2->>FS: gt resume
+    FS-->>S2: Restore hook, context, handoff message
+    S2->>S2: Continue work from where S1 left off
+```
+
 ## Molecules
 
 Molecules are multi-step workflow execution units. They break complex work into a directed acyclic graph (DAG) of steps that can be executed sequentially, in parallel, or with dependencies.

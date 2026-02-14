@@ -167,6 +167,22 @@ gt git-init --repair
 
 ---
 
+```mermaid
+flowchart TD
+    INSTALL[gt install ~/gt --git] --> INIT[Directory structure created]
+    INIT --> ENABLE[gt enable]
+    ENABLE --> SHELL[Shell hooks active]
+    SHELL --> START[gt start / gt up]
+    START --> DEACON[Deacon launched]
+    START --> MAYOR[Mayor launched]
+    DEACON --> RUNNING[Town running]
+    MAYOR --> RUNNING
+    RUNNING -->|Pause| DOWN[gt down]
+    DOWN -->|Resume| START
+    RUNNING -->|End of day| SHUTDOWN[gt shutdown]
+    SHUTDOWN --> CLEANUP[Worktrees removed, agents stopped]
+```
+
 ## `gt enable`
 
 Enable Gas Town for all agentic coding tools.

@@ -221,6 +221,19 @@ gt trail gt-abc12
 gt trail polecat/toast
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: Mayor creates bead
+    Created --> Assigned: gt sling
+    Assigned --> Hooked: Polecat picks up
+    Hooked --> Started: Work begins
+    Started --> Committed: Code changes pushed
+    Committed --> Submitted: gt done → MR in queue
+    Submitted --> Merged: Refinery merges to main
+    Merged --> Closed: Auto-close
+    Closed --> [*]
+```
+
 **Sample output (bead trail):**
 
 ```text

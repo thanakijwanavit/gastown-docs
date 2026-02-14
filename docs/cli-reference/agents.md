@@ -392,6 +392,18 @@ gt refinery status [rig] [options]
 
 Polecats are ephemeral worker agents. They spawn, execute a single task, submit their work, and exit. Managed by the Witness.
 
+```mermaid
+sequenceDiagram
+    participant W as Witness
+    participant P as Polecat
+    participant MQ as Merge Queue
+    W->>P: Spawn with bead assignment
+    P->>P: Work on task
+    P->>MQ: gt done (push + submit MR)
+    P-->>W: Exit signal
+    W->>W: Nuke polecat sandbox
+```
+
 ### `gt polecat list`
 
 List all polecats.

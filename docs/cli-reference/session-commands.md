@@ -201,6 +201,19 @@ Check session health for polecats.
 gt session check [rig] [flags]
 ```
 
+```mermaid
+flowchart TD
+    CHECK[gt session check] --> ENUM[Enumerate polecats with work-on-hook]
+    ENUM --> TMUX{tmux session exists?}
+    TMUX -->|No| WARN[Report: missing session]
+    TMUX -->|Yes| RESP{Session responsive?}
+    RESP -->|No| STALE[Report: unresponsive]
+    RESP -->|Yes| OK[Report: healthy]
+    WARN --> SUMMARY[Health summary]
+    STALE --> SUMMARY
+    OK --> SUMMARY
+```
+
 Validates that:
 
 1. Polecats with work-on-hook have running tmux sessions
