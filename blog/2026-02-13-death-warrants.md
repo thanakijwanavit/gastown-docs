@@ -147,6 +147,8 @@ In practice, most Gas Town users never think about warrants. The Witness files t
 ## Next Steps
 
 - [gt warrant Reference](/docs/cli-reference/warrant) — Full CLI reference for warrant commands
+- [Deacon Agent](/docs/agents/deacon) — The town-level supervisor that files warrants for unresponsive agents
+- [Witness Agent](/docs/agents/witness) — The per-rig watchdog that detects stalls and escalates to warrants
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) — How the Deacon supervises agents and files warrants
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) — The crash-recovery philosophy that warrants support
 - [Gas Town's Security Model](/blog/security-model) — Trust boundaries and permission scoping for agent termination

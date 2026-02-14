@@ -173,6 +173,8 @@ If you're a crew worker and keep hitting conflicts, check if a polecat is workin
 ## Next Steps
 
 - [Multi-Agent Git Workflow Reference](/docs/guides/git-workflow) — Full guide with all the edge cases
+- [Merge Queue Commands](/docs/cli-reference/merge-queue) — CLI reference for listing, submitting, and retrying merge requests
+- [Refinery Agent](/docs/agents/refinery) — The per-rig agent that rebases, validates, and merges code serially
 - [The Refinery: How Merges Actually Work](/blog/refinery-deep-dive) — How the Refinery serializes parallel work
 - [Why Git Worktrees?](/blog/git-worktrees) — How Gas Town uses worktrees for agent isolation
 - [Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) — Coordinating work to minimize conflicts

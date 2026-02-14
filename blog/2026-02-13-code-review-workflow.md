@@ -203,6 +203,8 @@ This is the exact pattern Gas Town is built for — independent parallel work wi
 ## Next Steps
 
 - [Code Review Workflow Reference](/docs/workflows/code-review) — Full reference with all presets, options, and output formats
+- [Molecules & Formulas](/docs/concepts/molecules) — How convoy formulas orchestrate parallel review molecules
+- [Polecats](/docs/agents/polecats) — The ephemeral workers that execute each review perspective
 - [Building Your First Custom Formula](/blog/custom-formulas) — Create custom review formulas with project-specific dimensions
 - [The Refinery: How Merges Actually Work](/blog/refinery-deep-dive) — How the Refinery integrates with review gates
 - [Formula Design Patterns](/blog/formula-design-patterns) — Patterns for building effective multi-step formulas
