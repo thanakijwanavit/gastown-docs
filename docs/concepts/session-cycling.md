@@ -131,6 +131,12 @@ There is no fixed rule for how often to cycle sessions. A polecat working on a c
 
 :::
 
+:::tip[Session Cycling Discipline]
+
+Establish a habit of writing detailed handoff notes even when you think the session will resume immediately. Network failures, accidental tab closures, and system crashes happen unpredictably, and future-you will thank past-you for that extra 30 seconds of documentation.
+
+:::
+
 ## Context Recovery
 
 When a new session starts (or after compaction), the agent rebuilds its working context through a well-defined recovery sequence.

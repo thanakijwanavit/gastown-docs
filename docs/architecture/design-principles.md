@@ -200,6 +200,12 @@ Gas Town borrows supervision patterns and mailboxes from Erlang/OTP, but it runs
 
 :::
 
+:::tip[The Scotty Principle Prevents Cascading Failures]
+
+By never proceeding past failures, Gas Town avoids the common trap where one broken test causes dozens of polecats to waste time implementing features on a broken base. The upfront cost of fixing the test immediately is far lower than the cascading cost of broken polecats discovering the issue later in their workflow.
+
+:::
+
 ## Design Principle Relationships
 
 The twelve design principles form an interconnected system where each principle reinforces the others.

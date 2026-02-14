@@ -223,6 +223,12 @@ graph LR
     D --> F
 ```
 
+:::tip
+
+When developing custom tap guards, always test them outside Gas Town first by manually piping sample JSON input (matching Claude Code's hook format) to the guard script. This allows you to verify exit code behavior (0 vs 2) and error handling before deploying the guard into `.claude/settings.local.json` where debugging failed hooks is harder.
+
+:::
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

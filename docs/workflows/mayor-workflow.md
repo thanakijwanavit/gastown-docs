@@ -102,6 +102,10 @@ The Mayor's ability to decompose complex requests into well-scoped beads improve
 Review the Mayor's decomposition before approving. The Mayor may sometimes create too many or too few beads, or miss dependencies between tasks. Verify that the breakdown matches your intent and that dependent work is ordered correctly.
 :::
 
+:::caution[Request Specificity vs Mayor Autonomy]
+The Mayor workflow works best when you provide outcome-focused requests rather than prescriptive implementation details. Saying "improve auth module test coverage" works better than "add 5 more tests to auth_test.go". The Mayor can assess the codebase and create appropriately scoped beads. Over-specifying implementation details reduces the Mayor's ability to make good decomposition decisions.
+:::
+
 ### Step 4: Mayor Assigns Work
 
 Once confirmed, the Mayor slings each bead to the appropriate rig:

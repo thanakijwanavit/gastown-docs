@@ -260,6 +260,12 @@ Seance forks create a separate Claude Code subprocess, which consumes API tokens
 
 Use **one-shot** (`-p`) when you have a specific question and want a quick answer. Use **interactive** (no `-p`) when you need to explore and follow up on answers.
 
+:::tip
+
+When using `gt seance --talk` with one-shot queries (`-p`), craft specific questions that reference concrete artifacts like file paths or commit hashes rather than vague prompts. The predecessor session has full context about its work, so asking "What did you change in src/auth/callback.ts and why?" will yield far more useful answers than "What did you do?".
+
+:::
+
 :::note
 Seance spawns a read-only fork of the predecessor session. It cannot modify the original session's state or history.
 :::

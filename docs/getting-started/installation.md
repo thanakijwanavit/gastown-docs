@@ -158,6 +158,12 @@ gt completion zsh > "${fpath[1]}/_gt"
 gt completion fish > ~/.config/fish/completions/gt.fish
 ```
 
+:::caution[PATH Configuration]
+
+After installation, verify that `gt` and `bd` are both in your PATH with `which gt` and `which bd`. If either command is not found, you will need to add the installation directory to your shell's PATH variable in your `.bashrc`, `.zshrc`, or equivalent shell configuration file.
+
+:::
+
 ## Verify Installation
 
 ```bash

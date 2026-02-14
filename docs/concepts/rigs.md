@@ -326,6 +326,12 @@ Each rig maintains multiple git clones (refinery, mayor, witness, plus one per a
 
 :::
 
+:::warning[Rig Name Stability]
+
+Never rename a rig directory after creation. The rig name is embedded in beads database prefixes, agent mail addresses, and hook file paths. Renaming breaks these references permanently. If a rig needs a different name, create a new rig and migrate work manually.
+
+:::
+
 ## Rig Startup Sequence
 
 When a rig starts, its agents initialize in a specific order to ensure dependencies are ready. For details on how Git worktrees enable the multi-agent isolation described here, see [Git Worktrees for Multi-Agent Development](/blog/git-worktrees).

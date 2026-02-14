@@ -321,6 +321,10 @@ gt dashboard
 
 :::
 
+:::caution[Dashboard Performance with Large Fleets]
+The dashboard refreshes all convoy and agent data every few seconds. With 15+ active polecats across multiple rigs, frequent refreshes can create noticeable CPU usage on older machines. If the dashboard feels sluggish, consider increasing the refresh interval in `settings/dashboard.json` or using command-line tools like `gt trail` for lower-overhead monitoring.
+:::
+
 This opens a local web server (default: `http://localhost:8420`) with:
 
 - **Convoy overview** -- All active convoys with progress bars

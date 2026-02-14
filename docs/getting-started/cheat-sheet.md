@@ -172,6 +172,12 @@ Avoid using `--force` flags unless absolutely necessary. Commands like `gt shutd
 
 :::
 
+:::info[Keep This Page Bookmarked]
+
+Bookmark this cheat sheet in your browser for instant reference. The search shortcut `Ctrl+K` is fast, but a pinned tab with this page is even faster when you need to look up a command mid-workflow without breaking focus.
+
+:::
+
 ## Troubleshooting Decision Tree
 
 When something goes wrong, follow this decision tree to find the right command.

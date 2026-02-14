@@ -258,6 +258,10 @@ exit $EXIT_CODE
 Keep plugins fast. Gate plugins block the merge pipeline, and a slow plugin can stall all polecats waiting for their MRs to merge. Aim for under 60 seconds of execution time, and always set a `timeout` in your `plugin.json` to prevent runaway processes. For plugin architecture details, see [Extending Gas Town with Plugins](/blog/plugin-system).
 :::
 
+:::tip[Plugin Testing Strategy]
+Test new plugins extensively with `--dry-run` before enabling them in the merge pipeline. A plugin with an off-by-one error in its exit code logic can block dozens of valid MRs before you notice the pattern. Run at least 5-10 dry runs simulating both pass and fail scenarios, then manually trigger the plugin on a test branch before trusting it as a pre-merge gate.
+:::
+
 ---
 
 ## Plugin Commands

@@ -692,6 +692,12 @@ graph TD
     end
 ```
 
+:::danger
+
+Never run `gt uninstall --all --force` on a workspace with active rigs unless you have verified all work is merged and pushed. This command permanently deletes all rig repositories, worktrees, beads databases, and agent state without recovery, including any uncommitted or unpushed changes in polecat and crew workspaces.
+
+:::
+
 ---
 
 ## `gt daemon`

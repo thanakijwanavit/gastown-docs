@@ -395,6 +395,10 @@ Switching a rig's default runtime while polecats are actively working can cause 
 
 :::
 
+:::caution[Runtime-Specific Hook Limitations]
+When mixing runtimes within a single rig, be aware that hook-limited runtimes (Cursor, Auggie, Amp) require manual context injection on every session start. If you have both Claude and Cursor polecats active simultaneously, the Cursor polecats need explicit `gt prime` calls while Claude polecats start automatically. This asymmetry can create workflow inconsistencies if not managed carefully.
+:::
+
 ## Multi-Runtime Best Practices
 
 1. **Start with Claude Code.** It has the deepest integration and is the most thoroughly tested. Add other runtimes once you are comfortable with the basics.

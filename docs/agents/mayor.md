@@ -230,6 +230,12 @@ The Mayor's decomposition quality directly depends on the clarity of your instru
 
 :::
 
+:::note[The Mayor Learns from Past Convoys]
+
+The Mayor tracks convoy completion patterns and polecat success rates over time. If a particular type of work consistently stalls or requires re-sling, the Mayor adjusts decomposition strategy for similar future work. This means decomposition quality improves as the system runs.
+
+:::
+
 ## Typical Mayor Time Allocation
 
 The Mayor distributes its processing time across several core activities during normal operation.

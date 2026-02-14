@@ -218,6 +218,12 @@ Each Witness only monitors polecats in its own rig -- it has no visibility into 
 
 :::
 
+:::info[Witness Stall Detection Uses Multiple Signals]
+
+The Witness doesn't rely on a single timeout to detect stalls. It triangulates from session activity timestamps, git commit timestamps, and process resource usage. A polecat with active CPU but no commits for 15 minutes triggers nudge, as does a polecat with no session output for 10 minutes. This multi-signal approach reduces false positives.
+
+:::
+
 ## Witness Nudge Protocol
 
 When the Witness detects a stalled polecat, it follows a structured nudge protocol before escalating.

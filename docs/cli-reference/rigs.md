@@ -538,6 +538,12 @@ timeline
            : Longer restore with gt rig undock
 ```
 
+:::warning
+
+When adding a new rig with `gt rig add` to a shallow clone (`--shallow`), be aware that some git operations (like `git log --since` used by the Witness for staleness checks) may behave unexpectedly or fail if the commit history is incomplete. Reserve shallow clones for read-only rigs or archives where agents will not actively work.
+
+:::
+
 ## `gt rig settings`
 
 Manage advanced rig settings.

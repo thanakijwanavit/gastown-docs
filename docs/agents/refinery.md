@@ -220,6 +220,12 @@ Even if 10 polecats submit MRs simultaneously, the Refinery processes them stric
 
 :::
 
+:::tip[Refinery Validation Commands Should Be Fast]
+
+The validation command runs on every MR before merge, so slow tests block the entire queue. Configure validation to run only critical smoke tests and fast unit tests. Save comprehensive test suites for CI after merge. A 30-second validation is reasonable; a 10-minute validation creates bottlenecks.
+
+:::
+
 ## Common Patterns
 
 ### The MERGED Mail Contract

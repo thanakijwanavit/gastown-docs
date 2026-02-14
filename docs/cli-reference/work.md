@@ -274,6 +274,12 @@ graph TD
     end
 ```
 
+:::caution
+
+When using `gt release --force` to free a bead from an active polecat, the polecat's hook is cleared but the polecat session remains running. This can cause the polecat to continue working on the now-released bead, creating duplicate or conflicting work. Always verify the polecat is stopped or idle before forcing a release.
+
+:::
+
 ### `gt close`
 
 Close a bead without going through the done workflow.

@@ -149,6 +149,12 @@ When any agent crashes, its supervisor detects the failure and restarts it. This
 
 :::
 
+:::danger[Never Kill Supervisors Manually]
+
+If you kill a supervisor process (Deacon or Witness) outside the `gt` command system, you break the supervision chain. Child agents will continue running without oversight, hooks may become orphaned, and the system cannot self-heal. Always use `gt deacon stop` or `gt witness stop` to maintain supervision integrity.
+
+:::
+
 ## Recovery Time by Agent Type
 
 Expected recovery times when different agent types crash and are restarted by their supervisors.

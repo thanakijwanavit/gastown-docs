@@ -196,6 +196,12 @@ Use `gt mol status` rather than `bd list` to inspect wisp states. Since wisps ar
 
 :::
 
+:::danger[Never Query Wisps Directly in Scripts]
+
+Wisps are implementation details of the molecule system and their schema can change between Gas Town releases. Scripts and integrations should query beads with `bd list` and molecules with `gt mol status`, never raw wisp records from the database.
+
+:::
+
 ## Wisp TTL and Promotion
 
 When a wisp exceeds its time-to-live while still open, it is promoted to a permanent bead for investigation. For more on compaction, TTLs, and the lifecycle events that affect wisps, see [Lifecycle Management in Gas Town](/blog/lifecycle-management).

@@ -323,6 +323,12 @@ Claude Code hooks run synchronously in the tool execution pipeline. If a PreTool
 
 :::
 
+:::info[Agent Runtime Settings Override Per-Session]
+
+The `--agent` flag on start commands overrides both town-level and rig-level defaults. This means you can test a new agent runtime on a single polecat without changing global configuration. The override applies only to that session and doesn't persist.
+
+:::
+
 ## Hook Execution Pipeline
 
 Claude Code hooks integrate into the tool execution flow at specific trigger points.

@@ -312,6 +312,12 @@ mindmap
       No action needed
 ```
 
+:::caution[Boot Triage Logs Are Critical for Debugging]
+
+The triage log at `~/gt/deacon/dogs/boot/triage-log.jsonl` preserves Boot's decision history across restarts and crashes. If you're troubleshooting why the Deacon isn't waking or why Boot made unexpected decisions, this log is your first stop. Each entry shows what Boot observed, what it decided, and what action it took.
+
+:::
+
 ## Related
 
 - [Deacon](deacon.md) -- The agent that Boot monitors and wakes

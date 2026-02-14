@@ -258,6 +258,12 @@ Closing a convoy with `--force` while beads are still in progress does not cance
 
 :::
 
+:::tip[Convoy Synthesis Reports Are Valuable for Stakeholders]
+
+After a convoy completes, running `gt convoy synthesis --format markdown --verbose` produces a detailed breakdown of time spent, agents used, and blockers encountered. This report is stakeholder-ready and provides clear visibility into development velocity and friction points without requiring stakeholders to understand Gas Town internals.
+
+:::
+
 ## Convoy Lifecycle Phases
 
 A convoy progresses through distinct phases from creation to synthesis.

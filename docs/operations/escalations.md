@@ -167,6 +167,10 @@ You can add custom channels like Discord or Slack webhooks by adding entries to 
 Review and close resolved escalations daily. Stale escalations clutter the system and reduce signal-to-noise ratio for new issues. A clean escalation inbox makes critical problems stand out immediately, while a backlog of old unacknowledged escalations creates alert fatigue. For handling critical situations, see [Incident Response with Gas Town](/blog/incident-response).
 :::
 
+:::info[Escalation Patterns as System Signals]
+When the same agent or rig generates escalations repeatedly with a consistent pattern, treat it as a signal about systemic issues rather than individual failures. Three P1 escalations from the same Refinery in one day suggests a deeper problem with test stability, merge frequency, or agent configuration worth investigating before continuing to acknowledge and close individual alerts.
+:::
+
 ## Managing Escalations
 
 ### `gt escalate list`

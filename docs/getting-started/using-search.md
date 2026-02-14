@@ -299,6 +299,12 @@ hook mechanism
 
 ---
 
+:::info[Search Works Offline]
+
+Once you have visited the documentation site, the search index is cached in your browser and works completely offline. This means you can reference Gas Town docs even without internet connectivity, making it useful in restricted network environments or during outages.
+
+:::
+
 ## Search Performance
 
 ### Index Size

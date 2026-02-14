@@ -406,6 +406,10 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 Token costs scale nonlinearly with codebase size. A polecat working on a large monorepo may consume 3-5x more input tokens per session than one working on a focused microservice, because each file read and context reload ingests more content. Consider splitting monorepos into separate rigs to control per-polecat costs. For scaling considerations, see [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30).
 :::
 
+:::info[Cost Budgets per Project Stage]
+Your optimal cost budget varies by project stage. Early prototyping benefits from aggressive parallelism (10+ polecats, $100+/hour) to validate ideas quickly. Mature production systems typically run better with 3-5 polecats ($30-50/hour) focused on quality over speed. Adjust your polecat count and patrol frequency based on where your project is in its lifecycle, not just your total budget.
+:::
+
 ## Cost Tracking Best Practices
 
 ```mermaid

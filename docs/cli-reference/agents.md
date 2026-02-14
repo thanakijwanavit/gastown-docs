@@ -136,6 +136,12 @@ When starting a rig's agents from scratch, start the Witness and Refinery before
 
 :::
 
+:::caution[Restarting Persistent Agents Loses In-Flight State]
+
+When you restart the Mayor, Deacon, or Witness, any in-flight patrol state, unprocessed mail, and working memory is lost. Hooks and beads persist, but the agent will rediscover state on restart. For critical operations, wait for patrol cycles to complete before restarting.
+
+:::
+
 ---
 
 ### `gt mayor stop`

@@ -490,6 +490,10 @@ gantt
     Verification        :180, 200
 ```
 
+:::tip[Document Your Fixes]
+When you resolve a recurring issue, add a note to the rig's CLAUDE.md explaining the failure pattern and solution. Future polecats can reference this documentation instead of re-discovering the same fix. Over time, this builds institutional knowledge that reduces troubleshooting time for similar problems.
+:::
+
 ## Related
 
 - [Operations: Troubleshooting](../operations/troubleshooting.md) -- Comprehensive reference covering all troubleshooting topics

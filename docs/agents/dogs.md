@@ -199,6 +199,12 @@ Dogs are typically named after their purpose (boot, fetch, lint) rather than usi
 
 :::
 
+:::info[Dogs Share Context Across Tasks]
+
+Unlike polecats which start fresh each time, dogs maintain session context across multiple tasks. This means a dog can build up specialized knowledge about infrastructure patterns as it works, making it more efficient on recurring tasks. However, this also means dogs need periodic session cycling to avoid context bloat.
+
+:::
+
 ## Dog Lifecycle States
 
 A dog transitions between idle and active states as the Deacon assigns and completes tasks.

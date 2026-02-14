@@ -257,6 +257,12 @@ graph TD
     E --> G
 ```
 
+:::note
+
+If you find orphaned commits from a recent polecat session, check the Witness logs with `gt log --level warn --since 2h` before recovering them. The Witness may have already filed a warrant for that polecat, indicating the session was terminated intentionally due to unresponsiveness, and the orphaned commits might represent incomplete or broken work.
+
+:::
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)

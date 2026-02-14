@@ -366,6 +366,10 @@ This tolerance for imperfection in exchange for throughput is a conscious design
 The survival formula is not just theoretical -- Gas Town itself is designed around it. The system compresses orchestration insights (Lever 1), runs coordination on traditional compute (Lever 2), and applies to any git-backed software project (Lever 3). Understanding the formula helps you evaluate whether Gas Town fits your team's needs. For the practical implementation, see [Why Beads: Gas Town's Issue Tracking Philosophy](/blog/why-beads).
 :::
 
+:::danger[The Timing Risk]
+Adopting Gas Town before your team reaches Stage 7 risks burning significant time and money on coordination problems you are not yet equipped to recognize. The system solves real problems that only emerge when running 10+ agents simultaneously. If you have not yet felt the pain of manual multi-agent coordination, Gas Town's complexity will feel like overhead rather than relief.
+:::
+
 ## Prediction Track Record
 
 Yegge has publicly tracked his predictions about AI coding adoption:

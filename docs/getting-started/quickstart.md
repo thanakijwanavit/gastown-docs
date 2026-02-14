@@ -227,6 +227,12 @@ The first `gt rig add` for a large repository can take 10-20 minutes as it clone
 
 :::
 
+:::warning[Verify Your Setup Before Production Work]
+
+Run `gt doctor` after completing this quick start to verify all components are healthy before starting production work. A green health check now saves hours of debugging later when polecats fail mysteriously due to misconfigured Git worktrees or missing dependencies.
+
+:::
+
 ## Next Steps
 
 - [Your First Convoy](first-convoy.md) — Detailed walkthrough of the convoy workflow

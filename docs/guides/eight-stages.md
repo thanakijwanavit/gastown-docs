@@ -417,6 +417,10 @@ Be solidly at **Stage 7** before adopting Gas Town. Spend time at Stage 6 (3-5 a
 You do not need to progress through every stage sequentially. Many developers jump from Stage 5 directly to Stage 7 once they see the productivity gains from parallel agents. The key requirement for Gas Town is hands-on experience managing multiple concurrent agents, regardless of how you got there.
 :::
 
+:::warning[Stage Skipping Risks]
+While you can jump stages, skipping too far ahead creates a knowledge gap that makes troubleshooting harder. A developer who jumps from Stage 3 (IDE chat) directly to Stage 8 (orchestration) will struggle to diagnose when individual agents fail, because they never learned the Stage 5 and 6 patterns for managing single and small-group CLI agents effectively.
+:::
+
 ## The Inevitability Argument
 
 Steve Yegge's core thesis: each stage is **inevitable**. Once developers discover that the next stage is possible, competitive pressure ensures widespread adoption within 6-12 months.

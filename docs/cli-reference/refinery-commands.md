@@ -402,6 +402,12 @@ pie title MR Processing Outcomes
     "Expired claim, re-queued" : 3
 ```
 
+:::caution
+
+If you notice the Refinery repeatedly rejecting MRs from the same rig due to test failures, check whether polecats in that rig are running validation locally before calling `gt done`. Missing or outdated integration check configuration in the rig's `.refinery/validation.sh` can cause polecats to submit broken MRs that the Refinery will always reject.
+
+:::
+
 ## Related
 
 - [Refinery](../agents/refinery.md) -- How the Refinery agent processes merge requests

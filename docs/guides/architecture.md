@@ -523,6 +523,12 @@ When a polecat finishes and runs `gt done`, the Witness removes the worktree wit
 
 ---
 
+:::note[Understanding Self-Healing Limits]
+
+While Gas Town recovers automatically from most agent crashes and stalls, certain failure modes require human intervention. Database corruption, filesystem permission errors, and network outages cannot be healed by supervisor agents and will escalate to the human operator through the standard escalation chain.
+
+:::
+
 ## Self-Healing: The Escalation Chain
 
 Gas Town is designed to recover from failures automatically. The supervision hierarchy forms a chain where each level monitors and heals the level below:

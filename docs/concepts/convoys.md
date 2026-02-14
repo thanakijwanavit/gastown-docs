@@ -281,6 +281,12 @@ Convoys emit lifecycle events (created, bead_added, bead_completed, convoy_compl
 
 :::
 
+:::danger[Race Conditions During Manual Convoy Creation]
+
+If you create a convoy manually after work has already started, you risk race conditions where beads complete before the convoy tracking is in place. Always create the convoy before slinging beads to ensure accurate progress tracking from the start.
+
+:::
+
 ## Convoy + Mayor Workflow
 
 In the recommended [Mayor Workflow](../workflows/mayor-workflow.md), convoys are created automatically:

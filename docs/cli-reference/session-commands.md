@@ -292,6 +292,12 @@ When using `gt session restart` to recover from a suspected hang, first capture 
 
 :::
 
+:::tip
+
+When restarting a polecat session with `gt session restart`, verify that no merge request is currently in the Refinery queue for that polecat's branch. Restarting mid-merge can leave the polecat in an inconsistent state where it loses track of its submission, causing the MR to remain orphaned in the queue even after the branch merges.
+
+:::
+
 ```mermaid
 pie title Session Management Operations
     "gt session at (attach)" : 30

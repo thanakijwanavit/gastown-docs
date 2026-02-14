@@ -124,6 +124,12 @@ Gas Town's five-layer architecture depends on the `~/gt/` directory structure. M
 
 :::
 
+:::note[Each Layer Has Independent Failure Domains]
+
+The five-layer architecture isolates failures. A corrupted rig-level beads database doesn't affect other rigs. A crashed polecat doesn't bring down the Witness. A failed Witness doesn't crash the Deacon. This isolation means you can recover from most failures by restarting a single component rather than the entire system.
+
+:::
+
 ## Layer Dependency Map
 
 The five architectural layers and their critical dependencies.

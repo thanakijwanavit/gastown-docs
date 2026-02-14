@@ -233,6 +233,12 @@ GUPP's forward-only guarantee is enforced at the database level. Bead status upd
 
 :::
 
+:::info[GUPP Violations Are Always Bugs]
+
+If you find yourself tempted to manually roll back a bead status, force-push to undo a commit, or delete completed work, that is a GUPP violation and indicates a process bug. Fix the process, do not violate GUPP. The correct approach is always to create a new forward-moving bead to address the problem.
+
+:::
+
 ## GUPP Decision Tree
 
 When an operation encounters a failure, GUPP dictates the forward-only response. For practical examples of how GUPP enables crash recovery in real workflows, see [Session Cycling Explained](/blog/session-cycling).

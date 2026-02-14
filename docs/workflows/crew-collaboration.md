@@ -154,6 +154,10 @@ The PR Sheriff hooks this work to their session, creating a permanent review cad
 In a high-velocity crew-polecat workflow, the review backlog can grow faster than crew members can process it. If you find yourself perpetually behind on reviewing merged polecat output, reduce the number of active polecats or increase crew review capacity. An unreviewed backlog creates compounding technical debt that becomes expensive to fix later.
 :::
 
+:::note[Crew Review Scheduling]
+Effective crew-polecat collaboration requires dedicated review time, not just ad-hoc checks when you happen to notice merged work. Block out 30-60 minutes twice per day specifically for pulling merged polecat output and creating follow-up beads. Treating review as interrupt-driven leads to the backlog problem described above.
+:::
+
 ## Quality Gates
 
 :::warning

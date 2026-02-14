@@ -441,6 +441,10 @@ git pull --rebase
 When resolving merge conflicts during a rebase, always run your tests before completing the rebase with `git rebase --continue`. A conflict resolution that compiles but breaks tests will propagate the failure to every subsequent polecat that rebases onto your commit.
 :::
 
+:::tip[Conflict Prevention via Scheduling]
+If you notice the same files conflicting repeatedly across multiple polecats, consider time-boxing conflicting work instead of relying solely on bead dependencies. Assign all tasks touching a hot file to complete in sequence during the same 2-hour window, then let the next batch start fresh after merges settle. This reduces churn better than many fine-grained dependencies.
+:::
+
 ## The Commit-Push-Pull Cycle
 
 In a multi-agent environment, every agent follows this tight loop to minimize divergence from remote.

@@ -182,6 +182,12 @@ This follows [GUPP](../concepts/gupp.md) — always move forward, never backward
 
 ---
 
+:::note[Cost Monitoring Best Practice]
+
+Set up a daily cron job to run `gt costs --today` and send the output to your email or Slack. Costs can escalate quickly during intensive development sprints, and daily monitoring catches runaway token usage before it becomes a budget crisis.
+
+:::
+
 ## Costs & Resources
 
 ### How much does Gas Town cost to run?

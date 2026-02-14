@@ -157,6 +157,12 @@ sequenceDiagram
     T->>T: Processes instructions
 ```
 
+:::tip
+
+When nudging multiple agents in sequence (for example, waking all polecats in a rig), add a short delay (1-2 seconds) between nudges using `sleep 1` in shell scripts. This prevents tmux input queues from becoming congested and ensures each agent receives its message cleanly, especially under heavy load.
+
+:::
+
 :::danger
 
 Repeatedly nudging an agent that is stuck in a long-running operation can flood its input buffer with queued messages, making recovery harder once the operation completes. If an agent does not respond to the first 2-3 nudges, escalate to the Witness or file a warrant rather than sending additional nudges. For escalation procedures and recovery workflows, see [Incident Response](/blog/incident-response).

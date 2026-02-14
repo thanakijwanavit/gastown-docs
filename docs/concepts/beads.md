@@ -127,6 +127,12 @@ Use consistent label conventions across your team. For example, prefix labels wi
 
 :::
 
+:::note
+
+When filtering beads by multiple labels using `bd list --labels "label1,label2"`, the filter applies an OR condition (beads matching any label are returned), not an AND condition. If you need AND filtering (beads that have both labels), pipe the output through multiple `grep` filters or use `bd list --json` and process with `jq`.
+
+:::
+
 Beads can declare dependencies on other beads, enabling automatic unblocking when prerequisites complete:
 
 ```bash

@@ -201,6 +201,12 @@ Do not bypass the MEOW abstraction by directly manipulating lower layers. For ex
 
 :::
 
+:::tip[Starting Small with MEOW]
+
+New users should start at Layers 1-2 (Beads and Convoys) and let the built-in formulas handle Layer 3-5 complexity. Only create custom formulas when you have a proven workflow that needs encoding. Jumping straight to protomolecules typically leads to over-engineered solutions.
+
+:::
+
 ## Formula-to-Completion Flow
 
 A formula flows through the MEOW layers from template to completed work.

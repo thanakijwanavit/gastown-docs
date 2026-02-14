@@ -367,6 +367,10 @@ mindmap
 The synthesis step that produces `review-summary.md` is only as good as the individual leg findings it combines. If a leg produces vague or superficial analysis, the synthesis will inherit that weakness. When creating custom review formulas, invest time in crafting clear, specific prompts for each leg to ensure high-quality synthesized output. For advanced convoy patterns, see [Advanced Convoy Orchestration Patterns](/blog/advanced-convoy-patterns).
 :::
 
+:::danger[Review Fatigue with Full Preset]
+Running the `full` preset (10 parallel review legs) on every PR creates review fatigue for both humans processing the output and the team's budget. Reserve `full` reviews for release candidates, security-sensitive changes, and architectural refactors. Use `gate` preset as the default for routine PRs to maintain sustainable review velocity without burning through tokens on over-analysis.
+:::
+
 ## Tips
 
 :::tip[Start with Gate Preset]

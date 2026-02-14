@@ -219,6 +219,12 @@ Because crew workspaces are full git clones on the local filesystem, uncommitted
 
 :::
 
+:::danger[Never Force-Push from Crew Workspaces]
+
+Crew workspaces have full git capabilities, including the ability to rewrite history with force-push. This can orphan polecat branches and corrupt the merge queue. Always use `gt done` to submit work through the Refinery, which handles rebasing safely. Reserve force-push for personal branches only.
+
+:::
+
 ## Crew Refresh Flow
 
 The following diagram shows how a crew workspace stays synchronized with the main branch through the refresh process.

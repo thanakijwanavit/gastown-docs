@@ -263,6 +263,12 @@ gantt
     Reassign to new polecat     :09:30, 10:00
 ```
 
+:::tip
+
+Before filing a manual warrant for an unresponsive polecat, check the session output with `gt session capture <rig>/<polecat>` to verify it is truly stuck rather than waiting on a long-running operation like a large test suite or slow network request. Many apparent hangs resolve themselves within minutes if given time.
+
+:::
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

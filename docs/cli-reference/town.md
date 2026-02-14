@@ -244,6 +244,12 @@ pie title Town-Level Agent Distribution
     "Refineries (per-rig merges)" : 30
 ```
 
+:::note
+
+The `gt town status` output shows a snapshot of running tmux sessions and agent beads at the moment of invocation. If you need historical trend data (like average patrol cycle times or merge throughput over days), use the Deacon's patrol digest reports and the Mayor's convoy summaries instead, as `gt town status` does not persist state across calls.
+
+:::
+
 ## Command Reference
 
 | Command | Description |

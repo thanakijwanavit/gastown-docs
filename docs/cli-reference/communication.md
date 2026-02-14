@@ -352,6 +352,12 @@ All mail is stored as JSONL files on disk, not in memory. If an agent crashes or
 
 :::
 
+:::warning[Nudges Interrupt Current Work]
+
+Unlike mail (which waits in the inbox), a nudge is synchronous and interrupts the target agent immediately. This is useful for urgent coordination but can disrupt long-running operations. If a polecat is mid-commit when nudged, the nudge may arrive at an awkward moment. Use mail for non-urgent messages and reserve nudges for time-sensitive coordination.
+
+:::
+
 ### `gt mail archive`
 
 Archive messages.

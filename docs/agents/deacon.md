@@ -222,6 +222,12 @@ Even when the town is idle with no active work, the Deacon continues its patrol 
 
 :::
 
+:::tip[Deacon Patrol Intervals Balance Responsiveness and Resource Usage]
+
+The 5-minute patrol cycle is tuned to detect issues quickly without constant overhead. If you're running a high-throughput rig with many concurrent polecats, consider reducing the interval to 3 minutes for faster recovery. For low-activity towns, increasing to 10 minutes reduces CPU usage without meaningful impact on responsiveness.
+
+:::
+
 ## Common Patterns
 
 ### Idle Town Protocol

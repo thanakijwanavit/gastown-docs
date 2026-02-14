@@ -179,6 +179,12 @@ If compaction promotes a large number of wisps in a single run, it may indicate 
 
 :::
 
+:::tip[Compaction Runs Are Idempotent]
+
+Running `gt compact` multiple times on the same data is safe. Already-deleted wisps stay deleted, already-promoted wisps stay promoted, and wisps within TTL remain unchanged. This makes compaction safe to run as part of automated scripts or when you're unsure if it already ran today.
+
+:::
+
 ## Wisp Outcome Distribution
 
 In a typical compaction run, the majority of wisps are either skipped (still within TTL) or deleted (closed and expired). Promotions are the exception.

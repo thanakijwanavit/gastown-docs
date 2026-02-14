@@ -279,6 +279,12 @@ Never manually delete gate beads from the database. If a gate is blocking progre
 
 :::
 
+:::tip[Testing Gate Logic Before Production]
+
+Before deploying a gate-dependent workflow to production, test the gate creation and closure logic in a development rig first. Gate bugs can silently stall entire convoys, and the only symptom may be work that never progresses past a specific step.
+
+:::
+
 ## Use Cases
 
 Gates enable async coordination at critical points in your workflow. For comprehensive examples of gate-driven workflows including CI gates, approval gates, and timer-based retry patterns, see [Hook-Driven Architecture](/blog/hook-driven-architecture).

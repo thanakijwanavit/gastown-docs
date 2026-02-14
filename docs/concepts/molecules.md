@@ -340,6 +340,12 @@ Then run it:
 gt formula run my-deploy --var version="2.3.1"
 ```
 
+:::caution[Debugging In-Progress Molecules]
+
+When debugging a stuck molecule, use `gt mol status` to see which step is blocking progress, then `bd show <step-wisp-id>` to read that step's detailed description and logs. Do not mark steps as done manually to skip past failures, as this can corrupt dependency tracking.
+
+:::
+
 ## Molecule Step Execution States
 
 Each molecule step transitions through a well-defined set of states as the agent works through its workflow. For advanced formula patterns including gated pipelines and multi-stage workflows, see [Formula Design Patterns](/blog/formula-design-patterns).

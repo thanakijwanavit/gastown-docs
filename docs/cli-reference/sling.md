@@ -162,6 +162,12 @@ pie title Target Resolution Distribution
     "Self-assign" : 10
 ```
 
+:::note
+
+When slinging with `--args` to pass natural language instructions, remember that these instructions are stored in the bead and displayed via `gt prime`, but they are not automatically injected into the Claude Code session transcript. The polecat must explicitly read the bead content with `gt bead read <id>` to see the instructions in its working context.
+
+:::
+
 The following diagram shows how `gt sling` compares to related work assignment commands.
 
 ```mermaid

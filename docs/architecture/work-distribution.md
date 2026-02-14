@@ -185,6 +185,12 @@ Using `gt unsling` to remove work from an agent's hook reverts the bead to `open
 
 :::
 
+:::info[Hooks Survive Everything Except Explicit Deletion]
+
+Work on a hook persists through session crashes, context compaction, agent restarts, and even disk unmounts (as long as the filesystem returns). The only ways to lose hooked work are explicit `gt unsling`, manual deletion of the hook directory, or catastrophic filesystem corruption. This durability is what makes GUPP crash-safe.
+
+:::
+
 ## Work State Machine
 
 A comprehensive view of all possible bead states and transitions in the work distribution system.

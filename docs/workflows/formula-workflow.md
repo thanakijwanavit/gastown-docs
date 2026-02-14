@@ -386,6 +386,10 @@ gantt
 Well-designed formulas are rig-agnostic and can be reused across multiple projects. When creating custom formulas, avoid hardcoding rig-specific paths or assumptions. Use variables for rig names, file paths, and configuration values to maximize reusability. A formula that works for one rig should work for any rig with minimal parameter changes. For custom formula patterns, see [Building Your First Custom Formula](/blog/custom-formulas).
 :::
 
+:::warning[Version Lock for Active Molecules]
+When you modify a formula that already has active molecules running, the active molecules continue using the old formula definition they were poured from. This means changing a formula's steps will not affect in-progress work. Always increment the formula's version number for breaking changes, and document which version each molecule uses to avoid confusion when troubleshooting workflow issues.
+:::
+
 ## Variables and Templating
 
 Formulas use Go `text/template` syntax for variable interpolation:

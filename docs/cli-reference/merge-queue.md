@@ -327,6 +327,12 @@ sequenceDiagram
     end
 ```
 
+:::danger
+
+Never manually delete MR beads from the merge queue database while the Refinery is actively processing them. If you need to remove a stale MR, use `gt mq reject <mr-id>` to safely update both the queue state and the associated bead status, preventing the Refinery from attempting to process a half-deleted request.
+
+:::
+
 The following timeline shows the typical lifecycle of a merge request as it moves through the queue.
 
 ```mermaid

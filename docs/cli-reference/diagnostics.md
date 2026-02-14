@@ -808,6 +808,12 @@ gt prune-branches --pattern "feature/*"  # Custom pattern
 
 ---
 
+:::info
+
+When monitoring multiple rigs at scale, combine `gt status --watch` with `gt feed --type work,merge` in split terminal panes. This gives you both a real-time snapshot of agent health (status) and a streaming log of work events (feed), helping you catch queue backups and stuck polecats faster than polling individual commands.
+
+:::
+
 ## Miscellaneous
 
 ### `gt thanks`

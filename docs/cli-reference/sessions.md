@@ -326,6 +326,12 @@ graph TD
     end
 ```
 
+:::info
+
+Handoff messages stored in `.handoff.json` are read by the successor session via `gt resume`, but they are not automatically appended to the session transcript. If you need the handoff message to appear in the successor's Claude Code context, the successor must explicitly read or echo the handoff file after resuming, as `gt prime` alone does not inject it.
+
+:::
+
 ## Molecules
 
 ```mermaid

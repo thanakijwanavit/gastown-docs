@@ -308,6 +308,12 @@ mindmap
       gt polecat identity show
 ```
 
+:::tip
+
+When a polecat's session crashes mid-work, first check `gt polecat git-state <rig>/<polecat>` before nuking to see if unpushed commits exist. If the git state shows uncommitted or unpushed work, use `gt polecat check-recovery` to determine whether the work is salvageable or needs escalation to the Mayor before cleanup.
+
+:::
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

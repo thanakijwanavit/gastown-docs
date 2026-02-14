@@ -291,6 +291,12 @@ Each polecat is a fresh spawn with no memory of previous polecats that worked on
 
 :::
 
+:::warning[Polecat Branch Naming Prevents Collisions]
+
+Gas Town auto-generates unique branch names for polecats using the pattern `polecat/<name>/<issue-id>@<molecule-id>`. Never manually create branches with this prefix, as the Witness will assume they belong to polecats and may nuke them during cleanup. Use your own prefix for manual branches.
+
+:::
+
 ## The Polecat Work Formula
 
 Every polecat follows the `mol-polecat-work` formula, which defines these steps:

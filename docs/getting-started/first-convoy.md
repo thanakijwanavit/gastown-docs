@@ -199,6 +199,12 @@ Create the convoy before slinging work, not after. If you sling beads first and 
 
 :::
 
+:::tip[Your First Convoy Should Be Simple]
+
+For your very first convoy, choose 2-3 small, independent tasks that touch different files. This reduces merge conflicts and lets you focus on learning the workflow rather than debugging interactions. Save complex multi-file refactors for your second or third convoy.
+
+:::
+
 ## Common First-Convoy Issues
 
 | Problem | Cause | Fix |

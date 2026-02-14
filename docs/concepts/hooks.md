@@ -236,6 +236,12 @@ If an agent seems to have lost its work assignment, run `gt hook` to inspect the
 
 :::
 
+:::note[Hook Recovery After Corruption]
+
+If a hook file becomes corrupted or deleted, use `gt doctor --fix` to rebuild it from the beads database. Hooks are the most critical persistence primitive in Gas Town, and hook corruption can cause agents to lose track of their work assignments entirely.
+
+:::
+
 ## Hook Lifecycle Across Sessions
 
 The following shows how a hook persists as agents cycle through multiple sessions. For a deep dive into work assignment and the sling command that creates these hooks, see [Mastering gt sling](/blog/mastering-gt-sling).

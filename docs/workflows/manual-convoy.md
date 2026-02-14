@@ -199,6 +199,10 @@ gt convoy list
 Manual convoys make it tempting to keep adding beads as new ideas emerge during implementation. While Gas Town supports adding beads to active convoys, doing so excessively creates sprawling, unfocused convoys that are hard to track and never complete. If a convoy grows beyond 10 beads, consider splitting it into multiple focused convoys with clear completion criteria. For convoy organization strategies, see [Your First Convoy in 5 Minutes](/blog/first-convoy).
 :::
 
+:::tip[Convoy Naming Discipline]
+Use descriptive, outcome-focused convoy names rather than vague labels. "API Security Hardening" is better than "Sprint 3" or "Bug Fixes". Six months later when reviewing convoy history, outcome-focused names make it immediately clear what was delivered without needing to read every bead title.
+:::
+
 ## Handling Dependencies
 
 For work that must happen in sequence, use bead dependencies. The dependency system ensures blocked beads are not slung until their prerequisites complete.
