@@ -20,7 +20,7 @@ In a Gas Town setup, costs come from three main sources:
 | **Patrol agents** (Witness, Refinery, Deacon) | Ongoing monitoring cycles | 15-25% |
 | **Mayor coordination** | Decomposition and planning | 10-15% |
 
-The single biggest cost driver is polecat sessions — each one consumes tokens to read context, reason about the task, write code, and self-review. Optimizing polecat efficiency gives the best return.
+The single biggest cost driver is polecat sessions — each one consumes tokens to read context, reason about the task, write code, and self-review. Optimizing [polecat](/docs/agents/polecats) efficiency gives the best return.
 
 ```mermaid
 pie title Token Cost Distribution

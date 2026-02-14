@@ -36,7 +36,7 @@ Molecules solve three problems:
 
 ### 1. Crash-Safe Progress
 
-Each step in a molecule is tracked as a sub-bead (wisp). When a polecat completes a step, the molecule updates in the beads database. If the polecat crashes:
+Each step in a molecule is tracked as a sub-bead (wisp). When a polecat completes a step, the molecule updates in the [beads database](/docs/concepts/beads). If the polecat crashes:
 
 ```text
 Step: load-context    ✓  (done)

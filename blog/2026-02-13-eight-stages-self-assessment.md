@@ -110,7 +110,7 @@ sequenceDiagram
 
 ### Stage 7 → 8: "Agents Managing Agents"
 
-Stage 8 is where Gas Town operates. The Mayor decomposes high-level requests into beads. Polecats execute autonomously. The Witness monitors health. The Refinery merges code. The Deacon manages infrastructure. You operate at the level of intent.
+Stage 8 is where Gas Town operates. The Mayor decomposes high-level requests into beads. Polecats execute autonomously. The Witness monitors health. The Refinery merges code. The Deacon manages infrastructure. You operate at the level of intent. See the [architecture overview](/docs/architecture/overview) for how these agents fit together.
 
 **What changes:** You stop thinking about code and start thinking about outcomes.
 

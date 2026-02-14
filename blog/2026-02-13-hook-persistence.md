@@ -123,7 +123,7 @@ Unlike standard hooks that clear on `gt done`, pinned hooks persist permanently 
 
 ## Why Git Worktrees?
 
-Gas Town uses git worktrees as the isolation mechanism for agents. Each polecat gets its own worktree — a lightweight checked-out copy of the repository. This is where the hook lives.
+Gas Town uses git worktrees as the isolation mechanism for agents. Each [polecat](/docs/agents/polecats) gets its own worktree — a lightweight checked-out copy of the repository. This is where the hook lives.
 
 The worktree gives you three things for free:
 

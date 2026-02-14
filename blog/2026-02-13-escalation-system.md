@@ -23,7 +23,7 @@ Gas Town's answer is **priority-routed escalations** — a system inspired by on
 | **P2 Medium** | Degraded but working | Bead + Mail to Mayor |
 | **P3 Low** | Minor issue, tracked only | Bead only |
 
-The key insight: **agents should not try to handle problems above their authority level**. A polecat that encounters a broken test suite shouldn't spend 40 minutes retrying — it should escalate, and a human or the Mayor should decide what to do.
+The key insight: **agents should not try to handle problems above their authority level**. A polecat that encounters a broken test suite shouldn't spend 40 minutes retrying — it should escalate, and a human or the Mayor should decide what to do. This follows the [agent hierarchy](/docs/architecture/agent-hierarchy) where each level has defined authority boundaries.
 
 ## How Escalations Flow
 

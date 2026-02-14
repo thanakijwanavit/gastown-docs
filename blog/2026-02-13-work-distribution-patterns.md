@@ -233,7 +233,7 @@ All three patterns ultimately use the same underlying machinery:
 4. **Molecules** (for formulas) track multi-step progress
 5. **GUPP** ensures agents execute immediately when work appears
 
-The pattern you choose only affects who does the decomposition and routing. The execution engine is identical.
+The pattern you choose only affects who does the decomposition and routing. The execution engine is identical. See the [concepts overview of hooks](/docs/concepts/hooks) to understand how work attaches to agents regardless of the distribution pattern used.
 
 ## Next Steps
 

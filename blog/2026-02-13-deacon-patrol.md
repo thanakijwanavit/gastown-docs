@@ -114,7 +114,7 @@ Deacon → "Rig myproject has 5 stale polecats, Witness claims all healthy"
   → Deacon: No action needed
 ```
 
-Boot dogs are deliberately short-lived. They assess and report, then exit. The Deacon takes action based on Boot's assessment. This separation keeps triage lightweight and prevents the Deacon from getting stuck doing detailed investigation.
+[Boot](/docs/agents/boot) dogs are deliberately short-lived. They assess and report, then exit. The Deacon takes action based on Boot's assessment. This separation keeps triage lightweight and prevents the Deacon from getting stuck doing detailed investigation.
 
 ```mermaid
 flowchart TD

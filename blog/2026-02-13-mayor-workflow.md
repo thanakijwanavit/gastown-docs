@@ -304,6 +304,7 @@ The key insight: you operate at the level of intent, not implementation. The May
 - **[Mayor Agent](/docs/agents/mayor/)** — Full reference for the Mayor role
 - **[Convoys](/docs/concepts/convoys/)** — How batch tracking works
 - **[Workflows](/docs/workflows/)** — All available workflow patterns
+- **[Work Distribution](/docs/architecture/work-distribution)** — How Gas Town routes and distributes work across rigs
 - **[Your First Convoy](/blog/first-convoy)** — Step-by-step tutorial
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use Mayor vs manual convoys vs formulas
 - **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Advanced patterns the Mayor uses for complex orchestration

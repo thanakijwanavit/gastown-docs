@@ -71,7 +71,7 @@ Each warrant is stored as a JSON file in `~/gt/warrants/`, creating an auditable
 
 ### Step 2: Triage
 
-Boot — the daemon's watchdog dog — picks up warrants during its triage cycle. Boot runs on every daemon tick (every 3 minutes), so warrants are typically executed within minutes of filing.
+Boot — the daemon's [watchdog dog](/docs/agents/boot) — picks up warrants during its triage cycle. Boot runs on every daemon tick (every 3 minutes), so warrants are typically executed within minutes of filing.
 
 ### Step 3: Execution
 

@@ -41,7 +41,7 @@ Body:    "The token refresh logic is in auth/refresh.go.
 Status:  unread
 ```
 
-Because mail is stored as beads, it benefits from all bead features: persistence, sync, cross-rig routing, and searchability.
+Because mail is stored as [beads](/docs/concepts/beads), it benefits from all bead features: persistence, sync, cross-rig routing, and searchability.
 
 ```mermaid
 flowchart TD

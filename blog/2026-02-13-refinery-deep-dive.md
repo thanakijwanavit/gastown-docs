@@ -151,7 +151,7 @@ Not every MR makes it through. Here's what happens at each failure point:
 
 **Cause:** CI is slow, an external dependency is down, or the Refinery process itself is stuck.
 
-**Behavior:** The Witness detects a stalled Refinery during its patrol and nudges it. If the Refinery remains stuck, the Witness escalates to the Deacon.
+**Behavior:** The [Witness](/docs/agents/witness) detects a stalled Refinery during its patrol and nudges it. If the Refinery remains stuck, the Witness escalates to the Deacon.
 
 **Manual intervention:**
 

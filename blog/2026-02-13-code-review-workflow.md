@@ -192,7 +192,7 @@ graph LR
     Fix --> MQ
 ```
 
-For automated pipelines, the `gate` preset acts as a quality gate. The Refinery can be configured to run a gate review before merging. If P0 issues are found, the merge is blocked and the original polecat (or a new one) is spawned to fix the issues.
+For automated pipelines, the `gate` preset acts as a quality gate. The [Refinery](/docs/agents/refinery) can be configured to run a gate review before merging. If P0 issues are found, the merge is blocked and the original polecat (or a new one) is spawned to fix the issues.
 
 This creates a continuous quality loop: polecats produce work, the review formula validates it, and the Refinery only merges clean code.
 

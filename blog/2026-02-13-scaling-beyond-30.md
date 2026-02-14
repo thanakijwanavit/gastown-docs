@@ -198,6 +198,8 @@ Adding more polecats to a rig without adjusting the Witness patrol interval crea
 3. **Ignoring Refinery backlog.** A growing merge queue means polecats are producing faster than you can merge. Either add Refinery workers or reduce polecat count.
 4. **Skipping monitoring.** At scale, problems compound quickly. What is a minor hiccup with 5 agents becomes a cascade with 30.
 
+Understanding the [work distribution architecture](/docs/architecture/work-distribution) helps you choose the right dispatch pattern when scaling across many rigs.
+
 ## Next Steps
 
 - [Architecture Overview](/docs/architecture/overview) -- How Gas Town's components fit together

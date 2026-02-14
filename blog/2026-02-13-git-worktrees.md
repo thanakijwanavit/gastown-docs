@@ -94,7 +94,7 @@ flowchart TD
 
 ### Polecat Sandboxes
 
-When the Mayor slings a bead to a rig, a polecat worktree is created:
+When the Mayor [slings](/docs/cli-reference/sling) a bead to a rig, a polecat worktree is created:
 
 ```text
 gt sling gt-a1b2c myproject

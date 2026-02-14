@@ -224,6 +224,7 @@ sequenceDiagram
 ## Next Steps
 
 - [Crew Workers](/docs/agents/crew) -- Full crew worker reference
+- [Crew Collaboration](/docs/workflows/crew-collaboration) -- Patterns for crew members working with agents
 - [Git Workflow](/docs/guides/git-workflow) -- Multi-agent git workflow patterns
 - [Session Cycling](/docs/concepts/session-cycling) -- How context refresh works for crew
 - [Cost Management](/docs/guides/cost-management) -- Optimizing token spend across your team

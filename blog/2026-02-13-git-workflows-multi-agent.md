@@ -14,7 +14,7 @@ Traditional git workflows assume one developer pushing at a time. In Gas Town, y
 
 In a single-developer workflow, you push when you're done. You pull when you start. The remote changes between those events at human speed — maybe once an hour.
 
-In Gas Town, the remote changes at **agent speed**:
+In Gas Town, where agents work inside isolated [rigs](/docs/concepts/rigs), the remote changes at **agent speed**:
 
 ```text
 14:00:00  Polecat toast pushes fix/login-bug

@@ -116,7 +116,7 @@ A common mistake is using nudges for information that should be mail, or mail fo
 
 ## Hooks: Durable Work Assignment
 
-Hooks are the most powerful primitive. When work is attached to an agent's hook (via `gt sling`), it persists in the filesystem and survives any disruption.
+[Hooks](/docs/concepts/hooks) are the most powerful primitive. When work is attached to an agent's hook (via `gt sling`), it persists in the filesystem and survives any disruption.
 
 ### When to Use Hooks
 

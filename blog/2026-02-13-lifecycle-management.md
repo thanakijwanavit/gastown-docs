@@ -297,6 +297,7 @@ Each component operates independently with its own state. A failed Witness in on
 - [Troubleshooting](/docs/operations/troubleshooting) — Diagnosing agent boot failures and stuck rigs
 - [Monitoring & Health](/docs/operations/monitoring) — Health checks and patrol digests
 - [Deacon Agent](/docs/agents/deacon) — The background coordinator that manages agent lifecycle across the town
+- [Rigs](/docs/concepts/rigs) — The rig concept: how rigs provide the runtime context for parking, docking, and lifecycle transitions
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) — How the Deacon manages the lifecycle of agents across the town
 - [Death Warrants: Structured Agent Termination](/blog/death-warrants) — How warrants coordinate safe cleanup of stuck agents
 - [Understanding Rigs](/blog/understanding-rigs) — How rigs provide the lifecycle context for parking and docking

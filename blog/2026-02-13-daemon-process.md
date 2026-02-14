@@ -81,7 +81,7 @@ for {
 
 Every 3 minutes, the daemon nudges the Deacon. The Deacon then:
 1. Checks all Witnesses across all rigs
-2. Runs health checks on the supervision tree
+2. Runs health checks on the [supervision tree](/docs/architecture/agent-hierarchy)
 3. Processes any pending warrants via Boot
 4. Reports status back
 

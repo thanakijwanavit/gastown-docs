@@ -184,6 +184,7 @@ Many production Gas Town setups run certain rigs in Minimal Mode permanently. Lo
 - [Minimal Mode Reference](/docs/workflows/minimal-mode) — Full step-by-step walkthrough
 - [Quick Start](/docs/getting-started/quickstart) — Initial setup before using any workflow
 - [Mayor Workflow](/docs/workflows/mayor-workflow) — The fully automated workflow you'll graduate to
+- [Hooks](/docs/concepts/hooks) — How crash-safe hooks persist work assignments across session restarts
 - [Cost Optimization](/blog/cost-optimization) — Keep costs low while experimenting with Gas Town
 - [Your First Convoy](/blog/first-convoy) — Your first full convoy after graduating from minimal mode
 - [Common Pitfalls](/blog/common-pitfalls) — Avoid the 5 most common mistakes when scaling from minimal mode
