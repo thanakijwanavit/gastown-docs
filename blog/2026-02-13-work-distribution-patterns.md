@@ -117,7 +117,7 @@ flowchart LR
 ```
 
 **Overhead**: Minimal. You describe, the Mayor executes.
-**Control**: Low. The Mayor makes decomposition and routing decisions.
+**Control**: Low. The Mayor makes decomposition and routing decisions. For a detailed look at what the Mayor can do beyond basic work distribution, see [mastering gt sling](/blog/mastering-gt-sling).
 
 ## When to Use Formulas
 

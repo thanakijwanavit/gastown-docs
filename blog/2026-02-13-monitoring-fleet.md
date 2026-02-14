@@ -335,4 +335,5 @@ Your monitoring tools complement this automated layer — they give you visibili
 - **[Incident Response](/blog/incident-response)** — What to do when things go wrong
 - **[The Witness Explained](/blog/witness-explained)** — How the Witness provides automated health monitoring
 - **[Deacon Patrol](/blog/deacon-patrol)** — How the Deacon patrols all rigs and complements your monitoring routine
+- **[Daemon Process](/blog/daemon-process)** — Understanding the daemon heartbeat that underlies all monitoring
 - [Diagnostics CLI Reference](/docs/cli-reference/diagnostics) — Commands for health checks and system diagnostics

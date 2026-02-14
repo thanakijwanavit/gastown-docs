@@ -274,3 +274,4 @@ This is the exact pattern Gas Town is built for — independent parallel work wi
 - [The Refinery: How Merges Actually Work](/blog/refinery-deep-dive) — How the Refinery integrates with review gates
 - [Formula Design Patterns](/blog/formula-design-patterns) — Patterns for building effective multi-step formulas
 - [Molecules and Formulas](/blog/molecules-and-formulas) — How the molecule engine orchestrates the parallel review legs
+- [Cost Optimization](/blog/cost-optimization) — Strategies for managing token costs when running multi-leg review formulas

@@ -276,3 +276,4 @@ Every mail message is a bead, which means it's permanently stored and searchable
 - [Session Cycling Explained](/blog/session-cycling) -- Handoff mail in the context refresh workflow
 - [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor uses mail for convoy coordination
 - [The Escalation System](/blog/escalation-system) -- How escalation notifications route through the mail system
+- [Work Distribution Patterns](/blog/work-distribution-patterns) -- How mail complements hooks for distributing work across agents

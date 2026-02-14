@@ -233,7 +233,7 @@ Uncommitted code changes are the single biggest risk during session cycling. Whe
 :::
 
 :::tip Include "What Didn't Work" in Handoff Mail
-The most valuable piece of context for a successor session is not what you accomplished — it can see that from the code and molecule state. What it cannot see is what you tried that failed, which approaches led to dead ends, and which files looked relevant but were not. Including these negative results in your handoff mail prevents the next session from repeating the same mistakes.
+The most valuable piece of context for a successor session is not what you accomplished — it can see that from the code and molecule state. What it cannot see is what you tried that failed, which approaches led to dead ends, and which files looked relevant but were not. Including these negative results in your handoff mail prevents the next session from repeating the same mistakes. For more on effective communication patterns between agents, see [agent communication patterns](/blog/agent-communication-patterns).
 :::
 
 :::info Molecules Make Multi-Session Tasks Seamless

@@ -201,7 +201,7 @@ As a Gas Town user, GUPP means:
 
 - **Don't worry about crashes.** They're handled automatically.
 - **Don't manually restart failed work.** The Witness detects zombies and the system re-slings the work. For more on how work is distributed and recovered, see [work distribution patterns](/blog/work-distribution-patterns).
-- **Don't babysit polecats.** The supervision tree (Witness → Deacon → Mayor) handles recovery at every level.
+- **Don't babysit polecats.** The supervision tree (Witness → Deacon → Mayor) handles recovery at every level. When escalation is needed, the [escalation system](/blog/escalation-system) routes issues to the appropriate handler.
 - **Trust the hook.** If work is on a hook, it will get done — eventually.
 
 :::note GUPP applies to you too

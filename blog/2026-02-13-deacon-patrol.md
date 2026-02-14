@@ -273,3 +273,4 @@ The Deacon never panics. It follows its patrol molecule step by step, handles wh
 - [Death Warrants](/blog/death-warrants) -- The warrant system the Deacon uses for stuck agents
 - [The Daemon: Gas Town's Heartbeat](/blog/daemon-process) -- The Go process that hosts the Deacon's patrol
 - [The Escalation System](/blog/escalation-system) -- How the Deacon routes problems through severity-based escalation
+- [Minimal Mode](/blog/minimal-mode) -- Running Gas Town with only essential patrol functions when the Deacon must conserve resources

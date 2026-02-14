@@ -67,7 +67,7 @@ When a stall is detected, the Witness follows a graduated response:
    → Work gets re-slung to a new polecat
 ```
 
-The Witness always tries the least disruptive action first. A nudge often works — the agent was just confused, and the nudge reorients it. For details on nudge commands and their options, see the [nudge CLI reference](/docs/cli-reference/nudge).
+The Witness always tries the least disruptive action first. A nudge often works — the agent was just confused, and the nudge reorients it. For details on nudge commands and their options, see the [nudge CLI reference](/docs/cli-reference/nudge). When nudges fail and escalation becomes necessary, understanding the [deacon patrol](/blog/deacon-patrol) cycle helps you see how rig-level issues get routed to town-level coordination.
 
 ## Monitoring the Refinery
 

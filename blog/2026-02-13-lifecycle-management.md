@@ -340,3 +340,4 @@ Each component operates independently with its own state. A failed Witness in on
 - [Death Warrants: Structured Agent Termination](/blog/death-warrants) — How warrants coordinate safe cleanup of stuck agents
 - [Understanding Rigs](/blog/understanding-rigs) — How rigs provide the lifecycle context for parking and docking
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — How to monitor fleet health across rig lifecycle transitions
+- [Session Cycling](/blog/session-cycling) — How context refresh and handoff work during rig restart and recovery

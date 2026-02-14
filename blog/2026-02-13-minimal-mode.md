@@ -232,3 +232,4 @@ Many production Gas Town setups run certain rigs in Minimal Mode permanently. Lo
 - [Your First Convoy](/blog/first-convoy) — Your first full convoy after graduating from minimal mode
 - [Common Pitfalls](/blog/common-pitfalls) — Avoid the 5 most common mistakes when scaling from minimal mode
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — The crash-safe hook system that makes minimal mode viable
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) — When and how to transition from minimal mode to full automation

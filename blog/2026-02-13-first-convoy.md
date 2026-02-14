@@ -151,7 +151,7 @@ In five minutes, you:
 4. **Watched** autonomous implementation, testing, and merge
 5. **Received** validated code on `main`
 
-This is the core Gas Town loop. The Mayor can automate steps 1-3 for you (just describe what you want in natural language), but understanding the manual flow helps you debug and fine-tune later.
+This is the core Gas Town loop. The Mayor can automate steps 1-3 for you (just describe what you want in natural language), but understanding the manual flow helps you debug and fine-tune later. For details on how the Mayor orchestrates this automation, see the [Mayor workflow guide](/blog/mayor-workflow).
 
 ```mermaid
 stateDiagram-v2
@@ -260,3 +260,4 @@ The Mayor will decompose your request into right-sized beads, set up dependencie
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the 5 most common mistakes with your first convoy
 - [First Convoy Tutorial](/docs/getting-started/first-convoy) — Step-by-step guide to running your first convoy
+- **[Advanced Convoy Patterns](/blog/advanced-convoy-patterns)** — Sophisticated orchestration patterns for coordinating complex multi-bead workflows

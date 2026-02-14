@@ -188,7 +188,7 @@ flowchart LR
 
 Each MR is rebased onto the latest main, validated (tests, build), and fast-forward merged. This guarantees a clean, linear history where every commit on main passes all checks.
 
-If a rebase fails, the Refinery either retries (for transient issues) or spawns a fresh polecat (for real conflicts). The merge queue acts as a buffer that absorbs the chaos of parallel development and produces ordered, validated commits.
+If a rebase fails, the Refinery either retries (for transient issues) or spawns a fresh polecat (for real conflicts). The merge queue acts as a buffer that absorbs the chaos of parallel development and produces ordered, validated commits. Understanding [Gas Town's security model](/blog/security-model) helps you see why this serialized merge process is critical for maintaining code integrity in multi-agent environments.
 
 ```mermaid
 sequenceDiagram
@@ -266,3 +266,4 @@ If you're a crew worker and keep hitting conflicts, check if a polecat is workin
 - [Why Git Worktrees?](/blog/git-worktrees) — How Gas Town uses worktrees for agent isolation
 - [Convoy Orchestration Patterns](/blog/advanced-convoy-patterns) — Coordinating work to minimize conflicts
 - [Your First Convoy](/blog/first-convoy) — Hands-on tutorial for convoy-based coordination that prevents git conflicts
+- [Code Review Workflow](/blog/code-review-workflow) — How to review code when multiple agents are committing in parallel

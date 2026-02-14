@@ -276,3 +276,4 @@ sequenceDiagram
 - **[Session Cycling Explained](/blog/session-cycling)** — Avoid context window pitfalls with proper session management
 - [FAQ](/docs/getting-started/faq) — Frequently asked questions about Gas Town setup and operations
 - [Tap CLI Reference](/docs/cli-reference/tap) — Commands for safety guards and agent permission management
+- [The Refinery Deep Dive](/blog/refinery-deep-dive) — Understand the merge pipeline to avoid fighting the Refinery

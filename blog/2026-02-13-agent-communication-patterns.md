@@ -289,3 +289,4 @@ stateDiagram-v2
 - [Session Cycling Explained](/blog/session-cycling) — How handoff mail preserves context across sessions
 - [The Mail System](/blog/mail-system) — Deep dive into Gas Town's durable async messaging infrastructure
 - [Nudge CLI Reference](/docs/cli-reference/nudge) — Commands for sending nudges to wake agents
+- [Hook-Driven Architecture](/blog/hook-driven-architecture) — How hook-based communication enables autonomous agent workflows

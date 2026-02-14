@@ -19,7 +19,7 @@ The first convoy tutorial teaches the mechanics: create beads, bundle, sling, mo
 - What if a polecat gets stuck?
 - How do you handle a convoy that's half-done and half-broken?
 
-These are the patterns that separate a Gas Town beginner from a productive operator.
+These are the patterns that separate a Gas Town beginner from a productive operator. For even more sophisticated coordination strategies, see [advanced convoy patterns](/blog/advanced-convoy-patterns).
 
 ## Pattern 1: Dependencies Between Beads
 

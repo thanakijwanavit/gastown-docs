@@ -263,3 +263,4 @@ These principles scale. As your fleet grows from 5 to 30 agents, the daemon stay
 - [Lifecycle Management](/blog/lifecycle-management) -- Starting, stopping, and managing the daemon lifecycle
 - [The Deacon: Background Coordinator](/blog/deacon-patrol) -- How the Deacon extends the daemon's coordination
 - [Hook Persistence](/blog/hook-persistence) -- Why agent hooks survive daemon crashes and restarts
+- [Incident Response](/blog/incident-response) -- Emergency procedures when the daemon fails during critical operations

@@ -286,4 +286,5 @@ graph LR
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- Monitoring plugin execution and failures
 - [Custom Formulas](/blog/custom-formulas) -- Building custom formulas that leverage plugins
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How lifecycle hooks power the plugin system
+- [Security Model](/blog/security-model) -- Security considerations when adding external scripts as plugins
 - [Configuration CLI Reference](/docs/cli-reference/configuration) — Commands for managing Gas Town configuration

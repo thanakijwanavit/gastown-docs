@@ -311,3 +311,4 @@ The backend beads run in parallel. When the API endpoint lands, the frontend bea
 - [Mastering gt sling](/blog/mastering-gt-sling) — Work assignment patterns that power advanced convoy execution
 - [Your First Convoy](/blog/first-convoy) — Start here if you haven't run a basic convoy before tackling advanced patterns
 - [Convoy CLI Reference](/docs/cli-reference/convoys) — Commands for creating, tracking, and managing convoys
+- [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) — Convoy strategies that maintain efficiency in large multi-rig deployments

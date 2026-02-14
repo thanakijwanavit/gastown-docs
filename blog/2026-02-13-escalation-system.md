@@ -266,3 +266,4 @@ If you find yourself wanting to disable escalations because they fire too often,
 - [Death Warrants](/blog/death-warrants) — How warrants handle the problems escalations identify
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects issues that trigger escalations
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — Proactive monitoring that catches problems before they become escalations
+- [Gas Town's Mail System](/blog/mail-system) — How escalations are delivered through the mail infrastructure to reach the right responders

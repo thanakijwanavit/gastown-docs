@@ -110,6 +110,8 @@ Good rig candidates:
 - A documentation site (like this one!)
 - A microservice with independent deployment
 
+For more on infrastructure considerations when creating rigs, see [infrastructure dogs](/blog/infrastructure-dogs).
+
 **Don't create a rig when:**
 - The project is a subdirectory of a monorepo (monorepos are one rig)
 - It's a temporary experiment (use a plain git clone)

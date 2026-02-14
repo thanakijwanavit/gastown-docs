@@ -270,3 +270,4 @@ This asymmetry is deliberate. Work stays hooked until it's explicitly done or re
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — Design patterns for hook-based agent coordination
 - [Session Cycling](/blog/session-cycling) — How hooks preserve work across context window refreshes
 - [Molecules and Formulas](/blog/molecules-and-formulas) — How molecules track step-level progress on hooks
+- [Mayor Workflow Automation](/blog/mayor-workflow) — How the Mayor uses hooks to assign decomposed tasks to polecats automatically

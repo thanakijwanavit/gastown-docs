@@ -362,7 +362,7 @@ Pushing commits directly to main bypasses the Refinery's rebase-and-validate pip
 
 **Don't bypass the queue.** Pushing directly to main while the Refinery is active can cause cascading rebase failures. Use crew workspaces or the Refinery for all changes.
 
-**Monitor queue depth.** A growing queue indicates a throughput problem. Address it before it becomes a bottleneck.
+**Monitor queue depth.** A growing queue indicates a throughput problem. Address it before it becomes a bottleneck. For strategies on managing increasing queue depth and merge contention, see [monitoring your fleet](/blog/monitoring-fleet).
 
 **Configure CI integration.** The Refinery's built-in checks are lightweight. For production codebases, always enable `require_ci` to run your full test suite.
 

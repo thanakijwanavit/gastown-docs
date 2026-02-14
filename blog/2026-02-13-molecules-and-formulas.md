@@ -331,3 +331,4 @@ But molecules are the foundation. Without crash-safe step tracking, none of the 
 - [Formula Design Patterns](/blog/formula-design-patterns) — Advanced patterns for multi-step workflows
 - [Work Distribution Patterns](/blog/work-distribution-patterns) — How formulas fit into the broader work distribution strategy
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — How molecules track step-level progress through the hook system
+- [Code Review Workflow](/blog/code-review-workflow) — How the code review formula leverages molecules for multi-perspective review

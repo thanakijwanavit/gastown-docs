@@ -219,7 +219,7 @@ The warrant system provides:
 - **Escalation paths.** Repeated failures surface to higher authorities rather than looping forever.
 - **Human override.** When automation can't handle it, humans can step in using the same system.
 
-In practice, most Gas Town users never think about warrants. The Witness files them, Boot executes them, and polecats respawn transparently. But when something does go wrong, the warrant log is invaluable for understanding what happened and why. This approach is part of Gas Town's broader [incident response](/blog/incident-response) strategy that prioritizes fast recovery over perfect prevention.
+In practice, most Gas Town users never think about warrants. The Witness files them, Boot executes them, and polecats respawn transparently. But when something does go wrong, the warrant log is invaluable for understanding what happened and why. This approach is part of Gas Town's broader [incident response](/blog/incident-response) strategy that prioritizes fast recovery over perfect prevention. Understanding the [monitoring capabilities](/blog/monitoring-fleet) helps you spot patterns in warrant executions before they become systemic issues.
 
 ## Next Steps
 
@@ -230,4 +230,5 @@ In practice, most Gas Town users never think about warrants. The Witness files t
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) — The crash-recovery philosophy that warrants support
 - [Gas Town's Security Model](/blog/security-model) — Trust boundaries and permission scoping for agent termination
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects stuck polecats and files warrants
+- [Escalation System](/blog/escalation-system) — How warrant failures escalate through the supervision hierarchy
 - [Troubleshooting Guide](/docs/guides/troubleshooting) — Common issues and their solutions

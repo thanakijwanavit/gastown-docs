@@ -291,4 +291,5 @@ graph TD
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — How hooks make slung work crash-safe
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex convoy orchestration that builds on sling mastery
 - [Work Distribution Patterns](/blog/work-distribution-patterns) — How sling fits into Gas Town's broader work distribution strategy
+- [Crew Workflow](/blog/crew-workflow) — Slinging work to crew members in persistent workspaces
 - [Sling CLI Reference](/docs/cli-reference/sling) — Full command reference for gt sling and its flags

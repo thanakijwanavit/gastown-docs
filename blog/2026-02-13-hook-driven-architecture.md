@@ -267,3 +267,4 @@ This is why Gas Town agents check `gt hook` before doing anything else. The hook
 - [Understanding GUPP](/blog/understanding-gupp) -- Why GUPP relies on hook-driven execution
 - [Mastering gt sling](/blog/mastering-gt-sling) -- How sling uses hooks to assign work to agents
 - [Session Cycling Explained](/blog/session-cycling) -- How hooks and handoff mail preserve continuity across sessions
+- [Plugin System Architecture](/blog/plugin-system) -- How hook-driven architecture enables extensible plugin development without breaking core workflows

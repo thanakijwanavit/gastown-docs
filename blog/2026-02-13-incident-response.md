@@ -365,3 +365,4 @@ Gas Town is designed to be self-healing. Most incidents resolve themselves withi
 - **[Death Warrants](/blog/death-warrants)** — Structured agent termination during incidents
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Proactive monitoring that prevents incidents
 - **[The Witness Explained](/blog/witness-explained)** — How the Witness detects and recovers from agent failures
+- **[Multi-Runtime Workflows](/blog/multi-runtime-workflows)** — Managing incidents across polyglot codebases with language-specific recovery patterns
