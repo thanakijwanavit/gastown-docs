@@ -142,6 +142,21 @@ bd close <step>
 bd ready                    # Next step appears
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> LoadContext: bd ready
+    LoadContext --> BranchSetup: step done
+    BranchSetup --> Preflight: step done
+    Preflight --> Implement: tests pass
+    Implement --> SelfReview: code written
+    SelfReview --> RunTests: review clean
+    RunTests --> Submit: tests pass
+    Submit --> [*]: gt done
+
+    Implement --> Implement: retry on failure
+    RunTests --> Implement: test failure (fix code)
+```
+
 The standard polecat workflow molecule (`mol-polecat-work`) includes steps like:
 
 1. Load context and verify assignment

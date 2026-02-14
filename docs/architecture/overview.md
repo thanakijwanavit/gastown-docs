@@ -107,7 +107,26 @@ flowchart LR
 All Gas Town state is crash-safe. If any component fails, the data it needs to recover is already on disk — no external databases or cloud services required.
 :::
 
-All state is persisted in git or the filesystem:
+All state is persisted in git or the filesystem. Each layer has its own persistence model, but all data ultimately resides on the local disk.
+
+```mermaid
+graph TD
+    subgraph "Persistent State"
+        BD[".beads/beads.db<br/>(SQLite)"]
+        JSONL[".beads/issues.jsonl<br/>(export)"]
+        Config["metadata.json<br/>config.yaml"]
+        Claude["CLAUDE.md<br/>(agent context)"]
+    end
+    subgraph "Runtime State"
+        Hooks["Git Worktrees<br/>(hooks)"]
+        Mail["Mailbox<br/>(JSONL)"]
+        Events[".events.jsonl<br/>(activity log)"]
+    end
+    BD -->|bd sync| JSONL
+    Hooks -->|survive| Crash["Crashes &<br/>Restarts"]
+    Mail -->|survive| Restart["Session<br/>Restarts"]
+    Config -->|survive| Everything["Everything"]
+```
 
 | State | Storage | Survives |
 |-------|---------|----------|

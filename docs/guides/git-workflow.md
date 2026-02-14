@@ -303,6 +303,16 @@ Polecats don't merge to main themselves. The refinery:
 3. Merges if tests pass
 4. Cleans up the branch
 
+```mermaid
+flowchart LR
+    P[Polecat branch] -->|gt done| R[Refinery]
+    R -->|rebase onto main| RB[Rebased branch]
+    RB -->|run tests| T{Tests pass?}
+    T -->|Yes| M[Merge to main]
+    T -->|No| F[Reject MR, notify Witness]
+    M -->|cleanup| D[Delete branch]
+```
+
 ---
 
 ## Reducing Merge Conflicts

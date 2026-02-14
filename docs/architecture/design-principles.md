@@ -124,6 +124,18 @@ Agents communicate explicitly through:
 
 Rather than reading shared state and inferring what to do.
 
+```mermaid
+flowchart LR
+    A["Agent A"] -->|mail| MB["Mailbox (async)"]
+    MB --> B["Agent B"]
+    A -->|nudge| B
+    A -->|escalation| E["Escalation Router"]
+    E -->|P0-P1| Mayor
+    E -->|P2-P3| Deacon
+    A -->|bd create| BD["Beads DB"]
+    BD -->|bd ready| B
+```
+
 ## 9. Persistent vs Ephemeral
 
 Gas Town distinguishes between:

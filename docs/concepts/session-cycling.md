@@ -127,7 +127,25 @@ Always commit and push your changes before cycling a session. In a multi-agent e
 
 ## Context Recovery
 
-When a new session starts (or after compaction), run:
+When a new session starts (or after compaction), the agent rebuilds its working context through a well-defined recovery sequence.
+
+```mermaid
+flowchart TD
+    A["New session starts"] --> B["gt prime"]
+    B --> C["Load CLAUDE.md<br/>(role context)"]
+    B --> D["Restore hook state<br/>(work assignment)"]
+    B --> E["Connect beads DB<br/>(issue tracking)"]
+    B --> F["Set agent identity<br/>(permissions)"]
+    C --> G["gt mail inbox"]
+    D --> G
+    E --> G
+    F --> G
+    G --> H{"Handoff mail?"}
+    H -->|Yes| I["Read orientation notes"]
+    H -->|No| J["Check hook for work"]
+    I --> K["Resume work (GUPP)"]
+    J --> K
+```
 
 ```bash
 gt prime

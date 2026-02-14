@@ -247,6 +247,22 @@ gt mail inbox
 # 5. The agent now has full context and can begin work
 ```
 
+```mermaid
+sequenceDiagram
+    participant You
+    participant GT as gt sling
+    participant Session as Agent Session
+    participant Agent as Limited Runtime
+
+    You->>GT: gt sling --agent auggie
+    GT->>Session: Spawn polecat
+    You->>Session: gt session at <name>
+    You->>Agent: gt prime (inject context)
+    Agent->>Agent: Read hook + bead
+    You->>Agent: gt mail inbox
+    Agent->>Agent: Begin work
+```
+
 :::note
 
 For Claude Code and Gemini, this manual process is not necessary -- hooks handle context injection automatically.

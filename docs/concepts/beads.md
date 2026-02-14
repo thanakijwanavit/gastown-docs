@@ -143,6 +143,24 @@ Rig B (.beads/) prefix: bd-
 
 A [convoy](convoys.md) with ID `hq-cv-001` can track issues `gt-a1b2c` and `bd-d3e4f` across both [rigs](rigs.md). Dependencies also work cross-prefix.
 
+```mermaid
+graph TD
+    subgraph "Town (.beads/)"
+        CV["hq-cv-001<br/>Convoy"]
+    end
+    subgraph "Rig A (.beads/)"
+        A1["gt-a1b2c<br/>Feature"]
+        A2["gt-e5f6g<br/>Bug"]
+    end
+    subgraph "Rig B (.beads/)"
+        B1["bd-d3e4f<br/>Task"]
+    end
+    CV -->|tracks| A1
+    CV -->|tracks| B1
+    A1 -->|depends on| A2
+    B1 -->|depends on| A1
+```
+
 ## Essential Commands
 
 ### Creating Beads

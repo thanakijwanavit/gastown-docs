@@ -197,7 +197,16 @@ gt convoy list
 
 ## Handling Dependencies
 
-For work that must happen in sequence, use bead dependencies:
+For work that must happen in sequence, use bead dependencies. The dependency system ensures blocked beads are not slung until their prerequisites complete.
+
+```mermaid
+flowchart LR
+    A["gt-d3e4f<br/>Rate Limiting"] -->|must complete first| B["gt-c1l2i<br/>Update Client SDK"]
+    B -->|must complete first| C["gt-t7u8v<br/>Integration Tests"]
+    A -->|sling immediately| P1[Polecat A]
+    B -.->|blocked until A done| P2[Polecat B]
+    C -.->|blocked until B done| P3[Polecat C]
+```
 
 ```bash
 # Create the dependent bead

@@ -169,6 +169,24 @@ Deacon → checks wisp promotions to detect systemic issues
 
 When a Witness detects a polecat with a wisp stuck in `in_progress` for too long, it triggers the escalation chain. The wisp's state is the primary signal for detecting stuck work at the individual step level.
 
+```mermaid
+sequenceDiagram
+    participant P as Polecat
+    participant W as Wisp (step 3)
+    participant Wit as Witness
+    participant D as Deacon
+
+    P->>W: Start step (pending → in_progress)
+    Note over W: Timer starts
+    Wit->>W: Patrol check: still in_progress?
+    Note over W: TTL exceeded
+    Wit->>Wit: Detect stall
+    Wit->>P: Nudge: "Are you stuck on step 3?"
+    P-->>Wit: No response
+    Wit->>D: Escalate: polecat stuck at wisp
+    D->>D: Evaluate: promote wisp or nuke polecat
+```
+
 ## Related Concepts
 
 - **[Molecules & Formulas](molecules.md)** -- Wisps are the per-step tracking units within molecules

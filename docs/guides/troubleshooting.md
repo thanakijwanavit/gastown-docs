@@ -399,6 +399,20 @@ gt refinery unclaimed <rig>
 gt refinery release <mr-id>
 ```
 
+The Refinery processes MRs through a strict sequential pipeline. Understanding the flow helps you pinpoint where a stuck merge is blocked.
+
+```mermaid
+flowchart TD
+    MR[MR Submitted] --> Claim[Refinery claims MR]
+    Claim --> Rebase[Rebase onto main]
+    Rebase --> Test{Tests pass?}
+    Test -->|Yes| Merge[Merge to main]
+    Test -->|No| Reject[Reject MR]
+    Merge --> Notify[Notify Witness: MERGED]
+    Reject --> Notify2[Notify Witness: FAILED]
+    Claim -.->|Crash here = stale claim| Stale[Release with gt refinery release]
+```
+
 :::note
 
 The Refinery merges MRs **one at a time**, rebasing each onto the latest `main`. This is intentional -- it prevents race conditions. If your queue is backing up, the bottleneck is usually validation speed (test suite runtime) or unresolved conflicts.

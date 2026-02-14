@@ -222,6 +222,18 @@ gt down
 
 A 2-hour sprint at "Normal" usage costs $60-100, compared to $240-400 for an 8-hour continuous run.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Sprint: gt start --all
+    Sprint --> CostCheck: Every 30 min
+    CostCheck --> Sprint: Under budget
+    CostCheck --> WindDown: Approaching limit
+    WindDown --> Idle: gt down
+    Idle --> Sprint: Next sprint
+    Sprint --> Idle: gt down (sprint ends)
+```
+
 ### Strategy 6: Reduce Context Size
 
 Large codebases mean more input tokens per agent interaction. Reduce context costs by:

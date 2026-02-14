@@ -82,6 +82,24 @@ NDI is the practical companion to GUPP. AI agents are inherently nondeterministi
 | Deterministic operations | Acknowledges AI nondeterminism |
 | Exact replay | Forward-only progress |
 
+```mermaid
+flowchart LR
+    subgraph "Traditional Idempotence"
+        I1["Input X"] --> F1["f(x)"]
+        F1 --> O1["Output A"]
+        I1 --> F2["f(x) again"]
+        F2 --> O2["Output A (identical)"]
+    end
+    subgraph "Nondeterministic Idempotence"
+        I2["Input X"] --> G1["Agent 1"]
+        G1 --> O3["Output B (Joi)"]
+        I2 --> G2["Agent 2"]
+        G2 --> O4["Output C (Zod)"]
+        O3 --> V1["Tests pass ✓"]
+        O4 --> V2["Tests pass ✓"]
+    end
+```
+
 ### NDI in Practice
 
 Consider a polecat working on bead `gt-a1b2c` (add input validation):

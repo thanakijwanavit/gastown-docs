@@ -74,7 +74,28 @@ The Boot dog is a special agent spawned by the Deacon to assess situations that 
 
 ## Escalation Path
 
-When an agent encounters a problem it cannot resolve:
+When an agent encounters a problem it cannot resolve, the escalation flows upward through the supervision tree until it reaches an agent (or human) with enough authority to resolve it.
+
+```mermaid
+sequenceDiagram
+    participant P as Polecat
+    participant W as Witness
+    participant D as Deacon
+    participant M as Mayor
+    participant H as Human/Overseer
+
+    P->>P: Stuck on task
+    W->>P: Detects stall (patrol cycle)
+    W->>P: Nudge: "Are you stuck?"
+    P-->>W: Still stuck
+    W->>D: Escalate (P2)
+    D->>M: Escalate (P1)
+    M->>H: Escalate (P0 if critical)
+    H-->>M: Resolution or instructions
+    M-->>D: Forward guidance
+    D-->>W: Apply fix
+    W-->>P: Nudge with resolution
+```
 
 ```text
 Polecat (stuck)

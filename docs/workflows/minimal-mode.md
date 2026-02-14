@@ -195,7 +195,15 @@ $ gt convoy show hq-cv-005
 
 ## Scaling Up from Minimal Mode
 
-Once you are comfortable with Minimal Mode, you can incrementally add automation:
+Once you are comfortable with Minimal Mode, you can incrementally add automation. Each layer builds on the previous one, adding capabilities without breaking your existing workflow.
+
+```mermaid
+graph LR
+    M["Minimal Mode<br/>(manual only)"] -->|add Tmux| T["+ Auto-spawn<br/>polecats"]
+    T -->|add Witness| W["+ Health monitoring<br/>& nudging"]
+    W -->|add Refinery| R["+ Auto-merge<br/>pipeline"]
+    R -->|add Mayor| F["Full Workflow<br/>(MEOW)"]
+```
 
 ### Add Tmux
 

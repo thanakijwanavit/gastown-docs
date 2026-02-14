@@ -163,6 +163,17 @@ Crew members are the quality backstop. While polecats run tests before submittin
 - **Security issues** -- Input validation, authentication gaps, injection risks
 - **Code style** -- Patterns that work but don't match the project's conventions
 
+```mermaid
+flowchart LR
+    P[Polecat MR] --> R[Refinery merge]
+    R --> Pull[Crew: git pull]
+    Pull --> Review{Crew Review}
+    Review -->|Looks good| Accept[Accept]
+    Review -->|Needs work| Fix[Create follow-up bead]
+    Fix --> Sling[Sling to polecat]
+    Sling --> P
+```
+
 ```bash
 # After pulling merged polecat work
 git pull

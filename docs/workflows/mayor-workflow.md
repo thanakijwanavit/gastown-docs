@@ -217,6 +217,19 @@ The Mayor handles cross-rig coordination automatically:
 
 The Mayor will create the beads with dependencies and ensure the work happens in the correct order.
 
+```mermaid
+flowchart TD
+    Mayor[Mayor] -->|creates beads| B1["API change<br/>(api-server rig)"]
+    Mayor -->|creates beads| B2["Client update<br/>(frontend-app rig)"]
+    B1 -->|dependency| B2
+    B1 -->|sling| P1[Polecat: toast]
+    P1 -->|gt done| Ref1[Refinery: api-server]
+    Ref1 -->|merged| Done1[API landed on main]
+    Done1 -->|unblocks| B2
+    B2 -->|sling| P2[Polecat: alpha]
+    P2 -->|gt done| Ref2[Refinery: frontend-app]
+```
+
 ### Intervening Mid-Flight
 
 You can always interrupt:
