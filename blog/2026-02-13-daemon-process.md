@@ -113,6 +113,10 @@ The daemon crashing is a non-event for running agents:
 | Heartbeat chain | **Broken** -- Deacon stops getting ticks |
 | New agent spawns | **Blocked** -- can't create sessions until daemon restarts |
 
+:::note A Daemon Crash Is a Non-Event
+Because all agent state lives in hooks and beads (not in the daemon), a daemon crash has zero impact on running agents. They continue working in their tmux sessions as if nothing happened. Only new agent spawns and heartbeats are affected. Restart with `gt daemon start` and everything resumes.
+:::
+
 The key insight: the daemon is a convenience, not a dependency. A crashed daemon doesn't lose work, corrupt state, or kill agents. It just stops creating new sessions and sending heartbeats.
 
 Recovery is trivial:

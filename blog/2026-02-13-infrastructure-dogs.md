@@ -138,6 +138,10 @@ The Deacon:
 
 Boot doesn't sit in the idle pool. It spawns, processes warrants, and exits. Think of it as the town's janitor who does a sweep every few minutes rather than waiting for a dispatch.
 
+:::warning Never Use Dogs for Feature Work
+Dogs bypass the merge queue and code review process entirely. If you need a feature implemented, sling it to a polecat via `gt sling`. The rule of thumb: if the work produces a feature branch and a merge request, it belongs to a polecat. Dogs are strictly for infrastructure maintenance.
+:::
+
 ## Anti-Patterns
 
 **Don't use dogs for feature work.** Dogs bypass the merge queue and code review process. If you need a feature implemented, sling it to a polecat via `gt sling`.

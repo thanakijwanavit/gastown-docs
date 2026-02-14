@@ -224,6 +224,10 @@ flowchart TD
 
 MEOW is the highest-automation option. Choose it when you trust the system and want maximum throughput.
 
+:::tip Tell the Mayor What You Want, Not How to Build It
+The Mayor is better at decomposing outcome-oriented requests like "add email validation" than implementation-specific ones like "create a validateEmail function in utils.go that uses regex." Describe the desired behavior and let the Mayor decide how to break the work down into beads.
+:::
+
 ## Tips for Effective MEOW
 
 **Be specific about outcomes, not implementation.** The Mayor is better at decomposing "add email validation" than "create a validateEmail function in utils.go that uses regex." Tell it what you want, not how to build it.

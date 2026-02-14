@@ -158,6 +158,10 @@ Use this matrix when choosing:
 3. **Do you need precise control over every assignment?** → **Manual Convoy**
 4. **Not sure?** → Start with **Mayor**. Fall back to **Manual Convoy** if the Mayor's decomposition doesn't match your intent.
 
+:::tip When in Doubt, Start with the Mayor
+If you are unsure which work distribution pattern to use, start with the Mayor workflow (MEOW). You can always inspect the beads and convoy it creates, then manually re-sling or override individual assignments. This gives you the speed of automation with a fallback to manual control if the decomposition does not match your intent.
+:::
+
 ## Combining Patterns
 
 The patterns aren't mutually exclusive. Advanced operators often combine them:

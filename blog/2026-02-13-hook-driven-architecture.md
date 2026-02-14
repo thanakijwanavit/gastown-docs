@@ -163,6 +163,10 @@ Session 2:  New polecat spawned → gt hook → same assignment
 
 In all three cases, the hook ensures continuity. The work assignment persists, the progress is tracked, and the new session moves forward.
 
+:::note Hooks Are More Authoritative Than Context
+Because work assignment is stored in the filesystem — not in the agent's context window — it cannot be manipulated through prompt injection or context manipulation. This is why Gas Town agents check `gt hook` before doing anything else. The hook is the source of truth, not whatever the context window says.
+:::
+
 ## The Security Angle
 
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.

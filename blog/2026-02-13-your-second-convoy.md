@@ -193,6 +193,10 @@ gt sling ga-fff myproject
 
 The convoy's completion criteria automatically expands. It won't auto-close until all beads (including the new one) are done.
 
+:::tip Decompose Aggressively — Five Small Beads Beat Two Large Ones
+Small, focused beads finish faster, parallelize better, conflict less during merging, and are far easier to re-sling when a polecat gets stuck. If a bead description takes more than a short paragraph, it is probably too big. Split it before slinging.
+:::
+
 ## Lessons from Second Convoys
 
 **Decompose aggressively.** Five small beads are better than two large ones. Small beads finish faster, parallelize better, and are easier to re-sling when something goes wrong.

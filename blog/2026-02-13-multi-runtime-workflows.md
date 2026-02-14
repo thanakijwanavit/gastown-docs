@@ -147,6 +147,10 @@ sequenceDiagram
     Note over GT,RT: Contract: hook → commits → done
 ```
 
+:::tip Start Single-Runtime, Specialize Later
+Most teams get the best results by starting with Claude Code for all rigs and only introducing additional runtimes after they identify specific tasks that benefit from a different model's strengths. Premature multi-runtime setups add operational complexity without clear payoff.
+:::
+
 ## Practical Tips
 
 **Start with one runtime.** Most teams begin with Claude Code for everything, then specialize as they learn which tasks benefit from different runtimes.

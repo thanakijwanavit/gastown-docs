@@ -165,6 +165,10 @@ flowchart LR
     end
 ```
 
+:::warning Push Early and Often
+In a multi-agent environment, polecats are constantly merging code to main. If you hold uncommitted changes in your crew workspace for too long, you will face painful merge conflicts when you finally pull. Push after every logical chunk of work to stay in sync with the fleet.
+:::
+
 ## Best Practices
 
 1. **Push frequently.** In a multi-agent environment, unpushed work diverges fast. Push after every logical chunk.

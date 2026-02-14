@@ -172,6 +172,10 @@ plugins/pre-merge/
 
 If any plugin fails with `fail_action = "reject"`, subsequent plugins are skipped and the merge is blocked.
 
+:::warning Always Set Timeouts on Pre-Merge Plugins
+A plugin that hangs will block the entire Refinery merge queue, stalling all agents waiting for their work to land on main. Always set a `timeout` field in your plugin configuration. If a plugin cannot complete within 60 seconds, consider running it asynchronously as a post-merge notification instead of a blocking pre-merge gate.
+:::
+
 ## Best Practices
 
 1. **Keep plugins fast.** Pre-merge plugins run on every merge. Aim for under 60 seconds total.

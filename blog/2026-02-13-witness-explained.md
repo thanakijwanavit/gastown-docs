@@ -163,6 +163,10 @@ Mayor → Human (if needed): "Something is wrong with myproject.
 
 Each level adds context and makes higher-level decisions. The Witness provides raw observations; the Deacon provides rig-level context; the Mayor provides strategic assessment.
 
+:::tip Tune the Stall Threshold to Match Your Workload
+The default stall threshold (600 seconds without progress) works well for typical coding tasks, but if your agents handle long-running computations or large test suites, increase it to avoid false positives. Conversely, for time-sensitive hotfix rigs, lower the threshold so stalls are caught faster. Check `gt rig config <rig> witness.stall_threshold` to see your current setting.
+:::
+
 ## Observing the Witness
 
 You can monitor the Witness's activity:

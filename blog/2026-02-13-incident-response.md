@@ -254,6 +254,10 @@ flowchart TD
     end
 ```
 
+:::tip Start Every Incident with the 90-Second Triage
+Before diving into any fix, always run `gt status`, `gt convoy stranded`, and `gt feed --errors` first. This gives you a system-wide health snapshot in under 90 seconds, and most issues become obvious from the output. Skipping triage leads to fixing symptoms while the real problem persists.
+:::
+
 ## The Golden Rule
 
 When in doubt, remember: **beads are the source of truth**. Agents come and go, sessions crash and restart, git branches get created and deleted. But the bead tracking state persists. As long as the bead is open, someone (or some new agent) will eventually pick it up.

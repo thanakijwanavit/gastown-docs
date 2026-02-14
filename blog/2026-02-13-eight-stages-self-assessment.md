@@ -61,6 +61,10 @@ This is where most people get stuck. Giving an AI agent permission to modify you
 
 **How to get past it:** Start with low-risk files. Let the agent write tests, update documentation, or refactor small functions. Build trust incrementally.
 
+:::tip Build Trust Incrementally
+The biggest blocker to advancing through the stages is fear, not capability. Start by letting agents handle low-risk tasks (tests, docs, formatting) where mistakes are cheap to fix. As you see consistent quality, gradually give agents higher-stakes work. Each successful delegation builds the confidence needed for the next stage.
+:::
+
 ### Stage 4 → 5: "I Trust Multi-File Changes"
 
 At Stage 4, you use agents for single-function or single-file tasks. Stage 5 means trusting the agent to make coordinated changes across multiple files — adding a new API endpoint means the agent updates the handler, the router, the tests, and the docs.

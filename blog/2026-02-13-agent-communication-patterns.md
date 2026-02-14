@@ -110,6 +110,10 @@ Nudges are unreliable for important information because:
 
 Use nudges as wake-up calls, not as primary information channels.
 
+:::tip Match the Primitive to the Purpose
+A common mistake is using nudges for information that should be mail, or mail for work that should be slung. Remember the rule: **mail for information, hooks for assignments, nudges for wake-ups**. If you want an agent to *know* something, send mail. If you want an agent to *do* something, create a bead and sling it.
+:::
+
 ## Hooks: Durable Work Assignment
 
 Hooks are the most powerful primitive. When work is attached to an agent's hook (via `gt sling`), it persists in the filesystem and survives any disruption.

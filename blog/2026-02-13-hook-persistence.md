@@ -157,6 +157,10 @@ gt hook attach gt-abc12
 gt mol status
 ```
 
+:::tip Hooks Clear Only on Explicit Completion
+Work stays hooked until it is explicitly done or released — crashes, context compaction, and machine restarts do not clear the hook. This asymmetry is deliberate and prevents work from falling through the cracks. If you need to remove work from a hook manually, use `gt hook clear`.
+:::
+
 ## When Hooks Clear
 
 Hooks clear when:

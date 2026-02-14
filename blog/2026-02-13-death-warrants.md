@@ -99,6 +99,10 @@ This hierarchy prevents circular problems. The Witness can't file a warrant agai
 
 Sometimes an agent keeps respawning into the same broken state. The Witness sees work on the hook, spawns a polecat, the polecat gets stuck, the Witness files a warrant, Boot kills it, and the cycle repeats.
 
+:::warning Watch for Warrant Loops
+If the same bead triggers more than 2-3 warrants, the problem is not the agent -- it is the task. A bead that repeatedly kills polecats usually has unclear instructions, a missing dependency, or a flaky test. Fix the root cause before re-slinging.
+:::
+
 Gas Town handles this with **escalation counting**. After a configurable number of warrant executions for the same bead (typically 3), the system escalates instead of retrying:
 
 1. The bead is marked as problematic

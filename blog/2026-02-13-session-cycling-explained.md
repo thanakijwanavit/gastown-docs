@@ -187,6 +187,10 @@ gt mol status
 
 The new session sees "step-3 is in progress" and knows to continue testing, not start over from step-1.
 
+:::warning Always Commit Before Cycling
+Uncommitted code changes are the single biggest risk during session cycling. When context pressure hits 85%, commit your work-in-progress immediately — even if it is incomplete. A WIP commit on the branch is recoverable; uncommitted changes in a terminated session are gone forever.
+:::
+
 ## Tips for Effective Cycling
 
 **Commit frequently.** Don't wait until context is full to commit. Small, frequent commits mean less risk of lost work when a session ends unexpectedly.

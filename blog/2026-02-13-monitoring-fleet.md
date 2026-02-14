@@ -164,6 +164,10 @@ gt costs --since 7d
 
 **When to use it:** Daily if you're cost-conscious. Weekly at minimum. Unexpected spikes in token usage often indicate an agent retrying a broken task.
 
+:::tip Watch for Rapid Spawn/Nuke Cycles
+If `gt feed` shows a polecat being spawned and nuked repeatedly in quick succession, it usually means the agent is crashing on the same task. Don't wait for the Witness to escalate — check the bead description for ambiguity, inspect `gt trail` for the error, and consider re-decomposing the work into smaller pieces before re-slinging.
+:::
+
 ## Building a Monitoring Routine
 
 Here's a practical daily routine for monitoring a Gas Town fleet:

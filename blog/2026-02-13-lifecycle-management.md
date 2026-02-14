@@ -40,6 +40,10 @@ This is the most common source of confusion. Here's the definitive comparison:
 | `gt rig park` | Killed | Preserved | Preserved | No (daemon skips parked rigs) |
 | `gt rig dock` | Killed | **Removed** | Preserved | No (persists across daemon restarts) |
 
+:::warning The Daemon May Restart Stopped Rigs
+A common gotcha: `gt rig stop` only pauses a rig momentarily. The daemon may restart it on its next tick. If you want a rig to stay offline, use `gt rig park` instead. Park preserves all worktrees and state while preventing the daemon from automatically restarting the rig.
+:::
+
 ### When to Use Stop
 
 Use `gt rig stop` for momentary pauses:

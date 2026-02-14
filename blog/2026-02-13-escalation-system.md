@@ -155,6 +155,10 @@ gt polecat nuke <name> --rig myproject  # Stop the bleeding
 gt escalate close ESC-003 --note "Stopped runaway polecat, task needs re-scoping"
 ```
 
+:::warning Alert Fatigue Is the Real Danger
+Overusing P0 severity for non-critical issues causes alert fatigue — the most dangerous outcome in any alerting system. Reserve P0 for genuine emergencies where data is at risk or the system is down. If agents escalate too often, the root cause is usually systemic (flaky tests, misconfigured rig) rather than the agent being noisy. Fix the root cause instead of suppressing the alerts.
+:::
+
 ## Best Practices
 
 1. **Acknowledge promptly.** Even if you can't fix it yet, acknowledging stops re-escalation and tells the system a human is aware.

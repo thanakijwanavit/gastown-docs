@@ -273,6 +273,10 @@ gt rig config myproject refinery.require_ci true
 gt rig config myproject refinery.required_checks "ci/build,ci/test,ci/lint"
 ```
 
+:::warning Never Push Directly to Main While the Refinery Is Active
+Pushing commits directly to main bypasses the Refinery's rebase-and-validate pipeline. Every MR currently in the queue will need to rebase against your out-of-band changes, potentially causing cascading conflicts across all pending merges. Always route changes through the Refinery or a crew workspace.
+:::
+
 ## Best Practices
 
 **Keep MRs small.** Small MRs rebase cleanly, validate faster, and are easier to retry on failure. Aim for 1-3 commits per MR.

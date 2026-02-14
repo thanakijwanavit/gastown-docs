@@ -234,6 +234,10 @@ step1 → step2 → step3 → step4
 load-context → implement → validate → submit
 ```
 
+:::tip Design Every Step as a Crash-Safe Checkpoint
+The most common formula design mistake is combining durable and non-durable operations in a single step. If an agent crashes mid-step, the entire step must be re-executed. Keep each step independently verifiable — mark it done only when its output is committed to git or written to beads.
+:::
+
 ### Design for GUPP
 
 Every step should be a checkpoint. If the agent crashes after completing a step, a fresh agent should be able to resume without redoing that step. This means:

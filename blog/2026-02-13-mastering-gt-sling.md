@@ -176,6 +176,10 @@ bd show gt-abc12        # Verify the bead
 bd list --status=open   # Check open beads
 ```
 
+:::tip Use --dry-run When Learning
+Not sure what a sling will do? Run `gt sling <bead-id> <target> --dry-run` first. It resolves the target, checks for conflicts, and reports what would happen without actually doing anything. This is especially useful when working with cross-rig slinging or specific agent targets for the first time.
+:::
+
 ## Anti-Patterns
 
 **Don't sling to busy agents.** If an agent is mid-task, slinging more work forces a context switch. Sling to the rig and let a fresh polecat handle it.

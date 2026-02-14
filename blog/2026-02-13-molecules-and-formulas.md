@@ -136,6 +136,10 @@ flowchart LR
     M --> W4["wisp: submit ○"]
 ```
 
+:::note Progress Survives Everything
+The molecule's killer feature is crash-safe step tracking. When a polecat crashes mid-workflow, the next session reads the molecule state and skips completed steps entirely — it does not re-run `load-context` or `branch-setup`. This means crashes, handoffs, and context compaction cost you only the in-progress step, not the entire workflow.
+:::
+
 ## Two Kinds of Molecules
 
 Gas Town uses molecules for two distinct purposes:
