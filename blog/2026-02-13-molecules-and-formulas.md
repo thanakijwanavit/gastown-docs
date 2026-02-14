@@ -170,6 +170,10 @@ Gas Town uses molecules for two distinct purposes:
 
 Guide a polecat through a single task. Poured when a polecat starts working on a bead. The `shiny` formula is the default work molecule — it takes the polecat from "read the task" to "submit the result."
 
+:::caution Work Molecules and Patrol Molecules Should Never Share a Formula
+Work molecules run once and complete, while patrol molecules loop indefinitely. If you accidentally pour a patrol formula for a polecat task (or vice versa), the agent will either exit prematurely or loop forever. Always verify the formula type with `gt formula show <name>` before pouring.
+:::
+
 ### Patrol Molecules
 
 Guide persistent agents through recurring monitoring cycles. The Witness runs `mol-witness-patrol` in a loop — each cycle checks polecat health, evaluates gates, handles completions, and patrols for issues. When the patrol completes, a new one is immediately poured.

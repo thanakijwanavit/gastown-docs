@@ -133,6 +133,10 @@ stateDiagram-v2
     FixLoop --> Code: Agent retries or respawns
 ```
 
+:::info Gas Town Does Not Replace Your Deployment Pipeline
+A common misconception is that Gas Town handles deployment. It does not. Gas Town's scope ends at merging validated code to main. Your existing CD system (ArgoCD, Flux, GitHub Actions deploy steps) continues to own the production deployment pipeline. Gas Town is a code generation and merge layer, not a deployment orchestrator.
+:::
+
 ## When to Use What
 
 | Scenario | Tool |

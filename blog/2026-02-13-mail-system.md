@@ -104,6 +104,10 @@ graph TD
     SMS --> ACK
 ```
 
+:::caution Escalation Mail Bypasses the Inbox When Priority Is P0
+For P0 critical escalations, the mail system routes directly to external channels (SMS, email) in addition to the in-app inbox. If you rely solely on `gt mail inbox` to track escalations, you may miss the fact that a P0 has already triggered external notifications. Always check `gt escalate list` alongside your inbox to see the full picture.
+:::
+
 ### Status Reports
 
 Persistent agents periodically mail status summaries:

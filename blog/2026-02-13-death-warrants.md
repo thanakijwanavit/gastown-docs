@@ -141,6 +141,10 @@ pie title Warrant Outcomes (Typical)
     "Manual human intervention" : 10
 ```
 
+:::danger Never Use `--force` Warrants in Automated Scripts
+The `--force` flag bypasses the formal warrant lifecycle, skipping triage, audit logging, and work-recovery steps. Using it in automated scripts or cron jobs can silently terminate agents mid-commit, causing data loss that the normal warrant flow is specifically designed to prevent. Reserve `--force` for interactive, human-supervised emergency situations only.
+:::
+
 ## Manual Warrant Operations
 
 Humans can participate in the warrant system directly:

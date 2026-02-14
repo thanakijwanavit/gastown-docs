@@ -195,6 +195,10 @@ gt polecat nuke myproject/toast  # Terminate and clean up
 
 The bead returns to `pending` status. Sling it again to a fresh polecat.
 
+:::note The Witness Can Auto-Sling Unblocked Beads for You
+If you configure auto-slinging on your rig, the Witness will detect when a dependency clears and automatically sling the unblocked bead to an available polecat. This eliminates the need to manually watch for completed dependencies and run `gt sling` yourself. Enable it with `gt rig config <rig> witness.auto_sling true` — but note that it removes your ability to review each assignment before dispatch.
+:::
+
 ## Pattern 5: Growing a Convoy Mid-Flight
 
 Requirements change. You discover additional work halfway through a convoy:

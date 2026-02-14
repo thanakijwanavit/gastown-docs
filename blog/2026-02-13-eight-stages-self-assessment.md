@@ -114,6 +114,10 @@ Stage 8 is where Gas Town operates. The Mayor decomposes high-level requests int
 
 **What changes:** You stop thinking about code and start thinking about outcomes.
 
+:::note Your Stage May Vary by Project
+Most developers operate at different stages across different codebases. You might be at Stage 6 on a well-tested personal project but only Stage 4 on a legacy codebase with no tests. Assess your stage per-project rather than globally, and focus on leveling up the projects that would benefit most from parallel agent work.
+:::
+
 ## Common Fears at Each Stage
 
 | Stage Transition | Fear | Reality |

@@ -127,6 +127,10 @@ gt worktree remove beads
 
 This is how crew workers contribute to projects outside their home rig without needing a full clone.
 
+:::info Cross-Rig Worktrees Share the Same Git History
+When you create a cross-rig worktree with `gt worktree`, it shares the `.git` directory with the rig's canonical clone. This means you get full git history access with zero additional disk cost. However, remember to clean up cross-rig worktrees with `gt worktree remove` when you are done -- orphaned worktrees consume inode resources and can block branch checkouts for other agents.
+:::
+
 ### Refinery Merge Operations
 
 The Refinery uses the canonical clone in `refinery/rig/` for merge operations:

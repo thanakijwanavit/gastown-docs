@@ -181,6 +181,10 @@ Convoy: hq-cv-auth-001  "Add authentication to API"
   Progress: 2/6 merged (33%)
 ```
 
+:::info You Can Ask the Mayor to Preview Its Plan Before Executing
+Before committing to a large decomposition, tell the Mayor: "Plan the work for X, but don't start yet." The Mayor will show you the beads it would create, their dependencies, and which rigs they target. This lets you catch decomposition issues early and adjust the request before any polecats are spawned.
+:::
+
 ## When Things Go Wrong
 
 The MEOW workflow handles failures automatically:

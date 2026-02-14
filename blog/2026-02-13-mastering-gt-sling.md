@@ -115,6 +115,10 @@ gt sling gt-abc12 frontend/crew/alice
 
 The sling command resolves the target rig, finds (or spawns) an appropriate agent, and attaches the work. Cross-rig slinging is the backbone of [convoy workflows](/docs/workflows/manual-convoy) where related work spans multiple projects.
 
+:::caution Cross-Rig Slinging Requires the Target Rig to Be Active
+If you sling a bead to a rig that is parked or docked, the sling will fail with a "target not found" error. Before slinging cross-rig work, verify the target rig's status with `gt rig status <rig>` and unpark or undock it if necessary.
+:::
+
 ## Batch Slinging
 
 For convoys with multiple beads, sling them all at once:

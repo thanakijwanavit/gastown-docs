@@ -72,6 +72,10 @@ gt escalate --severity critical "Database migration broke all downstream tests"
 
 Agents create escalations automatically when they detect problems they can't resolve. The Witness creates them for stalled polecats. The Refinery creates them for repeated merge failures. You rarely need to create them manually — but when you do, the same routing rules apply.
 
+:::caution Always Attach a Bead to Manual Escalations
+When creating escalations manually with `gt escalate`, use the `--bead` flag to link the escalation to the relevant task. Unattached escalations lack context, making it harder for the Mayor or other responders to understand what went wrong and where. A bead reference provides the full history of the problem including agent logs, prior attempts, and related commits.
+:::
+
 ```mermaid
 graph TD
     subgraph Hierarchy["Supervision Chain"]

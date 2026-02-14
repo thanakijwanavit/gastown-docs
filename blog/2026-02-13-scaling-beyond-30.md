@@ -187,6 +187,10 @@ stateDiagram-v2
     XL: 40+ agents, distributed setup
 ```
 
+:::caution Do Not Scale Polecats Without Scaling Witness Patrols
+Adding more polecats to a rig without adjusting the Witness patrol interval creates a supervision gap. The default 5-minute patrol cycle may not catch stalls quickly enough when 20+ agents are running concurrently. As you scale past 15 polecats per rig, reduce the patrol interval proportionally or split the rig so each Witness supervises fewer agents.
+:::
+
 ## Common Pitfalls at Scale
 
 1. **Not splitting rigs early enough.** By the time merge conflicts are constant, you should have split the rig already.

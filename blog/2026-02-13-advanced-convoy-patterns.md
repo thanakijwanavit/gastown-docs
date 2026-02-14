@@ -141,6 +141,10 @@ sequenceDiagram
     CV-->>H: Convoy auto-closes
 ```
 
+:::info Fan-Out Works Best When Tasks Touch Different Files
+Fan-out parallelism yields the highest throughput when each bead modifies a distinct set of files. If multiple fan-out beads edit the same files, the Refinery will spend extra cycles resolving merge conflicts and may trigger polecat retries. Check for file overlap before fanning out.
+:::
+
 ## Pattern 4: Rolling Convoys
 
 For ongoing work (like a sprint), use a rolling convoy pattern where you add beads as work is discovered:

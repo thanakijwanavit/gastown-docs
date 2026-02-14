@@ -180,6 +180,10 @@ graph TD
     DEPLOY --> POUR[gt mol pour in production]
 ```
 
+:::danger Never Modify a Formula While Molecules Are Running
+If you edit a formula TOML file while active molecules are using it, the running molecules will not pick up the changes -- but newly poured molecules will use the updated version. This creates inconsistency. Always wait for all in-flight molecules to complete or squash them before updating a formula, and bump the version field to track the change.
+:::
+
 ## Variables with Double Braces
 
 Formulas support `{{variable}}` placeholders that get filled when the molecule is poured:

@@ -121,6 +121,10 @@ flowchart TD
     BD -->|no backward transitions| RESUME
 ```
 
+:::info Forward-Only Status Prevents Agent State Conflicts
+The reason beads enforce forward-only transitions is not just about crash recovery — it also eliminates a class of coordination bugs. In systems where agents can reopen closed work, two agents may race to claim the same reopened bead, duplicating effort and producing conflicting code. By making `done` permanent, Gas Town guarantees that each unit of work is completed exactly once.
+:::
+
 ## NDI: The Practical Companion
 
 GUPP has a companion principle: **Nondeterministic Idempotence (NDI)**. It acknowledges that AI agents are nondeterministic — ask Claude to implement the same feature twice and you'll get different code.

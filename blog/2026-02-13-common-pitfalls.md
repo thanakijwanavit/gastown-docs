@@ -59,6 +59,10 @@ gt handoff -m "Context notes"
 The single most effective way to help a polecat succeed is to include the exact file path and line number in the bead description. Instead of "fix the auth bug," write "fix the race condition in `src/auth/middleware.go` line 145." This eliminates the exploration phase and lets the polecat start coding immediately.
 :::
 
+:::caution Polecats Cannot Ask Clarifying Questions
+Unlike a human teammate who might message you when a task is ambiguous, a polecat will attempt to interpret vague instructions on its own and proceed with its best guess. This is why specificity in bead descriptions is critical -- there is no feedback loop before the work is submitted.
+:::
+
 ## 4. Creating Too-Large Beads
 
 **The mistake:** Creating a single bead for "Build the entire notification system" and assigning it to one polecat.

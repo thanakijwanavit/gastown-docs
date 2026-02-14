@@ -181,6 +181,10 @@ sequenceDiagram
     DC->>DC: Log event, notify Mayor
 ```
 
+:::info The Deacon Patrol Interval Is Configurable
+The default 5-minute patrol cycle works well for most deployments, but you can adjust it with `gt config set deacon.patrol_interval <minutes>`. Shorter intervals catch problems faster but increase token usage. Longer intervals save tokens but delay gate evaluations and health checks.
+:::
+
 ## Patrol Molecule: Squash and Respawn
 
 To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn pattern:

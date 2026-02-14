@@ -120,6 +120,10 @@ git commit -m "Add pre-merge security scan plugin"
 
 The Refinery will automatically discover and run it during merge processing. No registration or configuration beyond the file itself is needed — convention over configuration keeps the plugin system simple.
 
+:::danger Never Place Destructive Commands in post-merge Plugins
+Post-merge plugins run after code has landed on main, and any failures at this stage cannot roll back the merge. Avoid commands that modify the repository state (like `git reset` or database migrations) in post-merge hooks. Use them strictly for read-only actions like notifications, metric collection, or triggering downstream CI pipelines.
+:::
+
 ## Plugin Configuration
 
 For more complex plugins, use a TOML configuration file:

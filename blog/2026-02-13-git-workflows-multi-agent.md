@@ -97,6 +97,10 @@ git add <files> && git commit -m "description" && git pull --rebase && git push
 
 This feels aggressive compared to normal development, where you might batch up commits and push once a day. But in Gas Town, the cost of a merge conflict (another agent redoing work, or a human resolving it manually) far outweighs the cost of frequent pushes.
 
+:::note Unpushed Commits Are Invisible to the Refinery
+The Refinery can only merge work that has been pushed to the remote. If a polecat crashes before pushing, its local commits exist only in the worktree. The Witness will detect the stalled agent and respawn a new polecat, which starts fresh on the latest main. To minimize rework, agents should commit and push after every meaningful unit of progress, not just at the end of the task.
+:::
+
 ## Git Strategy Comparison
 
 | Strategy | Who Uses It | Pros | Cons | When to Use |

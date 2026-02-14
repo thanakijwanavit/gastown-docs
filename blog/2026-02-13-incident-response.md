@@ -249,6 +249,10 @@ git pull --rebase
 git stash pop
 ```
 
+:::info Polecats Are Disposable — Don't Waste Time Repairing Their Git State
+Unlike crew workspaces where you may have uncommitted work worth saving, polecat worktrees are ephemeral. If a polecat's git state is corrupted, skip the diagnosis and go straight to kill-and-re-sling. The bead tracks all progress, so the replacement polecat picks up where the last one left off.
+:::
+
 **Recovery for polecat workspaces:**
 
 Polecats are disposable. If a polecat's git state is corrupted, just kill and re-sling:

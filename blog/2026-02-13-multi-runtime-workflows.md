@@ -101,6 +101,10 @@ gt convoy create "Auth System Overhaul" be-auth ml-extract fe-login
 
 Each rig spawns agents using its configured runtime. Gas Town doesn't care that three different AI systems are doing the work — it tracks progress uniformly through beads.
 
+:::caution Cross-Runtime Convoys Require Consistent Git Configuration
+When a convoy spans rigs with different runtimes, ensure all rigs share compatible Git settings (line endings, merge strategy, commit signing). Inconsistent Git configurations can cause Refinery merge failures that only surface when beads from different runtimes land on the same branch in sequence.
+:::
+
 ## Configuring a Rig's Runtime
 
 When creating a new rig, specify the runtime:

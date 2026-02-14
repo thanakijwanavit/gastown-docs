@@ -54,6 +54,10 @@ When an agent starts a session, it checks its hook. If work is there, the agent 
 
 This is critical for autonomous operation. In a system with 10+ agents, you can't have each one waiting for a human to say "yes, go ahead." The hook having work IS the go-ahead. The human (or Mayor, or Witness) placed work on the hook deliberately. The agent trusts that intent and acts.
 
+:::caution Verify the Hook Before Slinging New Work
+If you sling a new bead to an agent that already has work on its hook, the existing assignment will be overwritten. Always run `gt hook --target <agent>` before slinging to confirm the hook is empty. Overwriting an active hook can orphan the in-progress bead, leaving partially completed work on a branch that no agent is tracking.
+:::
+
 ## Types of Hook Content
 
 Hooks can carry different types of work:

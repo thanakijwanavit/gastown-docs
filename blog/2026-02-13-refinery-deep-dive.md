@@ -213,6 +213,10 @@ pie title Typical MR Outcomes
     "Stuck / Timed Out" : 3
 ```
 
+:::info The Refinery Always Uses Fast-Forward Merges
+The Refinery exclusively uses `--ff-only` merges, which means it never creates merge commits. This guarantees a perfectly linear commit history on main, making `git bisect`, `git log`, and blame annotations straightforward. If a fast-forward is not possible (because someone pushed directly to main), the Refinery detects the divergence and re-queues affected MRs for a fresh rebase.
+:::
+
 ## Queue Ordering
 
 The default ordering is FIFO — first submitted, first processed. But the Refinery respects priority when configured:

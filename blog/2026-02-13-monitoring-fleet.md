@@ -144,6 +144,10 @@ gt trail -n 50
 
 **When to use it:** When a polecat is stuck and you want to understand what it's trying to do. The trail shows the agent's actual work output, which can reveal confusion about the task, repeated errors, or infinite loops.
 
+:::warning gt trail Output Disappears When a Polecat Is Nuked
+The trail captures output from the agent's tmux session, which is destroyed when the polecat is nuked or its sandbox is cleaned up. If you suspect a polecat will be terminated soon, capture the trail immediately with `gt trail --agent <name> > trail-dump.txt` before the Witness or Deacon issues a death warrant.
+:::
+
 ## gt costs: Token Spend
 
 ```mermaid

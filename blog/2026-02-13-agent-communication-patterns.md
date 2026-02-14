@@ -142,6 +142,10 @@ gt handoff -s "Working on auth" -m "Check line 145 first"
 
 The hook triggers [GUPP](/docs/concepts/gupp): when an agent starts and finds work on its hook, it begins immediately without confirmation. This is the engine that makes Gas Town autonomous.
 
+:::caution Do Not Use Mail for Time-Sensitive Coordination
+Mail is durable but asynchronous -- recipients only see messages when they check their inbox or get nudged. If you need an agent to react within seconds (for example, to abort a conflicting merge), use a nudge for the immediate alert and follow up with mail for the details.
+:::
+
 ## Coordination Patterns
 
 ### Pattern: Witness → Mayor Escalation

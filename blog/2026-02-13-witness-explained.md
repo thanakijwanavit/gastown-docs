@@ -133,6 +133,10 @@ stateDiagram-v2
     Terminated --> [*]: Bead re-slung
 ```
 
+:::caution A Single Witness Failure Does Not Leave a Rig Unmonitored for Long
+If the Witness session crashes, the Deacon detects the missing session during its next patrol and restarts it. However, there is a brief monitoring gap between the crash and the Deacon's detection — typically one Deacon patrol cycle (2-5 minutes). During this window, stalled polecats will not be nudged. For production-critical rigs, keep the Deacon patrol interval short to minimize this gap.
+:::
+
 ## What the Witness Does NOT Do
 
 Understanding the Witness's scope helps avoid confusion:

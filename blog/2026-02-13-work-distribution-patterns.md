@@ -170,6 +170,10 @@ Formulas are designed for repeatable processes — code review, release prep, se
 If you start with the Mayor workflow and realize the decomposition does not match your needs, you can take over mid-flight. Use `gt release` to pull beads back from agents, adjust descriptions or dependencies with `bd update` and `bd dep add`, and re-sling manually. The convoy continues tracking all beads regardless of how they were dispatched, so switching from automated to manual control is seamless.
 :::
 
+:::danger Do Not Sling the Same Bead to Multiple Rigs Simultaneously
+Each bead should be assigned to exactly one rig at a time. Slinging the same bead to two rigs creates a race condition where both rigs produce competing implementations, and whichever merges second will likely hit a rebase conflict. If you need parallel work on related functionality across rigs, create separate beads for each rig with explicit dependencies between them.
+:::
+
 ## Combining Patterns
 
 The patterns aren't mutually exclusive. Advanced operators often combine them:

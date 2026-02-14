@@ -117,6 +117,10 @@ If your CI needs API keys, configure them in your CI provider's secrets manageme
 
 :::
 
+:::info Crew Workers Have Broader Access Than Polecats by Design
+Crew workers operate in persistent clones with full write access to their workspace, while polecats are confined to sandboxed worktrees. This is intentional: crew workers are human-managed sessions where an operator is actively reviewing changes, so they need the flexibility to modify any file. If you want to limit a crew worker's scope, use branch protection rules and code owners rather than Gas Town's workspace isolation.
+:::
+
 ## Agent Identity and Audit Trail
 
 Every action in Gas Town is attributable. The `BD_ACTOR` environment variable identifies each agent:

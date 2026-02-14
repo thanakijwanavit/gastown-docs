@@ -205,6 +205,10 @@ stateDiagram-v2
     Cleared --> [*]
 ```
 
+:::warning Never Manually Edit `.gt-hook` Files
+The hook metadata files are managed by Gas Town's internal tooling (`gt sling`, `gt hook`, `gt mol`). Manually editing a `.gt-hook` file can put the hook in an inconsistent state -- for example, marking a step as done when its output was never committed to git. If you need to change a hook's state, always use the CLI commands like `gt hook clear` or `gt hook attach` which validate state transitions.
+:::
+
 ## The Security Angle
 
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.

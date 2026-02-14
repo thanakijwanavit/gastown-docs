@@ -179,6 +179,10 @@ needs = ["validate"]
 
 The preflight step ensures the agent doesn't waste tokens implementing a feature on a broken main branch. If preflight fails, the agent can escalate immediately instead of discovering the problem after implementation.
 
+:::caution Preflight Steps Can Produce False Negatives on Busy Repos
+On repos with heavy agent traffic, main may be in a temporarily broken state when preflight runs -- a flaky test, an in-progress revert, or a Refinery merge that hasn't stabilized yet. Consider adding a short retry or delay to your preflight step so a single transient failure doesn't block the entire workflow unnecessarily.
+:::
+
 **When to use:** Any workflow where main branch health affects the task.
 
 ## Pattern 5: Error Recovery

@@ -198,6 +198,10 @@ graph LR
     W -->|supervise| P
 ```
 
+:::caution The Daemon Must Run Under a Process Supervisor
+Running the daemon directly in a terminal session means it dies when the session closes. Always run the daemon under `systemd` (Linux) or `launchd` (macOS) so it restarts automatically after crashes or reboots. Without a process supervisor, a daemon failure silently breaks the entire heartbeat chain.
+:::
+
 ## Design Lessons
 
 The daemon embodies several Gas Town principles:

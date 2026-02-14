@@ -132,6 +132,10 @@ gt rig config myproject model sonnet
 gt formula edit polecat-standard --model haiku
 ```
 
+:::danger Never Let Polecats Run Without a Working Test Suite
+If your project has no tests or only broken tests, polecats have no way to validate their own work. They will submit untested code to the Refinery, which will merge it to main unchecked. This can corrupt your codebase quickly when running multiple agents in parallel. Always ensure at least a basic passing test suite before slinging work.
+:::
+
 ## Strategy 6: Batch Related Work
 
 Instead of creating 5 separate convoys for related features, batch them into one:

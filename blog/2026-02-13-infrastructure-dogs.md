@@ -84,6 +84,10 @@ When infrastructure breaks, dogs rebuild it:
 - Rebuilding agent context files after format updates
 - Restoring state from backups
 
+:::info Dogs Report Results to the Deacon, Not to You
+Dogs do not surface their output directly to the operator. When a dog completes a cross-rig cleanup or migration, it reports results to the Deacon, which aggregates them into its patrol digest. Check the Deacon's patrol summary with `gt deacon digest` to see what infrastructure work was performed and whether any tasks failed.
+:::
+
 ### Migrations
 
 When Gas Town itself updates, dogs handle the transition:

@@ -85,6 +85,10 @@ gt polecat list --rig myproject
 
 You'll see polecats move through their molecule steps: loading context, setting up branches, running preflight tests, implementing, self-reviewing, and submitting.
 
+:::info The `gt feed` Command Is Your Best Friend
+During your first convoy, keep `gt feed` running in a separate terminal. It shows a real-time stream of events across all agents -- bead assignments, molecule step transitions, merge queue activity, and escalations. This live view is the fastest way to understand what Gas Town is actually doing under the hood.
+:::
+
 ## Step 5: Code Lands on Main
 
 As each polecat finishes, it runs `gt done` to submit a merge request. The Refinery picks up each MR, rebases onto latest `main`, runs validation, and merges. You'll see commits appearing on `main` within minutes.

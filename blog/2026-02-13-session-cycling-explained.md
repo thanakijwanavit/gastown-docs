@@ -115,6 +115,10 @@ sequenceDiagram
 
 The most important rule: **commit before you cycle**. Uncommitted code changes are the only real risk of data loss during session cycling.
 
+:::caution Do Not Rely on In-Memory State Across Session Boundaries
+Session cycling destroys all in-memory reasoning, variable values, and file contents the agent had loaded. If a piece of information is critical for the next session — such as a specific line number, a configuration quirk, or a workaround for a flaky test — it must be written to the handoff mail or committed to a file. Anything not persisted to disk or the beads database will be lost.
+:::
+
 ## Who Cycles and When
 
 ### Polecats (Ephemeral Workers)

@@ -144,6 +144,10 @@ graph TD
     end
 ```
 
+:::info Crew Workers See the Same Feed as Agents
+Running `gt feed` in a crew workspace shows all agent activity across the rig in real time -- polecat spawns, Refinery merges, Witness escalations, and convoy progress. This is the fastest way to stay aware of what the fleet is doing without interrupting any agent.
+:::
+
 ## Working Across Rigs
 
 Sometimes you need to fix something in a different project. Gas Town's worktree system lets you work on other rigs without leaving your crew workspace:
