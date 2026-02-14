@@ -200,6 +200,10 @@ stateDiagram-v2
     Stale --> Acknowledged: Human catches up
 ```
 
+:::danger Never Disable Escalations to Suppress Noise
+If you find yourself wanting to disable escalations because they fire too often, the problem is not the escalation system — it is the underlying issue causing repeated failures. Suppressing escalations masks systemic problems like flaky tests, misconfigured rigs, or under-scoped beads. Fix the root cause rather than silencing the alerts, or you will miss genuine emergencies when they arise.
+:::
+
 ## Best Practices
 
 1. **Acknowledge promptly.** Even if you can't fix it yet, acknowledging stops re-escalation and tells the system a human is aware.

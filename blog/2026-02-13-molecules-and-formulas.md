@@ -125,6 +125,10 @@ description = "Push branch and call gt done"
 needs = ["run-tests"]
 ```
 
+:::danger[Formula DAGs Must Be Acyclic]
+The `needs` field defines dependencies between steps, forming a directed acyclic graph. If you accidentally create a cycle (e.g., step A needs B, step B needs C, step C needs A), the molecule will deadlock and the agent will never progress. Gas Town validates formulas when you pour them, but always double-check dependency chains when writing custom formulas with `gt formula validate <name>`.
+:::
+
 The `needs` field creates a DAG (directed acyclic graph) of step dependencies. Steps without `needs` can run immediately. Steps with `needs` wait until all dependencies complete.
 
 ```mermaid

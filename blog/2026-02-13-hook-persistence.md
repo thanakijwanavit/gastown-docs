@@ -207,6 +207,10 @@ graph LR
     PN -->|gt hook unpin| CLEAR
 ```
 
+:::danger Check the Hook Before Every Sling
+If you sling a new bead to an agent that already has work on its hook, the existing assignment is overwritten — the previous bead becomes orphaned and falls through the cracks unless you manually recover it. Always run `gt hook --target <agent>` before slinging to confirm the hook is empty. This simple check prevents the most common source of lost work in Gas Town environments.
+:::
+
 ## When Hooks Clear
 
 Hooks clear when:

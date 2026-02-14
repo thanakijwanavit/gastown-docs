@@ -197,6 +197,10 @@ graph TD
     LOW --> CLEAN[Clean Merge to Main]
 ```
 
+:::caution Force-Pushing to Shared Branches Breaks Multi-Agent Workflows
+In a multi-agent environment, `git push --force` is nearly always a mistake. Other agents may have based work on commits you are about to overwrite, and force-push destroys that shared history. If you need to rewrite history, coordinate with all active agents first using `gt polecat list`, or work on a personal branch that only you control. The Refinery never force-pushes to main — your crew workspace should follow the same rule.
+:::
+
 ## Practical Tips
 
 :::tip

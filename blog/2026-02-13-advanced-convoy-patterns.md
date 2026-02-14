@@ -229,6 +229,10 @@ stateDiagram-v2
     Stalled --> Active: Mayor reassigns
 ```
 
+:::caution Test Your Dependency Chains Before Scaling
+If you add dependencies between beads using `bd dep add`, verify the chain resolves correctly with `bd blocked` and `bd ready` before slinging all the work. A circular dependency or mistyped bead ID will block the entire convoy, and debugging dependency issues after 10 polecats are already running is far more expensive than catching it at definition time.
+:::
+
 ## Anti-Patterns to Avoid
 
 **Mega-convoys**: Don't put 50 beads in one convoy. If a single bead stalls, you can't close the convoy. Keep convoys focused (3-10 beads).

@@ -141,6 +141,10 @@ Convoy hq-cv-001 "Auth System Fixes"
 
 This auto-close mechanism means you never need to manually close convoys in normal operation. The Deacon handles it.
 
+:::caution Gates Can Keep Convoys Open Indefinitely
+If a convoy contains a bead that creates a gate (for example, waiting for human approval or CI to pass), the convoy will not auto-close until that gate resolves. A forgotten gate can keep a convoy open for days or weeks. Use `bd gate list --open` to audit open gates and close any that are no longer needed.
+:::
+
 :::tip Let the Deacon Handle Convoy Lifecycle
 You should never need to manually close convoys. The Deacon checks convoy completion on every patrol cycle and auto-closes convoys when all beads reach a terminal state. If a convoy is not closing, check whether a bead is stuck rather than trying to force-close the convoy itself.
 :::

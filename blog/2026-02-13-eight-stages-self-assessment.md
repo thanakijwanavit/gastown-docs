@@ -128,6 +128,10 @@ Most developers operate at different stages across different codebases. You migh
 | 6 → 7 | "I'll lose track of parallel work" | That's what convoys are for |
 | 7 → 8 | "I'm giving up too much control" | You're trading control for leverage |
 
+:::danger Stage 7 Without Test Coverage Is a Recipe for Chaos
+Running multiple agents in parallel without comprehensive test coverage means you won't catch bad code until it is already on main and breaking downstream work. The automation that makes Stage 7 powerful — agents merging code with minimal review — becomes your biggest liability when tests are missing. If your codebase does not have 70%+ test coverage, stay at Stage 6 until you can build that foundation.
+:::
+
 ## The Stage 7 Starter Kit
 
 If you're at Stage 5-6 and want to try Gas Town, here's a minimal setup:

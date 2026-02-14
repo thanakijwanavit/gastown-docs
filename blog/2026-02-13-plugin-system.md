@@ -118,6 +118,10 @@ git add plugins/pre-merge/security-scan.sh
 git commit -m "Add pre-merge security scan plugin"
 ```
 
+:::note[Plugins Are Discovered Automatically via Filesystem Convention]
+The Refinery scans `plugins/pre-merge/`, `plugins/post-merge/`, and other hook directories for executable scripts on every merge cycle. No registration step, no configuration file, no restart required. Drop an executable script into the right directory, commit it, and the Refinery will run it on the next merge. This filesystem-based convention keeps the plugin system simple and discoverable.
+:::
+
 The Refinery will automatically discover and run it during merge processing. No registration or configuration beyond the file itself is needed — convention over configuration keeps the plugin system simple.
 
 :::danger Never Place Destructive Commands in post-merge Plugins

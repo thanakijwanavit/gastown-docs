@@ -303,6 +303,10 @@ graph TD
     end
 ```
 
+:::info Test Formulas Against Real Beads Before Deploying Them
+The best way to validate a new formula is pouring it onto a real bead in a non-critical rig and watching how the agent executes it. Dry-run testing with `gt formula show` catches syntax errors, but only live execution reveals whether steps are scoped correctly, dependencies are properly sequenced, and gates are placed logically. Keep a sandbox rig specifically for testing formulas before rolling them out to production rigs.
+:::
+
 ## Built-In Formulas
 
 Gas Town ships with several built-in formulas:

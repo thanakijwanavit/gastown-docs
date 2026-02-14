@@ -78,6 +78,10 @@ bd create --title "Fix typos across README, CONTRIBUTING, and CHANGELOG" \
   --description "README: line 12 (teh→the), line 45 (recieve→receive), line 78 (occured→occurred). CONTRIBUTING: line 3 (submiting→submitting). CHANGELOG: line 8 (relaesed→released)."
 ```
 
+:::info Session Restarts After Crashes Are Full-Cost Operations
+When a polecat crashes mid-task and restarts, the new session starts from scratch -- re-reading all context, re-loading the hook, and re-evaluating what was already done. This means a task that crashes once costs roughly 2x the tokens of one that completes on the first try. Reducing crash rates (through better beads, stable tests, and smaller tasks) has an outsized impact on total cost.
+:::
+
 ## Strategy 3: Control Patrol Frequency
 
 Patrol agents (Witness, Deacon) cycle on a fixed interval. If your project has quiet periods, consider parking the rig:

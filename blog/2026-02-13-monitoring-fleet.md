@@ -142,6 +142,10 @@ gt trail --agent polecats/alpha
 gt trail -n 50
 ```
 
+:::tip[Combine gt trail with gt feed for Complete Diagnostics]
+When debugging a stuck polecat, open two terminals: one running `gt feed` to see lifecycle events (spawns, nudges, escalations) and one running `gt trail --agent <name>` to see the agent's actual output. The feed shows WHEN things happen; the trail shows WHAT the agent is doing. Together they give you the complete diagnostic picture.
+:::
+
 **When to use it:** When a polecat is stuck and you want to understand what it's trying to do. The trail shows the agent's actual work output, which can reveal confusion about the task, repeated errors, or infinite loops.
 
 :::warning gt trail Output Disappears When a Polecat Is Nuked

@@ -176,6 +176,10 @@ A few things that might go wrong on your first run:
 
 For deeper troubleshooting, see the [Troubleshooting guide](/docs/operations/troubleshooting) and the [Common Pitfalls](/blog/common-pitfalls) blog post.
 
+:::warning Your First Convoy Should Be on a Non-Critical Project
+Do not run your first convoy on your production codebase or anything mission-critical. Start with a side project, internal tool, or experimental repo where mistakes are cheap. You need to build intuition for what good beads look like, how to interpret the feed output, and what kinds of tasks agents handle well — that learning process involves failures, and those failures should not block your team.
+:::
+
 ## Scaling Beyond Your First Convoy
 
 Once you've run a manual convoy successfully, you're ready to let the Mayor take over. Instead of creating beads and slinging them yourself, just describe what you want:

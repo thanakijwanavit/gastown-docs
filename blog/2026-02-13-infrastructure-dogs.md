@@ -75,6 +75,10 @@ Dog receives: "Sync .editorconfig to all rigs"
   → Report diffs if any rig needed changes
 ```
 
+:::info[Cross-Rig Operations Require Town-Level Beads Access]
+Unlike polecats which operate within a single rig's beads database, dogs have access to the town-level `.beads/` directory for tracking cross-rig work. This is why dog operations can coordinate state across all rigs — they bypass rig boundaries and work at the infrastructure layer where all rigs are visible.
+:::
+
 ### System Rebuilding
 
 When infrastructure breaks, dogs rebuild it:

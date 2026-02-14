@@ -165,6 +165,10 @@ gt worktree remove beads
 
 This is better than using `gt sling` (which dispatches work to a polecat) because you maintain human judgment over the fix.
 
+:::danger Always Remove Worktrees When Done
+Worktrees are full git clones that persist on disk even after you finish the work. Forgetting to run `gt worktree remove` after completing cross-rig work leaves stale clones that consume disk space and can cause confusion later when you accidentally edit files in the wrong workspace. Make `gt worktree remove` the final step of any cross-rig fix.
+:::
+
 ## Crew vs. Vibe Coding
 
 Gas Town embraces "vibe coding" -- letting AI do the heavy lifting while you focus on direction and review. Crew workers sit at the intersection:

@@ -207,6 +207,10 @@ gt sling gt-backend-bead backend
 gt mail send backend/crew/admin -s "Dependency" -m "We need the /api/auth endpoint fixed before our frontend can proceed"
 ```
 
+:::info Hooks Are the Only Reliable Work Persistence Mechanism
+When an agent's tmux session crashes or gets killed, any work assignment stored only in the agent's memory is lost. Hooks persist assignments to the filesystem, which means work survives crashes, restarts, and even full system reboots. This is why `gt sling` (which uses hooks) is the canonical way to assign work in Gas Town.
+:::
+
 :::note Mail Survives Everything -- Nudges Do Not
 Mail is stored as beads in `~/gt/.beads/` and persists through agent crashes, context compaction, and full session restarts. A nudge, by contrast, is just text injected into a tmux pane -- if the agent is not running, the nudge disappears permanently. When in doubt, always send mail first and follow up with a nudge to wake the recipient.
 :::

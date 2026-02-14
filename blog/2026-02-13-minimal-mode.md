@@ -101,6 +101,10 @@ pie title When Teams Use Minimal Mode
 
 The beauty of Minimal Mode is that you can add automation one piece at a time:
 
+:::info[Hooks and Beads Work Without Any Agents Running]
+The core value of Minimal Mode is that hooks and beads persist in the filesystem regardless of whether agents, the daemon, or tmux are running. You can create beads, hook work, and track convoy progress using only `bd` and `gt` commands in a regular shell. The agent infrastructure is purely additive — it automates execution but is not required for coordination.
+:::
+
 ### Level 1: Add Tmux
 
 Install Tmux and `gt sling` will auto-spawn polecats in tmux sessions:

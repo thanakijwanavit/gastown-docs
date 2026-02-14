@@ -196,6 +196,10 @@ For automated pipelines, the `gate` preset acts as a quality gate. The [Refinery
 
 This creates a continuous quality loop: polecats produce work, the review formula validates it, and the Refinery only merges clean code.
 
+:::note Parallel Review Legs May Find Duplicate Issues
+The correctness, security, and performance legs all examine the same code independently. When they flag the same issue from different perspectives, the synthesis step deduplicates these findings to prevent redundant fix work. Check the synthesis report rather than individual leg outputs to see the final deduplicated list.
+:::
+
 ## Practical Tips
 
 :::tip

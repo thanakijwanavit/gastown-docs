@@ -125,6 +125,10 @@ Gas Town handles this with **escalation counting**. After a configurable number 
 
 This prevents infinite warrant loops and surfaces genuinely hard problems to someone who can make a decision.
 
+:::tip Warrant Execution Leaves the Hook Assignment Intact
+When Boot executes a warrant and terminates an agent session, the bead remains assigned to the agent's hook. This allows the Witness to respawn a fresh polecat that automatically picks up the same work. If the underlying issue was a transient crash (for example, OOM or network timeout), the respawned polecat often completes successfully without manual intervention.
+:::
+
 :::tip Use `gt warrant list` to Audit Agent Terminations
 The warrant log provides a complete audit trail of every agent termination -- who filed it, why, and when it was executed. Run `gt warrant list --all` regularly to spot patterns like the same bead triggering repeated warrants or a specific rig producing more terminations than others. These patterns often reveal systemic issues worth fixing.
 :::

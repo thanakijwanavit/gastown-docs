@@ -101,6 +101,10 @@ gt sling mol-release mayor/ --on shiny
 
 This creates a molecule from the `shiny` formula and attaches it to the Mayor. The Mayor then works through each step of the formula.
 
+:::danger[Slinging Formulas Requires the Target Agent to Support Molecules]
+Not all agents can execute formulas. Polecats and the Mayor support molecule-based workflows, but crew members and some custom runtimes may not. Before slinging a formula, verify the target agent type with `gt agent info <path>`. Slinging a formula to an incompatible agent will result in a "cannot process molecule" error and leave the work stranded on the hook.
+:::
+
 ## Cross-Rig Slinging
 
 Work often needs to land in a different rig than where you're operating. Gas Town handles this seamlessly:

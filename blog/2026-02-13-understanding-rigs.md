@@ -184,6 +184,10 @@ sequenceDiagram
 **Monitor rig health with `gt rig status`.** This shows active polecats, merge queue depth, and agent health at a glance. Run it regularly when managing multiple rigs.
 :::
 
+:::note Rig State Transitions Are Synchronous — But Agent Shutdown Is Gradual
+When you run `gt rig park`, the command completes immediately and marks the rig as parked — but active polecats do not terminate instantly. They finish their current molecule step before gracefully shutting down. If you need to stop agents immediately, use `gt rig stop` instead of `gt rig park`, which forcibly terminates all sessions. Parking is for clean pauses; stopping is for urgent halts.
+:::
+
 ## Next Steps
 
 - [Rigs Reference](/docs/concepts/rigs) — Full reference with all commands and configuration options

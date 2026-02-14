@@ -209,6 +209,10 @@ stateDiagram-v2
 The hook metadata files are managed by Gas Town's internal tooling (`gt sling`, `gt hook`, `gt mol`). Manually editing a `.gt-hook` file can put the hook in an inconsistent state -- for example, marking a step as done when its output was never committed to git. If you need to change a hook's state, always use the CLI commands like `gt hook clear` or `gt hook attach` which validate state transitions.
 :::
 
+:::info Hooks Survive Git Operations That Would Lose Uncommitted Work
+Because hooks are stored as metadata files in the worktree, they persist through most git operations including branch switches, rebases, and even git resets. This durability is what makes hook-driven architecture reliable — even if an agent runs a destructive git command that loses uncommitted changes, the hook still points to the correct bead and molecule state, allowing a fresh session to retry the work from the last committed checkpoint.
+:::
+
 ## The Security Angle
 
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.

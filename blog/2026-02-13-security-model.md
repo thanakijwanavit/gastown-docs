@@ -178,6 +178,10 @@ sequenceDiagram
 4. **Scope agent permissions.** Crew workers need write access; the Witness does not. Keep permissions minimal.
 5. **Use gates for sensitive operations.** Production deploys and infrastructure changes should require human approval via [gates](/docs/concepts/gates).
 
+:::note Security Boundaries Are Enforced at the Git Layer, Not the Process Layer
+Gas Town's isolation model relies on git worktrees to keep agents in separate working directories, not on process sandboxing or containerization. This means agents share the same filesystem, network access, and environment variables. If your threat model requires process-level isolation — for example, running untrusted code or enforcing network boundaries — you need to layer Docker or VM-based sandboxing on top of Gas Town's git-based workspace isolation.
+:::
+
 ## Next Steps
 
 - [Architecture Overview](/docs/architecture/overview) -- How agents are organized within the town

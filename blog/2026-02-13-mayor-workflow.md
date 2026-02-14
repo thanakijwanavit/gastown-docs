@@ -127,6 +127,10 @@ sequenceDiagram
     M-->>U: All beads merged — convoy closed
 ```
 
+:::caution[The Mayor Cannot Retroactively Fix Bad Decompositions]
+Once the Mayor has created beads and slung them to polecats, changing the decomposition requires manual intervention. You cannot simply tell the Mayor "split that bead into two" after work has already started — you need to cancel the in-flight bead, create new beads manually with `bd create`, and re-sling. Always review the Mayor's decomposition plan before it starts executing to catch issues early.
+:::
+
 The Mayor sets dependencies between beads when needed:
 
 ```text

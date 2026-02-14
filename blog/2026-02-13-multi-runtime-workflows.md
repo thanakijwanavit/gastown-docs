@@ -117,6 +117,10 @@ gt rig create ml-pipeline --runtime codex --repo git@github.com:org/ml-pipeline.
 gt rig config ml-pipeline runtime codex
 ```
 
+:::warning[Changing a Rig's Runtime Requires Re-Booting All Active Polecats]
+If you change an existing rig's runtime configuration with `gt rig config`, any currently-running polecats will continue using the old runtime until they complete their work. To switch immediately, you must stop the rig with `gt rig stop <rig>`, then boot it fresh with `gt rig boot <rig>`. In-flight work is preserved on hooks and will be picked up by polecats spawned with the new runtime.
+:::
+
 The runtime determines:
 - How polecat sessions are created (tmux vs other)
 - What system prompt is injected at startup

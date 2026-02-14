@@ -223,6 +223,10 @@ gt witness attach myproject
 
 The Witness logs its patrol findings, so you can review what it detected during its last patrol cycle.
 
+:::danger Do Not Manually Terminate the Witness Session Without Using gt witness stop
+Killing the Witness session directly with `tmux kill-session` or `kill` bypasses the graceful shutdown protocol and can leave the rig in an inconsistent supervision state. Always use `gt witness stop <rig>` to cleanly terminate the Witness, which ensures it writes final patrol state and notifies the Deacon. If you accidentally kill the session, the Deacon will detect it and restart the Witness on the next patrol, but there will be a monitoring gap until then.
+:::
+
 ## Next Steps
 
 - **[Witness Agent Reference](/docs/agents/witness/)** — Full technical reference

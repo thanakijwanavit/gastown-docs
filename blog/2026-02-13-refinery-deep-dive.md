@@ -306,6 +306,10 @@ gt rig config myproject refinery.require_ci true
 gt rig config myproject refinery.required_checks "ci/build,ci/test,ci/lint"
 ```
 
+:::info The Refinery Waits for CI Status Asynchronously
+When `require_ci` is enabled, the Refinery pushes the rebased branch and then polls for commit status updates from your CI provider. It does not block the entire patrol cycle while waiting — instead, it marks the MR as "validating" and moves on to check other queue items. On the next patrol cycle, it rechecks the CI status and either merges or rejects based on the result. This keeps the Refinery responsive even when CI takes several minutes to complete.
+:::
+
 :::warning Never Push Directly to Main While the Refinery Is Active
 Pushing commits directly to main bypasses the Refinery's rebase-and-validate pipeline. Every MR currently in the queue will need to rebase against your out-of-band changes, potentially causing cascading conflicts across all pending merges. Always route changes through the Refinery or a crew workspace.
 :::

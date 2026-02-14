@@ -102,6 +102,10 @@ This is for projects you're done with for now:
 - Low-priority projects during crunch time
 - Archived experiments you might revisit
 
+:::note[Docking Preserves Beads and Configuration]
+When you dock a rig, only the worktrees are removed — all beads, hooks, and configuration remain intact in the town-level and rig-level databases. This means you can undock and boot the rig months later and all your tracked work, history, and settings are immediately available. Docking is safe for long-term storage without data loss.
+:::
+
 Restore with:
 
 ```bash

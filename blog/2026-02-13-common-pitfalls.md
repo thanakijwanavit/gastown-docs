@@ -110,6 +110,10 @@ gt doctor
 
 When the Witness escalates something, address it promptly. A stalled polecat wastes tokens every minute it loops.
 
+:::info Use `gt doctor` to Catch All Five Pitfalls at Once
+The `gt doctor` command checks for vague beads (no file paths), unpushed work (uncommitted changes), Refinery conflicts (divergent branches), oversized beads (context exhaustion patterns), and Witness escalations (unread mail). Running it before slinging a new convoy catches most of these pitfalls before they cost tokens.
+:::
+
 ```mermaid
 flowchart TD
     subgraph Pitfalls["Common Pitfalls"]

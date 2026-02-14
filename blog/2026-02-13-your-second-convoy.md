@@ -251,6 +251,10 @@ stateDiagram-v2
 
 **Use the Mayor for complex convoys.** If you're managing more than 5 beads with cross-rig dependencies, consider the [Mayor workflow](/docs/workflows/mayor-workflow) instead. Let the Mayor handle decomposition and routing.
 
+:::caution Re-Slinging a Bead Does Not Preserve Partial Progress Unless You Commit First
+When you run `gt release` to pull a bead from a stuck polecat and then `gt sling` it to a fresh agent, any uncommitted code changes from the first polecat are lost. The molecule state (completed steps) survives, but work-in-progress in the old worktree is abandoned. If the stuck polecat made meaningful progress, attach to its session with `gt polecat attach`, manually commit its changes, and then re-sling. Otherwise, the fresh agent starts the current step from scratch.
+:::
+
 ## Next Steps
 
 - [Manual Convoy Workflow](/docs/workflows/manual-convoy) — Full reference for convoy creation and management

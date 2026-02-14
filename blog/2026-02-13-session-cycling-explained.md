@@ -237,6 +237,10 @@ Without molecules, a cycling agent would need to re-read the entire codebase and
 
 **Trust the hook.** Your work assignment persists across sessions. You don't need to re-create beads, re-set-up branches, or re-attach molecules. The hook has it all.
 
+:::caution Session Cycling Does Not Reduce Total Token Usage
+Cycling to a fresh session resets the context window, allowing the agent to continue working — but the total token count across both sessions is cumulative, not reset. If the first session consumed 50,000 tokens and the second session consumes 30,000 tokens, your bill reflects 80,000 tokens. Session cycling solves the context limit problem but does not reduce API costs; in fact, it may increase costs slightly due to context re-loading overhead.
+:::
+
 ## Next Steps
 
 - **[Session Cycling](/docs/concepts/session-cycling/)** — Full concept reference

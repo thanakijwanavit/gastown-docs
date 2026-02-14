@@ -81,6 +81,10 @@ gt mail send gastowndocs/polecats/toast \
 
 The polecat reads this on startup, getting both the assignment (from the hook) and context (from the mail).
 
+:::tip[Mail + Hook Provides Complete Task Context]
+The combination of mail and hook is powerful: the hook tells the agent WHAT to work on (the bead ID), while the mail tells it HOW and WHY. When the Mayor slings work, it always pairs the hook attachment with a mail message providing implementation hints, priority context, and known gotchas. Check your inbox with `gt mail inbox` after receiving a new hook to get the full picture.
+:::
+
 ### Escalation Notifications
 
 When an agent escalates an issue, it mails the escalation chain:

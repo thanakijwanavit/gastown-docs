@@ -137,6 +137,10 @@ stateDiagram-v2
 A common misconception is that Gas Town handles deployment. It does not. Gas Town's scope ends at merging validated code to main. Your existing CD system (ArgoCD, Flux, GitHub Actions deploy steps) continues to own the production deployment pipeline. Gas Town is a code generation and merge layer, not a deployment orchestrator.
 :::
 
+:::caution Gas Town Generates More CI Load Than Human Developers
+Because agents work faster and in parallel, your CI system will see 5-10x the number of builds it is used to handling. If your CI has capacity limits or per-build costs, budget accordingly. The Refinery can be configured to batch merges or throttle submission rate, but the default behavior is to push every completed polecat branch through CI immediately, which can overwhelm under-provisioned build infrastructure.
+:::
+
 ## When to Use What
 
 | Scenario | Tool |

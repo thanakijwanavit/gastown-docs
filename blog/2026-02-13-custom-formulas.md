@@ -206,6 +206,10 @@ When you pour this formula, you provide the variable values:
 gt mol pour code-review --var pr_number=42 --var branch_name=feature/auth
 ```
 
+:::info Missing Variables Cause Immediate Molecule Failure
+If a formula references `{{variable_name}}` but you don't provide that variable when pouring the molecule with `--var variable_name=value`, the molecule will fail immediately when the agent encounters the unresolved placeholder. Always check the formula's variable requirements with `bd formula show <id>` before pouring to avoid wasted sessions.
+:::
+
 ## Step Types: Gates and Pauses
 
 Some workflows need to wait for external events. Use gates for this:

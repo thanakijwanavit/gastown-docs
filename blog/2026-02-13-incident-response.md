@@ -262,6 +262,10 @@ gt polecat kill <name> --rig myproject
 gt sling <bead-id> myproject
 ```
 
+:::caution Most Incidents Resolve Themselves — Wait for the Witness Patrol
+The Witness runs automated health checks every few minutes, detecting stuck polecats, stalled work, and orphaned processes. Most incidents that seem urgent at first glance resolve themselves within one or two Witness patrol cycles. Before intervening manually, wait at least 10 minutes and re-run `gt status` to see if the Witness has already fixed it. Premature manual intervention can conflict with automated recovery, creating more problems than it solves.
+:::
+
 ## Prevention Checklist
 
 The best incident response is prevention. Run these checks regularly:
