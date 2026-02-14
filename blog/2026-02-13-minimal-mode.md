@@ -155,6 +155,10 @@ Without the Witness, no one is watching your agents. If an agent crashes or gets
 Always **push your changes** before ending a session. Without the Refinery handling merges automatically, unpushed work sits on a local branch where it can be lost if the machine reboots.
 :::
 
+:::note Minimal Mode is not "lesser" Gas Town
+Many production Gas Town setups run certain rigs in Minimal Mode permanently. Low-activity rigs that process one or two beads per week don't need a Witness patrolling every 5 minutes. Minimal Mode is a first-class operating mode, not just a stepping stone to full automation.
+:::
+
 ## Next Steps
 
 - [Minimal Mode Reference](/docs/workflows/minimal-mode) — Full step-by-step walkthrough

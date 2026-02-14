@@ -111,6 +111,25 @@ Fresh agent actually uses:      Zod validation library
 Both produce:                   Valid input validation with passing tests ✓
 ```
 
+## GUPP in Practice: A Recovery Walkthrough
+
+Let's trace a real failure-recovery sequence to see GUPP in action:
+
+```text
+10:00  Polecat "toast" starts working on ga-xyz (molecule step: implement)
+10:15  Network issue kills the tmux session
+10:15  Hook state on disk: ga-xyz still attached
+10:15  Molecule state in DB: steps 1-3 done, step 4 in_progress
+10:20  Witness patrol detects toast is dead (session gone)
+10:20  Witness files warrant for toast, re-slings ga-xyz to the rig
+10:21  New polecat "alpha" spawns, finds ga-xyz on hook
+10:21  Alpha reads molecule: skips steps 1-3, resumes step 4
+10:35  Alpha completes all steps, runs gt done
+10:36  Refinery merges to main
+```
+
+No human involvement. No lost work. The 15-minute gap was the only cost — and that's just the Witness patrol interval. The key moments are at 10:15 (hook and molecule state survive the crash) and 10:21 (fresh agent skips completed steps).
+
 ## What This Means For You
 
 As a Gas Town user, GUPP means:
@@ -119,6 +138,10 @@ As a Gas Town user, GUPP means:
 - **Don't manually restart failed work.** The Witness detects zombies and the system re-slings the work.
 - **Don't babysit polecats.** The supervision tree (Witness → Deacon → Mayor) handles recovery at every level.
 - **Trust the hook.** If work is on a hook, it will get done — eventually.
+
+:::note GUPP applies to you too
+GUPP isn't just for polecats. When you're a crew worker and your session crashes, your hook still has your molecule attached. Run `gt prime` in your next session and you'll pick up right where you left off. The principle is universal across all Gas Town agent types.
+:::
 
 ## Further Reading
 

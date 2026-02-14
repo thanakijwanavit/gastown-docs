@@ -144,6 +144,10 @@ Gas Town is not CI/CD 2.0. It's the layer that generates the code your CI/CD val
 
 If your CI/CD pipeline works well, keep it. Gas Town will feed it better, faster, and in higher volume.
 
+:::note Integration is the default
+Gas Town was designed from day one to complement existing CI/CD, not replace it. The `refinery.require_ci` config flag is the bridge — it tells the Refinery to wait for your CI checks before merging. This means your existing quality gates remain fully in control of what lands on main.
+:::
+
 ## Next Steps
 
 - **[Architecture Overview](/docs/architecture/overview)** — How Gas Town's components fit together

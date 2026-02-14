@@ -118,7 +118,7 @@ git add plugins/pre-merge/security-scan.sh
 git commit -m "Add pre-merge security scan plugin"
 ```
 
-The Refinery will automatically discover and run it during merge processing.
+The Refinery will automatically discover and run it during merge processing. No registration or configuration beyond the file itself is needed — convention over configuration keeps the plugin system simple.
 
 ## Plugin Configuration
 
@@ -179,6 +179,7 @@ If any plugin fails with `fail_action = "reject"`, subsequent plugins are skippe
 3. **Version control everything.** Plugins in `plugins/` are committed to git and reviewed like code.
 4. **Test plugins independently.** Run your plugin scripts manually before deploying them.
 5. **Set timeouts.** A plugin that hangs blocks the Refinery. Always set reasonable timeouts.
+6. **Log results.** Write plugin output to a log file alongside exit codes. This makes debugging failed merges much easier when reviewing Refinery history.
 
 ## Next Steps
 

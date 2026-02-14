@@ -162,6 +162,10 @@ Gas Town's worktree approach provides **code isolation**, not **process isolatio
 
 If you need stronger isolation for security-sensitive workloads (running untrusted code, network-restricted environments), you can layer containers on top of Gas Town's worktree system. But for the common case of AI agents writing and testing code, worktrees provide the right balance of isolation, speed, and simplicity.
 
+:::tip Worktree lifecycle is automatic
+You don't need to manage worktrees manually. The Deacon creates them when spawning polecats, and Boot cleans them up when processing death warrants after work completes. The only time you interact with worktrees directly is when using `gt worktree` for cross-rig crew work.
+:::
+
 ## Next Steps
 
 - [Rigs](/docs/concepts/rigs) -- How rigs organize worktrees and agent infrastructure

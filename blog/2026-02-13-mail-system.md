@@ -189,6 +189,10 @@ gt mail send gastowndocs/polecats/toast -s "Priority change" -m "Drop current wo
 gt nudge gastowndocs/polecats/toast "Check your mail - priority change"
 ```
 
+:::tip Mail is your audit trail
+Every mail message is a bead, which means it's permanently stored and searchable. When debugging why an agent did something unexpected, check its mail history with `gt mail inbox --agent <path>`. The handoff mails and dispatch notifications often reveal the context that led to the behavior.
+:::
+
 ## Next Steps
 
 - [Communication CLI Reference](/docs/cli-reference/communication) -- Full mail command documentation

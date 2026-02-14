@@ -175,6 +175,8 @@ bd list --status=open   # Check open beads
 
 **Don't over-specify the target.** Unless you have a reason to target a specific polecat, sling to the rig. Let the [Witness](/docs/agents/witness) handle agent selection and spawning.
 
+**Don't sling dependent beads simultaneously.** If bead B depends on bead A's output, set up the dependency with `bd dep add` first. The Mayor will wait for A to merge before slinging B, preventing merge conflicts from overlapping work.
+
 ## Next Steps
 
 - [Work Distribution Architecture](/docs/architecture/work-distribution) — How work flows through Gas Town end-to-end

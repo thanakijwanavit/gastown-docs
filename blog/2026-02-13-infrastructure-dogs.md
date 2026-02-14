@@ -22,7 +22,7 @@ In a system with 10+ agents running across multiple rigs, infrastructure problem
 
 These problems don't belong to any single rig or feature. They span the entire town. Polecats can't handle them — they're scoped to one rig and one task. The [Witness](/docs/agents/witness) monitors health but doesn't do manual labor. The [Deacon](/docs/agents/deacon) coordinates but needs workers.
 
-Enter Dogs.
+Enter Dogs. They're the infrastructure specialists that handle the messy cross-cutting work that doesn't belong to any single feature or rig.
 
 ## Dogs vs. Polecats
 
@@ -159,6 +159,17 @@ gt dog status <id>         # Check what it's stuck on
 ```
 
 Boot will process the warrant on the next daemon tick.
+
+### Infrastructure Task Not Completing
+
+If a cross-rig cleanup or migration seems to hang, check whether the dog has access to all target rigs:
+
+```bash
+gt rig list                # Are all target rigs active?
+gt rig status <rig>        # Is any rig parked or docked?
+```
+
+Parked or docked rigs block dog operations. Unpark them first with `gt rig unpark <rig>` before retrying the infrastructure task.
 
 ## Next Steps
 
