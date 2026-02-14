@@ -1205,15 +1205,15 @@ for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
     # Count links to other blog posts
     blog_link_count=$(grep -coP '/blog/[a-z0-9-]+' "$file" 2>/dev/null) || blog_link_count=0
 
-    if [ "$blog_link_count" -lt 3 ]; then
+    if [ "$blog_link_count" -lt 4 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $blog_link_count blog link(s) in $rel_file (need 3+)"
+        echo "  Only $blog_link_count blog link(s) in $rel_file (need 4+)"
         BLOG_INTERLINK_ISSUES=$((BLOG_INTERLINK_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_INTERLINK_ISSUES" -eq 0 ]; then
-    pass_test "All blog posts link to 3+ other blog posts"
+    pass_test "All blog posts link to 4+ other blog posts"
 else
     fail_test "Found $BLOG_INTERLINK_ISSUES blog post(s) with fewer than 3 blog cross-links" "Add links to related blog posts in the Next Steps section"
 fi
