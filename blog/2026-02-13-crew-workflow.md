@@ -78,6 +78,24 @@ git pull
 bd ready
 ```
 
+```mermaid
+flowchart TD
+    START[Morning Start] --> PRIME[gt prime]
+    PRIME --> HOOK[gt hook]
+    HOOK --> MAIL[gt mail inbox]
+    MAIL --> PULL[git pull]
+    PULL --> READY[bd ready]
+    READY --> CLAIM[Claim work]
+    CLAIM --> CODE[Code & Test]
+    CODE --> COMMIT[git commit]
+    COMMIT --> PUSH[git push]
+    PUSH --> CLOSE[bd close]
+    CLOSE --> HANDOFF{Context full?}
+    HANDOFF -->|Yes| HO[gt handoff]
+    HANDOFF -->|No| CLAIM
+    HO --> START
+```
+
 ### Working on Issues
 
 ```bash

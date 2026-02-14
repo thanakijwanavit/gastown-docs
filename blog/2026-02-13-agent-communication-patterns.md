@@ -148,6 +148,26 @@ Mail is durable but asynchronous -- recipients only see messages when they check
 
 ## Coordination Patterns
 
+```mermaid
+mindmap
+    root((Communication<br/>Patterns))
+        Mail
+            Reports
+            Handoffs
+            Escalations
+            Cross-rig
+        Nudges
+            Wake-up calls
+            Status pings
+            Urgent alerts
+            Session interrupts
+        Hooks
+            Work assignment
+            Session handoff
+            Mail-as-task
+            GUPP trigger
+```
+
 ### Pattern: Witness → Mayor Escalation
 
 When a Witness detects a problem it can't solve:

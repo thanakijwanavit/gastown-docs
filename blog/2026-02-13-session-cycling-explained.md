@@ -224,9 +224,23 @@ The most valuable piece of context for a successor session is not what you accom
 Without molecules, a cycling agent would need to re-read the entire codebase and rediscover its progress from scratch. Molecules eliminate this overhead by recording exactly which steps are complete, which step is in progress, and what comes next. The new session reads the molecule state in seconds and resumes work immediately, making session boundaries nearly invisible to the overall workflow.
 :::
 
-## Tips for Effective Cycling
+```mermaid
+graph LR
+    subgraph Before["Before Cycling"]
+        C1[Context: 85% Full] --> C2[Agent Detects Pressure]
+    end
+    subgraph During["Cycling Actions"]
+        C2 --> A1[git commit + push]
+        A1 --> A2[gt handoff -m notes]
+        A2 --> A3[Session Ends]
+    end
+    subgraph After["After Cycling"]
+        A3 --> N1[New Session: 8% Full]
+        N1 --> N2[gt prime + gt hook]
+        N2 --> N3[gt mail inbox]
+        N3 --> N4[Resume Work]
+    end
 
-**Commit frequently.** Don't wait until context is full to commit. Small, frequent commits mean less risk of lost work when a session ends unexpectedly.
 
 **Write useful handoff mails.** The next session has zero context about your decisions. Include:
 - What you tried that didn't work

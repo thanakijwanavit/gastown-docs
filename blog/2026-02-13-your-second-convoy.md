@@ -239,9 +239,31 @@ stateDiagram-v2
     Done --> [*]: Convoy tracks completion
 ```
 
-## Lessons from Second Convoys
+```mermaid
+mindmap
+  root((Second Convoy Lessons))
+    Dependencies
+      bd dep add
+      bd ready to check
+      Unblock order matters
+    Cross-Rig
+      Different repos
+      Coordinate via convoy
+      Same tracking system
+    Monitoring
+      gt convoy show
+      gt feed for activity
+      gt polecat list
+    Recovery
+      gt nudge first
+      gt polecat attach to debug
+      gt release and re-sling
+      gt polecat nuke last resort
+    Scaling
+      Decompose small
+      Monitor actively
+      Use Mayor for 5+ beads
 
-**Decompose aggressively.** Five small beads are better than two large ones. Small beads finish faster, parallelize better, and are easier to re-sling when something goes wrong.
 
 **Set dependencies explicitly.** Don't rely on polecats to figure out ordering. Use `bd dep add` to make the dependency graph explicit.
 

@@ -14,6 +14,25 @@ Not everyone wants to run a full fleet of AI agents from day one. Maybe your mac
 
 The core insight behind Minimal Mode is that Gas Town's value doesn't come *only* from automated orchestration. Three features are independently useful:
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant B as Beads DB
+    participant H as Hook System
+    participant C as Convoy Tracker
+    participant A as Agent (Manual)
+
+    U->>B: bd create (task)
+    U->>C: gt convoy create
+    U->>H: gt sling (attach to hook)
+    U->>A: Start agent manually
+    A->>H: gt prime (read hook)
+    A->>A: Work on task
+    A->>B: gt done (complete)
+    B->>C: Update convoy progress
+    C->>U: gt convoy show
+```
+
 1. **Hooks** — Work assignments that survive crashes and session restarts
 2. **Beads** — AI-native issue tracking with prefix-based routing
 3. **Convoys** — Bundle related work and track collective progress

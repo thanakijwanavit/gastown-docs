@@ -48,6 +48,21 @@ flowchart LR
 
 The most common plugin type adds **custom quality gates** to the Refinery merge process. Out of the box, the Refinery runs tests and checks for clean rebasing. Quality gate plugins add additional checks:
 
+```mermaid
+timeline
+    title Plugin Deployment Lifecycle
+    Development : Write plugin script
+                : Test manually in isolation
+    Testing : Deploy with fail_action=warn
+            : Monitor for false positives
+    Stabilization : Fix edge cases
+                  : Tune timeouts and thresholds
+    Production : Promote to fail_action=reject
+               : Plugin blocks failing merges
+    Maintenance : Monitor plugin logs
+                : Update as codebase evolves
+```
+
 ```toml
 # plugins/quality-gates/coverage.toml
 name = "coverage-check"

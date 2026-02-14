@@ -109,6 +109,34 @@ Not all agents can execute formulas. Polecats and the Mayor support molecule-bas
 
 Work often needs to land in a different rig than where you're operating. Gas Town handles this seamlessly:
 
+```mermaid
+mindmap
+  root((gt sling))
+    Target Types
+      Rig Name
+        Auto-spawn polecat
+        Load balancing
+      Agent Path
+        Direct assignment
+        Context reuse
+      Crew Member
+        Cross-rig collab
+        Human workflow
+      Mayor
+        Formula orchestration
+        Multi-step workflows
+    Behaviors
+      Hook Attachment
+        Crash-safe
+        Persistent
+      Propulsion
+        GUPP protocol
+        Immediate pickup
+      Routing
+        Same-rig
+        Cross-rig
+```
+
 ```bash
 # Sling from anywhere to the backend rig
 gt sling gt-abc12 backend

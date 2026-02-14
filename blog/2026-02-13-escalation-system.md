@@ -94,6 +94,21 @@ graph TD
 
 ## Configuring Routing
 
+```mermaid
+timeline
+    title Escalation Lifecycle Timeline
+    section Creation
+        Agent Detects Problem : Escalation Created
+        Channels Fire : Notifications Sent
+    section Monitoring
+        15 Min (P0) or 1 Hr (P1) : Auto Re-Escalate if No Ack
+        Repeat Until Ack : Max Re-Escalations
+    section Resolution
+        Human Acknowledges : Timer Stops
+        Issue Fixed : Escalation Closed
+        No Ack After Max : Marked Stale
+```
+
 The default routing works well out of the box, but you can customize it in `settings/escalation.json`:
 
 ```json

@@ -93,6 +93,20 @@ The supervision chain determines who can file warrants for whom:
 | **Deacon** | Witness, Refinery | Missed 3+ patrol cycles, unresponsive to health pings |
 | **Human** | Any agent | Manual intervention via `gt warrant file` |
 
+```mermaid
+graph TD
+    subgraph Authority["Warrant Authority Hierarchy"]
+        H[Human] -->|can file against| ANY[Any Agent]
+        DC[Deacon] -->|can file against| W[Witness]
+        DC -->|can file against| RF[Refinery]
+        W -->|can file against| PC[Polecats]
+    end
+    style H fill:#FFD700
+    style DC fill:#87CEEB
+    style W fill:#90EE90
+    style PC fill:#DDA0DD
+```
+
 This hierarchy prevents circular problems. The Witness can't file a warrant against itself, and the Deacon can't file a warrant against itself. If the Deacon is stuck, only the daemon (or a human) can intervene.
 
 ```mermaid

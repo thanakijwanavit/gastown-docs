@@ -57,6 +57,21 @@ flowchart TD
 
 ## The Propulsion Cycle
 
+```mermaid
+graph LR
+    subgraph "Crash Recovery via Hooks"
+        S1[Session 1:<br/>Working on Bead] --> CR[CRASH]
+        CR --> HK[Hook Persists<br/>in Filesystem]
+        HK --> S2[Session 2:<br/>Starts Fresh]
+        S2 --> RD[gt prime<br/>gt hook]
+        RD --> RS[Resume from<br/>Last Checkpoint]
+        RS --> S2W[Continue Work]
+    end
+    style CR fill:#ff9999
+    style HK fill:#99ff99
+    style RS fill:#99ccff
+```
+
 Hooks create a self-propelling work cycle. Every agent follows the same startup protocol:
 
 ```text

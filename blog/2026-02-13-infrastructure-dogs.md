@@ -47,6 +47,24 @@ graph LR
     end
 ```
 
+```mermaid
+flowchart TD
+    subgraph "Task Routing Decision"
+        TASK[New Task] --> Q{Task Type?}
+        Q -->|Feature/Bug Fix| POL[Route to Polecat]
+        Q -->|Cross-Rig Cleanup| DOG[Route to Dog]
+        Q -->|Config Sync| DOG
+        Q -->|Schema Migration| DOG
+        Q -->|Code Change| POL
+        POL --> MR[Submits MR]
+        DOG --> RPT[Reports to Deacon]
+        MR --> MAIN[Code on Main]
+        RPT --> NEXT[Returns to Pool]
+    end
+    style POL fill:#cce5ff
+    style DOG fill:#ffe5cc
+```
+
 The rule of thumb: **if the work produces a feature branch and a merge request, it's a polecat. If the work maintains infrastructure, it's a dog.**
 
 ## What Dogs Do

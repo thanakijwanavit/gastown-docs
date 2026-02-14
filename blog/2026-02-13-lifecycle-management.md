@@ -15,6 +15,19 @@ Gas Town rigs have a lifecycle that goes well beyond "on" and "off." Understandi
 Every rig exists in one of these states:
 
 ```mermaid
+gantt
+    title Gas Town Rig Lifecycle Timeline
+    dateFormat HH:mm
+    section Rig Operations
+    Active Work        :active, 09:00, 4h
+    Park (Lunch Break) :crit, 13:00, 1h
+    Active Work        :active, 14:00, 3h
+    Stop (Quick Pause) :17:00, 15m
+    Active Work        :active, 17:15, 45m
+    Dock (End of Day)  :done, 18:00, 1h
+```
+
+```mermaid
 stateDiagram-v2
     [*] --> Added: gt rig add
     Added --> Active: gt rig boot

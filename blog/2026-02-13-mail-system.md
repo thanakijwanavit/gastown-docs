@@ -30,6 +30,21 @@ Mail is the backbone of Gas Town coordination. Nudges are the exception for time
 
 Every mail message is a bead in the town-level `.beads/` database:
 
+```mermaid
+timeline
+    title Mail Message Lifecycle
+    Composed : Agent creates message
+           : Subject and body written
+    Sent : Stored in Beads DB
+         : Routing to recipient
+    Delivered : Appears in inbox
+            : Status: unread
+    Read : Recipient opens message
+       : Status: read
+    Acted : Hooked or archived
+        : Task executed or filed
+```
+
 ```text
 ID:      hq-abc123
 Type:    message

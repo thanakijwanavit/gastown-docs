@@ -85,6 +85,18 @@ The Deacon processes lifecycle requests from the Mayor and human operators:
 | `gt rig dock myproject` | Deacon stops all rig agents, marks rig as docked |
 | `gt rig undock myproject` | Deacon restarts Witness and Refinery |
 
+```mermaid
+graph TD
+    subgraph Lifecycle["Rig Lifecycle States"]
+        ACTIVE[Active<br/>Normal operation] --> PARK[Park<br/>No new polecats]
+        PARK --> UNPARK[Unpark]
+        UNPARK --> ACTIVE
+        ACTIVE --> DOCK[Dock<br/>All agents stopped]
+        DOCK --> UNDOCK[Undock]
+        UNDOCK --> ACTIVE
+    end
+```
+
 Lifecycle changes are always graceful -- the Deacon waits for in-flight work to complete before stopping agents. This prevents work loss during administrative operations.
 
 ## Health Monitoring

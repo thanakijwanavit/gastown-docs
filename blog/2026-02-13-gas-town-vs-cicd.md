@@ -116,6 +116,26 @@ gt rig config myproject refinery.require_ci true
 
 **Intent-level tracking.** CI/CD tracks commits and builds. Gas Town tracks beads (intent) through the entire lifecycle from idea to merged code.
 
+```mermaid
+flowchart TD
+    subgraph "Traditional CI/CD Scope"
+        HC[Human Codes] --> PR[Pull Request]
+        PR --> BLD[Build]
+        BLD --> TST[Test]
+        TST --> DPL[Deploy]
+    end
+    subgraph "Gas Town Extended Scope"
+        INT[Human Intent] --> MAY[Mayor Decomposes]
+        MAY --> BD[Beads Created]
+        BD --> PC[Polecats Code]
+        PC --> RF[Refinery]
+        RF --> CICD[Your CI/CD]
+        CICD --> PROD[Production]
+    end
+    style "Gas Town Extended Scope" fill:#e1f5e1
+    style "Traditional CI/CD Scope" fill:#fff3cd
+```
+
 :::tip Keep Your Existing CI Pipeline as the Quality Gate
 Rather than duplicating test logic in Gas Town, configure the Refinery to call your existing CI system with `refinery.require_ci`. This way, your established quality gates remain the single source of truth for what merges to main, and Gas Town simply feeds work into the pipeline you already trust.
 :::

@@ -223,9 +223,18 @@ flowchart TD
     MOL --> GUPP
 ```
 
-## The Work Distribution Architecture
+```mermaid
+timeline
+    title Work Distribution Evolution
+    section Manual
+        Single Rig : Create beads manually : Sling individually : Monitor progress
+    section Semi-Auto
+        Multi-Rig : Mayor decomposes : Manual override : Cross-rig routing
+    section Automated
+        Formulas : Template-driven : Repeatable process : Molecule tracking
+    section Full Orchestration
+        Hybrid : Combine all patterns : Mayor + Formula : Auto-sling dependencies
 
-All three patterns ultimately use the same underlying machinery:
 
 1. **Beads** track the work
 2. **Hooks** attach work to agents

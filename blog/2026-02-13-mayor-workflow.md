@@ -157,6 +157,30 @@ Documentation → docs rig
 
 While MEOW runs, you have several ways to check progress:
 
+```mermaid
+graph LR
+    subgraph Tools["Monitoring Tools"]
+        CV[gt convoy status]
+        FD[gt feed]
+        DB[gt dashboard]
+        BD[bd show bead-id]
+    end
+    subgraph Status["Work States"]
+        MG[Merged]
+        IP[In Progress]
+        PN[Pending]
+        BL[Blocked]
+    end
+    CV --> MG
+    CV --> IP
+    CV --> PN
+    CV --> BL
+    FD --> IP
+    DB --> MG
+    DB --> IP
+    BD --> IP
+```
+
 ```bash
 # Convoy-level progress (how many beads landed?)
 gt convoy status

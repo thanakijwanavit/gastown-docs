@@ -92,6 +92,32 @@ flowchart TD
 
 ## How Gas Town Uses Worktrees
 
+```mermaid
+graph TD
+    subgraph "Shared .git Directory"
+        GIT[.git/<br/>Full History<br/>All Branches<br/>All Tags]
+    end
+    subgraph "Worktree 1: refinery/rig/"
+        WT1[Working Directory]
+        BR1[Branch: main]
+        WT1 -.->|reads| GIT
+    end
+    subgraph "Worktree 2: polecats/toast/"
+        WT2[Working Directory]
+        BR2[Branch: polecat/toast]
+        WT2 -.->|reads| GIT
+    end
+    subgraph "Worktree 3: crew/dave/"
+        WT3[Working Directory]
+        BR3[Branch: main]
+        WT3 -.->|reads| GIT
+    end
+    style GIT fill:#ffeb99
+    style WT1 fill:#d4edda
+    style WT2 fill:#d4edda
+    style WT3 fill:#d4edda
+```
+
 ### Polecat Sandboxes
 
 When the Mayor [slings](/docs/cli-reference/sling) a bead to a rig, a polecat worktree is created:

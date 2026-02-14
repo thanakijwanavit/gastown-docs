@@ -70,6 +70,28 @@ Use this for straightforward tasks where each step naturally depends on the prev
 
 ## Pattern 2: Parallel Fan-Out
 
+```mermaid
+sequenceDiagram
+    participant A as Agent
+    participant LC as load-context
+    participant API as implement-api
+    participant UI as implement-ui
+    participant TST as implement-tests
+    participant INT as integrate
+    A->>LC: Execute step
+    LC->>A: Done
+    par Parallel Execution
+        A->>API: Start
+        A->>UI: Start
+        A->>TST: Start
+    end
+    API->>INT: Needs completed
+    UI->>INT: Needs completed
+    TST->>INT: Needs completed
+    A->>INT: All deps met, execute
+    INT->>A: Done
+```
+
 Multiple steps execute concurrently after a shared prerequisite:
 
 ```toml

@@ -110,9 +110,31 @@ pie title Rig Resource Distribution
     "Beads DB + Config" : 10
 ```
 
-## Multi-Rig Coordination
-
-Most Gas Town deployments run 2-5 rigs. Coordinating work across rigs uses three mechanisms:
+```mermaid
+graph TD
+    subgraph RigA["Rig: myproject"]
+        RA_REF[Refinery A]
+        RA_WIT[Witness A]
+        RA_PC1[Polecat 1]
+        RA_PC2[Polecat 2]
+    end
+    subgraph RigB["Rig: backend"]
+        RB_REF[Refinery B]
+        RB_WIT[Witness B]
+        RB_PC1[Polecat 3]
+    end
+    subgraph Town["Town Level"]
+        MAYOR[Mayor]
+        DEACON[Deacon]
+    end
+    MAYOR -->|dispatch| RA_PC1
+    MAYOR -->|dispatch| RB_PC1
+    DEACON -->|monitor| RA_WIT
+    DEACON -->|monitor| RB_WIT
+    RA_PC1 --> RA_REF
+    RA_PC2 --> RA_REF
+    RB_PC1 --> RB_REF
+```
 
 ### Cross-Rig Beads
 

@@ -104,6 +104,16 @@ graph LR
 
 Running all 10 legs on every PR would be expensive. Presets let you match review thoroughness to the change's importance:
 
+```mermaid
+graph LR
+    subgraph Presets["Review Presets by Use Case"]
+        GATE[Gate: 4 legs<br/>Fast] --> USES1[Merge blocking]
+        SEC[Security: 4 legs<br/>Focused] --> USES2[Auth/Payment]
+        REF[Refactor: 4 legs<br/>Quality] --> USES3[Code cleanup]
+        FULL[Full: 10 legs<br/>Thorough] --> USES4[Major features]
+    end
+```
+
 ### Gate (4 legs — fast, for merge gating)
 
 ```bash

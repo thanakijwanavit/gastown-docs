@@ -87,6 +87,24 @@ The key insight: killing a polecat doesn't lose work. The bead is still tracked,
 
 ## Scenario 2: Stalled Convoy
 
+```mermaid
+flowchart LR
+    subgraph "Diagnosis Flow"
+        SYM[Symptoms:<br/>No Progress] --> TRI[Run Triage]
+        TRI --> CHK{Check Status}
+        CHK -->|Stuck Agent| SA[Restart Polecat]
+        CHK -->|Blocked Deps| BD[Remove Deadlock]
+        CHK -->|Unassigned| UA[Re-sling Work]
+        CHK -->|System Issue| SI[Check Refinery]
+        SA --> RES[Resolved]
+        BD --> RES
+        UA --> RES
+        SI --> RES
+    end
+    style SYM fill:#ff9999
+    style RES fill:#99ff99
+```
+
 **Symptoms:** `gt convoy status` shows the convoy is open, but no beads have progressed in a while.
 
 **Diagnosis:**

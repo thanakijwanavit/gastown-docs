@@ -183,6 +183,17 @@ gt feed
 gt convoy stranded
 ```
 
+```mermaid
+timeline
+    title Convoy Lifecycle Timeline
+    00:00 : Create convoy : Define beads
+    00:05 : Sling work : Polecats spawn
+    00:15 : First completion : Bead 1 done
+    00:30 : Mid-progress : 50% complete
+    00:45 : Dependencies resolve : Blocked beads start
+    01:00 : Final bead done : Auto-close triggered
+```
+
 **Escalation signals to watch for:**
 - **Stranded convoys** — work sitting unassigned means something broke in the sling step
 - **Stalled beads** — a polecat may have crashed; the Witness should restart it

@@ -38,6 +38,22 @@ flowchart TD
 
 ## Principle 1: The Landing Rule
 
+```mermaid
+stateDiagram-v2
+    [*] --> Working: git checkout -b feature
+    Working --> Committed: git commit
+    Committed --> Pushed: git push
+    Pushed --> Submitted: gt done (Refinery)
+    Submitted --> Rebased: Refinery rebases
+    Rebased --> Tested: CI runs
+    Tested --> Merged: Fast-forward merge
+    Merged --> [*]: Landed on main
+    Pushed --> Stale: Time passes, main diverges
+    Stale --> Conflict: git pull fails
+    Conflict --> Rework: Resolve + re-implement
+    Rework --> Submitted
+```
+
 > Work is NOT landed until it's either on main or submitted to the Refinery merge queue.
 
 Feature branches are dangerous in multi-agent environments:

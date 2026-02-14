@@ -60,6 +60,14 @@ If you sling a new bead to an agent that already has work on its hook, the exist
 
 ## Types of Hook Content
 
+```mermaid
+pie title Hook Content Distribution
+    "Bead + Molecule (Standard)" : 70
+    "Bead Only (No Molecule)" : 15
+    "Mail (Ad-Hoc)" : 10
+    "Pinned (Permanent)" : 5
+```
+
 Hooks can carry different types of work:
 
 ### Bead + Molecule (Standard)

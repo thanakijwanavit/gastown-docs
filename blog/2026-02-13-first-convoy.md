@@ -111,6 +111,34 @@ flowchart LR
     E --> F[Code on Main]
 ```
 
+```mermaid
+mindmap
+  root((First Convoy))
+    Preparation
+      Create Beads
+        Specific
+        Self-contained
+        Prioritized
+      Bundle Convoy
+        Track as batch
+        Auto-close when done
+    Execution
+      Sling to Rig
+        Spawn polecats
+        Parallel work
+      Monitor Progress
+        gt feed
+        gt convoy status
+    Completion
+      Refinery Merges
+        Rebase
+        Validate
+        Fast-forward
+      Code on Main
+        Review commits
+        Verify results
+```
+
 In five minutes, you:
 
 1. **Created** three focused work items (beads)

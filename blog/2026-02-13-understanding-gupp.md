@@ -190,9 +190,34 @@ GUPP enforces forward-only state transitions for a reason: reverting a bead from
 When setting up a new rig, deliberately kill a polecat session mid-task with `gt polecat nuke` and verify that the hook persists, the molecule state is intact, and a fresh polecat resumes from the correct step. Running this exercise early builds confidence that your rig's GUPP guarantees work in practice — not just in theory — and helps you identify any configuration issues before they surface during real production work.
 :::
 
-## The Cost of GUPP: Redundant Work Is a Feature, Not a Bug
+```mermaid
+mindmap
+  root((GUPP))
+    Forward Only
+      No Backward Transitions
+      Done Stays Done
+      Append Only History
+    Three Primitives
+      Hooks
+        Filesystem Storage
+        Survives Crash
+      Molecules
+        Step Checkpoints
+        Skip Completed
+      Beads
+        Status Machine
+        Open In Progress Done
+    Recovery Patterns
+      Agent Crashes
+        Hook Persists
+        Molecule Intact
+      Session Expires
+        Witness Detects
+        Re-sling Bead
+      Context Fills
+        Cycle Session
+        Resume From Step
 
-GUPP's forward-only guarantee means that if an agent crashes mid-step after writing partial code but before committing, the next agent may redo that work differently. This is intentional. The alternative — trying to recover and reuse partial in-memory state from a crashed session — introduces far more complexity and failure modes than simply redoing the last incomplete step. GUPP trades occasional redundant computation for guaranteed progress and crash safety.
 
 :::danger NDI Does Not Mean "Anything Goes"
 Nondeterministic Idempotence allows different agents to solve the same step differently — but the end state must still satisfy the acceptance criteria. If two agents produce conflicting implementations that both pass local tests but break when integrated, NDI has not been violated; your task decomposition or test coverage has. NDI is about tolerating implementation variance, not excusing sloppy task definitions or missing validation steps.

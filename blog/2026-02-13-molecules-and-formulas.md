@@ -84,6 +84,29 @@ Each formula encodes best practices for its workflow. The `shiny` formula ensure
 
 A formula is a TOML file that defines steps, their dependencies, and any variables:
 
+```mermaid
+flowchart LR
+    subgraph Formula["Formula TOML"]
+        S1[Step: load-context]
+        S2[Step: branch-setup]
+        S3[Step: implement]
+        S4[Step: test]
+    end
+    subgraph Molecule["Molecule Instance"]
+        W1["Wisp: load-context ✓"]
+        W2["Wisp: branch-setup ✓"]
+        W3["Wisp: implement ●"]
+        W4["Wisp: test ○"]
+    end
+    S1 --> W1
+    S2 --> W2
+    S3 --> W3
+    S4 --> W4
+    W1 -->|depends on| W2
+    W2 -->|depends on| W3
+    W3 -->|depends on| W4
+```
+
 ```toml
 [formula]
 name = "shiny"

@@ -79,6 +79,17 @@ for {
 }
 ```
 
+```mermaid
+flowchart LR
+    subgraph Daemon["Daemon Event Loop"]
+        TICK[Ticker: 3 min] --> HB[Send Heartbeat]
+        LC[Lifecycle Request] --> HANDLE[Handle Request]
+        CTX[Context Done] --> EXIT[Exit Loop]
+    end
+    HB --> DEACON[Nudge Deacon]
+    HANDLE --> TMUX[Create/Stop Sessions]
+```
+
 Every 3 minutes, the daemon nudges the Deacon. The Deacon then:
 1. Checks all Witnesses across all rigs
 2. Runs health checks on the [supervision tree](/docs/architecture/agent-hierarchy)

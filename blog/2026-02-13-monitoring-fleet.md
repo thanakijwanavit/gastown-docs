@@ -227,6 +227,19 @@ graph LR
 
 Here's a practical daily routine for monitoring a Gas Town fleet:
 
+```mermaid
+stateDiagram-v2
+    [*] --> Morning: Start of Day
+    Morning --> ActiveWork: gt status + gt feed
+    ActiveWork --> Issue: Problem Detected
+    ActiveWork --> EndDay: Work Complete
+    Issue --> Diagnose: gt doctor + gt trail
+    Diagnose --> Fix: Apply Remediation
+    Fix --> ActiveWork: Resume Monitoring
+    EndDay --> Review: gt convoy list + gt costs
+    Review --> [*]: Clean State
+```
+
 ### Morning Check (2 minutes)
 
 ```bash

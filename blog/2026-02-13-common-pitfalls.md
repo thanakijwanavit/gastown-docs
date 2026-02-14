@@ -108,6 +108,18 @@ gt mail inbox
 gt doctor
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Normal: Witness monitoring
+    Normal --> Detected: Issue found
+    Detected --> Escalated: Mail sent
+    Escalated --> Addressed: Human responds
+    Addressed --> Normal: Issue resolved
+    Escalated --> Ignored: No action taken
+    Ignored --> Compounded: Problem grows
+    Compounded --> Crisis: Major failure
+```
+
 When the Witness escalates something, address it promptly. A stalled polecat wastes tokens every minute it loops.
 
 :::info Use `gt doctor` to Catch All Five Pitfalls at Once

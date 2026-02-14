@@ -206,6 +206,22 @@ When you pour this formula, you provide the variable values:
 gt mol pour code-review --var pr_number=42 --var branch_name=feature/auth
 ```
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant F as Formula TOML
+    participant M as Molecule
+    participant A as Agent
+
+    U->>F: gt mol pour --var x=val
+    F->>M: Pour with variables
+    M->>M: Replace {{x}} with val
+    M->>A: Assign to agent
+    A->>M: Read step with resolved vars
+    A->>A: Execute commands
+    A->>M: Mark step done
+```
+
 :::info Missing Variables Cause Immediate Molecule Failure
 If a formula references `{{variable_name}}` but you don't provide that variable when pouring the molecule with `--var variable_name=value`, the molecule will fail immediately when the agent encounters the unresolved placeholder. Always check the formula's variable requirements with `bd formula show <id>` before pouring to avoid wasted sessions.
 :::

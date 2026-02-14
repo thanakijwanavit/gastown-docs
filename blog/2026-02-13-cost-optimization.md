@@ -94,6 +94,26 @@ gt rig park myproject
 gt rig unpark myproject
 ```
 
+```mermaid
+flowchart LR
+    subgraph Week["Weekly Cost Pattern"]
+        M[Monday<br/>Active] --> T[Tuesday<br/>Active]
+        T --> W[Wednesday<br/>Active]
+        W --> TH[Thursday<br/>Active]
+        TH --> F[Friday<br/>Active]
+        F --> SA[Saturday<br/>Parked]
+        SA --> SU[Sunday<br/>Parked]
+        SU --> M
+    end
+    style M fill:#90EE90
+    style T fill:#90EE90
+    style W fill:#90EE90
+    style TH fill:#90EE90
+    style F fill:#90EE90
+    style SA fill:#FFB6C1
+    style SU fill:#FFB6C1
+```
+
 Parked rigs don't consume any API tokens. The Deacon daemon skips them entirely.
 
 ## Strategy 4: Monitor Token Usage

@@ -132,9 +132,20 @@ gastowndocs/polecats/toast # Polecat toast in the gastowndocs rig
 
 This identity is recorded on every bead operation, git commit, and mail message. The beads database provides a complete audit trail: who created an issue, who worked on it, who closed it, and when.
 
-## Limiting Blast Radius
+```mermaid
+timeline
+    title Security Evolution in Gas Town
+    section Bootstrap
+        Single Rig : Workspace isolation via worktrees
+        First Agents : Refinery gate for all merges
+    section Production
+        Multi-Rig : Cross-rig routing with prefixes
+        Secrets : Environment separation and .gitignore
+    section Scale
+        Branch Protection : CI/CD integration gates
+        Audit Trail : BD_ACTOR identity tracking
+        Gates : Human approval for production ops
 
-The security model's primary goal is limiting blast radius. Here is how different failure modes are contained:
 
 | Failure Mode | Blast Radius | Recovery |
 |-------------|-------------|----------|

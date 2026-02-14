@@ -14,6 +14,31 @@ When 10 polecats are writing code in parallel, how does it all end up on main wi
 
 Parallel development creates a fundamental conflict: multiple agents modify the same codebase simultaneously, producing branches that diverge from each other and from main.
 
+```mermaid
+graph TD
+    subgraph Parallel["Parallel Work"]
+        P1[Polecat 1: API endpoint]
+        P2[Polecat 2: Auth update]
+        P3[Polecat 3: CSS fix]
+    end
+    subgraph Serial["Refinery: Serial Processing"]
+        Q[Queue: FIFO]
+        R1[Rebase P3]
+        R2[Rebase P1]
+        R3[Rebase P2]
+    end
+    subgraph Result["Linear History"]
+        M[Main: A-B-C-H'-D'-E'-F'-G']
+    end
+    P1 --> Q
+    P2 --> Q
+    P3 --> Q
+    Q --> R1
+    R1 --> R2
+    R2 --> R3
+    R3 --> M
+```
+
 ```text
 main:     A --- B --- C
 polecat1:       \--- D --- E        (adds API endpoint)

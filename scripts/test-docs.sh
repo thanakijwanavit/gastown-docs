@@ -1284,25 +1284,25 @@ else
     fail_test "Found $BLOG_LENGTH_ISSUES blog post(s) with insufficient content" "Blog posts should have at least 200 words after the truncate marker"
 fi
 
-# Test 43: All blog posts have 4+ Mermaid diagrams
+# Test 43: All blog posts have 5+ Mermaid diagrams
 echo ""
-echo "Test 43: Checking all blog posts have 4+ Mermaid diagrams..."
+echo "Test 43: Checking all blog posts have 5+ Mermaid diagrams..."
 BLOG_MULTI_MERMAID_ISSUES=0
 
 for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
     mermaid_count=$(grep -c '```mermaid' "$file" 2>/dev/null) || mermaid_count=0
 
-    if [ "$mermaid_count" -lt 4 ]; then
+    if [ "$mermaid_count" -lt 5 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $mermaid_count diagram(s) in $rel_file (need 4+)"
+        echo "  Only $mermaid_count diagram(s) in $rel_file (need 5+)"
         BLOG_MULTI_MERMAID_ISSUES=$((BLOG_MULTI_MERMAID_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_MULTI_MERMAID_ISSUES" -eq 0 ]; then
-    pass_test "All blog posts have 4+ Mermaid diagrams"
+    pass_test "All blog posts have 5+ Mermaid diagrams"
 else
-    fail_test "Found $BLOG_MULTI_MERMAID_ISSUES blog post(s) with fewer than 4 Mermaid diagrams" "Add at least 4 Mermaid diagrams to each blog post"
+    fail_test "Found $BLOG_MULTI_MERMAID_ISSUES blog post(s) with fewer than 5 Mermaid diagrams" "Add at least 5 Mermaid diagrams to each blog post"
 fi
 
 # Test 44: All blog posts have 4+ /docs/ cross-links

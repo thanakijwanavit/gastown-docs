@@ -44,6 +44,36 @@ flowchart TD
 
 Each Gas Town rig has a **runtime configuration** that tells the system how to spawn and manage agents:
 
+```mermaid
+flowchart TD
+    subgraph Contract["Universal Contract"]
+        RH[Read Hook]
+        MC[Make Commits]
+        CD[Call gt done]
+    end
+    subgraph Runtimes["Runtime Implementations"]
+        CC[Claude Code]
+        GM[Gemini CLI]
+        CX[Codex]
+        CR[Cursor]
+    end
+    CC --> RH
+    CC --> MC
+    CC --> CD
+    GM --> RH
+    GM --> MC
+    GM --> CD
+    CX --> RH
+    CX --> MC
+    CX --> CD
+    CR --> RH
+    CR --> MC
+    CR --> CD
+    RH --> GT[Gas Town Orchestration]
+    MC --> GT
+    CD --> GT
+```
+
 ```bash
 # Check a rig's runtime
 gt rig info backend

@@ -112,9 +112,21 @@ Instead of one Deacon patrolling all rigs, partition rigs into tiers:
 
 The Deacon prioritizes hot rigs, ensuring that active work gets fast gate evaluation while idle rigs consume minimal patrol time.
 
-## Resource Planning
-
-Here is a rough guide for compute resources at different scales:
+```mermaid
+gantt
+    title Scaling Timeline: From 5 to 40+ Agents
+    dateFormat X
+    axisFormat %s agents
+    section Infrastructure
+    Single Machine :milestone, 0, 10
+    Add Load Balancing :milestone, 20, 0
+    Distributed Setup :milestone, 40, 0
+    section Optimization
+    Partition Rigs :0, 15
+    Stagger Dispatches :15, 25
+    Multi-Refinery :25, 35
+    Tiered Patrols :35, 45
+```
 
 | Scale | Agents | Rigs | Recommended Setup |
 |-------|--------|------|-------------------|

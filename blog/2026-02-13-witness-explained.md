@@ -158,9 +158,15 @@ flowchart LR
     MY -->|strategic assessment| HU[Human]
 ```
 
-## The Escalation Flow
+```mermaid
+pie title Witness Patrol Time Distribution
+    "Check Polecats" : 35
+    "Check Refinery" : 20
+    "Check Merge Queue" : 15
+    "Check Convoys" : 15
+    "Report to Deacon" : 10
+    "Self-Context Check" : 5
 
-When the Witness escalates, the information flows upward:
 
 ```text
 Witness → Deacon: "Polecat alpha in rig myproject is stalled.

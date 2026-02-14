@@ -128,6 +128,23 @@ Most developers operate at different stages across different codebases. You migh
 | 6 → 7 | "I'll lose track of parallel work" | That's what convoys are for |
 | 7 → 8 | "I'm giving up too much control" | You're trading control for leverage |
 
+```mermaid
+gantt
+    title AI Coding Maturity Progression Timeline
+    dateFormat YYYY-MM
+    section Learning Phase
+    Stage 1-2: Manual/Completions    :2024-01, 6M
+    Stage 3: Chat Assistance          :2024-04, 4M
+    section Building Trust
+    Stage 4: Agent Edits              :2024-08, 6M
+    Stage 5: Multi-File Changes       :2025-02, 4M
+    section Intent Level
+    Stage 6: Intent-Based Dev         :2025-06, 6M
+    section Orchestration
+    Stage 7: Parallel Agents          :2025-12, 3M
+    Stage 8: Agents Managing Agents   :2026-03, 3M
+```
+
 :::danger Stage 7 Without Test Coverage Is a Recipe for Chaos
 Running multiple agents in parallel without comprehensive test coverage means you won't catch bad code until it is already on main and breaking downstream work. The automation that makes Stage 7 powerful — agents merging code with minimal review — becomes your biggest liability when tests are missing. If your codebase does not have 70%+ test coverage, stay at Stage 6 until you can build that foundation.
 :::
