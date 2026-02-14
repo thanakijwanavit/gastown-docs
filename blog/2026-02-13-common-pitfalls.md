@@ -234,6 +234,25 @@ All five pitfalls share a common root: treating Gas Town like a single-developer
 
 Once you internalize these principles, Gas Town becomes remarkably smooth. The [Eight Stages of Gas Town Maturity](/blog/eight-stages-self-assessment) framework can help you assess where you are on this journey. For comprehensive troubleshooting procedures when things go wrong, consult the [troubleshooting guide](/docs/guides/troubleshooting).
 
+### Pitfall Severity and Recovery Effort
+
+This chart shows the relative severity and recovery effort for each of the five common pitfalls.
+
+```mermaid
+graph TD
+    subgraph High["High Severity"]
+        FR2[Fighting Refinery<br/>Divergent State]
+        NP2[Not Pushing<br/>Lost Work]
+    end
+    subgraph Medium["Medium Severity"]
+        BIG2[Too-Large Beads<br/>Context Exhaustion]
+        IW2[Ignoring Witness<br/>Silent Failures]
+    end
+    subgraph Low["Low Severity"]
+        VB2[Vague Beads<br/>Wrong Implementation]
+    end
+```
+
 ```mermaid
 flowchart LR
     subgraph Right["Multi-Agent Mindset"]

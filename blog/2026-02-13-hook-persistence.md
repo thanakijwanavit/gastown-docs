@@ -284,6 +284,27 @@ This asymmetry is deliberate. Work stays hooked until it's explicitly done or re
 If a worktree is manually deleted without properly clearing the hook first, the hook metadata persists in the beads database but points to a non-existent workspace. This creates orphaned hooks that confuse the system. Always use `gt hook clear` before manually removing worktrees, or rely on Gas Town's cleanup commands like `gt worktree remove` which handle both operations atomically.
 :::
 
+### Hook Clearing Decision Matrix
+
+Understanding when hooks clear prevents orphaned work assignments.
+
+```mermaid
+graph LR
+    subgraph "Events That Clear Hooks"
+        DONE[gt done<br/>Success] --> CLEAR[Hook Cleared]
+        MANUAL[gt hook clear<br/>Explicit] --> CLEAR
+        WARRANT[Warrant Execution<br/>+ Cleanup] --> CLEAR
+    end
+    subgraph "Events That Preserve Hooks"
+        CRASH[Session Crash] --> KEEP[Hook Persists]
+        COMPACT[Context Compact] --> KEEP
+        REBOOT[Machine Reboot] --> KEEP
+        HANDOFF[Session Handoff] --> KEEP
+    end
+    style CLEAR fill:#99ff99
+    style KEEP fill:#cfe2ff
+```
+
 ## Next Steps
 
 - [Hooks Reference](/docs/concepts/hooks) — Full reference with all hook types, states, and commands

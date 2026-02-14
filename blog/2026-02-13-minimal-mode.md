@@ -251,6 +251,35 @@ graph TD
 If you cannot install Tmux on your machine (e.g., corporate restrictions or embedded environments), Minimal Mode still works completely — you manually spawn agents in regular terminal sessions instead of tmux panes. The hook system, beads database, and convoy tracking are all filesystem-based and have zero dependency on Tmux. You lose auto-spawning convenience but retain all coordination features.
 :::
 
+### Minimal Mode Component Dependencies
+
+Understanding which components require which dependencies helps you scale incrementally:
+
+```mermaid
+graph LR
+    subgraph Core["Core (No Dependencies)"]
+        BD[Beads Database]
+        HK[Hook System]
+        CV[Convoy Tracking]
+    end
+    subgraph Tmux["+ Tmux Layer"]
+        AS[Auto-Spawn]
+        TM[Tmux Sessions]
+    end
+    subgraph Agents["+ Agent Layer"]
+        WIT[Witness]
+        REF[Refinery]
+        MAY[Mayor]
+    end
+    BD --> HK
+    HK --> CV
+    CV -.->|optional| TM
+    TM -.->|enables| AS
+    AS -.->|required for| WIT
+    WIT -.->|works with| REF
+    REF -.->|coordinates with| MAY
+```
+
 ## Next Steps
 
 - [Minimal Mode Reference](/docs/workflows/minimal-mode) — Full step-by-step walkthrough

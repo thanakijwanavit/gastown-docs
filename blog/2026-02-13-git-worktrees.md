@@ -268,6 +268,24 @@ If you need stronger isolation for security-sensitive workloads (running untrust
 You don't need to manage worktrees manually. The Deacon creates them when spawning polecats, and Boot cleans them up when processing death warrants after work completes. The only time you interact with worktrees directly is when using `gt worktree` for cross-rig crew work.
 :::
 
+### Worktree Lifecycle Management
+
+The automatic worktree lifecycle ensures clean resource management without manual intervention.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Created: gt sling (Deacon)
+    Created --> Active: Polecat session starts
+    Active --> Working: Agent implements + commits
+    Working --> Done: gt done (submit MR)
+    Done --> Merged: Refinery merges
+    Merged --> Removed: Boot cleanup
+    Removed --> [*]
+    Working --> Crashed: Session ends unexpectedly
+    Crashed --> Respawned: Witness detects
+    Respawned --> Active
+```
+
 ## Next Steps
 
 - [Rigs](/docs/concepts/rigs) -- How rigs organize worktrees and agent infrastructure

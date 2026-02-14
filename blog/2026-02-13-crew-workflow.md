@@ -227,6 +227,26 @@ Gas Town embraces "vibe coding" -- letting AI do the heavy lifting while you foc
 
 The most effective Gas Town operators spend 80% of their time on specification and review, and 20% on direct coding in their crew workspace. For strategies on maximizing the value you get from AI work while minimizing wasted tokens, see [cost optimization](/blog/cost-optimization). Understanding the [design principles](/docs/architecture/design-principles) that shaped Gas Town helps crew members work more effectively with the agent fleet.
 
+### Crew Workspace vs Polecat Workspace Comparison
+
+This comparison highlights the key differences in workspace characteristics between crew and polecat agents.
+
+```mermaid
+graph LR
+    subgraph Crew["Crew Workspace"]
+        C1[Persistent Clone]
+        C2[Direct Main Access]
+        C3[Human Judgment]
+        C4[Self-Managed]
+    end
+    subgraph Polecat["Polecat Workspace"]
+        P1[Ephemeral Worktree]
+        P2[Via Refinery]
+        P3[Autonomous]
+        P4[Witness-Supervised]
+    end
+```
+
 ```mermaid
 flowchart LR
     subgraph Crew["Crew Operator Time Split"]

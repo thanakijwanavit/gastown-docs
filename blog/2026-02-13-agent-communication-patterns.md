@@ -291,6 +291,21 @@ pie title Communication Primitive Usage
 
 **Don't spam nudges.** Each nudge consumes context in the recipient's session. Batch your communication into one mail + one nudge rather than five nudges in a row.
 
+### Communication Primitive Selection Decision Tree
+
+This decision tree helps you choose the right communication primitive for your specific coordination needs.
+
+```mermaid
+flowchart TD
+    START{What is your goal?}
+    START -->|Information transfer| DURABLE{Durable needed?}
+    START -->|Work assignment| HOOK[Use Hook/gt sling]
+    START -->|Immediate alert| NUDGE[Use Nudge]
+    DURABLE -->|Yes| MAIL[Use Mail]
+    DURABLE -->|No| NUDGE
+    MAIL -->|Urgent?| BOTH[Mail + Nudge]
+```
+
 ## Next Steps
 
 - [GUPP: The Propulsion Principle](/docs/concepts/gupp) — Why hooks trigger immediate execution

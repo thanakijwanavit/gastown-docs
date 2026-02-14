@@ -368,6 +368,28 @@ The key insight: you operate at the level of intent, not implementation. The May
 If you realize mid-execution that the Mayor's decomposition is heading in the wrong direction, you can attach to the Mayor's session with `gt mayor attach` and tell it to pause the convoy. The Mayor will stop slinging new beads while allowing in-flight polecats to complete. This gives you a chance to review progress, cancel problematic beads, and adjust the plan before the convoy continues.
 :::
 
+### Mayor Workflow Decision Points
+
+The Mayor makes several key decisions during convoy execution:
+
+```mermaid
+graph TD
+    REQ[Natural Language Request] --> DEC[Decompose into Beads]
+    DEC --> DEP{Dependencies?}
+    DEP -->|Yes| CHAIN[Set Dependency Chain]
+    DEP -->|No| PAR[Parallel Execution]
+    CHAIN --> RIG{Multi-Rig?}
+    PAR --> RIG
+    RIG -->|Yes| ROUTE[Route to Appropriate Rigs]
+    RIG -->|No| SINGLE[Sling to Single Rig]
+    ROUTE --> MON[Monitor Progress]
+    SINGLE --> MON
+    MON --> FAIL{Failure?}
+    FAIL -->|Yes| RETRY[Re-sling to New Polecat]
+    FAIL -->|No| COMP[Convoy Complete]
+    RETRY --> MON
+```
+
 ## Next Steps
 
 - **[Mayor Agent](/docs/agents/mayor/)** — Full reference for the Mayor role

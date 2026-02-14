@@ -264,6 +264,18 @@ This keeps the beads database clean while maintaining full observability of what
 When investigating what happened during a specific time window, search for squashed patrol digest beads with timestamps matching the period of interest. Each digest bead contains a summary of all actions taken during that patrol cycle -- gates closed, health checks performed, escalations triggered -- without the noise of individual step beads.
 :::
 
+### Squash and Respawn Cycle
+
+The Deacon uses a squash-and-respawn pattern to keep the beads database clean while preserving audit history.
+
+```mermaid
+flowchart LR
+    PATROL[Complete Patrol] --> SQUASH[Squash to Digest]
+    SQUASH --> ARCHIVE[Archive Summary]
+    ARCHIVE --> FRESH[Pour Fresh Molecule]
+    FRESH --> PATROL2[Next Patrol Cycle]
+```
+
 ## When Things Go Wrong
 
 The Deacon is the safety net for most operational problems:

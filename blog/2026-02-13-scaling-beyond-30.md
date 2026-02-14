@@ -242,6 +242,21 @@ Adding more polecats to a rig without adjusting the Witness patrol interval crea
 3. **Ignoring Refinery backlog.** A growing merge queue means polecats are producing faster than you can merge. Either add Refinery workers or reduce polecat count.
 4. **Skipping monitoring.** At scale, problems compound quickly. What is a minor hiccup with 5 agents becomes a cascade with 30.
 
+### Scaling Maturity Stages
+
+This diagram shows the typical progression as you scale from a small deployment to a large multi-rig fleet.
+
+```mermaid
+flowchart LR
+    S1[Stage 1: Single Rig<br/>5-10 Agents] --> S2[Stage 2: Multi-Rig<br/>10-20 Agents]
+    S2 --> S3[Stage 3: Partitioned<br/>20-40 Agents]
+    S3 --> S4[Stage 4: Distributed<br/>40+ Agents]
+    S1 -.->|Add monitoring| S2
+    S2 -.->|Partition rigs| S3
+    S3 -.->|Multi-machine setup| S4
+```
+
+
 :::tip Set Up Queue Depth Alerts Before Reaching 20 Agents
 Configure automated alerts when your merge queue depth exceeds 5 items for more than 10 minutes. This gives you early warning that throughput is becoming a bottleneck — before polecats start stalling and conflicts cascade. Use `gt mq list --json | jq '.pending | length'` in a cron job or monitoring script to track queue depth over time.
 :::

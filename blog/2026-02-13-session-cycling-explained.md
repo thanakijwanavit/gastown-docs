@@ -283,6 +283,21 @@ graph LR
 
 **Trust the hook.** Your work assignment persists across sessions. You don't need to re-create beads, re-set-up branches, or re-attach molecules. The hook has it all.
 
+### Context Pressure Lifecycle
+
+This diagram shows the typical progression of context pressure during a long-running agent session and when cycling becomes necessary.
+
+```mermaid
+graph LR
+    START[Session Start<br/>0-20% Context] --> WORK[Active Work<br/>20-70% Context]
+    WORK --> PRESSURE[Pressure Builds<br/>70-85% Context]
+    PRESSURE --> TRIGGER[Cycle Trigger<br/>85%+ Context]
+    TRIGGER --> HANDOFF[Commit + Handoff]
+    HANDOFF --> FRESH[Fresh Session<br/>0-20% Context]
+    FRESH --> WORK
+```
+
+
 :::info Patrol Agents Cycle More Predictably Than Polecats
 The Witness and Refinery cycle on a fixed schedule — typically every N patrol rounds — because their work is repetitive and context accumulates in a predictable pattern. Polecats cycle unpredictably based on task complexity and context fill rate. When debugging patrol agent behavior, check the patrol count since the last cycle with `gt agent status <agent-name>` to verify cycling is happening as expected.
 :::

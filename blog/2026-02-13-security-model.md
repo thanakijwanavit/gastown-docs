@@ -226,6 +226,24 @@ sequenceDiagram
 4. **Scope agent permissions.** Crew workers need write access; the Witness does not. Keep permissions minimal. When extending Gas Town with custom functionality, follow the security guidelines in the [plugins documentation](/docs/operations/plugins). For insights on how plugins interact with the broader architecture, see the [plugin system guide](/blog/plugin-system).
 5. **Use gates for sensitive operations.** Production deploys and infrastructure changes should require human approval via [gates](/docs/concepts/gates).
 
+### Security Layers in Gas Town
+
+This diagram illustrates how multiple security layers work together to protect your codebase from agent misbehavior.
+
+```mermaid
+graph TD
+    subgraph Defense["Defense in Depth"]
+        L1[Layer 1: Workspace Isolation<br/>Git worktrees separate agents]
+        L2[Layer 2: Refinery Gate<br/>All code validated before main]
+        L3[Layer 3: Audit Trail<br/>BD_ACTOR tracks every action]
+        L4[Layer 4: Human Gates<br/>Critical ops require approval]
+    end
+    L1 --> L2
+    L2 --> L3
+    L3 --> L4
+```
+
+
 :::danger Audit BD_ACTOR Logs After Security Incidents
 Every agent action is tagged with a BD_ACTOR identity that persists in git commits, bead updates, and mail messages. After a security incident or suspicious activity, grep your audit logs for the BD_ACTOR value to trace which agent session was responsible. This attribution chain is essential for forensic analysis and identifying whether the issue was a misconfigured agent, a compromised session, or a workflow design flaw.
 :::

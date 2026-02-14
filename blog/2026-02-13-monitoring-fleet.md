@@ -351,6 +351,27 @@ graph TD
 The single best monitoring habit is keeping `gt feed` running in a persistent terminal window from the moment you start Gas Town. Unlike polling-based dashboards, the feed shows events as they happen in real time, letting you catch spawn/nuke cycles, escalation bursts, and merge queue stalls the instant they occur rather than discovering them minutes or hours later during manual checks.
 :::
 
+### Monitoring Command Workflow
+
+Use this workflow to systematically diagnose and resolve fleet issues:
+
+```mermaid
+flowchart TD
+    START[Monitoring Session] --> FEED[gt feed: Watch Activity]
+    FEED -->|Anomaly Detected| STATUS[gt status: Quick Check]
+    STATUS -->|Issue Confirmed| DOCTOR[gt doctor: Diagnose]
+    DOCTOR -->|Agent Problem| TRAIL[gt trail: Agent Output]
+    DOCTOR -->|Cost Spike| COSTS[gt costs: Review Spend]
+    TRAIL --> FIX{Can Fix?}
+    COSTS --> FIX
+    FIX -->|Yes| REPAIR[Apply Fix]
+    FIX -->|No| ESC[Escalate to Human]
+    REPAIR --> VERIFY[gt dashboard: Verify]
+    VERIFY --> FEED
+    ESC --> MANUAL[Manual Intervention]
+    MANUAL --> VERIFY
+```
+
 ## Next Steps
 
 - **[Operations Guide](/docs/operations/)** — Full operational reference

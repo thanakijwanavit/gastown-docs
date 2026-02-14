@@ -271,6 +271,28 @@ Stage 8 is not for everyone. It requires:
 
 But for teams with well-tested codebases and a backlog of clearly-defined tasks, Stage 8 can deliver 10-50x throughput over Stage 6. That's not hyperbole — it's math: 10 agents working in parallel, each 2-5x as productive as manual coding.
 
+### Organizational Readiness Assessment
+
+Use this flowchart to determine if your organization is ready for Stage 8.
+
+```mermaid
+flowchart TD
+    START[Considering Stage 8?] --> TEST{Test Coverage<br/>>70%?}
+    TEST -->|No| FIX1[Build Test Suite First]
+    TEST -->|Yes| ARCH{Clean<br/>Architecture?}
+    ARCH -->|No| FIX2[Refactor & Document]
+    ARCH -->|Yes| TRUST{Can You Trust<br/>Imperfect Code?}
+    TRUST -->|No| FIX3[Stay at Stage 6]
+    TRUST -->|Yes| BACKLOG{Backlog of<br/>Clear Tasks?}
+    BACKLOG -->|No| FIX4[Improve Task Definition]
+    BACKLOG -->|Yes| READY[Ready for Stage 8]
+    style READY fill:#99ff99
+    style FIX1 fill:#ffcccc
+    style FIX2 fill:#ffcccc
+    style FIX3 fill:#ffcccc
+    style FIX4 fill:#ffcccc
+```
+
 ## Next Steps
 
 - **[The 8 Stages of AI Coding](/docs/guides/eight-stages)** — Full reference with detailed descriptions

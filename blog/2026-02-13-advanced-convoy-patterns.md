@@ -325,6 +325,24 @@ gt convoy status hq-cv-search
 
 The backend beads run in parallel. When the API endpoint lands, the frontend bead unblocks and a polecat picks it up. When that finishes, docs unblocks. The convoy auto-closes when all four are done.
 
+### Convoy Lifecycle from Creation to Auto-Close
+
+This diagram shows the complete lifecycle of a convoy from initial creation through parallel execution to final auto-close.
+
+```mermaid
+flowchart TD
+    CREATE[Create Convoy] --> ADD[Add Beads]
+    ADD --> DEPS{Dependencies?}
+    DEPS -->|Yes| CHAIN[Chain with bd dep add]
+    DEPS -->|No| SLING
+    CHAIN --> SLING[Sling to Polecats]
+    SLING --> EXEC[Parallel Execution]
+    EXEC --> CHECK{All beads terminal?}
+    CHECK -->|No| EXEC
+    CHECK -->|Yes| AUTOCLOSE[Auto-Close Convoy]
+    AUTOCLOSE --> NOTIFY[Notify Stakeholders]
+```
+
 ## Next Steps
 
 - **[Convoys (Batch Tracking)](/docs/concepts/convoys)** — Full convoy reference

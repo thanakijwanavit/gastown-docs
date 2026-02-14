@@ -278,6 +278,28 @@ Never `git push --force` in a Gas Town repo unless explicitly asked. Other agent
 If you're a crew worker and keep hitting conflicts, check if a polecat is working on the same files. Use `gt polecat list` and `gt peek <polecat>` to see what's in flight.
 :::
 
+### Conflict Resolution Decision Tree
+
+Follow this decision tree when encountering merge conflicts in multi-agent environments.
+
+```mermaid
+flowchart TD
+    CONFLICT[Merge Conflict Detected] --> WHO{Who Has<br/>the Conflict?}
+    WHO -->|Crew Worker| CREW[Resolve Manually]
+    WHO -->|Polecat| POLE{Polecat<br/>Still Running?}
+    POLE -->|Yes| WAIT[Let Refinery Respawn]
+    POLE -->|No| RESPAWN[Fresh Polecat Spawned]
+    CREW --> FIX[Edit Files]
+    FIX --> STAGE[git add]
+    STAGE --> CONT[git rebase --continue]
+    CONT --> PUSH[git push]
+    WAIT --> RESPAWN
+    RESPAWN --> AUTO[Auto Re-implements]
+    AUTO --> DONE[Conflict Resolved]
+    PUSH --> DONE
+    style DONE fill:#99ff99
+```
+
 ## Next Steps
 
 - [Multi-Agent Git Workflow Reference](/docs/guides/git-workflow) — Full guide with all the edge cases

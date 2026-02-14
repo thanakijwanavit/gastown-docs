@@ -263,6 +263,21 @@ gt witness attach myproject
 
 The Witness logs its patrol findings, so you can review what it detected during its last patrol cycle.
 
+### Witness Monitoring Commands
+
+This diagram shows the key commands for observing Witness activity and debugging patrol behavior.
+
+```mermaid
+flowchart TD
+    START[Monitor Witness] --> STATUS[gt rig status<br/>Check overall health]
+    START --> FEED[gt feed --rig<br/>Watch patrol activity]
+    START --> ATTACH[gt witness attach<br/>Read-only session view]
+    STATUS --> LOGS[Review patrol findings]
+    FEED --> LOGS
+    ATTACH --> LOGS
+```
+
+
 :::tip Review Witness Patrol Logs After Unexplained Polecat Terminations
 When a polecat session terminates and you did not issue the warrant yourself, check the Witness patrol logs to understand why. The logs record detection timestamps, nudge attempts, and escalation decisions — giving you the forensic trail needed to determine whether the termination was justified or a false positive caused by misconfigured stall thresholds.
 :::

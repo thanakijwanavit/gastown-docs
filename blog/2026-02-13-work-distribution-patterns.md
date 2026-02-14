@@ -223,6 +223,22 @@ gt release gt-b2                    # Pull one bead back
 gt sling gt-b2 security-team-rig    # Re-route to security experts
 ```
 
+### Pattern Selection Matrix
+
+This matrix helps you choose the right work distribution pattern based on your requirements.
+
+```mermaid
+flowchart TD
+    START[Choose Pattern] --> REPEAT{Repeatable<br/>Process?}
+    REPEAT -->|Yes| FORMULA[Use Formula<br/>Template-driven consistency]
+    REPEAT -->|No| FUZZY{Fuzzy<br/>Requirements?}
+    FUZZY -->|Yes| MAYOR[Use Mayor MEOW<br/>Auto-decomposition]
+    FUZZY -->|No| CONTROL{Need<br/>Precise Control?}
+    CONTROL -->|Yes| MANUAL[Manual Convoy<br/>Full control]
+    CONTROL -->|No| MAYOR
+```
+
+
 ```mermaid
 sequenceDiagram
     participant H as Human

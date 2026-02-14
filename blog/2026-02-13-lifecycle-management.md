@@ -352,6 +352,26 @@ graph TD
 Because parked rigs keep their worktrees intact while docked rigs have them removed, unparking and restarting a rig takes seconds compared to the minutes required to undock and boot. If you frequently pause and resume work on a rig (e.g., daily cycling between projects), use park/unpark instead of dock/undock to minimize downtime and improve your workflow cadence.
 :::
 
+### Rig Lifecycle Command Reference
+
+The following diagram shows all lifecycle commands and their typical use cases:
+
+```mermaid
+flowchart LR
+    subgraph Quick["Quick Pause (Seconds)"]
+        STOP[gt rig stop] -.->|daemon restarts| RESUME1[Auto-Resume]
+    end
+    subgraph Extended["Extended Offline (Hours/Days)"]
+        PARK[gt rig park] -->|gt rig unpark| RESUME2[Manual Resume]
+    end
+    subgraph Shelve["Long-Term Storage (Weeks/Months)"]
+        DOCK[gt rig dock] -->|gt rig undock + boot| RESUME3[Full Restore]
+    end
+    subgraph Fresh["Clean Restart"]
+        REBOOT[gt rig reboot] -.->|auto| RESUME4[Clean State]
+    end
+```
+
 ## Next Steps
 
 - [Starting & Stopping](/docs/operations/lifecycle) — Full lifecycle command reference

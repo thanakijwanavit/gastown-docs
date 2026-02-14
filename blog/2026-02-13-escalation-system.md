@@ -276,6 +276,26 @@ graph LR
 Run `gt escalate stats --by-category` monthly to analyze which escalation types fire most frequently. If "flaky test" appears repeatedly, your test suite needs stability work. If "merge conflict" dominates, your bead scoping is too coarse. Escalations are not just incident reports — they are data about your development bottlenecks.
 :::
 
+### Escalation Rate Over Time
+
+Tracking escalation volume helps identify systemic problems before they compound.
+
+```mermaid
+graph LR
+    subgraph "Healthy Pattern"
+        W1[Week 1:<br/>10 escalations] --> W2[Week 2:<br/>8 escalations]
+        W2 --> W3[Week 3:<br/>6 escalations]
+        W3 --> W4[Week 4:<br/>5 escalations]
+    end
+    subgraph "Warning Pattern"
+        B1[Week 1:<br/>10 escalations] --> B2[Week 2:<br/>12 escalations]
+        B2 --> B3[Week 3:<br/>15 escalations]
+        B3 --> B4[Week 4:<br/>20 escalations]
+    end
+    style W4 fill:#99ff99
+    style B4 fill:#ff9999
+```
+
 ## Next Steps
 
 - [Escalation System Reference](/docs/operations/escalations) — Full configuration reference

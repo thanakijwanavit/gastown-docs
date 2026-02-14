@@ -378,6 +378,28 @@ Gas Town is designed to be self-healing. Most incidents resolve themselves withi
 The hardest lesson in Gas Town incident response is learning when not to intervene. The Witness patrol runs every 3 minutes, Boot processes warrants automatically, and the Refinery retries transient failures. If you jump in too quickly with manual fixes, you can conflict with automated recovery already in progress. Wait 10 minutes, re-run `gt status`, and verify the issue still exists before taking manual action.
 :::
 
+### Intervention Timing Guidelines
+
+Knowing when to intervene versus waiting for auto-recovery is critical.
+
+```mermaid
+graph TD
+    ISSUE[Issue Detected] --> TIME{Time Since<br/>Detection}
+    TIME -->|< 5 min| WAIT1[Wait - Too Early]
+    TIME -->|5-10 min| CHECK{Auto-Recovery<br/>in Progress?}
+    CHECK -->|Yes| WAIT2[Wait - Let It Finish]
+    CHECK -->|No| TRIAGE[Run 90-sec Triage]
+    TIME -->|> 10 min| TRIAGE
+    WAIT1 --> RECHECK[Recheck in 5 min]
+    WAIT2 --> RECHECK
+    TRIAGE --> SEV{Severity?}
+    SEV -->|SEV-1| IMMEDIATE[Intervene Now]
+    SEV -->|SEV-2| WAIT3[Wait 1 Witness Cycle]
+    SEV -->|SEV-3/4| AUTO[Let Auto-Recovery Handle]
+    style IMMEDIATE fill:#ff9999
+    style AUTO fill:#99ff99
+```
+
 ## Next Steps
 
 - **[Troubleshooting Guide](/docs/operations/troubleshooting)** — Comprehensive troubleshooting reference

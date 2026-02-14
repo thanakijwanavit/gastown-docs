@@ -342,6 +342,29 @@ graph BT
 If you modify a formula's TOML file (e.g., adding a new step or changing dependencies), molecules that are already poured from the old version continue using the old definition. Changes only apply to new molecules poured after the edit. To apply formula changes to in-flight work, you must reset the molecule with `gt mol reset` and restart from the beginning.
 :::
 
+### Formula to Molecule Instantiation
+
+The process of pouring a formula creates a live molecule instance with tracked state:
+
+```mermaid
+sequenceDiagram
+    participant F as Formula TOML
+    participant GT as gt formula run
+    participant M as Molecule Instance
+    participant W as Wisp Beads
+    participant A as Agent
+
+    F->>GT: Load formula definition
+    GT->>M: Create molecule bead
+    M->>W: Create wisp for each step
+    W->>W: Set initial state: pending
+    GT->>A: Attach molecule to hook
+    A->>W: Execute step 1
+    W->>W: Update state: completed
+    A->>W: Execute step 2
+    W->>W: Update state: in_progress
+```
+
 ## Next Steps
 
 - [Molecules & Formulas Reference](/docs/concepts/molecules) — Full reference with all step states, variables, and advanced features

@@ -253,6 +253,22 @@ sequenceDiagram
 **Monitor rig health with `gt rig status`.** This shows active polecats, merge queue depth, and agent health at a glance. Run it regularly when managing multiple rigs.
 :::
 
+### Rig Decision Guide
+
+This decision tree helps you determine when to create a new rig versus using an existing one.
+
+```mermaid
+graph TD
+    START[New Work Needed] --> Q1{Own Git Repo?}
+    Q1 -->|No| EXIST[Use Existing Rig]
+    Q1 -->|Yes| Q2{Independent Deploy?}
+    Q2 -->|No| Q3{Tightly Coupled?}
+    Q2 -->|Yes| NEW[Create New Rig]
+    Q3 -->|Yes| EXIST
+    Q3 -->|No| NEW
+```
+
+
 :::note Rig State Transitions Are Synchronous — But Agent Shutdown Is Gradual
 When you run `gt rig park`, the command completes immediately and marks the rig as parked — but active polecats do not terminate instantly. They finish their current molecule step before gracefully shutting down. If you need to stop agents immediately, use `gt rig stop` instead of `gt rig park`, which forcibly terminates all sessions. Parking is for clean pauses; stopping is for urgent halts.
 :::

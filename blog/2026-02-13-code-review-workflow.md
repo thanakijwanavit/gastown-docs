@@ -292,6 +292,20 @@ The parallel review model works because each perspective is genuinely independen
 
 This is the exact pattern Gas Town is built for — independent parallel work with a final coordination step. The code-review formula is just a convoy where every bead is a review leg and the synthesis is the convoy's completion handler. For more sophisticated review orchestration across multiple pull requests, see [work distribution patterns](/blog/work-distribution-patterns) for strategies on batching and prioritizing review work, which build on the foundational [work distribution architecture](/docs/architecture/work-distribution).
 
+### Review Formula Preset Decision Matrix
+
+Choose the right review preset based on change type and risk level for optimal cost-quality balance.
+
+```mermaid
+flowchart TD
+    PR{What type of change?}
+    PR -->|Typos/Formatting| GATE[Gate Preset<br/>4 legs, fast]
+    PR -->|Standard Feature| FULL[Full Preset<br/>10 legs, thorough]
+    PR -->|Auth/Payment/Security| SEC[Security Preset<br/>4 legs, focused]
+    PR -->|Refactoring| REF[Refactor Preset<br/>4 legs, quality]
+    PR -->|Custom| CUSTOM[Custom legs]
+```
+
 ## Next Steps
 
 - [Code Review Workflow Reference](/docs/workflows/code-review) — Full reference with all presets, options, and output formats

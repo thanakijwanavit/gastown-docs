@@ -279,6 +279,25 @@ This is why Gas Town agents check `gt hook` before doing anything else. The hook
 Because hooks persist in the filesystem independently of any session, you can manually hook work to yourself as a crew member, do part of the implementation, then un-hook it and re-sling to a polecat to finish. The hook state captures exactly where you left off, making human-to-agent and agent-to-human handoffs seamless. This is particularly useful for tasks that need initial human judgment before agent execution.
 :::
 
+### Hook Trust Hierarchy
+
+Hooks establish a trust hierarchy that protects against prompt injection.
+
+```mermaid
+graph TD
+    subgraph "Trust Levels (Most to Least Authoritative)"
+        HOOK[Hook in Filesystem<br/>✓ Tamper-resistant<br/>✓ Survives crashes<br/>✓ Auditable]
+        GIT[Git Commits<br/>✓ Durable<br/>✓ Version controlled]
+        BEAD[Bead Status<br/>✓ Tracked in DB<br/>✓ Queryable]
+        CTX[Context Window<br/>✗ Ephemeral<br/>✗ Can be injected]
+    end
+    HOOK -->|More Authoritative Than| GIT
+    GIT -->|More Authoritative Than| BEAD
+    BEAD -->|More Authoritative Than| CTX
+    style HOOK fill:#99ff99
+    style CTX fill:#ffcccc
+```
+
 ## Next Steps
 
 - [Hooks (Persistence)](/docs/concepts/hooks) -- Full reference for the hook system

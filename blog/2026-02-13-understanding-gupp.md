@@ -221,6 +221,24 @@ As a Gas Town user, GUPP means:
 - **Don't babysit polecats.** The supervision tree (Witness → Deacon → Mayor) handles recovery at every level. When escalation is needed, the [escalation system](/blog/escalation-system) routes issues to the appropriate handler.
 - **Trust the hook.** If work is on a hook, it will get done — eventually.
 
+### GUPP Recovery in Action
+
+This flowchart illustrates how GUPP's three primitives work together to enable automatic recovery from an agent crash.
+
+```mermaid
+flowchart TD
+    CRASH[Agent Crashes] --> HK[Hook Persists on Disk]
+    HK --> MOL[Molecule State in DB]
+    MOL --> BD[Bead Status: in_progress]
+    BD --> WIT[Witness Detects Dead Session]
+    WIT --> RESLING[Re-sling Bead]
+    RESLING --> NEW[New Agent Spawns]
+    NEW --> READ[Reads Hook + Molecule]
+    READ --> SKIP[Skips Completed Steps]
+    SKIP --> RESUME[Resumes Work]
+```
+
+
 :::note The Supervision Gap After a Witness Crash Is Bounded by Deacon Patrol Interval
 When a Witness session crashes, there is a brief period when stalled polecats in that rig will not be detected or nudged — but this gap never exceeds one Deacon patrol cycle. The Deacon detects the missing Witness during its next patrol and restarts it, restoring supervision. For production-critical rigs, keep the Deacon patrol interval short to minimize this supervision gap.
 :::

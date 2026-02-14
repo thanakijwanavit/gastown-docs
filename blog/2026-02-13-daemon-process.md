@@ -168,6 +168,26 @@ gt daemon start    # Restart the daemon
 # All existing agents continue; heartbeats resume
 ```
 
+### Daemon Crash Recovery Isolation
+
+This diagram shows which components are affected and which continue running during a daemon crash.
+
+```mermaid
+graph TD
+    subgraph Affected["Affected by Daemon Crash"]
+        HB[Heartbeats: Stopped]
+        NS[New Spawns: Blocked]
+    end
+    subgraph Unaffected["Unaffected by Daemon Crash"]
+        RP[Running Polecats: Continue]
+        RW[Running Witnesses: Continue]
+        RR[Running Refinery: Continue]
+        WS[Work State: Preserved]
+    end
+    FIX[gt daemon start] --> Affected
+    FIX -.->|No action needed| Unaffected
+```
+
 Understanding this resilient design helps avoid the mistakes described in [common pitfalls](/blog/common-pitfalls) when managing a multi-agent fleet.
 
 This resilient design complements Gas Town's [incident response](/blog/incident-response) procedures, ensuring that infrastructure failures don't cascade into data loss or workflow disruption. The [agent hierarchy](/docs/architecture/agent-hierarchy) explains how the daemon fits into the overall supervision tree.

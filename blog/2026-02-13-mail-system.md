@@ -294,6 +294,27 @@ Every mail message is a bead, which means it's permanently stored and searchable
 If you send mail to a typo'd agent path like `gastowndocs/polcats/toast` (note the typo: "polcats" instead of "polecats"), the mail is stored but never delivered. Gas Town does not validate recipient addresses at send time. Always double-check agent paths with `gt agent list` before sending critical handoff mail, or the next session will start without the context you intended to provide.
 :::
 
+### Mail Delivery Patterns
+
+Different mail delivery patterns serve different coordination needs across the agent hierarchy:
+
+```mermaid
+graph TD
+    subgraph Sync["Synchronous (Nudge)"]
+        N1[Agent A Running] -->|nudge| N2[Agent B Running]
+        N2 -->|immediate ack| N1
+    end
+    subgraph Async["Asynchronous (Mail)"]
+        M1[Agent A] -->|mail| MB[(Mailbox)]
+        MB -->|read later| M2[Agent B]
+    end
+    subgraph Hybrid["Hybrid (Mail + Nudge)"]
+        H1[Agent A] -->|mail| HMB[(Mailbox)]
+        H1 -->|nudge| H2[Agent B Running]
+        H2 -->|check mail| HMB
+    end
+```
+
 ## Next Steps
 
 - [Communication CLI Reference](/docs/cli-reference/communication) -- Full mail command documentation

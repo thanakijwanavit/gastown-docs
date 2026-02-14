@@ -326,6 +326,27 @@ sequenceDiagram
 Pre-merge and post-merge plugins execute in the Refinery's shell environment with the Refinery's filesystem and network access. If the Refinery has SSH keys, AWS credentials, or database passwords in its environment, plugins can access them. Never install untrusted third-party plugins without auditing their code, and always run the Refinery with minimal permissions rather than root or admin privileges.
 :::
 
+### Plugin Development Best Practices
+
+Follow this workflow when developing custom plugins:
+
+```mermaid
+flowchart TD
+    IDEA[Plugin Idea] --> WRITE[Write Shell Script]
+    WRITE --> TEST[Test Manually]
+    TEST -->|Pass| WARN[Deploy with fail_action: warn]
+    TEST -->|Fail| DEBUG[Debug and Fix]
+    DEBUG --> TEST
+    WARN --> MON[Monitor for 1-2 Days]
+    MON -->|No Issues| PROM[Promote to fail_action: reject]
+    MON -->|False Positives| TUNE[Tune Thresholds]
+    TUNE --> MON
+    PROM --> PROD[Production Plugin]
+    PROD --> REV[Regular Review]
+    REV -->|Needs Update| WRITE
+    REV -->|Working| PROD
+```
+
 ## Next Steps
 
 - [Operations: Plugins](/docs/operations/plugins) -- Detailed plugin operations guide

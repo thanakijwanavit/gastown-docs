@@ -384,6 +384,28 @@ You can inspect any built-in formula to use as a template for your own:
 gt formula show mol-polecat-work
 ```
 
+### Choosing the Right Pattern for Your Workflow
+
+Decision tree for selecting the appropriate formula design pattern.
+
+```mermaid
+flowchart TD
+    START[Need New Formula?] --> Q1{Steps Can<br/>Run in Parallel?}
+    Q1 -->|Yes| FAN[Use Fan-Out Pattern]
+    Q1 -->|No| SEQ{Need External<br/>Approval?}
+    SEQ -->|Yes| GATE[Use Gated Pattern]
+    SEQ -->|No| ERR{Expect Test<br/>Failures?}
+    ERR -->|Yes| REC[Use Error Recovery]
+    ERR -->|No| VAL{Need Health<br/>Validation?}
+    VAL -->|Yes| PRE[Use Preflight Pattern]
+    VAL -->|No| LIN[Use Linear Pattern]
+    style FAN fill:#d4edda
+    style GATE fill:#fff3cd
+    style REC fill:#cfe2ff
+    style PRE fill:#f8d7da
+    style LIN fill:#e2e3e5
+```
+
 ## Next Steps
 
 - [Molecules & Formulas](/docs/concepts/molecules) -- Full documentation of the molecule lifecycle

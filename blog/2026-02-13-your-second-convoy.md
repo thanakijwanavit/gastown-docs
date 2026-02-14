@@ -313,6 +313,25 @@ mindmap
 
 **Use the Mayor for complex convoys.** If you're managing more than 5 beads with cross-rig dependencies, consider the [Mayor workflow](/docs/workflows/mayor-workflow) instead. Let the Mayor handle decomposition and routing.
 
+### Convoy Management Workflow
+
+This diagram illustrates the typical workflow for monitoring and recovering from issues during convoy execution.
+
+```mermaid
+flowchart TD
+    START[Convoy Running] --> CHECK[gt convoy show<br/>Check progress]
+    CHECK --> STATUS{All polecats<br/>working?}
+    STATUS -->|Yes| WAIT[Continue monitoring]
+    STATUS -->|No| STUCK[Stuck polecat detected]
+    STUCK --> NUDGE[gt nudge<br/>Try to recover]
+    NUDGE --> RESP{Responds?}
+    RESP -->|Yes| WAIT
+    RESP -->|No| RELEASE[gt release + re-sling]
+    RELEASE --> WAIT
+    WAIT --> CHECK
+```
+
+
 :::danger Never Delete a Bead from a Running Convoy Without Removing It First
 If you delete a bead with `bd delete` while it is still part of an active convoy, the convoy's progress tracking breaks — it will wait indefinitely for a bead that no longer exists, preventing auto-closure. Always remove the bead from the convoy first with `gt convoy remove <convoy-id> <bead-id>` before deleting it. This updates the convoy's completion criteria to exclude the removed bead.
 :::

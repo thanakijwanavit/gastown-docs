@@ -214,6 +214,20 @@ done
 
 Batching reduces Refinery overhead (fewer individual merge cycles) and gives the Mayor better visibility for progress reporting. Combine this with the [crew workflow](/blog/crew-workflow) to handle high-judgment work directly while batching mechanical tasks for polecats.
 
+### Cost Optimization Strategy Priority
+
+Focus on the high-impact strategies first for maximum cost reduction with minimal effort.
+
+```mermaid
+flowchart LR
+    subgraph Priority["Optimization Priority Order"]
+        P1[1. Better Beads<br/>50% savings] --> P2[2. Right-Size Convoys<br/>30% savings]
+        P2 --> P3[3. Park During Idle<br/>20% savings]
+        P3 --> P4[4. Model Selection<br/>15% savings]
+        P4 --> P5[5. Control Patrol Freq<br/>10% savings]
+    end
+```
+
 ```mermaid
 flowchart TD
     subgraph Tiers["Model Tier Selection"]

@@ -309,6 +309,24 @@ This lets you verify that:
 3. Instructions are clear enough for an agent
 4. Variables resolve correctly
 
+### Formula Variable Substitution Process
+
+This diagram shows how variables flow from the pour command through the formula to the executing agent.
+
+```mermaid
+sequenceDiagram
+    participant C as gt mol pour
+    participant F as Formula Template
+    participant M as Molecule Instance
+    participant A as Agent Session
+
+    C->>F: --var key=value
+    F->>M: Replace {{key}} with value
+    M->>A: Assign molecule
+    A->>M: Read resolved step text
+    A->>A: Execute with actual values
+```
+
 ```mermaid
 flowchart TD
     subgraph CodeReview["Code Review Formula"]

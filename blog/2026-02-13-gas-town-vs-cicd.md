@@ -266,6 +266,23 @@ If your CI/CD pipeline works well, keep it. Gas Town will feed it better, faster
 Gas Town was designed from day one to complement existing CI/CD, not replace it. The `refinery.require_ci` config flag is the bridge — it tells the Refinery to wait for your CI checks before merging. This means your existing quality gates remain fully in control of what lands on main.
 :::
 
+### Integration Checklist
+
+Use this checklist to properly integrate Gas Town with your existing CI/CD.
+
+```mermaid
+flowchart TD
+    START[Starting Integration] --> C1[✓ Configure refinery.require_ci]
+    C1 --> C2[✓ Test CI webhook connectivity]
+    C2 --> C3[✓ Verify status checks in Refinery]
+    C3 --> C4[✓ Run test convoy with CI validation]
+    C4 --> C5[✓ Monitor CI build queue capacity]
+    C5 --> C6[✓ Configure throttling if needed]
+    C6 --> DONE[Production Ready]
+    style START fill:#cfe2ff
+    style DONE fill:#99ff99
+```
+
 ## Next Steps
 
 - **[Architecture Overview](/docs/architecture/overview)** — How Gas Town's components fit together

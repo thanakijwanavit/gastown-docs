@@ -280,6 +280,26 @@ pie title Dog Task Resource Distribution
 If you're looking for a dog you dispatched for cross-rig cleanup, remember that dogs are not polecats — they have their own lifecycle and listing commands. Use `gt dog list` to see active dogs and their assigned tasks. The Witness does not patrol dogs; the Deacon manages them entirely through town-level coordination.
 :::
 
+### Dog Lifecycle Management
+
+The Deacon manages the dog lifecycle from spawn to termination, maintaining a pool of reusable workers:
+
+```mermaid
+flowchart TD
+    DP[Dog Pool: Idle Dogs] --> DQ{Work Queue Empty?}
+    DQ -->|Yes| DP
+    DQ -->|No| ASG[Deacon Assigns Task]
+    ASG --> WRK[Dog Executes Task]
+    WRK --> CMP{Task Complete?}
+    CMP -->|Success| RPT[Report to Deacon]
+    CMP -->|Timeout| WNT[Warrant Issued]
+    RPT --> RU{Reuse?}
+    RU -->|More Work| ASG
+    RU -->|No Work| DP
+    WNT --> BOOT[Boot Processes Warrant]
+    BOOT --> TERM[Dog Terminated]
+```
+
 ## Next Steps
 
 - [Dogs Documentation](/docs/agents/dogs) — Full reference for dog types, commands, and patterns

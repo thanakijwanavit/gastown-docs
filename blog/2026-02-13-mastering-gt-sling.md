@@ -311,6 +311,30 @@ graph TD
 The `gt sling` command will report success when slinging to a parked rig, but no polecat will spawn because the rig's Witness is not running. The bead sits on a non-existent hook indefinitely. Before slinging work, always verify the target rig is active with `gt rig status <rig>` and unpark it if needed with `gt rig unpark <rig>` before the sling.
 :::
 
+### Sling Failure Recovery
+
+When slinging fails or work gets stuck, follow this recovery flowchart:
+
+```mermaid
+flowchart TD
+    FAIL[Sling Failed] --> CHK{Error Type?}
+    CHK -->|Target Not Found| RIG[gt rig status]
+    CHK -->|Hook Occupied| HOOK[gt hook --agent path]
+    CHK -->|Bead Not Found| BEAD[bd show bead-id]
+    RIG -->|Parked| UNPARK[gt rig unpark]
+    RIG -->|Docked| UNDOCK[gt rig undock + boot]
+    HOOK -->|Wait| WAIT[Agent Completes]
+    HOOK -->|Force| FORCE[gt sling --force]
+    BEAD -->|Missing| CREATE[bd create]
+    BEAD -->|Closed| REOPEN[bd reopen]
+    UNPARK --> RETRY[Retry Sling]
+    UNDOCK --> RETRY
+    WAIT --> RETRY
+    FORCE --> RETRY
+    CREATE --> RETRY
+    REOPEN --> RETRY
+```
+
 ## Next Steps
 
 - [Work Distribution Architecture](/docs/architecture/work-distribution) — How work flows through Gas Town end-to-end

@@ -270,6 +270,28 @@ gt mayor "Add user validation to the API with unit tests and docs"
 
 The Mayor will decompose your request into right-sized beads, set up dependencies between them, bundle a convoy, and sling work to the appropriate rig — all automatically. This is where Gas Town starts to feel like a superpower.
 
+### From Manual to Automated Convoys
+
+The progression from manual to Mayor-driven convoys represents a maturity shift.
+
+```mermaid
+graph TD
+    subgraph Manual["Manual Convoy Workflow"]
+        M1[You Create Beads] --> M2[You Bundle Convoy]
+        M2 --> M3[You Sling Each Bead]
+        M3 --> M4[You Monitor Progress]
+    end
+    subgraph Automated["Mayor-Driven Workflow"]
+        A1[You Describe Intent] --> A2[Mayor Decomposes]
+        A2 --> A3[Mayor Bundles]
+        A3 --> A4[Mayor Slings]
+        A4 --> A5[Mayor Monitors]
+    end
+    M4 -->|Transition| A1
+    style Manual fill:#fff3cd
+    style Automated fill:#d4edda
+```
+
 ## Next Steps
 
 - **[Mayor Workflow](/docs/workflows/mayor-workflow)** — Let the Mayor handle decomposition and assignment automatically

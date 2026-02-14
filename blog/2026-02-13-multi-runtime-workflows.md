@@ -295,6 +295,31 @@ graph LR
 A bead description like "refactor the auth middleware" will be interpreted through each runtime's strengths and limitations. Claude Code might produce a comprehensive multi-file refactoring; Codex might focus narrowly on Python code patterns; Cursor might prioritize UI-visible changes. When running cross-runtime convoys, write bead descriptions that are explicit about expected outcomes rather than relying on implicit assumptions about how the runtime will approach the work.
 :::
 
+### Multi-Runtime Convoy Execution
+
+A single convoy can coordinate work across multiple runtimes simultaneously:
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant CV as Convoy Tracker
+    participant CC as Claude Code Rig
+    participant CX as Codex Rig
+    participant CR as Cursor Rig
+    participant RF as Refinery
+
+    U->>CV: Create cross-runtime convoy
+    CV->>CC: Sling backend bead
+    CV->>CX: Sling ML bead
+    CV->>CR: Sling frontend bead
+    CC->>RF: Submit backend MR
+    CX->>RF: Submit ML MR
+    CR->>RF: Submit frontend MR
+    RF->>RF: Merge all to main
+    RF->>CV: Update convoy status
+    CV->>U: Convoy complete
+```
+
 ## Next Steps
 
 - **[Rigs](/docs/concepts/rigs)** — How rigs are configured and managed

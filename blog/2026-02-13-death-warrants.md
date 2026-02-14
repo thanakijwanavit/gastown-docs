@@ -244,6 +244,27 @@ The warrant system provides:
 
 In practice, most Gas Town users never think about warrants. The Witness files them, Boot executes them, and polecats respawn transparently. But when something does go wrong, the warrant log is invaluable for understanding what happened and why. This approach is part of Gas Town's broader [incident response](/blog/incident-response) strategy that prioritizes fast recovery over perfect prevention. Understanding the [monitoring capabilities](/blog/monitoring-fleet) helps you spot patterns in warrant executions before they become systemic issues.
 
+### Warrant Processing Timeline
+
+The following diagram shows a typical warrant lifecycle timeline from filing to execution.
+
+```mermaid
+timeline
+    title Warrant Processing Timeline
+    section Filing
+        Witness Detects Stuck Polecat : Warrant Filed
+        Reason Recorded : Audit Trail Created
+    section Triage
+        Boot Cycle (3 min) : Warrant Discovered
+        Validation : Confirm Target Still Stuck
+    section Execution
+        Terminate Session : Kill tmux
+        Update Warrant : Mark Executed
+    section Recovery
+        Witness Detects Termination : Respawn Decision
+        Fresh Polecat Spawned : Work Continues
+```
+
 ## Next Steps
 
 - [gt warrant Reference](/docs/cli-reference/warrant) — Full CLI reference for warrant commands
