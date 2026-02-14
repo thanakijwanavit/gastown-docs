@@ -47,6 +47,10 @@ Common scenarios that create orphans:
 | Push succeeded, Refinery failed | Remote branch | `gt orphans` + manual merge |
 | Process crashed, tmux still running | Claude process consuming resources | `gt orphans procs kill` |
 
+:::note
+Orphan recovery only works for committed but unpushed work. If a session is killed before the polecat commits its changes, those uncommitted modifications are lost entirely and cannot be recovered by `gt orphans` or any other tool. This is why Gas Town encourages frequent commits during work.
+:::
+
 ## Subcommands
 
 | Command | Description |

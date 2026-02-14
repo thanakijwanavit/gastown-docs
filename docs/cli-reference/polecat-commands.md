@@ -37,6 +37,10 @@ Polecats are **ephemeral workers**: spawned for one task, nuked when done. There
 
 **Self-cleaning model:** When work completes, the polecat runs `gt done`, which pushes the branch, submits to the merge queue, and exits. The Witness then nukes the sandbox. Polecats don't wait for more work.
 
+:::tip
+Use `--dry-run` with `nuke` and `stale` commands to preview what will be affected before taking action. For example, `gt polecat nuke myproject --all --dry-run` shows which polecats would be destroyed, and `gt polecat stale myproject --cleanup --dry-run` shows which stale polecats would be cleaned up.
+:::
+
 **Session vs sandbox:** The Claude session cycles frequently (handoffs, compaction). The git worktree (sandbox) persists until nuke. Work survives session restarts.
 
 ## Subcommands

@@ -94,6 +94,10 @@ Issues:
 Shall I proceed with assigning these to polecats?
 ```
 
+:::warning
+Review the Mayor's decomposition before approving. The Mayor may sometimes create too many or too few beads, or miss dependencies between tasks. Verify that the breakdown matches your intent and that dependent work is ordered correctly.
+:::
+
 ### Step 4: Mayor Assigns Work
 
 Once confirmed, the Mayor slings each bead to the appropriate rig:

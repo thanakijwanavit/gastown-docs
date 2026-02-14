@@ -119,6 +119,12 @@ title = "Implement {{feature}}"
 
 A formula is **poured** into a molecule — creating a live instance with real bead IDs and runtime state. You can pour the same formula many times, creating independent workflow instances.
 
+:::info
+
+Gas Town ships with 30+ built-in formulas covering work lifecycles, patrol cycles, convoy orchestration, and operational tasks. Browse the full catalog with `gt formula list`, or inspect any formula's steps with `gt formula show <name>`.
+
+:::
+
 Gas Town ships with 30+ built-in formulas. See [Molecules & Formulas](molecules.md) for the full catalog.
 
 ---

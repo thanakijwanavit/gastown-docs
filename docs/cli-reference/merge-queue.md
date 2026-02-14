@@ -130,6 +130,10 @@ gt mq submit --branch fix/critical-bug --bead gt-xyz99 --priority
 gt mq submit --branch feat/new-feature --rig myproject --message "Add user profile page"
 ```
 
+:::warning
+Priority merges jump ahead of other items in the queue. If you have dependent beads queued in a specific order (e.g., bead B depends on bead A), submitting bead B with `--priority` can cause it to merge before bead A, leading to broken builds or missing dependencies. Only use `--priority` for truly independent hotfixes.
+:::
+
 :::tip
 
 The standard polecat workflow uses `gt done` which handles `gt mq submit` automatically. Use `gt mq submit` directly for crew (human developer) workflows or manual submissions.

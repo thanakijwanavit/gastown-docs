@@ -101,6 +101,12 @@ The gate stays open until a human explicitly approves it:
 bd gate approve gt-gate-123
 ```
 
+:::warning
+
+Human approval gates are the only gate type that requires explicit human action. If no one runs `bd gate approve`, the gate stays open indefinitely, blocking the entire workflow. Make sure the responsible person is notified when a human gate is created.
+
+:::
+
 ### Mail Gates
 
 Mail gates close when a specific message arrives in an agent's mailbox:

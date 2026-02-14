@@ -145,6 +145,10 @@ In Gas Town, unpushed commits are invisible to every other agent. Push after eve
 | `gt rig reboot <name>` | Stop, clean, restart a rig |
 | `gt cleanup --rig <name>` | Clean orphaned resources |
 
+:::note
+When something seems wrong, `gt doctor` should be your first step. It checks agent health, session state, and common configuration issues — giving you a clear diagnosis before you start troubleshooting manually.
+:::
+
 ---
 
 ## Keyboard Shortcuts (Docs Site)

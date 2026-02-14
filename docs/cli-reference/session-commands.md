@@ -208,6 +208,12 @@ Validates that:
 
 Use this for manual health checks or debugging session issues.
 
+:::note
+
+Session health checks are useful for manual debugging, but you do not need to run them during normal operation. The Witness runs these checks automatically as part of its patrol cycle.
+
+:::
+
 **Examples:**
 
 ```bash

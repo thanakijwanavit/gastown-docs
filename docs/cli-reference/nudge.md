@@ -87,6 +87,10 @@ If the target has DND enabled (`gt dnd on`), the nudge is skipped. Use `--force`
 gt nudge myproject/toast "Urgent: check your mail" --force
 ```
 
+:::warning
+Do not use raw `tmux send-keys` as a substitute for `gt nudge`. The nudge command handles literal mode (`-l`), paste timing (500ms delay), and sends Enter separately to ensure reliable delivery. Raw `tmux send-keys` can mangle multi-line messages, trigger premature execution, or silently fail on special characters.
+:::
+
 ## Examples
 
 ```bash

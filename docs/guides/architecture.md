@@ -27,6 +27,10 @@ flowchart LR
     Refinery -->|merge| Main["main branch"]
 ```
 
+:::tip
+Gas Town follows a "Let It Crash" philosophy inspired by Erlang. Agents are expected to crash occasionally, and the supervision hierarchy (Witness, Deacon, Mayor) ensures automatic recovery. Design your workflows around resilience, not prevention.
+:::
+
 The rest of this guide explains each component in that pipeline.
 
 ---

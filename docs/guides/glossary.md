@@ -79,6 +79,10 @@ Use your browser's search (Ctrl+F) to quickly find terms. For deeper explanation
 | **Squash** | Compressing a completed molecule into a single digest bead. Used by patrol agents to keep the beads database clean. |
 | **Burn** | Archiving a completed molecule. The molecule is marked done and no longer appears in active status. |
 
+:::info
+The MEOW Stack page is the best resource for understanding how Molecules, Epics, Orchestration, and Workflows compose into Gas Town's layered abstraction model. See [The MEOW Stack](../concepts/meow-stack.md) for the full breakdown.
+:::
+
 ## Design Principles
 
 :::note

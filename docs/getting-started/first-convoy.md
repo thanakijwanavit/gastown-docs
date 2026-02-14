@@ -154,6 +154,10 @@ Each polecat:
 | Merge conflict | Two polecats touched same files | Refinery handles this — it spawns a resolution polecat |
 | Convoy stuck at 2/3 | One polecat stalled | Check `gt polecat list` and `gt feed` for errors |
 
+:::warning
+Write detailed bead descriptions. Vague descriptions like "fix the bug" force polecats to waste context figuring out what to do. Include the specific behavior, where it occurs, and what the expected outcome should be.
+:::
+
 ## Tips
 
 - Use `gt convoy show` frequently to track progress

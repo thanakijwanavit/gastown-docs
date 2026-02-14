@@ -385,6 +385,10 @@ gt rig dock <name> [options]
 gt rig dock backend
 ```
 
+:::tip
+Use **park** for temporary pauses — the daemon skips parked rigs during patrol cycles, but all worktrees and agent directories remain in place for a quick resume with `gt rig unpark`. Use **dock** for long-term archival — it aggressively cleans up worktrees and polecat directories to minimize disk usage, at the cost of a longer restore time with `gt rig undock`.
+:::
+
 ---
 
 ## `gt rig undock`

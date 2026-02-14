@@ -130,6 +130,12 @@ Patrol molecules use a **squash-and-respawn** pattern to avoid accumulating stal
 
 This keeps the beads database clean while maintaining full observability.
 
+:::warning
+
+Do not manually delete molecule step beads from the database. Use `gt mol squash` to compress a completed molecule into a single digest bead, or `gt mol burn` to archive it. Manual deletion can leave orphaned references and break molecule progress tracking.
+
+:::
+
 ## Formulas
 
 ### Formula Structure

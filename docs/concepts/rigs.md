@@ -117,6 +117,12 @@ graph LR
     end
 ```
 
+:::info
+
+Each rig is fully self-contained. If one rig's Witness or Refinery crashes, other rigs continue operating independently. The Deacon detects the failure during its next patrol cycle and restarts the affected agent without disrupting work elsewhere.
+
+:::
+
 ## Rig Configuration
 
 Each rig has a `config.json` file that defines its settings:

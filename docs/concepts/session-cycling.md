@@ -117,6 +117,12 @@ Build is clean, all pushed to main.
 "
 ```
 
+:::warning
+
+Always commit and push your changes before cycling a session. In a multi-agent environment, unpushed work can be overwritten by other agents working on the same files. The handoff preserves context notes, but it does not preserve uncommitted code.
+
+:::
+
 ---
 
 ## Context Recovery

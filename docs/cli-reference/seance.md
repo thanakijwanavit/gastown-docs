@@ -135,6 +135,10 @@ gt seance --talk <session-id>
 
 The fork creates a separate conversation branch. The predecessor's session is never modified — they won't even know you communed with them. This makes seance safe to use on active sessions.
 
+:::info
+The events file `~/gt/.events.jsonl` is required for session discovery. If SessionStart hooks are not configured in your agent's CLAUDE.md or hook files, sessions will not emit `session_start` events and will not appear in `gt seance` discovery. Verify your hooks are in place with `gt hook show` if sessions are missing.
+:::
+
 ### Session Events
 
 Sessions are tracked in `~/gt/.events.jsonl`. Each Gas Town session emits a `session_start` event containing:
