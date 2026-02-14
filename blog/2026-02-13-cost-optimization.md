@@ -208,7 +208,7 @@ for bead in ga-b1 ga-b2 ga-b3 ga-b4 ga-b5; do
 done
 ```
 
-Batching reduces Refinery overhead (fewer individual merge cycles) and gives the Mayor better visibility for progress reporting.
+Batching reduces Refinery overhead (fewer individual merge cycles) and gives the Mayor better visibility for progress reporting. Combine this with the [crew workflow](/blog/crew-workflow) to handle high-judgment work directly while batching mechanical tasks for polecats.
 
 ```mermaid
 flowchart TD

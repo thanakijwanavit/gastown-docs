@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [workflow, architecture, operations, concepts]
 ---
 
-Gas Town offers three distinct ways to distribute work across agents: manual convoys, the Mayor workflow (MEOW), and formula-driven molecules. Each pattern trades control for automation differently. Choosing the wrong one costs time. Choosing the right one feels like magic.
+Gas Town offers three distinct ways to distribute work across agents: manual convoys, the Mayor workflow (MEOW), and formula-driven molecules. Each pattern trades control for automation differently. Choosing the wrong one costs time. Choosing the right one feels like magic. For template-based workflows, see [custom formulas](/blog/custom-formulas).
 
 <!-- truncate -->
 

@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [scaling, architecture, operations, performance]
 ---
 
-Gas Town's architecture is designed to scale horizontally. Adding more rigs and polecats is straightforward -- but at 30+ concurrent agents, you start hitting coordination bottlenecks that require deliberate architectural choices. Here is what we have learned about running Gas Town at scale.
+Gas Town's architecture is designed to scale horizontally. Adding more rigs and polecats is straightforward -- but at 30+ concurrent agents, you start hitting coordination bottlenecks that require deliberate architectural choices. Understanding the [escalation system](/blog/escalation-system) becomes critical at scale. Here is what we have learned about running Gas Town at scale.
 
 <!-- truncate -->
 

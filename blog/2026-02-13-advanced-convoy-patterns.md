@@ -82,7 +82,7 @@ for bead in ga-users ga-orders ga-products ga-inventory ga-reviews; do
 done
 ```
 
-The convoy auto-closes when all five complete. Since each table migration is independent, they run in true parallel — no sequencing needed.
+The convoy auto-closes when all five complete. Since each table migration is independent, they run in true parallel — no sequencing needed. This same pattern powers the parallel review legs in the [code review workflow](/blog/code-review-workflow).
 
 :::info Verify Independence Before Fanning Out
 Before creating a fan-out convoy, confirm that the tasks truly have no hidden dependencies. Two beads that both modify the same configuration file or database schema will race and create merge conflicts even if they appear logically independent. Check file overlap with `git diff --name-only` before slinging parallel work.

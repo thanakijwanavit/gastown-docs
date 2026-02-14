@@ -16,7 +16,7 @@ After helping many users get started with Gas Town, we've identified the pattern
 
 **Why it fails:** Polecats are autonomous. They can't ask clarifying questions the way a human teammate would. A vague bead leads to an implementation that doesn't match what you wanted.
 
-**The fix:** Write beads as if briefing a contractor who can't ask follow-up questions:
+**The fix:** Write beads as if briefing a contractor who can't ask follow-up questions. This is also the most effective [cost optimization](/blog/cost-optimization) strategy:
 
 ```bash
 # ❌ Vague

@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [operations, concepts, architecture, workflow]
 ---
 
-Gas Town rigs have a lifecycle that goes well beyond "on" and "off." Understanding the difference between parking, docking, stopping, and shutting down is critical for day-to-day operations. Get it wrong and you'll either leave zombie agents consuming resources or accidentally destroy work-in-progress state.
+Gas Town rigs have a lifecycle that goes well beyond "on" and "off." Understanding the difference between parking, docking, stopping, and shutting down is critical for day-to-day operations, especially when coordinating work across multiple rigs with [convoy workflows](/blog/advanced-convoy-patterns). Get it wrong and you'll either leave zombie agents consuming resources or accidentally destroy work-in-progress state.
 
 <!-- truncate -->
 

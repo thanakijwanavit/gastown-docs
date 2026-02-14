@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [communication, architecture, operations, concepts]
 ---
 
-In a multi-agent system, communication is as important as computation. Gas Town's mail system provides async message passing between agents, enabling coordination without requiring both parties to be running simultaneously.
+In a multi-agent system, communication is as important as computation, especially when coordinating work through [convoy workflows](/blog/first-convoy). Gas Town's mail system provides async message passing between agents, enabling coordination without requiring both parties to be running simultaneously.
 
 <!-- truncate -->
 

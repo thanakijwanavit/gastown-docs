@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [security, architecture, operations, best-practices]
 ---
 
-When you give AI agents write access to your codebase, security stops being theoretical. Gas Town's security model is built around a simple principle: **minimize the blast radius of any single agent's actions** through workspace isolation, scoped permissions, and trust boundaries.
+When you give AI agents write access to your codebase, security stops being theoretical. Gas Town's security model is built around a simple principle: **minimize the blast radius of any single agent's actions** through workspace isolation, scoped permissions, and trust boundaries. For insights into how agents are organized and supervised, see the [witness explained](/blog/witness-explained) guide.
 
 <!-- truncate -->
 

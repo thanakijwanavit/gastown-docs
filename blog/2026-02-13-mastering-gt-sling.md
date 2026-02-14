@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [cli, operations, workflow, agents]
 ---
 
-`gt sling` is the single most important operational command in Gas Town. Every piece of work — from a bug fix to a multi-rig infrastructure migration — gets to an agent through slinging. Understanding its patterns, flags, and failure modes is the difference between a smooth fleet and a confused pile of idle polecats.
+`gt sling` is the single most important operational command in Gas Town. Every piece of work — from a bug fix to a multi-rig infrastructure migration — gets to an agent through slinging, backed by the crash-safe [hook persistence](/blog/hook-persistence) system. Understanding its patterns, flags, and failure modes is the difference between a smooth fleet and a confused pile of idle polecats.
 
 <!-- truncate -->
 

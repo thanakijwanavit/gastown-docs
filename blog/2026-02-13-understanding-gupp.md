@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [concepts, architecture]
 ---
 
-Multi-agent systems are inherently chaotic. Agents crash. Sessions expire. Context windows fill up. Gas Town handles all of this gracefully thanks to one core principle: **GUPP**.
+Multi-agent systems are inherently chaotic. Agents crash. Sessions expire. Context windows fill up. Gas Town handles all of this gracefully thanks to one core principle: **GUPP**. This principle is fundamental to [understanding rigs](/blog/understanding-rigs) and their resilience.
 
 <!-- truncate -->
 

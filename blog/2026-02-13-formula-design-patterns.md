@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [formulas, molecules, workflow, patterns, deep-dive]
 ---
 
-Formulas are Gas Town's workflow templates. When you pour a formula, it becomes a molecule -- a live, trackable execution plan with steps ([wisps](/docs/concepts/wisps)) that agents work through. Getting your formula design right is the difference between agents that execute smoothly and agents that stall.
+Formulas are Gas Town's workflow templates. When you pour a formula, it becomes a molecule -- a live, trackable execution plan with steps ([wisps](/docs/concepts/wisps)) that agents work through. Getting your formula design right is the difference between agents that execute smoothly and agents that stall. Well-designed formulas enable the parallel execution patterns described in [advanced convoy patterns](/blog/advanced-convoy-patterns) where multiple molecules execute concurrently across different beads.
 
 <!-- truncate -->
 

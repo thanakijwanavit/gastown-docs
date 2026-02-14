@@ -268,6 +268,8 @@ sequenceDiagram
 4. **File beads for follow-ups.** If you notice something while working, file a bead rather than trying to fix everything at once.
 5. **Communicate through Gas Town channels.** Use `gt mail` and `gt nudge` rather than side channels so all coordination is observable.
 
+For more guidance on effective crew practices, see [common pitfalls](/blog/common-pitfalls) to avoid mistakes that waste time and tokens.
+
 ## Next Steps
 
 - [Crew Workers](/docs/agents/crew) -- Full crew worker reference

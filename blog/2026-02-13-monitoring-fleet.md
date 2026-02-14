@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [operations, monitoring, tutorial, observability]
 ---
 
-Running 10-30 AI agents in parallel is powerful, but you need visibility into what they're doing. Gas Town provides several monitoring tools that work together to give you a complete picture — from real-time activity streams to health diagnostics.
+Running 10-30 AI agents in parallel is powerful, but you need visibility into what they're doing, especially when [scaling beyond 30 agents](/blog/scaling-beyond-30). Gas Town provides several monitoring tools that work together to give you a complete picture — from real-time activity streams to health diagnostics.
 
 <!-- truncate -->
 

@@ -12,7 +12,7 @@ If the Mayor is the strategic brain and the Witness is the floor supervisor, the
 
 ## What the Deacon Does
 
-The Deacon is a persistent town-level agent that runs a continuous patrol cycle. Every 5 minutes (by default), it performs a systematic check of the entire Gas Town deployment, following the [lifecycle management patterns](/docs/operations/lifecycle) that govern all agent operations:
+The Deacon is a persistent town-level agent that runs a continuous patrol cycle. Every 5 minutes (by default), it performs a systematic check of the entire Gas Town deployment, following the [lifecycle management patterns](/docs/operations/lifecycle) that govern all agent operations. The patrol system shares architectural patterns with the [hook-driven architecture](/blog/hook-driven-architecture) that ensures all work assignments survive session boundaries:
 
 ```text
 Deacon Patrol Cycle:

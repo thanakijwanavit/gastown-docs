@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [concepts, session-cycling, reliability, tutorial]
 ---
 
-Every AI coding agent has a context window — a limit on how much text it can hold in its working memory. When that window fills up, most AI tools just stop working. Gas Town solves this with session cycling: agents hand off work to fresh sessions automatically, preserving progress across the boundary.
+Every AI coding agent has a context window — a limit on how much text it can hold in its working memory. When that window fills up, most AI tools just stop working. Gas Town solves this with session cycling: agents hand off work to fresh sessions automatically, preserving progress across the boundary. This capability is essential for [scaling beyond 30](/blog/scaling-beyond-30) concurrent agents.
 
 <!-- truncate -->
 

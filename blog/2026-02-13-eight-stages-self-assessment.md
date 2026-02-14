@@ -30,7 +30,7 @@ Answer honestly. Which statement best describes your daily workflow?
 - "I run multiple agents on different tasks simultaneously" → Stage 7
 - "I manage agents with other agents (like Gas Town)" → Stage 8
 
-Most developers reading this blog are probably at Stage 4-6. That's fine — Gas Town will make more sense once you understand the progression.
+Most developers reading this blog are probably at Stage 4-6. That's fine — Gas Town will make more sense once you understand the progression. For those just starting their multi-agent journey, the [crew workflow](/blog/crew-workflow) offers a practical introduction to coordinating parallel development.
 
 ```mermaid
 flowchart LR

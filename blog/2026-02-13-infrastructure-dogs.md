@@ -153,7 +153,7 @@ Unlike polecats which are one-and-done (spawn, work, submit, die), dogs return t
 
 ## The Deacon-Dog Relationship
 
-Dogs don't operate independently. The [Deacon](/docs/agents/deacon) manages their entire lifecycle:
+Dogs don't operate independently. The [Deacon](/docs/agents/deacon) manages their entire lifecycle, coordinating infrastructure work across all rigs with the same orchestration patterns described in [work distribution patterns](/blog/work-distribution-patterns):
 
 ```mermaid
 sequenceDiagram

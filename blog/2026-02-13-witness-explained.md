@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [agents, witness, reliability, architecture]
 ---
 
-When you run 10 polecats in parallel, things go wrong. Agents get stuck in loops, context fills up without cycling, merge requests stall, and sessions crash. The Witness is Gas Town's answer to this chaos — a per-rig watchdog that patrols its agents and triggers recovery before you even notice a problem.
+When you run 10 polecats in parallel, things go wrong. Agents get stuck in loops, context fills up without cycling, merge requests stall, and sessions crash. The Witness is Gas Town's answer to this chaos — a per-rig watchdog that patrols its agents and triggers recovery before you even notice a problem. To understand the broader context of this monitoring system, see [understanding GUPP](/blog/understanding-gupp).
 
 <!-- truncate -->
 

@@ -164,6 +164,8 @@ gt daemon start    # Restart the daemon
 # All existing agents continue; heartbeats resume
 ```
 
+Understanding this resilient design helps avoid the mistakes described in [common pitfalls](/blog/common-pitfalls) when managing a multi-agent fleet.
+
 This resilient design complements Gas Town's [incident response](/blog/incident-response) procedures, ensuring that infrastructure failures don't cascade into data loss or workflow disruption. The [agent hierarchy](/docs/architecture/agent-hierarchy) explains how the daemon fits into the overall supervision tree.
 
 ## Monitoring the Daemon

@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, hooks, reliability, concepts]
 ---
 
-The biggest risk in multi-agent AI systems is lost work. An agent crashes at 80% completion, and everything it did vanishes. Gas Town's hook system eliminates this risk entirely through a simple but powerful persistence primitive, as described in the [hooks concept documentation](/docs/concepts/hooks).
+The biggest risk in multi-agent AI systems is lost work. An agent crashes at 80% completion, and everything it did vanishes. Gas Town's hook system eliminates this risk entirely through a simple but powerful persistence primitive, as described in the [hooks concept documentation](/docs/concepts/hooks). This crash-safe design is a cornerstone of [your second convoy](/blog/your-second-convoy), where you learn to trust hook persistence enough to run multiple parallel workflows without constant supervision.
 
 <!-- truncate -->
 

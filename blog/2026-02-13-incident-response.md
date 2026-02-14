@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [operations, troubleshooting, incident-response]
 ---
 
-Gas Town is designed to recover from failures automatically. But when the automated recovery isn't enough, you need to know how to diagnose and fix things manually. Here's your playbook for the most common failure scenarios.
+Gas Town is designed to recover from failures automatically. But when the automated recovery isn't enough, you need to know how to diagnose and fix things manually. Here's your playbook for the most common failure scenarios. Many of the incidents you'll encounter stem from issues explained in [common pitfalls](/blog/common-pitfalls), so understanding those patterns helps you prevent problems before they require manual intervention.
 
 <!-- truncate -->
 

@@ -6,13 +6,13 @@ authors: [gastown]
 tags: [tutorial, getting-started, workflow, operations]
 ---
 
-Your [first convoy](/blog/first-convoy) was three independent beads slung to one rig. Everything worked because nothing depended on anything else. Real work is messier. Your second convoy will teach you dependencies, cross-rig coordination, monitoring, and what to do when things go wrong.
+Your [first convoy](/blog/first-convoy) was three independent beads slung to one rig. Everything worked because nothing depended on anything else. Real work is messier. Your second convoy will teach you dependencies, cross-rig coordination, monitoring, and what to do when things go wrong. When problems arise, the [escalation system](/blog/escalation-system) ensures issues get routed appropriately.
 
 <!-- truncate -->
 
 ## What Changes After "Hello World"
 
-The first convoy tutorial teaches the mechanics: create beads, bundle, sling, monitor. But it sidesteps the hard parts:
+The first convoy tutorial teaches the mechanics: create beads, bundle, sling, monitor. But it sidesteps the hard parts, which become important when [scaling beyond 30](/blog/scaling-beyond-30) concurrent agents:
 
 - What if task B depends on task A finishing first?
 - What if work spans multiple rigs?

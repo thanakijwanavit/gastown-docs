@@ -117,6 +117,8 @@ graph TD
 
 ## Configuring Routing
 
+Understanding how to configure routing thresholds properly is essential for balancing responsiveness against alert fatigue, similar to the trade-offs discussed in [cost optimization](/blog/cost-optimization) where aggressive thresholds can increase operational overhead.
+
 ```mermaid
 timeline
     title Escalation Lifecycle Timeline

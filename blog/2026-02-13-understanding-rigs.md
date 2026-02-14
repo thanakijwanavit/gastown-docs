@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, concepts, rigs, getting-started]
 ---
 
-Everything in Gas Town revolves around rigs. A rig wraps a git repository with the full agent infrastructure — Witness, Refinery, polecats, crew workspaces, and a beads database. Understanding when to create rigs, how to manage their lifecycle, and how they interact with each other is fundamental to running Gas Town effectively.
+Everything in Gas Town revolves around rigs. A rig wraps a git repository with the full agent infrastructure — Witness, Refinery, polecats, crew workspaces, and a beads database. Understanding when to create rigs, how to manage their lifecycle, and how they interact with each other is fundamental to running Gas Town effectively. For a practical walkthrough of rig operations, see [your second convoy](/blog/your-second-convoy).
 
 <!-- truncate -->
 

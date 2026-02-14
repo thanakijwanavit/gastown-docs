@@ -260,7 +260,7 @@ pie title Review Issue Priority Distribution
 
 ## Why This Approach Works
 
-The parallel review model works because each perspective is genuinely independent. A security reviewer doesn't need to wait for the performance reviewer. A style reviewer doesn't need the correctness reviewer's findings. The only dependency is at the end: synthesis needs all leg outputs.
+The parallel review model works because each perspective is genuinely independent. A security reviewer doesn't need to wait for the performance reviewer. A style reviewer doesn't need the correctness reviewer's findings. The only dependency is at the end: synthesis needs all leg outputs. This mirrors the fan-out pattern described in [advanced convoy patterns](/blog/advanced-convoy-patterns).
 
 This is the exact pattern Gas Town is built for — independent parallel work with a final coordination step. The code-review formula is just a convoy where every bead is a review leg and the synthesis is the convoy's completion handler. For more sophisticated review orchestration across multiple pull requests, see [work distribution patterns](/blog/work-distribution-patterns) for strategies on batching and prioritizing review work, which build on the foundational [work distribution architecture](/docs/architecture/work-distribution).
 

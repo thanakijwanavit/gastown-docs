@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [workflows, mayor, tutorial, automation]
 ---
 
-The Mayor Workflow — or MEOW (Mayor-Execute-Orchestrate-Watch) — is Gas Town's highest-automation workflow. You describe what you want in plain English, and the Mayor handles everything else: decomposing the request, creating beads, spawning polecats, monitoring progress, and landing the code on main.
+The Mayor Workflow — or MEOW (Mayor-Execute-Orchestrate-Watch) — is Gas Town's highest-automation workflow. You describe what you want in plain English, and the Mayor handles everything else: decomposing the request, creating beads, spawning polecats, monitoring progress with [agent communication patterns](/blog/agent-communication-patterns), and landing the code on main.
 
 <!-- truncate -->
 

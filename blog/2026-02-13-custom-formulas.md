@@ -18,7 +18,7 @@ A formula is a TOML file that defines a sequence of steps for an agent to follow
 Formula (TOML template)  →  pour  →  Molecule (running workflow)
 ```
 
-The key benefit: if an agent crashes mid-workflow, the molecule remembers which steps completed. The next agent picks up exactly where the last one left off.
+The key benefit: if an agent crashes mid-workflow, the molecule remembers which steps completed. The next agent picks up exactly where the last one left off. This persistence is powered by [GUPP](/blog/understanding-gupp), Gas Town's propulsion principle.
 
 :::tip Crash Recovery Is Built In
 Because each step's completion is recorded in the molecule, you never lose progress when an agent crashes. The next agent that picks up the work skips all completed steps and resumes from the exact point of failure. Design your steps as discrete, independently completable units to maximize this benefit.

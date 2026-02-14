@@ -220,7 +220,7 @@ graph LR
 
 ## The Bottom Line
 
-Gas Town is not CI/CD 2.0. It's the layer that generates the code your CI/CD validates. Think of it as "AI-driven development management" that happens to interface with your existing automation.
+Gas Town is not CI/CD 2.0. It's the layer that generates the code your CI/CD validates. Think of it as "AI-driven development management" that happens to interface with your existing automation. The security implications of this upstream integration are discussed in the [security model](/blog/security-model), which explains how Gas Town maintains trust boundaries even when generating code at CI/CD scale.
 
 If your CI/CD pipeline works well, keep it. Gas Town will feed it better, faster, and in higher volume.
 

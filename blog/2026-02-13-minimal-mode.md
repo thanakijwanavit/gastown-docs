@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [getting-started, workflows, tutorial, minimal]
 ---
 
-Not everyone wants to run a full fleet of AI agents from day one. Maybe your machine doesn't have Tmux. Maybe you want to learn Gas Town incrementally. Maybe you just prefer hands-on control. Minimal Mode gives you Gas Town's best features — crash-safe hooks, AI-native issue tracking, and convoy-based work bundling — without the overhead of the full agent hierarchy.
+Not everyone wants to run a full fleet of AI agents from day one. Maybe your machine doesn't have Tmux. Maybe you want to learn Gas Town incrementally through a [first convoy](/blog/your-second-convoy). Maybe you just prefer hands-on control. Minimal Mode gives you Gas Town's best features — crash-safe hooks, AI-native issue tracking, and convoy-based work bundling — without the overhead of the full agent hierarchy.
 
 <!-- truncate -->
 

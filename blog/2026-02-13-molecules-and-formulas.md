@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, concepts, molecules, formulas, workflows]
 ---
 
-Every Gas Town agent follows a workflow. A polecat doesn't just "fix the bug" — it loads context, sets up a branch, runs preflight tests, implements the fix, self-reviews, runs tests again, and submits to the merge queue. Molecules are how Gas Town tracks progress through these multi-step workflows, and formulas are the templates that define them.
+Every Gas Town agent follows a workflow. A polecat doesn't just "fix the bug" — it loads context, sets up a branch, runs preflight tests, implements the fix, self-reviews, runs tests again, and submits to the merge queue managed by the [refinery](/blog/refinery-deep-dive). Molecules are how Gas Town tracks progress through these multi-step workflows, and formulas are the templates that define them.
 
 <!-- truncate -->
 

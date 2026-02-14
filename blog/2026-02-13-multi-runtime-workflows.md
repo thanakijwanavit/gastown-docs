@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, runtimes, multi-agent, advanced]
 ---
 
-Gas Town isn't just for Claude Code. Its architecture is runtime-agnostic — the same beads, convoys, and handoff patterns work whether your agents run Claude, Gemini, Codex, or even a human with a terminal.
+Gas Town isn't just for Claude Code. Its architecture is runtime-agnostic — the same beads, convoys, and [handoff patterns](/blog/session-cycling) work whether your agents run Claude, Gemini, Codex, or even a human with a terminal.
 
 <!-- truncate -->
 

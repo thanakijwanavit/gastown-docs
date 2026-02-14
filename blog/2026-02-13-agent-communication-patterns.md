@@ -231,7 +231,7 @@ flowchart TD
 
 ### Pattern: Cross-Rig Work Request
 
-When work in your rig depends on a change in another rig:
+When work in your rig depends on a change in another rig, you can coordinate through beads and mail. The [crew workflow](/blog/crew-workflow) also supports cross-rig work using worktrees for human oversight:
 
 ```bash
 # Create a bead in the other rig
