@@ -290,3 +290,4 @@ stateDiagram-v2
 - [The Mail System](/blog/mail-system) — Deep dive into Gas Town's durable async messaging infrastructure
 - [Nudge CLI Reference](/docs/cli-reference/nudge) — Commands for sending nudges to wake agents
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — How hook-based communication enables autonomous agent workflows
+- [Session Commands](/docs/cli-reference/session-commands) — CLI reference for managing agent sessions and communication channels

@@ -376,3 +376,4 @@ Pushing commits directly to main bypasses the Refinery's rebase-and-validate pip
 - **[Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent)** — Git patterns that the Refinery enforces
 - **[Code Review Workflow](/blog/code-review-workflow)** — How code review integrates with the Refinery merge pipeline
 - [Refinery CLI Reference](/docs/cli-reference/refinery-commands) — Commands for managing the merge queue and Refinery
+- [Lifecycle Management](/docs/operations/lifecycle) — Managing Refinery lifecycle and patrol cycles

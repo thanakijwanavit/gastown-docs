@@ -242,3 +242,4 @@ When you run `gt rig park`, the command completes immediately and marks the rig 
 - [Your First Convoy](/blog/first-convoy) — End-to-end walkthrough of creating work in a rig
 - [Gas Town's Security Model](/blog/security-model) — How rig isolation provides security boundaries
 - [Lifecycle Management](/blog/lifecycle-management) — Managing rig lifecycle states and transitions at scale
+- [Polecats Agent Reference](/docs/agents/polecats) — The ephemeral workers that execute tasks within rig worktrees

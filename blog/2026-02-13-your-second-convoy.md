@@ -309,3 +309,4 @@ When you run `gt release` to pull a bead from a stuck polecat and then `gt sling
 - [Your First Convoy](/blog/first-convoy) — Review the basics if needed
 - [Work Distribution Patterns](/blog/work-distribution-patterns) — When to use manual convoys vs. Mayor vs. formulas
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — Practical monitoring techniques for running convoys
+- [First Convoy Guide](/docs/getting-started/first-convoy) — Step-by-step tutorial for your very first convoy

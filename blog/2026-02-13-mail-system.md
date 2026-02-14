@@ -272,6 +272,7 @@ Every mail message is a bead, which means it's permanently stored and searchable
 - [Hooks](/docs/concepts/hooks) -- How mail integrates with the hook system
 - [Session Cycling](/docs/concepts/session-cycling) -- Handoff mail in the context refresh workflow
 - [Agent Hierarchy](/docs/architecture/agent-hierarchy) -- The escalation chain that mail supports
+- [Nudge Commands](/docs/cli-reference/nudge) -- Synchronous communication alongside async mail
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- How mail fits alongside nudges and hooks
 - [Session Cycling Explained](/blog/session-cycling) -- Handoff mail in the context refresh workflow
 - [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor uses mail for convoy coordination

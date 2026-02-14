@@ -282,3 +282,4 @@ Cycling to a fresh session resets the context window, allowing the agent to cont
 - **[Molecules and Formulas](/blog/molecules-and-formulas)** — How molecules track multi-step progress across session boundaries
 - [Compact CLI Reference](/docs/cli-reference/compact) — Commands for manual and automatic context compaction
 - [Session Commands CLI Reference](/docs/cli-reference/session-commands) — Commands for session health checks and management
+- [Communication CLI Reference](/docs/cli-reference/communication) — Managing handoff mail and agent-to-agent messaging

@@ -1305,25 +1305,25 @@ else
     fail_test "Found $BLOG_MULTI_MERMAID_ISSUES blog post(s) with fewer than 6 Mermaid diagrams" "Add at least 6 Mermaid diagrams to each blog post"
 fi
 
-# Test 44: All blog posts have 6+ /docs/ cross-links
+# Test 44: All blog posts have 7+ /docs/ cross-links
 echo ""
-echo "Test 44: Checking all blog posts have 6+ /docs/ cross-links..."
+echo "Test 44: Checking all blog posts have 7+ /docs/ cross-links..."
 BLOG_DOCS_LINK_ISSUES=0
 
 for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
     docs_link_count=$(grep -co '/docs/' "$file" 2>/dev/null) || docs_link_count=0
 
-    if [ "$docs_link_count" -lt 6 ]; then
+    if [ "$docs_link_count" -lt 7 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $docs_link_count /docs/ link(s) in $rel_file (need 6+)"
+        echo "  Only $docs_link_count /docs/ link(s) in $rel_file (need 7+)"
         BLOG_DOCS_LINK_ISSUES=$((BLOG_DOCS_LINK_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_DOCS_LINK_ISSUES" -eq 0 ]; then
-    pass_test "All blog posts have 6+ /docs/ cross-links"
+    pass_test "All blog posts have 7+ /docs/ cross-links"
 else
-    fail_test "Found $BLOG_DOCS_LINK_ISSUES blog post(s) with fewer than 6 /docs/ links" "Add /docs/ cross-links to blog posts for better navigation"
+    fail_test "Found $BLOG_DOCS_LINK_ISSUES blog post(s) with fewer than 7 /docs/ links" "Add /docs/ cross-links to blog posts for better navigation"
 fi
 
 # Test 45: All non-index doc pages have 6+ admonitions

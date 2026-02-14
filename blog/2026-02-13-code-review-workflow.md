@@ -275,3 +275,4 @@ This is the exact pattern Gas Town is built for — independent parallel work wi
 - [Formula Design Patterns](/blog/formula-design-patterns) — Patterns for building effective multi-step formulas
 - [Molecules and Formulas](/blog/molecules-and-formulas) — How the molecule engine orchestrates the parallel review legs
 - [Cost Optimization](/blog/cost-optimization) — Strategies for managing token costs when running multi-leg review formulas
+- [Polecat Commands](/docs/cli-reference/polecat-commands) — CLI reference for spawning and managing review polecats

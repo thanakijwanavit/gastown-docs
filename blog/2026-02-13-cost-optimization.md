@@ -285,3 +285,4 @@ flowchart LR
 - **[Session Cycling Explained](/blog/session-cycling)** — Context management strategies that reduce wasted tokens
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the cost traps and anti-patterns that burn through API budgets
 - **[Understanding GUPP](/blog/understanding-gupp)** — How GUPP's persistence reduces expensive retry costs
+- **[Cost Management Guide](/docs/guides/cost-management)** — Comprehensive guide to monitoring and reducing API costs

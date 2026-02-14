@@ -221,3 +221,4 @@ Gas Town's isolation model relies on git worktrees to keep agents in separate wo
 - [Death Warrants](/blog/death-warrants) -- How the warrant system enforces safe termination
 - [Understanding Rigs](/blog/understanding-rigs) -- How rigs enforce the security boundaries described here
 - [Incident Response](/blog/incident-response) -- What to do when a security boundary is breached or an agent misbehaves
+- [Agent Hierarchy](/docs/architecture/agent-hierarchy) -- Trust levels and authority boundaries across the agent tree

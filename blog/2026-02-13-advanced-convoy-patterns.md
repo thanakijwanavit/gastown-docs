@@ -312,3 +312,4 @@ The backend beads run in parallel. When the API endpoint lands, the frontend bea
 - [Your First Convoy](/blog/first-convoy) — Start here if you haven't run a basic convoy before tackling advanced patterns
 - [Convoy CLI Reference](/docs/cli-reference/convoys) — Commands for creating, tracking, and managing convoys
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) — Convoy strategies that maintain efficiency in large multi-rig deployments
+- [Architecture Overview](/docs/architecture/overview) — How convoys fit into Gas Town's five-layer system architecture

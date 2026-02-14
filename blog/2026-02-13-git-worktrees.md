@@ -254,6 +254,7 @@ You don't need to manage worktrees manually. The Deacon creates them when spawni
 - [Security Model](/blog/security-model) -- Gas Town's trust boundaries and isolation strategy
 - [Git Workflow](/docs/guides/git-workflow) -- Multi-agent git patterns with worktrees
 - [Polecats](/docs/agents/polecats) -- The ephemeral agents that work inside worktree sandboxes
+- [Witness Agent](/docs/agents/witness) -- The per-rig agent responsible for creating and cleaning up worktrees
 - [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- Git patterns for multi-agent development with worktrees
 - [Understanding Rigs](/blog/understanding-rigs) -- How rigs use worktrees to isolate agent workspaces
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) -- How hooks store work state inside git worktrees

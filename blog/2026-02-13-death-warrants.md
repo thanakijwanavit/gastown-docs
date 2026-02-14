@@ -232,3 +232,4 @@ In practice, most Gas Town users never think about warrants. The Witness files t
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects stuck polecats and files warrants
 - [Escalation System](/blog/escalation-system) — How warrant failures escalate through the supervision hierarchy
 - [Troubleshooting Guide](/docs/guides/troubleshooting) — Common issues and their solutions
+- [Operations Lifecycle](/docs/operations/lifecycle) — Understanding the complete lifecycle of agent operations and termination

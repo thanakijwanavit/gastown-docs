@@ -266,6 +266,7 @@ This asymmetry is deliberate. Work stays hooked until it's explicitly done or re
 - [GUPP & NDI](/docs/concepts/gupp) — The propulsion principle that hooks implement at the system level
 - [Session Cycling](/docs/concepts/session-cycling) — How hooks persist work assignments across context window refreshes
 - [Molecules & Formulas](/docs/concepts/molecules) — How molecules track step-level progress on hooked work
+- [Mayor Agent](/docs/agents/mayor) — The town-level orchestrator that assigns work to hooks via gt sling
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) — The propulsion principle that hooks enable
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) — Design patterns for hook-based agent coordination
 - [Session Cycling](/blog/session-cycling) — How hooks preserve work across context window refreshes

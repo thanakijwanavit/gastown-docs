@@ -275,3 +275,4 @@ You are not locked into one pattern per convoy. It is perfectly valid to let the
 - [Understanding Rigs](/blog/understanding-rigs) — How rigs organize the agents that receive work
 - [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex orchestration patterns for manual convoys
 - [The Mayor Workflow](/blog/mayor-workflow) — Deep dive into the Mayor's automated decomposition and dispatch
+- [Sling CLI Reference](/docs/cli-reference/sling) — Complete reference for slinging beads to agents

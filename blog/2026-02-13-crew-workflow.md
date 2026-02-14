@@ -280,3 +280,4 @@ sequenceDiagram
 - [The Mayor Workflow](/blog/mayor-workflow) -- How crew members interact with Mayor-driven automation
 - [Git Workflows for Multi-Agent Teams](/blog/git-workflows-multi-agent) -- Git strategies for crew members working alongside parallel agents
 - [Git Worktrees](/blog/git-worktrees) -- How crew workers use worktrees for cross-rig work without creating polecats
+- [Agents Overview](/docs/cli-reference/agents) -- CLI reference for managing crew and agent workspaces

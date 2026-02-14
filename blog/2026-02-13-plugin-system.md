@@ -282,6 +282,7 @@ graph LR
 - [The Refinery](/docs/agents/refinery) -- How the Refinery processes merge requests
 - [Quality Gates](/docs/concepts/gates) -- Built-in gate types and custom gates
 - [Monitoring](/docs/operations/monitoring) -- Monitoring plugin execution and failures
+- [Polecat Commands](/docs/cli-reference/polecat-commands) -- Commands for managing polecats affected by plugin failures
 - [The Refinery Deep Dive](/blog/refinery-deep-dive) -- How plugins integrate with the merge queue
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- Monitoring plugin execution and failures
 - [Custom Formulas](/blog/custom-formulas) -- Building custom formulas that leverage plugins

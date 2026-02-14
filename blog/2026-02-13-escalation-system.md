@@ -263,6 +263,7 @@ If you find yourself wanting to disable escalations because they fire too often,
 - [Incident Response with Gas Town](/blog/incident-response) — Broader incident management patterns
 - [Troubleshooting](/docs/operations/troubleshooting) — Resolving the issues escalations surface
 - [Witness Agent](/docs/agents/witness) — The per-rig monitor that detects stalls and triggers escalations
+- [Deacon Agent](/docs/agents/deacon) — The town-level supervisor that files escalations for patrol agents
 - [Death Warrants](/blog/death-warrants) — How warrants handle the problems escalations identify
 - [The Witness Explained](/blog/witness-explained) — How the Witness detects issues that trigger escalations
 - [Monitoring Your Fleet](/blog/monitoring-fleet) — Proactive monitoring that catches problems before they become escalations

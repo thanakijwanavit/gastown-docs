@@ -361,6 +361,7 @@ Gas Town is designed to be self-healing. Most incidents resolve themselves withi
 - **[Witness](/docs/agents/witness)** — How the Witness monitors and recovers agents
 - **[Refinery](/docs/agents/refinery)** — How the merge queue works
 - **[Diagnostics CLI](/docs/cli-reference/diagnostics)** — Commands for `gt status`, `gt doctor`, and other diagnostic tools
+- **[Escalation Operations](/docs/operations/escalations)** — Managing incident escalation priorities and routing
 - **[The Escalation System](/blog/escalation-system)** — How Gas Town surfaces problems before they snowball
 - **[Death Warrants](/blog/death-warrants)** — Structured agent termination during incidents
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Proactive monitoring that prevents incidents

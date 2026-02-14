@@ -274,3 +274,4 @@ The Deacon never panics. It follows its patrol molecule step by step, handles wh
 - [The Daemon: Gas Town's Heartbeat](/blog/daemon-process) -- The Go process that hosts the Deacon's patrol
 - [The Escalation System](/blog/escalation-system) -- How the Deacon routes problems through severity-based escalation
 - [Minimal Mode](/blog/minimal-mode) -- Running Gas Town with only essential patrol functions when the Deacon must conserve resources
+- [Escalations Reference](/docs/operations/escalations) -- Complete guide to Deacon's escalation paths and severity levels

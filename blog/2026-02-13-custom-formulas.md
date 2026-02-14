@@ -363,3 +363,4 @@ stateDiagram-v2
 - **[Code Review with Polecats](/blog/code-review-workflow)** — See formulas in action with parallel code review
 - **[Hook-Driven Architecture](/blog/hook-driven-architecture)** — How hooks trigger formula execution when work lands on an agent
 - **[The Security Model](/blog/security-model)** — Security considerations when formulas execute external commands and API calls
+- **[Rigs Overview](/docs/concepts/rigs)** — Understanding rigs helps scope formulas to the right execution context
