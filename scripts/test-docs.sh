@@ -1348,6 +1348,28 @@ else
     fail_test "Found $DOC_ADMONITION_ISSUES doc page(s) with fewer than 3 admonitions" "Add admonitions (:::tip, :::note, :::warning) to doc pages"
 fi
 
+# Test 46: All blog posts have 1000+ total words
+echo ""
+echo "Test 46: Checking all blog posts have 1000+ total words..."
+BLOG_TOTAL_LENGTH_ISSUES=0
+
+for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
+    word_count=$(wc -w < "$file" 2>/dev/null)
+    word_count="${word_count:-0}"
+
+    if [ "$word_count" -lt 1000 ]; then
+        rel_file="${file#$ROOT_DIR/}"
+        echo "  Only $word_count words in $rel_file (need 1000+)"
+        BLOG_TOTAL_LENGTH_ISSUES=$((BLOG_TOTAL_LENGTH_ISSUES + 1))
+    fi
+done
+
+if [ "$BLOG_TOTAL_LENGTH_ISSUES" -eq 0 ]; then
+    pass_test "All blog posts have 1000+ total words"
+else
+    fail_test "Found $BLOG_TOTAL_LENGTH_ISSUES blog post(s) with fewer than 1000 words" "Expand blog posts to at least 1000 words for substantive content"
+fi
+
 # Summary
 echo ""
 echo "========================================"
