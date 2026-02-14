@@ -90,7 +90,7 @@ MR {
 }
 ```
 
-The MR captures everything the Refinery needs: which branch to merge, what issue it addresses, and which commits are involved.
+The MR captures everything the Refinery needs: which branch to merge, what issue it addresses, and which commits are involved. For multi-step validation workflows, the Refinery can coordinate with [molecules](/docs/concepts/molecules) to track validation state across session boundaries.
 
 ## The Merge Pipeline
 

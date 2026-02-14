@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [operations, escalations, reliability, incident-response]
 ---
 
-When you hand control of your codebase to a fleet of AI agents, the question isn't *if* something will go wrong — it's *when*, and more importantly, whether you'll find out in time to do something about it. Gas Town's escalation system is the bridge between autonomous operation and human awareness. It routes problems through a severity-based hierarchy that ensures critical issues reach you immediately while low-priority noise stays out of your way.
+When you hand control of your codebase to a fleet of AI agents, the question isn't *if* something will go wrong — it's *when*, and more importantly, whether you'll find out in time to do something about it. Gas Town's escalation system is the bridge between autonomous operation and human awareness, implementing the [communication patterns](/docs/cli-reference/communication) that connect agents to human operators. It routes problems through a severity-based hierarchy that ensures critical issues reach you immediately while low-priority noise stays out of your way.
 
 <!-- truncate -->
 

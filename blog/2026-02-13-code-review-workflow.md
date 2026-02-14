@@ -227,7 +227,7 @@ graph LR
 
 For automated pipelines, the `gate` preset acts as a quality gate. The [Refinery](/docs/agents/refinery) can be configured to run a gate review before merging. If P0 issues are found, the merge is blocked and the original polecat (or a new one) is spawned to fix the issues.
 
-This creates a continuous quality loop: polecats produce work, the review formula validates it, and the Refinery only merges clean code.
+This creates a continuous quality loop: polecats produce work, the review formula validates it, and the Refinery only merges clean code. For more on building reliable multi-agent pipelines, see the [architecture overview](/docs/architecture/overview).
 
 :::note Parallel Review Legs May Find Duplicate Issues
 The correctness, security, and performance legs all examine the same code independently. When they flag the same issue from different perspectives, the synthesis step deduplicates these findings to prevent redundant fix work. Check the synthesis report rather than individual leg outputs to see the final deduplicated list.

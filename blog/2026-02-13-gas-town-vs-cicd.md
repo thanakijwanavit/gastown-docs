@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, comparison, ci-cd, devops]
 ---
 
-If you come from a DevOps background, Gas Town might look like a CI/CD system. It has pipelines (molecules), queues (merge queue), workers (polecats), and automated testing. But the mental model is fundamentally different.
+If you come from a DevOps background, Gas Town might look like a CI/CD system. It has pipelines (molecules), queues (merge queue), workers (polecats), and automated testing, as described in the [work distribution documentation](/docs/architecture/work-distribution). But the mental model is fundamentally different.
 
 <!-- truncate -->
 

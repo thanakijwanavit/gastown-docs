@@ -165,7 +165,7 @@ bd show bd-def34    # Routes to the beads rig's beads
 
 ### Cross-Rig Convoys
 
-Convoys can include beads from multiple rigs, enabling coordinated work across projects:
+[Convoys](/docs/concepts/convoys) can include beads from multiple rigs, enabling coordinated work across projects:
 
 ```bash
 gt convoy create "Auth Upgrade" gt-auth1 gt-auth2 bd-tracking

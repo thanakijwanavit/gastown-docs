@@ -228,7 +228,7 @@ All five pitfalls share a common root: treating Gas Town like a single-developer
 - Work must be right-sized (agents have limits)
 - Monitoring matters (the supervision tree is there to help)
 
-Once you internalize these principles, Gas Town becomes remarkably smooth. The [Eight Stages of Gas Town Maturity](/blog/eight-stages-self-assessment) framework can help you assess where you are on this journey.
+Once you internalize these principles, Gas Town becomes remarkably smooth. The [Eight Stages of Gas Town Maturity](/blog/eight-stages-self-assessment) framework can help you assess where you are on this journey. For comprehensive troubleshooting procedures when things go wrong, consult the [troubleshooting guide](/docs/guides/troubleshooting).
 
 ```mermaid
 flowchart LR

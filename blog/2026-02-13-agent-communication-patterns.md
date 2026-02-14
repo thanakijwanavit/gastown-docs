@@ -12,7 +12,7 @@ Gas Town agents are independent processes running in separate tmux sessions. The
 
 ## The Three Primitives
 
-Each primitive serves a distinct purpose. Using the wrong one is a common source of confusion.
+Each primitive serves a distinct purpose. Using the wrong one is a common source of confusion. For a full understanding of how these mechanisms enable autonomous agent behavior, see the [design principles](/docs/architecture/design-principles).
 
 | Primitive | Delivery | Persistence | Use Case |
 |-----------|----------|-------------|----------|

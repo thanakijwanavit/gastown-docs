@@ -320,7 +320,7 @@ Even when you're not watching, Gas Town monitors itself:
 
 1. **Daemon** sends heartbeats every 3 minutes
 2. **Boot** triages system state on each tick
-3. **Deacon** patrols all rigs every 5 minutes
+3. **[Deacon](/docs/agents/deacon)** patrols all rigs every 5 minutes
 4. **Witnesses** patrol their polecats every 5 minutes
 5. **Escalations** flow upward automatically
 

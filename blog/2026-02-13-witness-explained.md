@@ -168,6 +168,7 @@ Understanding the Witness's scope helps avoid confusion:
 | Monitor other rigs | Deacon |
 | Make strategic decisions | Mayor |
 | Fix broken code | Polecats |
+| Approve production changes | [Gates](/docs/concepts/gates) |
 
 The Witness is purely a health monitor. It observes and reports. It can nudge agents back on track, but it never takes direct action on code or work items. This clear separation of concerns follows Gas Town's [agent hierarchy](/docs/architecture/agent-hierarchy), where each level has a distinct scope of responsibility.
 

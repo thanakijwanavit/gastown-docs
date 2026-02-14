@@ -327,7 +327,7 @@ Gas Town continues operating even when components fail. Understanding what keeps
 | Witness (one rig) | Other rigs unaffected | Stale polecats not detected |
 | Refinery (one rig) | Polecats can still work | Completed work doesn't merge |
 
-Each component operates independently with its own state. A failed Witness in one rig has zero impact on polecats in another rig.
+Each component operates independently with its own state. A failed Witness in one rig has zero impact on polecats in another rig. For how quality gates influence lifecycle transitions and recovery, see [Gates](/docs/concepts/gates).
 
 ## Next Steps
 

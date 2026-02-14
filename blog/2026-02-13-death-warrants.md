@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, operations, reliability, agents]
 ---
 
-In a system where AI agents run autonomously, some agents inevitably get stuck. They stop responding to nudges, loop on impossible tasks, or become zombies after infrastructure failures. Gas Town handles this with **death warrants** — structured termination requests that ensure stuck agents are cleaned up without losing work.
+In a system where AI agents run autonomously, some agents inevitably get stuck. They stop responding to nudges, loop on impossible tasks, or become zombies after infrastructure failures. Gas Town handles this with **death warrants** — structured termination requests that ensure stuck agents are cleaned up without losing work, maintaining the reliability guarantees described in the [operations troubleshooting guide](/docs/operations/troubleshooting).
 
 <!-- truncate -->
 

@@ -50,7 +50,7 @@ The first line of defense is **physical isolation through git worktrees**. Every
 │   └── alpha/        # Polecat alpha's isolated worktree
 ```
 
-Polecats cannot see or modify each other's worktrees. A polecat that goes haywire -- writing garbage to files, deleting directories, corrupting state -- affects only its own sandbox. The Witness detects the problem, and the sandbox is nuked without impacting any other agent or the main branch.
+Polecats cannot see or modify each other's worktrees. A polecat that goes haywire -- writing garbage to files, deleting directories, corrupting state -- affects only its own sandbox. The Witness detects the problem, and the sandbox is nuked without impacting any other agent or the main branch. For managing transient state during agent operations, Gas Town uses [wisps](/docs/concepts/wisps) to track ephemeral data that should not persist beyond a single task.
 
 ### Why Worktrees, Not Containers?
 

@@ -123,7 +123,7 @@ Session cycling destroys all in-memory reasoning, variable values, and file cont
 
 ### Polecats (Ephemeral Workers)
 
-Polecats cycle when their context fills during a task. The Witness monitors polecat session age and can nudge stuck polecats to cycle.
+Polecats cycle when their context fills during a task. The [Witness](/docs/agents/witness) monitors polecat session age and can nudge stuck polecats to cycle.
 
 ```text
 Polecat starts → works → context fills → gt handoff → new session → resumes

@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [git, architecture, best-practices, workflows]
 ---
 
-Traditional git workflows assume one developer pushing at a time. In Gas Town, you might have a crew worker, three polecats, and the Refinery all pushing to the same repository within a five-minute window. This changes everything about how you think about branches, rebasing, and merge conflicts.
+Traditional git workflows assume one developer pushing at a time. In Gas Town, you might have a crew worker, three polecats, and the Refinery all pushing to the same repository within a five-minute window, requiring the coordination strategies documented in the [git workflow guide](/docs/guides/git-workflow). This changes everything about how you think about branches, rebasing, and merge conflicts.
 
 <!-- truncate -->
 

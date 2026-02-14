@@ -20,7 +20,7 @@ The daemon is a background Go process that runs continuously on the host machine
 | **Lifecycle** | On demand | Starts, stops, and restarts agent sessions via tmux |
 | **Polling** | Configurable | Checks external services (Discord, webhooks) for incoming work |
 
-That's it. The daemon doesn't make decisions, doesn't route work, doesn't monitor health, and doesn't handle escalations. All intelligence lives in the agents.
+That's it. The daemon doesn't make decisions, doesn't route work, doesn't monitor health, and doesn't handle escalations. All intelligence lives in the agents. For comprehensive daemon lifecycle management, see the [operations lifecycle guide](/docs/operations/lifecycle).
 
 ## Why Go?
 

@@ -238,7 +238,7 @@ The MEOW workflow handles failures automatically:
 
 ### Polecat Gets Stuck
 
-The Witness detects the stall during patrol, nudges the polecat, and if it remains stuck, the Deacon can spawn a replacement.
+The Witness detects the stall during patrol, nudges the polecat, and if it remains stuck, the Deacon can spawn a replacement. For more on polecat lifecycle and recovery, see [Polecats](/docs/agents/polecats).
 
 ### Merge Conflict
 

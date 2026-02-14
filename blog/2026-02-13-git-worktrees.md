@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, git, isolation, concepts]
 ---
 
-When you run 10 agents writing code in parallel, you need isolation. Each agent needs its own copy of the codebase where it can make changes without stepping on other agents' work. Gas Town solves this with git worktrees -- and the choice was deliberate.
+When you run 10 agents writing code in parallel, you need isolation. Each agent needs its own copy of the codebase where it can make changes without stepping on other agents' work. Gas Town solves this with git worktrees -- and the choice was deliberate, as part of the broader [design principles](/docs/architecture/design-principles) that guide the system architecture.
 
 <!-- truncate -->
 

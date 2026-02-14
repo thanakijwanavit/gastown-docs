@@ -73,7 +73,7 @@ Step: run-tests       ○  (pending)
 Step: submit          ○  (pending)
 ```
 
-The next session reads the molecule and picks up from `implement` — it doesn't re-run `load-context` or `branch-setup`. This is the molecule's killer feature: **progress survives crashes, handoffs, and context compaction**.
+The next session reads the molecule and picks up from `implement` — it doesn't re-run `load-context` or `branch-setup`. This is the molecule's killer feature: **progress survives crashes, handoffs, and context compaction**. This crash-safe tracking relies on the [hook system](/docs/concepts/hooks) to preserve work assignments across restarts.
 
 ### 2. Enforced Step Ordering
 

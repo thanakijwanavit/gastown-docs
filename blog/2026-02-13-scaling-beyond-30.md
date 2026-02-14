@@ -28,7 +28,7 @@ The Refinery processes merges sequentially (it must -- merge order matters). Wit
 
 ### 2. Deacon Patrol Latency
 
-The Deacon patrols all rigs sequentially. With 10+ rigs, each patrol cycle takes longer, and gate evaluations may lag:
+The [Deacon](/docs/agents/deacon) patrols all rigs sequentially. With 10+ rigs, each patrol cycle takes longer, and gate evaluations may lag:
 
 ```text
 3 rigs   → Patrol cycle: ~30 seconds

@@ -263,7 +263,7 @@ gt mol step park --gate <gate-id>
 """
 ```
 
-When a step has `gate = true`, the agent parks the molecule at that step. The Deacon's patrol cycle checks whether the gate condition is met and resumes the workflow automatically.
+When a step has `gate = true`, the agent parks the molecule at that step. The Deacon's patrol cycle checks whether the gate condition is met and resumes the workflow automatically. For a complete understanding of how gates enable asynchronous coordination, refer to the [gates documentation](/docs/concepts/gates).
 
 ## Registering Your Formula
 

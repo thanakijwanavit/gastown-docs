@@ -102,7 +102,7 @@ The combination of mail and hook is powerful: the hook tells the agent WHAT to w
 
 ### Escalation Notifications
 
-When an agent escalates an issue, it mails the escalation chain:
+When an agent escalates an issue, it mails the escalation chain. The [Mayor](/docs/agents/mayor) receives escalations and routes them appropriately:
 
 ```bash
 # Automated escalation routing based on priority

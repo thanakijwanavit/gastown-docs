@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [getting-started, philosophy, ai-coding, maturity]
 ---
 
-Gas Town targets developers at Stage 7 and above on the AI coding maturity model. But most developers are still at Stage 4 or 5. Here's how to figure out where you are and what it takes to level up.
+Gas Town targets developers at Stage 7 and above on the AI coding maturity model, as outlined in the [first convoy guide](/docs/getting-started/first-convoy). But most developers are still at Stage 4 or 5. Here's how to figure out where you are and what it takes to level up.
 
 <!-- truncate -->
 

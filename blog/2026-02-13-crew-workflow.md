@@ -22,7 +22,7 @@ Polecats are ephemeral. They spawn, do one task, submit to the merge queue, and 
 | **Workspace** | Isolated worktree (nuked after use) | Persistent git clone |
 | **Identity** | Auto-generated name (toast, alpha) | Chosen name (dave, emma) |
 
-Crew workers push directly to main because they have human judgment. There is no need for the Refinery to validate their work -- the human reviewer is already in the loop.
+Crew workers push directly to main because they have human judgment. There is no need for the Refinery to validate their work -- the human reviewer is already in the loop. For details on the complete agent ecosystem, see the [polecats documentation](/docs/agents/polecats).
 
 ```mermaid
 flowchart TD

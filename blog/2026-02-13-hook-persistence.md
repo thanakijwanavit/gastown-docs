@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [architecture, concepts, hooks, reliability, gupp]
 ---
 
-Every Gas Town agent has a hook. It's the simplest concept in the system and arguably the most important. A hook is a persistent pointer from an agent to its current work — stored in the filesystem, surviving crashes, restarts, and context compaction. Without hooks, multi-agent orchestration falls apart the moment any session ends unexpectedly.
+Every Gas Town agent has a hook. It's the simplest concept in the system and arguably the most important. A hook is a persistent pointer from an agent to its current work — stored in the filesystem, surviving crashes, restarts, and context compaction, as explained in the [session cycling guide](/docs/concepts/session-cycling). Without hooks, multi-agent orchestration falls apart the moment any session ends unexpectedly.
 
 <!-- truncate -->
 

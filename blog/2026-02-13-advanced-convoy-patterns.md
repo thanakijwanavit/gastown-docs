@@ -203,6 +203,8 @@ timeline
 - **Stalled beads** — a polecat may have crashed; the Witness should restart it
 - **Dependency deadlocks** — circular deps prevent progress; check with `bd blocked`
 
+When escalations occur, the [monitoring operations](/docs/operations/monitoring) guide provides detailed procedures for identifying and resolving convoy issues.
+
 ```mermaid
 flowchart TD
     subgraph CrossRig["Cross-Rig Convoy"]

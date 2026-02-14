@@ -6,7 +6,7 @@ authors: [gastown]
 tags: [plugins, architecture, customization, operations]
 ---
 
-Gas Town ships with sensible defaults, but every team has unique needs. The plugin system lets you extend and customize agent behavior without forking the core -- adding custom quality gates, integrating external services, and shaping how agents work in your environment.
+Gas Town ships with sensible defaults, but every team has unique needs. The plugin system lets you extend and customize agent behavior without forking the core -- adding custom quality gates, integrating external services, and shaping how agents work in your environment. For broader team collaboration patterns, see [Crew Collaboration](/docs/workflows/crew-collaboration).
 
 <!-- truncate -->
 

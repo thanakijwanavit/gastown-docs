@@ -132,7 +132,7 @@ gt sling ga-ddd backend
 gt sling ga-eee frontend
 ```
 
-Cross-rig convoys work exactly like single-rig convoys — the dependency system doesn't care which rig a bead is assigned to. The convoy tracks completion across all rigs.
+Cross-rig convoys work exactly like single-rig convoys — the dependency system doesn't care which rig a bead is assigned to. The convoy tracks completion across all rigs. Each rig has its own [Refinery](/docs/agents/refinery) that processes merges independently, so cross-rig work naturally parallelizes at the merge stage.
 
 ## Pattern 3: Monitoring a Running Convoy
 

@@ -253,7 +253,7 @@ timeline
         Hybrid : Combine all patterns : Mayor + Formula : Auto-sling dependencies
 ```
 
-1. **Beads** track the work
+1. **[Beads](/docs/concepts/beads)** track the work
 2. **Hooks** attach work to agents
 3. **Convoys** group related beads
 4. **Molecules** (for formulas) track multi-step progress

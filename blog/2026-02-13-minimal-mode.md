@@ -35,7 +35,7 @@ sequenceDiagram
 
 1. **Hooks** — Work assignments that survive crashes and session restarts
 2. **Beads** — AI-native issue tracking with prefix-based routing
-3. **Convoys** — Bundle related work and track collective progress
+3. **[Convoys](/docs/concepts/convoys)** — Bundle related work and track collective progress
 
 These features work without Tmux, without the Mayor, without the Witness. You are the coordinator — and that's fine for learning or for resource-constrained environments.
 

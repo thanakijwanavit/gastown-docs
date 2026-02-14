@@ -168,6 +168,7 @@ gt convoy list
 - **Stranded work** — Beads sitting unassigned waste convoy overhead without producing value
 
 For comprehensive visibility into your fleet's behavior, combine these metrics with the techniques described in [monitoring your fleet](/blog/monitoring-fleet) and the [monitoring operations](/docs/operations/monitoring) guide.
+The [diagnostics CLI reference](/docs/cli-reference/diagnostics) provides commands for identifying performance bottlenecks and cost issues.
 
 ## Strategy 5: Use the Right Model Tier
 
