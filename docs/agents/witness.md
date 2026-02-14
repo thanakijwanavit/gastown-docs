@@ -302,3 +302,4 @@ gt nudge <rig>/witness "context check"
 
 - [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- Deep dive into Witness patrol cycles and recovery patterns
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- How to observe Witness activity across rigs
+- [Death Warrants](/blog/death-warrants) -- How the Witness issues death warrants for zombie polecats and coordinates cleanup

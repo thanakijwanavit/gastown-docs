@@ -773,3 +773,4 @@ gt thanks
 
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health and catching problems early
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- Diagnosing and recovering from common failures
+- [Cost Optimization](/blog/cost-optimization) -- Strategies for tracking and reducing token usage and API costs across your fleet

@@ -317,3 +317,4 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 
 - [Refinery Deep Dive](/blog/refinery-deep-dive) -- How the merge queue processes branches, handles conflicts, and maintains main
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Scaling Refinery throughput for high-volume rigs
+- [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- How the Refinery's merge queue fits into Gas Town's overall git strategy

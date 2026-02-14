@@ -403,3 +403,4 @@ The search index is rebuilt on every documentation deployment. If you're running
 
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog with multi-agent orchestration tips and workflow patterns
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Troubleshooting tips and search strategies for finding answers in the documentation
+- [Your First Convoy in 5 Minutes](/blog/first-convoy) -- A practical walkthrough that demonstrates many of the commands you can search for in these docs

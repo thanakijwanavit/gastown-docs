@@ -404,3 +404,4 @@ Previously required when beads used file-based storage to ensure polecat bead st
 
 - [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness agent monitors polecat health, detects stalls, and triggers recovery
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make, from vague beads to ignoring the Refinery queue
+- [Lifecycle Management in Gas Town](/blog/lifecycle-management) -- Managing the full polecat lifecycle from spawn to nuke, including stale detection and garbage collection

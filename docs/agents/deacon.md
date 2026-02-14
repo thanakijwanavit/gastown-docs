@@ -300,3 +300,4 @@ gt polecat list              # See zombie states
 
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- Deep dive into patrol cycles, gate evaluation, and lifecycle management
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- How to observe Deacon activity across the town
+- [Infrastructure Dogs](/blog/infrastructure-dogs) -- How Dogs work as reusable infrastructure workers managed by the Deacon

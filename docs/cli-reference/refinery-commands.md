@@ -355,3 +355,4 @@ All subcommands that accept `[rig]` infer the rig from the current directory whe
 
 - [The Refinery: How Merges Actually Work in Gas Town](/blog/refinery-deep-dive) -- Deep dive into how the Refinery serializes parallel agent work into a clean linear history on main
 - [Code Review with Gas Town Polecats](/blog/code-review-workflow) -- How the code-review formula integrates with the Refinery's merge gate
+- [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- Branch management strategies when multiple agents push work through the Refinery

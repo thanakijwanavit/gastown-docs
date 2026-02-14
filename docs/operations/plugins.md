@@ -618,3 +618,4 @@ Scheduled plugins run on a cron schedule independently of workflow events.
 
 - [Extending Gas Town with Plugins](/blog/plugin-system) -- Practical guide to writing custom plugins
 - [Gas Town's Security Model](/blog/security-model) -- How plugins fit into the security architecture
+- [Hook-Driven Architecture in Gas Town](/blog/hook-driven-architecture) -- How hook plugins intercept agent lifecycle events within the hook-driven system

@@ -185,3 +185,4 @@ When something seems wrong, `gt doctor` should be your first step. It checks age
 
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new users make
 - [Your First Convoy in 5 Minutes](/blog/first-convoy) -- Quick walkthrough of creating beads, bundling a convoy, and watching polecats deliver
+- [Mastering gt sling](/blog/mastering-gt-sling) -- Complete guide to the sling command for assigning work to rigs and polecats

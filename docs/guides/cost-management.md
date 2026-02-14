@@ -387,3 +387,4 @@ The question is not "is this expensive?" but "is the throughput worth the cost?"
 
 - [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical strategies for monitoring API costs and right-sizing agent work
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Cost implications and optimization strategies when running at scale
+- [Running Gas Town in Minimal Mode](/blog/minimal-mode) -- Reduced-overhead mode that cuts monitoring costs for budget-conscious workflows

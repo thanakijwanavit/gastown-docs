@@ -652,3 +652,4 @@ gt formula create api-migration --from-molecule mol-auth-001 --description "API 
 
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How Gas Town agents automatically hand off work when their context window fills up
 - [Hook-Driven Architecture: How Gas Town Agents Never Lose Work](/blog/hook-driven-architecture) -- A deep dive into the hook system that makes crash-safe, self-propelling agent workflows possible
+- [Molecules and Formulas: Multi-Step Workflows](/blog/molecules-and-formulas) -- How molecules and formulas orchestrate multi-step workflows across session boundaries

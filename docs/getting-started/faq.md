@@ -196,3 +196,4 @@ Polecats run preflight tests before implementing. If main is broken, they'll det
 
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog and multi-agent orchestration tips
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
+- [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical cost guidance for the "How much does it cost?" question

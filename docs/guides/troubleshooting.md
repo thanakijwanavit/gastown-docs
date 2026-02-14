@@ -447,3 +447,4 @@ For the full troubleshooting reference, see [Operations: Troubleshooting](../ope
 
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
+- [Understanding the Witness](/blog/witness-explained) -- How the Witness detects and recovers from the polecat issues covered in this guide

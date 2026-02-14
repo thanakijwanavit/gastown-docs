@@ -202,3 +202,4 @@ Run `gt orphans` as part of your weekly maintenance routine. Orphaned commits ar
 
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent health, tracking work progress, and catching problems early
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon detects and recovers orphaned work during patrol cycles
+- [Death Warrants](/blog/death-warrants) -- How Gas Town identifies and terminates zombie processes and orphaned sessions

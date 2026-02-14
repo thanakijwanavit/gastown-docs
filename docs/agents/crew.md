@@ -277,3 +277,4 @@ gt crew restart myproject dave
 
 - [Session Cycling](/blog/session-cycling) -- How crew members handle context limits with session handoffs
 - [Common Pitfalls](/blog/common-pitfalls) -- Mistakes to avoid when working alongside AI agents
+- [Crew Workflow](/blog/crew-workflow) -- End-to-end guide to setting up and using crew workspaces effectively

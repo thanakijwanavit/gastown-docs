@@ -200,3 +200,4 @@ Compaction is irreversible for deletions. Use `--dry-run` first to verify what w
 
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How Gas Town agents automatically hand off work when their context window fills up
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon runs compaction as part of its automated patrol cycle
+- [Lifecycle Management](/blog/lifecycle-management) -- Managing agent and resource lifecycles including wisp TTLs and compaction policies
