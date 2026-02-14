@@ -169,6 +169,26 @@ Work stays hooked until it is explicitly done or released — crashes, context c
 You do not need to be inside an agent's session to inspect its hook. Use `gt hook --target <path>` from any terminal to check what work is assigned to any agent in any rig. This is invaluable for debugging stalled polecats or verifying that a sling command landed correctly — you can inspect the hook without interrupting the agent's session.
 :::
 
+```mermaid
+sequenceDiagram
+    participant H as Human/Mayor
+    participant S as gt sling
+    participant W as Worktree
+    participant A as Agent Session
+    participant M as Molecule
+
+    H->>S: Assign bead gt-abc12
+    S->>W: Create worktree + .gt-hook
+    S->>A: Start session
+    A->>W: Read .gt-hook
+    A->>M: Execute step 1
+    M->>W: Update hook (step 1 done)
+    A->>M: Execute step 2
+    Note over A: CRASH
+    A->>W: Read .gt-hook (step 2 in_progress)
+    A->>M: Resume step 2
+```
+
 ## When Hooks Clear
 
 Hooks clear when:

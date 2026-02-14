@@ -175,6 +175,20 @@ Setting the stall threshold too low causes the Witness to flag healthy polecats 
 Because the Witness runs its patrol as a molecule, it benefits from the same crash-recovery guarantees as any other Gas Town agent. If the Witness session dies mid-patrol — due to a context overflow, a machine restart, or a network issue — the Deacon detects the missing session and restarts it. The new Witness session reads its patrol molecule and resumes from the last completed step, so no patrol data is lost.
 :::
 
+```mermaid
+graph TD
+    subgraph Patrol["Witness Patrol Cycle"]
+        S1["Step 1: Process Inbox"] --> S2["Step 2: Check Polecats"]
+        S2 --> S3["Step 3: Check Refinery"]
+        S3 --> S4["Step 4: Check Merge Queue"]
+        S4 --> S5["Step 5: Check Convoys"]
+        S5 --> S6["Step 6: Report to Deacon"]
+        S6 --> S7["Step 7: Self-Context Check"]
+        S7 -->|context OK| S1
+        S7 -->|context HIGH| CY["Cycle Session"]
+    end
+```
+
 ## Observing the Witness
 
 You can monitor the Witness's activity:

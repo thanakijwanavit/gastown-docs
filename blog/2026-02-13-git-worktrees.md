@@ -164,6 +164,17 @@ Git worktrees share the same `.git` directory and run in the same OS process spa
 Git enforces a one-to-one relationship between branches and worktrees — you cannot check out the same branch in two worktrees simultaneously. If a polecat's worktree is not properly cleaned up after completion, subsequent agents trying to use that branch name will fail. The Witness handles this cleanup automatically, but be aware of this constraint when debugging "branch already checked out" errors.
 :::
 
+```mermaid
+graph TD
+    SLING["gt sling bead"] --> CREATE["git worktree add polecats/toast"]
+    CREATE --> WORK["Polecat works on branch"]
+    WORK --> DONE["gt done (submit MR)"]
+    DONE --> MERGE["Refinery merges to main"]
+    MERGE --> CLEANUP["git worktree remove polecats/toast"]
+    CLEANUP --> FREE["Worktree slot available"]
+    FREE -.->|next bead| SLING
+```
+
 ## The Trade-Off
 
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).

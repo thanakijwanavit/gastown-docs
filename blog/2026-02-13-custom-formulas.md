@@ -272,6 +272,20 @@ Use `gt mol pour <formula> --hook` to pour a molecule onto your own hook and ste
 Formula step descriptions are executed by AI agents, not read by humans. Avoid vague instructions like "review the code for issues" and instead provide explicit commands to run, specific files to check, and concrete success criteria. An agent cannot infer intent from context the way a human colleague can -- precision in step descriptions directly translates to fewer failed molecules and lower token costs.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Poured: gt mol pour
+    Poured --> Running: Agent picks up
+    Running --> StepDone: Step completes
+    StepDone --> Running: Next step
+    StepDone --> Gated: Gate step reached
+    Gated --> Running: Gate closes
+    Running --> Crashed: Agent crashes
+    Crashed --> Running: New agent resumes
+    StepDone --> Complete: All steps done
+    Complete --> [*]
+```
+
 ## Best Practices
 
 **Keep steps focused.** Each step should be one clear action. If a step description is more than a paragraph, consider splitting it into multiple steps.

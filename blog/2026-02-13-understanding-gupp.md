@@ -140,6 +140,19 @@ Let's trace a real failure-recovery sequence to see GUPP in action:
 
 No human involvement. No lost work. The 15-minute gap was the only cost — and that's just the Witness patrol interval. The key moments are at 10:15 (hook and molecule state survive the crash) and 10:21 (fresh agent skips completed steps).
 
+```mermaid
+graph TD
+    subgraph Recovery["GUPP Recovery Flow"]
+        CRASH["Agent Crashes"] --> HOOK["Hook persists on disk"]
+        HOOK --> WITNESS["Witness detects dead session"]
+        WITNESS --> WARRANT["Warrant filed"]
+        WARRANT --> RESLING["Bead re-slung"]
+        RESLING --> NEW["New polecat spawns"]
+        NEW --> MOLECULE["Reads molecule state"]
+        MOLECULE --> RESUME["Resumes at last checkpoint"]
+    end
+```
+
 ## What This Means For You
 
 As a Gas Town user, GUPP means:

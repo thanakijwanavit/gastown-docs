@@ -117,6 +117,17 @@ In five minutes, you:
 
 This is the core Gas Town loop. The Mayor can automate steps 1-3 for you (just describe what you want in natural language), but understanding the manual flow helps you debug and fine-tune later.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: bd create
+    Created --> Bundled: gt convoy create
+    Bundled --> Slung: gt sling
+    Slung --> In_Progress: Polecat picks up
+    In_Progress --> Submitted: gt done
+    Submitted --> Merged: Refinery merges
+    Merged --> [*]: Convoy auto-closes
+```
+
 ## Behind the Scenes
 
 When you sling a bead to a rig, several things happen automatically:

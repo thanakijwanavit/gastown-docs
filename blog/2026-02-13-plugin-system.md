@@ -184,6 +184,25 @@ When deploying a new quality gate plugin, start with `fail_action = "warn"` so i
 Every plugin's stdout and stderr are captured and stored in the Refinery's merge log for the associated MR. If a pre-merge plugin fails and rejects a merge, you can review the full plugin output with `gt mq log <mr-id>` to understand exactly what went wrong. This is especially useful when debugging intermittent failures in quality gate plugins that only reproduce under rebase conditions.
 :::
 
+```mermaid
+sequenceDiagram
+    participant PC as Polecat
+    participant RF as Refinery
+    participant PL as Plugins
+    participant MN as Main Branch
+
+    PC->>RF: gt done (submit MR)
+    RF->>RF: Rebase onto main
+    RF->>PL: Run pre-merge plugins
+    PL->>PL: 01-lint.sh
+    PL->>PL: 02-type-check.sh
+    PL->>PL: 03-coverage.sh
+    PL-->>RF: All gates pass
+    RF->>MN: Merge to main
+    RF->>PL: Run post-merge plugins
+    PL->>PL: notify-slack.sh
+```
+
 ## Best Practices
 
 1. **Keep plugins fast.** Pre-merge plugins run on every merge. Aim for under 60 seconds total.

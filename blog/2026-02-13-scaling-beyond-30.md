@@ -167,6 +167,14 @@ At 30+ concurrent agents, API token costs can escalate rapidly — especially if
 Splitting a monolithic rig into multiple smaller rigs does more than reduce merge contention — it also isolates failures. When a single rig experiences a Refinery stall, an infrastructure issue, or a cascade of rebase conflicts, only the agents on that rig are affected. Other rigs continue operating normally, which means your overall throughput degrades gracefully rather than collapsing entirely.
 :::
 
+```mermaid
+pie title Resource Usage by Scale
+    "API Calls" : 45
+    "Git Operations" : 25
+    "CI Validation" : 20
+    "Coordination Overhead" : 10
+```
+
 ## Common Pitfalls at Scale
 
 1. **Not splitting rigs early enough.** By the time merge conflicts are constant, you should have split the rig already.

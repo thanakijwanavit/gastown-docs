@@ -159,6 +159,19 @@ Before adding a new runtime to your Gas Town setup, always test the basic contra
 When Gas Town spawns a polecat in a non-default runtime, it injects a runtime-specific system prompt tailored to that tool's capabilities and conventions. This means a Gemini CLI agent receives different bootstrapping instructions than a Claude Code agent, even when working on the same rig. Review the generated prompts with `gt rig config <rig> --show-prompt` to ensure the instructions match your expectations before slinging work.
 :::
 
+```mermaid
+graph TD
+    RC[Rig Config] -->|runtime: claude-code| CC[Claude Code Polecat]
+    RC -->|runtime: gemini| GM[Gemini CLI Agent]
+    RC -->|runtime: codex| CX[Codex Worker]
+    RC -->|runtime: cursor| CR[Cursor Agent]
+    CC --> HC[Hook-Commit-Done Contract]
+    GM --> HC
+    CX --> HC
+    CR --> HC
+    HC --> GT[Gas Town Orchestration]
+```
+
 ## Practical Tips
 
 **Start with one runtime.** Most teams begin with Claude Code for everything, then specialize as they learn which tasks benefit from different runtimes.

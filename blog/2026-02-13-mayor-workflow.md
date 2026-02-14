@@ -253,6 +253,15 @@ You: Plan the work for adding rate limiting, but don't start yet.
 
 **Use convoys for grouping.** If you give the Mayor 5 unrelated requests, it creates 5 separate convoys. This keeps progress tracking clean.
 
+```mermaid
+pie title Mayor Time Allocation
+    "Decomposing Requests" : 25
+    "Creating Beads & Convoys" : 15
+    "Slinging Work" : 10
+    "Monitoring Progress" : 30
+    "Handling Failures" : 20
+```
+
 ## The MEOW Mental Model
 
 Think of the Mayor as a project manager who happens to be an AI:

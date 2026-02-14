@@ -194,6 +194,13 @@ This creates a continuous quality loop: polecats produce work, the review formul
 **Create custom legs.** The code-review formula is a standard TOML formula — you can fork it and add legs specific to your project (accessibility, i18n, API compatibility, etc.).
 :::
 
+```mermaid
+pie title Review Issue Priority Distribution
+    "P0 - Must Fix" : 10
+    "P1 - Should Fix" : 30
+    "P2 - Nice to Fix" : 60
+```
+
 ## Why This Approach Works
 
 The parallel review model works because each perspective is genuinely independent. A security reviewer doesn't need to wait for the performance reviewer. A style reviewer doesn't need the correctness reviewer's findings. The only dependency is at the end: synthesis needs all leg outputs.

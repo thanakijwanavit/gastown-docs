@@ -275,6 +275,18 @@ flowchart TD
 When using the `optional = true` flag on steps, the agent must decide at runtime whether to execute or skip them. This works well for error-recovery patterns, but avoid making critical quality gates optional — steps like testing and self-review should always be mandatory to prevent untested code from reaching the merge queue.
 :::
 
+```mermaid
+graph TD
+    subgraph Recovery["Pattern 5: Error Recovery"]
+        IM2[implement] --> TS[test]
+        TS -->|pass| SB[submit]
+        TS -->|fail| FX[fix-failures]
+        FX --> RT[retest]
+        RT -->|pass| SB
+        RT -->|fail| ESC[escalate]
+    end
+```
+
 ## Built-In Formulas
 
 Gas Town ships with several built-in formulas:

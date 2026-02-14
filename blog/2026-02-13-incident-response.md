@@ -163,6 +163,19 @@ gt mq reject <mr-id> --reason "Conflicts with other changes"
 
 For persistent merge conflicts, consider processing the conflicting MRs sequentially rather than letting the Refinery attempt parallel merges.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Detected: Issue Found
+    Detected --> Triaging: 90-Second Triage
+    Triaging --> Diagnosed: Root Cause Identified
+    Diagnosed --> AutoRecovery: Witness Handles It
+    Diagnosed --> ManualFix: Operator Intervenes
+    AutoRecovery --> Resolved: Self-Healed
+    ManualFix --> Resolved: Fix Applied
+    Resolved --> Verified: gt status Clean
+    Verified --> [*]
+```
+
 ## Scenario 4: Agent Can't Find Its Hook
 
 **Symptoms:** An agent starts up and reports "hook empty" even though work was assigned.

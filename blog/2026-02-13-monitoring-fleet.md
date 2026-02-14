@@ -176,6 +176,35 @@ The `gt doctor --fix` command only addresses well-understood, non-destructive cl
 If `gt feed` shows multiple escalations firing within a short window, it often indicates a systemic issue rather than individual polecat failures — such as a broken dependency, a flaky test, or a misconfigured rig. Investigate the common denominator across the escalations before addressing each one individually, or you risk wasting time on symptoms while the root cause continues generating new failures.
 :::
 
+```mermaid
+graph LR
+    subgraph Inputs["Data Sources"]
+        F[gt feed]
+        S[gt status]
+        D[gt doctor]
+        T[gt trail]
+    end
+    subgraph Analysis["Pattern Detection"]
+        SP[Spawn/Nuke Cycles]
+        EB[Escalation Bursts]
+        MG[Merge Queue Stalls]
+    end
+    subgraph Action["Response"]
+        FX[Fix Root Cause]
+        RS[Re-sling Work]
+        RR[Restart Rig]
+    end
+    F --> SP
+    F --> EB
+    S --> MG
+    D --> FX
+    SP --> T
+    T --> FX
+    EB --> FX
+    MG --> RS
+    FX --> RR
+```
+
 ## Building a Monitoring Routine
 
 Here's a practical daily routine for monitoring a Gas Town fleet:

@@ -175,6 +175,22 @@ Because work assignment is stored in the filesystem — not in the agent's conte
 When cycling sessions, always ensure work is hooked before relying on handoff mail. A common mistake is sending detailed handoff notes but failing to verify the hook state. The next session will find context in its inbox but no assignment on the hook, leaving it unable to act on the information. The hook is the assignment; the mail is the context.
 :::
 
+```mermaid
+graph LR
+    subgraph Durable["Durable (survives crash)"]
+        HK[Hook in .gt-hook]
+        GIT[Git commits/branches]
+        BD[Bead status in beads DB]
+    end
+    subgraph Ephemeral["Ephemeral (lost on crash)"]
+        CTX[Agent context window]
+        MEM[In-memory state]
+        TMP[Temp files]
+    end
+    HK -->|restores| CTX
+    GIT -->|restores| MEM
+```
+
 ## The Security Angle
 
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.

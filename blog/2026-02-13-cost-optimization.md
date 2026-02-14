@@ -165,6 +165,18 @@ A test that fails 20% of the time does not just cost 20% more -- it compounds. E
 Patrol agents (Witness, Deacon) cycle continuously on active rigs, consuming API tokens even when no productive work is happening. Running `gt rig park <rig>` during nights and weekends immediately stops all patrol cycles for that rig. Unpark in the morning with `gt rig unpark <rig>` and agents resume exactly where they left off.
 :::
 
+```mermaid
+graph TD
+    A[Bead Created] --> B{Well-Scoped?}
+    B -->|Yes| C[1 Session]
+    B -->|No| D[Explore Codebase]
+    D --> E[Context Fills Up]
+    E --> F[Crash + Restart]
+    F --> G[2-3 Sessions]
+    C --> H[Low Cost]
+    G --> I[High Cost]
+```
+
 ## Common Cost Traps
 
 **The "just one more polecat" trap.** It's tempting to throw more parallelism at a problem. But each polecat has startup costs, and if they touch overlapping files, the Refinery spends more time resolving conflicts — which triggers re-runs.

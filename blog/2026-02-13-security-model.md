@@ -138,6 +138,22 @@ For operations that touch production infrastructure — deployments, database mi
 Before onboarding a new rig, verify that your repository's branch protection rules allow the Refinery to push to main while still blocking direct pushes from other agents. A misconfigured branch protection setup can either lock out the Refinery entirely — stalling all merges — or leave main unprotected against direct polecat pushes, bypassing the validation pipeline you depend on.
 :::
 
+```mermaid
+sequenceDiagram
+    participant PC as Polecat
+    participant BR as Feature Branch
+    participant RF as Refinery
+    participant CI as CI/CD
+    participant M as Main Branch
+    PC->>BR: Push code changes
+    BR->>RF: Submit merge request
+    RF->>RF: Rebase onto main
+    RF->>CI: Run validation suite
+    CI-->>RF: Tests pass
+    RF->>M: Fast-forward merge
+    Note over RF,M: Only validated code reaches main
+```
+
 ## Best Practices
 
 1. **Never commit secrets.** Use `.gitignore` patterns for `.env`, `*.key`, `credentials.*`, and similar files.

@@ -166,6 +166,22 @@ Each MR is rebased onto the latest main, validated (tests, build), and fast-forw
 
 If a rebase fails, the Refinery either retries (for transient issues) or spawns a fresh polecat (for real conflicts). The merge queue acts as a buffer that absorbs the chaos of parallel development and produces ordered, validated commits.
 
+```mermaid
+sequenceDiagram
+    participant PA as Polecat A
+    participant RF as Refinery
+    participant MN as main
+    participant PB as Polecat B
+
+    PA->>RF: Submit MR (fix/auth)
+    RF->>MN: Rebase + merge fix/auth
+    PB->>RF: Submit MR (feat/email)
+    RF->>RF: Rebase feat/email onto new main
+    RF->>RF: Run tests
+    RF->>MN: Merge feat/email
+    Note over MN: Linear history preserved
+```
+
 ## Practical Tips
 
 :::tip

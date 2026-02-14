@@ -187,6 +187,23 @@ gt release gt-b2                    # Pull one bead back
 gt sling gt-b2 security-team-rig    # Re-route to security experts
 ```
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant MY as Mayor
+    participant BD as Beads DB
+    participant CV as Convoy
+    participant PC as Polecat
+    H->>MY: Describe goal
+    MY->>BD: Create beads
+    MY->>CV: Bundle into convoy
+    MY->>PC: Sling beads to agents
+    PC->>PC: Execute work
+    PC->>BD: bd close (mark done)
+    BD->>CV: Update convoy progress
+    CV-->>H: Auto-close when complete
+```
+
 ## The Work Distribution Architecture
 
 All three patterns ultimately use the same underlying machinery:

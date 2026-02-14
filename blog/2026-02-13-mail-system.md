@@ -178,6 +178,18 @@ sequenceDiagram
     Note over B: Processes mail content
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Composed: gt mail send
+    Composed --> Stored: Written to Beads DB
+    Stored --> Unread: Awaiting Recipient
+    Unread --> Read: gt mail inbox
+    Read --> Hooked: gt mail hook
+    Read --> Archived: No Action Needed
+    Hooked --> Executed: Agent Works on Mail
+    Executed --> [*]
+```
+
 ## Mail vs. Nudge: When to Use Which
 
 | Scenario | Use Mail | Use Nudge |

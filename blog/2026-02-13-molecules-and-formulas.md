@@ -230,6 +230,17 @@ gt formula run release
 Molecule progress is managed by the agent through `gt mol` commands. Directly editing wisp states in the `.beads/` database can put the molecule into an inconsistent state where completed steps appear pending or vice versa, causing the agent to skip work or repeat it. If a molecule is stuck, use `gt mol reset` to cleanly restart from a known step rather than hand-editing the underlying beads.
 :::
 
+```mermaid
+pie title Molecule Step Time Distribution (Typical Shiny)
+    "load-context" : 10
+    "branch-setup" : 5
+    "preflight-tests" : 15
+    "implement" : 40
+    "self-review" : 10
+    "run-tests" : 15
+    "submit-and-exit" : 5
+```
+
 ## The MEOW Stack Connection
 
 Molecules are one layer in the MEOW Stack (**M**olecules, **E**pics, **O**rchestration, **W**orkflows). Individual molecules handle single-agent workflows. At higher layers, convoys coordinate multiple molecules across agents, and protomolecules orchestrate complex multi-agent operations.

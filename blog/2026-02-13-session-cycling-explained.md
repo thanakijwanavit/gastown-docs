@@ -165,6 +165,19 @@ flowchart TD
     end
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Fresh: Session starts
+    Fresh --> Working: gt prime + gt hook
+    Working --> ContextLow: Context < 70%
+    ContextLow --> Working: Continue work
+    Working --> ContextHigh: Context >= 85%
+    ContextHigh --> Committing: git commit + push
+    Committing --> Handoff: gt handoff
+    Handoff --> [*]: Session ends
+    [*] --> Fresh: New session spawns
+```
+
 ## The Role of Molecules
 
 Molecules are what make session cycling work for multi-step tasks. Each molecule tracks:

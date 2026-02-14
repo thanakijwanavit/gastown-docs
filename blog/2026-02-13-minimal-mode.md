@@ -141,6 +141,17 @@ flowchart TD
     end
 ```
 
+```mermaid
+graph TD
+    H[Hook System] -->|survives crashes| R[Restart Session]
+    R -->|gt prime finds hook| P[Resume Work]
+    B[Beads DB] -->|tracks all tasks| C[Convoy Progress]
+    C -->|shows completion| N[Sling Next Bead]
+    H --- B
+    P --> D[gt done]
+    D --> C
+```
+
 ## Tips
 
 :::tip

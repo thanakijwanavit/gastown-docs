@@ -95,6 +95,20 @@ The supervision chain determines who can file warrants for whom:
 
 This hierarchy prevents circular problems. The Witness can't file a warrant against itself, and the Deacon can't file a warrant against itself. If the Deacon is stuck, only the daemon (or a human) can intervene.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Healthy: Agent running normally
+    Healthy --> Stalled: No output for 15+ min
+    Stalled --> Nudged: Witness sends nudge
+    Nudged --> Healthy: Agent recovers
+    Nudged --> Unresponsive: Nudge fails
+    Unresponsive --> Warrant_Filed: Witness files warrant
+    Warrant_Filed --> Terminated: Boot executes warrant
+    Terminated --> Respawned: Witness spawns fresh polecat
+    Respawned --> Healthy
+    Terminated --> Escalated: 3+ warrants on same bead
+```
+
 ## When Warrants Aren't Enough
 
 Sometimes an agent keeps respawning into the same broken state. The Witness sees work on the hook, spawns a polecat, the polecat gets stuck, the Witness files a warrant, Boot kills it, and the cycle repeats.

@@ -162,6 +162,24 @@ The daemon sends heartbeats to every active rig on every tick. If you have rigs 
 It may be tempting to extend the daemon with smarter scheduling, conditional heartbeats, or agent health tracking. Resist this impulse. Every feature added to the daemon increases its failure blast radius and makes recovery harder. Gas Town's architecture deliberately keeps the daemon simple so that all intelligence lives in agents, which have built-in crash recovery via hooks and molecules.
 :::
 
+```mermaid
+sequenceDiagram
+    participant D as Daemon
+    participant DC as Deacon
+    participant W as Witness
+    participant P as Polecats
+
+    loop Every 3 Minutes
+        D->>DC: Heartbeat tick
+        DC->>W: Check Witness health
+        W->>P: Patrol polecats
+        W-->>DC: Status report
+        DC-->>D: Ack
+    end
+    Note over D: Daemon stays simple
+    Note over DC,P: Intelligence lives here
+```
+
 ## Design Lessons
 
 The daemon embodies several Gas Town principles:

@@ -169,6 +169,21 @@ flowchart LR
     end
 ```
 
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant BD as bd create
+    participant PC as Polecat
+    participant RF as Refinery
+
+    Dev->>BD: Write specific bead with file paths
+    BD->>PC: Sling to polecat
+    PC->>PC: Read bead, go straight to fix
+    PC->>RF: gt done (submit work)
+    RF->>RF: Merge to main
+    RF-->>Dev: Work landed
+```
+
 ## Quick Reference: Pitfall vs Fix
 
 | Pitfall | Symptom | One-Line Fix |

@@ -192,6 +192,19 @@ The single biggest factor in Refinery throughput is merge conflict rate, and the
 When the Refinery rejects an MR due to a rebase conflict or validation failure, it immediately moves on to the next MR in the queue. The rejected bead stays open and can be re-slung to a fresh polecat, but it does not hold up other merges. This design ensures that one problematic MR never stalls the entire pipeline — the queue keeps flowing while the failed work is retried independently.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: MR submitted
+    Pending --> Rebasing: Refinery picks up
+    Rebasing --> Validating: Rebase clean
+    Rebasing --> Rejected: Conflict
+    Validating --> Merging: Tests pass
+    Validating --> Rejected: Tests fail
+    Merging --> Merged: Push success
+    Rejected --> [*]: Bead stays open
+    Merged --> [*]: Cleanup
+```
+
 ## Queue Ordering
 
 The default ordering is FIFO — first submitted, first processed. But the Refinery respects priority when configured:

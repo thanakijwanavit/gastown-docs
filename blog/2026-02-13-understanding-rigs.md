@@ -141,6 +141,22 @@ stateDiagram-v2
     Docked --> Active: gt rig undock
 ```
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant R as Rig
+    participant W as Witness
+    participant RF as Refinery
+    participant P as Polecats
+    H->>R: gt rig add (create)
+    R->>W: Witness starts patrolling
+    R->>RF: Refinery starts processing
+    H->>P: gt sling (assign work)
+    P->>RF: gt done (submit MR)
+    RF->>R: Merge to main
+    W->>P: Monitor health
+```
+
 ## Practical Tips
 
 :::tip

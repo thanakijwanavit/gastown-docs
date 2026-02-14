@@ -146,6 +146,23 @@ sequenceDiagram
     CI->>PR: Deploy (your CD)
 ```
 
+```mermaid
+graph LR
+    subgraph CICD_Only["Traditional CI/CD"]
+        HC[Human Codes] --> PR[Pull Request]
+        PR --> BLD[Build]
+        BLD --> TST[Test]
+        TST --> DPL[Deploy]
+    end
+    subgraph GT_Plus_CICD["Gas Town + CI/CD"]
+        INT[Human Intent] --> MAY[Mayor]
+        MAY --> PCS[Polecats Code]
+        PCS --> REF[Refinery]
+        REF --> CI2[Your CI]
+        CI2 --> CD2[Your CD]
+    end
+```
+
 ## The Bottom Line
 
 Gas Town is not CI/CD 2.0. It's the layer that generates the code your CI/CD validates. Think of it as "AI-driven development management" that happens to interface with your existing automation.

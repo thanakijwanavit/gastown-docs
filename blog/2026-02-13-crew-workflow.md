@@ -177,6 +177,23 @@ When your context window fills up or you finish a work chunk, always run `gt han
 You do not need to do everything yourself in a crew workspace. For well-defined, repetitive tasks, create a bead with a clear description and sling it to a polecat with `gt sling`. This lets you focus on high-judgment work while the agent fleet handles the mechanical tasks in parallel.
 :::
 
+```mermaid
+sequenceDiagram
+    participant CW as Crew Worker
+    participant GT as Gas Town
+    participant PC as Polecat Pool
+
+    CW->>GT: gt prime (load context)
+    CW->>GT: gt hook (check assignments)
+    CW->>GT: gt mail inbox (check mail)
+    CW->>CW: git pull (sync main)
+    CW->>CW: Code high-judgment work
+    CW->>GT: bd create (define task)
+    GT->>PC: gt sling (dispatch)
+    PC->>PC: Execute mechanical work
+    CW->>CW: git push (land own work)
+```
+
 ## Best Practices
 
 1. **Push frequently.** In a multi-agent environment, unpushed work diverges fast. Push after every logical chunk.

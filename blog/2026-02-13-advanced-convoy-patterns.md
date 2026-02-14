@@ -192,6 +192,19 @@ A single stalled bead prevents the entire convoy from auto-closing. If you bundl
 Polecats in different rigs cannot access each other's filesystems. If a frontend bead depends on a backend API contract, you must make that dependency explicit through bead dependencies or shared artifacts (such as a published API schema). Without this, cross-rig polecats will race on assumptions and produce incompatible output.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: gt convoy create
+    Created --> Active: beads slung
+    Active --> Monitoring: gt convoy status
+    Monitoring --> Active: beads still running
+    Active --> Closing: all beads terminal
+    Closing --> Closed: auto-close
+    Closed --> [*]
+    Active --> Stalled: bead stuck
+    Stalled --> Active: Mayor reassigns
+```
+
 ## Anti-Patterns to Avoid
 
 **Mega-convoys**: Don't put 50 beads in one convoy. If a single bead stalls, you can't close the convoy. Keep convoys focused (3-10 beads).

@@ -156,6 +156,16 @@ Each stage builds skills and trust that the next stage depends on. Jumping from 
 The jump from Stage 6 to Stage 7 is the most impactful transition in the entire maturity model. Running even two agents in parallel fundamentally changes how you think about development -- you shift from "what should I build next" to "what should I assign next." This mental model shift is harder than any tooling change, and it is what separates casual AI users from orchestrators.
 :::
 
+```mermaid
+pie title Developer Distribution by Stage (Estimated)
+    "Stage 1-2: Manual/Completions" : 25
+    "Stage 3: Chat" : 30
+    "Stage 4: Agent Edits" : 25
+    "Stage 5: Multi-File" : 12
+    "Stage 6: Intent-Level" : 5
+    "Stage 7-8: Orchestration" : 3
+```
+
 ## The Honest Truth About Stage 8
 
 Stage 8 is not for everyone. It requires:

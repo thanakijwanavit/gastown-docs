@@ -153,6 +153,17 @@ Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`). If the Deacon 
 If a convoy is not auto-closing, it means at least one bead has not reached a terminal state. Force-closing the convoy hides the problem instead of solving it. Use `gt convoy status <id>` to identify the stuck bead, then either fix the bead's blocking issue or mark it as `wontfix` with `bd close <bead> --reason wontfix`. The Deacon will auto-close the convoy on its next patrol once all beads are terminal.
 :::
 
+```mermaid
+graph LR
+    TG[Timer Gate] -->|timeout expired| CLOSE1[Close Gate]
+    GH[GitHub Actions Gate] -->|run completed| CLOSE2[Close Gate]
+    HM[Human Gate] -->|approved| CLOSE3[Close Gate]
+    CLOSE1 --> DISPATCH[Dispatch Molecule]
+    CLOSE2 --> DISPATCH
+    CLOSE3 --> DISPATCH
+    DISPATCH --> RESUME[Workflow Resumes]
+```
+
 ## Patrol Molecule: Squash and Respawn
 
 To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn pattern:

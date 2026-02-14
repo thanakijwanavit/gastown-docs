@@ -205,6 +205,19 @@ Slinging a bead that still has unresolved dependencies will assign it to a polec
 A stranded bead is one that belongs to a convoy but has not been slung to any agent — it sits in the ready queue with no polecat assigned. This commonly happens when a dependency clears and you forget to sling the unblocked work. Running `gt convoy show <id>` after each bead completes helps you catch stranded beads immediately, so your convoy does not stall waiting for work that nobody has picked up.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: bd create
+    Created --> Bundled: gt convoy create
+    Bundled --> Slung: gt sling
+    Slung --> Working: Polecat picks up
+    Working --> Done: gt done
+    Working --> Stuck: No progress
+    Stuck --> Released: gt release
+    Released --> Slung: gt sling (re-sling)
+    Done --> [*]: Convoy tracks completion
+```
+
 ## Lessons from Second Convoys
 
 **Decompose aggressively.** Five small beads are better than two large ones. Small beads finish faster, parallelize better, and are easier to re-sling when something goes wrong.

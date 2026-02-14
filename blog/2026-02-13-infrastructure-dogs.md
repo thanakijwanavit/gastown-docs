@@ -150,6 +150,18 @@ Dogs bypass the merge queue and code review process entirely. If you need a feat
 If a rig is parked or docked, dogs dispatched for cross-rig operations will skip it silently or fail. Before running infrastructure-wide sweeps like orphaned worktree cleanup or configuration syncing, verify all target rigs are active with `gt rig list`. Unpark any rigs that need to be included in the maintenance operation.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: Dog in Pool
+    Idle --> Assigned: Deacon Dispatches Task
+    Assigned --> Working: Scanning Rigs
+    Working --> Reporting: Task Complete
+    Reporting --> Idle: Return to Pool
+    Reporting --> Warranted: Timeout Exceeded
+    Warranted --> Terminated: Boot Processes Warrant
+    Terminated --> [*]
+```
+
 ## Anti-Patterns
 
 **Don't use dogs for feature work.** Dogs bypass the merge queue and code review process. If you need a feature implemented, sling it to a polecat via `gt sling`.

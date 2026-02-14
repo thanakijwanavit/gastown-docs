@@ -172,6 +172,19 @@ graph TD
 
 If you start a Witness before the Deacon, it'll function but the Deacon won't know about it until its next patrol cycle. Always let `gt start --all` handle the ordering unless you have a specific reason to do it manually.
 
+```mermaid
+flowchart LR
+    subgraph Pause["Short Pause"]
+        S1[gt rig stop] -->|daemon may restart| S2[Rig Resumes]
+    end
+    subgraph Offline["Extended Offline"]
+        P1[gt rig park] -->|worktrees kept| P2[gt rig unpark]
+    end
+    subgraph Shelve["Long-Term Shelving"]
+        D1[gt rig dock] -->|worktrees removed| D2[gt rig undock + boot]
+    end
+```
+
 ## Emergency Recovery
 
 ### Full System Unresponsive

@@ -167,6 +167,19 @@ If you run Gas Town outside business hours, set up quiet hours in `settings/esca
 Run `gt escalate stale` as part of your daily routine. Stale escalations are issues that were raised but never acknowledged -- they represent problems that fell through the cracks. Catching them early prevents small issues from compounding into larger outages. A clean stale queue each morning is the best indicator that your escalation routing is working correctly.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: Agent detects problem
+    Created --> Notified: Channels fire
+    Notified --> Acknowledged: Human runs gt escalate ack
+    Acknowledged --> Resolved: Human fixes + closes
+    Resolved --> [*]
+    Notified --> Re_Escalated: No ack within threshold
+    Re_Escalated --> Notified: Channels fire again
+    Re_Escalated --> Stale: max_re_escalations hit
+    Stale --> Acknowledged: Human catches up
+```
+
 ## Best Practices
 
 1. **Acknowledge promptly.** Even if you can't fix it yet, acknowledging stops re-escalation and tells the system a human is aware.
