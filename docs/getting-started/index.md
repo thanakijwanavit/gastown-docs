@@ -62,6 +62,10 @@ gt mayor attach               # Start the Mayor
 - [5 Common Pitfalls When Starting](/blog/common-pitfalls) -- Avoid these mistakes when setting up Gas Town
 - [Understanding GUPP](/blog/understanding-gupp) -- Why agents never lose work, even when they crash
 
+:::tip
+**Start with the Quick Start.** The fastest path is [Quick Start](quickstart.md) → [First Convoy](first-convoy.md) → [Cheat Sheet](cheat-sheet.md). You can read the conceptual docs later — get your hands dirty first.
+:::
+
 ## Next Steps
 
 Once you're up and running, explore these areas:

@@ -177,3 +177,4 @@ If those three work, the runtime is Gas Town compatible.
 - **[Architecture Overview](/docs/architecture/overview)** — The full Gas Town system design
 - **[Understanding Rigs](/blog/understanding-rigs)** — How rigs organize different runtime environments
 - **[Mastering gt sling](/blog/mastering-gt-sling)** — Slinging work across rigs with different runtimes
+- **[Plugin System](/blog/plugin-system)** — Extending Gas Town with plugins for different runtime environments

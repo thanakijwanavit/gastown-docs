@@ -128,3 +128,4 @@ As a Gas Town user, GUPP means:
 - **[Hooks](/docs/concepts/hooks)** — The persistence primitive that makes GUPP possible
 - **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks implement GUPP's crash-safety guarantee
 - **[Session Cycling Explained](/blog/session-cycling)** — How GUPP applies to context refresh and handoffs
+- **[Common Pitfalls](/blog/common-pitfalls)** — Mistakes that happen when teams skip GUPP principles

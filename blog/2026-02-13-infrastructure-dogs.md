@@ -167,3 +167,4 @@ Boot will process the warrant on the next daemon tick.
 - [Deacon Documentation](/docs/agents/deacon) — How the Deacon manages the dog pool
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) — Deep dive into the Deacon's patrol cycle
 - [Death Warrants: Structured Agent Termination](/blog/death-warrants) — How warrants handle stuck dogs and polecats
+- [Boot Dogs: The Triage Engine](/blog/boot-dogs) — How Boot performs initial triage before dispatching infrastructure dogs

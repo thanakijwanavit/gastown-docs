@@ -82,6 +82,10 @@ At each level, the system tries to self-heal before escalating. Most issues reso
 - [Gas Town's Security Model](/blog/security-model) -- Trust boundaries and workspace isolation for AI agents
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Bottlenecks and strategies for large-scale deployments
 
+:::info
+**Erlang-inspired design.** Gas Town's supervisor trees and mailbox patterns come from 30+ years of Erlang/OTP experience building fault-tolerant systems. If you're familiar with Erlang, the architecture will feel natural.
+:::
+
 ## Next Steps
 
 - **[System Overview](overview.md)** — Detailed view of all components and data flows

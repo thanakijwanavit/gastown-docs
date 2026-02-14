@@ -162,3 +162,4 @@ But for teams with well-tested codebases and a backlog of clearly-defined tasks,
 - **[Your First Convoy](/blog/first-convoy)** — Run your first parallel workflow
 - **[Philosophy](/docs/guides/philosophy)** — The design thinking behind Gas Town
 - **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the most frequent mistakes at every stage
+- **[Understanding GUPP](/blog/understanding-gupp)** — The core principle that defines Stage 4+ maturity

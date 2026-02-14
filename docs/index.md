@@ -99,6 +99,10 @@ Gas Town is created by [Steve Yegge](https://steve-yegge.medium.com/) and named 
 - [Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b) — Philosophy and predictions
 - [GitHub Repository](https://github.com/steveyegge/gastown) — Source code
 
+:::tip
+**New to Gas Town?** Start with the [Quick Start](getting-started/quickstart.md) — you'll have agents running in about 10 minutes. Come back here for deeper dives once you've seen it in action.
+:::
+
 ## Next Steps
 
 New to Gas Town? Follow this path:

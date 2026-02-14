@@ -207,3 +207,4 @@ The new session sees "step-3 is in progress" and knows to continue testing, not 
 - **[Hooks](/docs/concepts/hooks/)** — The persistence primitive that makes cycling work
 - **[Understanding GUPP](/blog/understanding-gupp)** — Practical examples of crash-safe design
 - **[Hooks: The Persistence Primitive](/blog/hook-persistence)** — How hooks make session cycling crash-safe
+- **[The Mail System](/blog/mail-system)** — How handoff mail preserves context across session cycles

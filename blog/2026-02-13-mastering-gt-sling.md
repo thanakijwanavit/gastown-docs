@@ -182,3 +182,4 @@ bd list --status=open   # Check open beads
 - [Formula Workflow](/docs/workflows/formula-workflow) — Structured workflows using TOML templates
 - [Understanding GUPP](/blog/understanding-gupp) — Why the propulsion principle makes slinging work
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) — How hooks make slung work crash-safe
+- [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex convoy orchestration that builds on sling mastery

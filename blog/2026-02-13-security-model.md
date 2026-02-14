@@ -146,3 +146,4 @@ The worst case -- a bug merged to main -- is handled by standard git practices (
 - [Troubleshooting](/docs/operations/troubleshooting) -- When things go wrong and how to recover
 - [Git Worktrees](/blog/git-worktrees) -- Worktree isolation as a security boundary
 - [Death Warrants](/blog/death-warrants) -- How the warrant system enforces safe termination
+- [Understanding Rigs](/blog/understanding-rigs) -- How rigs enforce the security boundaries described here

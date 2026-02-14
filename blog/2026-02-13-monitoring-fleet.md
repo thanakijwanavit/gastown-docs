@@ -241,3 +241,4 @@ Your monitoring tools complement this automated layer — they give you visibili
 - **[Escalation System](/docs/operations/escalations/)** — Priority routing and severity levels
 - **[Cost Optimization](/blog/cost-optimization)** — Strategies for reducing token spend
 - **[Incident Response](/blog/incident-response)** — What to do when things go wrong
+- **[The Witness Explained](/blog/witness-explained)** — How the Witness provides automated health monitoring

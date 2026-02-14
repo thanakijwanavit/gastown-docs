@@ -125,3 +125,4 @@ This is the core Gas Town loop. The Mayor can automate steps 1-3 for you (just d
 - **[GUPP & NDI](/docs/concepts/gupp)** — Understand why crashes don't lose work
 - **[Your Second Convoy](/blog/your-second-convoy)** — Level up with dependencies and cross-rig coordination
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
+- **[Common Pitfalls](/blog/common-pitfalls)** — Avoid the 5 most common mistakes with your first convoy

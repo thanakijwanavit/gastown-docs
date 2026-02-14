@@ -186,3 +186,4 @@ The Witness logs its patrol findings, so you can review what it detected during 
 - **[Escalation System](/docs/operations/escalations/)** — How escalations flow through the hierarchy
 - **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Practical monitoring guide
 - **[Incident Response](/blog/incident-response)** — What to do when the Witness escalates to you
+- **[The Escalation System](/blog/escalation-system)** — How escalations from the Witness get routed and resolved

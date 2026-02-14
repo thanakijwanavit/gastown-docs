@@ -174,3 +174,4 @@ flowchart LR
 - [Rigs](/docs/concepts/rigs) -- How to add and manage rigs
 - [Cost Optimization](/blog/cost-optimization) -- Cost tracking strategies for large deployments
 - [Lifecycle Management](/blog/lifecycle-management) -- Managing rig lifecycle at scale
+- [Monitoring Your Fleet](/blog/monitoring-fleet) -- Fleet monitoring becomes critical at scale

@@ -217,3 +217,4 @@ The backend beads run in parallel. When the API endpoint lands, the frontend bea
 - **[GUPP & NDI](/docs/concepts/gupp)** — Why agent crashes don't lose convoy progress
 - **[Work Distribution Patterns](/blog/work-distribution-patterns)** — When to use convoys vs Mayor vs formula workflows
 - **[Your Second Convoy](/blog/your-second-convoy)** — Dependencies and cross-rig convoy patterns in practice
+- [Mastering gt sling](/blog/mastering-gt-sling) — Work assignment patterns that power advanced convoy execution

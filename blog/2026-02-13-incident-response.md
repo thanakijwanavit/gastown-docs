@@ -259,3 +259,4 @@ Gas Town is designed to be self-healing. Most incidents resolve themselves withi
 - **[Refinery](/docs/agents/refinery)** — How the merge queue works
 - **[The Escalation System](/blog/escalation-system)** — How Gas Town surfaces problems before they snowball
 - **[Death Warrants](/blog/death-warrants)** — Structured agent termination during incidents
+- **[Monitoring Your Fleet](/blog/monitoring-fleet)** — Proactive monitoring that prevents incidents

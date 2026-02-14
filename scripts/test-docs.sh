@@ -1202,24 +1202,20 @@ echo "Test 39: Checking blog-to-blog cross-linking..."
 BLOG_INTERLINK_ISSUES=0
 
 for file in $(find "$ROOT_DIR/blog" -name "*.md" 2>/dev/null); do
-    basename=$(basename "$file")
-    # Skip the welcome post (it's an introduction, links to docs primarily)
-    [ "$basename" = "2026-02-04-welcome.md" ] && continue
-
     # Count links to other blog posts
     blog_link_count=$(grep -coP '/blog/[a-z0-9-]+' "$file" 2>/dev/null) || blog_link_count=0
 
-    if [ "$blog_link_count" -lt 2 ]; then
+    if [ "$blog_link_count" -lt 3 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $blog_link_count blog link(s) in $rel_file (need 2+)"
+        echo "  Only $blog_link_count blog link(s) in $rel_file (need 3+)"
         BLOG_INTERLINK_ISSUES=$((BLOG_INTERLINK_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_INTERLINK_ISSUES" -eq 0 ]; then
-    pass_test "All blog posts link to 2+ other blog posts"
+    pass_test "All blog posts link to 3+ other blog posts"
 else
-    fail_test "Found $BLOG_INTERLINK_ISSUES blog post(s) with fewer than 2 blog cross-links" "Add links to related blog posts in the Next Steps section"
+    fail_test "Found $BLOG_INTERLINK_ISSUES blog post(s) with fewer than 3 blog cross-links" "Add links to related blog posts in the Next Steps section"
 fi
 
 # Test 40: No orphaned blog slugs (every slug referenced by at least 1 doc page)

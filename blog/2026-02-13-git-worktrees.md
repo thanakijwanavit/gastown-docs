@@ -169,3 +169,4 @@ If you need stronger isolation for security-sensitive workloads (running untrust
 - [Security Model](/blog/security-model) -- Gas Town's trust boundaries and isolation strategy
 - [Git Workflow](/docs/guides/git-workflow) -- Multi-agent git patterns with worktrees
 - [Git Workflows for Multi-Agent Development](/blog/git-workflows-multi-agent) -- Git patterns for multi-agent development with worktrees
+- [Understanding Rigs](/blog/understanding-rigs) -- How rigs use worktrees to isolate agent workspaces

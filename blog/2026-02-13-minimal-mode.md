@@ -162,3 +162,4 @@ Always **push your changes** before ending a session. Without the Refinery handl
 - [Mayor Workflow](/docs/workflows/mayor-workflow) — The fully automated workflow you'll graduate to
 - [Cost Optimization](/blog/cost-optimization) — Keep costs low while experimenting with Gas Town
 - [Your First Convoy](/blog/first-convoy) — Your first full convoy after graduating from minimal mode
+- [Common Pitfalls](/blog/common-pitfalls) — Avoid the 5 most common mistakes when scaling from minimal mode

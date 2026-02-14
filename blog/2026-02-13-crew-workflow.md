@@ -181,3 +181,4 @@ flowchart LR
 - [Cost Management](/docs/guides/cost-management) -- Optimizing token spend across your team
 - [Session Cycling Explained](/blog/session-cycling) -- How crew members handle context limits with handoffs
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- Mail, nudges, and hooks for crew coordination
+- [The Mayor Workflow](/blog/mayor-workflow) -- How crew members interact with Mayor-driven automation

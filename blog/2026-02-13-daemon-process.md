@@ -169,3 +169,4 @@ These principles scale. As your fleet grows from 5 to 30 agents, the daemon stay
 - [Starting & Stopping](/docs/operations/lifecycle) -- Lifecycle commands that interact with the daemon
 - [Boot Dogs](/blog/boot-dogs) -- How Boot observes system state on every daemon tick
 - [Lifecycle Management](/blog/lifecycle-management) -- Starting, stopping, and managing the daemon lifecycle
+- [The Deacon: Background Coordinator](/blog/deacon-patrol) -- How the Deacon extends the daemon's coordination

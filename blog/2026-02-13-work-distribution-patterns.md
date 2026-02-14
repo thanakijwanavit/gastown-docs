@@ -195,3 +195,4 @@ The pattern you choose only affects who does the decomposition and routing. The 
 - [Formula Workflow](/docs/workflows/formula-workflow) — Creating and using formulas
 - [Mastering gt sling](/blog/mastering-gt-sling) — The command that powers all work assignment
 - [Understanding Rigs](/blog/understanding-rigs) — How rigs organize the agents that receive work
+- [Advanced Convoy Patterns](/blog/advanced-convoy-patterns) — Complex orchestration patterns for manual convoys

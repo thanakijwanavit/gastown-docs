@@ -197,3 +197,4 @@ gt nudge gastowndocs/polecats/toast "Check your mail - priority change"
 - [Agent Hierarchy](/docs/architecture/agent-hierarchy) -- The escalation chain that mail supports
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- How mail fits alongside nudges and hooks
 - [Session Cycling Explained](/blog/session-cycling) -- Handoff mail in the context refresh workflow
+- [The Mayor Workflow](/blog/mayor-workflow) -- How the Mayor uses mail for convoy coordination

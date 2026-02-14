@@ -177,3 +177,4 @@ This is why Gas Town agents check `gt hook` before doing anything else. The hook
 - [Session Cycling](/docs/concepts/session-cycling) -- How hooks and handoff mail work together across sessions
 - [Hooks: The Persistence Primitive](/blog/hook-persistence) -- The crash-safe storage behind hook-driven architecture
 - [Understanding GUPP](/blog/understanding-gupp) -- Why GUPP relies on hook-driven execution
+- [Mastering gt sling](/blog/mastering-gt-sling) -- How sling uses hooks to assign work to agents
