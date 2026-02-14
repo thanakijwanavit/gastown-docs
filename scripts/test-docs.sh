@@ -1140,9 +1140,9 @@ else
     fail_test "Found $MERMAID_MISSING doc page(s) without Mermaid diagrams" "Add a relevant Mermaid diagram to each doc page for visual clarity"
 fi
 
-# Test 37: All doc pages have 3+ blog post cross-links
+# Test 37: All doc pages have 4+ blog post cross-links
 echo ""
-echo "Test 37: Checking all doc pages have 3+ blog post cross-links..."
+echo "Test 37: Checking all doc pages have 4+ blog post cross-links..."
 BLOG_CROSSLINK_ISSUES=0
 
 for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
@@ -1153,17 +1153,17 @@ for file in $(find "$ROOT_DIR/docs" -name "*.md" 2>/dev/null); do
     # Count links to /blog/ in the file
     blog_link_count=$(grep -coP '/blog/[a-z0-9-]+' "$file" 2>/dev/null) || blog_link_count=0
 
-    if [ "$blog_link_count" -lt 3 ]; then
+    if [ "$blog_link_count" -lt 4 ]; then
         rel_file="${file#$ROOT_DIR/}"
-        echo "  Only $blog_link_count blog link(s) in $rel_file (need 3+)"
+        echo "  Only $blog_link_count blog link(s) in $rel_file (need 4+)"
         BLOG_CROSSLINK_ISSUES=$((BLOG_CROSSLINK_ISSUES + 1))
     fi
 done
 
 if [ "$BLOG_CROSSLINK_ISSUES" -eq 0 ]; then
-    pass_test "All doc pages have 3+ blog post cross-links"
+    pass_test "All doc pages have 4+ blog post cross-links"
 else
-    fail_test "Found $BLOG_CROSSLINK_ISSUES doc page(s) with fewer than 2 blog cross-links" "Add at least 2 /blog/ links to each doc page's Related section"
+    fail_test "Found $BLOG_CROSSLINK_ISSUES doc page(s) with fewer than 4 blog cross-links" "Add at least 4 /blog/ links to each doc page's Related section"
 fi
 
 # Test 38: Blog post meta description lengths within SEO range (50-160 chars)

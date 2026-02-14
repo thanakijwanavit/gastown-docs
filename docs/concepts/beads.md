@@ -310,3 +310,4 @@ Work is **not complete** until `git push` succeeds. Agents must always push thei
 - [Why Beads? AI-Native Issue Tracking](/blog/why-beads) -- The design philosophy behind choosing git-backed issues over web-based trackers
 - [Your First Convoy: From Idea to Merged Code](/blog/first-convoy) -- End-to-end walkthrough of creating beads, bundling them into a convoy, and watching agents execute
 - [Work Distribution Patterns in Gas Town](/blog/work-distribution-patterns) -- How beads flow through the work distribution pipeline from creation to assignment to completion
+- [Hook Persistence: Why Agent State Survives Restarts](/blog/hook-persistence) -- How hooked beads persist across crashes and session boundaries so agents always find their assigned work

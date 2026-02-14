@@ -141,3 +141,4 @@ Avoid manually restarting agents outside the supervision tree. The Deacon and Wi
 - [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness agent monitors polecat health, detects stalls, and triggers recovery
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale
+- [The Escalation System](/blog/escalation-system) -- How escalations flow through the supervision tree from polecats to the human overseer

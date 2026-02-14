@@ -374,3 +374,4 @@ Next: <what remains>"
 - [Understanding GUPP](/blog/understanding-gupp) -- Deep dive into the propulsion principle behind polecat execution
 - [Common Pitfalls](/blog/common-pitfalls) -- Mistakes to avoid when working with ephemeral workers
 - [The Witness Explained](/blog/witness-explained) -- How the Witness monitors and recovers polecats
+- [Session Cycling](/blog/session-cycling) -- How polecats hand off context when their session fills up mid-task

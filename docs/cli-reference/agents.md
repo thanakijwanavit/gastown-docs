@@ -901,3 +901,4 @@ gt crew restart myproject dave
 - [The Witness: Gas Town's Self-Healing Watchdog](/blog/witness-explained) -- How the Witness monitors polecat health and triggers recovery
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns for managing agents at scale
+- [Lifecycle Management](/blog/lifecycle-management) -- How agent start, stop, and restart operations interact with Gas Town's lifecycle system

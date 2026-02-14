@@ -216,3 +216,4 @@ gt session capture <target> --tail 20
 - [Gas Town's Mail System: Async Agent Communication](/blog/mail-system) -- How Gas Town agents communicate through async mail, from simple notifications to handoff context that spans session boundaries
 - [The Witness Explained](/blog/witness-explained) -- How the Witness uses nudges to wake stalled polecats during patrol cycles
 - [Agent Communication Patterns](/blog/agent-communication-patterns) -- Patterns for combining nudges, mail, and escalations for effective inter-agent coordination
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How session cycling interacts with nudge delivery when agents restart mid-conversation

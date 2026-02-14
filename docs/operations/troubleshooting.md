@@ -874,3 +874,4 @@ Before running `gt shutdown --all`, check if any polecats have uncommitted work:
 - [Incident Response with Gas Town: When Things Go Wrong](/blog/incident-response) -- A practical guide to diagnosing and recovering from common Gas Town failures
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
 - [The Deacon's Patrol: Keeping Gas Town Healthy](/blog/deacon-patrol) -- How the Deacon detects and recovers from the agent failures covered in this guide
+- [Hook Persistence: Why Work Survives Crashes](/blog/hook-persistence) -- How hooks ensure no work is lost during the crashes and restarts this guide helps diagnose

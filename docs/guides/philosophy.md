@@ -448,3 +448,4 @@ The following articles by Steve Yegge provide the foundational thinking behind G
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog and multi-agent orchestration tips
 - [Understanding GUPP: Why Crashes Don't Lose Work](/blog/understanding-gupp) -- How the Gas Town Universal Propulsion Principle makes multi-agent development crash-safe by design
 - [Gas Town vs Traditional CI/CD: What's Different?](/blog/gas-town-vs-cicd) -- How Gas Town's agent-driven model complements and extends traditional CI/CD pipelines
+- [The Eight Stages of AI Coding: A Self-Assessment](/blog/eight-stages-self-assessment) -- Evaluate where you fall on the AI coding maturity curve that underpins Gas Town's philosophy

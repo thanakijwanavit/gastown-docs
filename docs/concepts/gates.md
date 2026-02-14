@@ -324,3 +324,4 @@ Use gates whenever your workflow needs to wait for something external. Prefer ga
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon evaluates gates during patrol cycles
 - [Gas Town's Security Model](/blog/security-model) -- Human approval gates as security checkpoints
 - [Lifecycle Management in Gas Town](/blog/lifecycle-management) -- How gates integrate with the broader agent lifecycle, from gate creation through workflow resumption
+- [Hook-Driven Architecture](/blog/hook-driven-architecture) -- How hooks preserve gated workflow state so agents can park on gates and resume in fresh sessions

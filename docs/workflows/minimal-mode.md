@@ -292,3 +292,4 @@ Without Witness and Deacon monitoring, stuck or crashed sessions will not be aut
 - [Getting Started in Minimal Mode: Gas Town Without Tmux](/blog/minimal-mode) -- How to use hooks, beads, and convoys without requiring Tmux or the full agent hierarchy
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog and getting started resources
 - [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical strategies for monitoring costs in reduced-overhead workflows
+- [Hook Persistence: Why Work Survives Crashes](/blog/hook-persistence) -- How hooks preserve work state even without the full agent hierarchy running

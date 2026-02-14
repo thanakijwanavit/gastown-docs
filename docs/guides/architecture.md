@@ -644,3 +644,4 @@ Git is the ground truth. The Refinery's canonical clone is the single source of 
 - [Gas Town's Security Model: Trust Boundaries for AI Agents](/blog/security-model) -- How Gas Town implements security through workspace isolation and trust boundaries
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running at scale
 - [Hook-Driven Architecture in Gas Town](/blog/hook-driven-architecture) -- Deep dive into the hook mechanism that powers the propulsion principle described in this guide
+- [Agent Communication Patterns in Gas Town](/blog/agent-communication-patterns) -- How mail, nudge, and escalation channels connect the agent hierarchy described in this guide

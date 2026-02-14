@@ -192,3 +192,4 @@ gt config agent set gemini "gemini"
 - [Welcome to the Gas Town Blog](/blog/welcome) -- Introducing the Gas Town documentation blog
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid frequent mistakes during installation and initial setup
 - [Multi-Runtime Workflows with Gas Town](/blog/multi-runtime-workflows) -- How to configure and use the supported runtimes listed on this page
+- [Gas Town Minimal Mode](/blog/minimal-mode) -- Running Gas Town without tmux for simpler setups when full multi-agent orchestration is not needed

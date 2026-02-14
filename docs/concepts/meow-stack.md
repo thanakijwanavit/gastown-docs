@@ -193,3 +193,4 @@ Two concepts cut across all MEOW layers rather than living in a single layer:
 - [Understanding GUPP](/blog/understanding-gupp) -- How GUPP applies at every MEOW layer
 - [Custom Formulas](/blog/custom-formulas) -- Creating Layer 5 templates for your workflows
 - [Hook-Driven Architecture](/blog/hook-driven-architecture) -- The cross-cutting persistence mechanism
+- [Molecules and Formulas Deep Dive](/blog/molecules-and-formulas) -- Detailed look at MEOW Layers 3 and 5, from formula templates to live molecule execution

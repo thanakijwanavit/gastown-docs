@@ -311,3 +311,4 @@ gt session inject myproject/toast -f prompt.txt
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents automatically hand off work when their context window fills up
 - [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
 - [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring agent session health, tracking activity, and catching unresponsive sessions
+- [Hook Persistence: How Gas Town Survives Crashes](/blog/hook-persistence) -- How hooks preserve work state across session restarts and crashes

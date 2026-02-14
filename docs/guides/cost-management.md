@@ -392,3 +392,4 @@ Token costs scale nonlinearly with codebase size. A polecat working on a large m
 - [Cost Tracking and Optimization in Gas Town](/blog/cost-optimization) -- Practical strategies for monitoring API costs and right-sizing agent work
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Cost implications and optimization strategies when running at scale
 - [Running Gas Town in Minimal Mode](/blog/minimal-mode) -- Reduced-overhead mode that cuts monitoring costs for budget-conscious workflows
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- Frequent handoffs reduce per-session token consumption and keep costs predictable

@@ -538,3 +538,4 @@ gt activity --type polecat --since 1h --json
 - [Monitoring Your Fleet](/blog/monitoring-fleet) -- Practical monitoring patterns for multi-agent deployments
 - [Scaling Beyond 30 Agents](/blog/scaling-beyond-30) -- Monitoring strategies for large-scale deployments
 - [The Witness Explained](/blog/witness-explained) -- Deep dive into the per-rig health monitor
+- [Incident Response with Gas Town](/blog/incident-response) -- How to diagnose and recover from failures surfaced by the monitoring tools described here

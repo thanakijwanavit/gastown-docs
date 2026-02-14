@@ -183,3 +183,4 @@ You can detach from and reattach to the Mayor at any time without losing state. 
 - [Welcome to Gas Town](/blog/welcome) -- Introduction to Gas Town and its core philosophy
 - [Your First Convoy](/blog/first-convoy) -- Hands-on guide to getting your first batch of work running
 - [Your Second Convoy](/blog/your-second-convoy) -- Level up with dependencies, cross-rig work, and recovery patterns
+- [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new users make during initial setup and first workflows

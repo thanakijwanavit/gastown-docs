@@ -234,3 +234,4 @@ These principles are not just abstract ideals -- they are enforced by specific G
 - [Understanding GUPP](/blog/understanding-gupp) -- Practical examples of GUPP and NDI in real Gas Town workflows
 - [Common Pitfalls](/blog/common-pitfalls) -- Anti-patterns that violate GUPP and how to avoid them
 - [Agent-to-Agent Communication Patterns](/blog/agent-communication-patterns) -- How mail, nudges, and hooks implement GUPP-driven coordination
+- [Hook Persistence: Why Agent State Survives Restarts](/blog/hook-persistence) -- The primary mechanism that makes GUPP possible by persisting work state across every session boundary

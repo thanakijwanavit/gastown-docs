@@ -664,3 +664,4 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 - [Your First Convoy in 5 Minutes](/blog/first-convoy) -- A quick walkthrough of creating beads, bundling a convoy, and watching polecats deliver code
 - [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
 - [5 Common Pitfalls When Starting with Gas Town](/blog/common-pitfalls) -- Avoid the most frequent mistakes new Gas Town users make
+- [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents hand off work when context fills, and why frequent handoffs improve productivity

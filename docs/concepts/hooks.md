@@ -262,3 +262,4 @@ Always check `gt hook` at the start of a session before doing anything else. If 
 - [Hooks: The Persistence Primitive That Makes Gas Town Crash-Safe](/blog/hook-persistence) -- How hooks store work state in git worktrees so agents survive crashes and restarts
 - [Understanding GUPP](/blog/understanding-gupp) -- How hooks implement the propulsion principle
 - [Session Cycling Explained](/blog/session-cycling) -- Hooks and handoff mail working together across sessions
+- [Mastering gt sling](/blog/mastering-gt-sling) -- Complete guide to the sling command, the primary way work gets hooked to agents

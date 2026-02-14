@@ -236,3 +236,4 @@ gt town shutdown
 - [The Deacon: Gas Town's Background Coordinator](/blog/deacon-patrol) -- How the Deacon patrols the town, evaluates gates, and manages agent lifecycles
 - [Scaling Gas Town Beyond 30 Agents](/blog/scaling-beyond-30) -- Architectural patterns and operational strategies for running Gas Town at scale
 - [The Mayor Workflow: Strategic Coordination in Gas Town](/blog/mayor-workflow) -- How the Mayor coordinates work distribution and convoy management at the town level
+- [Monitoring Your Gas Town Fleet](/blog/monitoring-fleet) -- Practical guide to monitoring town health, tracking agent activity, and catching problems early

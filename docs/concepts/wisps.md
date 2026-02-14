@@ -205,3 +205,4 @@ sequenceDiagram
 - [Building Your First Custom Formula](/blog/custom-formulas) -- Step-by-step guide to creating TOML formulas that define custom agent workflows for specialized tasks
 - [Formula Design Patterns for Gas Town](/blog/formula-design-patterns) -- Advanced patterns for multi-step formulas where wisps track each step's progress
 - [Understanding the Witness](/blog/witness-explained) -- How the Witness monitors wisp states during patrol to detect stuck polecats and trigger recovery
+- [Lifecycle Management in Gas Town](/blog/lifecycle-management) -- How wisp TTLs, compaction, and promotion fit into the broader agent lifecycle management system

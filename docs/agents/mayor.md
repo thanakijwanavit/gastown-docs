@@ -286,3 +286,4 @@ gt rig start <rig>           # Start rig agents if needed
 - [The Mayor Workflow](/blog/mayor-workflow) -- End-to-end walkthrough of the Mayor's dispatch and coordination cycle
 - [Your First Convoy](/blog/first-convoy) -- How the Mayor creates and tracks convoys
 - [Work Distribution Patterns](/blog/work-distribution-patterns) -- Strategies for how the Mayor distributes work across rigs and agents
+- [Mastering gt sling](/blog/mastering-gt-sling) -- How the Mayor uses gt sling to dispatch work to rigs and spawn polecats

@@ -241,3 +241,4 @@ The highest-leverage crew activity is creating clear, detailed beads. A 10-minut
 - [The Crew Workflow: Human Developers in Gas Town](/blog/crew-workflow) -- How human developers work alongside AI agents using persistent crew workspaces
 - [Session Cycling: How Gas Town Agents Handle Context Limits](/blog/session-cycling) -- How agents automatically hand off work when their context window fills up
 - [Code Review Workflow in Gas Town](/blog/code-review-workflow) -- How crew members review polecat output and maintain code quality across the fleet
+- [Work Distribution Patterns in Gas Town](/blog/work-distribution-patterns) -- Decision framework for distributing work between crew members and polecats
