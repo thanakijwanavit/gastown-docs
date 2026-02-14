@@ -288,6 +288,18 @@ Checkpoints are stored in `.polecat-checkpoint.json` within the polecat director
 
 ## Molecules
 
+```mermaid
+graph TD
+    FORMULA[gt formula run name] --> MOL[Molecule instantiated]
+    MOL --> S1[Step 1: Execute]
+    S1 -->|gt mol step done| S2[Step 2: Execute]
+    S2 -->|gt mol step done| S3[Step 3: Execute]
+    S3 -->|All steps done| SQUASH{Squash?}
+    SQUASH -->|Yes| SQ[gt mol squash — single MR]
+    SQUASH -->|No| DONE[Molecule complete]
+    SQ --> DONE
+```
+
 Molecules are multi-step workflow execution units. They break complex work into a directed acyclic graph (DAG) of steps that can be executed sequentially, in parallel, or with dependencies.
 
 ### `gt mol status`

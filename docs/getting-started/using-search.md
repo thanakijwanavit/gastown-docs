@@ -323,6 +323,12 @@ If search results seem outdated:
 
 ## Search vs Navigation
 
+```mermaid
+pie title When to Use Each Approach
+    "Search (specific lookup)" : 60
+    "Navigation (browsing/learning)" : 40
+```
+
 ### When to Use Search
 
 - You know what you're looking for

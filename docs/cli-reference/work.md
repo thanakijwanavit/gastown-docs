@@ -413,6 +413,18 @@ The email domain is configurable in town settings (`agent_email_domain`). Defaul
 
 ---
 
+```mermaid
+graph LR
+    CREATE[bd create] --> READY[gt ready]
+    READY --> SLING[gt sling bead rig]
+    SLING --> HOOK[Bead on hook]
+    HOOK --> WORK[Agent works]
+    WORK --> DONE[gt done]
+    DONE --> MR[Merge request]
+    MR --> MERGE[Refinery merges]
+    MERGE --> CLOSE[Bead closed]
+```
+
 ### `gt gate`
 
 Gate coordination for async workflows.

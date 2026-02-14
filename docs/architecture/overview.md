@@ -77,6 +77,15 @@ This is a deliberate design choice. By keeping the scheduler simple, the system 
 
 ### 5. Communication Layer
 
+```mermaid
+flowchart TD
+    Mail["Mail<br/>Async messages"] -->|JSONL files| MB["Agent Mailbox"]
+    Nudge["Nudge<br/>Sync delivery"] -->|interrupt| Session["Agent Session"]
+    Esc["Escalation<br/>Priority routed"] -->|P0-P3| Router["Severity Router"]
+    Hooks["Hooks<br/>Work attachment"] -->|persist| WT["Git Worktree"]
+    Beads["Beads<br/>Issue tracking"] -->|SQLite + JSONL| DB["Beads DB"]
+```
+
 Agents communicate through:
 
 - **Mail** — Async message passing between agents

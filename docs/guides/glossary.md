@@ -163,6 +163,20 @@ Gas Town terminology is intentionally distinct from generic software terms. When
 
 ## CLI Quick Reference
 
+```mermaid
+graph LR
+    GT[gt CLI] -->|orchestration| START[gt start]
+    GT --> SLING[gt sling]
+    GT --> FEED[gt feed]
+    GT --> DOCTOR[gt doctor]
+    GT --> HANDOFF[gt handoff]
+    BD[bd CLI] -->|issue tracking| CREATE[bd create]
+    BD --> LIST[bd list]
+    BD --> SHOW[bd show]
+    BD --> CLOSE[bd close]
+    BD --> SYNC[bd sync]
+```
+
 The two primary CLIs for interacting with Gas Town:
 
 ```bash

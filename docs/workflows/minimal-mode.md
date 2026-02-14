@@ -244,6 +244,25 @@ You are now running the full [Mayor Workflow](mayor-workflow.md).
 
 ## Tips for Minimal Mode
 
+```mermaid
+sequenceDiagram
+    participant You as You (Human)
+    participant BD as bd CLI
+    participant GT as gt CLI
+    participant Agent as Claude Code
+
+    You->>BD: bd create (issues)
+    You->>GT: gt convoy create
+    You->>GT: gt sling <bead> <rig>
+    You->>Agent: Start claude manually
+    Agent->>GT: gt prime (load context)
+    Agent->>GT: gt hook (find work)
+    Agent->>Agent: Implement task
+    Agent->>GT: gt done (push + submit)
+    You->>GT: gt convoy show (check progress)
+    You->>GT: gt sling (next bead)
+```
+
 :::tip[Use Crew Workspaces]
 
 For persistent work, use crew workspaces (`gt crew add myproject yourname`) instead of polecat directories. Crew workspaces persist between sessions while polecat directories are ephemeral.

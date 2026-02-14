@@ -384,6 +384,16 @@ The PR Sheriff pattern keeps your PR backlog from growing unbounded. Instead of 
 
 ## Landing the Plane (Session Completion)
 
+```mermaid
+flowchart LR
+    S1["1. File remaining<br/>work (bd create)"] --> S2["2. Run quality<br/>gates (tests/lint)"]
+    S2 --> S3["3. Update bead<br/>status (bd close)"]
+    S3 --> S4["4. Push to remote<br/>(git push)"]
+    S4 --> S5["5. Clean up<br/>(gt cleanup)"]
+    S5 --> S6["6. Verify pushed<br/>(git status)"]
+    S6 --> S7["7. Handoff notes<br/>(gt handoff)"]
+```
+
 Landing the plane is the **mandatory** workflow for completing a Gas Town session. Skipping any step risks losing work, leaving stale state, or creating confusion for the next session.
 
 :::danger[Mandatory Workflow]

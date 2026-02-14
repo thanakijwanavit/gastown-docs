@@ -338,6 +338,16 @@ Gas Town is a **Stage 8** orchestration system. It provides the infrastructure t
 
 ## Readiness Assessment
 
+```mermaid
+flowchart TD
+    Q1{"Run 5+ CLI agents\nsimultaneously?"} -->|Yes| Q2{"Written lifecycle\nmanagement scripts?"}
+    Q1 -->|No| NOT["Not ready yet.\nBuild Stage 6-7 experience first."]
+    Q2 -->|Yes| Q3{"Comfortable with\ngit worktrees + tmux?"}
+    Q2 -->|No| NOT
+    Q3 -->|Yes| READY["Ready for Gas Town!"]
+    Q3 -->|No| NOT
+```
+
 ### You ARE Ready for Gas Town If:
 
 - [x] You have run 5+ CLI agents simultaneously

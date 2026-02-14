@@ -690,6 +690,21 @@ To send messages to a running session, use `gt nudge` instead of `gt session inj
 
 ## Data Lifecycle
 
+```mermaid
+flowchart TD
+    Events["Operational Events<br/>(heartbeats, patrols, pings)"]
+    KRC["gt krc<br/>TTL-based lifecycle"]
+    Compact["gt compact<br/>Wisp compaction"]
+    Prune["gt prune-branches<br/>Stale branch cleanup"]
+
+    Events --> KRC
+    Events --> Compact
+    KRC -->|expired| Delete["Delete expired"]
+    Compact -->|open past TTL| Promote["Promote to bead"]
+    Compact -->|closed past TTL| Delete
+    Prune -->|merged branches| Remove["Remove local branch"]
+```
+
 ### `gt krc`
 
 Key Record Chronicle — manages TTL-based lifecycle for Level 0 ephemeral data.

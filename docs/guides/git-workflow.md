@@ -317,6 +317,22 @@ flowchart LR
 
 ## Reducing Merge Conflicts
 
+```mermaid
+stateDiagram-v2
+    [*] --> Clean: git status clean
+    Clean --> Fetched: git fetch origin
+    Fetched --> UpToDate: no new commits
+    Fetched --> Behind: remote has new commits
+    Behind --> Rebased: git rebase origin/master
+    Rebased --> Conflict: conflict detected
+    Rebased --> Clean: rebase clean
+    Conflict --> Resolved: edit + git add
+    Resolved --> Rebased: git rebase --continue
+    UpToDate --> Pushed: git push
+    Clean --> Pushed: git push
+    Pushed --> [*]
+```
+
 ### Strategy 1: File-Level Coordination
 
 Assign related work to the same agent:

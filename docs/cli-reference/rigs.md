@@ -187,6 +187,24 @@ Stopping a rig with active polecats may result in lost uncommitted work. Use `--
 
 ## `gt rig shutdown`
 
+```mermaid
+sequenceDiagram
+    participant H as Human/Mayor
+    participant R as Rig
+    participant W as Witness
+    participant RF as Refinery
+    participant P as Polecats
+
+    H->>R: gt rig shutdown --drain
+    R->>P: Signal: finish current work
+    P->>RF: Submit remaining MRs
+    RF->>RF: Process merge queue
+    R->>W: Stop Witness
+    R->>RF: Stop Refinery
+    R->>P: Nuke polecat worktrees
+    R->>R: Mark rig as stopped
+```
+
 Fully shut down a rig including cleanup.
 
 ```bash

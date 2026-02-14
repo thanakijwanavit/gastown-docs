@@ -192,6 +192,25 @@ Never manually delete warrant JSON files from `~/gt/warrants/` to "clean up" exe
 
 :::
 
+```mermaid
+sequenceDiagram
+    participant W as Witness
+    participant D as Deacon
+    participant B as Boot
+    participant A as Stuck Agent
+
+    W->>W: Detect unresponsive polecat
+    W->>A: gt nudge (retry x3)
+    A--xW: No response
+    W->>D: Escalate: polecat stuck
+    D->>D: gt warrant file target --reason "..."
+    Note over D: Warrant saved to ~/gt/warrants/
+    B->>B: Triage cycle
+    B->>D: Pick up warrant
+    B->>A: Terminate tmux session
+    B->>B: Mark warrant executed
+```
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

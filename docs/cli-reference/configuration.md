@@ -145,6 +145,16 @@ The default agent can be overridden at the rig level with `gt rig config <rig> a
 
 ## Account Management
 
+```mermaid
+stateDiagram-v2
+    [*] --> Listed: gt account list
+    [*] --> Added: gt account add
+    Added --> Default: gt account default
+    Default --> Active: sessions use this account
+    Active --> Switched: gt account switch
+    Switched --> Active: new account in use
+```
+
 ### `gt account`
 
 Manage multiple Claude Code accounts for Gas Town.

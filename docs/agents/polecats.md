@@ -118,6 +118,24 @@ A session can die while the sandbox persists (zombie state). The sandbox contain
 
 ## Naming
 
+```mermaid
+graph LR
+    Pool["Name Pool<br/>Toast, Alpha, Bravo..."]
+    Spawn["Polecat Spawned"]
+    Assign["Name Assigned<br/>e.g. Toast"]
+    GitID["Git Identity<br/>toast@myproject.gt"]
+    Actor["Beads Actor<br/>Registered"]
+    Nuke["Polecat Nuked"]
+    Return["Name Returned<br/>to Pool"]
+
+    Pool --> Spawn
+    Spawn --> Assign
+    Assign --> GitID
+    Assign --> Actor
+    Nuke --> Return
+    Return --> Pool
+```
+
 Polecats are drawn from a name pool with memorable, distinct names:
 
 - **Named pool**: Toast, Alpha, Bravo, Charlie, Delta, Echo, Foxtrot, etc.

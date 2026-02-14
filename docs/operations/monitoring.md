@@ -469,6 +469,20 @@ A well-running Gas Town installation shows these patterns:
 
 ## Log Analysis Patterns
 
+```mermaid
+graph TD
+    PROBLEM[Problem reported] --> FEED["gt feed --level warn"]
+    PROBLEM --> TRAIL["gt trail --since 1h"]
+    FEED --> PATTERN{Pattern found?}
+    TRAIL --> PATTERN
+    PATTERN -->|Single agent| AUDIT["gt audit <agent>"]
+    PATTERN -->|Rig-wide| DOCTOR["gt doctor --rig <rig>"]
+    PATTERN -->|Cost spike| COSTS["gt costs --by-agent"]
+    AUDIT --> ACTION[Nudge / Restart agent]
+    DOCTOR --> ACTION2[gt doctor --fix]
+    COSTS --> ACTION3[Throttle polecats]
+```
+
 When `gt feed` and `gt trail` are not enough, dig into the raw event log for patterns.
 
 ### Finding Repeated Failures

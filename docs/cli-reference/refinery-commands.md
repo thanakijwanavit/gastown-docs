@@ -212,6 +212,19 @@ When attaching to a Refinery session for debugging, remember to detach with `Ctr
 
 ## gt refinery ready
 
+```mermaid
+graph TD
+    Q[Merge Queue] --> READY{MR Status?}
+    READY -->|Unclaimed + unblocked| R[gt refinery ready]
+    READY -->|Has open task| B[gt refinery blocked]
+    READY -->|Not claimed| U[gt refinery unclaimed]
+    R --> CLAIM[gt refinery claim]
+    CLAIM --> PROCESS[Rebase + Validate]
+    PROCESS -->|Pass| MERGE[Merge to main]
+    PROCESS -->|Fail| RELEASE[gt refinery release]
+    RELEASE --> Q
+```
+
 List MRs ready for processing.
 
 ```bash

@@ -121,6 +121,17 @@ gt orphans kill --force       # Skip confirmation prompt
 
 ## gt orphans procs
 
+```mermaid
+stateDiagram-v2
+    [*] --> Running: Claude process started
+    Running --> Orphaned_PPID1: Parent session killed
+    Running --> Orphaned_Stale: tmux session lost
+    Orphaned_PPID1 --> Detected: gt orphans procs
+    Orphaned_Stale --> Detected: gt orphans procs --aggressive
+    Detected --> Killed: gt orphans procs kill
+    Killed --> [*]
+```
+
 Find and kill Claude processes that have become orphaned (PPID=1).
 
 ```bash

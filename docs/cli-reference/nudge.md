@@ -175,6 +175,18 @@ Nudging an agent while it is in the middle of a long-running tool call (such as 
 
 ## Troubleshooting
 
+```mermaid
+stateDiagram-v2
+    [*] --> Sent: gt nudge target msg
+    Sent --> Delivered: Session active + no DND
+    Sent --> Skipped: DND enabled
+    Sent --> Queued: Target in tool call
+    Delivered --> Seen: Agent reads message
+    Queued --> Delivered: Tool call completes
+    Skipped --> Delivered: Retry with --force
+    Seen --> [*]
+```
+
 ### Nudge Not Delivered
 
 If a nudge appears to have no effect:

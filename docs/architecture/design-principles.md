@@ -144,6 +144,29 @@ Gas Town distinguishes between:
 - **Ephemeral agents** (Polecats) — Single-task, self-destructing
 - **Reusable agents** (Dogs, Crew) — Multiple tasks, managed lifecycle
 
+```mermaid
+stateDiagram-v2
+    state "Persistent" as pers {
+        [*] --> Running: start
+        Running --> Running: patrol cycle
+        Running --> Restarting: crash / restart
+        Restarting --> Running: auto-recover
+    }
+    state "Ephemeral" as eph {
+        [*] --> Spawned: gt sling
+        Spawned --> Working: hook loaded
+        Working --> Done: gt done
+        Done --> Nuked: cleanup
+        Nuked --> [*]
+    }
+    state "Reusable" as reus {
+        [*] --> Idle: created
+        Idle --> Active: task assigned
+        Active --> Idle: task complete
+        Active --> Active: new task
+    }
+```
+
 This three-tier model optimizes resource usage while maintaining reliability.
 
 ## 10. Human in the Loop

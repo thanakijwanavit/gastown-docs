@@ -473,6 +473,20 @@ gt daemon stop && gt daemon start
 
 ## Context Window Filling
 
+```mermaid
+flowchart TD
+    SYMPTOM{Agent behavior?}
+    SYMPTOM -->|Sluggish / repeating| CW[Context window filling]
+    SYMPTOM -->|Not responding| CONN[Connection lost]
+    SYMPTOM -->|Crashes on start| BOOT[Boot failure]
+    CW -->|Polecat| HANDOFF["gt handoff"]
+    CW -->|Persistent agent| PRIME["gt prime / restart --fresh"]
+    CONN --> PEEK["gt peek + gt nudge"]
+    PEEK --> RESTART["gt restart agent"]
+    BOOT --> DEPS["gt doctor --check dependencies"]
+    DEPS --> TMUX["Kill stale tmux sessions"]
+```
+
 **Symptom:** An agent becomes sluggish, loses track of its work, starts repeating itself, or produces incoherent output. Often preceded by the agent running for an extended period on a large task.
 
 **Diagnosis:**

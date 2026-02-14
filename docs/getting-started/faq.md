@@ -166,6 +166,17 @@ Do not run multiple Gas Town installations against the same git repository. Each
 
 ## Troubleshooting
 
+```mermaid
+flowchart TD
+    STUCK["Something is stuck"] --> DOCTOR["gt doctor"]
+    DOCTOR -->|issues found| FIX["gt doctor --fix"]
+    DOCTOR -->|no issues| FEED["gt feed (check activity)"]
+    FIX -->|resolved| OK["System healthy"]
+    FIX -->|not resolved| MANUAL["Check Troubleshooting guide"]
+    FEED -->|no activity| RESTART["gt rig reboot"]
+    FEED -->|errors visible| MANUAL
+```
+
 ### Everything is stuck. What do I do?
 
 ```bash

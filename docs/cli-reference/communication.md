@@ -492,6 +492,22 @@ gt mail group
 
 ## Notifications & Broadcasts
 
+```mermaid
+sequenceDiagram
+    participant S as Sender
+    participant N as gt nudge
+    participant B as gt broadcast
+    participant T as Target Agent
+    participant All as All Agents
+
+    S->>N: gt nudge target --action check-hook
+    N->>T: Synchronous interrupt
+    T-->>S: Immediate response
+
+    S->>B: gt broadcast --message "Freeze main"
+    B->>All: Deliver to all mailboxes
+```
+
 ### `gt nudge`
 
 Send a synchronous notification to an agent.

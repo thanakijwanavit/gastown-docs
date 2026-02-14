@@ -161,6 +161,19 @@ graph TD
     B1 -->|depends on| A1
 ```
 
+```mermaid
+flowchart TD
+    P0[P0 Critical] -->|Bead + Mail + Email + SMS| HUMAN[Human notified immediately]
+    P1[P1 High] -->|Bead + Mail + Email| MAYOR[Mayor + Human notified]
+    P2[P2 Medium] -->|Bead + Mail| MAYOR2[Mayor assigns]
+    P3[P3 Low] -->|Bead only| QUEUE[Enters ready queue]
+    HUMAN --> SLING[gt sling to agent]
+    MAYOR --> SLING
+    MAYOR2 --> SLING
+    QUEUE --> SLING
+    SLING --> WORK[Agent executes]
+```
+
 ## Essential Commands
 
 ### Creating Beads

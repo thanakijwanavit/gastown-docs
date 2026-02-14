@@ -715,6 +715,20 @@ Dogs persist between tasks and can be reused for multiple assignments, unlike po
 
 ## Crew
 
+```mermaid
+stateDiagram-v2
+    [*] --> Added: gt crew add
+    Added --> Running: gt crew start
+    Running --> Stopped: gt crew stop
+    Stopped --> Running: gt crew start
+    Running --> Refreshed: gt crew refresh
+    Refreshed --> Running
+    Running --> Restarted: gt crew restart
+    Restarted --> Running
+    Added --> [*]: gt crew remove
+    Stopped --> [*]: gt crew remove
+```
+
 Crew members are persistent workspaces for human developers. They get their own git clone within a rig and can run agent sessions.
 
 ### `gt crew start`

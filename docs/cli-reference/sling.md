@@ -153,6 +153,15 @@ sequenceDiagram
     P->>P: Begin work via GUPP
 ```
 
+```mermaid
+pie title Target Resolution Distribution
+    "Rig (auto-spawn)" : 45
+    "Specific polecat" : 20
+    "Mayor" : 15
+    "Deacon dogs" : 10
+    "Self-assign" : 10
+```
+
 ## Auto-Convoy
 
 When slinging a single issue (not a formula), `gt sling` automatically creates a convoy to track the work. This ensures all slung work appears in `gt convoy list`, even single assignments. Use `--no-convoy` to skip this.

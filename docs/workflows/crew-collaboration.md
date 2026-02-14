@@ -185,6 +185,23 @@ golangci-lint run ./...    # Check style and quality
 
 ## Working Across Rigs
 
+```mermaid
+sequenceDiagram
+    participant Crew as Crew Member
+    participant BD as Beads (bd)
+    participant Rig as Rig
+    participant PC as Polecat
+    participant Main as main branch
+
+    Crew->>BD: bd create (detailed spec)
+    BD->>Rig: gt sling <bead> <rig>
+    Rig->>PC: Spawn polecat
+    PC->>PC: Implement from spec
+    PC->>Main: gt done (MR submitted)
+    Main->>Crew: git pull (review output)
+    Crew->>BD: bd create (follow-up fixes)
+```
+
 Crew members can work on multiple rigs using [worktrees](../concepts/rigs.md):
 
 ```bash

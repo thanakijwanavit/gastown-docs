@@ -368,6 +368,18 @@ Token costs scale nonlinearly with codebase size. A polecat working on a large m
 
 ## Cost Tracking Best Practices
 
+```mermaid
+flowchart TD
+    MORNING["Morning: gt costs --today"] --> WORK["Active development"]
+    WORK --> HOURLY["Hourly: gt costs --by-role"]
+    HOURLY -->|under budget| WORK
+    HOURLY -->|approaching limit| REDUCE["Reduce polecats or gt down"]
+    REDUCE --> BREAK["Take a break"]
+    BREAK --> WORK
+    WORK --> EOD["End of day: gt costs --week"]
+    EOD --> REVIEW["Weekly: review cost-per-bead trend"]
+```
+
 1. **Check `gt costs --today` at least twice per day** -- once in the morning and once before ending your session.
 
 2. **Set a daily budget** and configure cost alerts to notify you when approaching it.

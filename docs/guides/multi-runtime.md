@@ -271,6 +271,22 @@ For Claude Code and Gemini, this manual process is not necessary -- hooks handle
 
 ---
 
+## Runtime Selection Decision Tree
+
+```mermaid
+flowchart TD
+    TASK{What kind of task?}
+    TASK -->|Complex reasoning / refactor| CLAUDE[Use Claude Code]
+    TASK -->|Large context window| GEMINI[Use Gemini CLI]
+    TASK -->|Rapid prototyping| CODEX[Use Codex]
+    TASK -->|IDE-integrated editing| CURSOR[Use Cursor]
+    CLAUDE --> SLING["gt sling --agent claude"]
+    GEMINI --> SLING2["gt sling --agent gemini"]
+    CODEX --> SLING3["gt sling --agent codex"]
+    CURSOR --> SLING4["gt sling --agent cursor"]
+    SLING & SLING2 & SLING3 & SLING4 --> REFINERY[Refinery merges<br/>runtime-agnostic]
+```
+
 ## Mixing Runtimes in a Single Rig
 
 You can have polecats running different runtimes in the same rig simultaneously:

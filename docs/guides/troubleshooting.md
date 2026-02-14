@@ -255,6 +255,18 @@ BD_DEBUG_ROUTING=1 bd show <bead-id>
 
 ## Hook Slot Failures
 
+```mermaid
+stateDiagram-v2
+    [*] --> Free: Hook available
+    Free --> Attached: gt sling (bead attaches)
+    Attached --> InUse: Polecat picks up work
+    InUse --> Released: gt done (clean exit)
+    InUse --> Stale: Polecat crashes
+    Stale --> Released: Witness cleanup / gt release
+    Released --> Free: Hook ready for reuse
+    Attached --> Free: gt release (manual)
+```
+
 **Symptom:** `gt sling` fails with an error about hooks, or a polecat starts but finds nothing on its hook.
 
 **Common errors:**

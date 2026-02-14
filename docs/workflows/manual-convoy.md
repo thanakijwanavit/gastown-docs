@@ -234,6 +234,20 @@ When adding beads to a convoy after polecats have already started working, verif
 
 ## Cross-Rig Coordination
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: bd create issues
+    Created --> Bundled: gt convoy create
+    Bundled --> Slung: gt sling (per bead)
+    Slung --> Working: Polecats implement
+    Working --> Submitted: gt done
+    Submitted --> Merged: Refinery merges
+    Merged --> CheckConvoy: Convoy checks progress
+    CheckConvoy --> Slung: More issues pending
+    CheckConvoy --> Completed: All issues done
+    Completed --> [*]
+```
+
 Manual convoys are particularly useful for cross-rig work:
 
 ```bash

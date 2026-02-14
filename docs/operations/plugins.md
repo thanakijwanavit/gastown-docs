@@ -351,6 +351,26 @@ Plugin: integration-tests (last 5 runs)
 
 ## Creating Custom Plugins
 
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant Dir as Plugin Directory
+    participant GT as gt plugin
+    participant Pipeline as Merge Pipeline
+
+    Dev->>Dir: mkdir + create plugin.json
+    Dev->>Dir: Write run.sh entry point
+    Dev->>Dir: chmod +x run.sh
+    Dev->>GT: gt plugin run --dry-run
+    GT->>Dev: Show simulated result
+    Dev->>GT: gt plugin run (manual test)
+    GT->>Dir: Execute run.sh
+    Dir->>GT: Exit code + output
+    GT->>Dev: Pass/Fail result
+    Note over Pipeline: Plugin now active in pipeline
+    Pipeline->>Dir: Auto-trigger on events
+```
+
 ### Step 1: Create the Plugin Directory
 
 ```bash

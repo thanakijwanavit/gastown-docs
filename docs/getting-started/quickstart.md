@@ -60,6 +60,16 @@ This creates the rig structure:
 
 ## Create a Crew Workspace
 
+```mermaid
+graph TD
+    TOWN["~/gt/ (Town)"]
+    TOWN --> RIG["myproject/ (Rig)"]
+    RIG --> CREW["crew/yourname (Your workspace)"]
+    RIG --> REFINERY["refinery/rig/ (Merge queue)"]
+    RIG --> POLECATS["polecats/ (Worker sandboxes)"]
+    RIG --> WITNESS["witness/ (Health monitor)"]
+```
+
 Crew workspaces are persistent clones for human developers.
 
 ```bash

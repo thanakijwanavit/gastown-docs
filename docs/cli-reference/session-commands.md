@@ -242,6 +242,20 @@ Session restarts (`gt session restart`) preserve the polecat's git worktree and 
 
 :::
 
+```mermaid
+graph TD
+    START[gt session start] --> RUN[Claude running in tmux]
+    RUN --> MON{Monitor options}
+    MON -->|View live| AT[gt session at — attach]
+    MON -->|Check health| CHK[gt session check]
+    MON -->|Read output| CAP[gt session capture]
+    AT -->|Ctrl-B D| RUN
+    CHK --> HEALTH{Healthy?}
+    HEALTH -->|Yes| RUN
+    HEALTH -->|No| RESTART[gt session restart]
+    RESTART --> RUN
+```
+
 ## gt session capture
 
 Capture recent output from a polecat session.

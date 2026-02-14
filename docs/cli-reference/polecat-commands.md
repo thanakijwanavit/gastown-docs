@@ -353,6 +353,17 @@ gt polecat git-state myproject/toast --json
 
 ## gt polecat identity
 
+```mermaid
+graph LR
+    A[gt polecat identity add] --> B[Identity bead created]
+    B --> C[CV history tracked]
+    C --> D{Rename needed?}
+    D -->|Yes| E[gt polecat identity rename]
+    E --> F[CV preserved under new name]
+    D -->|No| G[gt polecat identity show]
+    G --> H[Display identity + CV summary]
+```
+
 Manage polecat identity beads in rigs.
 
 ```bash

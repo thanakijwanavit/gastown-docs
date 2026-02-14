@@ -170,6 +170,26 @@ sequenceDiagram
     M->>M: Stop Mayor
 ```
 
+```mermaid
+graph TD
+    subgraph "Town Level (gt town)"
+        MAYOR[Mayor — Strategy]
+        DEACON[Deacon — Patrol]
+    end
+    subgraph "Rig Level (gt rig)"
+        WIT[Witness — Health]
+        REF[Refinery — Merges]
+        P1[Polecat 1]
+        P2[Polecat 2]
+    end
+    MAYOR -->|coordinates| WIT
+    MAYOR -->|coordinates| REF
+    DEACON -->|patrols| WIT
+    DEACON -->|patrols| REF
+    WIT -->|monitors| P1
+    WIT -->|monitors| P2
+```
+
 ## When to Use
 
 Town-level navigation and management is useful when:

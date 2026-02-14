@@ -102,6 +102,18 @@ This opens a tmux session with the crew workspace ready.
 
 ## Commands
 
+```mermaid
+flowchart LR
+    Add["gt crew add"] --> Start["gt crew start"]
+    Start --> Refresh["gt crew refresh"]
+    Start --> At["gt crew at"]
+    Start --> Stop["gt crew stop"]
+    Stop --> Start
+    Stop --> Remove["gt crew remove"]
+    Refresh --> Start
+    Start --> Restart["gt crew restart"]
+```
+
 | Command | Description |
 |---------|-------------|
 | `gt crew add <rig> <name>` | Create a new crew workspace |

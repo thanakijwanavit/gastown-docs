@@ -143,6 +143,22 @@ flowchart TD
 
 ## Context Files
 
+```mermaid
+graph TD
+    Mayor["Mayor Agent"]
+    TJ["town.json<br/>Rig list, global config"]
+    RJ["rigs.json<br/>Rig status summary"]
+    OJ["overseer.json<br/>Escalation rules"]
+    CM["CLAUDE.md<br/>Agent instructions"]
+    RCM["Per-rig CLAUDE.md<br/>Rig-specific context"]
+
+    Mayor -->|reads/writes| TJ
+    Mayor -->|reads/writes| RJ
+    Mayor -->|reads| OJ
+    Mayor -->|reads| CM
+    Mayor -->|reads| RCM
+```
+
 The Mayor maintains state through several context files:
 
 | File | Purpose |

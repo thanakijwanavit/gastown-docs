@@ -233,6 +233,18 @@ Convoy synthesis reports are especially valuable for retrospectives and status u
 
 ## `gt convoy check`
 
+```mermaid
+flowchart TD
+    CHK["gt convoy check"] --> SCAN["Scan convoy beads"]
+    SCAN --> OK{"All consistent?"}
+    OK -->|Yes| PASS["Report: healthy"]
+    OK -->|No| ISSUES["Report inconsistencies"]
+    ISSUES --> FIX{"--fix flag?"}
+    FIX -->|Yes| REPAIR["Attempt auto-repair"]
+    FIX -->|No| MANUAL["Manual fix needed"]
+    REPAIR --> PASS
+```
+
 Check convoy health and consistency.
 
 ```bash

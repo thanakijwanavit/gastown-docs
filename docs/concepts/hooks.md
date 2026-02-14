@@ -142,6 +142,17 @@ This releases the work back to the available pool without marking it done. Anoth
 
 ## When to Use Hooks
 
+```mermaid
+graph TD
+    SLING["gt sling (auto)"] -->|hooks bead| HOOK["Agent Hook"]
+    HANDOFF["gt handoff (auto)"] -->|preserves hook| HOOK
+    ATTACH["gt mol attach (auto)"] -->|sets hook| HOOK
+    SELF["gt hook bead-id (manual)"] -->|self-assign| HOOK
+    MAILHOOK["gt mail hook (manual)"] -->|hook mail| HOOK
+    HOOK -->|work complete| DONE["gt done"]
+    HOOK -->|can't finish| UNSLING["gt unsling"]
+```
+
 ### Automatic Hooking (Most Common)
 
 In normal Gas Town operation, you rarely hook work manually. Hooks are set automatically by:

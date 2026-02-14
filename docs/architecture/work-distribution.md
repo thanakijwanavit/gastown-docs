@@ -177,6 +177,20 @@ Do not skip molecule steps or close them out of order. The step sequence is desi
 
 ## Cross-Rig Work
 
+```mermaid
+graph TD
+    Mayor["Mayor"] -->|"gt sling gt-fe frontend"| FE["Frontend Rig"]
+    Mayor -->|"gt sling gt-be backend"| BE["Backend Rig"]
+    Mayor -->|"gt convoy create"| CV["Convoy Tracker"]
+    FE -->|spawns| P1["Polecat: Toast"]
+    BE -->|spawns| P2["Polecat: Alpha"]
+    P1 -->|gt done| R1["Refinery (frontend)"]
+    P2 -->|gt done| R2["Refinery (backend)"]
+    R1 -->|merged| CV
+    R2 -->|merged| CV
+    CV -->|all done| Mayor
+```
+
 For work spanning multiple projects:
 
 - **Dogs** handle infrastructure tasks across rigs

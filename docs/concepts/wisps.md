@@ -85,6 +85,15 @@ graph LR
 
 ## Compaction: Wisp Garbage Collection
 
+```mermaid
+flowchart TD
+    W["Expired Wisp"]
+    W -->|closed?| DEL["Delete wisp"]
+    W -->|still open?| PROMOTE["Promote to permanent bead"]
+    PROMOTE --> ALERT["Operational alert:\nsomething is stuck"]
+    DEL --> CLEAN["Database stays clean"]
+```
+
 Wisps accumulate over time as molecules complete. The [compaction system](../cli-reference/compact.md) applies TTL-based cleanup:
 
 | Wisp Type | TTL | Action After TTL |

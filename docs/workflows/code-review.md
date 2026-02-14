@@ -169,6 +169,21 @@ gt formula run code-review --pr=42 --legs=security,correctness,wiring,test-quali
 
 ## Review Output
 
+```mermaid
+stateDiagram-v2
+    [*] --> Launched: gt formula run code-review
+    Launched --> LegsRunning: Polecats spawned
+    LegsRunning --> LegsComplete: All legs finish
+    LegsComplete --> Synthesis: Combine findings
+    Synthesis --> P0Found: Critical issues found
+    Synthesis --> Clean: No critical issues
+    P0Found --> BlockMerge: Merge blocked
+    BlockMerge --> AuthorFixes: Author addresses P0
+    AuthorFixes --> Launched: Re-run review
+    Clean --> Approved: Review passes
+    Approved --> [*]
+```
+
 ### Individual Leg Findings
 
 Each leg writes its findings to `.reviews/<review-id>/<leg-id>-findings.md`:

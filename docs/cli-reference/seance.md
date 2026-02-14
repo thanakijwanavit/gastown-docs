@@ -137,6 +137,19 @@ gt seance --recent 20
 gt seance --talk sess-ghi789 -p "What went wrong and what did you try?"
 ```
 
+```mermaid
+graph TD
+    A[Context lost after compaction] --> B[gt seance --role crew --recent 5]
+    B --> C[Pick predecessor session ID]
+    C --> D{Query type?}
+    D -->|Quick lookup| E["gt seance --talk id -p 'What files did you change?'"]
+    D -->|Deep investigation| F[gt seance --talk id]
+    E --> G[One-shot answer returned]
+    F --> H[Interactive conversation with predecessor]
+    G --> I[Resume work with recovered context]
+    H --> I
+```
+
 ## How It Works Under the Hood
 
 Seance leverages Claude Code's `--fork-session` and `--resume` flags:

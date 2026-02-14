@@ -121,6 +121,14 @@ gt mol dag <mol-id>
 
 ### The Squash Pattern
 
+```mermaid
+flowchart LR
+    A["Patrol molecule\n(many steps)"] -->|gt mol squash| B["Single digest bead"]
+    B --> C["Audit trail preserved"]
+    A -->|then| D["Fresh patrol molecule\n(new cycle)"]
+    D -->|repeat| A
+```
+
 Patrol molecules use a **squash-and-respawn** pattern to avoid accumulating stale step beads:
 
 1. Complete a patrol cycle

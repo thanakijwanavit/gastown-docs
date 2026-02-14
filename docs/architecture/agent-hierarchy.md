@@ -51,6 +51,16 @@ graph TD
 
 ## Patrol Cycles
 
+```mermaid
+flowchart TD
+    Daemon["Daemon<br/>3 min heartbeat"] -->|tick| Deacon["Deacon Patrol<br/>5 min cycle"]
+    Deacon -->|checks| W["Witness Patrol<br/>5 min cycle"]
+    Deacon -->|checks| R["Refinery Patrol<br/>5 min cycle"]
+    W -->|scans| P["Polecats"]
+    R -->|processes| MQ["Merge Queue"]
+    Deacon -->|spawns if needed| Boot["Boot Triage"]
+```
+
 :::tip
 Patrol intervals are tuned for balance: frequent enough to catch problems quickly, but not so frequent that agents spend all their time monitoring instead of working.
 :::

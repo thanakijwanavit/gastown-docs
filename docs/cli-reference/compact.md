@@ -39,6 +39,17 @@ flowchart TD
 
 ### TTLs by Wisp Type
 
+```mermaid
+graph LR
+    HB["heartbeat / ping<br/>TTL: 6h"] -->|expired + closed| DEL[Delete]
+    HB -->|expired + open| PROM[Promote to Bead]
+    PT["patrol / gc_report<br/>TTL: 24h"] -->|expired + closed| DEL
+    PT -->|expired + open| PROM
+    RC["recovery / error<br/>TTL: 7d"] -->|expired + closed| DEL
+    RC -->|expired + open| PROM
+    ANY["Any wisp with<br/>keep label"] --> PROM
+```
+
 | Type | TTL |
 |------|-----|
 | `heartbeat`, `ping` | 6 hours |

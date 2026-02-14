@@ -157,6 +157,20 @@ When writing custom guards, always test them outside Gas Town first by running t
 
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Available: guard registered
+    Available --> Active: GT_ROLE set (agent context)
+    Available --> Dormant: GT_ROLE unset (human)
+    Active --> Evaluating: Tool call intercepted
+    Evaluating --> Allowed: Exit 0
+    Evaluating --> Blocked: Exit 2
+    Dormant --> PassThrough: All calls allowed
+    Allowed --> [*]
+    Blocked --> [*]
+    PassThrough --> [*]
+```
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

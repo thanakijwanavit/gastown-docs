@@ -146,6 +146,25 @@ The name is a backronym: **M**olecules, **E**pics, **O**rchestration, **W**orkfl
 
 ## MEOW in Practice
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant M as Mayor
+    participant C as Convoy (L2)
+    participant P as Polecat
+    participant Mol as Molecule (L3)
+    participant R as Refinery
+
+    H->>M: "Build user notifications"
+    M->>C: Create convoy with 5 beads (L1)
+    M->>P: Sling beads to polecats
+    P->>Mol: Pour formula (L5) into molecule (L3)
+    P->>P: Execute molecule steps
+    P->>R: Submit completed work
+    R->>R: Merge to main
+    C->>M: Convoy auto-closes (all beads done)
+```
+
 Here's how a typical Gas Town work session flows through the stack:
 
 1. **Human** tells Mayor: "Build user notifications"

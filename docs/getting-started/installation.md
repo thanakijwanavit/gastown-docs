@@ -124,6 +124,21 @@ After installing all dependencies, run `gt doctor` to verify your environment is
 
 ## Shell Completions
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant GT as gt CLI
+    participant BD as Beads (bd)
+    participant DOC as gt doctor
+
+    U->>GT: brew install gastown
+    U->>BD: brew install beads
+    U->>GT: gt --version
+    U->>BD: bd --version
+    U->>DOC: gt doctor
+    DOC-->>U: All checks passed
+```
+
 Install tab completions for better CLI experience:
 
 ```bash

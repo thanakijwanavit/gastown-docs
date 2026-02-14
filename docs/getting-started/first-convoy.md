@@ -86,6 +86,15 @@ stateDiagram-v2
 
 ## Step 5: Watch the Merge Queue
 
+```mermaid
+flowchart LR
+    PC1["Polecat 1\n(done)"] -->|submit MR| MQ["Merge Queue"]
+    PC2["Polecat 2\n(done)"] -->|submit MR| MQ
+    PC3["Polecat 3\n(done)"] -->|submit MR| MQ
+    MQ -->|one at a time| REF["Refinery"]
+    REF -->|rebase + test| MAIN["main branch"]
+```
+
 As polecats complete work, they submit merge requests to the Refinery:
 
 ```bash

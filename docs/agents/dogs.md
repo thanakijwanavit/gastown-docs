@@ -96,6 +96,15 @@ When Gas Town itself needs updating:
 
 ## Work Types
 
+```mermaid
+pie title Dog Task Distribution (Typical)
+    "cleanup" : 40
+    "sync" : 25
+    "rebuild" : 15
+    "migrate" : 10
+    "audit" : 10
+```
+
 | Work Type | Description | Frequency |
 |-----------|-------------|-----------|
 | `rebuild` | Recreate broken infrastructure | As needed |

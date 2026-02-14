@@ -183,6 +183,18 @@ Together, GUPP and NDI make Gas Town **resilient to the fundamental unpredictabi
 
 ## When to Apply GUPP & NDI
 
+```mermaid
+stateDiagram-v2
+    [*] --> open
+    open --> in_progress: Agent picks up bead
+    in_progress --> in_progress: Retry after failure (NDI)
+    in_progress --> done: Step succeeds
+    done --> [*]: Forward-only (GUPP)
+
+    note right of in_progress: Different agent may\nproduce different code\nbut equivalent result
+    note right of done: Never rolls back\nto a previous state
+```
+
 These principles are not just theoretical -- they guide practical design decisions:
 
 ### Apply GUPP When

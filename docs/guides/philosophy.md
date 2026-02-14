@@ -305,6 +305,15 @@ The Software Survival 3.0 framework leads to concrete strategic advice:
 - **Identify your niche breadth.** Understand whether your Usage multiplier compensates for your per-invocation Savings. Broad tools can survive with modest savings; niche tools need to save dramatically per use.
 - **Consider the Human Coefficient.** If you operate in a domain where human preference matters, lean into it. The H multiplier is a legitimate survival advantage.
 
+```mermaid
+pie title Survival Formula Components
+    "Savings (cognition saved)" : 30
+    "Usage (breadth of application)" : 25
+    "Human Coefficient (H)" : 15
+    "Awareness cost (denominator)" : 15
+    "Friction cost (denominator)" : 15
+```
+
 ### The Vibe Coding Commitment
 
 Gas Town embraces what Yegge calls "vibe coding" -- the practice of letting AI do the work while you focus on direction and review. As he writes in [Welcome to Gas Town](https://steve-yegge.medium.com/welcome-to-gas-town-4f25ee16dd04):

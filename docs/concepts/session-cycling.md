@@ -173,6 +173,19 @@ gt mail inbox
 
 ## Handoff vs Park
 
+```mermaid
+graph TD
+    SESSION["Active Session"]
+    SESSION -->|context full, keep working| HANDOFF["gt handoff"]
+    SESSION -->|done for now, pause| PARK["gt park"]
+    HANDOFF --> MAIL["Handoff mail created"]
+    HANDOFF --> HOOK1["Hook persists"]
+    MAIL --> NEXT["New session starts immediately"]
+    HOOK1 --> NEXT
+    PARK --> HOOK2["Hook persists"]
+    HOOK2 --> LATER["Resume later on demand"]
+```
+
 | Action | `gt handoff` | `gt park` |
 |--------|-------------|-----------|
 | **Intent** | Continue immediately in new session | Pause, resume later |

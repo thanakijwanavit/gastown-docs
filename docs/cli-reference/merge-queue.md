@@ -189,6 +189,19 @@ The merge queue processes items sequentially to maintain a clean linear history 
 
 ## `gt mq reject`
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: gt mq submit
+    Pending --> Processing: Refinery picks up
+    Processing --> Validated: checks pass
+    Validated --> Merged: fast-forward merge
+    Processing --> Rejected: checks fail
+    Processing --> Conflict: rebase conflict
+    Rejected --> Pending: gt mq retry
+    Conflict --> Pending: polecat resolves
+    Merged --> [*]
+```
+
 Reject a merge request.
 
 ```bash

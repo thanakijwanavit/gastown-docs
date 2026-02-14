@@ -85,6 +85,24 @@ You almost never need to close a convoy manually. The auto-close mechanism handl
 
 ## Cross-Project Tracking
 
+```mermaid
+graph LR
+    CV["Convoy: hq-cv-005"]
+    R1["Rig: api-server"]
+    R2["Rig: web-client"]
+    R3["Rig: docs"]
+    B1["gt-a1b2c"]
+    B2["bd-d3e4f"]
+    B3["docs-x5y6z"]
+
+    CV --> R1
+    CV --> R2
+    CV --> R3
+    R1 --> B1
+    R2 --> B2
+    R3 --> B3
+```
+
 Convoys can track issues **across multiple rigs**. A single convoy can reference beads from different projects:
 
 ```bash

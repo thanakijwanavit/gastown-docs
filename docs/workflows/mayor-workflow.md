@@ -249,6 +249,24 @@ gt convoy add hq-cv-015 gt-newbead
 For best results, give the Mayor outcome-oriented instructions rather than implementation details. Instead of "edit auth.go line 42 to add a nil check," say "fix the nil pointer crash in the login handler." The Mayor and polecats are more effective when they can choose their own implementation approach.
 :::
 
+## Mayor Decision Flow
+
+```mermaid
+graph TD
+    INPUT["Human describes work"] --> ANALYZE["Mayor analyzes request"]
+    ANALYZE --> DECOMPOSE["Break into discrete beads"]
+    DECOMPOSE --> DEPS{Dependencies?}
+    DEPS -->|Yes| ORDER["Order beads by dependency"]
+    DEPS -->|No| ASSIGN["Assign all in parallel"]
+    ORDER --> ASSIGN
+    ASSIGN --> RIGS{"Multiple rigs?"}
+    RIGS -->|Yes| CROSS["Cross-rig sling with ordering"]
+    RIGS -->|No| SINGLE["Sling all to one rig"]
+    CROSS --> MONITOR["Monitor convoy progress"]
+    SINGLE --> MONITOR
+    MONITOR --> COMPLETE["Report completion to human"]
+```
+
 ## Troubleshooting
 
 | Problem | Solution |

@@ -183,6 +183,26 @@ flowchart TD
     SHUTDOWN --> CLEANUP[Worktrees removed, agents stopped]
 ```
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant GT as gt CLI
+    participant D as Daemon
+    participant DC as Deacon
+    participant M as Mayor
+
+    U->>GT: gt install ~/gt --git
+    GT->>GT: Create directory structure
+    U->>GT: gt enable
+    GT->>GT: Configure shell hooks
+    U->>GT: gt start
+    GT->>D: Launch daemon
+    GT->>DC: Launch Deacon
+    GT->>M: Launch Mayor
+    D->>DC: Heartbeat loop
+    DC->>DC: Begin patrol cycles
+```
+
 ## `gt enable`
 
 Enable Gas Town for all agentic coding tools.

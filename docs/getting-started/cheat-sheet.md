@@ -116,6 +116,17 @@ sequenceDiagram
 
 ## Context & Handoff
 
+```mermaid
+stateDiagram-v2
+    [*] --> Working: Session active
+    Working --> ContextFull: Context fills up
+    ContextFull --> Handoff: gt handoff
+    Handoff --> FreshSession: New session starts
+    FreshSession --> Prime: gt prime
+    Prime --> CheckHook: gt hook
+    CheckHook --> Working: Resume work
+```
+
 | Command | What it does |
 |---------|-------------|
 | `gt prime` | Reload full role context |
