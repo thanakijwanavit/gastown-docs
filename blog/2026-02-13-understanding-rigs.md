@@ -101,6 +101,15 @@ Good rig candidates:
 
 The rule of thumb: **one git repo = one rig**.
 
+```mermaid
+pie title Rig Resource Distribution
+    "Polecats (Workers)" : 40
+    "Refinery (Merges)" : 20
+    "Witness (Monitoring)" : 15
+    "Crew (Human Workspaces)" : 15
+    "Beads DB + Config" : 10
+```
+
 ## Multi-Rig Coordination
 
 Most Gas Town deployments run 2-5 rigs. Coordinating work across rigs uses three mechanisms:

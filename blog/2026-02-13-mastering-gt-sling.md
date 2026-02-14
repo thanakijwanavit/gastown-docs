@@ -131,6 +131,20 @@ gt sling gt-c3 api-gateway
 
 Each bead lands on a separate polecat. The Witnesses monitor all three in parallel, and the convoy tracks overall completion.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Created: bd create
+    Created --> Slung: gt sling bead target
+    Slung --> Hooked: Attached to Agent Hook
+    Hooked --> InProgress: Agent Reads Hook
+    InProgress --> Done: gt done
+    Done --> InRefinery: Submitted to Merge Queue
+    InRefinery --> Merged: Refinery Merges
+    Merged --> [*]
+    InProgress --> Stuck: Agent Stalls
+    Stuck --> Slung: Re-sling to New Polecat
+```
+
 ## Dry Run
 
 Not sure what will happen? Preview first:

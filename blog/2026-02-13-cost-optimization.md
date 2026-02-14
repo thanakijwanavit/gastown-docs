@@ -177,6 +177,20 @@ graph TD
     G --> I[High Cost]
 ```
 
+```mermaid
+flowchart LR
+    subgraph Active["Active Hours"]
+        UP[gt rig unpark] --> WORK[Agents Working]
+        WORK --> COST1[Tokens consumed]
+    end
+    subgraph Idle["Off Hours"]
+        PK[gt rig park] --> SLEEP[No Patrols]
+        SLEEP --> COST2[Zero token cost]
+    end
+    Active -->|End of day| Idle
+    Idle -->|Morning| Active
+```
+
 ## Common Cost Traps
 
 **The "just one more polecat" trap.** It's tempting to throw more parallelism at a problem. But each polecat has startup costs, and if they touch overlapping files, the Refinery spends more time resolving conflicts — which triggers re-runs.

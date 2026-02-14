@@ -205,6 +205,14 @@ stateDiagram-v2
     Merged --> [*]: Cleanup
 ```
 
+```mermaid
+pie title Typical MR Outcomes
+    "Merged Successfully" : 75
+    "Rebase Conflict" : 12
+    "Validation Failure" : 10
+    "Stuck / Timed Out" : 3
+```
+
 ## Queue Ordering
 
 The default ordering is FIFO — first submitted, first processed. But the Refinery respects priority when configured:

@@ -120,6 +120,19 @@ gt rig config myproject refinery.require_ci true
 Rather than duplicating test logic in Gas Town, configure the Refinery to call your existing CI system with `refinery.require_ci`. This way, your established quality gates remain the single source of truth for what merges to main, and Gas Town simply feeds work into the pipeline you already trust.
 :::
 
+```mermaid
+stateDiagram-v2
+    [*] --> Intent: Human describes goal
+    Intent --> Beads: Mayor decomposes
+    Beads --> Code: Polecats implement
+    Code --> Validated: Your CI runs tests
+    Validated --> Merged: Refinery merges
+    Merged --> Deployed: Your CD deploys
+    Merged --> [*]
+    Code --> FixLoop: CI fails
+    FixLoop --> Code: Agent retries or respawns
+```
+
 ## When to Use What
 
 | Scenario | Tool |

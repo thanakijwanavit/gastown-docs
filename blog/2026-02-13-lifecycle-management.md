@@ -255,6 +255,26 @@ gt orphans --recover <commit-hash>
 
 ## Graceful Degradation
 
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant D as Daemon
+    participant R as Rig
+    participant W as Witness
+
+    U->>D: gt rig stop myproject
+    D->>R: Kill processes
+    Note over D: Next tick...
+    D->>R: Auto-restart rig
+    U->>D: gt rig park myproject
+    D->>R: Kill processes
+    Note over D: Next tick...
+    D--xR: Skip (parked)
+    U->>D: gt rig unpark myproject
+    D->>R: Resume on next tick
+    R->>W: Witness starts patrol
+```
+
 Gas Town continues operating even when components fail. Understanding what keeps working helps prioritize recovery:
 
 | Failed Component | What Still Works | What Stops |

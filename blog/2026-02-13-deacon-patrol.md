@@ -164,6 +164,23 @@ graph LR
     DISPATCH --> RESUME[Workflow Resumes]
 ```
 
+```mermaid
+sequenceDiagram
+    participant DC as Deacon
+    participant W as Witness
+    participant BD as Boot Dog
+
+    DC->>W: Ping health check
+    W-->>DC: No response
+    DC->>DC: Wait one cycle (grace)
+    DC->>W: Ping again
+    W-->>DC: No response
+    DC->>DC: Restart Witness session
+    DC->>BD: Spawn Boot dog for triage
+    BD-->>DC: Assessment: Witness OOM crash
+    DC->>DC: Log event, notify Mayor
+```
+
 ## Patrol Molecule: Squash and Respawn
 
 To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn pattern:

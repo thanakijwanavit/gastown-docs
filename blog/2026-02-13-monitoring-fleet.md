@@ -146,6 +146,16 @@ gt trail -n 50
 
 ## gt costs: Token Spend
 
+```mermaid
+pie title Typical Daily Monitoring Time Allocation
+    "gt feed (background)" : 40
+    "gt status (morning check)" : 10
+    "gt dashboard (active work)" : 20
+    "gt doctor (end of day)" : 15
+    "gt costs (cost review)" : 10
+    "gt trail (debugging)" : 5
+```
+
 AI agents consume tokens. `gt costs` tracks spend across agents and rigs:
 
 ```bash

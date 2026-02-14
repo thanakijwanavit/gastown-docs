@@ -135,6 +135,18 @@ needs = ["wait-for-review"]
 
 **When to use:** Workflows requiring human approval, external API responses, or cross-agent coordination.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: Step created
+    Pending --> In_Progress: Dependencies met
+    In_Progress --> Done: Agent completes step
+    In_Progress --> Failed: Error during execution
+    Failed --> In_Progress: Retry (optional step)
+    Failed --> Escalated: Max retries exceeded
+    Done --> [*]
+    Escalated --> [*]
+```
+
 ## Pattern 4: Preflight + Main Work
 
 Run validation before the main task to catch problems early:

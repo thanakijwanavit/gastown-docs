@@ -191,6 +191,20 @@ graph LR
     GIT -->|restores| MEM
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Empty: Agent starts fresh
+    Empty --> Hooked: gt sling assigns bead
+    Hooked --> In_Progress: Agent begins molecule
+    In_Progress --> Step_Done: Wisp completed
+    Step_Done --> In_Progress: Next wisp
+    Step_Done --> Submitted: All wisps done, gt done
+    In_Progress --> Crashed: Session ends unexpectedly
+    Crashed --> In_Progress: New session resumes via hook
+    Submitted --> Cleared: Refinery merges, hook clears
+    Cleared --> [*]
+```
+
 ## The Security Angle
 
 Hooks also serve a security function. Because work assignment is stored in the filesystem (not in the agent's context), it cannot be manipulated through prompt injection or context manipulation. An agent cannot "forget" its assignment or be tricked into working on something else -- the hook is the source of truth.

@@ -72,6 +72,22 @@ gt escalate --severity critical "Database migration broke all downstream tests"
 
 Agents create escalations automatically when they detect problems they can't resolve. The Witness creates them for stalled polecats. The Refinery creates them for repeated merge failures. You rarely need to create them manually — but when you do, the same routing rules apply.
 
+```mermaid
+graph TD
+    subgraph Hierarchy["Supervision Chain"]
+        PC[Polecat] -->|escalates to| WI[Witness]
+        WI -->|escalates to| MY[Mayor]
+        MY -->|escalates to| HU[Human Operator]
+        RF[Refinery] -->|escalates to| MY
+    end
+    subgraph Severity["Auto-Routing by Severity"]
+        P3[P3 Low] -.->|bead only| MY
+        P2[P2 Medium] -.->|mail| MY
+        P1[P1 High] -.->|email| HU
+        P0[P0 Critical] -.->|SMS + email| HU
+    end
+```
+
 ## Configuring Routing
 
 The default routing works well out of the box, but you can customize it in `settings/escalation.json`:

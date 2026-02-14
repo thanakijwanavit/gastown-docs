@@ -80,6 +80,26 @@ Each polecat reads the diff, examines the code from its perspective, and writes 
 
 The wiring leg is particularly valuable in multi-agent environments. When a polecat adds a dependency to `go.mod` but forgets to actually use it, or replaces an implementation but leaves the old one wired in, the wiring leg catches it.
 
+```mermaid
+graph LR
+    subgraph Analysis["Analysis Legs"]
+        CR[Correctness]
+        SC[Security]
+        PF[Performance]
+        EL[Elegance]
+        RS[Resilience]
+        ST[Style]
+        SM[Code Smells]
+    end
+    subgraph Verification["Verification Legs"]
+        WR[Wiring]
+        CD[Commit Discipline]
+        TQ[Test Quality]
+    end
+    Analysis --> SY[Synthesis]
+    Verification --> SY
+```
+
 ## Presets: Matching Review Depth to Risk
 
 Running all 10 legs on every PR would be expensive. Presets let you match review thoroughness to the change's importance:

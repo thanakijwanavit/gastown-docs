@@ -85,6 +85,22 @@ Stage 5 still involves directing the agent step by step. Stage 6 means describin
 
 This is the Gas Town entry point. Instead of one agent doing one task while you wait, you spawn multiple agents working on different tasks simultaneously.
 
+```mermaid
+sequenceDiagram
+    participant D as Developer
+    participant A1 as Agent 1
+    participant A2 as Agent 2
+    participant A3 as Agent 3
+    participant M as Main Branch
+    D->>A1: Task: Add validation
+    D->>A2: Task: Write tests
+    D->>A3: Task: Update docs
+    A1->>M: Merge validation
+    A2->>M: Merge tests
+    A3->>M: Merge docs
+    Note over D,M: 3x throughput vs serial
+```
+
 **What changes:** You go from "one agent, one task, wait, review" to "five agents, five tasks, monitor, merge." Your throughput jumps dramatically.
 
 **Prerequisites:**

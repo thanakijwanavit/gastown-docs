@@ -109,6 +109,18 @@ sequenceDiagram
 | **Cycling** | Agent context window fills up; agent initiates a voluntary session handoff | GUPP ensures all completed molecule steps survive the context refresh; new session reads hook and resumes | Agent writes a handoff summary, session ends, fresh session starts and picks up from the current in-progress step automatically |
 | **Dead** | Bead on hook; tmux session no longer exists (crash, timeout, or machine restart) | Hook and molecule state persist on disk and in the database — no work is lost | Witness detects the missing session on its next patrol, files a warrant, and re-slings the bead to a new polecat |
 
+```mermaid
+flowchart TD
+    subgraph Primitives["GUPP's Three Primitives"]
+        HK["Hooks<br/>Persistent Assignment"]
+        MOL["Molecules<br/>Step-Level Checkpoints"]
+        BD["Beads<br/>Forward-Only Status"]
+    end
+    HK -->|survives crash| RESUME["Agent Resumes Work"]
+    MOL -->|skips completed steps| RESUME
+    BD -->|no backward transitions| RESUME
+```
+
 ## NDI: The Practical Companion
 
 GUPP has a companion principle: **Nondeterministic Idempotence (NDI)**. It acknowledges that AI agents are nondeterministic — ask Claude to implement the same feature twice and you'll get different code.

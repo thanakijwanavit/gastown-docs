@@ -91,6 +91,19 @@ gt escalate "CI broken for 2 hours" -s HIGH
 # → Creates bead + mails Mayor + emails Human
 ```
 
+```mermaid
+graph TD
+    ESC[Agent Escalates Issue] --> BD[Create Escalation Bead]
+    BD --> P{Priority Level}
+    P -->|P3 Low| LOG[Log for Review]
+    P -->|P2 Medium| MAIL[Mail to Mayor Inbox]
+    P -->|P1 High| NUDGE[Mail + Nudge Mayor]
+    P -->|P0 Critical| SMS[Mail + SMS to Human]
+    MAIL --> ACK[Acknowledged]
+    NUDGE --> ACK
+    SMS --> ACK
+```
+
 ### Status Reports
 
 Persistent agents periodically mail status summaries:

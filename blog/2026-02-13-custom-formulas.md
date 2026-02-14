@@ -169,6 +169,17 @@ gh pr review {{pr_number}} --body "review content"
 
 Notice how `security-review`, `performance-review`, and `style-review` all depend only on `load-context`. In theory, they could run in parallel (though a single agent executes them sequentially).
 
+```mermaid
+graph TD
+    WRITE[Write TOML Formula] --> REG[Register in .beads/formulas/]
+    REG --> TEST[Test with gt mol pour --hook]
+    TEST --> STEP[Step through manually]
+    STEP --> OK{Steps correct?}
+    OK -->|No| WRITE
+    OK -->|Yes| DEPLOY[Deploy to polecats]
+    DEPLOY --> POUR[gt mol pour in production]
+```
+
 ## Variables with Double Braces
 
 Formulas support `{{variable}}` placeholders that get filled when the molecule is poured:

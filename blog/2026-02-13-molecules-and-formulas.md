@@ -146,6 +146,24 @@ You can create project-specific formulas by saving TOML files to `.beads/formula
 
 ## Two Kinds of Molecules
 
+```mermaid
+stateDiagram-v2
+    [*] --> Poured: gt formula run
+    Poured --> Step1: First Step Begins
+    Step1 --> Step2: Step Complete
+    Step2 --> StepN: Dependencies Satisfied
+    StepN --> Completed: All Steps Done
+    Completed --> [*]: Work Molecule Ends
+
+    state "Patrol Loop" as PL {
+        [*] --> Patrol: Pour Patrol Molecule
+        Patrol --> Check: Run Checks
+        Check --> Report: Summarize Findings
+        Report --> [*]: Cycle Complete
+    }
+    Completed --> PL: If Patrol Type
+```
+
 Gas Town uses molecules for two distinct purposes:
 
 ### Work Molecules

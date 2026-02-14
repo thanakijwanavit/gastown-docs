@@ -117,6 +117,19 @@ flowchart TD
     end
 ```
 
+```mermaid
+graph TD
+    A[Bead Created] --> B{Is it specific?}
+    B -->|No| C[Polecat explores aimlessly]
+    C --> D[Context exhausted]
+    D --> E[Session crash]
+    E --> F[Witness restarts polecat]
+    F --> C
+    B -->|Yes| G[Polecat goes to fix]
+    G --> H[Work submitted]
+    H --> I[Refinery merges]
+```
+
 ## Bonus: The Debug Checklist
 
 When something goes wrong in Gas Town, run through this checklist before escalating:

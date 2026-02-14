@@ -175,6 +175,13 @@ graph TD
     FREE -.->|next bead| SLING
 ```
 
+```mermaid
+pie title Disk Usage Comparison (10 Agents, 100MB Repo)
+    "Full Clones: 1000MB" : 1000
+    "Worktrees: ~110MB" : 110
+    "Containers: ~500MB" : 500
+```
+
 ## The Trade-Off
 
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).

@@ -205,6 +205,18 @@ sequenceDiagram
 
 ## Best Practices
 
+```mermaid
+graph LR
+    subgraph Development["Plugin Development Lifecycle"]
+        W[Write Script] --> T[Test Manually]
+        T --> D[Deploy as warn]
+        D --> M[Monitor for False Positives]
+        M -->|Stable| P[Promote to reject]
+        M -->|Issues| F[Fix and Re-test]
+        F --> T
+    end
+```
+
 1. **Keep plugins fast.** Pre-merge plugins run on every merge. Aim for under 60 seconds total.
 2. **Use `warn` for non-critical checks.** Reserve `reject` for checks that must pass (tests, security). Use `warn` for advisory checks (code style, documentation).
 3. **Version control everything.** Plugins in `plugins/` are committed to git and reviewed like code.

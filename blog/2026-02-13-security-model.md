@@ -90,6 +90,18 @@ Polecat work → Branch push → Merge Request → Refinery validates → Merge 
 
 The Refinery runs the full test suite before merging. If tests fail, the merge is rejected and a conflict-resolution bead is created. This prevents broken code from reaching main, even if a polecat's implementation has bugs.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Write: Polecat writes code
+    Write --> Push: Push to feature branch
+    Push --> Validate: Refinery rebases + tests
+    Validate --> Merge: Tests pass
+    Validate --> Reject: Tests fail
+    Merge --> Main: Fast-forward to main
+    Reject --> Retry: New polecat retries
+    Note right of Validate: Security checkpoint
+```
+
 ## Secrets Management
 
 Gas Town follows a strict rule: **secrets never enter agent context**.

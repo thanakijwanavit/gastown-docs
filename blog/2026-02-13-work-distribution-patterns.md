@@ -204,6 +204,21 @@ sequenceDiagram
     CV-->>H: Auto-close when complete
 ```
 
+```mermaid
+flowchart TD
+    subgraph Underlying["Shared Execution Engine"]
+        BD["Beads<br/>Track work items"]
+        HK["Hooks<br/>Attach work to agents"]
+        CV["Convoys<br/>Group related beads"]
+        MOL["Molecules<br/>Track multi-step progress"]
+        GUPP["GUPP<br/>Forward-only execution"]
+    end
+    BD --> HK
+    HK --> CV
+    CV --> MOL
+    MOL --> GUPP
+```
+
 ## The Work Distribution Architecture
 
 All three patterns ultimately use the same underlying machinery:

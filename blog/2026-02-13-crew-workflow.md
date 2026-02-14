@@ -129,6 +129,21 @@ The failing test is TestRefreshExpired - needs mock update.
 "
 ```
 
+```mermaid
+graph TD
+    subgraph Cycle["Crew Session Lifecycle"]
+        PRIME[gt prime] --> HOOK[gt hook]
+        HOOK --> MAIL[gt mail inbox]
+        MAIL --> PULL[git pull]
+        PULL --> WORK[Code & Test]
+        WORK --> PUSH[git push]
+        PUSH --> HANDOFF{Context full?}
+        HANDOFF -->|Yes| HO[gt handoff]
+        HANDOFF -->|No| WORK
+        HO --> PRIME
+    end
+```
+
 ## Working Across Rigs
 
 Sometimes you need to fix something in a different project. Gas Town's worktree system lets you work on other rigs without leaving your crew workspace:

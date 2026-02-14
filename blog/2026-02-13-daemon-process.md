@@ -180,6 +180,24 @@ sequenceDiagram
     Note over DC,P: Intelligence lives here
 ```
 
+```mermaid
+graph LR
+    subgraph Daemon["Daemon (Go)"]
+        HB[Heartbeat Ticker]
+        LC[Lifecycle Handler]
+        PL[Poller]
+    end
+    subgraph Agents["Agents (Claude Code)"]
+        DC[Deacon]
+        W[Witnesses]
+        P[Polecats]
+    end
+    HB -->|tick| DC
+    LC -->|create/stop| Agents
+    DC -->|patrol| W
+    W -->|supervise| P
+```
+
 ## Design Lessons
 
 The daemon embodies several Gas Town principles:

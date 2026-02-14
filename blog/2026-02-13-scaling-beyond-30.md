@@ -175,6 +175,18 @@ pie title Resource Usage by Scale
     "Coordination Overhead" : 10
 ```
 
+```mermaid
+stateDiagram-v2
+    [*] --> Small: 5-10 agents
+    Small --> Medium: Add rigs
+    Medium --> Large: Partition + stagger
+    Large --> XL: Dedicated machines
+    Small: Single machine, defaults
+    Medium: 10-20 agents, tune patrols
+    Large: 20-40 agents, multi-Refinery
+    XL: 40+ agents, distributed setup
+```
+
 ## Common Pitfalls at Scale
 
 1. **Not splitting rigs early enough.** By the time merge conflicts are constant, you should have split the rig already.

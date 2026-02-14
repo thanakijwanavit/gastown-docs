@@ -189,6 +189,20 @@ sequenceDiagram
     A->>M: Resume step 2
 ```
 
+```mermaid
+graph LR
+    subgraph Hook_Types["Hook Content Types"]
+        BM["Bead + Molecule<br/>(standard workflow)"]
+        BO["Bead Only<br/>(ad-hoc task)"]
+        ML["Mail<br/>(one-off instruction)"]
+        PN["Pinned<br/>(permanent, e.g. PR Sheriff)"]
+    end
+    BM -->|gt done| CLEAR[Hook Clears]
+    BO -->|gt done| CLEAR
+    ML -->|gt done| CLEAR
+    PN -->|gt hook unpin| CLEAR
+```
+
 ## When Hooks Clear
 
 Hooks clear when:

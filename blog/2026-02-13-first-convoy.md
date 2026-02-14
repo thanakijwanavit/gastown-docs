@@ -128,6 +128,15 @@ stateDiagram-v2
     Merged --> [*]: Convoy auto-closes
 ```
 
+```mermaid
+pie title Time Breakdown for a Typical Convoy
+    "Bead creation + bundling" : 5
+    "Polecat context loading" : 10
+    "Implementation" : 50
+    "Testing + self-review" : 20
+    "Refinery merge" : 15
+```
+
 ## Behind the Scenes
 
 When you sling a bead to a rig, several things happen automatically:

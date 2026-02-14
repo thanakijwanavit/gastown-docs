@@ -174,6 +174,20 @@ graph TD
 
 ## Practical Tips
 
+```mermaid
+stateDiagram-v2
+    [*] --> SingleRuntime: Start with Claude Code
+    SingleRuntime --> Evaluate: Identify task-specific needs
+    Evaluate --> AddRuntime: Configure new rig runtime
+    AddRuntime --> TestContract: Verify hook-commit-done
+    TestContract --> Pass: Contract works
+    TestContract --> Fix: Contract fails
+    Fix --> TestContract: Retry
+    Pass --> MultiRuntime: Production multi-runtime
+    MultiRuntime --> Monitor: Cross-runtime convoy monitoring
+    Monitor --> Evaluate: Optimize runtime assignments
+```
+
 **Start with one runtime.** Most teams begin with Claude Code for everything, then specialize as they learn which tasks benefit from different runtimes.
 
 **Runtime choice is per-rig, not per-bead.** You don't pick a runtime for each task — you pick it for each codebase. The rig's runtime handles all work slung to that rig.

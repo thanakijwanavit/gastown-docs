@@ -121,6 +121,26 @@ gt convoy status hq-cv-webhook
 # Progress: 1/3 done (be-webhook complete, fe-config in progress, doc-webhook pending)
 ```
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant BD as bd create
+    participant CV as Convoy
+    participant R1 as Backend Rig
+    participant R2 as Frontend Rig
+    participant R3 as Docs Rig
+
+    H->>BD: Create beads in 3 rigs
+    H->>CV: gt convoy create (cross-rig)
+    H->>R1: gt sling be-webhook backend
+    H->>R2: gt sling fe-config frontend
+    H->>R3: gt sling doc-webhook docs
+    R1-->>CV: be-webhook done
+    R2-->>CV: fe-config done
+    R3-->>CV: doc-webhook done
+    CV-->>H: Convoy auto-closes
+```
+
 ## Pattern 4: Rolling Convoys
 
 For ongoing work (like a sprint), use a rolling convoy pattern where you add beads as work is discovered:

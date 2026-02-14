@@ -182,6 +182,17 @@ sequenceDiagram
     Note over MN: Linear history preserved
 ```
 
+```mermaid
+graph TD
+    subgraph Conflict_Prevention["Conflict Prevention Strategies"]
+        A[Scope Beads Narrowly] -->|fewer files touched| LOW[Low Conflict Risk]
+        B[Use Convoys for Related Work] -->|sequenced execution| LOW
+        C[Push Immediately After Commit] -->|minimal divergence| LOW
+        D[Configure pull.rebase true] -->|linear history| LOW
+    end
+    LOW --> CLEAN[Clean Merge to Main]
+```
+
 ## Practical Tips
 
 :::tip

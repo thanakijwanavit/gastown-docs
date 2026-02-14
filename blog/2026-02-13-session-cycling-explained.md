@@ -178,6 +178,14 @@ stateDiagram-v2
     [*] --> Fresh: New session spawns
 ```
 
+```mermaid
+pie title What Survives Session Cycling
+    "Hook (Work Assignment)" : 25
+    "Molecule (Step Progress)" : 25
+    "Git (Code Changes)" : 25
+    "Mail (Context Notes)" : 25
+```
+
 ## The Role of Molecules
 
 Molecules are what make session cycling work for multi-step tasks. Each molecule tracks:

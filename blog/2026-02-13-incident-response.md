@@ -176,6 +176,23 @@ stateDiagram-v2
     Verified --> [*]
 ```
 
+```mermaid
+sequenceDiagram
+    participant OP as Operator
+    participant GT as gt status
+    participant WI as Witness
+    participant PC as Polecat
+    participant RF as Refinery
+    OP->>GT: Run 90-second triage
+    GT-->>OP: Stuck polecat detected
+    OP->>WI: gt nudge witness
+    WI->>PC: Health check
+    PC-->>WI: Unresponsive
+    WI->>PC: File death warrant + respawn
+    PC->>RF: New polecat completes work
+    RF-->>OP: Code merged to main
+```
+
 ## Scenario 4: Agent Can't Find Its Hook
 
 **Symptoms:** An agent starts up and reports "hook empty" even though work was assigned.

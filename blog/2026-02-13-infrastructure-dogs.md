@@ -92,6 +92,21 @@ When Gas Town itself updates, dogs handle the transition:
 - Configuration format updates across all rigs
 - Plugin upgrades that need cross-rig coordination
 
+```mermaid
+flowchart TD
+    UPD[Gas Town Update Released] --> SM[Schema Migration]
+    UPD --> CF[Config Format Update]
+    UPD --> PU[Plugin Upgrade]
+    SM --> R1[Apply to Rig 1 DB]
+    SM --> R2[Apply to Rig 2 DB]
+    CF --> R1V[Update Rig 1 Configs]
+    CF --> R2V[Update Rig 2 Configs]
+    PU --> R1P[Upgrade Rig 1 Plugins]
+    PU --> R2P[Upgrade Rig 2 Plugins]
+    R1 & R2 & R1V & R2V & R1P & R2P --> VER[Verify Consistency]
+    VER --> RPT[Report to Deacon]
+```
+
 ## Dog Task Types at a Glance
 
 | Task Type | Description | Example Commands / Actions | Typical Duration | Frequency |

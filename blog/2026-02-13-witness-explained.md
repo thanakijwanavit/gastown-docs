@@ -120,6 +120,19 @@ gt rig config myproject witness.max_nudges 2
 
 For most setups, the defaults work well. Decrease the stall threshold if your tasks are time-sensitive; increase it if your tasks naturally involve long computation periods.
 
+```mermaid
+stateDiagram-v2
+    [*] --> Healthy: Polecat is working
+    Healthy --> Suspect: No progress detected
+    Suspect --> Nudged: Witness sends nudge
+    Nudged --> Healthy: Polecat responds
+    Nudged --> SecondNudge: No response
+    SecondNudge --> Healthy: Polecat responds
+    SecondNudge --> Escalated: Still no response
+    Escalated --> Terminated: Warrant filed
+    Terminated --> [*]: Bead re-slung
+```
+
 ## What the Witness Does NOT Do
 
 Understanding the Witness's scope helps avoid confusion:

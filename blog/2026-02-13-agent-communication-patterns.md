@@ -177,6 +177,17 @@ Tests 3 and 7 are the ones that catch it.
 
 This creates a mail to yourself and hooks it. Your next session starts, reads the hook, reads the mail, and continues from where you left off.
 
+```mermaid
+flowchart TD
+    subgraph Primitives["Choosing the Right Primitive"]
+        Q{What do you need?}
+        Q -->|Agent must KNOW something| MAIL[Use Mail]
+        Q -->|Agent must DO something| HOOK[Use Hook / gt sling]
+        Q -->|Agent must WAKE UP| NUDGE[Use Nudge]
+        MAIL -->|Urgent?| BOTH[Mail + Nudge]
+    end
+```
+
 ### Pattern: Cross-Rig Work Request
 
 When work in your rig depends on a change in another rig:

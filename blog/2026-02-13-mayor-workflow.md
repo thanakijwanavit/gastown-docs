@@ -107,6 +107,26 @@ Each bead is independent enough for a single polecat to implement.
 
 ### Dependency Ordering
 
+```mermaid
+sequenceDiagram
+    participant U as You
+    participant M as Mayor
+    participant W as Witness
+    participant P as Polecats
+    participant R as Refinery
+
+    U->>M: Natural language request
+    M->>M: Decompose into beads
+    M->>M: Create convoy
+    M->>P: Sling beads to polecats
+    P->>P: Implement changes
+    W->>P: Monitor health (every 5min)
+    P->>R: gt done (submit MR)
+    R->>R: Rebase + merge
+    R-->>M: Convoy progress update
+    M-->>U: All beads merged — convoy closed
+```
+
 The Mayor sets dependencies between beads when needed:
 
 ```text

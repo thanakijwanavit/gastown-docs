@@ -80,6 +80,15 @@ flowchart LR
 
 ## When to Use Minimal Mode
 
+```mermaid
+pie title When Teams Use Minimal Mode
+    "Learning Gas Town" : 35
+    "Resource-Constrained Machines" : 25
+    "Single-Agent Workflows" : 20
+    "Debugging Full Mode Issues" : 15
+    "Low-Activity Rigs" : 5
+```
+
 **Starting out.** Minimal Mode is the best way to learn Gas Town. You see every step explicitly, which builds intuition for how the full system works.
 
 **Resource-constrained machines.** The full hierarchy runs a Deacon, Mayor, Witness, and Refinery as persistent processes. On a laptop with limited RAM, Minimal Mode avoids all that overhead.

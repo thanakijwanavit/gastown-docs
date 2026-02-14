@@ -73,6 +73,23 @@ graph TD
 
 The [Witness](/docs/agents/witness) can also auto-sling unblocked beads if configured to do so.
 
+```mermaid
+sequenceDiagram
+    participant H as Human
+    participant BD as Beads
+    participant CV as Convoy
+    participant PC as Polecat
+    H->>BD: bd create (3 beads)
+    H->>BD: bd dep add (set ordering)
+    H->>CV: gt convoy create
+    H->>PC: gt sling ga-aaa
+    PC->>BD: bd close ga-aaa
+    Note over BD: Dependencies clear
+    H->>PC: gt sling ga-bbb, ga-ccc
+    PC->>BD: bd close ga-bbb, ga-ccc
+    BD->>CV: Convoy auto-closes
+```
+
 ## Pattern 2: Cross-Rig Work
 
 Some convoys span multiple projects. A frontend change might depend on a backend API update:
