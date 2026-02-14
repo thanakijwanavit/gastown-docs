@@ -268,6 +268,10 @@ flowchart TD
 Use `gt mol pour <formula> --hook` to pour a molecule onto your own hook and step through it manually with `gt mol step next` and `gt mol step done`. This lets you verify step ordering, dependency logic, and variable resolution before any polecat runs it. Catching a broken formula early saves significant time and tokens.
 :::
 
+:::warning Keep Step Descriptions Agent-Readable, Not Human-Readable
+Formula step descriptions are executed by AI agents, not read by humans. Avoid vague instructions like "review the code for issues" and instead provide explicit commands to run, specific files to check, and concrete success criteria. An agent cannot infer intent from context the way a human colleague can -- precision in step descriptions directly translates to fewer failed molecules and lower token costs.
+:::
+
 ## Best Practices
 
 **Keep steps focused.** Each step should be one clear action. If a step description is more than a paragraph, consider splitting it into multiple steps.

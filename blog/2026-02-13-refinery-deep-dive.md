@@ -188,6 +188,10 @@ sequenceDiagram
 The single biggest factor in Refinery throughput is merge conflict rate, and the single biggest factor in conflict rate is MR size. Beads that touch 1-3 files and produce fewer than 100 changed lines rebase cleanly in the vast majority of cases. If your conflict rate climbs above 15%, decompose your beads into smaller, more focused units before slinging.
 :::
 
+:::note Rejected MRs Do Not Block the Queue
+When the Refinery rejects an MR due to a rebase conflict or validation failure, it immediately moves on to the next MR in the queue. The rejected bead stays open and can be re-slung to a fresh polecat, but it does not hold up other merges. This design ensures that one problematic MR never stalls the entire pipeline — the queue keeps flowing while the failed work is retried independently.
+:::
+
 ## Queue Ordering
 
 The default ordering is FIFO — first submitted, first processed. But the Refinery respects priority when configured:

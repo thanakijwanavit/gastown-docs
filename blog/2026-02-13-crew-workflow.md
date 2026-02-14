@@ -173,6 +173,10 @@ In a multi-agent environment, polecats are constantly merging code to main. If y
 When your context window fills up or you finish a work chunk, always run `gt handoff` with descriptive notes before cycling. The handoff creates a mail to yourself and hooks it, so your next session automatically picks up exactly where you left off -- no manual ramp-up needed.
 :::
 
+:::note Crew Workers Can Dispatch Work to Polecats
+You do not need to do everything yourself in a crew workspace. For well-defined, repetitive tasks, create a bead with a clear description and sling it to a polecat with `gt sling`. This lets you focus on high-judgment work while the agent fleet handles the mechanical tasks in parallel.
+:::
+
 ## Best Practices
 
 1. **Push frequently.** In a multi-agent environment, unpushed work diverges fast. Push after every logical chunk.

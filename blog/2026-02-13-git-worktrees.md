@@ -160,6 +160,10 @@ sequenceDiagram
 Git worktrees share the same `.git` directory and run in the same OS process space. A misbehaving agent can theoretically access files outside its worktree. For security-sensitive workloads that run untrusted code, layer container-based isolation on top of the worktree system. For standard AI code generation, worktree-level isolation is sufficient.
 :::
 
+:::note Each Branch Can Only Have One Worktree
+Git enforces a one-to-one relationship between branches and worktrees — you cannot check out the same branch in two worktrees simultaneously. If a polecat's worktree is not properly cleaned up after completion, subsequent agents trying to use that branch name will fail. The Witness handles this cleanup automatically, but be aware of this constraint when debugging "branch already checked out" errors.
+:::
+
 ## The Trade-Off
 
 Gas Town's worktree approach provides **code isolation**, not **process isolation**. A misbehaving polecat could theoretically access files outside its worktree. For most code generation use cases, this is acceptable -- the risk model is "agent writes bad code" (caught by tests), not "agent escapes sandbox" (which requires container-level isolation).

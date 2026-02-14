@@ -144,6 +144,10 @@ The Witness is your early warning system. When it sends you mail about stalled p
 
 Most issues trace back to one of the five pitfalls above. Once you've diagnosed which one, the fix is straightforward.
 
+:::note Run `gt doctor` as Your First Diagnostic Step
+Before diving into manual debugging, always run `gt doctor` first. It performs a comprehensive health check across agents, the Refinery, hooks, and disk state in seconds. Most of the five pitfalls above produce distinct signatures in the doctor output, saving you the time of tracing the issue manually.
+:::
+
 ## The Meta-Lesson
 
 All five pitfalls share a common root: treating Gas Town like a single-developer tool. It's a **multi-agent system**, which means:

@@ -172,6 +172,10 @@ If `gt feed` shows a polecat being spawned and nuked repeatedly in quick success
 The `gt doctor --fix` command only addresses well-understood, non-destructive cleanups — removing orphaned worktrees, clearing stale lock files, and restarting dead daemon processes. It will never modify your branches, delete uncommitted work, or alter bead state. Running it as part of your daily routine is safe and recommended.
 :::
 
+:::caution Don't Ignore Escalation Bursts in gt feed
+If `gt feed` shows multiple escalations firing within a short window, it often indicates a systemic issue rather than individual polecat failures — such as a broken dependency, a flaky test, or a misconfigured rig. Investigate the common denominator across the escalations before addressing each one individually, or you risk wasting time on symptoms while the root cause continues generating new failures.
+:::
+
 ## Building a Monitoring Routine
 
 Here's a practical daily routine for monitoring a Gas Town fleet:

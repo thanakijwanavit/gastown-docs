@@ -232,6 +232,10 @@ The Mayor is better at decomposing outcome-oriented requests like "add email val
 The Mayor workflow relies on automated validation at every stage — preflight tests, post-implementation tests, and Refinery CI checks. If your test suite has thin coverage, polecats may merge broken code that passes the existing tests. Invest in comprehensive test coverage before scaling to MEOW, or use the Manual Convoy workflow where you can review each bead before merging.
 :::
 
+:::warning Large Decompositions Can Overwhelm Rig Resources
+When the Mayor breaks a request into many beads (10+), all polecats may spawn simultaneously and compete for system resources — CPU, memory, and disk I/O from parallel test runs. Start with small requests that produce 2-3 beads and scale up gradually. You can also ask the Mayor to set dependencies between beads so they execute sequentially rather than all at once.
+:::
+
 ## Tips for Effective MEOW
 
 **Be specific about outcomes, not implementation.** The Mayor is better at decomposing "add email validation" than "create a validateEmail function in utils.go that uses regex." Tell it what you want, not how to build it.

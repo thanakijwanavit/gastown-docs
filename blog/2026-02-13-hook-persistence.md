@@ -165,6 +165,10 @@ gt mol status
 Work stays hooked until it is explicitly done or released — crashes, context compaction, and machine restarts do not clear the hook. This asymmetry is deliberate and prevents work from falling through the cracks. If you need to remove work from a hook manually, use `gt hook clear`.
 :::
 
+:::info Hook State Is Queryable From Outside the Agent
+You do not need to be inside an agent's session to inspect its hook. Use `gt hook --target <path>` from any terminal to check what work is assigned to any agent in any rig. This is invaluable for debugging stalled polecats or verifying that a sling command landed correctly — you can inspect the hook without interrupting the agent's session.
+:::
+
 ## When Hooks Clear
 
 Hooks clear when:

@@ -158,6 +158,10 @@ flowchart TD
 The daemon sends heartbeats to every active rig on every tick. If you have rigs that sit idle during off-hours or weekends, use `gt rig park <rig>` to skip them. The Deacon ignores parked rigs entirely, which eliminates unnecessary Witness and patrol cycles and saves both API tokens and compute.
 :::
 
+:::warning Do Not Add Intelligence to the Daemon
+It may be tempting to extend the daemon with smarter scheduling, conditional heartbeats, or agent health tracking. Resist this impulse. Every feature added to the daemon increases its failure blast radius and makes recovery harder. Gas Town's architecture deliberately keeps the daemon simple so that all intelligence lives in agents, which have built-in crash recovery via hooks and molecules.
+:::
+
 ## Design Lessons
 
 The daemon embodies several Gas Town principles:

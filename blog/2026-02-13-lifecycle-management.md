@@ -152,6 +152,10 @@ The distinction matters:
 
 **Use `gt down`** when pausing overnight. **Use `gt shutdown`** when cleaning up for real.
 
+:::caution Always Check for In-Flight Work Before Docking
+Running `gt rig dock` removes all worktrees, which destroys any uncommitted polecat work. Before docking a rig, verify no polecats have active hooks with `gt polecat list --rig <name>` and ensure the merge queue is empty with `gt mq list`. Docking a rig with in-flight work will orphan those beads and require manual re-slinging after undocking.
+:::
+
 ## Startup Order Dependencies
 
 Gas Town components must start in a specific order. `gt start --all` handles this automatically, but understanding the dependency chain helps when troubleshooting:

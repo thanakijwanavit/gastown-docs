@@ -149,6 +149,10 @@ You should never need to manually close convoys. The Deacon checks convoy comple
 Each patrol cycle is tracked as a molecule (`mol-deacon-patrol`). If the Deacon crashes mid-patrol, the next session picks up from the last completed step rather than re-running the entire cycle. This is the same molecule system that powers polecat workflows -- the Deacon eats its own dog food.
 :::
 
+:::warning Never Manually Close Convoys That Appear Stuck
+If a convoy is not auto-closing, it means at least one bead has not reached a terminal state. Force-closing the convoy hides the problem instead of solving it. Use `gt convoy status <id>` to identify the stuck bead, then either fix the bead's blocking issue or mark it as `wontfix` with `bd close <bead> --reason wontfix`. The Deacon will auto-close the convoy on its next patrol once all beads are terminal.
+:::
+
 ## Patrol Molecule: Squash and Respawn
 
 To avoid accumulating stale step beads, the Deacon uses the squash-and-respawn pattern:

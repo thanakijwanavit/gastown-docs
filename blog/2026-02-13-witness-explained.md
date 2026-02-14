@@ -171,6 +171,10 @@ The default stall threshold (600 seconds without progress) works well for typica
 Setting the stall threshold too low causes the Witness to flag healthy polecats as stalled — especially agents that are reading large files, running test suites, or waiting for CI results. False-positive stall detections trigger unnecessary nudges and escalations, which waste tokens and can interrupt agents mid-work. Keep the threshold at 120 seconds or above to avoid this churn.
 :::
 
+:::info The Witness Itself Is Protected by GUPP
+Because the Witness runs its patrol as a molecule, it benefits from the same crash-recovery guarantees as any other Gas Town agent. If the Witness session dies mid-patrol — due to a context overflow, a machine restart, or a network issue — the Deacon detects the missing session and restarts it. The new Witness session reads its patrol molecule and resumes from the last completed step, so no patrol data is lost.
+:::
+
 ## Observing the Witness
 
 You can monitor the Witness's activity:

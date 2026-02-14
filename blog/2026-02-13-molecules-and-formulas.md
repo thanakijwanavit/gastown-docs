@@ -226,6 +226,10 @@ Save this as `.beads/formulas/release.formula.toml` and pour it:
 gt formula run release
 ```
 
+:::warning Do Not Manually Edit Molecule State in the Beads Database
+Molecule progress is managed by the agent through `gt mol` commands. Directly editing wisp states in the `.beads/` database can put the molecule into an inconsistent state where completed steps appear pending or vice versa, causing the agent to skip work or repeat it. If a molecule is stuck, use `gt mol reset` to cleanly restart from a known step rather than hand-editing the underlying beads.
+:::
+
 ## The MEOW Stack Connection
 
 Molecules are one layer in the MEOW Stack (**M**olecules, **E**pics, **O**rchestration, **W**orkflows). Individual molecules handle single-agent workflows. At higher layers, convoys coordinate multiple molecules across agents, and protomolecules orchestrate complex multi-agent operations.

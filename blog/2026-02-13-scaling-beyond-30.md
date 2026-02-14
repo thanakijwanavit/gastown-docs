@@ -163,6 +163,10 @@ flowchart LR
 At 30+ concurrent agents, API token costs can escalate rapidly — especially if polecats are retrying broken tasks or patrol agents are cycling frequently. Set a daily budget alert with `gt costs --alert-threshold` and review `gt costs --by-agent` daily. A single misbehaving polecat stuck in a retry loop can consume more tokens in one hour than 10 healthy polecats use in a full day.
 :::
 
+:::note Horizontal Partitioning Also Improves Fault Isolation
+Splitting a monolithic rig into multiple smaller rigs does more than reduce merge contention — it also isolates failures. When a single rig experiences a Refinery stall, an infrastructure issue, or a cascade of rebase conflicts, only the agents on that rig are affected. Other rigs continue operating normally, which means your overall throughput degrades gracefully rather than collapsing entirely.
+:::
+
 ## Common Pitfalls at Scale
 
 1. **Not splitting rigs early enough.** By the time merge conflicts are constant, you should have split the rig already.

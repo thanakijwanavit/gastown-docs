@@ -157,6 +157,10 @@ GUPP isn't just for polecats. When you're a crew worker and your session crashes
 GUPP enforces forward-only state transitions for a reason: reverting a bead from `done` back to `open` can cause race conditions where multiple agents fight over the same work. If completed work needs revision, create a new bead that references the original. Never edit the beads database directly to change a bead's status backward — use `bd create` to file follow-up work instead.
 :::
 
+:::tip Test GUPP Recovery by Simulating Failures Early
+When setting up a new rig, deliberately kill a polecat session mid-task with `gt polecat nuke` and verify that the hook persists, the molecule state is intact, and a fresh polecat resumes from the correct step. Running this exercise early builds confidence that your rig's GUPP guarantees work in practice — not just in theory — and helps you identify any configuration issues before they surface during real production work.
+:::
+
 ## Further Reading
 
 - **[GUPP & NDI](/docs/concepts/gupp)** — Full technical reference

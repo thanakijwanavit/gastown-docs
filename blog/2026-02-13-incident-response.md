@@ -262,6 +262,10 @@ flowchart TD
 Before diving into any fix, always run `gt status`, `gt convoy stranded`, and `gt feed --errors` first. This gives you a system-wide health snapshot in under 90 seconds, and most issues become obvious from the output. Skipping triage leads to fixing symptoms while the real problem persists.
 :::
 
+:::note Document Recurring Incidents in Your Runbook
+If you encounter the same failure scenario more than twice, create a project-specific runbook entry with the exact diagnosis steps and fix. Gas Town's self-healing covers the common cases, but project-specific issues — like a flaky integration test that causes Refinery rejections — need documented workarounds so any operator can resolve them quickly.
+:::
+
 ## The Golden Rule
 
 When in doubt, remember: **beads are the source of truth**. Agents come and go, sessions crash and restart, git branches get created and deleted. But the bead tracking state persists. As long as the bead is open, someone (or some new agent) will eventually pick it up.

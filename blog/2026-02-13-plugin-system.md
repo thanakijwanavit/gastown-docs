@@ -180,6 +180,10 @@ A plugin that hangs will block the entire Refinery merge queue, stalling all age
 When deploying a new quality gate plugin, start with `fail_action = "warn"` so it logs failures without blocking the merge queue. Monitor the warnings for a few days to verify the plugin runs reliably, then promote it to `fail_action = "reject"` once you are confident it will not produce false positives that stall your polecats.
 :::
 
+:::info Plugin Output Is Captured in the Refinery Log
+Every plugin's stdout and stderr are captured and stored in the Refinery's merge log for the associated MR. If a pre-merge plugin fails and rejects a merge, you can review the full plugin output with `gt mq log <mr-id>` to understand exactly what went wrong. This is especially useful when debugging intermittent failures in quality gate plugins that only reproduce under rebase conditions.
+:::
+
 ## Best Practices
 
 1. **Keep plugins fast.** Pre-merge plugins run on every merge. Aim for under 60 seconds total.

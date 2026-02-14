@@ -166,6 +166,10 @@ If you are unsure which work distribution pattern to use, start with the Mayor w
 Formulas are designed for repeatable processes — code review, release prep, security audits. Using a formula for one-off feature work adds template overhead without payoff, and the rigid step structure can actually slow agents down when the task does not follow a predictable pattern. Use a manual convoy or the Mayor for ad-hoc work, and reserve formulas for workflows you will run more than three times.
 :::
 
+:::note You Can Switch Patterns Mid-Convoy
+If you start with the Mayor workflow and realize the decomposition does not match your needs, you can take over mid-flight. Use `gt release` to pull beads back from agents, adjust descriptions or dependencies with `bd update` and `bd dep add`, and re-sling manually. The convoy continues tracking all beads regardless of how they were dispatched, so switching from automated to manual control is seamless.
+:::
+
 ## Combining Patterns
 
 The patterns aren't mutually exclusive. Advanced operators often combine them:

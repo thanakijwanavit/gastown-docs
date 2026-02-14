@@ -115,6 +115,10 @@ This prevents infinite warrant loops and surfaces genuinely hard problems to som
 The warrant log provides a complete audit trail of every agent termination -- who filed it, why, and when it was executed. Run `gt warrant list --all` regularly to spot patterns like the same bead triggering repeated warrants or a specific rig producing more terminations than others. These patterns often reveal systemic issues worth fixing.
 :::
 
+:::note Warrants Preserve the Bead Assignment on the Hook
+When Boot executes a death warrant, it terminates the agent's session but does not remove the bead from the hook. This means the work assignment survives the termination, and the Witness can respawn a fresh polecat that picks up right where the previous one left off. No manual re-slinging is required for single-failure scenarios.
+:::
+
 ## Manual Warrant Operations
 
 Humans can participate in the warrant system directly:

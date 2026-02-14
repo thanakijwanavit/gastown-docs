@@ -201,6 +201,10 @@ Small, focused beads finish faster, parallelize better, conflict less during mer
 Slinging a bead that still has unresolved dependencies will assign it to a polecat that cannot make progress — the agent will stall waiting for prerequisite code that has not landed on main yet. Always check `bd ready` before slinging to confirm a bead's dependencies have cleared. If you sling prematurely, the Witness will eventually detect the stall, but you will have wasted a polecat session and its token budget.
 :::
 
+:::info Use `gt convoy show` to Spot Stranded Beads Early
+A stranded bead is one that belongs to a convoy but has not been slung to any agent — it sits in the ready queue with no polecat assigned. This commonly happens when a dependency clears and you forget to sling the unblocked work. Running `gt convoy show <id>` after each bead completes helps you catch stranded beads immediately, so your convoy does not stall waiting for work that nobody has picked up.
+:::
+
 ## Lessons from Second Convoys
 
 **Decompose aggressively.** Five small beads are better than two large ones. Small beads finish faster, parallelize better, and are easier to re-sling when something goes wrong.

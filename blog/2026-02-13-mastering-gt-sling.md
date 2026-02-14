@@ -184,6 +184,10 @@ Not sure what a sling will do? Run `gt sling <bead-id> <target> --dry-run` first
 If you sling a bead to an agent that already has work on its hook, the new bead replaces the existing assignment (with `--force`) or the sling fails. Either way, the current task is disrupted. Unless you have a specific reason to target a particular agent, always sling to the rig and let the Witness spawn a fresh polecat.
 :::
 
+:::info Sling Targets Are Resolved at Execution Time
+When you sling to a rig name like `myproject`, Gas Town resolves the target agent dynamically — it finds an idle polecat or spawns a new one at the moment of slinging. This means you do not need to pre-create polecats or predict agent names. The system handles agent lifecycle automatically, so you can focus on describing the work rather than managing workers.
+:::
+
 ## Anti-Patterns
 
 **Don't sling to busy agents.** If an agent is mid-task, slinging more work forces a context switch. Sling to the rig and let a fresh polecat handle it.

@@ -271,6 +271,10 @@ flowchart TD
     end
 ```
 
+:::note Optional Steps Require Agent Judgment
+When using the `optional = true` flag on steps, the agent must decide at runtime whether to execute or skip them. This works well for error-recovery patterns, but avoid making critical quality gates optional — steps like testing and self-review should always be mandatory to prevent untested code from reaching the merge queue.
+:::
+
 ## Built-In Formulas
 
 Gas Town ships with several built-in formulas:

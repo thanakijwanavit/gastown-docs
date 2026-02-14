@@ -155,6 +155,10 @@ Most teams get the best results by starting with Claude Code for all rigs and on
 Before adding a new runtime to your Gas Town setup, always test the basic contract: can the runtime read the hook, make git commits, and call `gt done`? A runtime that passes manual tests but fails any of these three steps under automation will silently drop work, leaving beads stranded on hooks with no progress. Test in a throwaway rig first.
 :::
 
+:::note Each Runtime Gets Its Own System Prompt
+When Gas Town spawns a polecat in a non-default runtime, it injects a runtime-specific system prompt tailored to that tool's capabilities and conventions. This means a Gemini CLI agent receives different bootstrapping instructions than a Claude Code agent, even when working on the same rig. Review the generated prompts with `gt rig config <rig> --show-prompt` to ensure the instructions match your expectations before slinging work.
+:::
+
 ## Practical Tips
 
 **Start with one runtime.** Most teams begin with Claude Code for everything, then specialize as they learn which tasks benefit from different runtimes.

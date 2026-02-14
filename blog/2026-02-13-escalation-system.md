@@ -163,6 +163,10 @@ Overusing P0 severity for non-critical issues causes alert fatigue — the most 
 If you run Gas Town outside business hours, set up quiet hours in `settings/escalation.json` to suppress non-critical notifications. Only P0 critical alerts will break through. Everything else queues until morning, giving you a clean summary instead of a flood of stale notifications. This is essential for maintaining sanity during overnight agent runs.
 :::
 
+:::info Review Stale Escalations Every Morning
+Run `gt escalate stale` as part of your daily routine. Stale escalations are issues that were raised but never acknowledged -- they represent problems that fell through the cracks. Catching them early prevents small issues from compounding into larger outages. A clean stale queue each morning is the best indicator that your escalation routing is working correctly.
+:::
+
 ## Best Practices
 
 1. **Acknowledge promptly.** Even if you can't fix it yet, acknowledging stops re-escalation and tells the system a human is aware.

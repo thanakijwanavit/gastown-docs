@@ -152,6 +152,10 @@ flowchart TD
 Each stage builds skills and trust that the next stage depends on. Jumping from Stage 4 directly to Stage 8 typically results in expensive failures -- agents produce low-quality code because you haven't developed the instinct for writing precise task descriptions, and you lack the monitoring habits to catch problems early. Progress through each stage deliberately, even if it feels slow.
 :::
 
+:::info Stage 7 Is the Real Turning Point
+The jump from Stage 6 to Stage 7 is the most impactful transition in the entire maturity model. Running even two agents in parallel fundamentally changes how you think about development -- you shift from "what should I build next" to "what should I assign next." This mental model shift is harder than any tooling change, and it is what separates casual AI users from orchestrators.
+:::
+
 ## The Honest Truth About Stage 8
 
 Stage 8 is not for everyone. It requires:

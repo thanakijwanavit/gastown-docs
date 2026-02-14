@@ -150,6 +150,10 @@ When you find mail on your hook (instead of a molecule), the mail content IS you
 A common mistake is sending handoff mail but forgetting to hook the work. The next session will find context notes in its inbox but no assignment to apply them to. Always ensure work is hooked via `gt sling` or `gt hook attach` before relying on handoff mail for continuity. The hook tells the agent WHAT to do; the mail tells it HOW.
 :::
 
+:::note Mail Messages Are Beads Under the Hood
+Because every mail message is stored as a bead in the town-level `.beads/` database, mail benefits from all bead features: persistence across restarts, cross-rig routing, full text search with `bd search`, and inclusion in bead statistics. This means your agent communication history is always auditable and never lost, even if the sending or receiving agent has long since terminated.
+:::
+
 ## Mail Routing
 
 Mail uses the two-level beads architecture:

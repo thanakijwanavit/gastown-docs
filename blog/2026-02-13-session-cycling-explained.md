@@ -195,6 +195,10 @@ Uncommitted code changes are the single biggest risk during session cycling. Whe
 The most valuable piece of context for a successor session is not what you accomplished — it can see that from the code and molecule state. What it cannot see is what you tried that failed, which approaches led to dead ends, and which files looked relevant but were not. Including these negative results in your handoff mail prevents the next session from repeating the same mistakes.
 :::
 
+:::info Molecules Make Multi-Session Tasks Seamless
+Without molecules, a cycling agent would need to re-read the entire codebase and rediscover its progress from scratch. Molecules eliminate this overhead by recording exactly which steps are complete, which step is in progress, and what comes next. The new session reads the molecule state in seconds and resumes work immediately, making session boundaries nearly invisible to the overall workflow.
+:::
+
 ## Tips for Effective Cycling
 
 **Commit frequently.** Don't wait until context is full to commit. Small, frequent commits mean less risk of lost work when a session ends unexpectedly.

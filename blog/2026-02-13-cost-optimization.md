@@ -161,6 +161,10 @@ flowchart TD
 A test that fails 20% of the time does not just cost 20% more -- it compounds. Each polecat retry is a full fresh session with all its startup overhead, and retries can cascade when the Refinery rejects merge requests. Fix any test with a flake rate above 5% before adding more polecats to a rig.
 :::
 
+:::note Park Rigs During Off-Hours to Eliminate Idle Costs
+Patrol agents (Witness, Deacon) cycle continuously on active rigs, consuming API tokens even when no productive work is happening. Running `gt rig park <rig>` during nights and weekends immediately stops all patrol cycles for that rig. Unpark in the morning with `gt rig unpark <rig>` and agents resume exactly where they left off.
+:::
+
 ## Common Cost Traps
 
 **The "just one more polecat" trap.** It's tempting to throw more parallelism at a problem. But each polecat has startup costs, and if they touch overlapping files, the Refinery spends more time resolving conflicts — which triggers re-runs.

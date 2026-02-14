@@ -188,6 +188,10 @@ flowchart TD
 A single stalled bead prevents the entire convoy from auto-closing. If you bundle 50 beads into one convoy, one stuck task blocks the completion signal for all 49 others. Decompose large efforts into multiple smaller convoys rather than one mega-convoy.
 :::
 
+:::note Cross-Rig Convoys Require Explicit Artifact Sharing
+Polecats in different rigs cannot access each other's filesystems. If a frontend bead depends on a backend API contract, you must make that dependency explicit through bead dependencies or shared artifacts (such as a published API schema). Without this, cross-rig polecats will race on assumptions and produce incompatible output.
+:::
+
 ## Anti-Patterns to Avoid
 
 **Mega-convoys**: Don't put 50 beads in one convoy. If a single bead stalls, you can't close the convoy. Keep convoys focused (3-10 beads).
