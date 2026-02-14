@@ -312,6 +312,20 @@ The `gt cycle` command only cycles within sessions of the same group type. It wi
 
 :::
 
+```mermaid
+graph TD
+    subgraph "Handoff Flow"
+        A[Session 1 context full]
+        A --> B[gt handoff --message 'progress notes']
+        B --> C[Save hook, checkpoint, context]
+        C --> D[Exit Session 1]
+        D --> E[Session 2 spawns]
+        E --> F[gt prime loads identity]
+        F --> G[gt resume loads handoff]
+        G --> H[Continue work from checkpoint]
+    end
+```
+
 ## Molecules
 
 ```mermaid

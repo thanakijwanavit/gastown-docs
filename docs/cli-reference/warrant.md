@@ -239,6 +239,30 @@ Executed warrants are not automatically cleaned up from `~/gt/warrants/`. The De
 
 :::
 
+```mermaid
+gantt
+    title Warrant Lifecycle Timeline
+    dateFormat mm:ss
+    axisFormat %M:%S
+
+    section Detection
+    Agent unresponsive          :00:00, 03:00
+    Nudge retries (x3)          :03:00, 06:00
+
+    section Warrant
+    Witness files warrant       :06:00, 06:30
+    Saved to ~/gt/warrants/     :06:30, 07:00
+
+    section Execution
+    Boot triage picks up        :07:00, 08:00
+    Terminate tmux session      :08:00, 08:30
+    Mark warrant executed       :08:30, 09:00
+
+    section Recovery
+    Release bead from hook      :09:00, 09:30
+    Reassign to new polecat     :09:30, 10:00
+```
+
 ### Agent Keeps Respawning After Warrant
 
 If an agent is terminated but respawns immediately:

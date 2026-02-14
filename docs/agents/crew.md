@@ -275,6 +275,31 @@ gt done                              # Submit MR to Refinery
 
 This is preferred over pushing directly to `main`, even for crew members.
 
+## Crew vs Polecat Workflow Comparison
+
+The following timeline shows how crew and polecat workflows differ for the same feature.
+
+```mermaid
+gantt
+    title Feature Implementation: Crew vs Polecat
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Crew Workflow
+    Setup workspace            :a1, 00:00, 10min
+    Review requirements        :a2, after a1, 15min
+    Implement incrementally    :a3, after a2, 2h
+    Manual testing            :a4, after a3, 30min
+    Submit via gt done        :a5, after a4, 5min
+
+    section Polecat Workflow
+    Auto-spawn                :b1, 00:00, 2min
+    Load context & preflight  :b2, after b1, 5min
+    Implement                 :b3, after b2, 45min
+    Run tests                 :b4, after b3, 10min
+    Submit & nuke             :b5, after b4, 3min
+```
+
 ## Troubleshooting
 
 ### Crew Workspace Is Out of Date

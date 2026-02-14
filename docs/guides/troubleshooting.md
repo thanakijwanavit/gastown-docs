@@ -463,6 +463,33 @@ graph TD
 
 For the full troubleshooting reference, see [Operations: Troubleshooting](../operations/troubleshooting.md).
 
+The following Gantt chart shows typical troubleshooting timelines for different severity issues:
+
+```mermaid
+gantt
+    title Troubleshooting Response Timeline by Severity
+    dateFormat X
+    axisFormat %M min
+
+    section P0 Critical
+    Detection           :0, 1
+    Diagnosis           :1, 3
+    Fix Applied         :3, 8
+    Verification        :8, 10
+
+    section P1 High
+    Detection           :0, 5
+    Diagnosis           :5, 15
+    Fix Applied         :15, 40
+    Verification        :40, 50
+
+    section P2 Medium
+    Detection           :0, 15
+    Diagnosis           :15, 60
+    Fix Applied         :60, 180
+    Verification        :180, 200
+```
+
 ## Related
 
 - [Operations: Troubleshooting](../operations/troubleshooting.md) -- Comprehensive reference covering all troubleshooting topics

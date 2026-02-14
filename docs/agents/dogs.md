@@ -250,6 +250,27 @@ Dog receives: "Clean orphaned worktrees across all rigs"
 
 The Deacon dispatches dogs for session cleanup when it detects stale tmux sessions or orphaned processes. The dog handles the actual file and process cleanup.
 
+### Dog Task Distribution Flow
+
+Dogs handle work assignment differently from polecats, with multi-task reuse and cross-rig scope.
+
+```mermaid
+flowchart TD
+    Deacon[Deacon] -->|Assign task 1| Dog[Dog: fetch]
+    Dog -->|Complete| Report1[Report to Deacon]
+    Report1 -->|Idle| Deacon
+    Deacon -->|Assign task 2| Dog
+    Dog -->|Complete| Report2[Report to Deacon]
+    Report2 -->|Idle| Pool[Return to idle pool]
+
+    Polecat[Polecat spawned] -->|Single task| Work[Complete work]
+    Work -->|gt done| Nuke[Nuke sandbox]
+
+    style Dog fill:#bfb
+    style Polecat fill:#fbb
+```
+
+
 ## Troubleshooting
 
 ### Dog Is Stuck on a Task

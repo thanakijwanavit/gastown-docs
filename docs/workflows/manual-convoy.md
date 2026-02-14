@@ -310,6 +310,32 @@ gt convoy stranded
 
 :::
 
+The following Gantt chart shows a typical manual convoy timeline with sequential work assignment and monitoring:
+
+```mermaid
+gantt
+    title Manual Convoy Workflow Timeline
+    dateFormat X
+    axisFormat %M min
+
+    section Setup
+    Create beads        :0, 3
+    Create convoy       :3, 4
+
+    section Sling Work
+    Sling bead 1        :4, 5
+    Sling bead 2        :5, 6
+    Sling bead 3        :6, 7
+
+    section Monitoring
+    Monitor progress    :7, 30
+    Handle issues       :15, 18
+
+    section Completion
+    All work merged     :30, 35
+    Convoy auto-closes  :35, 36
+```
+
 ## Related
 
 - [Mayor Workflow](mayor-workflow.md) -- The fully automated alternative where the Mayor handles assignment

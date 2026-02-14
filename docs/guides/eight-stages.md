@@ -387,6 +387,16 @@ flowchart TD
 - [x] You are willing to spend time learning a new operational model
 - [x] You accept the cost implications (~$100/hour at peak)
 
+```mermaid
+pie title Productivity Multiplier by Stage
+    "Stage 1-2: Baseline" : 1
+    "Stage 3-4: 5x" : 5
+    "Stage 5: 25x" : 25
+    "Stage 6: 125x" : 125
+    "Stage 7: 625x" : 625
+    "Stage 8: 3125x" : 3125
+```
+
 ### You Are NOT Ready If:
 
 - [ ] You have not used a CLI coding agent (Stage 5)

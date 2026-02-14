@@ -408,6 +408,21 @@ Progress: <what is done>
 Next: <what remains>"
 ```
 
+## Polecat Resource Profile
+
+A typical polecat's resource usage and activity breakdown during its lifecycle.
+
+```mermaid
+pie title Polecat Session Activity
+    "Implementation" : 50
+    "Testing" : 20
+    "Context loading" : 10
+    "Self-review" : 10
+    "Git operations" : 5
+    "Cleanup & submit" : 5
+```
+
+
 ## Related
 
 - [GUPP](../concepts/gupp.md) -- The propulsion principle that drives polecat execution

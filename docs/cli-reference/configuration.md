@@ -323,6 +323,36 @@ Claude Code hooks run synchronously in the tool execution pipeline. If a PreTool
 
 :::
 
+## Hook Execution Pipeline
+
+Claude Code hooks integrate into the tool execution flow at specific trigger points.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Session as Claude Session
+    participant Hooks as Hook System
+    participant Tool
+
+    User->>Session: Submit prompt
+    Session->>Hooks: SessionStart hook
+    Hooks-->>Session: Continue
+
+    Session->>Hooks: UserPromptSubmit hook
+    Hooks-->>Session: Modified prompt
+
+    Session->>Hooks: PreToolUse hook
+    Hooks-->>Session: Continue
+
+    Session->>Tool: Execute tool
+    Tool-->>Session: Result
+
+    Session->>Hooks: PostToolUse hook
+    Hooks-->>Session: Continue
+
+    Session-->>User: Response
+```
+
 ## Configuration Inheritance
 
 Settings cascade from town level down to individual sessions, with each level able to override its parent.

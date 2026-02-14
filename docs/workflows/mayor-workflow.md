@@ -309,6 +309,37 @@ The Mayor maintains context across the session. You can refer back to earlier wo
 
 :::
 
+The following Gantt chart shows a typical Mayor workflow timeline from initial request to convoy completion:
+
+```mermaid
+gantt
+    title Mayor Workflow (MEOW) Timeline
+    dateFormat X
+    axisFormat %M min
+
+    section Human Input
+    Describe work       :0, 2
+
+    section Mayor Planning
+    Analyze request     :2, 4
+    Create beads        :4, 6
+    Create convoy       :6, 7
+    Present plan        :7, 8
+
+    section Execution
+    Sling to rigs       :8, 10
+    Polecats work       :10, 35
+
+    section Monitoring
+    Mayor tracks        :10, 40
+    Progress updates    :20, 21
+
+    section Completion
+    All beads merged    :35, 40
+    Convoy closes       :40, 41
+    Report to human     :41, 42
+```
+
 ## Related
 
 - [Mayor](../agents/mayor.md) -- Full documentation of the Mayor agent's capabilities and commands

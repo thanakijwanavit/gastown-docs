@@ -203,6 +203,26 @@ When testing custom guards, always verify the exit code behavior with `echo $?` 
 
 :::
 
+```mermaid
+graph LR
+    subgraph "Guard Types"
+        A[pr-workflow<br/>Block PR creation]
+    end
+    subgraph "Planned Handlers"
+        B[audit<br/>Log tool calls]
+        C[inject<br/>Modify inputs]
+        D[check<br/>Validate outputs]
+    end
+    subgraph "Hook Points"
+        E[PreToolUse]
+        F[PostToolUse]
+    end
+    A --> E
+    C --> E
+    B --> F
+    D --> F
+```
+
 ### Writing Custom Guards
 
 Custom guards follow the same exit code convention. Place them in your PATH and reference them in `.claude/settings.local.json`:

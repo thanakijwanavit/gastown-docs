@@ -292,6 +292,15 @@ When using `gt session restart` to recover from a suspected hang, first capture 
 
 :::
 
+```mermaid
+pie title Session Management Operations
+    "gt session at (attach)" : 30
+    "gt session capture (read output)" : 25
+    "gt session restart (recover)" : 20
+    "gt session check (health)" : 15
+    "gt session start (spawn)" : 10
+```
+
 ## gt session capture
 
 Capture recent output from a polecat session.

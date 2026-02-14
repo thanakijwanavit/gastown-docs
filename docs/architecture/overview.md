@@ -124,6 +124,32 @@ Gas Town's five-layer architecture depends on the `~/gt/` directory structure. M
 
 :::
 
+## Layer Dependency Map
+
+The five architectural layers and their critical dependencies.
+
+```mermaid
+graph TD
+    Town[Town Layer<br/>~/gt/] --> Config[config.yaml<br/>town.json]
+    Town --> Agents[Mayor<br/>Deacon<br/>Daemon]
+
+    Rigs[Rig Layer<br/>~/gt/rig/] --> RigConfig[metadata.json<br/>.beads/]
+    Rigs --> RigAgents[Witness<br/>Refinery<br/>Polecats]
+
+    Comm[Communication Layer] --> Mail[Mailboxes<br/>JSONL]
+    Comm --> Hooks[Hooks<br/>Git worktrees]
+    Comm --> Beads[Beads<br/>SQLite + JSONL]
+
+    Town --> Rigs
+    Rigs --> Comm
+    Agents --> Comm
+    RigAgents --> Comm
+
+    style Town fill:#bbf
+    style Rigs fill:#bfb
+    style Comm fill:#ffb
+```
+
 ## End-to-End Work Flow
 
 The following sequence shows how a single unit of work flows through all five architectural layers from human instruction to merged code.

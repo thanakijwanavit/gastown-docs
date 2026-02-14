@@ -314,6 +314,35 @@ gt rig status <rig>          # Check rig health
 gt rig start <rig>           # Start rig agents if needed
 ```
 
+## Mayor Decision Tree
+
+The Mayor follows a structured decision tree when receiving work requests.
+
+```mermaid
+graph TD
+    Start[Receive work request] --> Parse[Parse & analyze]
+    Parse --> Type{Work type?}
+    Type -->|Single task| Single[Create 1 bead]
+    Type -->|Batch work| Multi[Create multiple beads]
+    Type -->|Cross-rig| Cross[Create beads per rig]
+
+    Single --> Sling1[gt sling to appropriate rig]
+    Multi --> Convoy[Bundle into convoy]
+    Cross --> Convoy
+
+    Convoy --> Distribute[Distribute across rigs]
+    Distribute --> Monitor[Monitor progress]
+    Sling1 --> Monitor
+
+    Monitor --> Complete{All done?}
+    Complete -->|Yes| Report[Report to overseer]
+    Complete -->|No| Check{Escalation?}
+    Check -->|Yes| Handle[Handle escalation]
+    Check -->|No| Monitor
+    Handle --> Monitor
+```
+
+
 ## Related
 
 - [MEOW Stack](../concepts/meow-stack.md) -- The Mayor's orchestration workflow

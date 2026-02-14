@@ -356,6 +356,26 @@ If a merge conflict occurs during rebase, the Refinery can spawn a fresh polecat
 
 
 :::
+
+```mermaid
+gantt
+    title Typical MR Processing Timeline
+    dateFormat mm:ss
+    axisFormat %M:%S
+
+    section Queue
+    Submitted to queue           :00:00, 00:30
+
+    section Refinery
+    Claimed by Refinery          :00:30, 01:00
+    Rebase onto main             :01:00, 02:00
+    Run integration checks       :02:00, 05:00
+    Fast-forward merge           :05:00, 05:30
+
+    section Notification
+    Update bead status           :05:30, 06:00
+    Notify polecat               :06:00, 06:10
+```
 ## Related
 
 - [Refinery](../agents/refinery.md) -- The agent that processes the merge queue

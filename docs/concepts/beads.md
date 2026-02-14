@@ -342,6 +342,23 @@ Work is **not complete** until `git push` succeeds. Agents must always push thei
 
 :::
 
+```mermaid
+timeline
+    title Bead Lifecycle Through Agent Workflow
+    Creation : bd create --title "Fix bug"
+             : Bead status: pending
+    Assignment : gt sling bead-id rig
+               : Bead status: hooked
+               : Polecat spawned
+    Execution : Agent reads hook via gt prime
+              : Bead status: in_progress
+              : Work committed and pushed
+    Completion : gt done submits MR
+               : Refinery merges to main
+               : Bead status: done
+               : Bead closed automatically
+```
+
 ## Related Concepts
 
 - **[Hooks](hooks.md)** -- Hooks attach beads to agents, creating the `hooked` status and enabling crash-safe work assignment

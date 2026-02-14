@@ -482,7 +482,7 @@ flowchart TD
     CW -->|Polecat| HANDOFF["gt handoff"]
     CW -->|Persistent agent| PRIME["gt prime / restart --fresh"]
     CONN --> PEEK["gt peek + gt nudge"]
-    PEEK --> RESTART["gt restart agent"]
+    PEEK --> RESTART["gt rig reboot"]
     BOOT --> DEPS["gt doctor --check dependencies"]
     DEPS --> TMUX["Kill stale tmux sessions"]
 ```
@@ -890,6 +890,19 @@ Before running `gt shutdown --all`, check if any polecats have uncommitted work:
 
 
 :::
+
+The following pie chart shows the distribution of common troubleshooting categories in a typical Gas Town deployment:
+
+```mermaid
+pie title Common Troubleshooting Issues by Category
+    "Agent stuck/stale" : 30
+    "Merge conflicts" : 20
+    "Context window filling" : 15
+    "Convoy not progressing" : 12
+    "Orphaned processes" : 10
+    "Beads database issues" : 8
+    "Git worktree problems" : 5
+```
 
 ## Related
 

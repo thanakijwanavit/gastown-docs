@@ -449,6 +449,17 @@ Increment the `version` field when making breaking changes to a formula. Existin
 
 :::
 
+The following pie chart shows the typical usage distribution of different formula types in a Gas Town deployment:
+
+```mermaid
+pie title Formula Usage by Type (Typical Deployment)
+    "shiny (standard workflow)" : 45
+    "code-review (convoy)" : 25
+    "shiny-secure (workflow)" : 15
+    "design exploration (convoy)" : 8
+    "custom formulas" : 7
+```
+
 ## Related
 
 - [Molecules](../concepts/molecules.md) -- How molecules track multi-step workflows and provide crash recovery

@@ -474,6 +474,30 @@ The following articles by Steve Yegge provide the foundational thinking behind G
 - [The 8 Stages of AI Coding](eight-stages.md) -- Maturity model for AI-assisted development
 - [GitHub Repository](https://github.com/steveyegge/gastown) -- Source code and issue tracker
 
+The following diagram shows how the six survival formula levers interact to determine a tool's fitness in the AI era:
+
+```mermaid
+mindmap
+  root((Survival Formula))
+    Numerator
+      Savings
+        Compressed Insights
+        Cheaper Substrate
+      Usage
+        Broad Applicability
+        Near-Universal Niche
+      H Factor
+        Human Preference
+        Domain Values Craftsmanship
+    Denominator
+      Awareness Cost
+        Discovery
+        Learning
+      Friction Cost
+        API Complexity
+        Error Handling
+```
+
 ## Related
 
 - [The 8 Stages of AI Coding](eight-stages.md) -- The maturity model that defines Gas Town's target audience

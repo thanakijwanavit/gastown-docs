@@ -498,6 +498,34 @@ You can override escalation settings at the rig level by placing an `escalation.
 
 6. **Let agents escalate.** Do not suppress agent escalations. If an agent is escalating too frequently, the root cause is usually a systemic issue (flaky tests, misconfigured rig, etc.) rather than the agent being too aggressive.
 
+The following Gantt chart shows the auto-escalation timeline for different severity levels:
+
+```mermaid
+gantt
+    title Auto-Escalation Timeline by Severity
+    dateFormat X
+    axisFormat %H hrs
+
+    section P0 Critical
+    Initial Alert       :0, 1
+    Re-escalation 1     :1, 2
+    Re-escalation 2     :2, 3
+    Re-escalation 3     :3, 4
+    Stale               :4, 5
+
+    section P1 High
+    Initial Alert       :0, 1
+    Re-escalation 1     :1, 2
+    Re-escalation 2     :2, 3
+    Stale               :3, 4
+
+    section P2 Medium
+    Initial Alert       :0, 4
+    Re-escalation 1     :4, 8
+    Re-escalation 2     :8, 12
+    Stale               :12, 13
+```
+
 ## Related
 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that defines escalation paths between agents

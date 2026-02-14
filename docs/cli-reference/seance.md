@@ -196,6 +196,26 @@ When debugging a failed polecat session, combine `gt seance --talk <session-id>`
 
 :::
 
+```mermaid
+graph LR
+    subgraph "Session Discovery"
+        A[gt seance --rig myproject]
+        A --> B[Filter by --role or --recent]
+        B --> C[List of session IDs]
+    end
+    subgraph "Session Query"
+        C --> D[gt seance --talk sess-id]
+        D --> E{Query Mode}
+        E -->|One-shot| F[gt seance --talk id -p 'question?']
+        E -->|Interactive| G[Open conversation]
+    end
+    subgraph "Context Recovery"
+        F --> H[Answer returned]
+        G --> H
+        H --> I[Resume work with context]
+    end
+```
+
 ### Session Events
 
 Sessions are tracked in `~/gt/.events.jsonl`. Each Gas Town session emits a `session_start` event containing:

@@ -64,6 +64,20 @@ When you add a rig with `gt rig add`, the following directory structure is creat
 └── plugins/             # Rig-level plugins
 ```
 
+```mermaid
+graph TD
+    RIG["Rig: myproject"]
+    RIG --> BEADS[".beads/<br/>Issue tracking"]
+    RIG --> REF["refinery/rig/<br/>Merge queue"]
+    RIG --> CREW["crew/<br/>Human workspaces"]
+    RIG --> POL["polecats/<br/>Worker sandboxes"]
+    RIG --> WIT["witness/<br/>Health monitor"]
+    CREW --> C1["dave/<br/>Persistent clone"]
+    CREW --> C2["emma/<br/>Persistent clone"]
+    POL --> P1["toast/<br/>Ephemeral worktree"]
+    POL --> P2["alpha/<br/>Ephemeral worktree"]
+```
+
 ### Key Directories
 
 | Directory | Purpose | Lifecycle |

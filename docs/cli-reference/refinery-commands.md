@@ -394,6 +394,14 @@ All subcommands that accept `[rig]` infer the rig from the current directory whe
 
 :::
 
+```mermaid
+pie title MR Processing Outcomes
+    "Successfully merged" : 80
+    "Rejected due to test failures" : 10
+    "Released due to conflicts" : 7
+    "Expired claim, re-queued" : 3
+```
+
 ## Related
 
 - [Refinery](../agents/refinery.md) -- How the Refinery agent processes merge requests

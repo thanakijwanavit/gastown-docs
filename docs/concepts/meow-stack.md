@@ -215,6 +215,32 @@ flowchart LR
     CV --> CLOSE["Auto-close<br/>all beads done"]
 ```
 
+```mermaid
+graph TD
+    subgraph "Layer 5: Formulas"
+        F1["mol-polecat-work.toml"]
+        F2["shiny.toml"]
+        F3["code-review.toml"]
+    end
+    subgraph "Layer 3: Molecules"
+        M1["Molecule instance 1"]
+        M2["Molecule instance 2"]
+    end
+    subgraph "Layer 2: Convoys"
+        CV["Convoy: auth-system"]
+    end
+    subgraph "Layer 1: Beads"
+        B1["gt-a1b2c"]
+        B2["gt-d3e4f"]
+    end
+    F1 -->|pour| M1
+    F2 -->|pour| M2
+    M1 --> B1
+    M2 --> B2
+    CV --> B1
+    CV --> B2
+```
+
 ## Cross-Cutting Concerns
 
 Two concepts cut across all MEOW layers rather than living in a single layer:

@@ -183,6 +183,25 @@ gt ready
 ```
 
 ```mermaid
+mindmap
+  root((Monitoring Commands))
+    Real-time
+      gt feed
+      gt polecat list
+      gt activity
+    Status checks
+      gt rig list
+      gt convoy list
+      gt status
+    Costs
+      gt costs --today
+      gt costs --by-role
+    Health
+      gt doctor
+      gt doctor --fix
+```
+
+```mermaid
 stateDiagram-v2
     [*] --> Install: gt install ~/gt
     Install --> AddRig: gt rig add

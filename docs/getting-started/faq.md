@@ -130,6 +130,17 @@ sequenceDiagram
 
 The Mayor decomposes natural language instructions into discrete, implementable beads, bundles them into convoys, assigns work to rigs, and monitors progress. It does **not** monitor health (that's the Deacon's job). See [Mayor](../agents/mayor.md).
 
+```mermaid
+stateDiagram-v2
+    [*] --> ReceiveRequest: Human describes work
+    ReceiveRequest --> DecomposeBeads: Create individual beads
+    DecomposeBeads --> BundleConvoy: Group into convoy
+    BundleConvoy --> SlingsWork: Assign to rigs
+    SlingsWork --> MonitorProgress: Track completion
+    MonitorProgress --> NotifyComplete: All beads done
+    NotifyComplete --> [*]
+```
+
 ---
 
 ## Work Management

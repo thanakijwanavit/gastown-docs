@@ -289,6 +289,25 @@ When running `gt polecat nuke --all` on a rig with active work, always check `gt
 
 :::
 
+```mermaid
+mindmap
+  root((Polecat<br/>Management))
+    Lifecycle
+      gt polecat list
+      gt polecat status
+      gt polecat nuke
+    Health
+      gt polecat stale
+      gt polecat check-recovery
+      gt polecat git-state
+    Cleanup
+      gt polecat gc
+      gt polecat remove
+    Identity
+      gt polecat identity add
+      gt polecat identity show
+```
+
 ## gt polecat gc
 
 Garbage collect stale polecat branches in a rig.

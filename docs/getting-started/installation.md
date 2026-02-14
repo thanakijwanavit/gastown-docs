@@ -223,6 +223,16 @@ gt config default-agent claude
 gt config agent set gemini "gemini"
 ```
 
+```mermaid
+pie title Supported AI Runtimes
+    "Claude Code (recommended)" : 40
+    "Gemini CLI" : 15
+    "Codex" : 15
+    "Cursor" : 10
+    "Auggie" : 10
+    "Amp" : 10
+```
+
 ## Related
 
 - [Quick Start](quickstart.md) -- Set up your workspace and give the Mayor your first instructions

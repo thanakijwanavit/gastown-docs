@@ -255,6 +255,14 @@ gt session capture <target> --tail 20
 
 :::
 
+```mermaid
+pie title Nudge Delivery Success Patterns
+    "DND enabled, --force used" : 15
+    "DND disabled, immediate delivery" : 70
+    "Target in long tool call, queued" : 10
+    "Session not found, failed" : 5
+```
+
 ## Related
 
 - [Communication](./communication.md) -- Full communication command reference (mail, escalations, broadcasts)

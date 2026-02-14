@@ -741,6 +741,30 @@ Dogs persist between tasks and can be reused for multiple assignments, unlike po
 
 :::
 
+## Agent Start Order Dependencies
+
+When starting agents from scratch, follow this dependency order to avoid coordination issues.
+
+```mermaid
+graph TD
+    Start[System Start] --> Daemon[1. Start Daemon]
+    Daemon --> Deacon[2. Start Deacon]
+    Daemon --> Mayor[2. Start Mayor]
+
+    Deacon --> Witness[3. Start Witnesses<br/>per rig]
+    Witness --> Refinery[4. Start Refineries<br/>per rig]
+
+    Refinery --> Work[5. Sling work<br/>spawns polecats]
+
+    style Start fill:#eee
+    style Daemon fill:#faa
+    style Deacon fill:#ffa
+    style Mayor fill:#ffa
+    style Witness fill:#afa
+    style Refinery fill:#afa
+    style Work fill:#aaf
+```
+
 ---
 
 ## Crew

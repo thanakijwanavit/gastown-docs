@@ -312,6 +312,33 @@ If polecat directories are not being cleaned up after merge, the `MERGED` mail s
 2. Is the Witness receiving and processing the mail?
 3. Check `gt polecat list` for polecats stuck in `done` state.
 
+## Merge Queue Processing Timeline
+
+A typical merge request's journey through the Refinery queue.
+
+```mermaid
+gantt
+    title MR Processing Timeline
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Queue
+    Submitted by polecat      :a1, 00:00, 1min
+    Wait in queue             :a2, after a1, 3min
+
+    section Refinery
+    Dequeue MR                :b1, after a2, 1min
+    Rebase onto main          :b2, after b1, 2min
+    Run validation tests      :b3, after b2, 5min
+    Merge to main             :b4, after b3, 1min
+    Send MERGED signal        :b5, after b4, 1min
+
+    section Cleanup
+    Witness receives signal   :c1, after b5, 1min
+    Nuke polecat sandbox      :c2, after c1, 2min
+```
+
+
 ## Related
 
 - [Polecats](polecats.md) -- Submit MRs that the Refinery processes

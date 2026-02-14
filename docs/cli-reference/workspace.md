@@ -677,6 +677,21 @@ gt shutdown --all --force
 
 :::
 
+```mermaid
+graph TD
+    subgraph "Workspace States"
+        A[Uninstalled] -->|gt install ~/gt --git| B[Installed]
+        B -->|gt enable| C[Enabled]
+        C -->|gt start| D[Running]
+        D -->|gt down| E[Paused]
+        E -->|gt start| D
+        D -->|gt shutdown| F[Stopped]
+        F -->|gt start| D
+        C -->|gt disable| B
+        B -->|gt uninstall| A
+    end
+```
+
 ---
 
 ## `gt daemon`

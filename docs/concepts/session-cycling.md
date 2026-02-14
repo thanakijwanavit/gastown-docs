@@ -239,6 +239,15 @@ The next session has zero memory of the current one. Write handoff notes as if b
 
 4. **Cycle proactively.** Don't wait until the context window is completely full. If you notice yourself re-reading the same files or losing track, it's time.
 
+```mermaid
+pie title Why Sessions Cycle
+    "Context full (70%+)" : 50
+    "Logical breakpoint" : 20
+    "Human requested" : 15
+    "Fresh perspective needed" : 10
+    "Agent confusion" : 5
+```
+
 ---
 
 ## Related Concepts

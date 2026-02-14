@@ -657,6 +657,32 @@ stateDiagram-v2
 
 :::
 
+The following timeline shows the execution flow when a gate plugin is invoked during the merge pipeline:
+
+```mermaid
+gantt
+    title Gate Plugin Execution in Merge Pipeline
+    dateFormat X
+    axisFormat %S sec
+
+    section MR Submitted
+    Refinery Claims MR  :0, 1
+
+    section Pre-Merge Gates
+    Plugin 1: Tests     :1, 8
+    Plugin 2: Lint      :8, 10
+    Plugin 3: Coverage  :10, 15
+
+    section Decision
+    All Gates Pass      :15, 16
+    Rebase onto main    :16, 18
+    Final Tests         :18, 22
+
+    section Merge
+    Merge to main       :22, 23
+    Post-Merge Actions  :23, 25
+```
+
 ## Related
 
 - [Gates](../concepts/gates.md) -- Async coordination primitives that plugins use to control workflow execution

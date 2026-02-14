@@ -253,6 +253,27 @@ When a polecat escalates with `gt done --escalate`, the bead remains hooked to t
 
 :::
 
+```mermaid
+graph TD
+    subgraph "Work Discovery"
+        A[gt ready] --> B[Filter by --priority]
+        B --> C[Filter by --type]
+        C --> D[List of available beads]
+    end
+    subgraph "Work Assignment"
+        D --> E[gt sling bead target]
+        E --> F[Bead status: hooked]
+        F --> G[Polecat spawned]
+    end
+    subgraph "Work Completion"
+        G --> H[gt done]
+        H --> I{Exit state}
+        I -->|COMPLETED| J[MR submitted]
+        I -->|ESCALATED| K[Needs human input]
+        I -->|DEFERRED| L[Paused for later]
+    end
+```
+
 ### `gt close`
 
 Close a bead without going through the done workflow.

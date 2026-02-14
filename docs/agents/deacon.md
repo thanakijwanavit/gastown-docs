@@ -299,6 +299,21 @@ gt daemon status             # Boot runs on daemon ticks
 gt polecat list              # See zombie states
 ```
 
+## Deacon Resource Allocation
+
+The Deacon distributes patrol cycle processing time across different monitoring responsibilities.
+
+```mermaid
+pie title Deacon Patrol Time Distribution
+    "Witness health checks" : 35
+    "Gate evaluation" : 20
+    "Dog pool maintenance" : 15
+    "Orphan cleanup" : 15
+    "Mail processing" : 10
+    "Zombie detection" : 5
+```
+
+
 ## Related
 
 - [Boot](boot.md) -- The Daemon's watchdog that wakes the Deacon

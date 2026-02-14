@@ -208,6 +208,15 @@ Create the convoy before slinging work, not after. If you sling beads first and 
 | Merge conflict | Two polecats touched same files | Refinery handles this — it spawns a resolution polecat |
 | Convoy stuck at 2/3 | One polecat stalled | Check `gt polecat list` and `gt feed` for errors |
 
+```mermaid
+pie title First Convoy Common Issues
+    "Polecat not starting (slots full)" : 30
+    "Vague bead descriptions" : 25
+    "Merge conflicts" : 20
+    "Stalled polecats" : 15
+    "Convoy created after slinging" : 10
+```
+
 :::warning
 Write detailed bead descriptions. Vague descriptions like "fix the bug" force polecats to waste context figuring out what to do. Include the specific behavior, where it occurs, and what the expected outcome should be.
 :::

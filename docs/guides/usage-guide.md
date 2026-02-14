@@ -683,6 +683,25 @@ Your Crew are the bridge between your intent and the fleet's execution. Invest t
 | `gt crew at <name>` | Attach to a Crew workspace |
 | `gt session at <name>` | Attach to a polecat session |
 
+The following state diagram shows the typical daily usage cycle as you move between different Gas Town interfaces and modes:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Morning: gt start --all
+    Morning --> MayorWork: gt may at
+    Morning --> CrewWork: gt crew at
+    MayorWork --> Delegate: Create convoys, sling work
+    CrewWork --> Design: Write specs, review output
+    Delegate --> Monitor: gt feed / gt trail
+    Design --> Monitor
+    Monitor --> Intervene: Issues detected
+    Monitor --> Evening: All tasks progressing
+    Intervene --> MayorWork: Nudge or redirect
+    Intervene --> CrewWork: Manual intervention
+    Evening --> Land: Landing checklist
+    Land --> [*]: gt down or continue overnight
+```
+
 ## Related
 
 - [Quick Start](../getting-started/quickstart.md) -- Initial setup and first steps with Gas Town

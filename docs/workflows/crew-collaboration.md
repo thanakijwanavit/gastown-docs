@@ -270,6 +270,21 @@ The highest-leverage crew activity is creating clear, detailed beads. A 10-minut
 
 ---
 
+The following state diagram shows the typical crew member workflow cycle as they rotate between design, delegation, and review:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Design: Start session
+    Design --> CreateBeads: bd create detailed specs
+    CreateBeads --> Delegate: gt sling to polecats
+    Delegate --> NextTask: Move to next design task
+    NextTask --> Pull: git pull (review merged work)
+    Pull --> QualityCheck: Review polecat output
+    QualityCheck --> Design: Output is good
+    QualityCheck --> FollowUp: Issues found
+    FollowUp --> CreateBeads: bd create follow-up bead
+```
+
 ## Related
 
 - **[Crew Workspaces](../agents/crew.md)** -- Full documentation of crew workspace setup and capabilities

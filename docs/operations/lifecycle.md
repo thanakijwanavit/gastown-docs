@@ -609,6 +609,29 @@ stateDiagram-v2
 | `gt rig park <name>` | Single rig | Stop | Unchanged | Parked |
 | `gt rig dock <name>` | Single rig | Stop | **Removed** | Archived |
 
+The following Gantt chart shows the typical boot sequence timeline when starting the full Gas Town fleet:
+
+```mermaid
+gantt
+    title Full Fleet Startup Timeline (gt start --all)
+    dateFormat X
+    axisFormat %S sec
+
+    section Core
+    Daemon Start        :0, 2
+    Deacon Start        :2, 5
+    Mayor Start         :2, 5
+
+    section Per-Rig
+    Witness Start       :5, 8
+    Refinery Start      :8, 12
+    Polecats Ready      :12, 15
+
+    section Verification
+    Health Check        :15, 17
+    All Systems Ready   :17, 18
+```
+
 ## Related
 
 - [Agent Hierarchy](../architecture/agent-hierarchy.md) -- The supervision tree that determines startup order and monitoring

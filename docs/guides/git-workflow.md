@@ -343,6 +343,22 @@ stateDiagram-v2
     Pushed --> [*]
 ```
 
+```mermaid
+sequenceDiagram
+    participant A1 as Agent 1
+    participant A2 as Agent 2
+    participant A3 as Agent 3
+    participant Main as main branch
+
+    A1->>Main: Commit 1 (auth.go)
+    A2->>A2: Working on auth.go (not pushed)
+    A3->>Main: Commit 2 (config.go)
+    A2->>A2: git pull --rebase
+    Note over A2: CONFLICT: auth.go
+    A2->>A2: Resolve conflict
+    A2->>Main: Commit 3 (auth.go merged)
+```
+
 ### Strategy 1: File-Level Coordination
 
 Assign related work to the same agent:

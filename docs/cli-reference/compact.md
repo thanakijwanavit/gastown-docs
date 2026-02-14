@@ -190,6 +190,30 @@ pie title Typical Compaction Outcomes
     "Promoted (open + expired)" : 10
 ```
 
+## Compaction Decision Logic
+
+The full decision tree applied during compaction processing.
+
+```mermaid
+flowchart TD
+    Start[Scan wisp] --> Keep{Has keep<br/>label?}
+    Keep -->|Yes| Promote[Promote to bead]
+    Keep -->|No| Comments{Has comments<br/>or refs?}
+
+    Comments -->|Yes| Promote
+    Comments -->|No| TTL{Past TTL?}
+
+    TTL -->|No| Skip[Skip - within TTL]
+    TTL -->|Yes| Status{Status?}
+
+    Status -->|Open| Promote
+    Status -->|Closed| Delete[Delete wisp]
+
+    Promote --> Report1[Log: promoted]
+    Delete --> Report2[Log: deleted]
+    Skip --> Report3[Log: skipped]
+```
+
 ## Understanding the Output
 
 A typical compaction run produces output like:

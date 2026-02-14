@@ -293,6 +293,19 @@ In the recommended [Mayor Workflow](../workflows/mayor-workflow.md), convoys are
 6. Convoy auto-closes when everything lands
 7. Mayor notifies you of completion
 
+```mermaid
+gantt
+    title Convoy Timeline Example
+    dateFormat HH:mm
+    axisFormat %H:%M
+    section Convoy hq-cv-001
+    Create convoy        :done, c1, 10:00, 1m
+    Bead 1 (in_progress) :active, b1, 10:05, 25m
+    Bead 2 (in_progress) :active, b2, 10:10, 30m
+    Bead 3 (pending)     :b3, after b1, 15m
+    Auto-close           :milestone, after b3, 0m
+```
+
 You can also create convoys manually for finer control -- see the [Manual Convoy Workflow](../workflows/manual-convoy.md).
 
 :::tip[Monitoring Progress]

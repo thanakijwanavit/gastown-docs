@@ -235,6 +235,28 @@ Never use `git gc --aggressive --prune=now` manually on a rig's repository witho
 
 :::
 
+```mermaid
+graph TD
+    subgraph "Orphan Types"
+        A[Dangling Commits<br/>Local only]
+        B[Remote Branches<br/>Never merged]
+        C[Zombie Processes<br/>PPID=1]
+    end
+    subgraph "Detection"
+        D[git fsck --unreachable]
+        E[gt orphans procs]
+    end
+    subgraph "Recovery"
+        F[git show + cherry-pick]
+        G[gt orphans kill]
+    end
+    A --> D
+    B --> D
+    C --> E
+    D --> F
+    E --> G
+```
+
 ## Related
 
 - [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)

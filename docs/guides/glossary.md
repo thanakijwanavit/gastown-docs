@@ -243,6 +243,20 @@ bd <command> [options]
 | `gt mail inbox` | Check your inbox |
 | `gt done` | Signal work ready for merge queue |
 
+The following state machine shows how a bead transitions through different status values as it moves through the Gas Town workflow:
+
+```mermaid
+stateDiagram-v2
+    [*] --> pending: bd create
+    pending --> hooked: gt sling
+    hooked --> in_progress: Agent claims
+    in_progress --> done: Work complete
+    in_progress --> pending: gt release (crash recovery)
+    done --> merged: Refinery merges
+    merged --> closed: Convoy completes
+    closed --> [*]
+```
+
 ## Related
 
 - [Architecture Guide](architecture.md) -- Narrative walkthrough of how all the components work together

@@ -211,6 +211,21 @@ When batch-slinging multiple beads to a rig, each bead gets its own polecat with
 
 :::
 
+```mermaid
+timeline
+    title Sling Operation Timeline
+    Target Resolution : Parse target argument
+                      : Determine rig vs agent vs formula
+    Hook Attachment : Attach bead to target's hook
+                    : Update bead status to hooked
+    Polecat Spawn : Create git worktree
+                  : Launch tmux session
+                  : Run SessionStart hook
+    Work Begins : gt prime loads context
+                : Agent reads hook
+                : GUPP cycle starts
+```
+
 ## Comparison with Related Commands
 
 | Command | Behavior |

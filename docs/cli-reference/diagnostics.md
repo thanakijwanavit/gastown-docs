@@ -348,6 +348,21 @@ Run `gt doctor` after installation, after upgrading Gas Town, or whenever someth
 
 :::
 
+```mermaid
+graph LR
+    A[Issue Detected] --> B{Diagnostic Strategy}
+    B -->|Live Activity| FEED[gt feed --rig myproject]
+    B -->|Historical| ACT[gt activity --since 1h]
+    B -->|Performance| COST[gt costs --group-by rig]
+    B -->|Health Check| DOC[gt doctor --verbose]
+    B -->|Specific Agent| TRAIL[gt trail agent-id]
+    FEED --> RESOLVE[Resolve Issue]
+    ACT --> RESOLVE
+    COST --> RESOLVE
+    DOC --> RESOLVE
+    TRAIL --> RESOLVE
+```
+
 ---
 
 ### `gt dashboard`

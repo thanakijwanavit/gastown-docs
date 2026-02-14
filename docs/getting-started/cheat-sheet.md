@@ -188,6 +188,33 @@ graph TD
     POLECAT -->|Zombie| SHUTDOWN["gt shutdown --polecats-only"]
 ```
 
+```mermaid
+mindmap
+  root((Gas Town Commands))
+    gt
+      start/stop
+        gt start
+        gt down
+        gt shutdown
+      monitoring
+        gt feed
+        gt doctor
+        gt costs
+      rigs
+        gt rig add
+        gt rig list
+        gt rig start
+      work
+        gt sling
+        gt convoy create
+    bd
+      beads
+        bd create
+        bd list
+        bd ready
+        bd close
+```
+
 ## Emergency Commands
 
 | Command | What it does |

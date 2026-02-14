@@ -233,6 +233,41 @@ Gas Town favors agents discovering what needs to happen over centralized trackin
 
 This makes the system resilient to state corruption: even if tracking data is lost, agents can recover by rediscovering the current state.
 
+## Principle Application Flow
+
+How the twelve design principles apply across the agent hierarchy.
+
+```mermaid
+flowchart LR
+    subgraph "Foundation Principles"
+        P1[Propulsion<br/>Hook-driven]
+        P2[Supervision<br/>Let-it-crash]
+        P3[Git Truth<br/>Persistence]
+    end
+
+    subgraph "Agent Principles"
+        P4[Self-cleaning<br/>Workers]
+        P5[Role<br/>Separation]
+        P6[Discovery<br/>Over Tracking]
+    end
+
+    subgraph "System Principles"
+        P7[Dumb Scheduler<br/>Smart Agents]
+        P8[Communication<br/>Over State]
+        P9[Human<br/>In Loop]
+    end
+
+    P1 --> P4
+    P2 --> P5
+    P3 --> P6
+    P4 --> P7
+    P5 --> P7
+    P6 --> P8
+    P7 --> P9
+    P8 --> P9
+```
+
+
 ## Related
 
 - [Agent Hierarchy](agent-hierarchy.md) -- How the Erlang-inspired supervision tree implements these principles

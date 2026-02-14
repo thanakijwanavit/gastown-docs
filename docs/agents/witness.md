@@ -326,6 +326,26 @@ Long-running Witness sessions accumulate context. The Witness handles this autom
 gt nudge <rig>/witness "context check"
 ```
 
+## Witness Activity Timeline
+
+A typical 5-minute patrol cycle broken down by activity.
+
+```mermaid
+gantt
+    title Witness Patrol Cycle (5 minutes)
+    dateFormat mm:ss
+    axisFormat %M:%S
+
+    section Patrol
+    List all polecats         :a1, 00:00, 30s
+    Check each polecat        :a2, after a1, 2m
+    Process mail inbox        :a3, after a2, 1m
+    Check Refinery health     :a4, after a3, 30s
+    Send patrol report        :a5, after a4, 30s
+    Idle until next cycle     :a6, after a5, 30s
+```
+
+
 ## Related
 
 - [Deacon](deacon.md) -- Supervises the Witness and handles escalations from it

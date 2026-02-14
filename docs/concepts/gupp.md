@@ -261,6 +261,31 @@ These principles are not just abstract ideals -- they are enforced by specific G
 | [Gates](gates.md) | Pause without losing progress | Gate resolution may trigger different downstream execution |
 | [Rigs](rigs.md) | Git worktrees provide durable filesystem state | Each polecat worktree is independent |
 
+```mermaid
+mindmap
+  root((GUPP & NDI))
+    GUPP
+      Forward-only
+        Never roll back
+        Crashes safe
+      State progression
+        open → in_progress → done
+        Checkpoints preserve progress
+      Recovery
+        Hooks persist
+        Molecules resume
+    NDI
+      Different implementations
+        Same outcome
+        Tests pass
+      Retry variation
+        Agent 1: Joi
+        Agent 2: Zod
+      Equivalence
+        Not bit equality
+        State equivalence
+```
+
 ## Related Concepts
 
 - **[Hooks](hooks.md)** -- The primary mechanism that makes GUPP possible: hooks persist across all session boundaries

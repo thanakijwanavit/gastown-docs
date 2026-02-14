@@ -326,6 +326,36 @@ graph TD
 | Requires Tmux | No | Yes |
 | Resource usage | Low | Higher |
 
+The following Gantt chart shows the typical minimal mode workflow timeline with manual agent spawning:
+
+```mermaid
+gantt
+    title Minimal Mode Workflow Timeline (Manual Spawning)
+    dateFormat X
+    axisFormat %M min
+
+    section Setup
+    bd create (issues)  :0, 5
+    gt convoy create    :5, 6
+
+    section First Bead
+    gt sling bead 1     :6, 7
+    Start claude        :7, 9
+    Agent works         :9, 25
+    gt done             :25, 27
+    Manual merge        :27, 30
+
+    section Second Bead
+    gt sling bead 2     :30, 31
+    Start claude        :31, 33
+    Agent works         :33, 50
+    gt done             :50, 52
+    Manual merge        :52, 55
+
+    section Completion
+    Convoy completes    :55, 56
+```
+
 ## Related
 
 - [Mayor Workflow](mayor-workflow.md) -- The fully automated workflow that minimal mode scales up to

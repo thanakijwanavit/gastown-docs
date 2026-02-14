@@ -551,6 +551,25 @@ pie title Typical Token Cost Distribution by Agent Type
 
 8. **Track trends, not just snapshots.** A single stale polecat is normal. Three stale polecats in the same rig within an hour suggests a systemic problem.
 
+The following state diagram shows how monitoring tools interact in a typical problem detection and resolution flow:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Monitoring: gt feed active
+    Monitoring --> WarningDetected: Anomaly in feed
+    Monitoring --> Healthy: All normal
+    Healthy --> Monitoring: Continue monitoring
+    WarningDetected --> Investigate: gt doctor / gt trail
+    Investigate --> Diagnosed: Root cause found
+    Diagnosed --> Escalate: gt escalate
+    Diagnosed --> Fix: gt rig reboot / gt nudge
+    Fix --> Verify: gt peek / gt feed
+    Verify --> Monitoring: Issue resolved
+    Verify --> Investigate: Problem persists
+    Escalate --> HumanAction: Manual intervention
+    HumanAction --> Fix
+```
+
 ## Related
 
 - [Troubleshooting](troubleshooting.md) -- Detailed diagnosis and resolution for problems surfaced by monitoring

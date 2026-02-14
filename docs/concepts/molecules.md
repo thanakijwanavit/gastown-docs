@@ -411,6 +411,26 @@ Hook
 
 On session restart, the agent reads the hook, finds the molecule, and resumes from the last completed step. No work is repeated.
 
+```mermaid
+sequenceDiagram
+    participant F as Formula (TOML)
+    participant P as Pour Operation
+    participant M as Molecule
+    participant W as Wisp Steps
+    participant A as Agent
+
+    F->>P: gt formula run shiny
+    P->>M: Create molecule instance
+    M->>W: Create wisps for each step
+    A->>M: Execute step 1
+    M->>W: Mark step 1 done
+    A->>M: Execute step 2
+    Note over A,M: Agent crashes
+    A->>M: Resume from step 2
+    M->>W: Check step 1: done ✓
+    A->>M: Continue step 2
+```
+
 :::tip[When to Use Formulas]
 
 Use the built-in `mol-polecat-work` for standard feature work. Use `shiny` for design-first workflows. Use `code-review` for thorough parallel code reviews. Create custom formulas when you have a repeatable multi-step process that agents should follow consistently.

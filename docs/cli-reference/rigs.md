@@ -522,6 +522,22 @@ Changing the `max_polecats` setting on a rig that already has active polecats wi
 
 :::
 
+```mermaid
+timeline
+    title Rig Lifecycle from Creation to Archive
+    Added : gt rig add myproject url
+          : Initialize .beads and worktrees
+    Active : gt rig start myproject
+           : Witness and Refinery running
+           : Polecats processing work
+    Parked : gt rig park myproject
+           : All agents stopped, worktrees preserved
+           : Quick resume with gt rig unpark
+    Docked : gt rig dock myproject
+           : Deep storage, worktrees cleaned
+           : Longer restore with gt rig undock
+```
+
 ## `gt rig settings`
 
 Manage advanced rig settings.

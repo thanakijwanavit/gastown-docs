@@ -287,6 +287,15 @@ When a session restarts, the agent:
 
 This is why Gas Town agents can work on complex tasks across many sessions without losing progress.
 
+```mermaid
+pie title Hook Persistence Guarantees
+    "Session restart" : 20
+    "Context compaction" : 20
+    "Agent crash" : 20
+    "Machine reboot" : 20
+    "Manual kill" : 20
+```
+
 :::tip[Best Practice]
 
 Always check `gt hook` at the start of a session before doing anything else. If work is on your hook, that is your top priority. The Propulsion Principle ensures agents stay focused and productive.

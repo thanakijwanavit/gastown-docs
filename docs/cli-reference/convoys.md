@@ -258,6 +258,29 @@ Closing a convoy with `--force` while beads are still in progress does not cance
 
 :::
 
+## Convoy Lifecycle Phases
+
+A convoy progresses through distinct phases from creation to synthesis.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Planning: gt convoy create
+    Planning --> Dispatching: Add beads
+    Dispatching --> Active: gt sling beads
+    Active --> Active: Polecats working
+    Active --> PartialComplete: Some beads done
+    PartialComplete --> Active: More work assigned
+    PartialComplete --> AllComplete: All beads closed
+    Active --> Stalled: No progress
+    Stalled --> Active: Re-sling stranded
+    AllComplete --> Synthesis: gt convoy synthesis
+    Synthesis --> Closed: Complete
+    Closed --> [*]
+
+    Planning --> Cancelled: Abandon
+    Cancelled --> [*]
+```
+
 ## `gt convoy check`
 
 ```mermaid

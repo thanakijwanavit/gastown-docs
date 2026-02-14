@@ -110,6 +110,19 @@ Wisps accumulate over time as molecules complete. The [compaction system](../cli
 
 **Promotion** means converting an expired open wisp into a permanent bead — if a wisp is still open past its TTL, something is likely stuck and needs attention. Promoted wisps appear in `bd list` for follow-up.
 
+```mermaid
+gantt
+    title Wisp Lifecycle with TTL
+    dateFormat HH:mm
+    axisFormat %H:%M
+    section Wisp Created
+    Active period     :active, a1, 10:00, 6h
+    TTL expires       :milestone, m1, 16:00, 0m
+    section TTL Action
+    Still open?       :crit, a2, 16:00, 1m
+    Promote to bead   :crit, a3, 16:01, 1m
+```
+
 ```bash
 # Preview what compaction would do
 gt compact --dry-run --verbose

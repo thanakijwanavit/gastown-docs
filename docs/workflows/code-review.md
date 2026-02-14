@@ -394,6 +394,34 @@ You can create your own code review formula with custom legs tailored to your co
 
 :::
 
+The following Gantt chart shows a typical code review timeline with parallel leg execution and final synthesis:
+
+```mermaid
+gantt
+    title Code Review Workflow Timeline (Full Preset)
+    dateFormat X
+    axisFormat %M min
+
+    section Launch
+    Spawn 10 Polecats   :0, 2
+
+    section Parallel Review Legs
+    Correctness         :2, 8
+    Security            :2, 9
+    Performance         :2, 7
+    Elegance            :2, 8
+    Resilience          :2, 7
+    Style               :2, 6
+    Code Smells         :2, 9
+    Wiring              :2, 5
+    Commit Discipline   :2, 6
+    Test Quality        :2, 8
+
+    section Synthesis
+    Combine Findings    :9, 12
+    Generate Summary    :12, 14
+```
+
 ## Related
 
 - [Formula Workflow](formula-workflow.md) -- How to run, create, and customize formula templates

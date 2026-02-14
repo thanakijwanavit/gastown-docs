@@ -407,6 +407,16 @@ Switching a rig's default runtime while polecats are actively working can cause 
 
 5. **Keep fallback procedures documented.** If you use hook-limited runtimes, document the startup sequence for your team so everyone knows the manual context injection steps.
 
+The following pie chart shows a typical multi-runtime fleet composition balancing different runtimes based on task characteristics:
+
+```mermaid
+pie title Runtime Usage Distribution (Example Multi-Runtime Fleet)
+    "Claude Code (complex reasoning)" : 50
+    "Gemini CLI (large contexts)" : 25
+    "Codex (rapid prototyping)" : 15
+    "Cursor (IDE-integrated)" : 10
+```
+
 ## Related
 
 - [Installation](../getting-started/installation.md) -- Supported runtimes and how to configure the default agent

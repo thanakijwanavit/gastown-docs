@@ -370,6 +370,19 @@ pie title When to Use Each Approach
 - Reading guides sequentially
 - Exploring related concepts
 
+```mermaid
+flowchart TD
+    START["Need information?"] --> KNOW{"Know what<br/>you're looking for?"}
+    KNOW -->|Yes| SEARCH["Use Search (Ctrl+K)"]
+    KNOW -->|No| BROWSE["Browse navigation"]
+    SEARCH --> FOUND{"Found it?"}
+    FOUND -->|Yes| DONE["Done"]
+    FOUND -->|No| BROADER["Try broader terms"]
+    BROADER --> SEARCH
+    BROWSE --> LEARN["Read sequentially"]
+    LEARN --> DONE
+```
+
 ---
 
 :::warning

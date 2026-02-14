@@ -149,6 +149,25 @@ When any agent crashes, its supervisor detects the failure and restarts it. This
 
 :::
 
+## Recovery Time by Agent Type
+
+Expected recovery times when different agent types crash and are restarted by their supervisors.
+
+```mermaid
+graph LR
+    Polecat[Polecat crash<br/>Recovery: seconds] -->|Witness detects| W[Witness restarts]
+    W -->|New spawn| Working[Back to working]
+
+    Witness[Witness crash<br/>Recovery: 1-2 min] -->|Deacon detects| D[Deacon restarts]
+
+    Deacon[Deacon crash<br/>Recovery: 3-5 min] -->|Boot detects| Boot[Boot wakes Deacon]
+    Boot -->|Daemon tick| Active[Deacon active]
+
+    style Polecat fill:#bfb
+    style Witness fill:#ffb
+    style Deacon fill:#fbb
+```
+
 ## Agent Lifecycle States
 
 Each agent type follows a distinct lifecycle pattern within the supervision tree.

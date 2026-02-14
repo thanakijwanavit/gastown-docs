@@ -185,6 +185,36 @@ Using `gt unsling` to remove work from an agent's hook reverts the bead to `open
 
 :::
 
+## Work State Machine
+
+A comprehensive view of all possible bead states and transitions in the work distribution system.
+
+```mermaid
+stateDiagram-v2
+    [*] --> Created: bd create
+    Created --> Open: Initialized
+    Open --> Hooked: gt sling
+    Hooked --> InProgress: Agent claims work
+
+    InProgress --> Review: gt done
+    Review --> Merged: Refinery validates
+    Merged --> Completed: Bead closed
+    Completed --> [*]
+
+    InProgress --> Escalated: Blocker
+    Escalated --> InProgress: Resolved
+    Escalated --> Deferred: Postponed
+
+    InProgress --> Deferred: Manual defer
+    Deferred --> Open: gt release
+
+    Open --> WontFix: Rejected
+    WontFix --> [*]
+
+    InProgress --> PhaseComplete: Gate blocks
+    PhaseComplete --> InProgress: Gate opens
+```
+
 ## Typical Work Timeline
 
 A representative timeline showing how a bead progresses from creation through merge.

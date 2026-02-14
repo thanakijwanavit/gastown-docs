@@ -236,6 +236,14 @@ The `gt town status` command queries live tmux sessions and agent state files, s
 
 :::
 
+```mermaid
+pie title Town-Level Agent Distribution
+    "Mayor (strategy)" : 20
+    "Deacon (patrol)" : 20
+    "Witnesses (per-rig health)" : 30
+    "Refineries (per-rig merges)" : 30
+```
+
 ## Command Reference
 
 | Command | Description |

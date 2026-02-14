@@ -287,6 +287,31 @@ Boot is designed for rapid triage (seconds, not minutes). If Boot is slow:
 - Agent state files may be corrupted or very large
 - The system may have many rigs/agents to inventory
 
+## Boot Observation Coverage
+
+Boot's triage cycle covers multiple system dimensions to ensure comprehensive health assessment.
+
+```mermaid
+mindmap
+  root((Boot Triage))
+    Deacon Health
+      Session alive?
+      Last response time
+      Activity level
+    Agent Inventory
+      Witness count
+      Polecat census
+      Zombie detection
+    System Resources
+      Disk space
+      Queue state
+      Stale hooks
+    Recovery Actions
+      Wake Deacon
+      Nudge with findings
+      No action needed
+```
+
 ## Related
 
 - [Deacon](deacon.md) -- The agent that Boot monitors and wakes

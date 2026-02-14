@@ -833,6 +833,35 @@ Stale P0/P1 escalations indicate that critical issues are going unaddressed. The
 
 
 :::
+
+## Communication Method Selection
+
+Choosing the right communication method based on urgency and scope.
+
+```mermaid
+graph TD
+    Need[Need to communicate?] --> Urgent{Urgent?}
+
+    Urgent -->|Yes| Sync{Needs immediate<br/>response?}
+    Urgent -->|No| Async[Use gt mail send]
+
+    Sync -->|Yes| Nudge[Use gt nudge]
+    Sync -->|No| Async
+
+    Async --> Scope{Scope?}
+    Scope -->|One agent| Mail[gt mail send agent]
+    Scope -->|All agents| Broadcast[gt broadcast]
+    Scope -->|Topic group| Channel[gt mail send --channel]
+
+    Nudge --> Critical{Critical?}
+    Critical -->|Yes| Escalate[Use gt escalate P0/P1]
+    Critical -->|No| Direct[Direct nudge]
+
+    style Escalate fill:#faa
+    style Nudge fill:#ffa
+    style Async fill:#afa
+```
+
 ## Related
 
 - [gt nudge](./nudge.md) -- Synchronous message delivery to running sessions

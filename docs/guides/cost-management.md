@@ -244,6 +244,21 @@ stateDiagram-v2
     Sprint --> Idle: gt down (sprint ends)
 ```
 
+```mermaid
+gantt
+    title Cost-Conscious Sprint Schedule
+    dateFormat HH:mm
+    axisFormat %H:%M
+    section Workday
+    Morning sprint    :done, s1, 09:00, 2h
+    Break             :b1, 11:00, 1h
+    Afternoon sprint  :active, s2, 12:00, 2h
+    Wrap-up           :s3, 14:00, 30m
+    section Costs
+    Morning $60-100   :milestone, after s1, 0m
+    Afternoon $60-100 :milestone, after s2, 0m
+```
+
 ### Strategy 6: Reduce Context Size
 
 Large codebases mean more input tokens per agent interaction. Reduce context costs by:
