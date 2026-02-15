@@ -16,7 +16,7 @@ List items in the merge queue.
 
 ```bash
 gt mq list [options]
-```text
+```
 
 **Description:** Shows all merge requests currently in the queue, including their position, status, and associated bead.
 
@@ -40,16 +40,16 @@ gt mq list --all
 
 # Show only pending items
 gt mq list --status pending
-```text
+```
 
 **Sample output:**
 
-```text
+```
 POS  ID       BEAD       BRANCH                  STATUS       RIG          AGE
 1    mr-001   gt-abc12   fix/login-bug           processing   myproject    5m
 2    mr-002   gt-def34   feat/email-validation   pending      myproject    2m
 3    mr-003   gt-ghi56   docs/update-readme      pending      docs         1m
-```text
+```
 
 ---
 
@@ -59,7 +59,7 @@ Show or process the next item in the merge queue.
 
 ```bash
 gt mq next [options]
-```text
+```
 
 **Description:** Without options, shows what the Refinery will process next. The Refinery typically calls this automatically during its patrol cycle.
 
@@ -79,7 +79,7 @@ gt mq next
 
 # Process next item now
 gt mq next --process
-```text
+```
 
 ---
 
@@ -89,7 +89,7 @@ Submit a merge request to the queue.
 
 ```bash
 gt mq submit [options]
-```text
+```
 
 **Description:** Adds the current branch to the merge queue for processing by the Refinery. This is typically called by `gt done` automatically, but can be used manually for crew workspaces or special cases.
 
@@ -115,7 +115,7 @@ gt mq submit --branch fix/critical-bug --bead gt-xyz99 --priority
 
 # Submit from a crew workspace
 gt mq submit --branch feat/new-feature --rig myproject --message "Add user profile page"
-```text
+```
 
 :::tip
 
@@ -131,7 +131,7 @@ Show overall merge queue status.
 
 ```bash
 gt mq status [options]
-```text
+```
 
 **Description:** Displays a summary of the merge queue including queue depth, processing rate, and any current issues.
 
@@ -148,11 +148,11 @@ gt mq status [options]
 ```bash
 gt mq status
 gt mq status --all
-```text
+```
 
 **Sample output:**
 
-```text
+```
 Merge Queue Status: myproject
   Queue depth: 3
   Currently processing: mr-001 (fix/login-bug)
@@ -160,7 +160,7 @@ Merge Queue Status: myproject
   Rejected today: 1
   Avg merge time: 3m 20s
   Refinery: running (PID 1250)
-```text
+```
 
 ---
 
@@ -170,7 +170,7 @@ Reject a merge request.
 
 ```bash
 gt mq reject <mr-id> [options]
-```text
+```
 
 **Description:** Removes a merge request from the queue and marks it as rejected. The associated bead is updated and the submitting agent is notified.
 
@@ -186,7 +186,7 @@ gt mq reject <mr-id> [options]
 ```bash
 gt mq reject mr-002 --reason "Fails integration tests, needs rework"
 gt mq reject mr-003 --reason "Superseded by mr-005" --reassign
-```text
+```
 
 ---
 
@@ -196,7 +196,7 @@ Retry a failed or rejected merge request.
 
 ```bash
 gt mq retry <mr-id> [options]
-```text
+```
 
 **Description:** Re-queues a previously failed or rejected merge request for another processing attempt. Useful after the underlying issue has been resolved (e.g., flaky test fixed, conflict resolved).
 
@@ -212,7 +212,7 @@ gt mq retry <mr-id> [options]
 ```bash
 gt mq retry mr-002
 gt mq retry mr-002 --rebase --priority
-```text
+```
 
 ---
 
@@ -222,7 +222,7 @@ Manage integration validation for the merge queue.
 
 ```bash
 gt mq integration [options]
-```text
+```
 
 **Description:** Controls what validation the Refinery runs before merging. This includes test suites, build checks, linting, and custom validation scripts.
 
@@ -248,17 +248,17 @@ gt mq integration --add "npm test" --rig myproject
 
 # Disable linting temporarily
 gt mq integration --disable lint --rig myproject
-```text
+```
 
 **Sample configuration output:**
 
-```text
+```
 Integration Checks: myproject
   [enabled]   build     npm run build
   [enabled]   test      npm test
   [disabled]  lint      npm run lint
   [enabled]   typecheck npx tsc --noEmit
-```text
+```
 
 :::note[Merge Process]
 

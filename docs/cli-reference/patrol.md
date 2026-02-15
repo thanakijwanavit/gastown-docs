@@ -20,7 +20,7 @@ Aggregate patrol cycle digests into a daily summary bead.
 gt patrol digest              # Aggregate today's patrol digests
 gt patrol digest --yesterday  # Aggregate yesterday's patrol digests
 gt patrol digest --dry-run    # Preview what would be aggregated
-```text
+```
 
 **Options:**
 
@@ -45,7 +45,7 @@ gt patrol digest --dry-run
 
 # Aggregate yesterday's data (useful for morning reviews)
 gt patrol digest --yesterday
-```text
+```
 
 ### `gt patrol start`
 
@@ -54,7 +54,7 @@ Request a fresh patrol cycle from all patrol agents.
 ```bash
 gt patrol start               # Trigger patrol across all agents
 gt patrol start --rig myapp   # Trigger patrol for a specific rig
-```text
+```
 
 This nudges patrol agents to run their check cycle immediately rather than waiting for the next scheduled tick.
 
@@ -76,7 +76,7 @@ Each patrol cycle generates ephemeral data (heartbeats, status checks, health re
 
 ## How Digest Aggregation Works
 
-```text
+```
 Per-cycle data:
   witness-patrol-14:00 → "3 polecats healthy, 0 stalled"
   witness-patrol-14:05 → "3 polecats healthy, 1 nudged"
@@ -85,7 +85,7 @@ Per-cycle data:
 
 After gt patrol digest:
   patrol-daily-2026-02-13 → "Witness: 288 cycles, 285 healthy, 2 nudged, 1 escalated"
-```text
+```
 
 The per-cycle ephemeral data is removed after aggregation, keeping the beads database clean while preserving the audit trail.
 

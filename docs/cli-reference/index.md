@@ -42,6 +42,9 @@ Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name
 | [Warrant](warrant.md) | File and execute death warrants for stuck agents | `gt warrant file`, `gt warrant list`, `gt warrant execute` |
 | [Patrol](patrol.md) | Aggregate patrol cycle digests | `gt patrol digest` |
 | [KRC](krc.md) | TTL-based lifecycle for ephemeral data | `gt krc stats`, `gt krc prune`, `gt krc config` |
+| [Compact](compact.md) | TTL-based compaction for ephemeral wisps | `gt compact`, `gt compact report` |
+| [Tap](tap.md) | Hook handlers for Claude Code tool execution events | `gt tap guard` |
+| [Town](town.md) | Town-level operations and session cycling | `gt town next`, `gt town prev` |
 
 ## Command Deep Dives
 
@@ -59,6 +62,9 @@ Comprehensive reference for frequently used commands with all flags, subcommands
 | [`gt warrant`](warrant.md) | Death warrant lifecycle for zombie agent cleanup |
 | [`gt patrol`](patrol.md) | Patrol cycle digest aggregation |
 | [`gt krc`](krc.md) | Key Record Chronicle — ephemeral data TTL management |
+| [`gt compact`](compact.md) | TTL-based compaction for ephemeral wisps |
+| [`gt tap`](tap.md) | Hook handlers for Claude Code PreToolUse/PostToolUse events |
+| [`gt town`](town.md) | Town-level session cycling between mayor and deacon |
 
 ## Related Tools
 

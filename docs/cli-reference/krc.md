@@ -19,7 +19,7 @@ Show statistics about ephemeral data — counts by event type, age distribution,
 ```bash
 gt krc stats              # Human-readable summary
 gt krc stats --json       # Machine-readable output
-```text
+```
 
 **Options:**
 
@@ -35,7 +35,7 @@ Remove expired events based on configured TTLs. Events are removed from both `.e
 gt krc prune              # Remove expired events
 gt krc prune --dry-run    # Preview what would be pruned (no changes)
 gt krc prune --auto       # Daemon mode: only prune if PruneInterval has elapsed
-```text
+```
 
 **Options:**
 
@@ -51,7 +51,7 @@ Show forensic value decay report — visualize how data value decreases over tim
 ```bash
 gt krc decay              # Human-readable decay report
 gt krc decay --json       # Machine-readable output
-```text
+```
 
 Each event type follows one of four decay curves:
 
@@ -84,7 +84,7 @@ gt krc config set patrol_* 12h     # Set TTL for patrol events to 12 hours
 gt krc config set heartbeat_* 6h   # Set TTL for heartbeat events to 6 hours
 gt krc config set default 3d       # Set default TTL to 3 days
 gt krc config reset                # Reset to default configuration
-```text
+```
 
 **Subcommands:**
 
@@ -101,7 +101,7 @@ Show the auto-prune scheduling state — whether automatic pruning is active and
 
 ```bash
 gt krc auto-prune-status
-```text
+```
 
 ## Data Levels
 
@@ -137,9 +137,9 @@ Patrol agents are the primary producers of Level 0 data. Each 5-minute patrol cy
 
 The typical flow:
 
-```text
+```
 Patrol agents → generate ephemeral events → KRC prunes expired → gt patrol digest aggregates
-```text
+```
 
 Use `gt krc stats` to monitor accumulation rates and tune TTLs accordingly.
 

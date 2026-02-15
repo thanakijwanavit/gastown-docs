@@ -18,7 +18,7 @@ List configured agent runtimes.
 
 ```bash
 gt config agent list [options]
-```text
+```
 
 **Description:** Shows all configured agent runtimes and their command mappings. Gas Town supports multiple AI coding agent runtimes.
 
@@ -32,11 +32,11 @@ gt config agent list [options]
 
 ```bash
 gt config agent list
-```text
+```
 
 **Sample output:**
 
-```text
+```
 AGENT      COMMAND     STATUS      DEFAULT
 claude     claude      available   *
 gemini     gemini      available
@@ -44,7 +44,7 @@ codex      codex       not found
 cursor     cursor      available
 auggie     auggie      not found
 amp        amp         not found
-```text
+```
 
 ---
 
@@ -54,7 +54,7 @@ Get a specific agent runtime configuration value.
 
 ```bash
 gt config agent get <agent> [key]
-```text
+```
 
 **Description:** Without a key, shows all configuration for the specified agent runtime. With a key, shows that specific setting.
 
@@ -66,7 +66,7 @@ gt config agent get claude
 
 # Get a specific setting
 gt config agent get claude model
-```text
+```
 
 ---
 
@@ -76,7 +76,7 @@ Set an agent runtime configuration value.
 
 ```bash
 gt config agent set <agent> <key> <value>
-```text
+```
 
 **Description:** Configures a specific setting for an agent runtime. Use this to set command paths, model preferences, and other runtime-specific options.
 
@@ -101,7 +101,7 @@ gt config agent set claude model "claude-opus-4-5-20251101"
 
 # Set custom args
 gt config agent set cursor args "--no-telemetry"
-```text
+```
 
 ---
 
@@ -111,7 +111,7 @@ Get or set the default agent runtime.
 
 ```bash
 gt config default-agent [agent]
-```text
+```
 
 **Description:** Without an argument, shows the current default agent. With an argument, sets the default agent runtime used when no `--agent` flag is specified.
 
@@ -124,7 +124,7 @@ gt config default-agent
 
 # Set default to gemini
 gt config default-agent gemini
-```text
+```
 
 :::tip
 
@@ -142,7 +142,7 @@ Manage multiple Claude Code accounts for Gas Town.
 
 ```bash
 gt account <subcommand>
-```text
+```
 
 **Description:** Enables switching between Claude Code accounts (e.g., personal vs work) with easy account selection per spawn or globally.
 
@@ -173,7 +173,7 @@ gt account status
 
 # Switch accounts
 gt account switch personal
-```text
+```
 
 ---
 
@@ -185,7 +185,7 @@ Manage tmux status bar themes for Gas Town sessions.
 
 ```bash
 gt theme [name] [options]
-```text
+```
 
 **Description:** Without arguments, shows the current theme assignment for the rig. With a name, sets the active tmux status bar theme.
 
@@ -219,7 +219,7 @@ gt theme apply
 
 # Set CLI color scheme
 gt theme cli dark
-```text
+```
 
 ---
 
@@ -231,7 +231,7 @@ List all Claude Code hooks configured in the workspace.
 
 ```bash
 gt hooks [options]
-```text
+```
 
 **Description:** Scans for `.claude/settings.json` files across the workspace and displays all configured Claude Code hooks, organized by type.
 
@@ -274,7 +274,7 @@ gt hooks --json
 
 # Install from registry
 gt hooks install
-```text
+```
 
 ---
 
@@ -286,7 +286,7 @@ Manage current issue displayed in the tmux status line.
 
 ```bash
 gt issue <subcommand>
-```text
+```
 
 **Description:** Controls which issue/bead ID is shown in the tmux status bar for the current session. Useful for quick visual identification of what you are working on.
 
@@ -309,7 +309,7 @@ gt issue show
 
 # Clear the status line
 gt issue clear
-```text
+```
 
 ---
 
@@ -321,7 +321,7 @@ Manage plugins that run during Deacon patrol cycles.
 
 ```bash
 gt plugin <subcommand> [options]
-```text
+```
 
 **Description:** Plugins are periodic automation tasks defined by `plugin.md` files with TOML frontmatter. They can be installed at town level (`~/gt/plugins/`) or rig level (`<rig>/plugins/`).
 
@@ -358,7 +358,7 @@ gt plugin run my-plugin
 
 # List as JSON
 gt plugin list --json
-```text
+```
 
 ## See Also
 

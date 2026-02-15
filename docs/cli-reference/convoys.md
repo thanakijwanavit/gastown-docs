@@ -16,7 +16,7 @@ Create a new convoy.
 
 ```bash
 gt convoy create <title> [bead-id...] [options]
-```text
+```
 
 **Description:** Creates a new convoy with an optional set of initial beads. Convoys are the standard unit for tracking a batch of related work such as a feature set, a bug-fix sprint, or a documentation effort.
 
@@ -41,7 +41,7 @@ gt convoy create "Q1 Performance Sprint" --priority high
 
 # Create with description
 gt convoy create "API Refactor" --description "Migrate all endpoints from v1 to v2 schema"
-```text
+```
 
 ---
 
@@ -51,7 +51,7 @@ Add beads to an existing convoy.
 
 ```bash
 gt convoy add <convoy-id> <bead-id>... [options]
-```text
+```
 
 **Description:** Adds one or more beads to an existing convoy. The convoy's completion tracking updates automatically.
 
@@ -63,7 +63,7 @@ gt convoy add hq-cv-001 gt-j7k8l
 
 # Add multiple beads
 gt convoy add hq-cv-001 gt-j7k8l gt-m9n0o gt-p1q2r
-```text
+```
 
 :::tip
 
@@ -79,7 +79,7 @@ List all convoys.
 
 ```bash
 gt convoy list [options]
-```text
+```
 
 **Options:**
 
@@ -98,16 +98,16 @@ gt convoy list
 
 # List active convoys only
 gt convoy list --status active
-```text
+```
 
 **Sample output:**
 
-```text
+```
 ID          TITLE                    STATUS     PROGRESS   AGE
 hq-cv-001   Auth System Fixes        active     2/3        2h
 hq-cv-002   API Refactor             active     0/5        30m
 hq-cv-003   Bug Fix Sprint           completed  4/4        1d
-```text
+```
 
 ---
 
@@ -117,7 +117,7 @@ Show summary status of all convoys or a specific convoy.
 
 ```bash
 gt convoy status [convoy-id] [options]
-```text
+```
 
 **Description:** Without an ID, shows an overview of all active convoys. With a convoy ID, shows detailed progress information.
 
@@ -135,7 +135,7 @@ gt convoy status
 
 # Status of a specific convoy
 gt convoy status hq-cv-001
-```text
+```
 
 ---
 
@@ -145,7 +145,7 @@ Show detailed information about a convoy.
 
 ```bash
 gt convoy show <convoy-id> [options]
-```text
+```
 
 **Description:** Displays comprehensive convoy details including all tracked beads, their individual statuses, assigned agents, and overall progress metrics.
 
@@ -160,11 +160,11 @@ gt convoy show <convoy-id> [options]
 
 ```bash
 gt convoy show hq-cv-001
-```text
+```
 
 **Sample output:**
 
-```text
+```
 Convoy: hq-cv-001
 Title: Auth System Fixes
 Status: active
@@ -175,7 +175,7 @@ BEAD       STATUS         AGENT           TITLE
 gt-a1b2c   completed      polecat/toast   Fix login redirect
 gt-d3e4f   in_progress    polecat/alpha   Add email validation
 gt-g5h6i   pending        -               Update auth docs
-```text
+```
 
 ---
 
@@ -185,7 +185,7 @@ Manually close a convoy.
 
 ```bash
 gt convoy close <convoy-id> [options]
-```text
+```
 
 **Description:** Closes a convoy regardless of whether all tracked beads are complete. Use for administrative cleanup or when remaining items are no longer relevant.
 
@@ -204,7 +204,7 @@ gt convoy close hq-cv-001
 
 # Force-close an incomplete convoy
 gt convoy close hq-cv-002 --force --reason "Requirements changed, work no longer needed"
-```text
+```
 
 :::note
 
@@ -220,7 +220,7 @@ Check convoy health and consistency.
 
 ```bash
 gt convoy check [convoy-id] [options]
-```text
+```
 
 **Description:** Validates the convoy state, checking for inconsistencies between convoy tracking and bead statuses. Reports any beads that may be stuck, orphaned, or in an unexpected state.
 
@@ -240,7 +240,7 @@ gt convoy check hq-cv-001
 
 # Check all convoys and fix issues
 gt convoy check --all --fix
-```text
+```
 
 ---
 
@@ -250,7 +250,7 @@ Find convoys with work that is ready but unassigned.
 
 ```bash
 gt convoy stranded [options]
-```text
+```
 
 **Description:** Identifies convoys where one or more beads are in a ready state (pending or open) but not assigned to any agent. These represent stalled work that needs attention.
 
@@ -264,15 +264,15 @@ gt convoy stranded [options]
 
 ```bash
 gt convoy stranded
-```text
+```
 
 **Sample output:**
 
-```text
+```
 CONVOY       TITLE                    STRANDED   TOTAL
 hq-cv-002    API Refactor             3          5
 hq-cv-004    Documentation Update     1          2
-```text
+```
 
 :::warning
 
@@ -288,7 +288,7 @@ Manage convoy synthesis steps.
 
 ```bash
 gt synthesis <subcommand> <convoy-id>
-```text
+```
 
 **Description:** Synthesis is the final step in a convoy workflow that combines outputs from all parallel legs into a unified deliverable. This is a top-level command separate from `gt convoy synthesis` (which generates reports).
 
@@ -313,7 +313,7 @@ gt synthesis start hq-cv-abc
 
 # Close after synthesis
 gt synthesis close hq-cv-abc
-```text
+```
 
 ---
 
@@ -323,7 +323,7 @@ Generate a synthesis report for a convoy.
 
 ```bash
 gt convoy synthesis <convoy-id> [options]
-```text
+```
 
 **Description:** Produces a summary report of the convoy's progress, including what was accomplished, what remains, any blockers encountered, and time metrics. Useful for status updates and retrospectives.
 
@@ -345,11 +345,11 @@ gt convoy synthesis hq-cv-001 --format markdown
 
 # Detailed synthesis
 gt convoy synthesis hq-cv-001 --verbose
-```text
+```
 
 **Sample output:**
 
-```text
+```
 Convoy Synthesis: Auth System Fixes (hq-cv-001)
 ================================================
 
@@ -366,7 +366,7 @@ Remaining:
 
 Blockers: none
 Merge status: 2 merged, 0 in queue
-```text
+```
 
 ## See Also
 

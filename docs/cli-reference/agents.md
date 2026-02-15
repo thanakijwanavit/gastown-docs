@@ -18,7 +18,7 @@ List all agents and their current status.
 
 ```bash
 gt agents [options]
-```text
+```
 
 **Description:** Displays all agents across the town, organized by role. Shows running status, current activity, and resource usage.
 
@@ -42,11 +42,11 @@ gt agents --running
 
 # Show agents for a specific rig
 gt agents --rig myproject
-```text
+```
 
 **Sample output:**
 
-```text
+```
 ROLE        RIG          STATUS     PID    AGE
 mayor       (town)       running    1234   2h
 deacon      (town)       running    1235   2h
@@ -56,7 +56,7 @@ refinery    myproject    running    1250   1h
 polecat     myproject    running    1260   15m   [toast] gt-abc12
 polecat     myproject    running    1261   10m   [alpha] gt-def34
 dog         (town)       idle       -      -     [boot]
-```text
+```
 
 ---
 
@@ -66,7 +66,7 @@ Display or set the current agent role context.
 
 ```bash
 gt role [role-name]
-```text
+```
 
 **Description:** Without arguments, displays the current role set by `GT_ROLE`. With an argument, sets the role for the current session. The role determines which identity and capabilities the current agent session operates under.
 
@@ -80,7 +80,7 @@ gt role
 
 # Set role
 gt role witness
-```text
+```
 
 :::warning
 
@@ -100,7 +100,7 @@ Start the Mayor agent.
 
 ```bash
 gt mayor start [options]
-```text
+```
 
 **Options:**
 
@@ -116,7 +116,7 @@ gt mayor start [options]
 gt mayor start
 gt mayor start --attach
 gt mayor start --agent claude
-```text
+```
 
 ---
 
@@ -126,7 +126,7 @@ Stop the Mayor agent.
 
 ```bash
 gt mayor stop [options]
-```text
+```
 
 **Options:**
 
@@ -140,7 +140,7 @@ gt mayor stop [options]
 ```bash
 gt mayor stop
 gt mayor stop --checkpoint
-```text
+```
 
 ---
 
@@ -150,7 +150,7 @@ Show Mayor status and current activity.
 
 ```bash
 gt mayor status [options]
-```text
+```
 
 **Options:**
 
@@ -163,18 +163,18 @@ gt mayor status [options]
 
 ```bash
 gt mayor status
-```text
+```
 
 **Sample output:**
 
-```text
+```
 Mayor: running (PID 1234)
 Session: sess-abc123
 Uptime: 2h 15m
 Hook: empty
 Inbox: 3 unread
 Active convoys: 2
-```text
+```
 
 ---
 
@@ -188,7 +188,7 @@ Start the Deacon agent.
 
 ```bash
 gt deacon start [options]
-```text
+```
 
 **Options:**
 
@@ -201,7 +201,7 @@ gt deacon start [options]
 
 ```bash
 gt deacon start
-```text
+```
 
 ---
 
@@ -211,7 +211,7 @@ Stop the Deacon agent.
 
 ```bash
 gt deacon stop [options]
-```text
+```
 
 **Options:**
 
@@ -227,7 +227,7 @@ Show Deacon status.
 
 ```bash
 gt deacon status [options]
-```text
+```
 
 **Options:**
 
@@ -239,7 +239,7 @@ gt deacon status [options]
 
 ```bash
 gt deacon status
-```text
+```
 
 ---
 
@@ -253,7 +253,7 @@ Start a Witness agent for a rig.
 
 ```bash
 gt witness start <rig> [options]
-```text
+```
 
 **Options:**
 
@@ -266,7 +266,7 @@ gt witness start <rig> [options]
 
 ```bash
 gt witness start myproject
-```text
+```
 
 ---
 
@@ -276,7 +276,7 @@ Stop a Witness agent.
 
 ```bash
 gt witness stop <rig> [options]
-```text
+```
 
 **Options:**
 
@@ -288,7 +288,7 @@ gt witness stop <rig> [options]
 
 ```bash
 gt witness stop myproject
-```text
+```
 
 ---
 
@@ -298,7 +298,7 @@ Show Witness status for a rig.
 
 ```bash
 gt witness status [rig] [options]
-```text
+```
 
 **Options:**
 
@@ -312,7 +312,7 @@ gt witness status [rig] [options]
 ```bash
 gt witness status myproject
 gt witness status --all
-```text
+```
 
 ---
 
@@ -326,7 +326,7 @@ Start the Refinery agent for a rig.
 
 ```bash
 gt refinery start <rig> [options]
-```text
+```
 
 **Options:**
 
@@ -339,7 +339,7 @@ gt refinery start <rig> [options]
 
 ```bash
 gt refinery start myproject
-```text
+```
 
 ---
 
@@ -349,7 +349,7 @@ Stop the Refinery agent.
 
 ```bash
 gt refinery stop <rig> [options]
-```text
+```
 
 **Options:**
 
@@ -365,7 +365,7 @@ Show Refinery status for a rig.
 
 ```bash
 gt refinery status [rig] [options]
-```text
+```
 
 **Options:**
 
@@ -386,7 +386,7 @@ List all polecats.
 
 ```bash
 gt polecat list [options]
-```text
+```
 
 **Options:**
 
@@ -404,16 +404,16 @@ gt polecat list
 
 # List running polecats in a rig
 gt polecat list --rig myproject --status running
-```text
+```
 
 **Sample output:**
 
-```text
+```
 NAME     RIG          STATUS    BEAD       AGE     BRANCH
 toast    myproject    running   gt-abc12   15m     fix/login-bug
 alpha    myproject    running   gt-def34   10m     feat/email-validation
 bravo    docs         running   gt-ghi56   5m      docs/update-readme
-```text
+```
 
 ---
 
@@ -423,7 +423,7 @@ Show detailed status of a specific polecat.
 
 ```bash
 gt polecat status <name> [options]
-```text
+```
 
 **Options:**
 
@@ -435,7 +435,7 @@ gt polecat status <name> [options]
 
 ```bash
 gt polecat status toast
-```text
+```
 
 ---
 
@@ -445,7 +445,7 @@ Destroy a polecat and clean up its resources.
 
 ```bash
 gt polecat nuke <name> [options]
-```text
+```
 
 **Description:** Terminates the polecat process, removes its worktree, and cleans up all associated state. Used for zombie polecats or when a task needs to be reassigned.
 
@@ -461,7 +461,7 @@ gt polecat nuke <name> [options]
 ```bash
 gt polecat nuke toast
 gt polecat nuke toast --force
-```text
+```
 
 :::warning
 
@@ -477,7 +477,7 @@ Garbage collect finished polecat directories.
 
 ```bash
 gt polecat gc [options]
-```text
+```
 
 **Description:** Cleans up directories and branches from polecats that have completed their work or have been abandoned.
 
@@ -495,7 +495,7 @@ gt polecat gc [options]
 ```bash
 gt polecat gc --all
 gt polecat gc --rig myproject --dry-run
-```text
+```
 
 ---
 
@@ -505,7 +505,7 @@ List polecats that appear to be stalled or unresponsive.
 
 ```bash
 gt polecat stale [options]
-```text
+```
 
 **Options:**
 
@@ -520,7 +520,7 @@ gt polecat stale [options]
 ```bash
 gt polecat stale
 gt polecat stale --age 15m
-```text
+```
 
 ---
 
@@ -534,7 +534,7 @@ List all dogs and their current status.
 
 ```bash
 gt dog list [options]
-```text
+```
 
 **Options:**
 
@@ -546,16 +546,16 @@ gt dog list [options]
 
 ```bash
 gt dog list
-```text
+```
 
 **Sample output:**
 
-```text
+```
 NAME     STATUS    CURRENT TASK     SINCE
 boot     idle      -                -
 fetch    running   sync-upstream    5m
 lint     idle      -                -
-```text
+```
 
 ---
 
@@ -565,7 +565,7 @@ Show detailed status of a specific dog.
 
 ```bash
 gt dog status <name> [options]
-```text
+```
 
 **Options:**
 
@@ -577,7 +577,7 @@ gt dog status <name> [options]
 
 ```bash
 gt dog status boot
-```text
+```
 
 ---
 
@@ -587,7 +587,7 @@ Register a new dog agent.
 
 ```bash
 gt dog add <name> [options]
-```text
+```
 
 **Description:** Creates a new dog with a specific name and optional configuration. Dogs persist in the `deacon/dogs/` directory.
 
@@ -603,7 +603,7 @@ gt dog add <name> [options]
 ```bash
 gt dog add fetch --role infrastructure
 gt dog add lint --agent claude
-```text
+```
 
 ---
 
@@ -617,7 +617,7 @@ Spawn the Boot triage agent.
 
 ```bash
 gt boot spawn [options]
-```text
+```
 
 **Description:** Starts the Boot dog to perform triage on pending work items, assess complexity, and recommend assignment strategies.
 
@@ -631,7 +631,7 @@ gt boot spawn [options]
 
 ```bash
 gt boot spawn
-```text
+```
 
 ---
 
@@ -641,7 +641,7 @@ Show Boot agent status.
 
 ```bash
 gt boot status [options]
-```text
+```
 
 **Options:**
 
@@ -659,7 +659,7 @@ Handle callbacks from agents during Deacon patrol.
 
 ```bash
 gt callbacks <subcommand>
-```text
+```
 
 **Description:** Processes messages sent to the Mayor from Witnesses, Refineries, polecats, and external triggers. Routes messages to other agents or updates state as needed.
 
@@ -673,7 +673,7 @@ gt callbacks <subcommand>
 
 ```bash
 gt callbacks process
-```text
+```
 
 :::note
 
@@ -693,7 +693,7 @@ Start an agent session in a crew workspace.
 
 ```bash
 gt crew start <rig> <member> [options]
-```text
+```
 
 **Options:**
 
@@ -706,7 +706,7 @@ gt crew start <rig> <member> [options]
 
 ```bash
 gt crew start myproject dave --attach
-```text
+```
 
 ---
 
@@ -716,7 +716,7 @@ Stop a crew agent session.
 
 ```bash
 gt crew stop <rig> <member> [options]
-```text
+```
 
 **Options:**
 
@@ -732,7 +732,7 @@ Add a new crew member workspace to a rig.
 
 ```bash
 gt crew add <rig> <name> [options]
-```text
+```
 
 **Description:** Creates a new persistent git clone for a human developer within the specified rig.
 
@@ -748,7 +748,7 @@ gt crew add <rig> <name> [options]
 ```bash
 gt crew add myproject dave
 gt crew add myproject emma --branch develop
-```text
+```
 
 ---
 
@@ -758,7 +758,7 @@ List crew members.
 
 ```bash
 gt crew list [rig] [options]
-```text
+```
 
 **Options:**
 
@@ -772,7 +772,7 @@ gt crew list [rig] [options]
 ```bash
 gt crew list myproject
 gt crew list --all
-```text
+```
 
 ---
 
@@ -782,13 +782,13 @@ Show what a crew member is currently working on.
 
 ```bash
 gt crew at <rig> <member>
-```text
+```
 
 **Example:**
 
 ```bash
 gt crew at myproject dave
-```text
+```
 
 ---
 
@@ -798,7 +798,7 @@ Remove a crew member workspace.
 
 ```bash
 gt crew remove <rig> <name> [options]
-```text
+```
 
 **Options:**
 
@@ -811,7 +811,7 @@ gt crew remove <rig> <name> [options]
 
 ```bash
 gt crew remove myproject dave
-```text
+```
 
 ---
 
@@ -821,7 +821,7 @@ Refresh a crew workspace by pulling latest changes.
 
 ```bash
 gt crew refresh <rig> <member> [options]
-```text
+```
 
 **Options:**
 
@@ -834,7 +834,7 @@ gt crew refresh <rig> <member> [options]
 
 ```bash
 gt crew refresh myproject dave --rebase
-```text
+```
 
 ---
 
@@ -844,7 +844,7 @@ Restart a crew agent session.
 
 ```bash
 gt crew restart <rig> <member> [options]
-```text
+```
 
 **Description:** Stops and restarts the agent session for a crew member, preserving hook state and context.
 
@@ -858,7 +858,7 @@ gt crew restart <rig> <member> [options]
 
 ```bash
 gt crew restart myproject dave
-```text
+```
 
 ## See Also
 

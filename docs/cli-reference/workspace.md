@@ -16,7 +16,7 @@ Create a new Gas Town workspace.
 
 ```bash
 gt install <directory> [options]
-```text
+```
 
 **Description:** Initializes a new town directory with all required structure including `.beads/`, `mayor/`, `deacon/`, `settings/`, and configuration files. This is typically the first command you run.
 
@@ -37,11 +37,11 @@ gt install ~/gt --git
 
 # Install with Gemini as default agent
 gt install ~/gt --git --agent gemini
-```text
+```
 
 **Created structure:**
 
-```text
+```
 ~/gt/
 ├── .beads/          # Town-level issue tracking
 ├── .claude/         # Claude Code integration
@@ -52,7 +52,7 @@ gt install ~/gt --git --agent gemini
 ├── plugins/         # Town-level plugins
 ├── CLAUDE.md        # Project context file
 └── .events.jsonl    # Activity log
-```text
+```
 
 :::warning
 
@@ -68,7 +68,7 @@ Initialize Gas Town in an existing directory.
 
 ```bash
 gt init [options]
-```text
+```
 
 **Description:** Sets up Gas Town structure in the current directory without creating a new directory. Useful for adding Gas Town to an existing project layout.
 
@@ -85,7 +85,7 @@ gt init [options]
 ```bash
 cd ~/my-workspace
 gt init --git
-```text
+```
 
 ---
 
@@ -95,7 +95,7 @@ Remove Gas Town from a workspace.
 
 ```bash
 gt uninstall [directory] [options]
-```text
+```
 
 **Description:** Removes Gas Town configuration and infrastructure from a workspace. Does not remove your project source code or git repositories by default.
 
@@ -116,7 +116,7 @@ gt uninstall ~/gt
 
 # Full removal
 gt uninstall ~/gt --all --force
-```text
+```
 
 :::danger
 
@@ -132,7 +132,7 @@ Initialize or repair git configuration for a Gas Town workspace.
 
 ```bash
 gt git-init [options]
-```text
+```
 
 **Description:** Sets up git tracking for the town workspace, including `.gitignore` rules, `.gitattributes`, and initial commit structure. Also useful for repairing corrupted git state.
 
@@ -151,7 +151,7 @@ gt git-init
 
 # Repair corrupted git state
 gt git-init --repair
-```text
+```
 
 ---
 
@@ -161,7 +161,7 @@ Enable Gas Town for all agentic coding tools.
 
 ```bash
 gt enable
-```text
+```
 
 **Description:** Activates Gas Town system-wide. When enabled, shell hooks set `GT_TOWN_ROOT` and `GT_RIG` environment variables, Claude Code `SessionStart` hooks run `gt prime` for context, and git repos are auto-registered as rigs.
 
@@ -171,7 +171,7 @@ Use environment variables for per-session overrides: `GASTOWN_DISABLED=1` to dis
 
 ```bash
 gt enable
-```text
+```
 
 ---
 
@@ -181,7 +181,7 @@ Disable Gas Town for all agentic coding tools.
 
 ```bash
 gt disable [options]
-```text
+```
 
 **Description:** Disables Gas Town system-wide. When disabled, shell hooks become no-ops, Claude Code `SessionStart` hooks skip `gt prime`, and tools work vanilla without Gas Town behavior. The workspace (`~/gt`) is preserved.
 
@@ -199,7 +199,7 @@ gt disable
 
 # Disable and remove shell integration
 gt disable --clean
-```text
+```
 
 ---
 
@@ -209,7 +209,7 @@ Check if the `gt` binary needs rebuilding.
 
 ```bash
 gt stale [options]
-```text
+```
 
 **Description:** Compares the commit hash embedded in the binary at build time with the current HEAD of the gastown repository. Reports whether the binary is out of date.
 
@@ -239,7 +239,7 @@ gt stale --json
 
 # Script-friendly check
 gt stale --quiet && echo "Rebuild needed"
-```text
+```
 
 ---
 
@@ -249,7 +249,7 @@ Display Gas Town version and release notes.
 
 ```bash
 gt info [options]
-```text
+```
 
 **Description:** Shows the current Gas Town version and optionally displays agent-relevant changes from recent versions.
 
@@ -271,7 +271,7 @@ gt info --whats-new
 
 # Machine-readable output
 gt info --whats-new --json
-```text
+```
 
 ---
 
@@ -281,7 +281,7 @@ Display help information for any command.
 
 ```bash
 gt help [command] [subcommand]
-```text
+```
 
 **Description:** Shows usage, options, and examples for any `gt` command. When called without arguments, displays the top-level help with all available commands.
 
@@ -299,7 +299,7 @@ gt help convoy create
 
 # Alternative syntax
 gt convoy create --help
-```text
+```
 
 ---
 
@@ -309,7 +309,7 @@ Generate shell completion scripts.
 
 ```bash
 gt completion <shell>
-```text
+```
 
 **Description:** Generates tab-completion scripts for bash, zsh, fish, or PowerShell. These scripts enable tab completion for all `gt` commands, subcommands, and flags.
 
@@ -329,7 +329,7 @@ gt completion fish > ~/.config/fish/completions/gt.fish
 
 # PowerShell
 gt completion powershell > gt.ps1
-```text
+```
 
 :::tip
 
@@ -345,7 +345,7 @@ Launch an interactive Gas Town shell.
 
 ```bash
 gt shell [options]
-```text
+```
 
 **Description:** Opens an interactive shell session with Gas Town context pre-loaded. Provides enhanced tab completion, prompt integration showing current rig and agent status, and shorthand command aliases.
 
@@ -364,7 +364,7 @@ gt shell
 
 # Launch in context of a specific rig
 gt shell --rig myproject
-```text
+```
 
 :::note
 
@@ -381,13 +381,31 @@ Print Gas Town version information.
 
 ```bash
 gt version
-```text
+```
 
 **Example:**
 
 ```bash
 gt version
-```text
+```
+
+---
+
+### `gt thanks`
+
+Display acknowledgments to contributors.
+
+```bash
+gt thanks
+```
+
+**Description:** Shows a list of all humans who have contributed to the Gas Town project. This command celebrates the collaborative effort behind the multi-agent workspace manager.
+
+**Example:**
+
+```bash
+gt thanks
+```
 
 ---
 
@@ -397,7 +415,7 @@ Display overall town status.
 
 ```bash
 gt status [options]
-```text
+```
 
 **Description:** Shows town name, registered rigs, active polecats, and agent status at a glance.
 
@@ -422,7 +440,7 @@ gt status --watch
 
 # Fast mode (skip mail)
 gt status --fast
-```text
+```
 
 ---
 
@@ -432,7 +450,7 @@ Show the identity used for mail commands.
 
 ```bash
 gt whoami
-```text
+```
 
 **Description:** Displays the current identity determined by the `GT_ROLE` environment variable. If `GT_ROLE` is set, you are an agent. If not, you are the overseer (human).
 
@@ -440,7 +458,7 @@ gt whoami
 
 ```bash
 gt whoami
-```text
+```
 
 ---
 
@@ -454,7 +472,7 @@ Start Gas Town by launching the Deacon and Mayor.
 
 ```bash
 gt start [path] [options]
-```text
+```
 
 **Description:** Launches the Deacon (health-check orchestrator) and Mayor (global coordinator). Other agents (Witnesses, Refineries) are started lazily as needed. If a path like `rig/crew/name` is provided, starts that crew workspace instead.
 
@@ -476,7 +494,7 @@ gt start --all
 
 # Start a crew workspace
 gt start myproject/crew/dave
-```text
+```
 
 ---
 
@@ -486,7 +504,7 @@ Bring up all Gas Town long-lived services.
 
 ```bash
 gt up [options]
-```text
+```
 
 **Description:** Idempotent boot command that ensures all infrastructure agents are running: Daemon, Deacon, Mayor, Witnesses, and Refineries. Polecats are NOT started (they are transient workers spawned on demand). Running `gt up` multiple times is safe.
 
@@ -502,7 +520,7 @@ gt up [options]
 ```bash
 gt up
 gt up --restore
-```text
+```
 
 ---
 
@@ -512,7 +530,7 @@ Stop Gas Town services (reversible pause).
 
 ```bash
 gt down [options]
-```text
+```
 
 **Description:** Stops infrastructure agents (Refineries, Witnesses, Mayor, Boot, Deacon, Daemon). This is a "pause" operation -- use `gt start` to bring everything back up. For permanent cleanup, use `gt shutdown` instead.
 
@@ -538,7 +556,7 @@ gt down --polecats
 
 # Preview what would stop
 gt down --dry-run
-```text
+```
 
 :::warning
 
@@ -554,7 +572,7 @@ Shut down Gas Town with full cleanup.
 
 ```bash
 gt shutdown [options]
-```text
+```
 
 **Description:** The "done for the day" command. Stops all agents, cleans up polecat worktrees and branches, and puts the town in a fully stopped state. Polecats with uncommitted work are protected (skipped) unless `--nuclear` is used.
 
@@ -591,7 +609,7 @@ gt shutdown --graceful
 
 # Shutdown including crew
 gt shutdown --all --force
-```text
+```
 
 :::danger
 
@@ -601,13 +619,52 @@ gt shutdown --all --force
 
 ---
 
+### `gt prune-branches`
+
+Remove stale local polecat tracking branches.
+
+```bash
+gt prune-branches [options]
+```
+
+**Description:** When polecats push branches to origin, other clones create local tracking branches via `git fetch`. After the remote branch is deleted (post-merge), `git fetch --prune` removes the remote tracking ref but the local branch persists. This command finds and removes those stale local branches.
+
+The command finds branches matching the pattern (default: `polecat/*`) that are either:
+
+- Fully merged to the default branch (main)
+- Have no corresponding remote tracking branch (remote was deleted)
+
+**Safety:** Uses `git branch -d` (not `-D`), so only fully-merged branches are deleted. Never deletes the current branch or the default branch.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Show what would be deleted without deleting |
+| `--pattern <pattern>` | Branch name pattern to match (default: `polecat/*`) |
+
+**Example:**
+
+```bash
+# Clean up stale polecat branches
+gt prune-branches
+
+# Preview what would be deleted
+gt prune-branches --dry-run
+
+# Custom pattern
+gt prune-branches --pattern "feature/*"
+```
+
+---
+
 ### `gt daemon`
 
 Manage the Gas Town background daemon.
 
 ```bash
 gt daemon <subcommand>
-```text
+```
 
 **Description:** The daemon is a Go background process that pokes agents periodically (heartbeat), processes lifecycle requests, and restarts sessions when agents request cycling. It is a "dumb scheduler" -- all intelligence is in the agents.
 
@@ -625,7 +682,7 @@ gt daemon <subcommand>
 ```bash
 gt daemon status
 gt daemon logs
-```text
+```
 
 ---
 
@@ -635,7 +692,7 @@ Manage the Dolt SQL server for beads.
 
 ```bash
 gt dolt <subcommand>
-```text
+```
 
 **Description:** The Dolt server provides multi-client access to all rig databases, avoiding the single-writer limitation of embedded Dolt mode. Runs on port 3307 (to avoid conflicts with MySQL on 3306).
 
@@ -658,7 +715,7 @@ gt dolt <subcommand>
 gt dolt status
 gt dolt sql
 gt dolt list
-```text
+```
 
 ---
 
@@ -668,7 +725,7 @@ Manage themed name pools for polecats.
 
 ```bash
 gt namepool [subcommand] [options]
-```text
+```
 
 **Description:** Polecats get themed names from a pool (default: Mad Max universe, e.g., furiosa, nux, slit). You can change the theme or add custom names.
 
@@ -704,7 +761,7 @@ gt namepool add ember
 
 # Reset pool state
 gt namepool reset
-```text
+```
 
 ---
 
@@ -714,7 +771,7 @@ Create a git worktree in another rig for cross-rig work.
 
 ```bash
 gt worktree <rig> [options]
-```text
+```
 
 **Description:** For crew workers who need to work on another rig's codebase while maintaining their identity. Creates a worktree in the target rig's `crew/` directory named after your source rig and identity.
 
@@ -742,7 +799,7 @@ gt worktree list
 
 # Remove a worktree
 gt worktree remove beads
-```text
+```
 
 ## See Also
 

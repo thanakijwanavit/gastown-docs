@@ -18,7 +18,7 @@ List work items that are ready for assignment.
 
 ```bash
 gt ready [options]
-```text
+```
 
 **Description:** Shows beads in `pending` or `open` status that are not currently assigned to any agent. These are available for slinging to workers.
 
@@ -43,16 +43,16 @@ gt ready --priority high --type bug
 
 # Show ready work for a specific rig
 gt ready --rig myproject
-```text
+```
 
 **Sample output:**
 
-```text
+```
 ID         PRIORITY   TYPE      TITLE                           RIG
 gt-abc12   high       bug       Fix login redirect loop         myproject
 gt-def34   medium     feature   Add email validation            myproject
 gt-ghi56   low        task      Update API documentation        docs
-```text
+```
 
 ---
 
@@ -62,7 +62,7 @@ Assign work to a rig or agent.
 
 ```bash
 gt sling <bead-id>... <target> [options]
-```text
+```
 
 **Description:** The primary command for assigning work. Hooks the bead to the target, updates its status, and spawns a polecat to execute the work. This is the central work distribution command in Gas Town.
 
@@ -89,7 +89,7 @@ gt sling gt-abc12 myproject --agent cursor
 
 # Hook work without spawning (manual pickup later)
 gt sling gt-abc12 myproject --no-spawn
-```text
+```
 
 **What happens:**
 
@@ -112,7 +112,7 @@ View or attach work to the current agent's hook.
 
 ```bash
 gt hook [bead-id] [options]
-```text
+```
 
 **Description:** Without arguments, shows what is currently on the agent's hook. With a bead ID, attaches that work item to the hook. The hook is Gas Town's durability primitive -- work on a hook survives session restarts, compaction, and crashes.
 
@@ -130,17 +130,17 @@ gt hook
 
 # Attach work to hook
 gt hook gt-abc12
-```text
+```
 
 **Sample output:**
 
-```text
+```
 Hook: gt-abc12 "Fix login redirect loop" [in_progress]
   Rig: myproject
   Branch: fix/login-bug
   Convoy: hq-cv-001
   Hooked: 15m ago
-```text
+```
 
 ---
 
@@ -150,7 +150,7 @@ Remove work from a hook without completing it.
 
 ```bash
 gt unsling <bead-id> [options]
-```text
+```
 
 **Description:** Detaches work from an agent's hook and sets the bead back to an assignable state. Use this when work needs to be reassigned or when a polecat should not continue with a task.
 
@@ -169,51 +169,66 @@ gt unsling gt-abc12
 
 # Unsling and release back to ready pool
 gt unsling gt-abc12 --release
-```text
+```
 
 ---
 
 ### `gt done`
 
-Mark work as complete and submit a merge request.
+Signal that work is complete and ready for the merge queue.
 
 ```bash
 gt done [options]
-```text
+```
 
-**Description:** The standard polecat exit command. Commits any remaining changes, pushes the branch, creates a merge request for the Refinery, updates the bead status, and exits the polecat session. This is the happy-path completion for any piece of work.
+**Description:** The standard polecat exit command that:
+1. Submits the current branch to the merge queue
+2. Auto-detects issue ID from branch name
+3. Notifies the Witness with the exit outcome
+4. Exits the Claude session
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <msg>` | MR description / completion summary |
-| `--no-mr` | Complete without creating a merge request |
-| `--escalate` | Exit with escalation instead of completion |
-| `--defer` | Exit with deferred status (work paused, not done) |
-| `--phase` | Exit with phase-complete status (gate point) |
+| `--status <status>` | Exit status: `COMPLETED`, `ESCALATED`, or `DEFERRED` (default: `COMPLETED`) |
+| `--phase-complete` | Signal phase complete -- await gate before continuing |
+| `--gate <bead-id>` | Gate bead ID to wait on (used with `--phase-complete`) |
+| `--issue <id>` | Explicit source issue ID (default: parsed from branch name) |
+| `--priority <0-4>` | Override priority (default: inherit from issue) |
+| `--cleanup-status <status>` | Git cleanup status: `clean`, `uncommitted`, `unpushed`, `stash`, `unknown` |
 
-**Example:**
+**Examples:**
 
 ```bash
 # Standard completion
-gt done --message "Fixed login redirect by correcting OAuth callback URL"
+gt done
 
-# Complete without MR (e.g., documentation-only changes)
-gt done --no-mr --message "Updated local docs only"
+# Explicit issue ID
+gt done --issue gt-abc
 
 # Escalate a blocker
-gt done --escalate --message "Blocked: need API credentials for staging"
-```text
+gt done --status ESCALATED
 
-**Exit states:**
+# Pause work for later
+gt done --status DEFERRED
 
-| Flag | Exit State | Meaning |
-|------|-----------|---------|
-| (default) | `COMPLETED` | Work done, MR submitted to Refinery |
-| `--escalate` | `ESCALATED` | Hit a blocker, needs human input |
-| `--defer` | `DEFERRED` | Paused, another agent can pick up later |
-| `--phase` | `PHASE_COMPLETE` | Phase done, waiting for gate |
+# Phase complete with gate
+gt done --phase-complete --gate g-x
+```
+
+**Exit statuses:**
+
+| Status | Meaning |
+|--------|---------|
+| `COMPLETED` | Work done, MR submitted to Refinery (default) |
+| `ESCALATED` | Hit a blocker, needs human intervention |
+| `DEFERRED` | Work paused, issue still open |
+| `PHASE_COMPLETE` | Phase done, awaiting gate (use `--phase-complete`) |
+
+**Phase handoff workflow:**
+
+When a molecule has gate steps (async waits), use `--phase-complete` to signal that the current phase is complete but work continues after the gate closes. The Witness will recycle this polecat and dispatch a new one when the gate resolves.
 
 ---
 
@@ -223,7 +238,7 @@ Close a bead without going through the done workflow.
 
 ```bash
 gt close <bead-id> [options]
-```text
+```
 
 **Description:** Manually closes a bead. Useful for closing duplicate issues, items resolved by other means, or administrative cleanup.
 
@@ -241,7 +256,7 @@ gt close <bead-id> [options]
 gt close gt-abc12 --reason "Resolved by upstream fix"
 gt close gt-def34 --duplicate gt-abc12
 gt close gt-ghi56 --wontfix
-```text
+```
 
 ---
 
@@ -251,7 +266,7 @@ Release a stuck in-progress bead back to the ready pool.
 
 ```bash
 gt release <bead-id> [options]
-```text
+```
 
 **Description:** Frees a bead that is stuck in `in_progress` or `hooked` status, making it available for reassignment. Essential for recovering from polecat crashes or stalled work.
 
@@ -266,7 +281,7 @@ gt release <bead-id> [options]
 ```bash
 gt release gt-abc12
 gt release gt-abc12 --force
-```text
+```
 
 :::tip
 
@@ -282,7 +297,7 @@ Show detailed information about a bead or work item.
 
 ```bash
 gt show <bead-id> [options]
-```text
+```
 
 **Description:** Displays comprehensive information about a bead including its status, history, assigned agent, convoy membership, and related activity.
 
@@ -299,11 +314,11 @@ gt show <bead-id> [options]
 ```bash
 gt show gt-abc12
 gt show gt-abc12 --history
-```text
+```
 
 **Sample output:**
 
-```text
+```
 Bead: gt-abc12
 Title: Fix login redirect loop
 Type: bug
@@ -315,7 +330,7 @@ Branch: fix/login-bug
 Convoy: hq-cv-001
 Created: 2h ago
 Updated: 15m ago
-```text
+```
 
 ---
 
@@ -325,7 +340,7 @@ Output the raw content of a bead or work artifact.
 
 ```bash
 gt cat <bead-id> [options]
-```text
+```
 
 **Description:** Prints the raw bead content, including description, comments, and metadata. Useful for piping into other tools or for programmatic access.
 
@@ -347,7 +362,7 @@ gt cat gt-abc12 --field description
 
 # JSON output for scripting
 gt cat gt-abc12 --format json
-```text
+```
 
 ---
 
@@ -357,7 +372,7 @@ Git commit with automatic agent identity.
 
 ```bash
 gt commit [flags] [-- git-commit-args...]
-```text
+```
 
 **Description:** A git commit wrapper that automatically sets the git author identity for agents. When run by an agent (with `GT_ROLE` set), it detects the agent identity from environment variables and converts it to a git-friendly name and email. When run by a human (no `GT_ROLE`), it passes through to plain `git commit`.
 
@@ -372,14 +387,14 @@ gt commit -am "Quick fix"
 
 # Amend last commit
 gt commit -- --amend
-```text
+```
 
 **Identity mapping:**
 
-```text
+```
 Agent: gastown/crew/jack  →  Name: gastown/crew/jack
                               Email: gastown.crew.jack@gastown.local
-```text
+```
 
 :::tip
 
@@ -395,7 +410,7 @@ Gate coordination for async workflows.
 
 ```bash
 gt gate <subcommand>
-```text
+```
 
 **Description:** Gates provide async coordination points in workflows. Most gate operations are in the `bd` CLI (`bd gate create`, `bd gate show`, `bd gate list`, `bd gate close`, `bd gate approve`, `bd gate eval`). The `gt gate` command adds Gas Town integration.
 
@@ -409,7 +424,7 @@ gt gate <subcommand>
 
 ```bash
 gt gate wake <gate-id>
-```text
+```
 
 ---
 
@@ -423,7 +438,7 @@ Create a new bead (issue).
 
 ```bash
 bd create [options]
-```text
+```
 
 **Description:** Creates a new bead in the beads database. Beads are the fundamental work unit in Gas Town.
 
@@ -432,13 +447,19 @@ bd create [options]
 | Flag | Description |
 |------|-------------|
 | `--title <text>` | Bead title (required) |
-| `--type <type>` | Type: `bug`, `feature`, `task`, `chore`, `epic` |
-| `--priority <level>` | Priority: `critical`, `high`, `medium`, `low` |
-| `--description <text>` | Detailed description |
+| `--type <type>` | Type: `bug`, `feature`, `task`, `chore`, `epic`, `molecule`, `gate`, etc. |
+| `--priority <level>` | Priority: `0-4` or `P0-P4` (0=highest, default: `2`) |
+| `--description <text>`, `-d` | Detailed description |
+| `--assignee <name>`, `-a` | Assignee |
 | `--rig <name>` | Assign to a specific rig |
-| `--label <label>` | Add labels (can be repeated) |
+| `--labels <list>`, `-l` | Add labels (comma-separated) |
 | `--parent <id>` | Set parent bead for hierarchical tracking |
 | `--convoy <id>` | Add to an existing convoy |
+| `--estimate <minutes>`, `-e` | Time estimate in minutes (e.g., 60 for 1 hour) |
+| `--file <path>`, `-f` | Create multiple issues from markdown file |
+| `--silent` | Output only the issue ID (for scripting) |
+| `--dry-run` | Preview what would be created without creating |
+| `--prefix <prefix>` | Create issue in rig by prefix (e.g., `--prefix bd-`) |
 
 **Example:**
 
@@ -451,7 +472,7 @@ bd create --title "Add email validation" --type feature --description "Validate 
 
 bd create --title "Auth epic" --type epic
 # Created: gt-epc01
-```text
+```
 
 ---
 
@@ -461,7 +482,7 @@ List beads with optional filters.
 
 ```bash
 bd list [options]
-```text
+```
 
 **Options:**
 
@@ -487,7 +508,7 @@ bd list --type bug --priority high
 
 # List recent 10 beads
 bd list --limit 10 --sort updated
-```text
+```
 
 ---
 
@@ -497,7 +518,7 @@ Show detailed information about a bead.
 
 ```bash
 bd show <bead-id> [options]
-```text
+```
 
 **Options:**
 
@@ -510,7 +531,7 @@ bd show <bead-id> [options]
 
 ```bash
 bd show gt-abc12
-```text
+```
 
 ---
 
@@ -520,7 +541,7 @@ Update a bead's fields.
 
 ```bash
 bd update <bead-id> [options]
-```text
+```
 
 **Options:**
 
@@ -541,7 +562,7 @@ bd update <bead-id> [options]
 ```bash
 bd update gt-abc12 --priority critical --comment "This is blocking production"
 bd update gt-def34 --status in_progress --assign polecat/toast
-```text
+```
 
 ---
 
@@ -551,7 +572,7 @@ Close a bead.
 
 ```bash
 bd close <bead-id> [options]
-```text
+```
 
 **Options:**
 
@@ -564,7 +585,7 @@ bd close <bead-id> [options]
 
 ```bash
 bd close gt-abc12 --reason "Fixed in PR #42"
-```text
+```
 
 ---
 
@@ -574,7 +595,7 @@ Synchronize the beads database.
 
 ```bash
 bd sync [options]
-```text
+```
 
 **Description:** Syncs the local beads SQLite database with the git-backed storage. Ensures all beads are consistent across agents and workspaces.
 
@@ -590,7 +611,7 @@ bd sync [options]
 ```bash
 bd sync
 bd sync --rig myproject
-```text
+```
 
 ---
 
@@ -602,7 +623,7 @@ Show bead details through the `gt` interface.
 
 ```bash
 gt bead show <bead-id> [options]
-```text
+```
 
 **Description:** Similar to `bd show` but integrates with Gas Town context, showing additional information like hook status, convoy membership, and agent assignment.
 
@@ -617,7 +638,7 @@ gt bead show <bead-id> [options]
 
 ```bash
 gt bead show gt-abc12
-```text
+```
 
 ---
 
@@ -627,7 +648,7 @@ Read a bead's full content into the agent context.
 
 ```bash
 gt bead read <bead-id>
-```text
+```
 
 **Description:** Loads the complete bead content (description, comments, history) into the current agent's working context. Primarily used by agents to understand their assigned work.
 
@@ -635,7 +656,7 @@ gt bead read <bead-id>
 
 ```bash
 gt bead read gt-abc12
-```text
+```
 
 ---
 
@@ -645,7 +666,7 @@ Move a bead between rigs.
 
 ```bash
 gt bead move <bead-id> <target-rig> [options]
-```text
+```
 
 **Description:** Transfers a bead from one rig to another. Useful when work is reassigned to a different project.
 
@@ -660,7 +681,7 @@ gt bead move <bead-id> <target-rig> [options]
 ```bash
 gt bead move gt-abc12 docs
 gt bead move gt-def34 myproject --force
-```text
+```
 
 :::note
 
