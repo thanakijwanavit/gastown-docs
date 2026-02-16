@@ -76,7 +76,7 @@ Each patrol cycle generates ephemeral data (heartbeats, status checks, health re
 
 ## How Digest Aggregation Works
 
-```
+```text
 Per-cycle data:
   witness-patrol-14:00 → "3 polecats healthy, 0 stalled"
   witness-patrol-14:05 → "3 polecats healthy, 1 nudged"
