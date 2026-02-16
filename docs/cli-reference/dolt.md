@@ -121,7 +121,7 @@ gt dolt rollback       # Restore from the pre-migration backup
 
 ## Architecture
 
-```
+```text
 $GT_ROOT/
 ├── .dolt-data/              ← Centralized data directory
 │   ├── hq/                  ← HQ (town-level) database
