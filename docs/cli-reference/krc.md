@@ -137,7 +137,7 @@ Patrol agents are the primary producers of Level 0 data. Each 5-minute patrol cy
 
 The typical flow:
 
-```
+```text
 Patrol agents → generate ephemeral events → KRC prunes expired → gt patrol digest aggregates
 ```
 
