@@ -2,7 +2,7 @@
   "name": "Gas Town Documentation",
   "url": "https://docs.gt.villamarket.ai",
   "description": "Multi-agent orchestration for AI coding agents",
-  "generated": "2026-02-13T17:21:06.286Z",
+  "generated": "2026-02-16T04:32:08.102Z",
   "sections": [
     {
       "id": "getting-started",
@@ -27,6 +27,21 @@
           "title": "Your First Convoy",
           "path": "/docs/getting-started/first-convoy",
           "description": "A Convoy is Gas Town's primary unit for tracking batches of related work. This walkthrough takes you through creating and monitoring your first convoy."
+        },
+        {
+          "title": "Using Search",
+          "path": "/docs/getting-started/using-search",
+          "description": "How to effectively search the Gas Town documentation to find what you need quickly."
+        },
+        {
+          "title": "Cheat Sheet",
+          "path": "/docs/getting-started/cheat-sheet",
+          "description": "One-page quick reference for the most common Gas Town and Beads commands, organized by task."
+        },
+        {
+          "title": "FAQ",
+          "path": "/docs/getting-started/faq",
+          "description": "Frequently asked questions about Gas Town, covering setup, agent behavior, costs, and common misconceptions."
         }
       ]
     },
@@ -146,9 +161,19 @@
           "description": "CLI commands for configuring Gas Town agent runtimes, account settings, themes, hooks, and issue integration at the town and rig levels."
         },
         {
+          "title": "gt seance",
+          "path": "/docs/cli-reference/seance",
+          "description": "Talk to predecessor sessions. Discover recent sessions and ask questions about decisions, progress, and context from previous work."
+        },
+        {
           "title": "gt formula",
           "path": "/docs/cli-reference/formula",
           "description": "Manage workflow formulas — reusable TOML/JSON templates that define multi-step molecules with variables and composition rules."
+        },
+        {
+          "title": "gt orphans",
+          "path": "/docs/cli-reference/orphans",
+          "description": "Find and recover orphaned commits and processes. Detects work lost from killed sessions, failed merges, and network issues."
         },
         {
           "title": "gt dolt",
@@ -158,7 +183,17 @@
         {
           "title": "gt warrant",
           "path": "/docs/cli-reference/warrant",
-          "description": "File and execute death warrants for stuck or unresponsive agents that need controlled termination."
+          "description": "Manage death warrants for agents that need forced termination. File, list, and execute warrants through Boot's triage cycle."
+        },
+        {
+          "title": "gt town",
+          "path": "/docs/cli-reference/town",
+          "description": "Town-level operations including session cycling between mayor and deacon."
+        },
+        {
+          "title": "gt compact",
+          "path": "/docs/cli-reference/compact",
+          "description": "Apply TTL-based compaction to ephemeral wisps. Promotes stuck wisps to permanent beads and deletes closed wisps past their TTL."
         },
         {
           "title": "gt patrol",
@@ -169,6 +204,11 @@
           "title": "gt krc",
           "path": "/docs/cli-reference/krc",
           "description": "Key Record Chronicle — TTL-based lifecycle management for ephemeral operational data like patrol heartbeats and status checks."
+        },
+        {
+          "title": "gt tap",
+          "path": "/docs/cli-reference/tap",
+          "description": "Hook handlers for Claude Code PreToolUse and PostToolUse events. Implements policy guards, auditing, and input transformation."
         }
       ]
     },
@@ -416,6 +456,11 @@
           "description": "Solutions for the most common Gas Town problems: gt done failures, polecat churn, branch naming, bead routing, hook conflicts, and stuck refineries."
         },
         {
+          "title": "Multi-Agent Git Workflow",
+          "path": "/docs/guides/git-workflow",
+          "description": "Best practices for git workflows in multi-agent environments where multiple agents work simultaneously on the same repository."
+        },
+        {
           "title": "Glossary",
           "path": "/docs/guides/glossary",
           "description": "Complete terminology reference for Gas Town, covering all agents, concepts, commands, and conventions."
@@ -521,6 +566,12 @@
       "description": "CLI commands for inter-agent messaging, notifications, escalations, and broadcasts using Gas Town's Erlang-inspired asynchronous mailbox system."
     },
     {
+      "title": "gt compact",
+      "path": "/docs/cli-reference/compact",
+      "section": "cli-reference",
+      "description": "Apply TTL-based compaction to ephemeral wisps. Promotes stuck wisps to permanent beads and deletes closed wisps past their TTL."
+    },
+    {
       "title": "Configuration",
       "path": "/docs/cli-reference/configuration",
       "section": "cli-reference",
@@ -575,6 +626,12 @@
       "description": "Send synchronous messages directly to any worker's Claude Code session for real-time coordination between agents."
     },
     {
+      "title": "gt orphans",
+      "path": "/docs/cli-reference/orphans",
+      "section": "cli-reference",
+      "description": "Find and recover orphaned commits and processes. Detects work lost from killed sessions, failed merges, and network issues."
+    },
+    {
       "title": "gt patrol",
       "path": "/docs/cli-reference/patrol",
       "section": "cli-reference",
@@ -599,6 +656,12 @@
       "description": "CLI commands for adding, configuring, starting, stopping, and managing rigs -- Gas Town's project containers that wrap git repositories."
     },
     {
+      "title": "gt seance",
+      "path": "/docs/cli-reference/seance",
+      "section": "cli-reference",
+      "description": "Talk to predecessor sessions. Discover recent sessions and ask questions about decisions, progress, and context from previous work."
+    },
+    {
       "title": "gt session",
       "path": "/docs/cli-reference/session-commands",
       "section": "cli-reference",
@@ -617,10 +680,22 @@
       "description": "Assign work to agents and rigs. The primary command for work distribution in Gas Town, handling polecat spawning, formula instantiation, and batch dispatch."
     },
     {
+      "title": "gt tap",
+      "path": "/docs/cli-reference/tap",
+      "section": "cli-reference",
+      "description": "Hook handlers for Claude Code PreToolUse and PostToolUse events. Implements policy guards, auditing, and input transformation."
+    },
+    {
+      "title": "gt town",
+      "path": "/docs/cli-reference/town",
+      "section": "cli-reference",
+      "description": "Town-level operations including session cycling between mayor and deacon."
+    },
+    {
       "title": "gt warrant",
       "path": "/docs/cli-reference/warrant",
       "section": "cli-reference",
-      "description": "File and execute death warrants for stuck or unresponsive agents that need controlled termination."
+      "description": "Manage death warrants for agents that need forced termination. File, list, and execute warrants through Boot's triage cycle."
     },
     {
       "title": "Work Management",
@@ -707,6 +782,18 @@
       "description": "Wisps are lightweight, ephemeral sub-beads that track individual steps within a molecule. They provide granular progress visibility without cluttering the persistent issue database."
     },
     {
+      "title": "Cheat Sheet",
+      "path": "/docs/getting-started/cheat-sheet",
+      "section": "getting-started",
+      "description": "One-page quick reference for the most common Gas Town and Beads commands, organized by task."
+    },
+    {
+      "title": "FAQ",
+      "path": "/docs/getting-started/faq",
+      "section": "getting-started",
+      "description": "Frequently asked questions about Gas Town, covering setup, agent behavior, costs, and common misconceptions."
+    },
+    {
       "title": "Your First Convoy",
       "path": "/docs/getting-started/first-convoy",
       "section": "getting-started",
@@ -731,6 +818,12 @@
       "description": "Set up your Gas Town workspace, add your first project, start the core agents, and give the Mayor your first instructions."
     },
     {
+      "title": "Using Search",
+      "path": "/docs/getting-started/using-search",
+      "section": "getting-started",
+      "description": "How to effectively search the Gas Town documentation to find what you need quickly."
+    },
+    {
       "title": "Architecture Guide",
       "path": "/docs/guides/architecture",
       "section": "guides",
@@ -747,6 +840,12 @@
       "path": "/docs/guides/eight-stages",
       "section": "guides",
       "description": "The 8-stage maturity framework for AI-assisted development, from zero AI to multi-agent orchestration. Gas Town targets Stage 7 and above."
+    },
+    {
+      "title": "Multi-Agent Git Workflow",
+      "path": "/docs/guides/git-workflow",
+      "section": "guides",
+      "description": "Best practices for git workflows in multi-agent environments where multiple agents work simultaneously on the same repository."
     },
     {
       "title": "Glossary",

@@ -106,6 +106,23 @@ Gas Town is created by [Steve Yegge](https://steve-yegge.medium.com/) and named 
 
 This section covers everything you need to go from zero to running Gas Town with your first project.
 
+## What is Gas Town?
+
+Gas Town is a **multi-agent workspace manager** that coordinates AI coding agents working on your projects. Instead of one agent in one terminal, Gas Town runs many agents in parallel — each with its own git worktree, issue tracker, and session — while a hierarchy of supervisors keeps everything on track.
+
+**Core components:**
+
+| Component | Role |
+|-----------|------|
+| **Mayor** | Global coordinator that decomposes high-level goals into actionable work |
+| **Polecats** | Ephemeral workers spawned for individual tasks, nuked when done |
+| **Refinery** | Per-rig merge queue that serializes all merges to main |
+| **Witness** | Monitors polecat health and recovers stuck workers |
+| **Deacon** | Infrastructure orchestrator running periodic health checks |
+| **Crew** | Persistent human-managed workspaces for direct interaction |
+
+**How it works:** You describe what you want built. The Mayor breaks it into issues, bundles them into convoys, and slings work to polecats. Each polecat works independently in its own sandbox, then submits completed work to the Refinery for merge. The Witness watches for failures. You watch the progress.
+
 ## Prerequisites
 
 Before installing Gas Town, ensure you have:
@@ -122,6 +139,9 @@ Before installing Gas Town, ensure you have:
 1. [Installation](installation.md) — Install Gas Town and its dependencies
 2. [Quick Start](quickstart.md) — Set up your workspace and add your first project
 3. [Your First Convoy](first-convoy.md) — Assign work and watch agents deliver
+4. [Using Search](using-search.md) — Find what you need in the documentation
+5. [Cheat Sheet](cheat-sheet.md) — One-page command quick reference
+6. [FAQ](faq.md) — Answers to the most common questions
 
 ## The 30-Second Version
 
@@ -133,6 +153,16 @@ gt rig add myapp git@github.com:you/app.git   # Add project
 gt mayor attach               # Start the Mayor
 # Tell the Mayor what to build
 ```
+
+## Next Steps
+
+Once you're up and running, explore these areas:
+
+- [Cheat Sheet](cheat-sheet.md) — Quick reference for the commands you'll use most
+- [FAQ](faq.md) — Answers to common questions about setup, agents, and costs
+- [Architecture Overview](../architecture/overview.md) — Understand how all the pieces fit together
+- [Usage Guide](../guides/usage-guide.md) — Day-to-day patterns for working with Gas Town
+- [CLI Reference](../cli-reference/index.md) — Complete command reference
 
 
 ========================================================================
@@ -172,6 +202,10 @@ sudo mv gt /usr/local/bin/
 </Tabs>
 
 ## Install Dependencies
+
+:::warning
+Gas Town requires Git 2.25+ because it relies heavily on git worktrees for agent isolation. Older versions have worktree bugs that can cause data corruption. Check your version before proceeding.
+:::
 
 ### Git (Required)
 
@@ -249,6 +283,10 @@ gt help
 
 You should see the Gas Town help output listing all available commands.
 
+:::tip
+Install shell completions right away -- they make the `gt` and `bd` CLIs significantly easier to use, especially when working with bead IDs and rig names.
+:::
+
 ## Supported Runtimes
 
 Gas Town supports multiple AI coding agent runtimes:
@@ -289,11 +327,11 @@ The **Town** is your top-level workspace directory. All projects (rigs) live ins
 ```bash
 gt install ~/gt --git
 cd ~/gt
-```
+```text
 
 This creates:
 
-```
+```text
 ~/gt/
 ├── .beads/          # Town-level issue tracking
 ├── .claude/         # Claude Code integration
@@ -304,7 +342,11 @@ This creates:
 ├── scripts/         # Utility scripts
 ├── plugins/         # Town-level plugins
 └── CLAUDE.md        # Project context
-```
+```text
+
+:::note
+The `--git` flag in `gt install` initializes the workspace as a git repository. This is recommended because Gas Town uses git as ground truth for all persistent state.
+:::
 
 ## Add a Project (Rig)
 
@@ -312,11 +354,11 @@ Each project you manage with Gas Town is called a **Rig**.
 
 ```bash
 gt rig add myproject https://github.com/you/repo.git
-```
+```text
 
 This creates the rig structure:
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/          # Rig-level issue tracking
 ├── config.json      # Rig configuration
@@ -326,7 +368,7 @@ This creates the rig structure:
 ├── witness/         # Health monitor
 ├── polecats/        # Worker directories
 └── plugins/         # Rig-level plugins
-```
+```text
 
 ## Create a Crew Workspace
 
@@ -334,13 +376,13 @@ Crew workspaces are persistent clones for human developers.
 
 ```bash
 gt crew add myproject yourname
-```
+```text
 
 Enter your workspace:
 
 ```bash
 cd ~/gt/myproject/crew/yourname
-```
+```text
 
 ## Start Gas Town
 
@@ -352,7 +394,7 @@ gt start
 
 # Or start everything including Witnesses and Refineries
 gt start --all
-```
+```text
 
 ## Attach to the Mayor
 
@@ -360,7 +402,7 @@ The Mayor is your primary interface for coordinating work.
 
 ```bash
 gt mayor attach
-```
+```text
 
 Now you can give natural language instructions. For example:
 
@@ -373,6 +415,10 @@ The Mayor will:
 3. Spawn polecats to work on each task
 4. Monitor progress
 5. Route completed work through the refinery for merging
+
+:::tip
+You can use `gt start --all` to launch the full agent fleet (Mayor, Deacon, all Witnesses, and all Refineries) in one command. Use plain `gt start` if you only need the Mayor and Deacon for lighter workloads.
+:::
 
 ## Check Status
 
@@ -388,7 +434,7 @@ gt feed
 
 # Check what's ready for work
 gt ready
-```
+```text
 
 ## See Also
 
@@ -491,6 +537,10 @@ gt convoy list
 # hq-cv-xyz  Auth System Fixes  [COMPLETED]  3/3 done
 ```
 
+:::info
+Convoys auto-close when all tracked beads reach a terminal state. You do not need to manually close a convoy -- just focus on completing the individual issues.
+:::
+
 ## Using the Mayor Instead
 
 For a more automated experience, attach to the Mayor and describe the work:
@@ -505,6 +555,10 @@ Then tell the Mayor:
 
 The Mayor handles convoy creation, issue tracking, and agent assignment automatically.
 
+:::tip
+For most workflows, use `gt mayor attach` instead of manually creating convoys. The Mayor handles issue creation, convoy bundling, and agent assignment automatically from natural language instructions.
+:::
+
 ## Tips
 
 - Use `gt convoy show` frequently to track progress
@@ -517,6 +571,701 @@ The Mayor handles convoy creation, issue tracking, and agent assignment automati
 - **[Convoys](../concepts/convoys.md)** -- The convoy concept in depth
 - **[Mayor Workflow](../workflows/mayor-workflow.md)** -- Full Mayor-driven workflow documentation
 - **[Manual Convoy](../workflows/manual-convoy.md)** -- Fine-grained convoy control without the Mayor
+
+
+========================================================================
+# Using Search
+# URL: /docs/getting-started/using-search
+========================================================================
+
+# Using Search
+
+The Gas Town documentation includes a powerful local search feature that helps you find information quickly across all pages.
+
+---
+
+## Accessing Search
+
+:::tip
+Press **`Ctrl+K`** (Windows/Linux) or **`⌘+K`** (Mac) from any page to instantly open search. This is the fastest way to find anything in the docs.
+:::
+
+### Keyboard Shortcut
+
+Press **`Ctrl+K`** (Windows/Linux) or **`⌘+K`** (Mac) from any page to open the search modal.
+
+### Click to Search
+
+Click the search icon or search box in the navigation bar at the top of the page.
+
+---
+
+## How Search Works
+
+The documentation uses **local search** powered by [@easyops-cn/docusaurus-search-local](https://github.com/easyops-cn/docusaurus-search-local). This means:
+
+- **No external requests**: All search happens in your browser
+- **Fast results**: Instant search as you type
+- **Offline capable**: Works even without internet connection
+- **Privacy-friendly**: No search queries are sent to external servers
+
+### What Gets Indexed
+
+The search indexes:
+- **Page titles**: Primary matching for navigation
+- **Headings**: All H2 and H3 headings across the docs
+- **Body content**: Full-text search of all documentation content
+- **Code blocks**: Searches code examples and commands
+
+### What Doesn't Get Indexed
+
+- Comments in code blocks
+- Hidden or collapsed content
+- External links (only the link text, not destination content)
+
+---
+
+## Search Tips
+
+### Basic Search
+
+Just start typing - results appear instantly:
+
+```text
+witness
+```
+
+Finds all pages mentioning "witness" (the patrol agent type).
+
+### Multi-Word Search
+
+Search for multiple words together:
+
+```bash
+git merge conflict
+```
+
+Finds pages discussing git merge conflicts.
+
+### Phrase Search
+
+Use quotes for exact phrases:
+
+```text
+"gt doctor --fix"
+```
+
+Finds exact command references.
+
+### Command Search
+
+Search for specific commands:
+
+```bash
+bd ready
+```
+
+Finds documentation for the `bd ready` command.
+
+### Concept Search
+
+Search by concept or feature:
+
+```text
+convoy tracking
+```
+
+Finds pages explaining convoy functionality.
+
+---
+
+## Understanding Results
+
+### Result Format
+
+Each search result shows:
+- **Page title**: The document containing the match
+- **Heading**: The specific section within the page
+- **Preview**: Snippet showing the matched text with highlights
+- **Path**: Breadcrumb showing location in docs hierarchy
+
+### Result Ranking
+
+Results are ranked by relevance:
+1. **Exact title matches**: Pages with the search term in the title appear first
+2. **Heading matches**: Sections with matching headings
+3. **Body content**: Full-text matches in page content
+4. **Recency**: More recently updated pages rank higher
+
+### Highlighted Terms
+
+When you click a search result, the matching terms are **highlighted in yellow** on the destination page, making it easy to find the relevant content.
+
+---
+
+## Advanced Search Techniques
+
+### Finding Commands
+
+To find a specific command:
+
+```bash
+gt mail send
+```
+
+Returns all references to the mail sending command across guides and references.
+
+### Troubleshooting Searches
+
+Looking for solutions to problems:
+
+```text
+zombie session
+agent stuck
+merge conflict
+```
+
+### Conceptual Searches
+
+Understanding how things work:
+
+```text
+how polecats work
+witness patrol cycle
+refinery merge queue
+```
+
+### Reference Searches
+
+Looking up specific syntax:
+
+```bash
+bd create flags
+convoy syntax
+hook format
+```
+
+---
+
+## Search Shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+K` / `⌘+K` | Open search |
+| `Esc` | Close search |
+| `↑` / `↓` | Navigate results |
+| `Enter` | Go to selected result |
+| `Tab` | Cycle through results |
+
+---
+
+## Search Scope
+
+### Included in Search
+
+- **Getting Started** guides
+- **Architecture** documentation
+- **CLI Reference** pages
+- **Concepts** explainers
+- **Workflows** guides
+- **Operations** guides
+- **Agent** documentation
+- **Troubleshooting** sections
+
+### Not Included in Search
+
+- External GitHub repository code
+- Medium blog posts (linked but not indexed)
+- Community forum content
+- API documentation (if separate)
+
+---
+
+## Common Search Queries
+
+### For New Users
+
+```text
+installation
+quickstart
+first convoy
+getting started
+```
+
+### For Troubleshooting
+
+```text
+agent not responding
+error messages
+zombie
+stuck
+failed
+```
+
+### For Command Reference
+
+```bash
+gt status
+bd create
+convoy list
+mail send
+```
+
+### For Understanding Concepts
+
+```text
+what is a polecat
+how witnesses work
+beads system
+hook mechanism
+```
+
+---
+
+## Search Performance
+
+### Index Size
+
+The search index is approximately:
+- **Compressed**: ~100KB (downloaded on first visit)
+- **Uncompressed**: ~300KB (stored in browser cache)
+- **Pages indexed**: 60+ documentation pages
+
+### Load Time
+
+- **First visit**: Index downloads with the page (~200ms)
+- **Subsequent visits**: Index loads from browser cache (instant)
+- **Search results**: Appear as you type (under 50ms per keystroke)
+
+---
+
+## Troubleshooting Search
+
+### Search Not Working
+
+If search isn't responding:
+
+1. **Refresh the page**: `Ctrl+R` or `⌘+R`
+2. **Clear browser cache**: Search index may be corrupted
+3. **Check JavaScript**: Search requires JavaScript enabled
+4. **Try another browser**: Browser compatibility issue
+
+### No Results Found
+
+If your search returns no results:
+
+1. **Check spelling**: Try variations or simpler terms
+2. **Try broader terms**: "agent" instead of "polecat"
+3. **Use related terms**: "mail" if "message" finds nothing
+4. **Search parent concepts**: "workflow" instead of specific step names
+
+### Outdated Results
+
+If search results seem outdated:
+
+1. **Hard refresh**: `Ctrl+Shift+R` / `⌘+Shift+R`
+2. **Clear site data**: Browser settings → Clear site data
+3. **Check deployment**: Site may be deploying updates
+
+---
+
+## Search vs Navigation
+
+### When to Use Search
+
+- You know what you're looking for
+- Quick reference needed
+- Finding specific commands
+- Troubleshooting errors
+- Cross-referencing concepts
+
+### When to Use Navigation
+
+- Browsing documentation structure
+- Learning Gas Town from scratch
+- Understanding topic relationships
+- Reading guides sequentially
+- Exploring related concepts
+
+---
+
+## Search Limitations
+
+### What Search Can't Do
+
+- **Code execution**: Can't test commands or validate syntax
+- **Context-aware help**: Doesn't know your specific setup
+- **External resources**: Can't search GitHub issues or forums
+- **Future features**: Only searches current documentation
+- **Personalization**: Doesn't learn from your searches
+
+### For These Cases, Use:
+
+- **Code testing**: Your local Gas Town installation
+- **Setup-specific help**: `gt doctor` diagnostics
+- **Community**: GitHub issues and discussions
+- **Roadmap**: GitHub project boards
+- **Support**: File an issue or ask in discussions
+
+---
+
+## Providing Feedback
+
+### Improve Search Results
+
+If search isn't finding what you expect:
+
+1. **File an issue**: [GitHub issues](https://github.com/steveyegge/gastown/issues)
+2. **Suggest keywords**: Terms that should be added to pages
+3. **Report broken links**: Links in search results that don't work
+4. **Request content**: Missing documentation you'd like to see
+
+### Search Analytics
+
+The documentation site does not collect search analytics to protect privacy. Search queries stay in your browser and are never transmitted.
+
+---
+
+## Summary
+
+- **Fast local search**: Instant results, works offline
+- **Keyboard shortcut**: `Ctrl+K` / `⌘+K` to search
+- **Highlighted results**: Terms highlighted on destination pages
+- **Full documentation**: Searches all pages, headings, and content
+- **Privacy-friendly**: No external requests or tracking
+
+Happy searching! If you can't find what you need, consider filing a [documentation issue](https://github.com/steveyegge/gastown/issues) to help improve the docs for everyone.
+
+## Related
+
+- [Glossary](../guides/glossary.md) -- Complete terminology reference for Gas Town agents, concepts, and commands
+- [Quick Start](quickstart.md) -- Get started with Gas Town from scratch
+- [Architecture Guide](../guides/architecture.md) -- Narrative overview of how all the pieces fit together
+- [Troubleshooting Guide](../guides/troubleshooting.md) -- Solutions for the most common Gas Town problems
+
+
+========================================================================
+# Cheat Sheet
+# URL: /docs/getting-started/cheat-sheet
+========================================================================
+
+# Cheat Sheet
+
+A quick reference for the commands you'll use most often. Print this or keep it in a tab.
+
+:::tip
+Commands prefixed with `gt` manage agents and workflows. Commands prefixed with `bd` manage issues (beads).
+:::
+
+---
+
+## Starting & Stopping
+
+| Command | What it does |
+|---------|-------------|
+| `gt start` | Start Mayor + Deacon |
+| `gt start --all` | Start everything (all rigs) |
+| `gt down` | Pause all agents (preserves state) |
+| `gt shutdown` | Stop and clean up worktrees |
+| `gt rig start <name>` | Start agents in one rig |
+| `gt rig stop <name>` | Stop agents in one rig |
+| `gt rig park <name>` | Pause a rig (skipped by `start --all`) |
+| `gt rig unpark <name>` | Resume a parked rig |
+
+---
+
+## Monitoring
+
+| Command | What it does |
+|---------|-------------|
+| `gt feed` | Live activity stream |
+| `gt trail` | Recent activity summary |
+| `gt doctor` | System health check |
+| `gt rig list` | List all rigs and their status |
+| `gt polecat list` | List active polecats |
+| `gt costs` | Token usage and cost tracking |
+| `gt status` | Quick status overview |
+
+---
+
+## Working with Beads (Issues)
+
+| Command | What it does |
+|---------|-------------|
+| `bd create --title "..." --type task` | Create a new issue |
+| `bd list` | List all open issues |
+| `bd show <id>` | View issue details |
+| `bd ready` | Show issues with no blockers |
+| `bd update <id> --status=in_progress` | Claim an issue |
+| `bd close <id>` | Mark issue complete |
+| `bd dep add <child> <parent>` | Add dependency (child needs parent) |
+
+---
+
+## Assigning Work
+
+| Command | What it does |
+|---------|-------------|
+| `gt sling <bead-id> <rig>` | Assign a bead to a rig (spawns polecat) |
+| `gt convoy create "Name" <id1> <id2>...` | Bundle beads into a convoy |
+| `gt convoy list` | List active convoys |
+| `gt convoy status <id>` | Check convoy progress |
+
+---
+
+## Communication
+
+| Command | What it does |
+|---------|-------------|
+| `gt mail inbox` | Check your messages |
+| `gt mail send <addr> -s "Subject" -m "Body"` | Send mail to an agent |
+| `gt mail send --human -s "Subject" -m "Body"` | Send mail to the overseer |
+| `gt nudge <agent> "message"` | Send immediate message to an agent |
+| `gt escalate "msg" -s HIGH` | Create an escalation |
+
+---
+
+## Agent Sessions
+
+| Command | What it does |
+|---------|-------------|
+| `gt mayor attach` | Attach to Mayor session |
+| `gt may at` | Short alias for Mayor attach |
+| `gt crew at <name>` | Attach to a crew workspace |
+| `gt witness attach --rig <name>` | Attach to a Witness |
+| `gt polecat attach <name> --rig <rig>` | Attach to a polecat |
+
+---
+
+## Context & Handoff
+
+| Command | What it does |
+|---------|-------------|
+| `gt prime` | Reload full role context |
+| `gt hook` | Check what's on your hook |
+| `gt handoff -m "notes"` | Cycle to fresh session |
+| `gt mol status` | Check molecule progress |
+| `gt seance` | List recent sessions |
+| `gt seance --talk <id> -p "question"` | Query a previous session |
+
+---
+
+## Git (Multi-Agent)
+
+```bash
+# Standard work cycle
+git pull --rebase            # Always pull first
+# ... edit files ...
+git add <files>
+git commit -m "description"
+git pull --rebase && git push  # Push immediately
+
+# When push fails
+git pull --rebase            # Rebase onto remote
+# resolve conflicts if any
+git push                     # Try again
+```
+
+:::warning
+In Gas Town, unpushed commits are invisible to every other agent. Push after every commit.
+:::
+
+---
+
+## Emergency Commands
+
+| Command | What it does |
+|---------|-------------|
+| `gt doctor` | Diagnose system health |
+| `gt doctor --fix` | Auto-fix common issues |
+| `gt shutdown --polecats-only` | Kill all polecats, keep everything else |
+| `gt rig reboot <name>` | Stop, clean, restart a rig |
+| `gt cleanup --rig <name>` | Clean orphaned resources |
+
+---
+
+## Keyboard Shortcuts (Docs Site)
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+K` / `⌘+K` | Open search |
+| `Esc` | Close search |
+| `↑` / `↓` | Navigate search results |
+| `Enter` | Go to selected result |
+
+## Related
+
+- [Installation](installation.md) -- Install Gas Town and its dependencies
+- [Quick Start](quickstart.md) -- Set up your first workspace end-to-end
+- [Glossary](../guides/glossary.md) -- Full terminology reference for all Gas Town terms
+- [CLI Reference](../cli-reference/index.md) -- Complete command documentation with all flags and options
+
+
+========================================================================
+# FAQ
+# URL: /docs/getting-started/faq
+========================================================================
+
+# Frequently Asked Questions
+
+:::tip
+Use your browser's search (`Ctrl+K`) to find specific topics. For full command documentation, see the [CLI Reference](../cli-reference/index.md).
+:::
+
+---
+
+## General
+
+### What is Gas Town?
+
+Gas Town is a multi-agent AI orchestration system that coordinates fleets of AI coding agents to build software. It provides supervision, crash recovery, merge queue management, and work tracking for 1 to 30+ concurrent agents.
+
+### Why is it called Gas Town?
+
+The naming is inspired by Mad Max: Fury Road. Gas Town is the fuel-producing citadel; rigs are armored trucks; polecats are the warriors who swing on poles; the refinery processes crude into fuel (code into merged commits). See the [Glossary](../guides/glossary.md) for all Mad Max terminology.
+
+### What AI models does Gas Town support?
+
+Gas Town is runtime-agnostic. It supports Claude Code (default and recommended), Gemini CLI, Codex, Cursor, Augment, and Amp. You can mix runtimes within a single town. See [Multi-Runtime Support](../guides/multi-runtime.md).
+
+### Do I need to be a programmer to use Gas Town?
+
+Gas Town is designed for software developers and teams. You interact with the Mayor using natural language, but understanding software development concepts (git, testing, code review) is essential for effective use.
+
+---
+
+## Setup & Requirements
+
+### What are the minimum requirements?
+
+- **Git 2.25+** (for worktree support)
+- **Node.js 20+** (for the documentation site)
+- **tmux** (recommended for full workflow, optional for Minimal Mode)
+- **Claude Code** or another supported AI coding runtime
+- A **git repository** to work with
+
+### Can I use Gas Town without tmux?
+
+Yes. [Minimal Mode](../workflows/minimal-mode.md) works without tmux. You lose some automation (no parallel agent sessions) but gain simplicity.
+
+### How many rigs can I run simultaneously?
+
+There is no hard limit. Typical setups run 2-5 rigs. Each rig requires a Witness and Refinery (persistent agents), so more rigs means more resource consumption. Use `gt rig park` to pause inactive rigs.
+
+---
+
+## Agents & Behavior
+
+### What happens when a polecat crashes?
+
+The [Witness](../agents/witness.md) detects the crash during its patrol cycle (every 5 minutes). It cleans up the zombie session, recovers any uncommitted work, and the bead returns to `pending` status. The work can be re-slung to a fresh polecat. See [GUPP & NDI](../concepts/gupp.md) for why crashes don't lose work.
+
+### How many polecats can run at once?
+
+By default, each rig supports up to 5 concurrent polecats. This is configurable in the rig's `metadata.json`. More polecats means more parallel work but also more merge conflicts and resource consumption.
+
+### Can I talk to a running polecat?
+
+Yes, using `gt nudge`:
+
+```bash
+gt nudge polecat:toast --rig myproject "Focus on the API tests first"
+```
+
+### What's the difference between Crew and Polecats?
+
+| | Crew | Polecats |
+|---|------|----------|
+| **Lifecycle** | Long-lived, human-managed | Ephemeral, self-destructing |
+| **Purpose** | Interactive development | Autonomous task execution |
+| **Merge path** | Push directly to main | Submit MR via Refinery |
+| **Monitoring** | Self-managed | Witness-supervised |
+
+### What does the Mayor actually do?
+
+The Mayor decomposes natural language instructions into discrete, implementable beads, bundles them into convoys, assigns work to rigs, and monitors progress. It does **not** monitor health (that's the Deacon's job). See [Mayor](../agents/mayor.md).
+
+---
+
+## Work Management
+
+### What's the difference between a bead and a convoy?
+
+A **bead** is a single unit of work (like a GitHub issue). A **convoy** is a batch of related beads (like a GitHub milestone). Convoys auto-close when all their beads are done.
+
+### Can I create beads without using the Mayor?
+
+Yes. Use the `bd` CLI directly:
+
+```bash
+bd create --title "Add input validation" --type task --priority 1
+gt sling <bead-id> <rig>
+```
+
+This is the [Manual Convoy](../workflows/manual-convoy.md) workflow.
+
+### What happens if two polecats edit the same file?
+
+The [Refinery](../agents/refinery.md) processes merges one at a time. The first MR merges cleanly. The second MR is rebased onto the updated `main`. If there's a conflict, the Refinery spawns a conflict-resolution polecat. See [Multi-Agent Git Workflow](../guides/git-workflow.md).
+
+### Can I undo a merged commit?
+
+Gas Town does not have a built-in "undo merge." Create a new bead to revert the change:
+
+```bash
+bd create --title "Revert: <original change>" --type bug --priority 1
+```
+
+This follows [GUPP](../concepts/gupp.md) — always move forward, never backward.
+
+---
+
+## Costs & Resources
+
+### How much does Gas Town cost to run?
+
+Gas Town itself is free and open-source. Costs come from the AI runtime (Claude API tokens, etc.). Use `gt costs` to track token usage. See [Cost Management](../guides/cost-management.md) for optimization strategies.
+
+### How can I reduce token costs?
+
+- Write specific beads (reduces polecat exploration time)
+- Use Minimal Mode for simple tasks
+- Park inactive rigs to stop patrol agent token consumption
+- Set polecat concurrency limits per rig
+
+---
+
+## Troubleshooting
+
+### Everything is stuck. What do I do?
+
+```bash
+gt doctor          # Automated diagnostics
+gt doctor --fix    # Auto-fix common issues
+```
+
+If that doesn't help, see the [Troubleshooting guide](../operations/troubleshooting.md).
+
+### How do I recover from a broken main branch?
+
+1. Fix the issue in a crew workspace
+2. Push the fix to main
+3. Resume polecat work
+
+Polecats run preflight tests before implementing. If main is broken, they'll detect it and escalate rather than building on a broken foundation. See the [Scotty Principle](../architecture/design-principles.md).
+
+### Where can I get help?
+
+- **Documentation**: You're reading it
+- **GitHub Issues**: [steveyegge/gastown](https://github.com/steveyegge/gastown/issues)
+- **`gt doctor`**: Built-in diagnostics
+
+## Related
+
+- [Quick Start](quickstart.md) -- Get started with Gas Town from scratch
+- [Cheat Sheet](cheat-sheet.md) -- One-page command quick reference
+- [Glossary](../guides/glossary.md) -- Full terminology reference
+- [Troubleshooting](../operations/troubleshooting.md) -- Detailed problem resolution guide
 
 
 ========================================================================
@@ -572,7 +1321,15 @@ graph TB
     R2 -->|merge| Main2[main]
 ```
 
-Gas Town is a hierarchical supervisor system where each level monitors the level below it, ensuring work progresses reliably even when individual agents crash or stall.
+## How It Fits Together
+
+Gas Town is a hierarchical supervisor system with three layers:
+
+- **Town level** — The Mayor sets strategy, the Deacon runs health checks, and the Daemon provides heartbeats. These are singleton agents shared across all projects.
+- **Rig level** — Each project (rig) has its own Witness watching polecat health and a Refinery serializing merges to main. These agents are rig-scoped.
+- **Worker level** — Polecats are ephemeral workers spawned for one task and nuked when done. Crew members are persistent human-managed workspaces. Both do the actual coding work.
+
+Each level monitors the level below it, ensuring work progresses reliably even when individual agents crash or stall. When a polecat gets stuck, the Witness detects it and escalates to the Deacon, who can file a warrant for termination or trigger recovery.
 
 
 ========================================================================
@@ -599,7 +1356,7 @@ The town is the root directory (typically `~/gt/`) containing all projects and c
 
 Each rig wraps a git repository with the full agent infrastructure:
 
-```
+```text
 myproject/
 ├── .beads/           # Rig-level issue tracking (SQLite + JSONL export)
 ├── metadata.json     # Rig configuration and identity
@@ -614,7 +1371,7 @@ myproject/
 │   ├── toast/
 │   └── alpha/
 └── plugins/          # Rig-level plugins
-```
+```text
 
 ### 3. Agents (Workers)
 
@@ -631,6 +1388,10 @@ Seven agent roles form the hierarchy:
 | **Dogs** | Town | Reusable | Infrastructure tasks |
 
 Additionally, the **Boot** dog is a special triage agent spawned by the Deacon to assess new work or problems.
+
+:::info
+The Boot dog is not a persistent agent. It is spawned on demand by the Deacon to perform quick triage assessments, then exits. This keeps triage fast and focused.
+:::
 
 ### 4. Daemon (Scheduler)
 
@@ -655,7 +1416,7 @@ Agents communicate through:
 
 ## Data Flow
 
-```
+```text
 Human gives Mayor instructions
     → Mayor creates beads + convoy
     → Mayor slings work to rigs
@@ -665,7 +1426,7 @@ Human gives Mayor instructions
     → Code lands on main branch
     → Witness cleans up polecat sandbox
     → Convoy auto-closes when all done
-```
+```text
 
 ## State Management
 
@@ -680,6 +1441,10 @@ All state is persisted in git or the filesystem:
 | Config | `metadata.json`, `.beads/config.yaml` | Everything |
 | Agent context | CLAUDE.md files | Everything |
 | Activity log | `.events.jsonl` | Everything |
+
+:::tip
+Use `gt feed` to watch the real-time activity stream across all agents and rigs. It is the fastest way to see what is happening in your town at any given moment.
+:::
 
 ## See Also
 
@@ -727,7 +1492,11 @@ graph TD
     P1 -->|gt done → MR| Refinery
     P2 -->|gt done → MR| Refinery
     Refinery -->|merge| Main[main branch]
-```
+```text
+
+:::note
+The supervision tree is inspired by Erlang/OTP's "let it crash" philosophy. Agents are expected to fail occasionally -- what matters is that their supervisor detects the failure and recovers automatically.
+:::
 
 ## Monitoring Chain
 
@@ -758,20 +1527,24 @@ The Boot dog is a special agent spawned by the Deacon to assess situations that 
 
 When an agent encounters a problem it cannot resolve:
 
-```
+```text
 Polecat (stuck)
   → Witness detects stall (patrol cycle)
     → Witness nudges polecat
       → If still stuck: Witness escalates to Deacon
         → Deacon escalates to Mayor
           → Mayor escalates to Human/Overseer
-```
+```text
 
 Agents can also self-escalate using `gt escalate`:
 
 ```bash
 gt escalate "Brief description" -s HIGH -m "Details"
-```
+```text
+
+:::tip
+Use `gt escalate` with an appropriate severity level. Over-escalating (P0 for non-critical issues) creates noise, while under-escalating can delay resolution of real problems.
+:::
 
 Severity levels control routing:
 
@@ -851,6 +1624,10 @@ What happens:
 3. Polecat spawns in the rig
 4. Polecat's startup hook finds the work
 5. Polecat begins execution
+
+:::warning
+Once you `gt sling` a bead, the polecat begins execution immediately. There is no confirmation step. Make sure the bead description and acceptance criteria are clear before slinging.
+:::
 
 ### Hook Persistence
 
@@ -934,6 +1711,10 @@ The standard polecat workflow molecule (`mol-polecat-work`) includes steps like:
 
 Molecules provide crash recovery — if an agent restarts, `bd ready` shows the next incomplete step, so work resumes from where it left off.
 
+:::tip
+Run `bd ready` at the start of any agent session to see the next actionable step. This works even after crashes -- molecules track progress persistently, so you never lose your place.
+:::
+
 ## Cross-Rig Work
 
 For work spanning multiple projects:
@@ -983,6 +1764,10 @@ Gas Town borrows heavily from Erlang/OTP patterns:
 - **Let it crash** — Agents can crash; supervisors handle recovery
 - **Process isolation** — Each agent runs in its own session
 
+:::warning
+Violating role separation (Principle 7) is the most common source of bugs in custom Gas Town configurations. If you find an agent doing work outside its role, refactor immediately.
+:::
+
 ## 3. Git as Ground Truth
 
 All persistent state lives in git or git-adjacent storage:
@@ -1008,9 +1793,9 @@ The daemon is intentionally simple — it just sends heartbeats and processes li
 
 Polecats follow a strict lifecycle:
 
-```
+```text
 Spawn → Work → Done → Nuke
-```
+```text
 
 They are never idle. A polecat is either:
 
@@ -1084,6 +1869,10 @@ Named after the Star Trek engineer: Gas Town agents never proceed past failures.
 
 This principle prevents failure cascading through the system. One broken test, left unaddressed, can waste dozens of polecat hours.
 
+:::caution
+The Scotty Principle means polecats will refuse to start implementation if preflight tests fail on `main`. If your test suite is flaky, fix the flakes first -- otherwise polecats will stall repeatedly trying to begin work.
+:::
+
 ## 12. Discovery Over Tracking
 
 Gas Town favors agents discovering what needs to happen over centralized tracking that tells them. The [Witness](../agents/witness.md) discovers stale polecats by inspecting them, not by reading a checklist. The [Deacon](../agents/deacon.md) discovers zombies by scanning processes, not by maintaining a process table.
@@ -1140,6 +1929,9 @@ Many subcommands also support `--json`, `--verbose`, `--quiet`, and `--rig <name
 | [Warrant](warrant.md) | File and execute death warrants for stuck agents | `gt warrant file`, `gt warrant list`, `gt warrant execute` |
 | [Patrol](patrol.md) | Aggregate patrol cycle digests | `gt patrol digest` |
 | [KRC](krc.md) | TTL-based lifecycle for ephemeral data | `gt krc stats`, `gt krc prune`, `gt krc config` |
+| [Compact](compact.md) | TTL-based compaction for ephemeral wisps | `gt compact`, `gt compact report` |
+| [Tap](tap.md) | Hook handlers for Claude Code tool execution events | `gt tap guard` |
+| [Town](town.md) | Town-level operations and session cycling | `gt town next`, `gt town prev` |
 
 ## Command Deep Dives
 
@@ -1157,6 +1949,9 @@ Comprehensive reference for frequently used commands with all flags, subcommands
 | [`gt warrant`](warrant.md) | Death warrant lifecycle for zombie agent cleanup |
 | [`gt patrol`](patrol.md) | Patrol cycle digest aggregation |
 | [`gt krc`](krc.md) | Key Record Chronicle — ephemeral data TTL management |
+| [`gt compact`](compact.md) | TTL-based compaction for ephemeral wisps |
+| [`gt tap`](tap.md) | Hook handlers for Claude Code PreToolUse/PostToolUse events |
+| [`gt town`](town.md) | Town-level session cycling between mayor and deacon |
 
 ## Related Tools
 
@@ -1588,6 +2383,24 @@ gt version
 
 ---
 
+### `gt thanks`
+
+Display acknowledgments to contributors.
+
+```bash
+gt thanks
+```
+
+**Description:** Shows a list of all humans who have contributed to the Gas Town project. This command celebrates the collaborative effort behind the multi-agent workspace manager.
+
+**Example:**
+
+```bash
+gt thanks
+```
+
+---
+
 ### `gt status`
 
 Display overall town status.
@@ -1795,6 +2608,45 @@ gt shutdown --all --force
 `gt shutdown --nuclear` forces cleanup even when polecats have uncommitted work. This may result in lost work.
 
 :::
+
+---
+
+### `gt prune-branches`
+
+Remove stale local polecat tracking branches.
+
+```bash
+gt prune-branches [options]
+```
+
+**Description:** When polecats push branches to origin, other clones create local tracking branches via `git fetch`. After the remote branch is deleted (post-merge), `git fetch --prune` removes the remote tracking ref but the local branch persists. This command finds and removes those stale local branches.
+
+The command finds branches matching the pattern (default: `polecat/*`) that are either:
+
+- Fully merged to the default branch (main)
+- Have no corresponding remote tracking branch (remote was deleted)
+
+**Safety:** Uses `git branch -d` (not `-D`), so only fully-merged branches are deleted. Never deletes the current branch or the default branch.
+
+**Options:**
+
+| Flag | Description |
+|------|-------------|
+| `--dry-run` | Show what would be deleted without deleting |
+| `--pattern <pattern>` | Branch name pattern to match (default: `polecat/*`) |
+
+**Example:**
+
+```bash
+# Clean up stale polecat branches
+gt prune-branches
+
+# Preview what would be deleted
+gt prune-branches --dry-run
+
+# Custom pattern
+gt prune-branches --pattern "feature/*"
+```
 
 ---
 
@@ -2994,45 +3846,60 @@ gt unsling gt-abc12 --release
 
 ### `gt done`
 
-Mark work as complete and submit a merge request.
+Signal that work is complete and ready for the merge queue.
 
 ```bash
 gt done [options]
 ```
 
-**Description:** The standard polecat exit command. Commits any remaining changes, pushes the branch, creates a merge request for the Refinery, updates the bead status, and exits the polecat session. This is the happy-path completion for any piece of work.
+**Description:** The standard polecat exit command that:
+1. Submits the current branch to the merge queue
+2. Auto-detects issue ID from branch name
+3. Notifies the Witness with the exit outcome
+4. Exits the Claude session
 
 **Options:**
 
 | Flag | Description |
 |------|-------------|
-| `--message <msg>` | MR description / completion summary |
-| `--no-mr` | Complete without creating a merge request |
-| `--escalate` | Exit with escalation instead of completion |
-| `--defer` | Exit with deferred status (work paused, not done) |
-| `--phase` | Exit with phase-complete status (gate point) |
+| `--status <status>` | Exit status: `COMPLETED`, `ESCALATED`, or `DEFERRED` (default: `COMPLETED`) |
+| `--phase-complete` | Signal phase complete -- await gate before continuing |
+| `--gate <bead-id>` | Gate bead ID to wait on (used with `--phase-complete`) |
+| `--issue <id>` | Explicit source issue ID (default: parsed from branch name) |
+| `--priority <0-4>` | Override priority (default: inherit from issue) |
+| `--cleanup-status <status>` | Git cleanup status: `clean`, `uncommitted`, `unpushed`, `stash`, `unknown` |
 
-**Example:**
+**Examples:**
 
 ```bash
 # Standard completion
-gt done --message "Fixed login redirect by correcting OAuth callback URL"
+gt done
 
-# Complete without MR (e.g., documentation-only changes)
-gt done --no-mr --message "Updated local docs only"
+# Explicit issue ID
+gt done --issue gt-abc
 
 # Escalate a blocker
-gt done --escalate --message "Blocked: need API credentials for staging"
+gt done --status ESCALATED
+
+# Pause work for later
+gt done --status DEFERRED
+
+# Phase complete with gate
+gt done --phase-complete --gate g-x
 ```
 
-**Exit states:**
+**Exit statuses:**
 
-| Flag | Exit State | Meaning |
-|------|-----------|---------|
-| (default) | `COMPLETED` | Work done, MR submitted to Refinery |
-| `--escalate` | `ESCALATED` | Hit a blocker, needs human input |
-| `--defer` | `DEFERRED` | Paused, another agent can pick up later |
-| `--phase` | `PHASE_COMPLETE` | Phase done, waiting for gate |
+| Status | Meaning |
+|--------|---------|
+| `COMPLETED` | Work done, MR submitted to Refinery (default) |
+| `ESCALATED` | Hit a blocker, needs human intervention |
+| `DEFERRED` | Work paused, issue still open |
+| `PHASE_COMPLETE` | Phase done, awaiting gate (use `--phase-complete`) |
+
+**Phase handoff workflow:**
+
+When a molecule has gate steps (async waits), use `--phase-complete` to signal that the current phase is complete but work continues after the gate closes. The Witness will recycle this polecat and dispatch a new one when the gate resolves.
 
 ---
 
@@ -3251,13 +4118,19 @@ bd create [options]
 | Flag | Description |
 |------|-------------|
 | `--title <text>` | Bead title (required) |
-| `--type <type>` | Type: `bug`, `feature`, `task`, `chore`, `epic` |
-| `--priority <level>` | Priority: `critical`, `high`, `medium`, `low` |
-| `--description <text>` | Detailed description |
+| `--type <type>` | Type: `bug`, `feature`, `task`, `chore`, `epic`, `molecule`, `gate`, etc. |
+| `--priority <level>` | Priority: `0-4` or `P0-P4` (0=highest, default: `2`) |
+| `--description <text>`, `-d` | Detailed description |
+| `--assignee <name>`, `-a` | Assignee |
 | `--rig <name>` | Assign to a specific rig |
-| `--label <label>` | Add labels (can be repeated) |
+| `--labels <list>`, `-l` | Add labels (comma-separated) |
 | `--parent <id>` | Set parent bead for hierarchical tracking |
 | `--convoy <id>` | Add to an existing convoy |
+| `--estimate <minutes>`, `-e` | Time estimate in minutes (e.g., 60 for 1 hour) |
+| `--file <path>`, `-f` | Create multiple issues from markdown file |
+| `--silent` | Output only the issue ID (for scripting) |
+| `--dry-run` | Preview what would be created without creating |
+| `--prefix <prefix>` | Create issue in rig by prefix (e.g., `--prefix bd-`) |
 
 **Example:**
 
@@ -6284,6 +7157,12 @@ gt formula create my-workflow --from workflow.yaml
 gt formula create api-migration --from-molecule mol-auth-001 --description "API version migration workflow"
 ```
 
+## Related
+
+- [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes
+- [gt seance](./seance.md) -- Talk to predecessor sessions to recover context
+- [Molecules](../concepts/molecules.md) -- Multi-step workflow definitions
+
 
 ========================================================================
 # gt session
@@ -8270,6 +9149,127 @@ gt plugin list --json
 
 
 ========================================================================
+# gt seance
+# URL: /docs/cli-reference/seance
+========================================================================
+
+# gt seance
+
+Talk to predecessor sessions to recover context and understand decisions.
+
+```bash
+gt seance [flags]
+```
+
+## Description
+
+Seance lets you talk to predecessor sessions directly. Instead of parsing logs, it spawns a Claude subprocess that resumes a previous session with full context. You can ask questions like:
+
+- "Why did you make this decision?"
+- "Where were you stuck?"
+- "What did you try that didn't work?"
+
+This solves the #1 handoff question: "Where did you put the stuff you left for me?"
+
+## Session Discovery
+
+List recent sessions discovered from events emitted by SessionStart hooks (`~/gt/.events.jsonl`).
+
+```bash
+gt seance                     # List recent sessions
+gt seance --role crew         # Filter by role type
+gt seance --rig gastown       # Filter by rig
+gt seance --recent 10         # Last N sessions
+```
+
+## Talking to a Predecessor
+
+The `--talk` flag spawns `claude --fork-session --resume <id>`, loading the predecessor's full context without modifying their session.
+
+```bash
+gt seance --talk <session-id>              # Interactive conversation
+gt seance --talk <session-id> -p "Where is X?"   # One-shot question
+```
+
+## Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--talk <id>` | `-t` | Session ID to commune with |
+| `--prompt <text>` | `-p` | One-shot prompt (requires `--talk`) |
+| `--recent <n>` | `-n` | Number of recent sessions to show (default: 20) |
+| `--rig <name>` | | Filter by rig name |
+| `--role <type>` | | Filter by role (crew, polecat, witness, etc.) |
+| `--json` | | Output as JSON |
+
+## Examples
+
+```bash
+# Discover recent sessions
+gt seance
+gt seance --rig myproject --role polecat
+
+# Ask a one-shot question to a predecessor
+gt seance --talk sess-abc123 -p "What was the root cause of the auth bug?"
+
+# Start an interactive conversation with a predecessor
+gt seance --talk sess-abc123
+```
+
+:::tip
+Sessions are discovered from events emitted by SessionStart hooks. The `[GAS TOWN]` beacon in each session makes them searchable via `/resume`.
+:::
+
+## Common Use Cases
+
+### Recovering Lost Context After Compaction
+
+When your context window compacts and you lose details about earlier work:
+
+```bash
+# Find your recent sessions
+gt seance --role crew --recent 5
+
+# Ask your predecessor what they were doing
+gt seance --talk sess-abc123 -p "What files did you modify and why?"
+```
+
+### Debugging a Polecat's Decisions
+
+When reviewing polecat output and you don't understand the approach:
+
+```bash
+# Find polecat sessions in the rig
+gt seance --rig myproject --role polecat
+
+# Ask why it made a particular choice
+gt seance --talk sess-def456 -p "Why did you use a map instead of a slice for the cache?"
+```
+
+### Investigating Escalations
+
+When an escalation arrives and you need to understand the original problem:
+
+```bash
+# Find the session that escalated
+gt seance --recent 20
+
+# Get the full story
+gt seance --talk sess-ghi789 -p "What went wrong and what did you try?"
+```
+
+:::note
+Seance spawns a read-only fork of the predecessor session. It cannot modify the original session's state or history.
+:::
+
+## Related
+
+- [Session Cycling](../concepts/session-cycling.md) -- How Gas Town manages context window refreshes across agent sessions
+- [Session & Handoff](./sessions.md) -- The handoff commands that create the sessions seance can query
+- [gt compact](./compact.md) -- TTL-based compaction, another approach to context management
+
+
+========================================================================
 # gt formula
 # URL: /docs/cli-reference/formula
 ========================================================================
@@ -8289,6 +9289,10 @@ Formulas are loaded from these locations (in priority order):
 3. `$GT_ROOT/.beads/formulas/` — Orchestrator-level (shared across all rigs)
 
 When multiple formulas share the same name, the highest-priority path wins. This allows project-level overrides of shared formulas.
+
+:::tip
+Use `--dry-run` with `gt formula run` to preview what a formula will do before executing it. This is especially useful when testing custom formulas or unfamiliar workflows.
+:::
 
 ## Commands
 
@@ -8385,6 +9389,10 @@ gt formula create nightly-check --type=patrol # Repeating patrol cycle
 | `workflow` | Multi-step sequence with dependencies | `shiny` — design, implement, review, test, submit |
 | `patrol` | Repeating cycle (used for wisps) | `mol-witness-patrol` — continuous health monitoring |
 
+:::note
+If no formula name is provided to `gt formula run`, it uses the default formula from the rig's `settings/config.json` under `workflow.default_formula`. Configure this to avoid typing the formula name every time.
+:::
+
 ## How Formulas Relate to Molecules
 
 - A **formula** is a blueprint (static template)
@@ -8443,6 +9451,140 @@ See [Formula Workflow](../workflows/formula-workflow.md) for a step-by-step guid
 
 
 ========================================================================
+# gt orphans
+# URL: /docs/cli-reference/orphans
+========================================================================
+
+# gt orphans
+
+Find orphaned commits that were never merged to main.
+
+```bash
+gt orphans [flags]
+gt orphans [command]
+```
+
+## Description
+
+Polecat work can get lost when:
+
+- Session killed before merge
+- Refinery fails to process
+- Network issues during push
+
+This command uses `git fsck --unreachable` to find dangling commits, filters to recent ones, and shows details to help recovery.
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`kill`](#gt-orphans-kill) | Remove all orphans (commits and processes) |
+| [`procs`](#gt-orphans-procs) | Manage orphaned Claude processes |
+
+## Flags
+
+| Flag | Description |
+|------|-------------|
+| `--days <n>` | Show orphans from last N days (default: 7) |
+| `--all` | Show all orphans (no date filter) |
+| `--rig <name>` | Target rig name (required when not in a rig directory) |
+
+## Examples
+
+```bash
+gt orphans                    # Last 7 days, infers rig from cwd
+gt orphans --rig=gastown      # Target a specific rig
+gt orphans --days=14          # Last 2 weeks
+gt orphans --all              # Show all orphans (no date filter)
+```
+
+---
+
+## gt orphans kill
+
+Remove orphaned commits and kill orphaned Claude processes.
+
+```bash
+gt orphans kill [flags]
+```
+
+Performs a complete orphan cleanup:
+
+1. Finds orphaned commits (same as `gt orphans`)
+2. Finds orphaned Claude processes (same as `gt orphans procs`)
+3. Shows what will be removed/killed
+4. Asks for confirmation (unless `--force`)
+5. Runs `git gc` and kills processes
+
+:::warning
+
+This operation is irreversible. Once commits are pruned, they cannot be recovered. Use `--dry-run` first to preview.
+
+:::
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--days <n>` | Kill orphans from last N days (default: 7) |
+| `--all` | Kill all orphans (no date filter) |
+| `--dry-run` | Preview without deleting |
+| `--force` | Skip confirmation prompt |
+
+**Examples:**
+
+```bash
+gt orphans kill               # Kill orphans from last 7 days
+gt orphans kill --days=14     # Kill orphans from last 2 weeks
+gt orphans kill --dry-run     # Preview without deleting
+gt orphans kill --force       # Skip confirmation prompt
+```
+
+---
+
+## gt orphans procs
+
+Find and kill Claude processes that have become orphaned (PPID=1).
+
+```bash
+gt orphans procs [flags]
+gt orphans procs [command]
+```
+
+Orphaned processes are those that survived session termination and are now parented to init/launchd. They consume resources and should be killed.
+
+**Subcommands:**
+
+| Command | Description |
+|---------|-------------|
+| `list` | List orphaned Claude processes |
+| `kill` | Kill orphaned Claude processes |
+
+**Flags:**
+
+| Flag | Description |
+|------|-------------|
+| `--aggressive` | Use tmux session verification to find ALL orphans, not just PPID=1 |
+
+Use `--aggressive` to detect all orphaned Claude processes by cross-referencing against active tmux sessions. Any Claude process NOT in a `gt-*` or `hq-*` session is considered an orphan.
+
+**Examples:**
+
+```bash
+gt orphans procs              # List orphaned processes (PPID=1 only)
+gt orphans procs --aggressive # List ALL orphaned processes
+gt orphans procs kill         # Kill orphaned processes
+```
+
+## Related
+
+- [gt polecat](./polecat-commands.md) -- Polecat lifecycle management (nuke, stale, gc)
+- [Witness](../agents/witness.md) -- Agent that detects stuck polecats and triggers recovery
+- [Lifecycle Management](../operations/lifecycle.md) -- Agent lifecycle and cleanup operations
+- [Git Workflow](../guides/git-workflow.md) -- How branches and merges work in Gas Town
+
+
+========================================================================
 # gt dolt
 # URL: /docs/cli-reference/dolt
 ========================================================================
@@ -8496,6 +9638,10 @@ gt dolt fix-metadata   # Update metadata.json in all rig .beads directories
 gt dolt sync           # Push Dolt databases to DoltHub remotes
 ```
 
+:::warning
+The Dolt server uses port 3307 by default to avoid conflicts with MySQL on port 3306. If you have another service on 3307, you will need to change the Dolt port before starting.
+:::
+
 ## Common Workflows
 
 ### Initial Setup
@@ -8516,6 +9662,10 @@ gt dolt status         # Verify recovery
 ```
 
 This typically happens when the Dolt server shuts down uncleanly or when multiple writers conflict. The `recover` command detects the issue and restarts the server with a clean lock state.
+
+:::caution
+If you see repeated "database is read-only" errors, do not attempt to manually edit lock files in `.dolt-data/`. Always use `gt dolt recover` which handles lock cleanup atomically.
+:::
 
 ### Adding a New Rig
 
@@ -8588,133 +9738,326 @@ All `bd` commands route through the Dolt server automatically when it's running.
 
 Manage death warrants for agents that need termination.
 
-Death warrants provide a controlled way to terminate agents that are stuck, unresponsive, or otherwise need forced termination. The warrant system ensures proper cleanup and work recovery before killing an agent.
-
-## Warrant Lifecycle
-
-```mermaid
-flowchart LR
-    Detect["Detect Problem"]
-    File["File Warrant"]
-    Triage["Boot Triage"]
-    Recover["Recover Work"]
-    Terminate["Terminate Agent"]
-    Archive["Archive Warrant"]
-
-    Detect --> File --> Triage --> Recover --> Terminate --> Archive
+```bash
+gt warrant [command]
 ```
 
-1. **Deacon/Witness files a warrant** with a reason (e.g., "agent stuck in loop for 30 minutes")
-2. **Boot picks up the warrant** during its triage cycle
-3. **Boot recovers in-progress work** — commits, pushes, or releases hooked beads
-4. **Boot terminates the session** — kills the tmux session and cleans up worktree
-5. **Warrant is marked as executed** and archived
+## Description
 
-Warrants are stored as JSON files in `~/gt/warrants/`.
+Death warrants are filed when an agent is stuck, unresponsive, or needs forced termination. Boot handles warrant execution during triage cycles.
 
-## Commands
+The warrant lifecycle:
 
-### `gt warrant file`
+1. **Deacon/Witness files a warrant** with a reason
+2. **Boot picks up the warrant** during triage
+3. **Boot executes the warrant** (terminates session, updates state)
+4. **Warrant is marked as executed**
 
-File a death warrant for an agent.
+Warrants are stored in `~/gt/warrants/` as JSON files.
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`file`](#gt-warrant-file) | File a death warrant for an agent |
+| [`list`](#gt-warrant-list) | List pending warrants |
+| [`execute`](#gt-warrant-execute) | Execute a warrant (terminate agent) |
+
+---
+
+## gt warrant file
+
+File a death warrant for an agent that needs termination.
 
 ```bash
-gt warrant file --agent gastowndocs/polecats/alpha --reason "Stuck in infinite loop"
-gt warrant file --agent gastowndocs/polecats/bravo --reason "Zombie: session gone but state shows running"
+gt warrant file <target> [flags]
 ```
 
-**Options:**
+The target should be an agent path like `gastown/polecats/alpha` or `deacon/dogs/bravo`.
 
-| Flag | Description |
-|------|-------------|
-| `--agent <path>` | Full agent path (e.g., `gastowndocs/polecats/alpha`) |
-| `--reason <text>` | Human-readable reason for the warrant |
-| `--priority <level>` | Urgency: `normal` (default), `urgent` |
+**Flags:**
 
-### `gt warrant list`
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--reason <text>` | `-r` | Reason for the warrant (required unless `--stdin`) |
+| `--stdin` | | Read reason from stdin (avoids shell quoting issues) |
 
-List pending warrants that haven't been executed yet.
+**Examples:**
+
+```bash
+gt warrant file gastown/polecats/alpha --reason "Zombie: no session, idle >10m"
+gt warrant file deacon/dogs/bravo --reason "Stuck: working on task for >2h"
+```
+
+---
+
+## gt warrant list
+
+List all pending (unexecuted) warrants.
+
+```bash
+gt warrant list [flags]
+```
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--all` | `-a` | Include executed warrants |
+
+**Examples:**
 
 ```bash
 gt warrant list
-gt warrant list --all         # Include executed warrants
+gt warrant list --all
 ```
 
-**Example output:**
+---
 
-```
-WARRANT ID   AGENT                           REASON                    FILED
-w-abc123     gastowndocs/polecats/alpha      Stuck in infinite loop    14:30
-w-def456     gastowndocs/polecats/bravo      Zombie: session gone      14:35
-```
+## gt warrant execute
 
-### `gt warrant execute`
-
-Execute a warrant — recover work, terminate the agent, clean up.
+Execute a pending warrant for the specified target.
 
 ```bash
-gt warrant execute <warrant-id>
-gt warrant execute w-abc123
+gt warrant execute <target> [flags]
 ```
 
-This is normally done by Boot automatically, but can be run manually for immediate intervention.
+This will:
 
-### `gt warrant cancel`
+1. Find the warrant for the target
+2. Terminate the agent's tmux session (if exists)
+3. Mark the warrant as executed
 
-Cancel a pending warrant before it is executed.
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--force` | `-f` | Execute even without a warrant |
+
+**Examples:**
 
 ```bash
-gt warrant cancel <warrant-id>
+gt warrant execute gastown/polecats/alpha
+gt warrant execute deacon/dogs/bravo --force
 ```
 
-Use this if the agent recovered on its own before Boot processed the warrant.
+:::warning
 
-## When Warrants Are Filed
+Using `--force` bypasses the warrant system entirely. Only use this for emergency termination when you can't wait for the normal warrant flow.
 
-Warrants are typically filed automatically by [patrol agents](../concepts/patrol-cycles.md) when they detect:
+:::
 
-| Condition | Filed By | Typical Threshold |
-|-----------|----------|-------------------|
-| **Zombie processes** | Deacon | Session gone, state still "running" |
-| **Infinite loops** | Witness | Same state for 30+ minutes after nudge |
-| **Resource exhaustion** | Witness | Excessive tokens without progress |
-| **Stale sessions** | Deacon | Exceeds maximum age without cycling |
-| **Unresponsive after nudge** | Witness | No response within 2 patrol cycles |
+## Related
 
-### Manual Warrants
+- [Boot](../agents/boot.md) -- Infrastructure helper that executes warrants during triage
+- [Deacon](../agents/deacon.md) -- Health-check orchestrator that files warrants
+- [Witness](../agents/witness.md) -- Polecat monitor that escalates stuck agents
+- [Lifecycle Management](../operations/lifecycle.md) -- Agent lifecycle and termination flows
 
-You can also file warrants manually for agents that the automated system hasn't caught:
+
+========================================================================
+# gt town
+# URL: /docs/cli-reference/town
+========================================================================
+
+# gt town
+
+Commands for town-level operations including session cycling.
 
 ```bash
-# Polecat that's clearly stuck
-gt warrant file --agent gastowndocs/polecats/alpha --reason "Stuck retrying failed API call"
-
-# Check pending warrants
-gt warrant list
-
-# If you need immediate action, execute directly
-gt warrant execute w-abc123
+gt town [command]
 ```
 
-## Work Recovery
+## Description
 
-Before terminating an agent, Boot attempts to recover any in-progress work:
+The `gt town` commands manage navigation between **town-level sessions** -- the Mayor and Deacon. These are the two persistent agents that run at the Gas Town infrastructure level (above individual rigs).
 
-1. **Check for uncommitted changes** — commit and push if possible
-2. **Release hooked beads** — `bd release` returns beads to the ready queue
-3. **Update molecule state** — mark current step as `failed` so the next agent knows
-4. **Clean up worktree** — remove the polecat's sandbox directory
-5. **Send notification** — mail the Witness that the warrant was executed
+Town sessions live in tmux and `gt town` provides quick cycling between them, similar to how `gt rig` commands manage rig-level agents.
 
-If work recovery fails (e.g., merge conflicts), Boot files a follow-up bead for manual intervention.
+## Subcommands
 
-## See Also
+| Command | Description |
+|---------|-------------|
+| [`next`](#gt-town-next) | Switch to next town session (mayor/deacon) |
+| [`prev`](#gt-town-prev) | Switch to previous town session (mayor/deacon) |
 
-- **[Lifecycle](../operations/lifecycle.md)** -- Agent lifecycle management including death warrants
-- **[Boot](../agents/boot.md)** -- The triage agent that processes warrants
-- **[Deacon](../agents/deacon.md)** -- Files warrants when agents need termination
-- **[Patrol Cycles](../concepts/patrol-cycles.md)** -- The monitoring pattern that detects warrant-worthy conditions
-- **[Polecat Commands](polecat-commands.md)** -- Manual polecat management as an alternative to warrants
+---
+
+## gt town next
+
+Switch to the next town session (mayor/deacon).
+
+```bash
+gt town next
+```
+
+Cycles forward through town-level tmux sessions, allowing quick navigation between the mayor and deacon sessions. Useful when monitoring or debugging town-level coordination.
+
+---
+
+## gt town prev
+
+Switch to the previous town session (mayor/deacon).
+
+```bash
+gt town prev
+```
+
+Cycles backward through town-level tmux sessions.
+
+## When to Use
+
+Town-level navigation is useful when:
+
+- **Debugging coordination issues** -- The Mayor and Deacon handle different aspects of town operations. Cycling between them lets you compare what each is seeing.
+- **Monitoring town health** -- Check the Deacon's patrol state, then switch to the Mayor to see strategic context.
+- **During incident response** -- Quickly switch between sessions to understand both the health monitoring (Deacon) and coordination (Mayor) perspectives.
+
+:::tip
+If you need to interact with rig-level agents (Witness, Refinery, Polecats), use `gt rig next/prev` instead. `gt town` only cycles between Mayor and Deacon sessions.
+:::
+
+## Examples
+
+```bash
+# Cycle to the next town-level session
+gt town next
+
+# Cycle back to the previous town-level session
+gt town prev
+
+# Common workflow: check Deacon health, then Mayor strategy
+gt town next          # Switch to Deacon
+# ... inspect patrol state ...
+gt town next          # Switch to Mayor
+# ... check coordination status ...
+```
+
+## Related
+
+- [Starting & Stopping](../operations/lifecycle.md) -- Full lifecycle management for town and rig agents
+- [Architecture Overview](../architecture/overview.md) -- How Mayor and Deacon fit into the Gas Town architecture
+- [Mayor](../agents/mayor.md) -- The Mayor agent that coordinates across rigs
+- [Deacon](../agents/deacon.md) -- The Deacon agent that manages infrastructure
+
+
+========================================================================
+# gt compact
+# URL: /docs/cli-reference/compact
+========================================================================
+
+# gt compact
+
+Apply TTL-based compaction policy to ephemeral wisps.
+
+```bash
+gt compact [flags]
+gt compact [command]
+```
+
+## Description
+
+[Wisps](../concepts/wisps.md) are lightweight, ephemeral beads (heartbeats, pings, patrol reports). Over time they accumulate and need cleanup. Compaction applies TTL (time-to-live) policies:
+
+- **Non-closed wisps past TTL** are promoted to permanent beads (something is stuck)
+- **Closed wisps past TTL** are deleted (Dolt `AS OF` preserves history)
+- **Wisps with comments, references, or `keep` labels** are always promoted
+
+### TTLs by Wisp Type
+
+| Type | TTL |
+|------|-----|
+| `heartbeat`, `ping` | 6 hours |
+| `patrol`, `gc_report` | 24 hours |
+| `recovery`, `error`, `escalation` | 7 days |
+| Default (untyped) | 24 hours |
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`report`](#gt-compact-report) | Generate and send compaction digest report |
+
+## Flags
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--dry-run` | | Preview compaction without making changes |
+| `--rig <name>` | | Compact a specific rig (default: current rig) |
+| `--verbose` | `-v` | Show each wisp decision |
+| `--json` | | Output results as JSON |
+
+## Examples
+
+```bash
+gt compact               # Run compaction
+gt compact --dry-run     # Preview what would happen
+gt compact --verbose     # Show each wisp decision
+gt compact --json        # Machine-readable output
+gt compact --rig gastown # Compact a specific rig
+```
+
+---
+
+## gt compact report
+
+Generate a compaction digest and send it to deacon/ (cc mayor/).
+
+```bash
+gt compact report [flags]
+```
+
+The daily digest shows per-category breakdown of deleted, promoted, and active wisps, plus any promotions with reasons and detected anomalies.
+
+The weekly rollup (`--weekly`) aggregates the past 7 days of compaction event beads and sends trend data to mayor/.
+
+**Flags:**
+
+| Flag | Short | Description |
+|------|-------|-------------|
+| `--dry-run` | | Preview report without sending |
+| `--date <YYYY-MM-DD>` | | Report for specific date (default: today) |
+| `--weekly` | | Generate weekly rollup instead of daily digest |
+| `--verbose` | `-v` | Verbose output |
+| `--json` | | Output report as JSON |
+
+**Examples:**
+
+```bash
+gt compact report              # Run compaction + send daily digest
+gt compact report --dry-run    # Preview the report without sending
+gt compact report --weekly     # Send weekly rollup to mayor/
+```
+
+## Troubleshooting
+
+### Wisps Not Being Compacted
+
+If `gt compact --dry-run` shows no wisps to process, check that:
+
+1. The rig has wisps: `bd list --type wisp`
+2. The wisps have exceeded their TTL (see table above)
+3. You're targeting the correct rig: `gt compact --rig <name>`
+
+### Unexpected Promotions
+
+Wisps are promoted (instead of deleted) when they're still open past their TTL — this usually means something is stuck. Check the promoted bead for context:
+
+```bash
+# After compaction reports a promotion
+bd show <promoted-bead-id>
+
+# Common causes: stalled heartbeats, unresolved patrol findings
+```
+
+:::warning
+Compaction is irreversible for deletions. Use `--dry-run` first to verify what will be removed. Dolt's `AS OF` feature preserves historical data, but direct recovery is not straightforward.
+:::
+
+## Related
+
+- [Wisps](../concepts/wisps.md) -- The ephemeral beads that compaction manages
+- [Diagnostics](./diagnostics.md) -- Other maintenance and diagnostic commands
 
 
 ========================================================================
@@ -8776,6 +10119,10 @@ gt patrol start --rig myapp   # Trigger patrol for a specific rig
 
 This nudges patrol agents to run their check cycle immediately rather than waiting for the next scheduled tick.
 
+:::tip
+Use `gt patrol digest --dry-run` during morning reviews to see what happened overnight without writing any changes. This gives you a quick health overview before committing to aggregation.
+:::
+
 ## What Are Patrol Cycles?
 
 Patrol is the core monitoring pattern in Gas Town. Three agent types run continuous [patrol molecules](../concepts/patrol-cycles.md):
@@ -8802,6 +10149,10 @@ After gt patrol digest:
 ```
 
 The per-cycle ephemeral data is removed after aggregation, keeping the beads database clean while preserving the audit trail.
+
+:::warning
+Running `gt patrol digest` deletes the per-cycle ephemeral data after aggregation. If you need to preserve raw per-cycle data for debugging, use `--dry-run` first to inspect it before aggregating.
+:::
 
 ## When to Run Digests
 
@@ -8884,6 +10235,10 @@ Each event type follows one of four decay curves:
 
 Events with low forensic scores are candidates for aggressive pruning.
 
+:::tip
+Run `gt krc decay` before tuning TTLs to understand which event types are decaying fastest. This helps you set appropriate TTLs based on actual forensic value rather than guessing.
+:::
+
 **Options:**
 
 | Flag | Description |
@@ -8931,6 +10286,10 @@ KRC manages **Level 0** (ephemeral) data as defined in the Dolt storage design:
 
 KRC only manages Level 0. Higher levels are managed by Dolt directly.
 
+:::caution
+Never set TTLs too aggressively for patrol events. If a TTL is shorter than the patrol digest interval, events may be pruned before they can be aggregated by `gt patrol digest`. A safe minimum for patrol events is 24 hours.
+:::
+
 ## How Auto-Pruning Works
 
 When configured, KRC can run pruning automatically at a set interval:
@@ -8961,6 +10320,119 @@ Use `gt krc stats` to monitor accumulation rates and tune TTLs accordingly.
 - [gt dolt](dolt.md) — Dolt SQL server management
 - [Patrol Cycles](../concepts/patrol-cycles.md) — The patrol monitoring pattern
 - [Monitoring](../operations/monitoring.md) — Operational monitoring patterns
+
+
+========================================================================
+# gt tap
+# URL: /docs/cli-reference/tap
+========================================================================
+
+# gt tap
+
+Hook handlers for Claude Code PreToolUse and PostToolUse events.
+
+```bash
+gt tap [command]
+```
+
+## Description
+
+Tap commands are called by Claude Code hooks to implement policies, auditing, and input transformation. They tap into the tool execution flow to guard, audit, inject, or check.
+
+The tap system uses Claude Code's hook mechanism to intercept tool calls at two points:
+
+- **PreToolUse** — Before a tool executes (can block or modify input)
+- **PostToolUse** — After a tool executes (can log or validate output)
+
+| Handler | Hook Type | Purpose | Status |
+|---------|-----------|---------|--------|
+| `guard` | PreToolUse | Block forbidden operations (exit 2) | Available |
+| `audit` | PostToolUse | Log/record tool executions | Planned |
+| `inject` | PreToolUse | Modify tool inputs (updatedInput) | Planned |
+| `check` | PostToolUse | Validate after execution | Planned |
+
+## Subcommands
+
+| Command | Description |
+|---------|-------------|
+| [`guard`](#gt-tap-guard) | Block forbidden operations (PreToolUse hook) |
+
+---
+
+## gt tap guard
+
+Block forbidden operations via Claude Code PreToolUse hooks.
+
+```bash
+gt tap guard [command]
+```
+
+Guard commands exit with code 2 to BLOCK tool execution when a policy is violated. They're called before the tool runs, preventing the forbidden operation entirely.
+
+### Exit Codes
+
+| Code | Meaning |
+|------|---------|
+| `0` | Operation allowed (not in Gas Town agent context) |
+| `2` | Operation **BLOCKED** (policy violation in agent context) |
+
+Guards only activate when running as a Gas Town agent (crew, polecat, witness, etc.). Humans running outside Gas Town are unaffected.
+
+### Available Guards
+
+| Guard | Description |
+|-------|-------------|
+| [`pr-workflow`](#gt-tap-guard-pr-workflow) | Block PR creation and feature branches |
+
+---
+
+### gt tap guard pr-workflow
+
+Block PR workflow operations in Gas Town.
+
+```bash
+gt tap guard pr-workflow
+```
+
+Gas Town workers push directly to main. PRs add friction that breaks the autonomous execution model ([GUPP principle](../concepts/gupp.md)). This guard enforces that pattern by blocking:
+
+- `gh pr create` — PR creation
+- `git checkout -b` — Feature branch creation
+- `git switch -c` — Feature branch creation
+
+### Hook Configuration
+
+Configure in `.claude/settings.local.json`:
+
+```json
+{
+  "PreToolUse": [{
+    "matcher": "Bash(gh pr create*)",
+    "hooks": [{"command": "gt tap guard pr-workflow"}]
+  }]
+}
+```
+
+### Examples
+
+```bash
+# Test the guard directly (returns exit code 2 if in agent context)
+gt tap guard pr-workflow
+
+# Example: agent tries to create a PR
+# Hook intercepts: gt tap guard pr-workflow → exits 2 → tool call BLOCKED
+```
+
+:::tip
+
+See the [Operations Guide](../operations/troubleshooting.md) and [Lifecycle Management](../operations/lifecycle.md) for more on how hooks integrate with the Gas Town agent lifecycle.
+
+:::
+
+## Related
+
+- [Git Workflow Guide](../guides/git-workflow.md) -- Why Gas Town uses direct-to-main instead of PRs
+- [GUPP (Propulsion Principle)](../concepts/gupp.md) -- The autonomous execution model that tap guards enforce
 
 
 ========================================================================
@@ -9023,7 +10495,7 @@ graph TD
     W2 -->|supervises| P2
     P1 -->|submit MRs| R1
     P2 -->|submit MRs| R2
-```
+```text
 
 ## Comparison Table
 
@@ -9058,24 +10530,24 @@ graph TD
 
 The monitoring chain ensures no agent runs unsupervised:
 
-```
+```text
 Daemon --[heartbeat]--> Deacon
 Deacon --[monitors]---> Witnesses (all rigs)
 Witness --[watches]---> Polecats (in its rig)
 Witness --[watches]---> Refinery (in its rig)
 Mayor  --[strategy]---> Deacon
-```
+```text
 
 When something goes wrong, escalations flow upward:
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat
       --> If still stuck: Witness escalates to Deacon
         --> Deacon escalates to Mayor
           --> Mayor escalates to Human/Overseer
-```
+```text
 
 ## Role Separation
 
@@ -9121,7 +10593,7 @@ gt doctor                    # Full system health check
 gt rig status <rig>          # Per-rig agent status
 gt polecat list              # All polecats in current rig
 gt deacon status             # Deacon health
-```
+```text
 
 ### Tracing the Escalation Chain
 
@@ -9146,7 +10618,7 @@ gt deacon status
 
 # Are Witnesses patrolling? (monitor polecats)
 gt rig status <rig>
-```
+```text
 
 ## Troubleshooting
 
@@ -9155,14 +10627,14 @@ gt rig status <rig>
 ```bash
 gt up                        # Bring up all services
 gt doctor --fix              # Auto-fix common issues
-```
+```text
 
 ### Agent Is Stuck or Unresponsive
 
 ```bash
 gt nudge <agent> "status?"   # Send a nudge
 gt polecat nuke <name>       # Last resort: destroy polecat
-```
+```text
 
 ### Escalation Chain Is Broken
 
@@ -9203,9 +10675,9 @@ The Mayor is the primary human-facing agent in Gas Town. When you run `gt mayor 
 
 The Mayor is your interface to Gas Town. You describe what you want built, fixed, or changed in natural language:
 
-```
+```text
 > Fix the 5 failing tests in auth and add input validation to registration.
-```
+```text
 
 The Mayor parses this into discrete work items.
 
@@ -9218,7 +10690,7 @@ For each piece of work, the Mayor creates a bead (issue) in the tracking system,
 bd create --title "Fix auth test: login_expired" --type bug --priority 1
 bd create --title "Add email validation to registration" --type feature --priority 2
 gt convoy create "Auth Improvements" gt-a1b2c gt-d3e4f
-```
+```text
 
 ### 3. Assign Work to Rigs
 
@@ -9227,7 +10699,7 @@ The Mayor uses `gt sling` to assign beads to rigs, which triggers polecat spawni
 ```bash
 gt sling gt-a1b2c myproject    # Assigns issue to rig, spawns polecat
 gt sling gt-d3e4f myproject    # Another issue, another polecat
-```
+```text
 
 ### 4. Route Escalations
 
@@ -9240,7 +10712,7 @@ The Mayor monitors convoy completion, ensuring all assigned work reaches the fin
 ```bash
 gt convoy list
 gt convoy show hq-cv-001
-```
+```text
 
 ### 6. Strategic Direction to Deacon
 
@@ -9274,7 +10746,7 @@ flowchart TD
     Escalation -->|No| Complete
     Complete -->|No| Monitor
     Complete -->|Yes| Report
-```
+```text
 
 **MEOW Steps:**
 
@@ -9344,7 +10816,7 @@ sequenceDiagram
     P-->>M: Escalation (if blocked)
     M-->>H: Escalation (if unresolvable)
     M->>H: Convoy complete report
-```
+```text
 
 ## Tips and Best Practices
 
@@ -9392,7 +10864,7 @@ gt sling gt-def myproject
 
 # Monitor batch progress
 gt convoy list
-```
+```text
 
 ### Handling an Escalation
 
@@ -9403,7 +10875,7 @@ gt mail inbox                            # Check for escalations
 gt mail read <id>                        # Read the details
 # Decide: reassign, provide guidance, or escalate to human
 gt mail send <rig>/witness -s "RE: ..." -m "Guidance: ..."
-```
+```text
 
 ### Dispatching Cross-Rig Work
 
@@ -9413,7 +10885,7 @@ When work spans multiple rigs, the Mayor coordinates:
 gt sling gt-frontend frontend-rig
 gt sling gt-backend backend-rig
 gt convoy create gt-frontend gt-backend  # Track together
-```
+```text
 
 ## Troubleshooting
 
@@ -9423,7 +10895,7 @@ gt convoy create gt-frontend gt-backend  # Track together
 gt mayor status              # Check if session is alive
 gt nudge mayor "status?"     # Send a nudge
 gt mayor stop && gt mayor start  # Restart if needed
-```
+```text
 
 ### Convoy Shows Incomplete But Work Is Done
 
@@ -9432,7 +10904,7 @@ Check if all beads in the convoy are closed. A convoy auto-closes only when ever
 ```bash
 gt convoy show <convoy-id>   # See which beads are still open
 bd show <open-bead-id>       # Check why it is still open
-```
+```text
 
 ### Polecats Not Being Spawned After Sling
 
@@ -9441,7 +10913,7 @@ Verify the rig is started and the Witness is running:
 ```bash
 gt rig status <rig>          # Check rig health
 gt rig start <rig>           # Start rig agents if needed
-```
+```text
 
 ## See Also
 
@@ -9500,7 +10972,7 @@ sequenceDiagram
         Dc->>Dc: Process patrol cycle
         Dc->>W: Check all Witnesses
     end
-```
+```text
 
 ### 2. Monitor All Witnesses
 
@@ -9520,7 +10992,7 @@ Dogs are reusable infrastructure workers managed by the Deacon for cross-rig tas
 ```bash
 gt dog list          # List active dogs
 gt dog add <name>    # Create a new dog
-```
+```text
 
 ### 4. Patrol Cycle
 
@@ -9550,7 +11022,7 @@ flowchart TD
     Hooks --> Orphans
     Orphans --> Zombies
     Zombies --> Done
-```
+```text
 
 ### 5. Boot Triage Process
 
@@ -9563,7 +11035,7 @@ flowchart LR
     Act["Act<br/>Execute Recovery"]
 
     Observe --> Decide --> Act
-```
+```text
 
 **Boot triage steps:**
 
@@ -9638,7 +11110,7 @@ graph TD
     W2 -->|escalates| Deacon
     W3 -->|escalates| Deacon
     Deacon -->|escalates| Mayor
-```
+```text
 
 ## Tips and Best Practices
 
@@ -9672,10 +11144,10 @@ The Deacon handles **operational health** (is everything running?). The Mayor ha
 
 When no active work exists across rigs, the Deacon enters idle monitoring mode. It skips health nudges for docked rigs and uses exponential backoff to reduce resource usage:
 
-```
+```text
 Active rigs with polecats → Full patrol cycle
 No active work anywhere → Idle monitoring (reduced frequency)
-```
+```text
 
 This prevents unnecessary Witness nudges and resource consumption when the system is quiet.
 
@@ -9691,17 +11163,17 @@ The Deacon checks timer gates for expiration, closes elapsed gates, and dispatch
 bd gate list                 # See open gates
 # Deacon auto-closes expired timer gates
 # Deacon auto-dispatches unblocked molecules
-```
+```text
 
 ### Second-Order Monitoring
 
 The "who watches the watchers" problem is solved by Witness pings. Each Witness sends a `WITNESS_PING` to the Deacon during its patrol. If the Deacon stops receiving pings, it knows a Witness has died:
 
-```
+```text
 Witness patrol → sends WITNESS_PING → Deacon archives it
 No ping for 3+ cycles → Deacon restarts the Witness
 No ping for 5+ cycles → Deacon escalates to Mayor
-```
+```text
 
 ## Troubleshooting
 
@@ -9714,7 +11186,7 @@ gt daemon status             # Is the Daemon running?
 # Check Boot's triage log:
 # ~/gt/deacon/dogs/boot/triage-log.jsonl
 gt deacon status             # Check Deacon state
-```
+```text
 
 ### Witnesses Are Not Being Monitored
 
@@ -9723,7 +11195,7 @@ Verify the Deacon is receiving `WITNESS_PING` messages. If Witnesses are running
 ```bash
 gt deacon status             # Check last patrol time
 gt rig status <rig>          # Check Witness state per rig
-```
+```text
 
 ### Dogs Are Not Being Dispatched
 
@@ -9732,7 +11204,7 @@ The Deacon maintains a minimum pool of idle dogs. If dogs are not spawning:
 ```bash
 gt dog list                  # Check current dog pool
 gt deacon status             # Verify Deacon patrol is running
-```
+```text
 
 ### Zombie Polecats Accumulating
 
@@ -9741,7 +11213,7 @@ The Deacon detects zombies during its patrol but only files "death warrants" -- 
 ```bash
 gt daemon status             # Boot runs on daemon ticks
 gt polecat list              # See zombie states
-```
+```text
 
 ## See Also
 
@@ -9990,7 +11462,7 @@ The Witness handles several mail types during its inbox check:
 
 When the Mayor dispatches multiple polecats as a batch (swarm), the Witness tracks completion:
 
-```
+```text
 Swarm started (4 polecats) → Monitor all 4
 Polecat 1 done → 3 remaining
 Polecat 2 done → 2 remaining
@@ -10212,7 +11684,7 @@ Refinery behavior is configured per-rig:
 
 The Refinery holds the **canonical clone** of the repository -- the authoritative copy from which merges to `main` happen:
 
-```
+```text
 ~/gt/<rig>/refinery/rig/     # Canonical git clone
 ~/gt/<rig>/refinery/CLAUDE.md # Refinery agent context
 ```
@@ -10278,7 +11750,7 @@ Each rig has exactly one Refinery. Cross-rig merges are coordinated by Dogs and 
 
 After merging a branch to `main`, the Refinery **must immediately** send a `MERGED` mail to the Witness. This is the critical signal that triggers polecat sandbox cleanup:
 
-```
+```text
 Merge to main → Push → Send MERGED mail → Close MR bead → Archive mail → Cleanup branches
 ```
 
@@ -10297,7 +11769,7 @@ The Refinery never merges code that fails validation.
 
 The Refinery processes one MR at a time, strictly serialized. After each successful merge, it loops back to check for more:
 
-```
+```text
 Process MR 1 → merge → Process MR 2 → merge → ... → Queue empty → Wait for next patrol
 ```
 
@@ -10505,7 +11977,7 @@ Each name is unique within a rig at any given time. Names are recycled after a p
 
 Every polecat gets its own git identity:
 
-```
+```text
 Author: Toast <toast@myproject.gt>
 Author: Alpha <alpha@myproject.gt>
 ```
@@ -10574,7 +12046,7 @@ Polecat behavior is configured per-rig:
 
 ## Directory Structure
 
-```
+```text
 ~/gt/<rig>/polecats/
 ├── toast/                # Polecat sandbox (git worktree)
 │   ├── .git              # Worktree link
@@ -10668,7 +12140,7 @@ The next session picks up context from the handoff mail.
 
 Polecat branches follow the convention:
 
-```
+```text
 polecat/<name>/<issue-id>@<molecule-id>
 ```
 
@@ -10884,7 +12356,7 @@ The Deacon:
 
 All Dogs operate from the Deacon's dog directory:
 
-```
+```text
 ~/gt/deacon/dogs/
 ├── boot/              # Boot dog (special - see Boot docs)
 ├── dog-001/           # General purpose dog
@@ -10950,7 +12422,7 @@ The Deacon maintains a minimum pool of idle dogs so infrastructure tasks can be 
 
 A typical dog cleanup task might span all rigs:
 
-```
+```text
 Dog receives: "Clean orphaned worktrees across all rigs"
   → Scan rig 1: Remove 3 orphaned directories
   → Scan rig 2: Remove 1 orphaned directory
@@ -11051,7 +12523,7 @@ Full clones give human developers complete independence -- they can rebase, forc
 
 Crew members are named after the humans who use them:
 
-```
+```text
 ~/gt/myproject/crew/
 ├── dave/          # Dave's workspace
 ├── emma/          # Emma's workspace
@@ -11137,7 +12609,7 @@ Unlike polecats, crew workspaces are never automatically nuked. They persist unt
 
 ## Directory Structure
 
-```
+```text
 ~/gt/<rig>/crew/<name>/
 ├── .git/              # Full git repository
 ├── CLAUDE.md          # Gas Town context (if using Claude Code)
@@ -11401,7 +12873,7 @@ Because Boot starts clean every time, it has unique advantages:
 
 Boot lives within the Deacon's dog directory:
 
-```
+```text
 ~/gt/deacon/dogs/boot/
 ├── CLAUDE.md          # Boot agent context and instructions
 ├── last-run.json      # Timestamp and results of last run
@@ -11412,7 +12884,7 @@ Boot lives within the Deacon's dog directory:
 
 Boot runs on the daemon's tick cycle:
 
-```
+```text
 Daemon tick (every ~3 min)
   → Spawn Boot
   → Boot observes, decides, acts
@@ -11492,7 +12964,7 @@ Boot uses a precise decision matrix during the Decide phase:
 
 Most Boot runs result in no action:
 
-```
+```text
 Spawn → Observe: Deacon active, recent output → Decide: NOTHING → Exit
 ```
 
@@ -11502,7 +12974,7 @@ This is the expected state. Boot confirms health and exits in seconds.
 
 When the Deacon session crashes:
 
-```
+```text
 Spawn → Observe: Deacon session dead → Decide: START → Act: Request Deacon wake → Exit
 Next tick: Spawn → Observe: Deacon alive but fresh → Decide: NUDGE (stale hooks, pending work) → Exit
 ```
@@ -11671,13 +13143,13 @@ Beads is an open-source project. Learn more at [github.com/steveyegge/beads](htt
 
 Beads stores issues in a **SQLite database** located in the `.beads/` directory at the root of each repository (or town):
 
-```
+```text
 .beads/
 ├── beads.db           # SQLite database (primary store)
 ├── formulas/          # TOML workflow templates
 ├── README.md          # Onboarding documentation
 └── daemon.log         # Daemon activity log
-```
+```text
 
 The SQLite backend enables fast queries, filtering, and complex joins while remaining portable and easy to back up through git.
 
@@ -11719,7 +13191,7 @@ stateDiagram-v2
     hooked --> in_progress: Agent picks up
     in_progress --> done: bd close
     done --> [*]
-```
+```text
 
 | Status | Meaning | Typical Transition |
 |--------|---------|-------------------|
@@ -11738,7 +13210,7 @@ Labels are free-form tags that categorize beads:
 ```bash
 bd create --title "Fix auth bug" --labels "auth,security,p1"
 bd list --labels "security"
-```
+```text
 
 ### Priorities
 
@@ -11754,7 +13226,7 @@ Priority levels control escalation routing and work ordering:
 ```bash
 bd create --title "Security vulnerability" --priority 0
 bd create --title "Minor UI glitch" --priority 3
-```
+```text
 
 ### Dependencies
 
@@ -11766,17 +13238,17 @@ bd create --title "Deploy to prod" --depends-on gt-a1b2c
 
 # Check blocked issues
 bd blocked
-```
+```text
 
 ## Cross-Project Tracking
 
 Beads supports **cross-prefix tracking**, allowing issues in different rigs to reference each other. Each rig has its own bead prefix (configured in `config.json`):
 
-```
+```text
 Town (.beads/)  prefix: hq-
 Rig A (.beads/) prefix: gt-
 Rig B (.beads/) prefix: bd-
-```
+```text
 
 A [convoy](convoys.md) with ID `hq-cv-001` can track issues `gt-a1b2c` and `bd-d3e4f` across both [rigs](rigs.md). Dependencies also work cross-prefix.
 
@@ -11794,7 +13266,7 @@ bd create --title "Fix login bug" \
   --priority 1 \
   --labels "auth,critical" \
   --description "Login fails when password contains special characters"
-```
+```text
 
 ### Listing and Filtering
 
@@ -11813,7 +13285,7 @@ bd list --json
 
 # Find ready work
 bd ready
-```
+```text
 
 ### Viewing Bead Details
 
@@ -11823,7 +13295,7 @@ bd show gt-a1b2c
 
 # Show bead as JSON
 bd show gt-a1b2c --json
-```
+```text
 
 ### Updating Beads
 
@@ -11836,7 +13308,7 @@ bd update gt-a1b2c --notes "Fixed the parser, testing now"
 
 # Add labels
 bd update gt-a1b2c --labels "reviewed"
-```
+```text
 
 ### Closing Beads
 
@@ -11846,7 +13318,7 @@ bd close gt-a1b2c
 
 # Close with a reason
 bd close gt-a1b2c --reason "Merged to main at abc1234"
-```
+```text
 
 ### Syncing with Git
 
@@ -11856,7 +13328,7 @@ bd sync
 
 # Onboard to a repo (first time setup)
 bd onboard
-```
+```text
 
 ## Command Reference
 
@@ -11887,7 +13359,7 @@ bd update <id> --status in_progress  # Claim it
 # ... do the work ...
 bd close <id>         # Mark complete
 bd sync               # Push state to remote
-```
+```text
 
 :::
 
@@ -11954,7 +13426,7 @@ graph TD
     A -->|writes progress to| H
     B[Agent Session 2] -->|reads from| H
     B -->|resumes work| W[Continues Work]
-```
+```text
 
 The hook stores:
 
@@ -11989,7 +13461,7 @@ flowchart TD
     Execute -->|Done| Submit[gt done]
     Execute -->|Context full| Handoff[gt handoff]
     Handoff --> Start
-```
+```text
 
 ## Commands
 
@@ -11998,23 +13470,23 @@ flowchart TD
 ```bash
 # Show what is currently on your hook
 gt hook
-```
+```text
 
 Output shows the hooked bead ID and any attached molecule:
 
-```
+```text
 Hook: gt-a1b2c  "Fix login bug"
   Molecule: mol-polecat-work (step: implement)
   Branch: polecat/toast
   Status: in_progress
-```
+```text
 
 ### Manually Hooking Work
 
 ```bash
 # Attach a bead to your hook
 gt hook gt-a1b2c
-```
+```text
 
 This is rarely done manually. Most hooking happens through `gt sling`.
 
@@ -12031,7 +13503,7 @@ gt sling gt-a1b2c myproject --agent cursor
 
 # Assign multiple items
 gt sling gt-a1b2c gt-d3e4f myproject
-```
+```text
 
 What `gt sling` does internally:
 
@@ -12046,7 +13518,7 @@ What `gt sling` does internally:
 ```bash
 # Remove a bead from the hook without completing it
 gt unsling gt-a1b2c
-```
+```text
 
 This releases the work back to the available pool without marking it done. Another agent can pick it up later.
 
@@ -12095,7 +13567,7 @@ The Mayor's hook typically holds a coordination molecule or convoy management ta
 
 Hooks and [Molecules](molecules.md) work together to provide crash-safe workflows:
 
-```
+```text
 Hook
 ├── hook_bead: gt-a1b2c        # The assigned issue
 └── molecule: mol-polecat-work  # The workflow template
@@ -12104,7 +13576,7 @@ Hook
     ├── step: implement         [in_progress]  <-- resume here
     ├── step: self-review       [pending]
     └── step: submit-and-exit   [pending]
-```
+```text
 
 When a session restarts, the agent:
 
@@ -12161,7 +13633,7 @@ graph TD
     style B1 fill:#2d5a2d
     style B2 fill:#5a5a2d
     style B3 fill:#5a2d2d
-```
+```text
 
 ## Convoy Lifecycle
 
@@ -12174,7 +13646,7 @@ stateDiagram-v2
 
     Open --> Stalled: Issues stuck
     Stalled --> Open: Unstuck / reassigned
-```
+```text
 
 | State | Meaning |
 |-------|---------|
@@ -12186,10 +13658,10 @@ stateDiagram-v2
 
 Convoys use the `hq-cv-` prefix by default (since they are town-level coordination beads):
 
-```
+```text
 hq-cv-001   # First convoy
 hq-cv-abc   # Auto-generated short ID
-```
+```text
 
 The `hq-` prefix indicates the bead belongs to the town-level `.beads/` database, not a rig-level one.
 
@@ -12206,7 +13678,7 @@ This is the key feature of convoys. The system automatically checks whether all 
 # The Deacon runs this check automatically:
 bd list --type=convoy --status=open
 # For each: check tracked issues, close if all done
-```
+```text
 
 :::info[No Manual Closing Needed]
 
@@ -12220,7 +13692,7 @@ Convoys can track issues **across multiple rigs**. A single convoy can reference
 
 ```bash
 gt convoy create "Cross-rig refactor" gt-a1b2c bd-d3e4f myrig-x5y6z
-```
+```text
 
 This works because convoys support **cross-prefix tracking** -- the convoy bead stores full IDs including their prefix, allowing it to query status from any [rig's](rigs.md) `.beads/` database.
 
@@ -12235,7 +13707,7 @@ ID          Title                  Status      Progress
 hq-cv-001   Auth System Fixes     OPEN        2/3 done
 hq-cv-002   API Redesign          OPEN        0/5 done
 hq-cv-003   Bug Bash Sprint       COMPLETED   8/8 done
-```
+```text
 
 The Mayor uses this dashboard to report progress to the Overseer (human operator) and make strategic decisions about resource allocation.
 
@@ -12251,7 +13723,7 @@ gt convoy create "Auth System Fixes" gt-a1b2c gt-d3e4f gt-g5h6i
 # Create with just a name (add issues later)
 gt convoy create "Sprint 42"
 # Created: hq-cv-002
-```
+```text
 
 ### Adding Issues to a Convoy
 
@@ -12261,7 +13733,7 @@ gt convoy add hq-cv-001 gt-h7i8j
 
 # Add multiple issues
 gt convoy add hq-cv-001 gt-h7i8j gt-k9l0m
-```
+```text
 
 ### Listing Convoys
 
@@ -12271,7 +13743,7 @@ gt convoy list
 
 # List only open convoys
 gt convoy list --status open
-```
+```text
 
 ### Checking Convoy Status
 
@@ -12281,11 +13753,11 @@ gt convoy show hq-cv-001
 
 # Get status summary
 gt convoy status hq-cv-001
-```
+```text
 
 Example output:
 
-```
+```text
 Convoy: hq-cv-001 "Auth System Fixes"
 Status: OPEN
 Progress: 2/3 issues completed
@@ -12296,7 +13768,7 @@ Tracked Issues:
   [PENDING]     gt-g5h6i  Update README
 
 Created: 2026-01-15T10:30:00Z
-```
+```text
 
 ### Closing a Convoy
 
@@ -12306,14 +13778,14 @@ gt convoy close hq-cv-001
 
 # Close with reason
 gt convoy close hq-cv-001 --reason "Remaining work deprioritized"
-```
+```text
 
 ### Checking Completion
 
 ```bash
 # Manually trigger completion check
 gt convoy check hq-cv-001
-```
+```text
 
 ### Finding Stranded Convoys
 
@@ -12322,7 +13794,7 @@ A stranded convoy has ready work that is not assigned to any agent:
 ```bash
 # Find convoys with unassigned work
 gt convoy stranded
-```
+```text
 
 This is useful for the Mayor to identify work that needs to be [slung](hooks.md) to polecats.
 
@@ -12400,7 +13872,7 @@ graph LR
     M1 --> S1a["Step: load-context ✓"]
     M1 --> S1b["Step: implement ●"]
     M1 --> S1c["Step: test ○"]
-```
+```text
 
 ## Molecules
 
@@ -12440,7 +13912,7 @@ graph TD
     F --> G["cleanup-workspace"]
     G --> H["prepare-for-review"]
     H --> I["submit-and-exit"]
-```
+```text
 
 ### Molecule Types
 
@@ -12487,7 +13959,7 @@ gt mol squash <mol-id> --summary "Patrol cycle: 3 merges, 0 failures"
 
 # Show the dependency graph
 gt mol dag <mol-id>
-```
+```text
 
 ### The Squash Pattern
 
@@ -12532,7 +14004,7 @@ required = true
 
 [vars.assignee]
 description = "Who is assigned"
-```
+```text
 
 ### Formula Types
 
@@ -12552,7 +14024,7 @@ title = "Design {{feature}}"
 id = "implement"
 needs = ["design"]
 title = "Implement {{feature}}"
-```
+```text
 
 **Convoy formulas** (`type = "convoy"`) -- Parallel execution with multiple agents (legs), followed by a synthesis step:
 
@@ -12571,7 +14043,7 @@ title = "Security Review"
 [synthesis]
 title = "Review Synthesis"
 depends_on = ["correctness", "security"]
-```
+```text
 
 ### Built-in Formulas
 
@@ -12642,7 +14114,7 @@ gt formula run code-review --pr=123
 
 # Create a custom formula
 gt formula create my-workflow
-```
+```text
 
 ### Creating Custom Formulas
 
@@ -12682,19 +14154,19 @@ description = "Push to production with canary rollout"
 [vars.version]
 description = "Version being deployed"
 required = true
-```
+```text
 
 Then run it:
 
 ```bash
 gt formula run my-deploy --var version="2.3.1"
-```
+```text
 
 ## Molecule + Hook Integration
 
 Molecules are stored on an agent's [Hook](hooks.md), creating the crash-safe execution model:
 
-```
+```text
 Hook
 ├── hook_bead: gt-a1b2c            # The assigned issue
 └── molecule: mol-polecat-work     # Active workflow
@@ -12703,7 +14175,7 @@ Hook
     ├── implement         [in_progress]  <-- resume here
     ├── self-review       [pending]
     └── submit-and-exit   [pending]
-```
+```text
 
 On session restart, the agent reads the hook, finds the molecule, and resumes from the last completed step. No work is repeated.
 
@@ -12764,7 +14236,7 @@ sequenceDiagram
     Agent->>Gate: Check gate status
     Gate-->>Agent: CLOSED (ready)
     Agent->>Agent: Resume workflow
-```
+```text
 
 ## Gate Types
 
@@ -12785,14 +14257,14 @@ Timer gates are the simplest type. They close automatically after a specified du
 ```bash
 # Create a gate that opens after 30 minutes
 bd gate create --type timer --timeout 30m --title "Cooldown before retry"
-```
+```text
 
 The Deacon's patrol cycle checks all timer gates and closes any that have elapsed:
 
 ```bash
 # Deacon runs this automatically:
 bd gate check --type=timer --escalate
-```
+```text
 
 :::note[Escalation on Expiry]
 
@@ -12807,7 +14279,7 @@ These gates wait for a GitHub Actions workflow run to complete:
 ```bash
 # Wait for CI to pass on a specific commit
 bd gate create --type gh:run --run-id 12345 --title "Wait for CI"
-```
+```text
 
 The Deacon polls GitHub during patrol cycles to check run status.
 
@@ -12818,14 +14290,14 @@ Human gates require explicit human action to proceed. They are used for critical
 ```bash
 # Create a gate requiring human approval
 bd gate create --type human --title "Approve production deploy"
-```
+```text
 
 The gate stays open until a human explicitly approves it:
 
 ```bash
 # Human approves the gate
 bd gate approve gt-gate-123
-```
+```text
 
 ### Mail Gates
 
@@ -12834,7 +14306,7 @@ Mail gates close when a specific message arrives in an agent's mailbox:
 ```bash
 # Wait for a MERGED notification
 bd gate create --type mail --subject "MERGED polecat/toast" --title "Wait for merge"
-```
+```text
 
 ## Gate Lifecycle
 
@@ -12848,7 +14320,7 @@ stateDiagram-v2
     Open --> Expired: Timer exceeds limit
     Expired --> Escalated: Auto-escalate
     Escalated --> Closed: Human resolves
-```
+```text
 
 | State | Meaning |
 |-------|---------|
@@ -12878,12 +14350,12 @@ bd gate create --type gh:run --run-id <run-id> --title "Wait for CI"
 
 # Park on the gate
 gt mol step park --gate <gate-id>
-```
+```text
 
 The Deacon will close this gate when CI completes. Your next patrol
 cycle (or a fresh session) will pick up from here.
 """
-```
+```text
 
 ### Example: Human Gate Before Production Deploy
 
@@ -12900,11 +14372,11 @@ bd gate create --type human --title "Approve deploy v2.3.1 to production"
 # Notify the overseer
 gt mail send mayor/ -s "APPROVAL NEEDED: Deploy v2.3.1" \
   -m "Please review and approve: bd gate approve <gate-id>"
-```
+```text
 
 This step cannot proceed until a human runs `bd gate approve`.
 """
-```
+```text
 
 ## Gate Evaluation by the Deacon
 
@@ -12924,7 +14396,7 @@ bd mol ready --gated --json
 
 # Dispatch each to the appropriate rig
 gt sling <mol-id> <rig>/polecats
-```
+```text
 
 ## Commands
 
@@ -12942,7 +14414,7 @@ bd gate create --type gh:run --run-id 12345 --title "Wait for CI"
 
 # Mail gate
 bd gate create --type mail --subject "MERGED" --title "Wait for merge"
-```
+```text
 
 ### Viewing Gates
 
@@ -12955,7 +14427,7 @@ bd gate list
 
 # List gates as JSON
 bd gate list --json
-```
+```text
 
 ### Closing Gates
 
@@ -12968,7 +14440,7 @@ bd gate approve <gate-id>
 
 # Wake agents waiting on a gate
 gt gate wake <gate-id>
-```
+```text
 
 ## Command Reference
 
@@ -12994,7 +14466,7 @@ graph LR
     E -->|No| D
     E -->|Yes| F[Close gate]
     F --> G[Resume workflow]
-```
+```text
 
 ### Human Approval Workflow
 
@@ -13006,7 +14478,7 @@ graph LR
     D --> E[Human runs bd gate approve]
     E --> F[Gate closes]
     F --> G[Deploy proceeds]
-```
+```text
 
 ### Timer-Based Retry
 
@@ -13017,7 +14489,7 @@ graph LR
     C --> D[15 minutes pass]
     D --> E[Deacon closes gate]
     E --> F[Retry operation]
-```
+```text
 
 :::tip[When to Use Gates]
 
@@ -13073,13 +14545,13 @@ graph TD
     Deacon -->|monitors| R1
     Deacon -->|monitors| R2
     Deacon -->|monitors| R3
-```
+```text
 
 ## Rig Directory Structure
 
 When you add a rig with `gt rig add`, the following directory structure is created:
 
-```
+```text
 ~/gt/myproject/
 ├── .beads/              # Rig-level issue tracking (SQLite)
 │   ├── beads.db         # Issue database
@@ -13097,7 +14569,7 @@ When you add a rig with `gt rig add`, the following directory structure is creat
 │   ├── toast/           # Polecat "toast" worktree
 │   └── alpha/           # Polecat "alpha" worktree
 └── plugins/             # Rig-level plugins
-```
+```text
 
 ### Key Directories
 
@@ -13150,7 +14622,7 @@ graph LR
         P2 -->|submits MR| R
         R -->|merges to| Main[main branch]
     end
-```
+```text
 
 ## Rig Configuration
 
@@ -13168,7 +14640,7 @@ Each rig has a `config.json` file that defines its settings:
     "prefix": "gt"
   }
 }
-```
+```text
 
 | Field | Description |
 |-------|-------------|
@@ -13195,7 +14667,7 @@ stateDiagram-v2
     Active --> Docked: gt rig dock
     Docked --> Active: gt rig undock
     Parked --> Docked: gt rig dock
-```
+```text
 
 :::warning[Docked Rigs]
 
@@ -13213,23 +14685,23 @@ gt rig add myproject https://github.com/you/repo.git
 
 # Add with SSH URL
 gt rig add myproject git@github.com:you/repo.git
-```
+```text
 
 ### Listing Rigs
 
 ```bash
 # List all rigs with status
 gt rig list
-```
+```text
 
 Example output:
 
-```
+```text
 Name          Status    Branch    Polecats    MQ
 myproject     Active    main      2/3         1 pending
 docs          Active    master    0/0         0 pending
 api-server    Docked    main      -           -
-```
+```text
 
 ### Starting and Stopping
 
@@ -13242,14 +14714,14 @@ gt rig stop myproject
 
 # Shutdown (immediate stop)
 gt rig shutdown myproject
-```
+```text
 
 ### Checking Status
 
 ```bash
 # Detailed rig status
 gt rig status myproject
-```
+```text
 
 ### Lifecycle Management
 
@@ -13262,7 +14734,7 @@ gt rig boot myproject
 
 # Reset a rig (clear state and restart)
 gt rig reset myproject
-```
+```text
 
 ### Parking and Docking
 
@@ -13278,7 +14750,7 @@ gt rig dock myproject
 
 # Undock (bring back online)
 gt rig undock myproject
-```
+```text
 
 ## Command Reference
 
@@ -13372,7 +14844,7 @@ See [Beads](beads.md) for the full reference.
 
 **Convoys** group related beads into batches that travel together. When you tell the Mayor "build the auth system," it creates a convoy containing all the individual beads needed:
 
-```
+```text
 Convoy: auth-system-v2
 ├── gt-a1b2c  Add login endpoint
 ├── gt-d3e4f  Add JWT middleware
@@ -13389,7 +14861,7 @@ See [Convoys](convoys.md) for details.
 
 **Molecules** are execution plans for individual beads. When a polecat picks up a bead, it follows a molecule — a sequence of ordered steps with dependencies, gates, and checkpoints.
 
-```
+```text
 Molecule: mol-polecat-work
 ├── load-context      [done]
 ├── branch-setup      [done]
@@ -13405,6 +14877,10 @@ The molecule tracks exactly where an agent is in its workflow. If the agent cras
 See [Molecules & Formulas](molecules.md) for the full reference.
 
 ### Layer 4: Protomolecules (Convoy-Level Orchestration)
+
+:::note
+Protomolecules are the most advanced MEOW concept. Most Gas Town users work at Layers 1-3 daily and only encounter protomolecules when orchestrating large, multi-agent efforts.
+:::
 
 **Protomolecules** are higher-order orchestration patterns that coordinate multiple molecules working in parallel. They represent convoy-level workflows where multiple agents work simultaneously on related tasks with coordination points.
 
@@ -13449,6 +14925,10 @@ Gas Town ships with 30+ built-in formulas. See [Molecules & Formulas](molecules.
 ---
 
 ## Why "MEOW"?
+
+:::tip
+You don't need to understand all five layers to use Gas Town. Start with Beads (create issues) and Convoys (batch them). Molecules and Formulas become relevant when you want structured agent workflows.
+:::
 
 The name is a backronym: **M**olecules, **E**pics, **O**rchestration, **W**orkflows. But more importantly, it reflects Gas Town's philosophy that work organization should be:
 
@@ -13522,13 +15002,17 @@ GUPP is the single most important design principle in Gas Town. It means:
 
 ### GUPP in Practice
 
-```
+```text
 Before crash:     load-context [done] → branch-setup [done] → implement [in_progress]
 After restart:    load-context [done] → branch-setup [done] → implement [in_progress]
                                                                 ↑ resumes here
 ```
 
 The [molecule](molecules.md) tracks step completion in the [beads](beads.md) database. When a fresh polecat picks up the work via its [hook](hooks.md), it reads the molecule state and continues from exactly where the crashed agent left off.
+
+:::tip
+GUPP is the reason you can safely kill any Gas Town agent at any time. The system will always recover forward, never backward.
+:::
 
 ### Why GUPP Matters
 
@@ -13567,7 +15051,7 @@ NDI is the practical companion to GUPP. AI agents are inherently nondeterministi
 
 Consider a polecat working on bead `gt-a1b2c` (add input validation):
 
-```
+```text
 Run 1:  Implements validation with Joi library
         Tests pass → step marked done
 
@@ -13578,7 +15062,7 @@ Run 2:  (after crash and restart)
 
 If the agent had crashed *during* implementation (before marking done):
 
-```
+```text
 Run 1:  Starts implementing with Joi, crashes at 60%
         Step still marked in_progress
 
@@ -13617,6 +15101,10 @@ Nudges are appropriate when:
 - An upstream dependency was resolved and the agent should retry
 
 ### Nudges and GUPP
+
+:::warning
+A nudge should never instruct an agent to undo completed work. If a completed step needs to be redone, file a new bead for the correction rather than rolling back progress.
+:::
 
 Nudges respect GUPP — they provide new information that enables forward progress, but never instruct an agent to undo completed work. A nudge says "try this approach instead," not "go back and redo what you did."
 
@@ -13747,6 +15235,10 @@ graph LR
 
 ## Cleanup Wisps
 
+:::info
+Cleanup wisps are the exception, not the rule. A well-behaved polecat that runs `gt done` cleanly needs no cleanup wisp at all.
+:::
+
 A special use of wisps occurs in the [Witness](../agents/witness.md) workflow. When a polecat exits with a dirty state (uncommitted changes, unpushed commits), the Witness creates a **cleanup wisp** to track recovery:
 
 - **Clean exit** (branch pushed, MR submitted, git clean): No wisp needed -- auto-nuke immediately
@@ -13769,6 +15261,10 @@ gt mol current
 ---
 
 ## Ephemeral by Design
+
+:::note
+Wisps are deliberately invisible in normal bead listings. If you need to see them, use `gt mol status` which shows molecule progress including all wisp states.
+:::
 
 Wisps are deliberately ephemeral. They are **not exported** to JSONL during `bd sync` and do not appear in `bd list` output. This keeps the beads database focused on meaningful work items while allowing molecules to track arbitrarily fine-grained progress internally.
 
@@ -13811,6 +15307,10 @@ Gas Town solves this with session cycling:
 ---
 
 ## The Two Persistence Mechanisms
+
+:::note
+These two mechanisms are deliberately independent. If either one fails, the other still preserves enough state to continue. The hook carries the assignment; the mail carries the context.
+:::
 
 Session cycling relies on two independent mechanisms:
 
@@ -13935,6 +15435,10 @@ gt mail inbox
 
 ## Best Practices
 
+:::tip
+The next session has zero memory of the current one. Write handoff notes as if briefing a stranger — because from a context perspective, that's exactly what's happening.
+:::
+
 1. **Always include handoff notes.** The next session (even if it's "you") has no memory of the previous one. Good notes save significant ramp-up time.
 
 2. **Commit and push before cycling.** Unpushed work in a multi-agent environment is work at risk. Always land your changes before handing off.
@@ -14019,7 +15523,7 @@ flowchart TD
     Zombie -->|No| Next
     Next --> Each
     Each -->|All checked| Done
-```
+```text
 
 ### Deacon (Town-Wide)
 
@@ -14046,7 +15550,7 @@ flowchart TD
     Response -->|Yes| Hooks
     Stale -->|No| Hooks
     Hooks --> Orphans --> Zombies --> Done
-```
+```text
 
 ### Refinery (Per-Rig)
 
@@ -14054,9 +15558,9 @@ The [Refinery](../agents/refinery.md) processes the merge queue for its rig.
 
 **Patrol focus:** Merge requests, rebase validation, merge to main.
 
-```
+```text
 Patrol Tick → Check Queue → Process Next MR → Rebase → Run Tests → Merge → Repeat
-```
+```text
 
 ---
 
@@ -14102,21 +15606,21 @@ This means:
 ### Example: Discovery vs Tracking
 
 **Tracking approach (fragile):**
-```
+```text
 Polecat spawned → Tracker records "polecat-3: active"
 Polecat crashes → Crash handler fails to fire
 Tracker still shows "polecat-3: active"
 Work sits stuck indefinitely
-```
+```text
 
 **Discovery approach (resilient):**
-```
+```text
 Patrol tick → Witness lists all polecats
 Witness checks polecat-3's session → not responding
 Witness nudges polecat-3 → no response
 Witness escalates to Deacon → Deacon cleans up
 Work recovers within one patrol cycle
-```
+```text
 
 ---
 
@@ -14137,7 +15641,7 @@ gt mol squash <mol-id> --summary "Patrol cycle: 3 polecats healthy, 1 nudged, 0 
 # Aggregate daily patrol digests
 gt patrol digest
 gt patrol digest --yesterday
-```
+```text
 
 ### Standard Patrol Formulas
 
@@ -14159,7 +15663,7 @@ Use `gt patrol digest` to see aggregated patrol findings:
 gt patrol digest                          # Today's digest
 gt patrol digest --agent witness --rig myapp  # Specific agent/rig
 gt patrol digest --yesterday              # Yesterday's digest
-```
+```text
 
 ### Logs
 
@@ -14168,7 +15672,7 @@ Use `gt log` to see real-time patrol activity:
 ```bash
 gt log --agent witness    # Watch witness patrol in real time
 gt log --agent deacon     # Watch deacon patrol
-```
+```text
 
 ### Status
 
@@ -14178,7 +15682,7 @@ Use `gt status` for a snapshot of current patrol state:
 gt status           # Overview of all agents and rigs
 gt witness status   # Witness health and last patrol time
 gt deacon status    # Deacon health and last patrol time
-```
+```text
 
 ---
 
@@ -14274,7 +15778,7 @@ flowchart TD
 
 ### Automation Spectrum
 
-```
+```text
   Manual                                              Fully Automated
     |                                                        |
     |   Minimal    Manual Convoy    Formula    MEOW          |
@@ -14316,7 +15820,7 @@ gt mail inbox      # Check for messages
 
 Workers always follow the self-cleaning model:
 
-```
+```text
 Spawn -> Work -> Done -> Nuke
 ```
 
@@ -14324,7 +15828,7 @@ Spawn -> Work -> Done -> Nuke
 
 Completed work always flows through the Refinery:
 
-```
+```text
 Polecat pushes branch -> Witness sends MERGE_READY ->
 Refinery rebases + tests -> Refinery merges to main
 ```
@@ -14394,7 +15898,7 @@ sequenceDiagram
     Witness->>Witness: Nuke polecat sandboxes
     Deacon->>Mayor: Convoy complete
     Mayor->>Human: Work landed
-```
+```text
 
 ## Step-by-Step
 
@@ -14402,7 +15906,7 @@ sequenceDiagram
 
 ```bash
 gt mayor attach
-```
+```text
 
 This opens an interactive session with the Mayor agent. The Mayor already has context about your town, rigs, and current state.
 
@@ -14427,7 +15931,7 @@ The Mayor automatically:
 
 Example Mayor response:
 
-```
+```text
 I've created the following plan:
 
 Convoy: hq-cv-012 "Auth Module Improvements"
@@ -14438,7 +15942,7 @@ Issues:
   gt-g5h6i  [task]    Update README with auth flow (P3)
 
 Shall I proceed with assigning these to polecats?
-```
+```text
 
 ### Step 4: Mayor Assigns Work
 
@@ -14449,7 +15953,7 @@ Once confirmed, the Mayor slings each bead to the appropriate rig:
 gt sling gt-a1b2c myproject
 gt sling gt-d3e4f myproject
 gt sling gt-g5h6i myproject
-```
+```text
 
 Each `gt sling` spawns a polecat worker that immediately begins work.
 
@@ -14467,7 +15971,7 @@ gt feed
 
 # Check individual polecat status
 gt polecat list
-```
+```text
 
 Or simply ask the Mayor:
 
@@ -14489,7 +15993,7 @@ When all convoy items are done, the convoy auto-closes and the Mayor notifies yo
 
 Here is a complete example session from start to finish:
 
-```
+```text
 $ gt mayor attach
 
 Mayor> Welcome! I see 2 active rigs: myproject, docs. How can I help?
@@ -14531,7 +16035,7 @@ Mayor> Progress update on hq-cv-015:
 
 Mayor> Convoy hq-cv-015 "Login Quote Bug Fix" is complete!
   All 3 issues merged to main. Duration: 12 minutes.
-```
+```text
 
 ## Advanced Usage
 
@@ -14572,7 +16076,7 @@ gt release gt-a1b2c
 
 # Add more work to an existing convoy
 gt convoy add hq-cv-015 gt-newbead
-```
+```text
 
 ## Troubleshooting
 
@@ -14637,7 +16141,7 @@ graph TD
     Agent -->|reads hook| Hook
     Agent -->|works on| Code[Code Changes]
     Agent -->|completes| Done[gt done]
-```
+```text
 
 ## Step-by-Step
 
@@ -14651,7 +16155,7 @@ bd create --title "Fix login bug" --type bug --priority 1
 
 bd create --title "Add email validation" --type feature
 # Created: gt-d3e4f
-```
+```text
 
 ### Step 2: Create a Convoy
 
@@ -14660,7 +16164,7 @@ Bundle the issues for tracking:
 ```bash
 gt convoy create "Auth Fixes" gt-a1b2c gt-d3e4f
 # Created: hq-cv-001
-```
+```text
 
 ### Step 3: Sling Work to a Hook
 
@@ -14668,7 +16172,7 @@ Attach the first issue to an agent's hook:
 
 ```bash
 gt sling gt-a1b2c myproject
-```
+```text
 
 This does two things:
 
@@ -14688,13 +16192,13 @@ Open a terminal in the rig's working directory and start Claude Code:
 ```bash
 cd ~/gt/myproject/polecats/toast  # Or crew/yourname for persistent workspace
 claude
-```
+```text
 
 When Claude starts, it should run `gt prime` (via the SessionStart hook) and discover the work on its hook. If it does not auto-prime, tell it:
 
-```
+```text
 Run gt prime and check your hook for assigned work.
-```
+```text
 
 The agent will:
 
@@ -14716,7 +16220,7 @@ bd show gt-a1b2c
 
 # Check what's in the merge queue
 gt mq list
-```
+```text
 
 ### Step 6: Handle Completion
 
@@ -14733,7 +16237,7 @@ cd ~/gt/myproject/refinery/rig
 git fetch origin
 git merge --ff-only origin/polecat/toast
 git push origin main
-```
+```text
 
 ### Step 7: Move to Next Issue
 
@@ -14742,14 +16246,14 @@ Repeat steps 3-6 for the next issue:
 ```bash
 gt sling gt-d3e4f myproject
 # Start a new agent session manually
-```
+```text
 
 ### Step 8: Check Convoy Completion
 
 ```bash
 gt convoy show hq-cv-001
 # If all issues done, convoy shows COMPLETED
-```
+```text
 
 ## Example Session
 
@@ -14789,7 +16293,7 @@ $ claude
 # 8. Convoy completes
 $ gt convoy show hq-cv-005
 # COMPLETED: 2/2 done
-```
+```text
 
 ## Scaling Up from Minimal Mode
 
@@ -14803,7 +16307,7 @@ Install Tmux and let Gas Town manage sessions:
 # Now gt sling will auto-spawn polecats
 gt sling gt-a1b2c myproject
 # Polecat spawns in a tmux pane automatically
-```
+```text
 
 ### Start the Witness
 
@@ -14811,7 +16315,7 @@ Let the Witness monitor your polecats:
 
 ```bash
 gt witness start myproject
-```
+```text
 
 ### Start the Refinery
 
@@ -14819,7 +16323,7 @@ Let the Refinery handle merges:
 
 ```bash
 gt refinery start myproject
-```
+```text
 
 ### Start the Full Stack
 
@@ -14828,7 +16332,7 @@ When ready, start everything:
 ```bash
 gt start --all
 gt mayor attach
-```
+```text
 
 You are now running the full [Mayor Workflow](mayor-workflow.md).
 
@@ -14846,7 +16350,7 @@ Since you do not have the automated Refinery, always push your changes and sync 
 ```bash
 git push origin HEAD
 bd sync
-```
+```text
 
 :::
 
@@ -14928,7 +16432,7 @@ graph TD
     S3 --> P3["Polecat: bravo"]
 
     You -->|4. Monitor| Monitor["gt convoy show"]
-```
+```text
 
 ## Step-by-Step
 
@@ -14958,7 +16462,7 @@ bd create --title "Update API security docs" \
   --priority 3 \
   --labels "docs"
 # Created: gt-g5h6i
-```
+```text
 
 :::tip[Detailed Descriptions]
 
@@ -14973,7 +16477,7 @@ Bundle the beads into a convoy for batch tracking:
 ```bash
 gt convoy create "API Security Hardening" gt-a1b2c gt-d3e4f gt-g5h6i
 # Created: hq-cv-007
-```
+```text
 
 ### Step 3: Sling Work to Rigs
 
@@ -14988,7 +16492,7 @@ gt sling gt-d3e4f backend
 
 # Send docs to the docs rig
 gt sling gt-g5h6i docs
-```
+```text
 
 Each `gt sling` command:
 
@@ -15013,11 +16517,11 @@ gt polecat list
 
 # Merge queue status
 gt mq list
-```
+```text
 
 Example convoy output:
 
-```
+```text
 Convoy: hq-cv-007 "API Security Hardening"
 Status: OPEN
 Progress: 1/3 issues completed
@@ -15031,7 +16535,7 @@ Polecats:
   backend/toast  -> gt-a1b2c (completed, awaiting merge)
   backend/alpha  -> gt-d3e4f (implementing)
   docs/bravo     -> gt-g5h6i (loading context)
-```
+```text
 
 ### Step 5: Handle Issues
 
@@ -15046,7 +16550,7 @@ gt sling gt-d3e4f backend --agent gemini
 
 # Or manually nudge the polecat
 gt nudge backend/polecats/alpha "Status update? Need help?"
-```
+```text
 
 ### Step 6: Add More Work
 
@@ -15062,7 +16566,7 @@ gt convoy add hq-cv-007 gt-n1e2w
 
 # Sling it
 gt sling gt-n1e2w backend
-```
+```text
 
 ### Step 7: Convoy Completes
 
@@ -15071,7 +16575,7 @@ When all tracked issues are done, the convoy auto-closes. You can verify:
 ```bash
 gt convoy list
 # hq-cv-007  API Security Hardening  [COMPLETED]  4/4 done
-```
+```text
 
 ## Handling Dependencies
 
@@ -15095,7 +16599,7 @@ bd show gt-c1l2i
 # When gt-d3e4f completes, the dependency resolves automatically
 # Now you can sling it:
 gt sling gt-c1l2i frontend
-```
+```text
 
 ## Cross-Rig Coordination
 
@@ -15113,7 +16617,7 @@ gt sling gt-g5h6i shared-lib
 
 # All tracked in one convoy
 gt convoy show hq-cv-007
-```
+```text
 
 ## Comparison with Other Workflows
 
@@ -15133,7 +16637,7 @@ If you forget to sling some issues, use `gt convoy stranded` to find convoys wit
 ```bash
 gt convoy stranded
 # hq-cv-007 has 1 unassigned issue: gt-n1e2w
-```
+```text
 
 :::
 
@@ -15180,7 +16684,7 @@ graph LR
     M --> S3["Step 3: Review ○"]
     M --> S4["Step 4: Test ○"]
     M --> S5["Step 5: Submit ○"]
-```
+```text
 
 ## Step-by-Step
 
@@ -15190,11 +16694,11 @@ List all available formulas in your workspace:
 
 ```bash
 gt formula list
-```
+```text
 
 Example output:
 
-```
+```text
 Name                        Type      Steps  Description
 shiny                       workflow  5      Design-implement-review-test-submit
 shiny-secure                workflow  6      Shiny with security audit
@@ -15204,7 +16708,7 @@ security-audit              convoy    4      Security-focused analysis
 mol-polecat-work            workflow  9      Full polecat work lifecycle
 rule-of-five                convoy    5      Five-perspective analysis
 ...
-```
+```text
 
 ### Step 2: Examine a Formula
 
@@ -15212,7 +16716,7 @@ View the details of a formula before running it:
 
 ```bash
 gt formula show shiny
-```
+```text
 
 This shows:
 
@@ -15231,7 +16735,7 @@ gt formula run shiny --var feature="Add notification system"
 
 # Run with multiple variables
 gt formula run shiny --var feature="Add notifications" --var assignee="polecat/toast"
-```
+```text
 
 For convoy formulas with parallel execution:
 
@@ -15244,7 +16748,7 @@ gt formula run design --problem="Redesign the merge queue"
 
 # Run with a specific preset
 gt formula run code-review --pr=42 --preset=gate
-```
+```text
 
 ### Step 4: Track Progress
 
@@ -15259,11 +16763,11 @@ gt mol progress <mol-id>
 
 # Show the dependency graph
 gt mol dag <mol-id>
-```
+```text
 
 Example progress output:
 
-```
+```text
 Molecule: mol-shiny-x1y2z "Add notification system"
 Formula: shiny v1
 Progress: 2/5 steps complete
@@ -15274,7 +16778,7 @@ Steps:
   [●] review          Review implementation
   [ ] test            Test Add notification system
   [ ] submit          Submit for merge
-```
+```text
 
 ### Step 5: Advance Steps
 
@@ -15286,7 +16790,7 @@ gt mol step done
 
 # The next step becomes active automatically
 gt mol status
-```
+```text
 
 ### Step 6: Completion
 
@@ -15304,7 +16808,7 @@ graph LR
     B --> C[review]
     C --> D[test]
     D --> E[submit]
-```
+```text
 
 **Built-in workflow formulas:**
 
@@ -15346,7 +16850,7 @@ id = "submit"
 needs = ["test"]
 title = "Submit for merge"
 description = "Final check and submit..."
-```
+```text
 
 ### Convoy Formulas
 
@@ -15365,7 +16869,7 @@ graph TD
     L4 --> Synth
 
     Synth --> Result[Unified Output]
-```
+```text
 
 **Built-in convoy formulas:**
 
@@ -15391,7 +16895,7 @@ gt formula run code-review --pr=42 --preset=gate
 
 # Run specific legs only
 gt formula run code-review --pr=42 --legs=security,correctness,wiring
-```
+```text
 
 ## Creating Custom Formulas
 
@@ -15439,13 +16943,13 @@ description = "Create git tag and publish release"
 [vars.version]
 description = "Release version (e.g., 2.3.1)"
 required = true
-```
+```text
 
 Run it:
 
 ```bash
 gt formula run my-release --var version="2.3.1"
-```
+```text
 
 ### Custom Convoy Formula
 
@@ -15490,7 +16994,7 @@ description = "Propose preventive measures..."
 title = "Incident Report"
 description = "Synthesize all analyses into a unified incident report..."
 depends_on = ["timeline", "root-cause", "impact", "prevention"]
-```
+```text
 
 ### Formula CLI Reference
 
@@ -15509,7 +17013,7 @@ gt formula run <name> --var key=value
 
 # Run with preset (convoy formulas)
 gt formula run <name> --preset=<preset-name>
-```
+```text
 
 ## Variables and Templating
 
@@ -15519,13 +17023,13 @@ Formulas use Go `text/template` syntax for variable interpolation:
 [[steps]]
 title = "Implement {{.feature}}"
 description = "Build the {{.feature}} feature for {{.assignee}}"
-```
+```text
 
 Variables are provided at runtime via `--var`:
 
 ```bash
 gt formula run shiny --var feature="notifications" --var assignee="toast"
-```
+```text
 
 ### Variable Definitions
 
@@ -15539,7 +17043,7 @@ required = true
 description = "Who is assigned"
 required = false
 default = "auto"
-```
+```text
 
 | Field | Purpose |
 |-------|---------|
@@ -15635,7 +17139,7 @@ graph TD
     L10 --> Synth
 
     Synth --> Output["review-summary.md"]
-```
+```text
 
 Each polecat works in parallel, examining the code from its specialized perspective. When all legs complete, a synthesis step combines findings into a single prioritized document.
 
@@ -15669,19 +17173,19 @@ The `code-review` formula examines code from 10 different perspectives:
 
 ```bash
 gt formula run code-review --pr=42
-```
+```text
 
 ### Review a Branch
 
 ```bash
 gt formula run code-review --branch=feature/auth-redesign
-```
+```text
 
 ### Review Specific Files
 
 ```bash
 gt formula run code-review --files="src/auth/*.go"
-```
+```text
 
 ## Presets
 
@@ -15693,7 +17197,7 @@ Fast, focused on blockers. Good for automatic merge-gate reviews:
 
 ```bash
 gt formula run code-review --pr=42 --preset=gate
-```
+```text
 
 | Legs | Purpose |
 |------|---------|
@@ -15708,7 +17212,7 @@ All 10 legs. Use for major features, security-sensitive changes, or important re
 
 ```bash
 gt formula run code-review --pr=42 --preset=full
-```
+```text
 
 ### Security-Focused Preset
 
@@ -15716,7 +17220,7 @@ Heavy on security analysis:
 
 ```bash
 gt formula run code-review --pr=42 --preset=security-focused
-```
+```text
 
 | Legs | Purpose |
 |------|---------|
@@ -15731,7 +17235,7 @@ Focus on code quality during refactoring:
 
 ```bash
 gt formula run code-review --pr=42 --preset=refactor
-```
+```text
 
 | Legs | Purpose |
 |------|---------|
@@ -15746,7 +17250,7 @@ Run specific legs only:
 
 ```bash
 gt formula run code-review --pr=42 --legs=security,correctness,wiring,test-quality
-```
+```text
 
 ## Review Output
 
@@ -15754,7 +17258,7 @@ gt formula run code-review --pr=42 --legs=security,correctness,wiring,test-quali
 
 Each leg writes its findings to `.reviews/<review-id>/<leg-id>-findings.md`:
 
-```
+```text
 .reviews/review-abc123/
 ├── correctness-findings.md
 ├── security-findings.md
@@ -15767,7 +17271,7 @@ Each leg writes its findings to `.reviews/<review-id>/<leg-id>-findings.md`:
 ├── commit-discipline-findings.md
 ├── test-quality-findings.md
 └── review-summary.md          # Synthesized review
-```
+```text
 
 ### Findings Format
 
@@ -15794,7 +17298,7 @@ Brief overview of findings from this perspective.
 
 ## Observations
 - ...
-```
+```text
 
 ### Synthesized Review
 
@@ -15829,7 +17333,7 @@ What is done well.
 
 ## Recommendations
 Actionable next steps.
-```
+```text
 
 ## Integration with Merge Queue
 
@@ -15844,7 +17348,7 @@ graph LR
     Decision -->|Clean| Merge[Refinery Merges]
     Block --> Fix[Author Fixes]
     Fix --> Review
-```
+```text
 
 ### Automatic Gate Review
 
@@ -15857,7 +17361,7 @@ gt formula run code-review --pr=$PR_NUMBER --preset=gate
 # Check for critical issues
 # If P0 issues found, block the merge
 # If clean, proceed to merge
-```
+```text
 
 ### Manual Full Review
 
@@ -15865,7 +17369,7 @@ For important changes, run the full review before the author finishes:
 
 ```bash
 gt formula run code-review --branch=feature/big-refactor --preset=full
-```
+```text
 
 Share the `review-summary.md` with the team for discussion.
 
@@ -15903,7 +17407,7 @@ $ cat .reviews/review-abc123/review-summary.md
 # Overall solid implementation with 1 critical security issue
 # and 2 major performance concerns. Recommend fixing P0 before merge.
 # ...
-```
+```text
 
 ## Tips
 
@@ -15959,6 +17463,10 @@ Use crew collaboration when:
 ---
 
 ## The Guzzoline Pattern
+
+:::info
+The name comes from Mad Max: guzzoline (fuel) is the scarce resource that keeps the fleet moving. In Gas Town, well-written specs are the fuel that powers polecat productivity.
+:::
 
 Crew members produce specifications; polecats consume them.
 
@@ -16030,7 +17538,7 @@ bd create --title "Fix: rate limiter missing IPv6 normalization" \
 
 The most productive crew collaboration involves working in parallel with polecats:
 
-```
+```text
 You (Crew)                    Polecats
 ─────────────                 ─────────
 Design feature A              Implement feature B (from earlier spec)
@@ -16044,7 +17552,9 @@ File follow-ups for B         Implement feature A
 Design feature C              ...
 ```
 
+:::tip
 The key insight: while polecats implement your previous specs, you design the next batch. This creates a pipeline where neither you nor the polecats are ever idle.
+:::
 
 ---
 
@@ -16083,6 +17593,10 @@ The PR Sheriff hooks this work to their session, creating a permanent review cad
 
 ## Quality Gates
 
+:::warning
+Polecats optimize for task completion, not system-wide coherence. Without crew review, architectural drift can compound quickly across many parallel workers.
+:::
+
 Crew members are the quality backstop. While polecats run tests before submitting, crew reviews catch:
 
 - **Architectural drift** -- Polecat implementations that don't match the system's design
@@ -16117,6 +17631,10 @@ gt worktree remove beads
 ---
 
 ## Tips
+
+:::tip
+The highest-leverage crew activity is creating clear, detailed beads. A 10-minute spec saves a polecat 30 minutes of exploring the wrong approach.
+:::
 
 1. **Write specs, not code.** Your highest-leverage activity is creating well-specified beads. A 10-minute spec saves a polecat from spending 30 minutes exploring the wrong approach.
 
@@ -16187,7 +17705,7 @@ Found the issue is in token refresh logic.
 Check line 145 in auth.go first.
 The failing test is TestRefreshExpired.
 "
-```
+```text
 
 The mail is addressed to yourself. Your next session reads it for orientation.
 
@@ -16207,7 +17725,7 @@ Complete the logical unit of work you are on. Do not hand off mid-implementation
 git add <files>
 git commit -m "Implement input validation for signup form"
 git push
-```
+```text
 
 :::danger[Non-Negotiable]
 
@@ -16222,7 +17740,7 @@ Close finished work, update status on in-progress items:
 ```bash
 bd close ga-abc --reason "Implemented and tests passing"
 bd update ga-def --status=in_progress --comment "50% done, form validation complete"
-```
+```text
 
 ### 4. Submit or Handoff
 
@@ -16230,7 +17748,7 @@ If the work is **done**, submit to the merge queue:
 
 ```bash
 gt done    # Submits MR, Witness nukes sandbox
-```
+```text
 
 If the work is **not done** but context is full, hand off:
 
@@ -16246,7 +17764,7 @@ Remaining:
 
 Next step: Look at auth/refresh.go line 145.
 "
-```
+```text
 
 ---
 
@@ -16262,7 +17780,7 @@ git add <files>
 git commit -m "Add sidebar navigation fixes"
 git push                    # MANDATORY
 git status                  # Verify "up to date with origin/main"
-```
+```text
 
 ### 2. File Follow-Up Work
 
@@ -16271,13 +17789,13 @@ Create beads for anything that needs attention later:
 ```bash
 bd create "Follow-up: add error handling for edge case in auth" -t task
 bd create "Follow-up: flaky test in TestRefreshExpired" -t bug
-```
+```text
 
 ### 3. Close Finished Beads
 
 ```bash
 bd close ga-abc --reason "Completed — sidebar navigation fixed"
-```
+```text
 
 ### 4. Handoff
 
@@ -16293,7 +17811,7 @@ Filed:
 
 Build is clean. All pushed to main.
 "
-```
+```text
 
 ---
 
@@ -16310,7 +17828,7 @@ gt handoff -s "Context full after 200 patrol cycles" -m "
 All polecats healthy. No pending escalations.
 Merge queue empty. Last patrol at 14:30.
 "
-```
+```text
 
 After restart, the agent runs `gt prime` to reload role context and resumes its patrol molecule from the hook.
 
@@ -16333,7 +17851,7 @@ gt mail read <handoff-mail-id>
 
 # 4. Resume work immediately (GUPP)
 # Do not wait for confirmation — the hook IS the assignment
-```
+```text
 
 ```mermaid
 sequenceDiagram
@@ -16355,7 +17873,7 @@ sequenceDiagram
     S2->>Hook: gt hook (find assigned work)
     S2->>Mail: gt mail inbox (read handoff notes)
     S2->>S2: Resume work immediately (GUPP)
-```
+```text
 
 ---
 
@@ -16380,7 +17898,7 @@ Handoff notes are for your next session — a version of you with no memory of t
 
 ### Example: Good Handoff
 
-```
+```text
 gt handoff -s "Token refresh bug — root cause found" -m "
 Root cause: RefreshToken() in auth/refresh.go:145 doesn't check expiry.
 Fix approach: Add time.Now().After(token.ExpiresAt) guard.
@@ -16393,15 +17911,15 @@ Remaining:
 Build: clean on main. Tests passing except TestRefreshExpired (the bug).
 Filed: ga-xyz for related rate-limiting issue found during investigation.
 "
-```
+```text
 
 ### Example: Bad Handoff
 
-```
+```text
 gt handoff -m "Worked on the auth bug for a while. Made some progress but
 couldn't figure it all out. The tests are kind of weird. Check the auth
 folder I guess."
-```
+```text
 
 ---
 
@@ -16430,7 +17948,7 @@ gt handoff -m "Almost done with the feature"
 # RIGHT: Always push first
 git add <files> && git commit -m "WIP: auth validation" && git push
 gt handoff -m "Auth validation WIP pushed. Resume from auth/validate.go."
-```
+```text
 
 ### Empty Handoff Notes
 
@@ -16440,7 +17958,7 @@ gt handoff
 
 # RIGHT: Always include notes
 gt handoff -s "Feature X progress" -m "Completed A and B. Next: do C. See auth/refresh.go:145."
-```
+```text
 
 ### Handing Off Mid-Thought
 
@@ -16454,7 +17972,7 @@ Evidence: bd show ga-abc shows closed, but convoy ga-def still open.
 Next: Add logging to convoy_close() in convoys.go:220 and reproduce.
 Reproduction: Run gt convoy create with 3 beads, gt done on all 3 within 5s.
 "
-```
+```text
 
 ---
 
@@ -16498,14 +18016,14 @@ The daemon process is a simple Go scheduler that sends heartbeats and processes 
 
 ### 2. Escalations Flow Upward
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat
       --> If still stuck: Witness escalates to Deacon
         --> Deacon escalates to Mayor
           --> Mayor escalates to Human/Overseer
-```
+```text
 
 You only need to intervene when escalations reach you. The system handles lower-level recovery automatically.
 
@@ -16533,7 +18051,7 @@ gt down
 
 # Stop and clean up
 gt shutdown --all
-```
+```text
 
 :::tip[Daily Operations Checklist]
 
@@ -16551,7 +18069,7 @@ gt shutdown --all
 
 When something goes wrong, follow this decision tree:
 
-```
+```text
 Is the system completely down?
 ├── Yes → gt daemon start && gt start --all (see Lifecycle: Emergency Recovery)
 └── No
@@ -16565,7 +18083,7 @@ Is the system completely down?
     │   └── gt costs --by-agent (see Escalations: Cost Spike scenario)
     └── Are escalations piling up?
         └── gt escalate list (see Escalations: Managing Escalations)
-```
+```text
 
 ## Weekly Review Checklist
 
@@ -16589,7 +18107,7 @@ gt convoy stranded
 
 # 6. Clean up finished polecat worktrees
 gt cleanup
-```
+```text
 
 ## Operational Anti-Patterns
 
@@ -16625,7 +18143,7 @@ Starts the **Deacon** and **Mayor**, the two town-level persistent agents.
 
 ```bash
 gt start
-```
+```text
 
 What happens:
 
@@ -16646,7 +18164,7 @@ Starts everything: Deacon, Mayor, plus all Witnesses and Refineries across all a
 
 ```bash
 gt start --all
-```
+```text
 
 What happens:
 
@@ -16660,7 +18178,7 @@ What happens:
 ```bash
 # Start with verbose output to watch the boot sequence
 gt start --all --verbose
-```
+```text
 
 :::tip
 
@@ -16678,7 +18196,7 @@ Stops all running agent processes but **keeps worktrees intact**. Use this when 
 
 ```bash
 gt down
-```
+```text
 
 | What it stops | What it keeps |
 |---------------|---------------|
@@ -16692,7 +18210,7 @@ Resume with:
 
 ```bash
 gt start --all
-```
+```text
 
 :::info[When to use `gt down`]
 
@@ -16706,7 +18224,7 @@ Stops all processes **and** removes worktrees, cleaning up disk resources.
 
 ```bash
 gt shutdown
-```
+```text
 
 This removes polecat worktrees and temporary state. Persistent state (beads, config, hooks) is preserved.
 
@@ -16716,7 +18234,7 @@ Stops everything including crew sessions and removes all ephemeral resources.
 
 ```bash
 gt shutdown --all
-```
+```text
 
 | Flag | Behavior |
 |------|----------|
@@ -16736,7 +18254,7 @@ Targets only ephemeral workers. Useful when polecats are stuck but you want to k
 
 ```bash
 gt shutdown --polecats-only
-```
+```text
 
 This is a surgical operation:
 
@@ -16757,7 +18275,7 @@ Start the background daemon process.
 
 ```bash
 gt daemon start
-```
+```text
 
 The daemon:
 
@@ -16772,7 +18290,7 @@ Stop the daemon process.
 
 ```bash
 gt daemon stop
-```
+```text
 
 :::warning
 
@@ -16786,16 +18304,16 @@ Check whether the daemon is running and view its state.
 
 ```bash
 gt daemon status
-```
+```text
 
 Sample output:
 
-```
+```text
 Daemon: running (PID 12345)
 Uptime: 4h 23m
 Last heartbeat: 12s ago
 Pending requests: 0
-```
+```text
 
 ### `gt daemon logs`
 
@@ -16810,7 +18328,7 @@ gt daemon logs --follow
 
 # Filter by level
 gt daemon logs --level error
-```
+```text
 
 ---
 
@@ -16832,7 +18350,7 @@ gt witness start --rig myproject
 
 # Start a Refinery for a specific rig
 gt refinery start --rig myproject
-```
+```text
 
 ### Stopping a Specific Agent
 
@@ -16848,7 +18366,7 @@ gt witness stop --rig myproject
 
 # Stop a Refinery
 gt refinery stop --rig myproject
-```
+```text
 
 ### Restarting an Agent
 
@@ -16858,7 +18376,7 @@ gt mayor restart
 
 # Restart with fresh context
 gt mayor restart --fresh
-```
+```text
 
 :::note
 
@@ -16877,7 +18395,7 @@ gt witness attach --rig myproject
 
 # Attach to a specific polecat
 gt polecat attach toast --rig myproject
-```
+```text
 
 ---
 
@@ -16901,7 +18419,7 @@ sequenceDiagram
     B->>B: Recovers uncommitted work if possible
     B->>P: Terminates process
     B->>D: Reports cleanup complete
-```
+```text
 
 1. **Detection**: The [Deacon](../agents/deacon.md) detects zombies during its patrol cycle -- sessions that are alive but not responding, or processes consuming resources without producing output.
 2. **Filing**: The Deacon files a death warrant as a bead, not an immediate kill. This creates an audit trail.
@@ -16915,7 +18433,7 @@ sequenceDiagram
 ```bash
 gt dog list                  # Check dog states
 # Dogs past timeout show "death warrant pending"
-```
+```text
 
 ### Why Not Kill Immediately?
 
@@ -16939,7 +18457,7 @@ Start all agents for a rig (Witness + Refinery).
 
 ```bash
 gt rig start myproject
-```
+```text
 
 ### `gt rig stop`
 
@@ -16947,7 +18465,7 @@ Stop all agents in a rig.
 
 ```bash
 gt rig stop myproject
-```
+```text
 
 ### `gt rig boot`
 
@@ -16955,7 +18473,7 @@ Cold-start a rig from scratch. Creates fresh worktrees and initializes all agent
 
 ```bash
 gt rig boot myproject
-```
+```text
 
 This is used when first adding a rig or after a `gt rig dock`.
 
@@ -16965,7 +18483,7 @@ Stop all rig agents, clean up, and restart fresh.
 
 ```bash
 gt rig reboot myproject
-```
+```text
 
 Equivalent to `gt rig stop` + cleanup + `gt rig boot`.
 
@@ -16981,7 +18499,7 @@ Take a rig offline without removing it. Parked rigs are ignored by `gt start --a
 
 ```bash
 gt rig park myproject
-```
+```text
 
 Use cases:
 
@@ -16995,7 +18513,7 @@ Bring a parked rig back online.
 
 ```bash
 gt rig unpark myproject
-```
+```text
 
 After unparking, run `gt rig start myproject` to launch agents.
 
@@ -17005,7 +18523,7 @@ Archive a rig. Stops agents, removes worktrees, and marks the rig as docked.
 
 ```bash
 gt rig dock myproject
-```
+```text
 
 Docked rigs retain their configuration and bead history but consume no runtime resources.
 
@@ -17015,7 +18533,7 @@ Restore a docked rig to active status.
 
 ```bash
 gt rig undock myproject
-```
+```text
 
 After undocking, run `gt rig boot myproject` to create worktrees and start agents.
 
@@ -17037,7 +18555,7 @@ graph TD
     W2 --> R2[Refinery: rig2]
     R1 --> P1[Polecats: rig1]
     R2 --> P2[Polecats: rig2]
-```
+```text
 
 | Order | Component | Depends On | Why |
 |-------|-----------|------------|-----|
@@ -17088,7 +18606,7 @@ tmux list-sessions
 # Step 4: Kill all tmux sessions and restart clean
 tmux kill-server
 gt start --all
-```
+```text
 
 ### Scenario: Single Rig in Bad State
 
@@ -17103,7 +18621,7 @@ gt cleanup --rig myproject
 
 # Fresh start for the rig
 gt rig boot myproject
-```
+```text
 
 ### Scenario: Polecats Spawning and Immediately Dying
 
@@ -17123,7 +18641,7 @@ git fetch origin && git checkout origin/main
 # Run project tests
 
 # If main is broken, fix it before resuming polecat work
-```
+```text
 
 ### Scenario: Lost Work from Crashed Polecat
 
@@ -17142,7 +18660,7 @@ git log --oneline -5
 # If the worktree is gone, check for orphaned commits
 gt orphans --commits --rig myproject
 gt orphans --recover <commit-hash>
-```
+```text
 
 ---
 
@@ -17181,7 +18699,7 @@ stateDiagram-v2
     Docked --> Added: gt rig undock
     Active --> Rebooting: gt rig reboot
     Rebooting --> Active: auto
-```
+```text
 
 ---
 
@@ -17228,7 +18746,7 @@ The primary real-time monitoring command. Shows a live stream of events across a
 
 ```bash
 gt feed
-```
+```text
 
 The feed displays:
 
@@ -17252,17 +18770,17 @@ gt feed --level warn
 
 # JSON output for piping to other tools
 gt feed --json
-```
+```text
 
 Sample output:
 
-```
+```text
 14:23:01 [myproject] polecat:toast  STARTED  gt-a1b2c "Fix login bug"
 14:23:45 [docs]      polecat:bravo  DONE     gt-d3e4f "Update API docs"
 14:24:02 [myproject] refinery       MERGE    gt-d3e4f merged to main
 14:25:11 [myproject] witness        STALE    polecat:alpha idle 12m
 14:25:12 [myproject] witness        NUDGE    polecat:alpha "check progress"
-```
+```text
 
 :::tip[Keep a Feed Running]
 
@@ -17276,7 +18794,7 @@ Shows a summary of recent agent activity -- more concise than `gt feed`, focused
 
 ```bash
 gt trail
-```
+```text
 
 ```bash
 # Show last N events
@@ -17290,11 +18808,11 @@ gt trail --rig myproject
 
 # Show activity in the last hour
 gt trail --since 1h
-```
+```text
 
 Sample output:
 
-```
+```text
 Last 1h activity (23 events):
 
   myproject  4 polecats spawned, 3 completed, 1 active
@@ -17303,7 +18821,7 @@ Last 1h activity (23 events):
 
   Escalations: 0 new, 0 open
   Convoys: 2 active, 1 completed
-```
+```text
 
 ### `gt peek` -- View Recent Session Output
 
@@ -17321,7 +18839,7 @@ gt peek witness --rig myproject
 
 # Show more lines
 gt peek mayor --lines 100
-```
+```text
 
 :::note
 
@@ -17347,7 +18865,7 @@ gt activity emit "deployment started" --type deploy --rig myproject
 # Query events with filters
 gt activity --type convoy --since 24h
 gt activity --actor witness --rig myproject
-```
+```text
 
 Events are stored in `.events.jsonl` at the town level and queryable with standard JSON tools.
 
@@ -17370,11 +18888,11 @@ gt audit --bead gt-a1b2c
 
 # JSON output
 gt audit --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Audit: polecat:toast (myproject)
 
   2025-06-15 14:23  SPAWNED   hook: gt-a1b2c "Fix login bug"
@@ -17384,7 +18902,7 @@ Audit: polecat:toast (myproject)
 
   Total: 1 task, 1 completed, 0 escalated
   Avg duration: 29m
-```
+```text
 
 ### `gt log` -- Town Activity Log
 
@@ -17404,7 +18922,7 @@ gt log --level warn
 # Filter by component
 gt log --component refinery
 gt log --component daemon
-```
+```text
 
 ---
 
@@ -17416,7 +18934,7 @@ Run a comprehensive diagnostic check on your Gas Town installation.
 
 ```bash
 gt doctor
-```
+```text
 
 The doctor checks:
 
@@ -17446,11 +18964,11 @@ gt doctor --json
 
 # Auto-fix what it can
 gt doctor --fix
-```
+```text
 
 Sample output:
 
-```
+```text
 Gas Town Doctor v1.2.0
 
   [PASS] Dependencies: all present
@@ -17466,7 +18984,7 @@ Gas Town Doctor v1.2.0
 
 Summary: 8 passed, 2 warnings, 1 failure
 Run 'gt doctor --fix' to attempt automatic repairs.
-```
+```text
 
 :::warning
 
@@ -17487,7 +19005,7 @@ gt patrol digest --agent witness --rig myproject
 
 # Request a fresh patrol cycle
 gt patrol start
-```
+```text
 
 The patrol digest summarizes:
 
@@ -17507,7 +19025,7 @@ Launch a web-based dashboard for visual convoy and system tracking.
 
 ```bash
 gt dashboard
-```
+```text
 
 This opens a local web server (default: `http://localhost:8420`) with:
 
@@ -17526,7 +19044,7 @@ gt dashboard --no-open
 
 # Stop the dashboard
 gt dashboard stop
-```
+```text
 
 :::tip
 
@@ -17540,7 +19058,7 @@ Track token consumption and estimated costs across all agent sessions.
 
 ```bash
 gt costs
-```
+```text
 
 ```bash
 # Show costs for the current day
@@ -17558,11 +19076,11 @@ gt costs --by-rig
 
 # JSON output
 gt costs --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Gas Town Costs (last 24h)
 
   Total tokens:  2,450,000 input / 890,000 output
@@ -17578,7 +19096,7 @@ Gas Town Costs (last 24h)
   By rig:
     myproject:   $32.40 (68.6%)
     docs:        $14.80 (31.4%)
-```
+```text
 
 :::warning[Cost Awareness]
 
@@ -17656,7 +19174,7 @@ gt log --level error --component myproject --since 24h
 
 # Find agents that restarted more than twice
 gt trail --since 24h | grep RESTART
-```
+```text
 
 ### Tracking a Specific Bead Through the System
 
@@ -17667,7 +19185,7 @@ gt audit --bead gt-a1b2c
 # Check if it is stuck somewhere
 bd show gt-a1b2c
 gt mq show gt-a1b2c
-```
+```text
 
 ### Correlating Events Across Agents
 
@@ -17678,7 +19196,7 @@ gt trail --since 2h --last 100
 # Cross-reference Witness actions with polecat events
 gt activity --actor witness --since 1h --json
 gt activity --type polecat --since 1h --json
-```
+```text
 
 ---
 
@@ -17739,7 +19257,7 @@ gt escalate --bead gt-a1b2c "Blocked: needs API key configuration"
 
 # Attach to a rig
 gt escalate --rig myproject "All polecats failing to spawn"
-```
+```text
 
 :::note
 
@@ -17836,7 +19354,7 @@ Escalation routing is configured in `settings/escalation.json` at the town level
     "override_for": ["critical"]
   }
 }
-```
+```text
 
 ### Routing Paths by Severity
 
@@ -17860,7 +19378,7 @@ graph LR
     subgraph P3 ["P3 - Low"]
         L0[Bead]
     end
-```
+```text
 
 Each channel in the routing path is attempted in order. If the escalation is not acknowledged within the `auto_escalate_after` window, it re-escalates through the same channels.
 
@@ -17894,11 +19412,11 @@ gt escalate list --all
 
 # JSON output
 gt escalate list --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Open Escalations (3):
 
   ESC-001  P0  CRITICAL  "Database migration broke all tests"
@@ -17912,7 +19430,7 @@ Open Escalations (3):
   ESC-003  P2  MEDIUM    "Flaky test in auth module"
            Rig: docs  Age: 2h  ACK: no
            Route: bead -> mail:mayor (pending)
-```
+```text
 
 ### `gt escalate ack`
 
@@ -17927,7 +19445,7 @@ gt escalate ack ESC-001 --note "Looking into the migration issue"
 
 # Acknowledge all open escalations
 gt escalate ack --all
-```
+```text
 
 :::warning
 
@@ -17948,7 +19466,7 @@ gt escalate close ESC-001 --note "Fixed: migration script had wrong column type"
 
 # Close with a linked commit
 gt escalate close ESC-001 --commit abc1234
-```
+```text
 
 ### `gt escalate stale`
 
@@ -17956,18 +19474,18 @@ Find escalations that have gone unacknowledged past their threshold.
 
 ```bash
 gt escalate stale
-```
+```text
 
 Sample output:
 
-```
+```text
 Stale Escalations (1):
 
   ESC-003  P2  MEDIUM  "Flaky test in auth module"
            Age: 4h 12m (threshold: 4h)
            Re-escalations: 1 of 2
            Next re-escalation in: 3h 48m
-```
+```text
 
 ---
 
@@ -18025,7 +19543,7 @@ sequenceDiagram
         S->>H: Re-escalation #2 email
         Note over S: Marked as stale
     end
-```
+```text
 
 ---
 
@@ -18042,7 +19560,7 @@ stateDiagram-v2
     Stale --> Acknowledged: gt escalate ack
     Stale --> Closed: gt escalate close
     Closed --> [*]
-```
+```text
 
 ---
 
@@ -18073,7 +19591,7 @@ cd ~/gt/myproject/crew/yourname
 
 # Close the escalation
 gt escalate close ESC-001 --note "Fixed flaky test: added retry logic to test_auth_timeout"
-```
+```text
 
 ### Scenario: Polecat Stuck in a Loop
 
@@ -18101,7 +19619,7 @@ bd update gt-a1b2c --notes "Previous attempt failed because <reason>. Try <alter
 gt sling gt-a1b2c myproject
 
 gt escalate close ESC-002 --note "Respawned with updated guidance"
-```
+```text
 
 ### Scenario: Cost Spike During Off-Hours
 
@@ -18125,7 +19643,7 @@ gt polecat stop <name> --rig myproject
 # Acknowledge and close
 gt escalate ack ESC-003 --note "Cost spike from runaway polecat"
 gt escalate close ESC-003 --note "Stopped runaway polecat, reviewing task scoping"
-```
+```text
 
 ---
 
@@ -18148,7 +19666,7 @@ The default thresholds work well for most setups, but you may want to adjust the
     }
   }
 }
-```
+```text
 
 ### When to Loosen Thresholds (Longer Timers)
 
@@ -18165,7 +19683,7 @@ The default thresholds work well for most setups, but you may want to adjust the
     }
   }
 }
-```
+```text
 
 ### Per-Rig Overrides
 
@@ -18221,7 +19739,7 @@ gt trail --since 1h
 
 # Check for open escalations
 gt escalate list
-```
+```text
 
 ---
 
@@ -18240,7 +19758,7 @@ gt hook --agent <agent>
 
 # Check convoy status for the agent's work
 gt convoy list
-```
+```text
 
 **Solutions:**
 
@@ -18292,7 +19810,7 @@ bd list --convoy <convoy-id>
 
 # Check for stranded convoys
 gt convoy stranded
-```
+```text
 
 **Solutions:**
 
@@ -18345,7 +19863,7 @@ gt mail inbox --agent mayor
 
 # Check for recent Mayor activity
 gt audit mayor --since 1h
-```
+```text
 
 **Solutions:**
 
@@ -18397,7 +19915,7 @@ gt polecat stale
 # Check individual polecat status
 gt polecat list --rig myproject
 gt peek polecat:toast --rig myproject
-```
+```text
 
 **Solutions:**
 
@@ -18441,7 +19959,7 @@ gt orphans
 
 # Clean them up
 gt cleanup
-```
+```text
 
 `gt orphans` finds:
 
@@ -18457,7 +19975,7 @@ gt deacon zombie-scan
 
 # Or manually check
 ps aux | grep claude | grep -v grep
-```
+```text
 
 If zombie processes are found:
 
@@ -18467,7 +19985,7 @@ gt deacon zombie-scan --cleanup
 
 # Or manually kill specific processes
 kill <PID>
-```
+```text
 
 ### Orphaned Commits
 
@@ -18477,7 +19995,7 @@ gt orphans --commits
 
 # Recover work from an orphaned commit
 gt orphans --recover <commit-hash>
-```
+```text
 
 :::tip[Lost Work Recovery]
 
@@ -18500,7 +20018,7 @@ gt mq status --rig myproject
 
 # Check for conflict details
 gt mq show <mr-id>
-```
+```text
 
 **Solutions:**
 
@@ -18551,7 +20069,7 @@ gt daemon start --verbose
 
 # Check daemon logs
 gt daemon logs --level error
-```
+```text
 
 ### Heartbeat Failures
 
@@ -18566,7 +20084,7 @@ gt daemon logs --follow
 
 # Restart the daemon
 gt daemon stop && gt daemon start
-```
+```text
 
 ---
 
@@ -18582,7 +20100,7 @@ gt audit polecat:toast --rig myproject
 
 # Look for signs of context pressure in agent output
 gt peek polecat:toast --rig myproject --lines 50
-```
+```text
 
 **Solutions:**
 
@@ -18630,7 +20148,7 @@ gt daemon logs --level error --since 10m
 
 # Check if the tmux session was created
 tmux list-sessions
-```
+```text
 
 **Solutions:**
 
@@ -18678,7 +20196,7 @@ tmux list-sessions
 cd ~/gt/myproject/polecats/<name>/myproject
 git status
 git log --oneline -5
-```
+```text
 
 **Solutions:**
 
@@ -18731,7 +20249,7 @@ bd doctor
 
 # Check for lock files
 ls -la ~/gt/myproject/.beads/*.lock 2>/dev/null
-```
+```text
 
 **Solutions:**
 
@@ -18781,7 +20299,7 @@ ls -la ~/gt/myproject/.beads/*.lock 2>/dev/null
 cd ~/gt/myproject/polecats/<name>/myproject
 git status
 git log --oneline origin/main..HEAD
-```
+```text
 
 **Solutions:**
 
@@ -18838,7 +20356,7 @@ gt mail inbox --agent <recipient>
 
 # Verify the mail address format
 gt mail send <rig>/<agent> -s "test" -m "ping"
-```
+```text
 
 **Solutions:**
 
@@ -18904,7 +20422,7 @@ gt mail send <rig>/<agent> -s "test" -m "ping"
 
 Use this to quickly find the right troubleshooting section:
 
-```
+```text
 Is anything running at all?
 ├── No → Daemon Issues / Agent Boot Failures
 └── Yes
@@ -18922,7 +20440,7 @@ Is anything running at all?
     │   └── Context Window Filling
     └── Are there leftover resources?
         └── Orphaned Processes
-```
+```text
 
 ---
 
@@ -18934,7 +20452,7 @@ If multiple systems are failing simultaneously and individual fixes are not reso
 # Nuclear option: stop everything and start fresh
 gt shutdown --all
 gt start --all
-```
+```text
 
 This preserves all persistent state (beads, config, hooks) but gives every agent a clean session. Agents will automatically pick up their hooked work on restart.
 
@@ -18969,7 +20487,7 @@ Gas Town's plugin system extends the platform with custom automation, gates, and
 
 Town-level plugins live in `~/gt/plugins/` and are available across all rigs.
 
-```
+```text
 ~/gt/plugins/
 ├── eslint-gate/
 │   ├── plugin.json
@@ -18980,13 +20498,13 @@ Town-level plugins live in `~/gt/plugins/` and are available across all rigs.
 └── cost-alert/
     ├── plugin.json
     └── run.sh
-```
+```text
 
 ### Rig-Level Plugins
 
 Rig-level plugins live in `<rig>/plugins/` and only affect that specific project.
 
-```
+```text
 ~/gt/myproject/plugins/
 ├── integration-tests/
 │   ├── plugin.json
@@ -18994,7 +20512,7 @@ Rig-level plugins live in `<rig>/plugins/` and only affect that specific project
 └── coverage-check/
     ├── plugin.json
     └── run.sh
-```
+```text
 
 :::note
 
@@ -19021,7 +20539,7 @@ Enforces a minimum time delay between actions.
     "scope": "rig"
   }
 }
-```
+```text
 
 Use cases:
 
@@ -19042,7 +20560,7 @@ Opens at scheduled times based on a cron expression.
     "timezone": "America/Los_Angeles"
   }
 }
-```
+```text
 
 Use cases:
 
@@ -19065,7 +20583,7 @@ Opens when a boolean condition evaluates to true.
     "max_retries": 3
   }
 }
-```
+```text
 
 Use cases:
 
@@ -19088,7 +20606,7 @@ Opens in response to a specific event in the activity stream.
     }
   }
 }
-```
+```text
 
 Use cases:
 
@@ -19110,7 +20628,7 @@ Requires explicit human approval to open.
     "notify_channels": ["email:human"]
   }
 }
-```
+```text
 
 Use cases:
 
@@ -19151,7 +20669,7 @@ Every plugin requires a `plugin.json` manifest and an executable entry point.
     "report": "test-results.json"
   }
 }
-```
+```text
 
 ### Manifest Fields
 
@@ -19194,7 +20712,7 @@ else
 fi
 
 exit $EXIT_CODE
-```
+```text
 
 ---
 
@@ -19216,11 +20734,11 @@ gt plugin list --rig myproject
 
 # JSON output
 gt plugin list --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Town plugins:
   eslint-gate       gate/condition   pre-merge   v1.0.0
   deploy-notify     action           post-merge  v1.2.0
@@ -19229,7 +20747,7 @@ Town plugins:
 Rig: myproject
   integration-tests gate/condition   pre-merge   v1.0.0
   coverage-check    gate/condition   pre-merge   v1.1.0
-```
+```text
 
 ### `gt plugin show`
 
@@ -19238,7 +20756,7 @@ View details of a specific plugin.
 ```bash
 gt plugin show integration-tests
 gt plugin show integration-tests --rig myproject
-```
+```text
 
 ### `gt plugin run`
 
@@ -19253,7 +20771,7 @@ gt plugin run integration-tests --rig myproject --input branch=feature/auth
 
 # Dry run (show what would happen)
 gt plugin run integration-tests --dry-run
-```
+```text
 
 ### `gt plugin history`
 
@@ -19271,11 +20789,11 @@ gt plugin history integration-tests --since 7d
 
 # JSON output
 gt plugin history --json
-```
+```text
 
 Sample output:
 
-```
+```text
 Plugin: integration-tests (last 5 runs)
 
   2025-06-15 14:23  PASSED  branch: fix/login    12.4s
@@ -19283,7 +20801,7 @@ Plugin: integration-tests (last 5 runs)
   2025-06-15 12:45  PASSED  branch: fix/typo      6.1s
   2025-06-14 22:00  PASSED  branch: feat/api     15.3s
   2025-06-14 18:30  PASSED  branch: fix/css        4.8s
-```
+```text
 
 ---
 
@@ -19297,7 +20815,7 @@ mkdir -p ~/gt/plugins/my-plugin
 
 # Or rig-level plugin
 mkdir -p ~/gt/myproject/plugins/my-plugin
-```
+```text
 
 ### Step 2: Write the Manifest
 
@@ -19322,7 +20840,7 @@ Create `plugin.json`:
     "min_coverage": "80"
   }
 }
-```
+```text
 
 ### Step 3: Write the Entry Point
 
@@ -19349,7 +20867,7 @@ else
     echo "FAIL: Coverage ${COVERAGE}% is below minimum ${MIN_COVERAGE}%"
     exit 1
 fi
-```
+```text
 
 ### Step 4: Make Executable and Test
 
@@ -19361,7 +20879,7 @@ gt plugin run my-plugin --rig myproject
 
 # Check it appears in the list
 gt plugin list
-```
+```text
 
 ---
 
@@ -19399,7 +20917,7 @@ gt plugin history my-plugin --last 5
 
 # See detailed output of a specific run
 gt plugin history my-plugin --verbose
-```
+```text
 
 ### Running with Debug Output
 
@@ -19419,7 +20937,7 @@ echo "PLUGIN_DIR: $PLUGIN_DIR"
 echo "========================="
 
 # Your plugin logic here...
-```
+```text
 
 ### Common Failure Causes
 
@@ -19442,7 +20960,7 @@ gt plugin run my-plugin --rig myproject --dry-run
 # Manual run with custom inputs to simulate different scenarios
 gt plugin run my-plugin --rig myproject --input branch=main
 gt plugin run my-plugin --rig myproject --input branch=feature/untested
-```
+```text
 
 ---
 
@@ -19464,7 +20982,7 @@ Actions run in response to triggers but do not block workflow progress. Use thes
     "timeout": "30s"
   }
 }
-```
+```text
 
 ### Hook Plugins
 
@@ -19480,7 +20998,7 @@ Hooks intercept lifecycle events and can modify behavior. They run synchronously
     "timeout": "10s"
   }
 }
-```
+```text
 
 ### Schedule Plugins
 
@@ -19497,7 +21015,7 @@ Scheduled plugins run on a cron schedule independently of workflow events.
     "timeout": "5m"
   }
 }
-```
+```text
 
 ---
 
@@ -19611,7 +21129,7 @@ Your two main entry points into Gas Town are:
 ```bash
 gt may at    # Attach to the Mayor
 gt crew at <name> --rig <rig>   # Attach to a Crew workspace
-```
+```text
 
 **`gt may at`** (short for `gt mayor attach`) drops you into the Mayor's tmux session. From there you can give instructions, check progress, and coordinate all your rigs. This is the primary interface for most Gas Town work.
 
@@ -19664,7 +21182,7 @@ The inner loop is the moment-to-moment operational cadence:
 
 The inner loop is where execution happens. Speed here comes from clear instructions and fast feedback cycles.
 
-```
+```text
 Outer Loop (Days-Weeks)
 │  Strategic planning, upgrades, capacity decisions
 │
@@ -19673,7 +21191,7 @@ Outer Loop (Days-Weeks)
 │   │
 │   └── Inner Loop (Minutes)
 │       Task delegation, output review, handoffs
-```
+```text
 
 ---
 
@@ -19685,7 +21203,7 @@ The Mayor is your primary interface for multi-agent coordination. You talk to th
 
 ```bash
 gt mayor attach
-```
+```text
 
 This attaches your terminal to the Mayor's tmux session. You can now interact with it directly.
 
@@ -19693,12 +21211,12 @@ This attaches your terminal to the Mayor's tmux session. You can now interact wi
 
 Be specific and action-oriented:
 
-```
+```text
 Good:  "Fix the 5 failing tests in the auth module and add input
         validation to the user registration endpoint."
 
 Bad:   "Make the code better."
-```
+```text
 
 The Mayor will:
 
@@ -19712,11 +21230,11 @@ The Mayor will:
 
 You can ask the Mayor directly:
 
-```
+```text
 "What's the status of the auth fixes?"
 "How many polecats are running right now?"
 "Are there any blocked items?"
-```
+```text
 
 Or use CLI commands from any terminal:
 
@@ -19724,7 +21242,7 @@ Or use CLI commands from any terminal:
 gt convoy list
 gt feed
 gt trail --since 30m
-```
+```text
 
 ### Detaching from the Mayor
 
@@ -19740,16 +21258,16 @@ A common Gas Town setup involves 2-5 rigs (projects) running simultaneously.
 
 ```bash
 gt rig list
-```
+```text
 
 Sample output:
 
-```
+```text
 Rigs (3):
   myapp        active   3 polecats   witness: up   refinery: up
   api-server   active   1 polecat    witness: up   refinery: up
   docs         parked   -            witness: -    refinery: -
-```
+```text
 
 ### Working Across Rigs
 
@@ -19763,7 +21281,7 @@ gt rig status myapp
 
 # View a rig's merge queue
 gt mq list --rig api-server
-```
+```text
 
 ### Rig-Specific Operations
 
@@ -19777,7 +21295,7 @@ gt rig park docs
 # Bring it back later
 gt rig unpark docs
 gt rig start docs
-```
+```text
 
 :::tip[Focus Mode]
 
@@ -19797,7 +21315,7 @@ When an agent loses context (after compaction, crash, or long idle):
 
 ```bash
 gt prime
-```
+```text
 
 This reloads the agent's full context from its CLAUDE.md file, hooks, and beads state. All persistent agents run `gt prime` automatically on startup.
 
@@ -19808,7 +21326,7 @@ When transitioning from one work session to another (e.g., end of day):
 ```bash
 # From within an agent session
 gt handoff
-```
+```text
 
 This:
 
@@ -19825,7 +21343,7 @@ gt mayor restart
 
 # Restart with a different agent
 gt mayor restart --agent claude
-```
+```text
 
 ---
 
@@ -19848,7 +21366,7 @@ gt convoy list
 
 # 5. Attach to Mayor and give today's instructions
 gt mayor attach
-```
+```text
 
 ### During Active Development
 
@@ -19864,7 +21382,7 @@ gt doctor
 
 # Quick status check
 gt rig list
-```
+```text
 
 ### End of Day
 
@@ -19880,7 +21398,7 @@ gt convoy list
 
 # 4. Option B: Pause until morning
 gt down
-```
+```text
 
 ---
 
@@ -19918,7 +21436,7 @@ gt crew at bob
 # ... give task, detach ...
 gt crew at carol
 # ... cycle back to alice when ready ...
-```
+```text
 
 :::tip[Crew vs. Polecats]
 
@@ -19945,7 +21463,7 @@ bd create --title "PR Sheriff Standing Orders" --type task \
 # Hook it permanently to a Crew member
 gt crew at dave
 gt hook <bead-id>
-```
+```text
 
 The PR Sheriff pattern keeps your PR backlog from growing unbounded. Instead of PRs piling up while you focus on new work, they get triaged and handled continuously.
 
@@ -19971,7 +21489,7 @@ Any incomplete work or follow-up items must be tracked:
 # Create beads for remaining work
 bd create --title "TODO: finish API pagination" --type task --priority 2
 bd create --title "TODO: add tests for edge case X" --type task
-```
+```text
 
 Do not leave work undocumented. If it is not in a bead, it will be forgotten.
 
@@ -19989,7 +21507,7 @@ npm run lint      # or your project's lint command
 
 # Check for build errors
 npm run build
-```
+```text
 
 #### Step 3: Update Issue Status
 
@@ -20002,7 +21520,7 @@ bd close gt-d3e4f
 
 # Update in-progress beads
 bd defer gt-g5h6i    # Defer until later (waiting for API spec)
-```
+```text
 
 #### Step 4: Push to Remote (MANDATORY)
 
@@ -20017,7 +21535,7 @@ bd sync --flush-only
 
 # Push everything
 git push
-```
+```text
 
 :::danger[Always Push]
 
@@ -20033,7 +21551,7 @@ gt cleanup
 
 # Stop polecats that have finished
 gt shutdown --polecats-only
-```
+```text
 
 #### Step 6: Verify All Changes Committed and Pushed
 
@@ -20046,7 +21564,7 @@ git status
 # Verify remote is up to date
 git log --oneline origin/main..HEAD
 # Should show nothing (all commits pushed)
-```
+```text
 
 #### Step 7: Hand Off with Context
 
@@ -20054,13 +21572,13 @@ Write handoff notes for the next session:
 
 ```bash
 gt handoff
-```
+```text
 
 Or if you are the human operator, leave a note in the Mayor's mail:
 
 ```bash
 gt mail send mayor/ -s "End of day handoff" -m "All auth work landed. Remaining: API pagination (gt-g5h6i) deferred until spec is ready. Tests all green."
-```
+```text
 
 ### Landing Checklist Summary
 
@@ -20096,7 +21614,7 @@ Ctrl+B N/P     # Next/previous window (cycle through agents)
 Ctrl+B [       # Enter copy mode (scroll through output)
 Ctrl+B %       # Split pane vertically
 Ctrl+B "       # Split pane horizontally
-```
+```text
 
 :::tip[tmux Is Your Friend]
 
@@ -20120,7 +21638,7 @@ You can run Gas Town in **Mayor-only mode** as a tutorial and introduction:
 gt may at
 # Give the Mayor instructions directly
 # It can file issues, fix code, and sling work to polecats
-```
+```text
 
 Once you are comfortable with Mayor interactions, expand to using Crew and polecats for parallel execution.
 
@@ -20138,7 +21656,7 @@ gt handoff
 
 # Or shell out
 !gt handoff
-```
+```text
 
 The worker will be spun up on a fresh shift, preserving the tmux session. Short sessions with frequent handoffs prevent context bloat, reduce token costs, and keep agents sharp.
 
@@ -20253,10 +21771,10 @@ The framework is based on the work of [Steve Yegge](https://steve-yegge.medium.c
 
 You write all code by hand. No AI assistance of any kind.
 
-```
+```text
 You: *types every character*
 AI:  *does not exist in your workflow*
-```
+```text
 
 **Characteristics:**
 
@@ -20272,11 +21790,11 @@ AI:  *does not exist in your workflow*
 
 You use AI-powered code completion -- a smarter version of autocomplete that predicts multiple lines at once.
 
-```
+```text
 You: def calculate_tax(
 AI:  income, rate=0.25):
          return income * rate
-```
+```text
 
 **Characteristics:**
 
@@ -20299,11 +21817,11 @@ AI:  income, rate=0.25):
 
 You use an AI chat panel alongside your editor. You ask questions, get explanations, request code snippets, and paste them into your project.
 
-```
+```text
 You: "How do I add JWT authentication to this Express app?"
 AI:  *provides explanation and code snippet*
 You: *copies and adapts the code*
-```
+```text
 
 **Characteristics:**
 
@@ -20326,11 +21844,11 @@ You: *copies and adapts the code*
 
 You let the AI agent edit files directly in your IDE. In "YOLO mode," you approve changes in batches rather than line by line. The agent can read your codebase, run commands, and make multi-file changes.
 
-```
+```text
 You: "Refactor the auth module to use middleware pattern"
 AI:  *edits 6 files, runs tests, shows diff*
 You: "Looks good, apply it"
-```
+```text
 
 **Characteristics:**
 
@@ -20357,7 +21875,7 @@ You move from the IDE to a dedicated CLI agent running in your terminal. The age
 ```bash
 claude "Add input validation to all API endpoints and write tests"
 # Agent works for 10-30 minutes autonomously
-```
+```text
 
 **Characteristics:**
 
@@ -20396,7 +21914,7 @@ claude "Add email validation"
 
 # Terminal 3
 claude "Write integration tests for the API"
-```
+```text
 
 **Characteristics:**
 
@@ -20432,7 +21950,7 @@ You scale to 10 or more agents running simultaneously. You develop ad-hoc script
 # ... 7 more
 ./check-status.sh
 ./merge-next.sh
-```
+```text
 
 **Characteristics:**
 
@@ -20466,7 +21984,7 @@ gt start --all
 gt mayor attach
 # "Build the auth system, run all tests, deploy to staging"
 # 15 agents coordinate automatically
-```
+```text
 
 **Characteristics:**
 
@@ -20575,12 +22093,12 @@ Steve Yegge's core thesis: each stage is **inevitable**. Once developers discove
 >
 > -- Steve Yegge, *[Software Survival 3.0](https://steve-yegge.medium.com/software-survival-3-0-97a2a6255f7b)*
 
-```
+```text
 Stage 5 developers: "Why would I need more than one agent?"
 Stage 6 developers: "OK, 3 agents is amazing, but 10 is chaos"
 Stage 7 developers: "I've built a pile of scripts... wait, is this an orchestrator?"
 Stage 8 developers: "Yes. Yes it is."
-```
+```text
 
 The pattern is consistent: what seems excessive today becomes standard practice within a year. Gas Town is built on the assumption that Stage 8 multi-agent orchestration will be as normal in 2026-2027 as AI completions are today.
 
@@ -21032,11 +22550,11 @@ gt costs --by-rig
 
 # JSON output for external tools
 gt costs --json
-```
+```text
 
 ### Sample Output
 
-```
+```text
 Gas Town Costs (today)
 
   Total tokens:  4,800,000 input / 1,620,000 output
@@ -21056,7 +22574,7 @@ Gas Town Costs (today)
     docs:        $12.50  (14.0%)
 
   Hourly rate (last 3h avg): $32.40/hr
-```
+```text
 
 ### Real-Time Cost Monitoring
 
@@ -21068,7 +22586,7 @@ gt feed
 
 # In terminal 2: cost updates every 5 minutes
 watch -n 300 gt costs --today
-```
+```text
 
 ---
 
@@ -21087,7 +22605,7 @@ gt polecat remove alpha --rig myproject
 
 # Reduce the max polecat count via rig settings
 gt rig settings set --rig myproject max_polecats 3
-```
+```text
 
 :::tip[Quality Over Quantity]
 
@@ -21107,7 +22625,7 @@ gt convoy create "Fix C" gt-c3
 
 # Create one focused convoy:
 gt convoy create "Auth Module Fixes" gt-a1 gt-b2 gt-c3
-```
+```text
 
 When related beads are in the same convoy, the Mayor can assign them to fewer polecats that share context, reducing redundant file reading.
 
@@ -21118,7 +22636,7 @@ Run Gas Town with reduced monitoring overhead for cost-sensitive workloads.
 ```bash
 # Enable minimal mode
 gt rig settings set minimal_mode true
-```
+```text
 
 Minimal mode:
 
@@ -21144,7 +22662,7 @@ gt rig park staging-env
 
 # Unpark when needed
 gt rig unpark docs
-```
+```text
 
 ### Strategy 5: Time-Box Sessions
 
@@ -21160,7 +22678,7 @@ gt down
 gt start --all
 # ... intensive work ...
 gt down
-```
+```text
 
 A 2-hour sprint at "Normal" usage costs $60-100, compared to $240-400 for an 8-hour continuous run.
 
@@ -21203,7 +22721,7 @@ gt down
 
 # Monitor costs
 gt costs --today
-```
+```text
 
 ### The "$200/day" Workflow
 
@@ -21227,7 +22745,7 @@ gt down
 
 # Monitor costs every hour
 gt costs --today --by-role
-```
+```text
 
 ### The "Unlimited" Workflow
 
@@ -21242,7 +22760,7 @@ gt start --all
 
 # Run all day, monitor hourly
 watch -n 3600 gt costs --today
-```
+```text
 
 ---
 
@@ -21262,7 +22780,7 @@ Set up automated cost alerts using the plugin system:
     "alert_threshold_daily": 300
   }
 }
-```
+```text
 
 Example `check-costs.sh`:
 
@@ -21273,7 +22791,7 @@ DAILY_COST=$(gt costs --today --json | jq '.total_cost')
 if (( $(echo "$DAILY_COST > 300" | bc -l) )); then
     gt escalate --severity high "Daily cost threshold exceeded: \$$DAILY_COST"
 fi
-```
+```text
 
 ---
 
@@ -21431,7 +22949,7 @@ Gas Town's architecture borrows directly from Erlang/OTP, the telecommunications
 
 ### Supervisor Trees
 
-```
+```text
                       Daemon
                         |
                       Deacon
@@ -21439,7 +22957,7 @@ Gas Town's architecture borrows directly from Erlang/OTP, the telecommunications
               Witness:A    Witness:B
               /    \          |
         Polecat  Polecat   Polecat
-```
+```text
 
 Each level monitors the level below it. When a child crashes, its supervisor decides what to do (restart, escalate, or ignore). This creates a self-healing system where individual agent failures do not cascade.
 
@@ -21490,9 +23008,9 @@ Yegge calls his survival framework the **Squirrel Selection Model** -- a deliber
 
 The model expresses software fitness as a ratio of cognitive value to cognitive cost:
 
-```
+```text
 Survival(T) = (Savings x Usage x H) / (Awareness + Friction)
-```
+```text
 
 Where:
 
@@ -21631,7 +23149,7 @@ Yegge has publicly tracked his predictions about AI coding adoption:
 
 ### Exponential Curve Intuition
 
-```
+```text
      Capability
          ^
          |                                    *
@@ -21646,7 +23164,7 @@ Yegge has publicly tracked his predictions about AI coding adoption:
          | *
          +---------------------------------> Time
          2023  2024  2025  2026  2027
-```
+```text
 
 The key insight: **exponential curves look flat at the beginning and vertical at the end**. Each stage seemed like a modest step when it arrived, but looking back, the cumulative progress is staggering.
 
@@ -21758,7 +23276,7 @@ flowchart LR
     Rigs -->|polecats execute| Code["Feature<br/>Branches"]
     Code -->|gt done| Refinery
     Refinery -->|merge| Main["main branch"]
-```
+```text
 
 The rest of this guide explains each component in that pipeline.
 
@@ -21768,7 +23286,7 @@ The rest of this guide explains each component in that pipeline.
 
 A **town** is the root directory (typically `~/gt/`) that contains all projects, agents, and coordination state. Think of it as the factory floor where everything happens.
 
-```
+```text
 ~/gt/
 ├── mayor/              # Global coordinator
 ├── deacon/             # Town-level health monitor
@@ -21780,7 +23298,7 @@ A **town** is the root directory (typically `~/gt/`) that contains all projects,
 ├── myproject/          # ← A rig
 ├── docs/               # ← Another rig
 └── ...
-```
+```text
 
 Town-level state includes the global beads database (prefixed `hq-*`), Mayor and Deacon contexts, daemon process state, and configuration. Everything below this root is either a rig or a town-level agent.
 
@@ -21790,7 +23308,7 @@ Town-level state includes the global beads database (prefixed `hq-*`), Mayor and
 
 A **rig** is a self-contained project unit. Each rig wraps a git repository and provides the full agent infrastructure needed to work on that project autonomously. See the [Rigs concept page](../concepts/rigs.md) for reference details.
 
-```
+```text
 myproject/                # One rig
 ├── .beads/               # Rig-level issue tracking
 ├── metadata.json         # Rig identity and configuration
@@ -21803,7 +23321,7 @@ myproject/                # One rig
 │   ├── toast/            # ← git worktree
 │   └── alpha/            # ← git worktree
 └── plugins/              # Rig-level plugins
-```
+```text
 
 Each rig has its own beads prefix (e.g., `ga-` for gastowndocs, `gt-` for gastown). The `bd` CLI routes commands to the correct rig automatically based on issue ID prefix.
 
@@ -21855,7 +23373,7 @@ graph TD
     P3 -->|"gt done → MR"| R2
     R1 -->|merge| Main1["main"]
     R2 -->|merge| Main2["main"]
-```
+```text
 
 | Agent | Scope | Lifecycle | Count | Purpose |
 |-------|-------|-----------|-------|---------|
@@ -21975,7 +23493,7 @@ stateDiagram-v2
     Stalled --> Zombie: Unresponsive
     Zombie --> Recover: Witness cleans up
     Recover --> [*]: Work re-slung to new polecat
-```
+```text
 
 ### Step by Step
 
@@ -22019,7 +23537,7 @@ stateDiagram-v2
     Escalated --> InProgress: Resolved
     InProgress --> Deferred: Paused
     Deferred --> Open: gt release
-```
+```text
 
 Key bead types:
 
@@ -22061,7 +23579,7 @@ flowchart TD
     Close --> ConvoyCheck
     ConvoyCheck -->|Yes| ConvoyClose
     ConvoyCheck -->|No| Sling
-```
+```text
 
 The bead is the unit of work that travels through the entire pipeline. It starts as a human instruction, becomes a tracked issue, gets assigned to an agent, drives implementation, accompanies the merge request, and closes when code lands on `main`.
 
@@ -22077,7 +23595,7 @@ gt convoy create "Dark mode support" ga-a1 ga-b2 ga-c3 ga-d4 ga-e5
 
 # Check progress
 gt convoy status hq-cv-001
-```
+```text
 
 Convoys auto-close when all tracked beads reach a terminal state. The Deacon checks this during its patrol cycle.
 
@@ -22117,7 +23635,11 @@ flowchart TD
     Validate --> Pass
     Pass -->|No| Reject
     Pass -->|Yes| Merge --> CloseBead --> Nuke
-```
+```text
+
+:::warning
+The Refinery follows the Scotty Principle: it never merges code that fails validation. If your tests are failing on `main`, the entire merge pipeline stops. Fix `main` first before expecting new work to land.
+:::
 
 ### Why This Design?
 
@@ -22145,7 +23667,7 @@ gt mail send gastowndocs/witness -s "Subject" -m "Message body"
 
 # Check inbox
 gt mail inbox
-```
+```text
 
 Mail is used for escalations, status reports, handoff context, and coordination messages. It is async -- the sender does not wait for a response.
 
@@ -22155,7 +23677,7 @@ A synchronous message injected directly into a running agent's session. Used by 
 
 ```bash
 gt nudge <agent> "Are you still working?"
-```
+```text
 
 Nudges are more intrusive than mail -- they interrupt the agent's current context. Used sparingly and only by supervisors.
 
@@ -22172,7 +23694,7 @@ Priority-routed alerts that travel up the supervision chain:
 
 ```bash
 gt escalate "Description" -s HIGH -m "Details"
-```
+```text
 
 ### Hooks (Persistent State)
 
@@ -22207,7 +23729,7 @@ bd close <step-id>
 
 # See what's next
 bd ready
-```
+```text
 
 Persistent agents (Witness, Refinery, Deacon) use **patrol molecules** that follow a squash-and-respawn pattern: complete the patrol, squash all step beads, spawn a fresh molecule for the next cycle. This prevents step bead accumulation over time.
 
@@ -22217,7 +23739,7 @@ Persistent agents (Witness, Refinery, Deacon) use **patrol molecules** that foll
 
 Gas Town uses git worktrees to enable concurrent work on the same repository. Each polecat gets its own worktree -- an independent working directory linked to the same git repository.
 
-```
+```text
 myproject/
 ├── refinery/rig/      # Canonical clone (.repo.git)
 ├── mayor/rig/         # Mayor's reference worktree
@@ -22226,7 +23748,7 @@ myproject/
 │   └── alpha/         # Polecat worktree (different branch)
 └── crew/
     └── dave/          # Crew worktree
-```
+```text
 
 **The Refinery holds the canonical clone.** All other worktrees -- mayor, polecats, crew -- link back to it. This is efficient (one repository, many working directories) and safe (each agent has isolated state on its own branch).
 
@@ -22265,7 +23787,7 @@ flowchart TD
 
     DPatrol -->|"can't resolve"| EscalateMayor
     EscalateMayor -->|"can't resolve"| EscalateHuman
-```
+```text
 
 The key principle is **Let It Crash** (borrowed from Erlang): agents can crash, and that is acceptable. What matters is that the supervisor detects the crash and recovers. A polecat that crashes mid-implementation is not a failure -- its work is on the hook, the Witness cleans up the zombie, and a fresh polecat picks up the work.
 
@@ -22309,7 +23831,11 @@ sequenceDiagram
 
     Beads->>Beads: All beads done → convoy auto-closes
     Mayor->>Human: "Dark mode convoy complete"
-```
+```text
+
+:::info
+Gas Town's "Let It Crash" philosophy means you should not fear agent crashes. The hook persists, the Witness detects the zombie, and a fresh polecat picks up the work. No manual intervention is needed for routine crashes.
+:::
 
 ### The Five Invariants
 
@@ -22373,9 +23899,9 @@ This guide covers the most frequently encountered Gas Town problems and their so
 
 **Symptom:** A polecat finishes its work, runs `gt done`, and gets:
 
-```
+```text
 Error: not inside a rig directory
-```
+```text
 
 This happens regardless of which directory you run the command from -- worktree, polecat root, rig root, or town root.
 
@@ -22435,7 +23961,7 @@ bd show <bead-id>
 # Check if main is green
 cd <rig>/refinery/rig
 git checkout main && npm test   # or your project's test command
-```
+```text
 
 **Solutions:**
 
@@ -22474,9 +24000,9 @@ If you see the same bead ID appearing repeatedly in `gt trail`, that is a churn 
 
 **Symptom:** Git commands fail with errors like:
 
-```
+```text
 fatal: couldn't find remote ref main
-```
+```text
 
 or polecats push to the wrong branch.
 
@@ -22490,7 +24016,7 @@ git remote show origin | grep "HEAD branch"
 
 # Check what branches exist
 git branch -r
-```
+```text
 
 **Solutions:**
 
@@ -22546,7 +24072,7 @@ cat ~/gt/.beads/routes.jsonl
 
 # Debug routing for a specific bead
 BD_DEBUG_ROUTING=1 bd show <bead-id>
-```
+```text
 
 **Solutions:**
 
@@ -22580,13 +24106,13 @@ BD_DEBUG_ROUTING=1 bd show <bead-id>
 
 **Common errors:**
 
-```
+```text
 hook already attached
-```
+```text
 
-```
+```text
 no work on hook
-```
+```text
 
 **Cause:** Hooks are persistent pointers from an agent to its current bead. Hook conflicts happen when:
 
@@ -22602,7 +24128,7 @@ gt hook
 
 # Check hooks across a rig
 gt hook --agent <polecat> --rig <rig>
-```
+```text
 
 **Solutions:**
 
@@ -22664,7 +24190,7 @@ gt refinery blocked <rig>
 
 # Check Refinery session health
 gt peek refinery --rig <rig>
-```
+```text
 
 **Common causes and solutions:**
 
@@ -22675,7 +24201,7 @@ The Refinery agent may have crashed or lost context.
 ```bash
 # Restart it
 gt refinery restart <rig>
-```
+```text
 
 ### 2. Merge Conflict in the First MR
 
@@ -22690,7 +24216,7 @@ gt refinery release <mr-id>
 
 # Re-sling the problematic bead for a fresh attempt
 gt sling <bead-id> <rig>
-```
+```text
 
 ### 3. Validation Failures
 
@@ -22704,7 +24230,7 @@ gt refinery attach <rig>
 cd <rig>/refinery/rig
 git pull origin main
 npm test   # or your project's test command
-```
+```text
 
 If `main` is broken, fix it first -- no MR can pass validation against a broken `main`.
 
@@ -22718,7 +24244,7 @@ gt refinery unclaimed <rig>
 
 # Release the stale claim
 gt refinery release <mr-id>
-```
+```text
 
 :::note
 
@@ -22752,6 +24278,509 @@ For the full troubleshooting reference, see [Operations: Troubleshooting](../ope
 
 
 ========================================================================
+# Multi-Agent Git Workflow
+# URL: /docs/guides/git-workflow
+========================================================================
+
+# Multi-Agent Git Workflow
+
+Gas Town's multi-agent architecture creates unique git workflow challenges. Multiple agents (crew members, polecats, refinery) work simultaneously on the same repository, leading to frequent remote changes and potential merge conflicts. This guide provides strategies for managing git in this environment.
+
+---
+
+## The Challenge
+
+In a traditional single-developer workflow, you push code when you're done working. In Gas Town:
+
+- **Polecats** push completed work constantly (every few minutes)
+- **Crew workers** share the same repository
+- **Refinery** merges to main automatically
+- **Remote state** changes faster than you can type `git status`
+
+This creates race conditions where your local branch diverges from remote almost immediately.
+
+---
+
+## Golden Rules
+
+:::warning
+In Gas Town, unpushed work is invisible to every other agent. The longer you wait to push, the more merge conflicts you accumulate and the more work you risk losing.
+:::
+
+### 1. Pull Before Every Push
+
+**Always pull before pushing**, even if you just pulled 5 minutes ago:
+
+```bash
+# ❌ WRONG: Push without checking remote
+git commit -m "Add feature"
+git push  # Will fail if remote changed
+
+# ✅ CORRECT: Always pull first
+git commit -m "Add feature"
+git pull --rebase
+git push
+```
+
+**Why `--rebase`?** It keeps git history linear, which is essential when multiple agents are pushing simultaneously. Merge commits create noise and complicate the history.
+
+### 2. Commit Frequently, Push Immediately
+
+In multi-agent environments, **work that isn't pushed doesn't exist**. If your local branch has unpushed commits:
+
+- Other agents can't build on your work
+- You're accumulating merge conflicts
+- A session restart loses your context (but git preserves commits)
+
+**Best practice:**
+
+```bash
+# Every logical unit of work = commit + push
+git add <files>
+git commit -m "Implement X"
+git pull --rebase && git push
+
+# Don't accumulate multiple commits locally
+# Push each one immediately
+```
+
+### 3. Expect Merge Conflicts
+
+With agents working simultaneously, merge conflicts are normal, not exceptional. Don't be surprised when:
+
+```bash
+git push
+# ! [rejected] master -> master (fetch first)
+```
+
+This just means someone else pushed first. It's not a failure—it's the system working.
+
+---
+
+## Handling Frequent Remote Changes
+
+### Detecting When Remote Changed
+
+```bash
+# Check if remote has new commits
+git fetch
+git status
+
+# Output shows if you're behind:
+# Your branch is behind 'origin/master' by 3 commits
+```
+
+### Rebasing Onto Remote
+
+```bash
+# Safe rebase workflow
+git fetch origin
+git rebase origin/master
+
+# If conflicts occur (see below)
+```
+
+### When You're Too Far Behind
+
+If remote has diverged significantly (20+ commits):
+
+```bash
+# Check what you have locally that isn't pushed
+git log origin/master..HEAD
+
+# If it's important work, create a branch
+git branch backup/my-work
+
+# Then reset to remote and cherry-pick what you need
+git reset --hard origin/master
+git cherry-pick <commit-hash>
+```
+
+---
+
+## Conflict Resolution Strategies
+
+### Add/Add Conflicts
+
+**Symptom:** Multiple agents create the same file with different content.
+
+```text
+Auto-merging docs/new-guide.md
+CONFLICT (add/add): Merge conflict in docs/new-guide.md
+```
+
+**Resolution:**
+
+```bash
+# Option 1: Keep both versions (manual merge)
+# Edit the file to combine content from both
+vim docs/new-guide.md
+git add docs/new-guide.md
+git rebase --continue
+
+# Option 2: Take remote version (if your version is obsolete)
+git checkout --theirs docs/new-guide.md
+git add docs/new-guide.md
+git rebase --continue
+
+# Option 3: Take your version (if remote is wrong)
+git checkout --ours docs/new-guide.md
+git add docs/new-guide.md
+git rebase --continue
+```
+
+**Prevention:** Before creating new files, check if they exist on remote:
+
+```bash
+git fetch
+git ls-tree origin/master | grep <filename>
+```
+
+### Content Conflicts
+
+**Symptom:** Same file modified by multiple agents.
+
+```text
+Auto-merging src/main.go
+CONFLICT (content): Merge conflict in src/main.go
+```
+
+**Resolution:**
+
+```bash
+# View conflict markers
+cat src/main.go
+# <<<<<<< HEAD
+# Your changes
+# =======
+# Remote changes
+# >>>>>>> origin/master
+
+# Edit to resolve
+vim src/main.go
+
+# Mark as resolved
+git add src/main.go
+git rebase --continue
+```
+
+**Prevention:** Coordinate work through beads dependencies. If two tasks touch the same file, make one depend on the other:
+
+```bash
+bd dep add task-2 task-1  # task-2 depends on task-1
+```
+
+### Aborting and Retrying
+
+If a rebase goes wrong:
+
+```bash
+# Abort the rebase
+git rebase --abort
+
+# Start over with a fresh fetch
+git fetch
+git rebase origin/master
+```
+
+---
+
+## Crew Worker Workflow
+
+Crew workers push directly to main (no feature branches):
+
+```bash
+# Start of work session
+cd ~/gt/<rig>/crew/<name>
+git pull  # Get latest
+
+# Do work, commit, push frequently
+# ... edit files ...
+git add <files>
+git commit -m "Description"
+git pull --rebase && git push
+
+# Repeat for each logical unit of work
+```
+
+### When Push Fails
+
+```bash
+git push
+# ! [rejected]
+
+# Pull with rebase
+git pull --rebase
+
+# If conflicts occur, resolve them
+git status  # Shows conflicts
+vim <conflicted-file>
+git add <conflicted-file>
+git rebase --continue
+
+# Push again
+git push
+```
+
+### Keeping Your Branch Fresh
+
+```bash
+# Pull regularly, even when not pushing
+# Prevents accumulating drift
+
+# Every 10-15 minutes or before starting new work
+git fetch && git pull --rebase
+```
+
+---
+
+## Polecat Workflow
+
+Polecats work on branches and submit via the refinery:
+
+```bash
+# Polecats create feature branches
+git checkout -b polecat/<name>/<bead-id>
+
+# Work and commit
+git add -A
+git commit -m "Implement feature"
+
+# Push to their branch
+git push origin polecat/<name>/<bead-id>
+
+# When done, use gt done (refinery handles merge)
+gt done
+```
+
+Polecats don't merge to main themselves. The refinery:
+1. Rebases the polecat's branch onto latest main
+2. Runs tests
+3. Merges if tests pass
+4. Cleans up the branch
+
+---
+
+## Reducing Merge Conflicts
+
+### Strategy 1: File-Level Coordination
+
+Assign related work to the same agent:
+
+```bash
+# If tasks A and B both touch auth.go
+# Assign both to the same polecat or crew member
+
+gt sling task-a <rig> --agent alice
+gt sling task-b <rig> --agent alice
+```
+
+### Strategy 2: Serialization via Dependencies
+
+Make tasks sequential when they touch the same code:
+
+```bash
+# task-b waits for task-a to complete
+bd dep add task-b task-a
+```
+
+### Strategy 3: Small, Focused Changes
+
+Break large tasks into smaller beads:
+
+```bash
+# ❌ WRONG: One bead that touches 20 files
+bd create --title "Refactor authentication system"
+
+# ✅ CORRECT: Multiple focused beads
+bd create --title "Extract auth helpers"
+bd create --title "Add session validation"
+bd create --title "Update auth middleware"
+bd dep add auth-2 auth-1  # Sequential
+bd dep add auth-3 auth-2
+```
+
+---
+
+## Checking Git State
+
+### Before Starting Work
+
+```bash
+# Ensure you're up to date
+git fetch
+git status
+# Should show: "Your branch is up to date with 'origin/master'"
+
+# If behind:
+git pull --rebase
+```
+
+### During Work
+
+```bash
+# Check what you've changed
+git status
+
+# Check what you're about to commit
+git diff
+git diff --staged
+```
+
+### Before Pushing
+
+```bash
+# Check for new remote commits
+git fetch
+git log HEAD..origin/master  # Shows what's new on remote
+
+# If empty: safe to push
+# If not empty: pull first
+git pull --rebase
+```
+
+---
+
+## When to Use Branches
+
+**Crew workers:** Never. Push directly to main.
+
+**Polecats:** Always. Use `polecat/<name>/<bead-id>` format.
+
+**Cross-rig work (`gt worktree`):** Uses branches automatically. Submit via refinery when done.
+
+---
+
+## Emergency Recovery
+
+:::tip
+Git's reflog is your safety net. Even after a bad rebase or reset, `git reflog` shows every state your HEAD has been in. You can almost always recover.
+:::
+
+### Lost Work After Session Restart
+
+Commits are safe even if the session dies:
+
+```bash
+# View recent commits (even if detached)
+git reflog
+
+# Find your work
+git log --all --oneline | grep <keyword>
+
+# Recover a commit
+git cherry-pick <commit-hash>
+```
+
+### Diverged Completely from Remote
+
+```bash
+# Save your work first
+git branch backup/my-work
+
+# Reset to remote
+git fetch origin
+git reset --hard origin/master
+
+# Cherry-pick your commits if needed
+git cherry-pick <commit-hash>
+```
+
+### Rebase Gone Wrong
+
+```bash
+# Abort immediately
+git rebase --abort
+
+# Check reflog for pre-rebase state
+git reflog
+
+# Reset to before the rebase
+git reset --hard HEAD@{N}  # where N is the step before rebase started
+```
+
+---
+
+## Tools and Commands Reference
+
+| Command | Purpose |
+|---------|---------|
+| `git pull --rebase` | Get remote changes, replay yours on top |
+| `git fetch` | Download remote changes without merging |
+| `git status` | Check local vs remote state |
+| `git log origin/master..HEAD` | Show unpushed commits |
+| `git log HEAD..origin/master` | Show commits on remote you don't have |
+| `git reflog` | View history of HEAD changes (recovery tool) |
+| `git rebase --abort` | Cancel a rebase in progress |
+| `git rebase --continue` | Continue rebase after resolving conflicts |
+| `git cherry-pick <hash>` | Apply a specific commit to current branch |
+| `git branch backup/<name>` | Save current state before risky operations |
+
+---
+
+## Best Practices Summary
+
+1. **Always `git pull --rebase`** before pushing
+2. **Push immediately** after every commit (don't accumulate local commits)
+3. **Expect conflicts** as normal, not exceptional
+4. **Use dependencies** to serialize conflicting work
+5. **Keep changes small** to minimize conflict surface area
+6. **Check remote state** before starting work (`git fetch && git status`)
+7. **Commit frequently** (every logical unit of work)
+8. **Never force push** to main (for crew) or shared branches
+9. **Save state** before risky operations (`git branch backup/...`)
+10. **Use reflog** for recovery if things go wrong
+
+---
+
+## When to Ask for Help
+
+If you encounter:
+- Repeated merge conflicts on the same files (coordination issue)
+- Git commands failing with "unknown" errors (possible corruption)
+- Lost commits that reflog can't find (rare, but escalate)
+- Rebase loops (aborting and retrying doesn't help)
+
+Escalate to:
+```bash
+# For crew workers: ask the overseer
+gt mail send --human -s "Git issue" -m "Description"
+
+# For polecats: ask the witness
+gt mail send <rig>/witness -s "Git issue" -m "Description"
+```
+
+---
+
+## Philosophy: Git in Multi-Agent Systems
+
+Traditional git workflows assume:
+- One person controls when changes happen
+- You can "finish" before someone else starts
+- Remote changes are infrequent
+
+Gas Town inverts these assumptions:
+- **Many agents** push simultaneously
+- **No one controls** the global push schedule
+- **Remote changes** are constant
+
+The workflow adapts by:
+- Rebasing (not merging) to keep history linear
+- Pushing immediately (not batching)
+- Expecting conflicts (not avoiding them)
+- Using beads dependencies for coordination
+
+This requires more discipline but enables true parallel development.
+
+## Related
+
+- [Architecture Guide](architecture.md) -- How the Refinery merge pipeline processes code from polecats to main
+- [Operations: Troubleshooting](../operations/troubleshooting.md) -- Resolving merge conflicts, git worktree issues, and push failures
+- [Polecats](../agents/polecats.md) -- How ephemeral workers use feature branches and git worktrees
+- [Refinery](../agents/refinery.md) -- The merge queue agent that serializes all merges to main
+
+
+========================================================================
 # Glossary
 # URL: /docs/guides/glossary
 ========================================================================
@@ -22775,6 +24804,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **[Crew](../agents/crew.md)** | Human-paired agents for interactive, collaborative work sessions. Unlike polecats, crew agents are long-lived and maintain context with a human operator. |
 | **[Boot](../agents/boot.md)** | Triage agent that assesses incoming work, classifies complexity, and recommends assignment strategies. |
 | **Daemon** | The background Go process that manages agent lifecycles, runs health checks, and provides the `gt` CLI interface. |
+
+:::tip
+Use this glossary as a quick reference when reading other Gas Town documentation. Terms in **bold** link to their full documentation pages where available.
+:::
 
 ## Core Concepts
 
@@ -22841,6 +24874,10 @@ A comprehensive reference for Gas Town terminology, drawn from the documentation
 | **Survival Formula** | (Savings x Usage x H) / (Awareness + Friction) — the formula determining whether a software tool survives. |
 | **Plot Armor** | A survival ratio so high (in the thousands) that a tool becomes effectively indestructible. No LLM will waste tokens re-synthesizing what the tool already does perfectly. `grep` is the canonical example. Extreme velocity from AI orchestration can provide plot armor. |
 | **Human Coefficient (H)** | A multiplier in the survival formula representing human preference for human-made output. Higher H means the domain values human involvement, giving software in that domain an extra survival advantage beyond pure efficiency. |
+
+:::note
+Gas Town's naming convention is drawn from the Mad Max film franchise. Understanding the metaphor helps the terminology stick: the workspace is a citadel, projects are war rigs, and polecats are the warriors who do the fighting.
+:::
 
 ## Mad Max Naming
 
