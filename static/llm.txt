@@ -12,6 +12,9 @@
   - [Installation](/docs/getting-started/installation)
   - [Quick Start](/docs/getting-started/quickstart)
   - [Your First Convoy](/docs/getting-started/first-convoy)
+  - [Using Search](/docs/getting-started/using-search)
+  - [Cheat Sheet](/docs/getting-started/cheat-sheet)
+  - [FAQ](/docs/getting-started/faq)
 
 ## Architecture
   - [Architecture](/docs/architecture)
@@ -37,11 +40,16 @@
   - [gt refinery](/docs/cli-reference/refinery-commands)
   - [Diagnostics](/docs/cli-reference/diagnostics)
   - [Configuration](/docs/cli-reference/configuration)
+  - [gt seance](/docs/cli-reference/seance)
   - [gt formula](/docs/cli-reference/formula)
+  - [gt orphans](/docs/cli-reference/orphans)
   - [gt dolt](/docs/cli-reference/dolt)
   - [gt warrant](/docs/cli-reference/warrant)
+  - [gt town](/docs/cli-reference/town)
+  - [gt compact](/docs/cli-reference/compact)
   - [gt patrol](/docs/cli-reference/patrol)
   - [gt krc](/docs/cli-reference/krc)
+  - [gt tap](/docs/cli-reference/tap)
 
 ## Agents
   - [Agents](/docs/agents)
@@ -95,6 +103,7 @@
   - [Background & Philosophy](/docs/guides/philosophy)
   - [Architecture Guide](/docs/guides/architecture)
   - [Troubleshooting](/docs/guides/troubleshooting)
+  - [Multi-Agent Git Workflow](/docs/guides/git-workflow)
   - [Glossary](/docs/guides/glossary)
 
 ---
@@ -182,6 +191,57 @@ bd create --title "Update README" --type task
 
 ---
 
+## Using Search
+> /docs/getting-started/using-search
+
+How to effectively search the Gas Town documentation to find what you need quickly.
+
+The Gas Town documentation includes a powerful local search feature that helps you find information quickly across all pages.
+
+```text
+witness
+```
+
+---
+
+## Cheat Sheet
+> /docs/getting-started/cheat-sheet
+
+One-page quick reference for the most common Gas Town and Beads commands, organized by task.
+
+A quick reference for the commands you'll use most often. Print this or keep it in a tab.
+
+```bash
+# Standard work cycle
+git pull --rebase            # Always pull first
+# ... edit files ...
+git add <files>
+git commit -m "description"
+git pull --rebase && git push  # Push immediately
+
+# When push fails
+git pull --rebase            # Rebase onto remote
+# resolve conflicts if any
+git push                     # Try again
+```
+
+---
+
+## FAQ
+> /docs/getting-started/faq
+
+Frequently asked questions about Gas Town, covering setup, agent behavior, costs, and common misconceptions.
+
+:::tip
+Use your browser's search (`Ctrl+K`) to find specific topics. For full command documentation, see the [CLI Reference](../cli-reference/index.md).
+:::
+
+```bash
+gt nudge polecat:toast --rig myproject "Focus on the API tests first"
+```
+
+---
+
 ## Architecture
 > /docs/architecture
 
@@ -198,7 +258,7 @@ Gas Town consists of five layers: the Town workspace, Rigs for each project, Age
 
 Gas Town consists of five layers:
 
-```
+```text
 myproject/
 ├── .beads/           # Rig-level issue tracking (SQLite + JSONL export)
 ├── metadata.json     # Rig configuration and identity
@@ -224,7 +284,11 @@ Gas Town uses a supervisor tree pattern inspired by Erlang/OTP. Each agent level
 
 Gas Town uses a supervisor tree pattern inspired by Erlang/OTP. Each agent level monitors the level below it, providing fault tolerance and automatic recovery.
 
-```
+```text
+
+:::note
+The supervision tree is inspired by Erlang/OTP's "let it crash" philosophy. Agents are expected to fail occasionally -- what matters is that their supervisor detects the failure and recovers automatically.
+:::
 
 ## Monitoring Chain
 
@@ -296,7 +360,7 @@ Gas Town is built on several core design principles that guide its architecture 
 
 Gas Town is built on several core design principles that guide its architecture and behavior.
 
-```
+```text
 Spawn → Work → Done → Nuke
 ```
 
@@ -510,6 +574,19 @@ gt config agent list [options]
 
 ---
 
+## gt seance
+> /docs/cli-reference/seance
+
+Talk to predecessor sessions. Discover recent sessions and ask questions about decisions, progress, and context from previous work.
+
+Talk to predecessor sessions to recover context and understand decisions.
+
+```bash
+gt seance [flags]
+```
+
+---
+
 ## gt formula
 > /docs/cli-reference/formula
 
@@ -520,6 +597,20 @@ Manage workflow formulas — reusable templates that define multi-step molecules
 ```bash
 gt formula list            # List all formulas
 gt formula list --json     # JSON output for scripting
+```
+
+---
+
+## gt orphans
+> /docs/cli-reference/orphans
+
+Find and recover orphaned commits and processes. Detects work lost from killed sessions, failed merges, and network issues.
+
+Find orphaned commits that were never merged to main.
+
+```bash
+gt orphans [flags]
+gt orphans [command]
 ```
 
 ---
@@ -543,26 +634,39 @@ gt dolt logs           # View Dolt server logs
 ## gt warrant
 > /docs/cli-reference/warrant
 
-File and execute death warrants for stuck or unresponsive agents that need controlled termination.
+Manage death warrants for agents that need forced termination. File, list, and execute warrants through Boot's triage cycle.
 
 Manage death warrants for agents that need termination.
 
+```bash
+gt warrant [command]
 ```
 
-1. **Deacon/Witness files a warrant** with a reason (e.g., "agent stuck in loop for 30 minutes")
-2. **Boot picks up the warrant** during its triage cycle
-3. **Boot recovers in-progress work** — commits, pushes, or releases hooked beads
-4. **Boot terminates the session** — kills the tmux session and cleans up worktree
-5. **Warrant is marked as executed** and archived
+---
 
-Warrants are stored as JSON files in `~/gt/warrants/`.
+## gt town
+> /docs/cli-reference/town
 
-## Commands
+Town-level operations including session cycling between mayor and deacon.
 
-### `gt warrant file`
+Commands for town-level operations including session cycling.
 
-File a death warrant for an agent.
+```bash
+gt town [command]
+```
 
+---
+
+## gt compact
+> /docs/cli-reference/compact
+
+Apply TTL-based compaction to ephemeral wisps. Promotes stuck wisps to permanent beads and deletes closed wisps past their TTL.
+
+Apply TTL-based compaction policy to ephemeral wisps.
+
+```bash
+gt compact [flags]
+gt compact [command]
 ```
 
 ---
@@ -596,6 +700,19 @@ gt krc stats --json       # Machine-readable output
 
 ---
 
+## gt tap
+> /docs/cli-reference/tap
+
+Hook handlers for Claude Code PreToolUse and PostToolUse events. Implements policy guards, auditing, and input transformation.
+
+Hook handlers for Claude Code PreToolUse and PostToolUse events.
+
+```bash
+gt tap [command]
+```
+
+---
+
 ## Agents
 > /docs/agents
 
@@ -603,7 +720,7 @@ Overview of Gas Town's agent hierarchy: Mayor, Deacon, Witness, Refinery, Poleca
 
 Gas Town's agent hierarchy is a supervisor tree inspired by Erlang/OTP. Each role has a well-defined scope, lifecycle, and set of responsibilities -- ensuring reliable, self-healing operation from a single worker to 30 concurrent agents.
 
-```
+```text
 
 ## Comparison Table
 
@@ -649,7 +766,7 @@ The Mayor is Gas Town's global coordinator. It receives human instructions, crea
 
 > The Mayor is the brain of Gas Town. It receives instructions from the human overseer, decomposes them into actionable work, and orchestrates the entire agent hierarchy to deliver results.
 
-```
+```text
 > Fix the 5 failing tests in auth and add input validation to registration.
 ```
 
@@ -662,7 +779,7 @@ The Deacon is Gas Town's town-level watchdog agent. It monitors agent health, ma
 
 > The Deacon is the immune system of Gas Town. It monitors the health of every agent, manages lifecycles, and ensures the system self-heals when things go wrong.
 
-```
+```text
 
 ### 2. Monitor All Witnesses
 
@@ -803,7 +920,7 @@ Crew workspaces give human developers a persistent, fully integrated seat at the
 
 > Crew workspaces give human developers a first-class seat at the Gas Town table -- persistent, fully integrated, and always ready for hands-on work.
 
-```
+```text
 ~/gt/myproject/crew/
 ├── dave/          # Dave's workspace
 ├── emma/          # Emma's workspace
@@ -847,7 +964,7 @@ Beads is Gas Town's AI-native, git-backed issue tracking system. Issues live in 
 
 Beads is Gas Town's **AI-native, git-backed issue tracking system**. Instead of a web-based project board, issues live directly in your repository as structured data, managed entirely through the `bd` CLI. This design makes Beads seamlessly usable by AI coding agents that work through the terminal.
 
-```
+```text
 .beads/
 ├── beads.db           # SQLite database (primary store)
 ├── formulas/          # TOML workflow templates
@@ -864,7 +981,7 @@ Hooks are Gas Town's durability primitive -- persistent attachment points that s
 
 Hooks are Gas Town's **durability primitive**. A hook is a persistent attachment point where work state is stored in a way that survives crashes, restarts, handoffs, context compaction, and even machine failures. Hooks are what make Gas Town agents self-propelling -- an agent always knows what to do by checking its hook.
 
-```
+```text
 
 The hook stores:
 
@@ -899,7 +1016,7 @@ Convoys bundle multiple beads into tracked batches, provide progress monitoring,
 
 A **Convoy** is Gas Town's unit for tracking batches of related work. Convoys bundle multiple beads together, provide a single point of progress monitoring, auto-close when all tracked items complete, and notify subscribers on landing. They are the primary coordination mechanism for multi-issue projects.
 
-```
+```text
 
 ## Convoy Lifecycle
 
@@ -914,7 +1031,7 @@ Molecules are multi-step workflow instances created from TOML-defined formulas. 
 
 **Molecules** are Gas Town's multi-step workflow execution units. A molecule guides an agent through a sequence of steps, tracking progress so that work can resume after crashes, handoffs, or context compaction. **Formulas** are the TOML-defined templates from which molecules are created.
 
-```
+```text
 
 ## Molecules
 
@@ -955,7 +1072,7 @@ Gates are synchronization points that park Gas Town workflows while waiting for 
 
 **Gates** are synchronization points in Gas Town workflows. When a molecule step needs to wait for an external condition -- a CI pipeline finishing, a human approving a change, or a timer elapsing -- it parks on a gate. The gate holds the workflow until the condition is met, then releases it to continue.
 
-```
+```text
 
 ## Gate Types
 
@@ -984,7 +1101,7 @@ A Rig is Gas Town's project container, wrapping a git repository with agent infr
 
 A **Rig** is Gas Town's project container. Each rig wraps a git repository with the full agent infrastructure needed to manage, develop, and merge code. Rigs are the physical structure of a Gas Town workspace -- every project you manage with Gas Town becomes a rig.
 
-```
+```text
 
 ## Rig Directory Structure
 
@@ -1018,7 +1135,7 @@ The Gas Town Universal Propulsion Principle (GUPP) and Nondeterministic Idempote
 
 Two foundational principles govern how Gas Town handles the inherent chaos of multi-agent AI coordination: the **Gas Town Universal Propulsion Principle (GUPP)** and **Nondeterministic Idempotence (NDI)**.
 
-```
+```text
 Before crash:     load-context [done] → branch-setup [done] → implement [in_progress]
 After restart:    load-context [done] → branch-setup [done] → implement [in_progress]
                                                                 ↑ resumes here
@@ -1076,7 +1193,7 @@ Patrol cycles are the heartbeat of Gas Town's monitoring infrastructure. Persist
 
 **Patrol cycles** are the heartbeat of Gas Town's monitoring infrastructure. Every 5 minutes, persistent agents — the [Deacon](../agents/deacon.md), [Witness](../agents/witness.md), and [Refinery](../agents/refinery.md) — wake up, observe the current state of the system, and take corrective action.
 
-```
+```text
 
 ### Deacon (Town-Wide)
 
@@ -1112,7 +1229,7 @@ The MEOW workflow lets the Mayor handle bead creation, convoy management, agent 
 
 The **Mayor Workflow** -- also known as **MEOW** (Mayor-Executed Orchestrated Work) -- is the recommended workflow for complex multi-issue coordination. You describe what you want in natural language, and the Mayor handles bead creation, convoy management, agent assignment, progress monitoring, and completion notification.
 
-```
+```text
 
 ## Step-by-Step
 
@@ -1129,7 +1246,7 @@ Minimal Mode lets you use Gas Town's hooks, beads, and convoy tracking without T
 
 **Minimal Mode** lets you use Gas Town's persistence and tracking features without requiring Tmux or the full agent hierarchy. You manually spawn agents and manage work, while Gas Town provides hooks, beads, and convoy tracking. This is ideal for getting started, running on limited resources, or when you prefer hands-on control.
 
-```
+```text
 
 ## Step-by-Step
 
@@ -1148,7 +1265,7 @@ The Manual Convoy Workflow gives you direct control over work distribution while
 
 The **Manual Convoy Workflow** gives you direct control over work distribution while still using Gas Town's convoy tracking, merge queue, and agent infrastructure. Unlike the Mayor Workflow (where the Mayor decides assignments), you create the convoy, add issues, and sling them individually to specific rigs or agents.
 
-```
+```text
 
 ## Step-by-Step
 
@@ -1167,7 +1284,7 @@ The Formula Workflow uses predefined TOML templates to orchestrate structured, r
 
 The **Formula Workflow** uses predefined TOML templates to orchestrate structured, repeatable processes. Instead of describing work in free-form text, you select a formula that defines the exact steps, run it with variables, and let Gas Town execute the workflow. This is ideal for standardized processes like releases, design explorations, and audits.
 
-```
+```text
 
 ## Step-by-Step
 
@@ -1186,7 +1303,7 @@ Gas Town's parallel code review workflow spawns multiple specialized reviewer po
 
 Gas Town provides a powerful **parallel code review** system using the `code-review` convoy formula. Instead of a single reviewer reading through a PR, Gas Town spawns multiple specialized reviewer polecats -- each examining the code from a different perspective -- then synthesizes their findings into a unified, prioritized review.
 
-```
+```text
 
 Each polecat works in parallel, examining the code from its specialized perspective. When all legs complete, a synthesis step combines findings into a single prioritized document.
 
@@ -1263,7 +1380,7 @@ Day-to-day Gas Town operations: starting and stopping the system, monitoring hea
 
 Running Gas Town in production means managing a fleet of AI agents across multiple projects. This section covers the day-to-day operational tasks: starting and stopping the system, monitoring health, handling escalations, troubleshooting problems, and extending functionality with plugins.
 
-```
+```text
 Polecat (stuck)
   --> Witness detects stall
     --> Witness nudges polecat
@@ -1355,7 +1472,7 @@ Extend Gas Town with custom plugins for automation, gates, and scheduled tasks. 
 
 Gas Town's plugin system extends the platform with custom automation, gates, and scheduled tasks. Plugins can operate at the town level (affecting all rigs) or at the rig level (scoped to a single project).
 
-```
+```text
 ~/gt/plugins/
 ├── eslint-gate/
 │   ├── plugin.json
@@ -1400,7 +1517,7 @@ The 8-stage maturity framework for AI-assisted development, from zero AI to mult
 
 This guide maps out the progression of AI-assisted software development, from basic code completions to building your own multi-agent orchestrator. Gas Town targets users at **Stage 7 and above** -- if you are not yet there, this guide will help you understand the path.
 
-```
+```text
 You: *types every character*
 AI:  *does not exist in your workflow*
 ```
@@ -1456,7 +1573,7 @@ Gas Town is not just a tool -- it is a thesis about the future of software devel
 
 Gas Town is not just a tool -- it is a thesis about the future of software development. This guide covers why Gas Town exists, how it evolved, the intellectual foundations behind its design, and the community response to its ideas.
 
-```
+```text
                       Daemon
                         |
                       Deacon
@@ -1475,7 +1592,7 @@ A comprehensive tour of Gas Town's architecture: how Mayor, Deacon, Witness, Ref
 
 Gas Town is a multi-agent AI orchestration system where dozens of autonomous agents coordinate to build software. This guide walks through the entire architecture in one place -- from the high-level metaphor down to the merge pipeline that lands code on `main`.
 
-```
+```text
 
 The rest of this guide explains each component in that pipeline.
 
@@ -1496,8 +1613,28 @@ Solutions for the most common Gas Town problems: gt done failures, polecat churn
 
 This guide covers the most frequently encountered Gas Town problems and their solutions. For a comprehensive reference of all troubleshooting topics, see [Operations: Troubleshooting](../operations/troubleshooting.md).
 
-```
+```text
 Error: not inside a rig directory
+```
+
+---
+
+## Multi-Agent Git Workflow
+> /docs/guides/git-workflow
+
+Best practices for git workflows in multi-agent environments where multiple agents work simultaneously on the same repository.
+
+Gas Town's multi-agent architecture creates unique git workflow challenges. Multiple agents (crew members, polecats, refinery) work simultaneously on the same repository, leading to frequent remote changes and potential merge conflicts. This guide provides strategies for managing git in this environment.
+
+```bash
+# ❌ WRONG: Push without checking remote
+git commit -m "Add feature"
+git push  # Will fail if remote changed
+
+# ✅ CORRECT: Always pull first
+git commit -m "Add feature"
+git pull --rebase
+git push
 ```
 
 ---
