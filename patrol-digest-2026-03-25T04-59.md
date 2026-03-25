@@ -1,0 +1,3 @@
+**Digest:** Patrol executed (gastowndocs/refinery). **Hook** — ga-8tzjwn (CLOSED, HANDOFF delegation complete). No molecule attached. **Deacon** — was ○ stopped; **started** ● RUNNING detached (session 2026-03-25 05:00:57). **Dolt** ✓. **Refinery** gastowndocs ● RUNNING, queue 0. **MQ empty.** **npm run build** ✓ (~12s). **bd sync** ✓ (exported 0 before comment; 2 after patrol comment). **Inbox** — 0 unread. **Boot** — idle (mayor-level). **Polecats** — `timeout 25 gt polecat list gastowndocs` timed out (124). **bd ready --allow-stale** — 10 P0 infra (delegated). Comment logged on ga-8tzjwn. Rig OPERATIONAL.
+
+**Next session:** Check `gt hook`; if empty execute refinery patrol inline.
